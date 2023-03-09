@@ -34,4 +34,19 @@
       <initValue>'Submit Gagal'</initValue>
       <name>FailedReasonSubmitError</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'findTestData(\'Login/Login\').getValue(1, 14)'</initValue>
+      <name>KondisiCekDB</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Done well'</initValue>
+      <name>SuccessReason</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Data tidak cocok pada DB/Excel'</initValue>
+      <name>FailedReasonDataNotMatch</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

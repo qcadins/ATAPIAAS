@@ -1,0 +1,30 @@
+{
+  "keywordFileContentHash": "3F658C999F1A36D085D3DC76CFB34BF8",
+  "keywordClasses": [
+    {
+      "name": "profile.getDatafromDB",
+      "keywordMethods": [
+        {
+          "name": "getDBdata",
+          "parameters": [
+            {
+              "name": "conn",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ],
+          "javadoc": ""
+        }
+      ]
+    }
+  ],
+  "javadocParsed": true
+}

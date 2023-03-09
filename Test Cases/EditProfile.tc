@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>EditProfile</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>e056c875-7a58-4e7f-831d-68209f217ad5</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>b06e4a39-ee4c-4dfb-96b4-3bd3ef55216a</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'Data Files/APIAAS/DataEditProfile'</defaultValue>
+      <description></description>
+      <id>b06e4a39-ee4c-4dfb-96b4-3bd3ef55216a</id>
+      <masked>false</masked>
+      <name>ExcelPathEditProfile</name>
+   </variable>
+</TestCaseEntity>

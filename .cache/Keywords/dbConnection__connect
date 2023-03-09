@@ -1,0 +1,16 @@
+{
+  "keywordFileContentHash": "C3A97A66F2EDA73837E6B9BFD942158F",
+  "keywordClasses": [
+    {
+      "name": "dbConnection.connect",
+      "keywordMethods": [
+        {
+          "name": "connectDBAPIAAS",
+          "parameters": [],
+          "javadoc": ""
+        }
+      ]
+    }
+  ],
+  "javadocParsed": true
+}
