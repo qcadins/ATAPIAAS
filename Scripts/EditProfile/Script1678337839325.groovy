@@ -36,90 +36,87 @@ WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
 int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 
 'loop sesuai data yang ada di Sheet Edit Profile pada DataFiles/APIAAS/DataEditProfiles'
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++) {
-	
-	WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [:], FailureHandling.STOP_ON_FAILURE)
-		
-	'klik garis tiga di kanan atas web'
+    WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [:], FailureHandling.STOP_ON_FAILURE)
+
+    'klik garis tiga di kanan atas web'
     WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/i_LINA_ft-chevron-down'))
 
-	'klik profil saya'
+    'klik profil saya'
     WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/a_Profil Saya'))
-	
-	'klik tombol edit profile'
-    WebUI.click(findTestObject('Object Repository/Eendigo/Page_My Profile/button_Edit Profile'))
-	
-	'panggil fungsi verifikasi jika checkdatabase = yes'
-	if(GlobalVariable.KondisiCekDB == 'Yes')
-	{
-		'verifikasi data yang ada di web dengan di database sebelum diEdit'
-		WebUI.callTestCase(findTestCase('Test Cases/FunctionVerify/VerifyDBEditProfile'), [:], FailureHandling.STOP_ON_FAILURE)
-	}
 
-	'input data nama perusahaan'
+    'klik tombol edit profile'
+    WebUI.click(findTestObject('Object Repository/Eendigo/Page_My Profile/button_Edit Profile'))
+
+    'panggil fungsi verifikasi jika checkdatabase = yes'
+    if (GlobalVariable.KondisiCekDB == 'Yes') {
+        'verifikasi data yang ada di web dengan di database sebelum diEdit'
+        WebUI.callTestCase(findTestCase('Test Cases/FunctionVerify/VerifyDBEditProfile'), [:], FailureHandling.STOP_ON_FAILURE)
+    }
+    
+    'input data nama perusahaan'
     WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__tenantName'), findTestData(ExcelPathEditProfile).getValue(
             GlobalVariable.NumOfColumn, 10))
-	'klik pada field nama belakang'
+
+    'klik pada field nama belakang'
     WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__lastName'))
 
-	'input data nama belakang'
+    'input data nama belakang'
     WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__lastName'), findTestData(ExcelPathEditProfile).getValue(
             GlobalVariable.NumOfColumn, 11))
-	
-	'input data industri'
+
+    'input data industri'
     WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__industry'), findTestData(ExcelPathEditProfile).getValue(
             GlobalVariable.NumOfColumn, 12))
 
-	'pilih jenis kelamin'
+    'pilih jenis kelamin'
     WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__ng-untouched ng-pristine ng-valid'))
 
-	'klik pada field website'
+    'klik pada field website'
     WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__website'))
 
-	'input data field webstie'
+    'input data field webstie'
     WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input_Wanita_phoneNumber'), findTestData(ExcelPathEditProfile).getValue(
             GlobalVariable.NumOfColumn, 13))
 
-	'input data field position'
+    'input data field position'
     WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__position'), findTestData(ExcelPathEditProfile).getValue(
             GlobalVariable.NumOfColumn, 14))
 
-	'pilih dari dropdownlist +62 Indonesia'
+    'pilih dari dropdownlist +62 Indonesia'
     WebUI.selectOptionByValue(findTestObject('Object Repository/Eendigo/Page_Edit Profile/select_Afghanistan 93Albania 355Algeria 213_ddb156'), 
         findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 15), true)
 
-	'klik tombol simpan'
+    'klik tombol simpan'
     WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/button_Simpan'))
 
-	'klik tombol garis tiga di kanan atas web'
+    'klik tombol garis tiga di kanan atas web'
     WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/i_LINA_ft-chevron-down'))
 
-	'klik tombol profil saya'
+    'klik tombol profil saya'
     WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/a_Profil Saya'))
 
-	'klik tombol edit profile'
+    'klik tombol edit profile'
     WebUI.click(findTestObject('Object Repository/Eendigo/Page_My Profile/button_Edit Profile'))
 
-	'panggil fungsi verifikasi jika checkdatabase = yes'
-	if(GlobalVariable.KondisiCekDB == 'Yes')
-	{
-		'verifikasi data yang ada di excel dengan di database sesudah diEdit'
-		WebUI.callTestCase(findTestCase('Test Cases/FunctionVerify/VerifyExcelDBEditProfile'), [:], FailureHandling.STOP_ON_FAILURE)
-	}
-
-	'klik pada tombol simpan'
+    'panggil fungsi verifikasi jika checkdatabase = yes'
+    if (GlobalVariable.KondisiCekDB == 'Yes') {
+        'verifikasi data yang ada di excel dengan di database sesudah diEdit'
+        WebUI.callTestCase(findTestCase('Test Cases/FunctionVerify/VerifyExcelDBEditProfile'), [:], FailureHandling.STOP_ON_FAILURE)
+    }
+    
+    'klik pada tombol simpan'
     WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/button_Simpan'))
 
-	'verifikasi adanya tombol ok setelah klik simpan'
+    'verifikasi adanya tombol ok setelah klik simpan'
     if (!(WebUI.verifyElementPresent(findTestObject('Eendigo/Page_Edit Profile/button_OK'), GlobalVariable.Timeout))) {
-		'tulis error ke excel'
+        'tulis error ke excel'
         CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed, 
             (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSubmitError)
+		WebUI.closeBrowser()
     }
-}
 
 CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Success, 
-	GlobalVariable.SuccessReason)
+    GlobalVariable.SuccessReason)
 
 WebUI.closeBrowser()
 

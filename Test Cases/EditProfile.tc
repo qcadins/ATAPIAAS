@@ -12,7 +12,7 @@
       <variableId>b06e4a39-ee4c-4dfb-96b4-3bd3ef55216a</variableId>
    </variableLinks>
    <variable>
-      <defaultValue>'Data Files/APIAAS/DataEditProfile'</defaultValue>
+      <defaultValue>'APIAAS/DataEditProfile'</defaultValue>
       <description></description>
       <id>b06e4a39-ee4c-4dfb-96b4-3bd3ef55216a</id>
       <masked>false</masked>

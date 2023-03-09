@@ -34,5 +34,8 @@ WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Pla
 'ceklis pada reCaptcha'
 WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/div_id(katalon-rec_elementInfoDiv)'))
 
+'focus pada button login'
+WebUI.focus(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+
 'Klik Login'
 WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
