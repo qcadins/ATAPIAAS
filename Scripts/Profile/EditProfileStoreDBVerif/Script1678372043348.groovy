@@ -24,9 +24,6 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
-'mendapat jumlah kolom dari sheet Edit Profile'
-int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
-
 'kumpulan string yang menyimpan hasil text dari User Interface APIAAS'
 ArrayList<String> hasilgetText = new ArrayList<String>()
 
@@ -49,18 +46,22 @@ hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/in
 hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__position'), 'value'))
 
 'mengambil data dari excel'
-hasilexcel.add(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 10))
-hasilexcel.add(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 11))
-hasilexcel.add(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 12))
-hasilexcel.add(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 13))
-hasilexcel.add(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 14))
+for (int i=10; i<=hasilexcel.size; i++)
+{
+	hasilexcel.add(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, i))
+}
 
 'verifikasi data pada WEB dan excel sama'
 for (int j = 0; j < hasilexcel.size ; j++) {
-	WebUI.verifyMatch(hasilgetText[j], hasilexcel[j], false)
-	if(WebUI.verifyMatch(hasilgetText[j], hasilexcel[j], false))
+	checkVerifyEqualorMatch(WebUI.verifyMatch(hasilgetText[j], hasilexcel[j], false, FailureHandling.OPTIONAL))
+}
+
+def checkVerifyEqualorMatch(Boolean isMatch) {
+	if(isMatch == false)
 	{
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed,
-		(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonDataNotMatch)
+		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
+		GlobalVariable.Failed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		GlobalVariable.FailedReasonDataNotMatch)
 	}
 }

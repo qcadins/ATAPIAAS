@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>RegisterLogin</name>
+   <name>VerifyDataEditProfile</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>5fd288ec-b5e8-4e6b-9180-caa91165819b</testCaseGuid>
+   <testCaseGuid>be8bd4e3-47f5-4daa-b237-dbd2d44713b1</testCaseGuid>
    <variableLinks>
       <testDataLinkId></testDataLinkId>
       <type>DEFAULT</type>
       <value></value>
-      <variableId>b7119612-6230-4996-b220-6c286085236f</variableId>
+      <variableId>43026727-e4c8-4ab7-b296-4aa1dbf8b7fb</variableId>
    </variableLinks>
    <variable>
-      <defaultValue>'APIAAS/DataRegistLogin'</defaultValue>
+      <defaultValue>'APIAAS/DataEditProfile'</defaultValue>
       <description></description>
-      <id>b7119612-6230-4996-b220-6c286085236f</id>
+      <id>43026727-e4c8-4ab7-b296-4aa1dbf8b7fb</id>
       <masked>false</masked>
-      <name>ExcelPathRegisterLogin</name>
+      <name>ExcelPathEditProfile</name>
    </variable>
 </TestCaseEntity>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>VerifyDBEditProfile</name>
+   <name>CObareg</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>be8bd4e3-47f5-4daa-b237-dbd2d44713b1</testCaseGuid>
+   <testCaseGuid>4d7b0149-fd9b-4ea7-adc7-d501fd9d3dfa</testCaseGuid>
 </TestCaseEntity>

@@ -1,0 +1,16 @@
+{
+  "keywordFileContentHash": "EE8B07A06FE87EB3A4172C878AF91042",
+  "keywordClasses": [
+    {
+      "name": "profile.getTextfromWeb",
+      "keywordMethods": [
+        {
+          "name": "getTextfromField",
+          "parameters": [],
+          "javadoc": ""
+        }
+      ]
+    }
+  ],
+  "javadocParsed": true
+}

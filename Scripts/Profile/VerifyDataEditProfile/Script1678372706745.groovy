@@ -27,33 +27,23 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 'deklarasi variabel untuk konek ke Database APIAAS'
 def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS'()
 
-'kumpulan string yang menyimpan hasil text dari User Interface APIAAS'
-ArrayList<String> hasilgetText = new ArrayList<String>()
-
 'kumpulan string dari data yang diambil langsung dari database'
 ArrayList<String> hasildb = CustomKeywords.'profile.getDatafromDB.getDBdata'(conn)
 
-'mengambil text dari field nama perusahaan'
-hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__tenantName'), 'value'))
-
-'megambil text dari field nama belakang'
-hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__lastName'), 'value'))
-
-'mengambil text dari field industri'
-hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__industry'), 'value'))
-
-'mengambil nomor telepon dari field Nomor HP'
-hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input_Wanita_phoneNumber'), 'value'))
-
-'mengambil text dari field jabatan kerja'
-hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__position'), 'value'))
+'ambil text dari UI Web APIAAS'
+ArrayList<String> hasilweb = CustomKeywords.'profile.getTextfromWeb.getTextfromField'()
 
 'verifikasi data pada WEB dan DB sama'
 for (int j = 0; j < hasildb.size ; j++) {
-	WebUI.verifyMatch(hasilgetText[j], hasildb[j], false)
-	if(!WebUI.verifyMatch(hasilgetText[j], hasildb[j], false))
+	checkVerifyEqualorMatch(WebUI.verifyMatch(hasilweb[j], hasildb[j], false, FailureHandling.OPTIONAL))
+}
+
+def checkVerifyEqualorMatch(Boolean isMatch) {
+	if(isMatch == false)
 	{
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed,
-			(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonDataNotMatch)
+		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, 
+		GlobalVariable.Failed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		GlobalVariable.FailedReasonDataNotMatch)
 	}
 }

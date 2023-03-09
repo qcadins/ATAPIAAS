@@ -24,18 +24,12 @@ import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
-'buka chrome\r\n'
-WebUI.openBrowser('')
+//'mendapat jumlah kolom dari sheet Edit Profile'
+//int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 
-'buka website APIAAS SIT, data diambil dari TestData Login'
-WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
-
-'mendapat jumlah kolom dari sheet Edit Profile'
-int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
-
-'loop sesuai data yang ada di Sheet Edit Profile pada DataFiles/APIAAS/DataEditProfiles'
+'memanggil fungsi untuk login'
     WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [:], FailureHandling.STOP_ON_FAILURE)
 
     'klik garis tiga di kanan atas web'
@@ -50,7 +44,7 @@ int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
     'panggil fungsi verifikasi jika checkdatabase = yes'
     if (GlobalVariable.KondisiCekDB == 'Yes') {
         'verifikasi data yang ada di web dengan di database sebelum diEdit'
-        WebUI.callTestCase(findTestCase('Test Cases/FunctionVerify/VerifyDBEditProfile'), [:], FailureHandling.STOP_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('Test Cases/Profile/VerifyDataEditProfile'), [:], FailureHandling.STOP_ON_FAILURE)
     }
     
     'input data nama perusahaan'
@@ -101,7 +95,7 @@ int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
     'panggil fungsi verifikasi jika checkdatabase = yes'
     if (GlobalVariable.KondisiCekDB == 'Yes') {
         'verifikasi data yang ada di excel dengan di database sesudah diEdit'
-        WebUI.callTestCase(findTestCase('Test Cases/FunctionVerify/VerifyExcelDBEditProfile'), [:], FailureHandling.STOP_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfileStoreDBVerif'), [:], FailureHandling.STOP_ON_FAILURE)
     }
     
     'klik pada tombol simpan'
@@ -114,9 +108,10 @@ int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 		   (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSubmitError)
 	   WebUI.closeBrowser()
     }
-
-CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Success, 
-    GlobalVariable.SuccessReason)
-
+	else
+	{
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Success,
+			GlobalVariable.SuccessReason)
+	}
 WebUI.closeBrowser()
 
