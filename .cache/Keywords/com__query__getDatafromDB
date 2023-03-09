@@ -1,0 +1,30 @@
+{
+  "keywordFileContentHash": "16D95E2B2C4188F57D8B9CE49F81D7BC",
+  "keywordClasses": [
+    {
+      "name": "com.query.getDatafromDB",
+      "keywordMethods": [
+        {
+          "name": "getDBdata",
+          "parameters": [
+            {
+              "name": "conn",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ],
+          "javadoc": ""
+        }
+      ]
+    }
+  ],
+  "javadocParsed": true
+}

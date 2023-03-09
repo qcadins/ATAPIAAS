@@ -6,12 +6,12 @@
    <elementGuidId>1d24c393-da5a-4316-ac6b-52a03aa76cec</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>//div[@id='katalon-rec_elementInfoDiv']</value>
-      </entry>
-      <entry>
          <key>CSS</key>
          <value>#katalon-rec_elementInfoDiv</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='katalon-rec_elementInfoDiv']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +22,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>div</value>
-      <webElementGuid>e120107f-fd12-4d98-b10a-2d77c4f098c1</webElementGuid>
+      <webElementGuid>99200638-cf63-4ea5-8d1f-30bfdd7d8a55</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +30,7 @@
       <name>id</name>
       <type>Main</type>
       <value>katalon-rec_elementInfoDiv</value>
-      <webElementGuid>2f83d7fb-e925-492b-84b8-0badf46d2f3e</webElementGuid>
+      <webElementGuid>57b8da40-ad00-4a13-a2a9-79150511f4f6</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -38,7 +38,7 @@
       <name>text</name>
       <type>Main</type>
       <value>id(&quot;katalon-rec_elementInfoDiv&quot;)</value>
-      <webElementGuid>b1e723f0-a437-4662-9efa-8f4f4162f7e1</webElementGuid>
+      <webElementGuid>4279335c-ee59-4b6f-94be-5e875e36fb6a</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,15 +46,15 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;katalon-rec_elementInfoDiv&quot;)</value>
-      <webElementGuid>78e55495-2a0d-48ef-b342-9c33753b6273</webElementGuid>
+      <webElementGuid>0e05cd12-e619-450d-a2de-d9d49cc30004</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>ref_element</name>
       <type>Main</type>
-      <value>Object Repository/Eendigo/Page_Login - eendigo Platform/iframe_Lupa Kata Sandi_a-raacq6h1gq4c</value>
-      <webElementGuid>d802bea9-0973-4296-b893-36f7cce2e83c</webElementGuid>
+      <value>Object Repository/Eendigo/Page_Login - eendigo Platform/iframe_Lupa Kata Sandi_a-fqiryovxupng</value>
+      <webElementGuid>0e8320b6-4b1c-40df-90c0-91d53b2a89ff</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -62,7 +62,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//div[@id='katalon-rec_elementInfoDiv']</value>
-      <webElementGuid>476f1ba9-7c75-47ba-9d36-eadaa2a9212f</webElementGuid>
+      <webElementGuid>14618ad0-fd63-4fe8-ba91-0eae48e80e46</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +70,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//div[@id='katalon']/div</value>
-      <webElementGuid>4d48a672-d80a-4925-bd8c-01aa014157eb</webElementGuid>
+      <webElementGuid>bf2eaaee-3ac7-44e0-b76e-27798b5c44e3</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +78,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Persyaratan'])[1]/following::div[2]</value>
-      <webElementGuid>0b0cf45d-9ffa-47a9-91ad-1ef49a7c739e</webElementGuid>
+      <webElementGuid>71b8baca-b5a5-43b5-8991-3808846cb56e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +86,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Privasi'])[1]/following::div[2]</value>
-      <webElementGuid>aa9959c9-8176-4e9d-af76-c83e53b66f3e</webElementGuid>
+      <webElementGuid>e5e57a27-91bc-4865-a44f-842128c4cf7b</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +94,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='id(&quot;katalon-rec_elementInfoDiv&quot;)']/parent::*</value>
-      <webElementGuid>f51ef92a-dc34-401a-a38f-e51d03d0ed43</webElementGuid>
+      <webElementGuid>47c0b6c0-9fe1-4a46-98c3-c93048b140bb</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,7 +102,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[3]/div</value>
-      <webElementGuid>0c86368b-4c9a-42f6-8bd4-54b235ab3755</webElementGuid>
+      <webElementGuid>c9f8052d-93c4-442e-bcfc-7e361fe2ad6f</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -110,6 +110,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//div[@id = 'katalon-rec_elementInfoDiv' and (text() = 'id(&quot;katalon-rec_elementInfoDiv&quot;)' or . = 'id(&quot;katalon-rec_elementInfoDiv&quot;)')]</value>
-      <webElementGuid>a519bbf7-8413-4e4c-bb82-8015f94fff76</webElementGuid>
+      <webElementGuid>e2c104e6-591e-4908-a44f-e71e7bcc0153</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

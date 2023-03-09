@@ -1,0 +1,15 @@
+{
+  "keywordFileContentHash": "3DA427C409580B15204EA44BF0B6C1D1",
+  "keywordClasses": [
+    {
+      "name": "com.query.connect",
+      "keywordMethods": [
+        {
+          "name": "connectDBAPIAAS",
+          "parameters": []
+        }
+      ]
+    }
+  ],
+  "javadocParsed": false
+}
