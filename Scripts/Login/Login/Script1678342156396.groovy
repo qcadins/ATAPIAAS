@@ -24,12 +24,12 @@ import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
 'input email'
-WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-	findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
+WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'), 
+    findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
 
 'input password'
-WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
-	findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
+WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'), 
+    findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
 
 'ceklis pada reCaptcha'
 WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/div_id(katalon-rec_elementInfoDiv)'))
@@ -37,5 +37,8 @@ WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platf
 'focus pada button login'
 WebUI.focus(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
+WebUI.delay(GlobalVariable.Timeout)
+
 'Klik Login'
 WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+

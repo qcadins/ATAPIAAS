@@ -24,7 +24,7 @@ import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('Excel/APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('Excel/2. APIAAS.xlsx')
 
 'buka chrome\r\n'
 WebUI.openBrowser('')
@@ -108,11 +108,11 @@ int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
     WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/button_Simpan'))
 
     'verifikasi adanya tombol ok setelah klik simpan'
-    if (!(WebUI.verifyElementPresent(findTestObject('Eendigo/Page_Edit Profile/button_OK'), GlobalVariable.Timeout))) {
+    if (WebUI.verifyElementNotPresent(findTestObject('Eendigo/Page_Edit Profile/button_OK'), GlobalVariable.Timeout)) {
         'tulis error ke excel'
-        CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed, 
-            (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSubmitError)
-		WebUI.closeBrowser()
+       CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed, 
+		   (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSubmitError)
+	   WebUI.closeBrowser()
     }
 
 CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Success, 
