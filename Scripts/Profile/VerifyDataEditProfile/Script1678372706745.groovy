@@ -37,7 +37,7 @@ ArrayList<String> hasilweb = CustomKeywords.'profile.checkProfile.getTextfromFie
 
 'verifikasi data pada WEB dan DB sama'
 for (int j = 0; j < hasildb.size; j++) {
-    checkVerifyEqualorMatch(WebUI.verifyMatch(hasilweb[j], hasildb[j], false, FailureHandling.STOP_ON_FAILURE))
+    checkVerifyEqualorMatch(WebUI.verifyMatch(hasilweb[j], hasildb[j], false, FailureHandling.CONTINUE_ON_FAILURE))
 }
 
 def checkVerifyEqualorMatch(Boolean isMatch) {

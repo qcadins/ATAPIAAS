@@ -44,7 +44,7 @@ for (int i=10; i<=hasilexcel.size; i++)
 
 'verifikasi data pada WEB dan excel sama'
 for (int j = 0; j < hasilexcel.size ; j++) {
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[j], hasilexcel[j], false, FailureHandling.OPTIONAL))
+	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[j], hasilexcel[j], false, FailureHandling.CONTINUE_ON_FAILURE))
 }
 
 def checkVerifyEqualorMatch(Boolean isMatch) {
