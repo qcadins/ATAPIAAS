@@ -28,26 +28,26 @@ int CountColumnEdit = findTestData(ExcelPathRegisterLogin).getColumnNumbers()
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; GlobalVariable.NumOfColumn++)
 {
 	'memanggil fungsi untuk login'
-	WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [:], FailureHandling.STOP_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), ["TC":'Regist'], FailureHandling.STOP_ON_FAILURE)
 	
-	'klik pada tombol buat akun'
-	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/div_Buat Akun'))
-	
-	'input pada field email'
-	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4'),
-		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8))
-	
-	'input pada field nama pengguna'
-	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1'),
-		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9))
-	
-	'input pada field kata sandi'
-	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2'),
-		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 10))
-	
-	'input pada field ketik ulang kata sandi'
-	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'),
-		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 10))
+//	'klik pada tombol buat akun'
+//	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/div_Buat Akun'))
+//	
+//	'input pada field email'
+//	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4'),
+//		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8))
+//	
+//	'input pada field nama pengguna'
+//	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1'),
+//		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9))
+//	
+//	'input pada field kata sandi'
+//	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2'),
+//		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 10))
+//	
+//	'input pada field ketik ulang kata sandi'
+//	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'),
+//		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 10))
 	
 	//WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (1)'))
 	WebUI.delay(20)

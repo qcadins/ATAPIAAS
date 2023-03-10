@@ -33,15 +33,15 @@ int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; GlobalVariable.NumOfColumn++)
 {
 	'memanggil fungsi untuk login'
-	WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [:], FailureHandling.STOP_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), ["TC":'EditProf'], FailureHandling.STOP_ON_FAILURE)
 	
-	'input email'
-	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
-	
-	'input password'
-	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
-		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
+//	'input email'
+//	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+//		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
+//	
+//	'input password'
+//	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
+//		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	WebUI.delay(20)
 	
