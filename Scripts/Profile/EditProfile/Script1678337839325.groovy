@@ -26,92 +26,112 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
-//'mendapat jumlah kolom dari sheet Edit Profile'
-//int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
+'mendapat jumlah kolom dari sheet Edit Profile'
+int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 
-'memanggil fungsi untuk login'
-    WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [:], FailureHandling.STOP_ON_FAILURE)
+'looping kolom dari testdata'
+for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; GlobalVariable.NumOfColumn++)
+{
+	'memanggil fungsi untuk login'
+	WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [:], FailureHandling.STOP_ON_FAILURE)
+	
+	'input email'
+	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
+	
+	'input password'
+	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
+		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
+	
+	WebUI.delay(20)
+	
+	'focus pada button login'
+	WebUI.focus(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+	
+	'Klik Login'
+	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
-    'klik garis tiga di kanan atas web'
-    WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/i_LINA_ft-chevron-down'))
+	'klik garis tiga di kanan atas web'
+	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/i_LINA_ft-chevron-down'))
 
-    'klik profil saya'
-    WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/a_Profil Saya'))
+	'klik profil saya'
+	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/a_Profil Saya'))
 
-    'klik tombol edit profile'
-    WebUI.click(findTestObject('Object Repository/Eendigo/Page_My Profile/button_Edit Profile'))
+	'klik tombol edit profile'
+	WebUI.click(findTestObject('Object Repository/Eendigo/Page_My Profile/button_Edit Profile'))
 
-    'panggil fungsi verifikasi jika checkdatabase = yes'
-    if (GlobalVariable.KondisiCekDB == 'Yes') {
-        'verifikasi data yang ada di web dengan di database sebelum diEdit'
-        WebUI.callTestCase(findTestCase('Test Cases/Profile/VerifyDataEditProfile'), [:], FailureHandling.STOP_ON_FAILURE)
-    }
-    
-    'input data nama perusahaan'
-    WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__tenantName'), findTestData(ExcelPathEditProfile).getValue(
-            GlobalVariable.NumOfColumn, 10))
+	'panggil fungsi verifikasi jika checkdatabase = yes'
+	if (GlobalVariable.KondisiCekDB == 'Yes') {
+		'verifikasi data yang ada di web dengan di database sebelum diEdit'
+		WebUI.callTestCase(findTestCase('Test Cases/Profile/VerifyDataEditProfile'), [:], FailureHandling.STOP_ON_FAILURE)
+	}
+	
+	'input data nama perusahaan'
+	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__tenantName'), findTestData(ExcelPathEditProfile).getValue(
+			GlobalVariable.NumOfColumn, 10))
 
-    'klik pada field nama belakang'
-    WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__lastName'))
+	'klik pada field nama belakang'
+	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__lastName'))
 
-    'input data nama belakang'
-    WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__lastName'), findTestData(ExcelPathEditProfile).getValue(
-            GlobalVariable.NumOfColumn, 11))
+	'input data nama belakang'
+	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__lastName'), findTestData(ExcelPathEditProfile).getValue(
+			GlobalVariable.NumOfColumn, 11))
 
-    'input data industri'
-    WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__industry'), findTestData(ExcelPathEditProfile).getValue(
-            GlobalVariable.NumOfColumn, 12))
+	'input data industri'
+	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__industry'), findTestData(ExcelPathEditProfile).getValue(
+			GlobalVariable.NumOfColumn, 12))
 
-    'pilih jenis kelamin'
-    WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__ng-untouched ng-pristine ng-valid'))
+	'pilih jenis kelamin'
+	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__ng-untouched ng-pristine ng-valid'))
 
-    'klik pada field website'
-    WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__website'))
+	'klik pada field website'
+	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__website'))
 
-    'input data field webstie'
-    WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input_Wanita_phoneNumber'), findTestData(ExcelPathEditProfile).getValue(
-            GlobalVariable.NumOfColumn, 13))
+	'input data field webstie'
+	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input_Wanita_phoneNumber'), findTestData(ExcelPathEditProfile).getValue(
+			GlobalVariable.NumOfColumn, 13))
 
-    'input data field position'
-    WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__position'), findTestData(ExcelPathEditProfile).getValue(
-            GlobalVariable.NumOfColumn, 14))
+	'input data field position'
+	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__position'), findTestData(ExcelPathEditProfile).getValue(
+			GlobalVariable.NumOfColumn, 14))
 
-    'pilih dari dropdownlist +62 Indonesia'
-    WebUI.selectOptionByValue(findTestObject('Object Repository/Eendigo/Page_Edit Profile/select_Afghanistan 93Albania 355Algeria 213_ddb156'), 
-        findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 15), true)
+	'pilih dari dropdownlist +62 Indonesia'
+	WebUI.selectOptionByValue(findTestObject('Object Repository/Eendigo/Page_Edit Profile/select_Afghanistan 93Albania 355Algeria 213_ddb156'),
+		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 15), true)
 
-    'klik tombol simpan'
-    WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/button_Simpan'))
+	'klik tombol simpan'
+	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/button_Simpan'))
 
-    'klik tombol garis tiga di kanan atas web'
-    WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/i_LINA_ft-chevron-down'))
+	'klik tombol garis tiga di kanan atas web'
+	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/i_LINA_ft-chevron-down'))
 
-    'klik tombol profil saya'
-    WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/a_Profil Saya'))
+	'klik tombol profil saya'
+	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/a_Profil Saya'))
 
-    'klik tombol edit profile'
-    WebUI.click(findTestObject('Object Repository/Eendigo/Page_My Profile/button_Edit Profile'))
+	'klik tombol edit profile'
+	WebUI.click(findTestObject('Object Repository/Eendigo/Page_My Profile/button_Edit Profile'))
 
-    'panggil fungsi verifikasi jika checkdatabase = yes'
-    if (GlobalVariable.KondisiCekDB == 'Yes') {
-        'verifikasi data yang ada di excel dengan di database sesudah diEdit'
-        WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfileStoreDBVerif'), [:], FailureHandling.STOP_ON_FAILURE)
-    }
-    
-    'klik pada tombol simpan'
-    WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/button_Simpan'))
+	'panggil fungsi verifikasi jika checkdatabase = yes'
+	if (GlobalVariable.KondisiCekDB == 'Yes') {
+		'verifikasi data yang ada di excel dengan di database sesudah diEdit'
+		WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfileStoreDBVerif'), [:], FailureHandling.STOP_ON_FAILURE)
+	}
+	
+	'klik pada tombol simpan'
+	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/button_Simpan'))
 
-    'verifikasi adanya tombol ok setelah klik simpan'
-    if (WebUI.verifyElementNotPresent(findTestObject('Eendigo/Page_Edit Profile/button_OK'), GlobalVariable.Timeout)) {
-        'tulis error ke excel'
-       CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed, 
+	'verifikasi adanya tombol ok setelah klik simpan'
+	if (WebUI.verifyElementNotPresent(findTestObject('Eendigo/Page_Edit Profile/button_OK'), GlobalVariable.Timeout)) {
+		'tulis error ke excel'
+	   CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed,
 		   (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSubmitError)
 	   WebUI.closeBrowser()
-    }
+	}
 	else
 	{
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Success,
-			GlobalVariable.SuccessReason)
+		GlobalVariable.SuccessReason)
+		WebUI.closeBrowser()
 	}
-WebUI.closeBrowser()
+}
 

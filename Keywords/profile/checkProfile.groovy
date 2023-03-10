@@ -25,13 +25,13 @@ import java.sql.ResultSetMetaData
 
 import internal.GlobalVariable
 
-public class getDatafromDB {
+public class checkProfile {
 	@Keyword
-	public getDBdata(Connection conn) {
+	public getDBdata(Connection conn, String email) {
 		String data
 		ArrayList<String> listdata = new ArrayList<>()
 		Statement stm = conn.createStatement()
-		ResultSet resultSet = stm.executeQuery("SELECT ms_tenant.tenant_name, a.last_name, ms_tenant.tenant_industry, a.hashed_phone, am_user_personal_data.position from am_msuser a, am_user_personal_data , ms_tenant WHERE a.login_id = am_user_personal_data.email AND a.login_id = ms_tenant.email_reminder_dest AND a.login_id ='WILLIS.WY@AD-INS.COM'")
+		ResultSet resultSet = stm.executeQuery("SELECT ms_tenant.tenant_name, a.last_name, ms_tenant.tenant_industry, a.hashed_phone, am_user_personal_data.position from am_msuser a, am_user_personal_data , ms_tenant WHERE a.login_id = am_user_personal_data.email AND a.login_id = ms_tenant.email_reminder_dest AND a.login_id ='"+ email +"'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 		int columnCount = metadata.getColumnCount()
 		while(resultSet.next()) {
@@ -42,5 +42,29 @@ public class getDatafromDB {
 		}
 		return listdata
 		listdata.removeAll(listdata)
+	}
+	
+	@Keyword
+	public getTextfromField() {
+
+		'kumpulan string yang menyimpan hasil text dari User Interface APIAAS'
+		ArrayList<String> hasilgetText = new ArrayList<String>()
+
+		'mengambil text dari field nama perusahaan'
+		hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__tenantName'), 'value'))
+
+		'megambil text dari field nama belakang'
+		hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__lastName'), 'value'))
+
+		'mengambil text dari field industri'
+		hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__industry'), 'value'))
+
+		'mengambil nomor telepon dari field Nomor HP'
+		hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input_Wanita_phoneNumber'), 'value'))
+
+		'mengambil text dari field jabatan kerja'
+		hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__position'), 'value'))
+
+		return hasilgetText
 	}
 }

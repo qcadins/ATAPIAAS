@@ -24,26 +24,17 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
-'kumpulan string yang menyimpan hasil text dari User Interface APIAAS'
-ArrayList<String> hasilgetText = new ArrayList<String>()
+'deklarasi variabel untuk konek ke Database APIAAS'
+def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS'()
 
-'kumpulan string dari data yang diambil langsung dari database'
+'ambil email dari testdata, disimpan ke string'
+String email = WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__email'), 'value')
+
+'kumpulan string yang menyimpan hasil data dari DB'
+ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getDBdata'(conn, email)
+
+'kumpulan string dari data yang diambil langsung dari excel'
 ArrayList<String> hasilexcel = new ArrayList<String>()
-
-'mengambil text dari field nama perusahaan'
-hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__tenantName'), 'value'))
-
-'megambil text dari field nama belakang'
-hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__lastName'), 'value'))
-
-'mengambil text dari field industri'
-hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__industry'), 'value'))
-
-'mengambil nomor telepon dari field Nomor HP'
-hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input_Wanita_phoneNumber'), 'value'))
-
-'mengambil text dari field jabatan kerja'
-hasilgetText.add(WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__position'), 'value'))
 
 'mengambil data dari excel'
 for (int i=10; i<=hasilexcel.size; i++)
@@ -53,7 +44,7 @@ for (int i=10; i<=hasilexcel.size; i++)
 
 'verifikasi data pada WEB dan excel sama'
 for (int j = 0; j < hasilexcel.size ; j++) {
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasilgetText[j], hasilexcel[j], false, FailureHandling.OPTIONAL))
+	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[j], hasilexcel[j], false, FailureHandling.OPTIONAL))
 }
 
 def checkVerifyEqualorMatch(Boolean isMatch) {

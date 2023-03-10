@@ -15,8 +15,7 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.kms.katalon.entity.global.GlobalVariableEntity
-
+import com.kms.katalon.entity.global.GlobalVariableEntity as GlobalVariableEntity
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 import groovy.sql.Sql as Sql
@@ -27,23 +26,25 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 'deklarasi variabel untuk konek ke Database APIAAS'
 def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS'()
 
+'ambil email dari testdata, disimpan ke string'
+String email = WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__email'), 'value')
+
 'kumpulan string dari data yang diambil langsung dari database'
-ArrayList<String> hasildb = CustomKeywords.'profile.getDatafromDB.getDBdata'(conn)
+ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getDBdata'(conn, email)
 
 'ambil text dari UI Web APIAAS'
-ArrayList<String> hasilweb = CustomKeywords.'profile.getTextfromWeb.getTextfromField'()
+ArrayList<String> hasilweb = CustomKeywords.'profile.checkProfile.getTextfromField'()
 
 'verifikasi data pada WEB dan DB sama'
-for (int j = 0; j < hasildb.size ; j++) {
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasilweb[j], hasildb[j], false, FailureHandling.OPTIONAL))
+for (int j = 0; j < hasildb.size; j++) {
+    checkVerifyEqualorMatch(WebUI.verifyMatch(hasilweb[j], hasildb[j], false, FailureHandling.STOP_ON_FAILURE))
 }
 
 def checkVerifyEqualorMatch(Boolean isMatch) {
-	if(isMatch == false)
-	{
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, 
-		GlobalVariable.Failed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonDataNotMatch)
-	}
+    if (isMatch == false) {
+        'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+        CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed, 
+            (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonDataNotMatch)
+    }
 }
+

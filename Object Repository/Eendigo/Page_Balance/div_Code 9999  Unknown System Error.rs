@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>div_Code 9999  Unknown System Error</name>
+   <tag></tag>
+   <elementGuidId>29aa55cc-32ee-4511-8c38-2cc704351935</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='toast-container']/div</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>div.ng-tns-c95-7.ng-star-inserted.ng-trigger.ng-trigger-flyInOut.ngx-toastr.toast-error</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>div</value>
+      <webElementGuid>a2ee161a-3b42-4280-9032-2703bfa122fe</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ng-tns-c95-7 ng-star-inserted ng-trigger ng-trigger-flyInOut ngx-toastr toast-error</value>
+      <webElementGuid>0fb3424d-6842-4a5f-b6da-2fefddda8908</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value> Code: 9999  Unknown System Error </value>
+      <webElementGuid>6e2a72df-2ab8-4993-afea-132d0e09175d</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;toast-container&quot;)/div[@class=&quot;ng-tns-c95-7 ng-star-inserted ng-trigger ng-trigger-flyInOut ngx-toastr toast-error&quot;]</value>
+      <webElementGuid>21893912-9fa7-4318-a568-b89efd8f31fb</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='toast-container']/div</value>
+      <webElementGuid>f4089341-eb20-4c0a-9856-d8dab736a9a2</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='`'])[2]/following::div[9]</value>
+      <webElementGuid>615b0154-dc0f-4bf3-8617-8f6e4cb135d0</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Alt'])[2]/following::div[9]</value>
+      <webElementGuid>fb204cd9-0dcf-4196-b8a1-91c6cdbc9229</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div[5]/div/div</value>
+      <webElementGuid>66b64f69-9a4f-4792-8488-157d84455651</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//div[(text() = ' Code: 9999  Unknown System Error ' or . = ' Code: 9999  Unknown System Error ')]</value>
+      <webElementGuid>92cf4c32-094d-4f40-b612-e5323e994ba4</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

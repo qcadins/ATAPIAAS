@@ -1,0 +1,48 @@
+{
+  "keywordFileContentHash": "2EA83E465F1B26AB1292AC5A34A94D04",
+  "keywordClasses": [
+    {
+      "name": "profile.checkProfile",
+      "keywordMethods": [
+        {
+          "name": "getDBdata",
+          "parameters": [
+            {
+              "name": "conn",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "email",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ],
+          "javadoc": ""
+        },
+        {
+          "name": "getTextfromField",
+          "parameters": [],
+          "javadoc": ""
+        }
+      ]
+    }
+  ],
+  "javadocParsed": true
+}

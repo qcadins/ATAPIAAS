@@ -29,22 +29,6 @@ WebUI.openBrowser('')
 'buka website APIAAS SIT, data diambil dari TestData Login'
 WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
 
-'input email'
-WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'), 
-    findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
-
-'input password'
-WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'), 
-    findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
-
 'ceklis pada reCaptcha'
 //WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/div_id(katalon-rec_elementInfoDiv)'))
-
-WebUI.delay(20)
-
-'focus pada button login'
-WebUI.focus(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-
-'Klik Login'
-WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
