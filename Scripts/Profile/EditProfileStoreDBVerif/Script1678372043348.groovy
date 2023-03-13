@@ -30,8 +30,11 @@ def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS'()
 'ambil email dari testdata, disimpan ke string'
 String email = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8)
 
+'ambil nama negara dari excel'
+String country = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 18)
+
 'kumpulan string yang menyimpan hasil data dari DB'
-ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getProfilefromDB'(conn, email)
+ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getProfilefromDB'(conn, email, country)
 
 'kumpulan string dari data yang diambil langsung dari excel'
 ArrayList<String> hasilexcel = new ArrayList<String>()
@@ -50,6 +53,7 @@ for (int j = 0; j < hasilexcel.size ; j++) {
 def checkVerifyEqualorMatch(Boolean isMatch) {
 	if(isMatch == false)
 	{
+		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
 		GlobalVariable.Failed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') +

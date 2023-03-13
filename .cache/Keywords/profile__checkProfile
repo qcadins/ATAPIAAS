@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "8EF2B7F7864D6DAA5FCD578A09F5DB30",
+  "keywordFileContentHash": "A91B2A9B1F4732BD5334832EA420C509",
   "keywordClasses": [
     {
       "name": "profile.checkProfile",
@@ -32,17 +32,28 @@
                 "genericsTypes": [],
                 "errorOnParsing": false
               }
+            },
+            {
+              "name": "country",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getAttributeValueProfile",
-          "parameters": [],
-          "javadoc": ""
+          "parameters": []
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

@@ -12,42 +12,13 @@ import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as Cucumber
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
 import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
-import com.kms.katalon.core.testcase.Variable
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import java.sql.Connection
-import java.sql.Statement
-import java.sql.DriverManager
-import java.sql.ResultSet
-import java.sql.ResultSetMetaData
 
 import internal.GlobalVariable
 
-public class getOTPfromDB {
-
-	//fungsi digunakan untuk mengambil kode otp secara realtime dengan parameter email
-	@Keyword
-	public getOTPforRegister(Connection conn, String email) {
-		String data
-		int columnCount = metadata.getColumnCount()
-
-		ArrayList<String> listdata = new ArrayList<>()
-
-		Statement stm = conn.createStatement()
-
-		ResultSet resultSet = stm.executeQuery("SELECT otp_code FROM tr_otp WHERE login_id = '"+ email +"'")
-
-		ResultSetMetaData metadata  = resultSet.getMetaData()
-
-		while(resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
-				data = resultSet.getObject(i)
-				listdata.add(data)
-			}
-		}
-		return listdata
-	}
+public class checkRegisterProfile {
 }

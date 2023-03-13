@@ -30,101 +30,114 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPa
 int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 
 'looping kolom dari testdata'
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; GlobalVariable.NumOfColumn++)
-{
-	'memanggil fungsi untuk login'
-	WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), ["TC":'EditProf'], FailureHandling.STOP_ON_FAILURE)
+for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++) {
+    'memanggil fungsi untuk login'
+    WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf'], FailureHandling.STOP_ON_FAILURE)
+
+    //	'input email'
+    //	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+    //		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
+    //	
+    //	'input password'
+    //	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
+    //		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
+    'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
+    WebUI.delay(20)
+
+    'focus pada button login'
+    WebUI.focus(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+
+    'Klik Login'
+    WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+
+    'klik garis tiga di kanan atas web'
+    WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/i_LINA_ft-chevron-down'))
+
+    'klik profil saya'
+    WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/a_Profil Saya'))
+
+    'klik tombol edit profile'
+    WebUI.click(findTestObject('Object Repository/Profile/Page_My Profile/button_Edit Profile'))
+
+    WebUI.delay(GlobalVariable.Timeout)
+
+    'panggil fungsi verifikasi jika checkdatabase = yes'
+    if (GlobalVariable.KondisiCekDB == 'Yes') {
+        'verifikasi data yang ada di web dengan di database sebelum diEdit'
+        WebUI.callTestCase(findTestCase('Test Cases/Profile/VerifyDataEditProfile'), [:], FailureHandling.STOP_ON_FAILURE)
+    }
+    
+    'input nama depan pengguna'
+    WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__firstName'), findTestData(ExcelPathEditProfile).getValue(
+            GlobalVariable.NumOfColumn, 10))
+
+    'klik pada field nama belakang'
+    WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/input__lastName'))
+
+    'input data nama belakang'
+    WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__lastName'), findTestData(ExcelPathEditProfile).getValue(
+            GlobalVariable.NumOfColumn, 11))
+
+    'input data nama perusahaan'
+    WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__tenantName'), findTestData(ExcelPathEditProfile).getValue(
+            GlobalVariable.NumOfColumn, 12))
+
+    'input data industri'
+    WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__industry'), findTestData(ExcelPathEditProfile).getValue(
+            GlobalVariable.NumOfColumn, 13))
+
+    'pilih jenis kelamin'
+    if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 14) == 'M') {
+        WebUI.check(findTestObject('Object Repository/Profile/Page_Edit Profile/input__ng-untouched ng-pristine ng-valid'))
+    } else {
+        WebUI.check(findTestObject('Object Repository/Profile/Page_Edit Profile/input_Pria_ng-untouched ng-pristine ng-valid'))
+    }
+    
+    'input field website'
+    WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__website'), findTestData(ExcelPathEditProfile).getValue(
+            GlobalVariable.NumOfColumn, 15))
+
+    'input data field nomor telepon'
+    WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input_Wanita_phoneNumber'), findTestData(ExcelPathEditProfile).getValue(
+            GlobalVariable.NumOfColumn, 16))
+
+    'input data field position'
+    WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__position'), findTestData(ExcelPathEditProfile).getValue(
+            GlobalVariable.NumOfColumn, 17))
+
+    'pilih dari dropdownlist +62 Indonesia'
+    WebUI.selectOptionByLabel(findTestObject('Object Repository/Profile/Page_Edit Profile/select_Afghanistan 93Albania 355Algeria 213_ddb156'), 
+        findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 18), false)
+
+    'klik tombol simpan'
+    WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/button_Simpan'))
 	
-//	'input email'
-//	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-//		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
-//	
-//	'input password'
-//	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
-//		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
-	'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
-	WebUI.delay(20)
-	
-	'focus pada button login'
-	WebUI.focus(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-	
-	'Klik Login'
-	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-
-	'klik garis tiga di kanan atas web'
-	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/i_LINA_ft-chevron-down'))
-
-	'klik profil saya'
-	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/a_Profil Saya'))
-
-	'klik tombol edit profile'
-	WebUI.click(findTestObject('Object Repository/Eendigo/Page_My Profile/button_Edit Profile'))
-
-	'panggil fungsi verifikasi jika checkdatabase = yes'
-	if (GlobalVariable.KondisiCekDB == 'Yes') {
-		'verifikasi data yang ada di web dengan di database sebelum diEdit'
-		WebUI.callTestCase(findTestCase('Test Cases/Profile/VerifyDataEditProfile'), [:], FailureHandling.STOP_ON_FAILURE)
-	}
-	
-	'input data nama perusahaan'
-	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__tenantName'), findTestData(ExcelPathEditProfile).getValue(
-			GlobalVariable.NumOfColumn, 10))
-
-	'klik pada field nama belakang'
-	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__lastName'))
-
-	'input data nama belakang'
-	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__lastName'), findTestData(ExcelPathEditProfile).getValue(
-			GlobalVariable.NumOfColumn, 11))
-
-	'input data industri'
-	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__industry'), findTestData(ExcelPathEditProfile).getValue(
-			GlobalVariable.NumOfColumn, 12))
-
-	'pilih jenis kelamin'
-	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__ng-untouched ng-pristine ng-valid'))
-
-	'klik pada field website'
-	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__website'))
-
-	'input data field webstie'
-	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input_Wanita_phoneNumber'), findTestData(ExcelPathEditProfile).getValue(
-			GlobalVariable.NumOfColumn, 13))
-
-	'input data field position'
-	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Edit Profile/input__position'), findTestData(ExcelPathEditProfile).getValue(
-			GlobalVariable.NumOfColumn, 14))
-
-	'pilih dari dropdownlist +62 Indonesia'
-	WebUI.selectOptionByValue(findTestObject('Object Repository/Eendigo/Page_Edit Profile/select_Afghanistan 93Albania 355Algeria 213_ddb156'),
-		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 15), true)
-
-	'klik tombol simpan'
-	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/button_Simpan'))
-
-	'panggil fungsi verifikasi jika checkdatabase = yes'
-	if (GlobalVariable.KondisiCekDB == 'Yes') {
-		'verifikasi data yang ada di excel dengan di database sesudah diEdit'
-		WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfileStoreDBVerif'), [:], FailureHandling.STOP_ON_FAILURE)
-	}
-
 	'verifikasi adanya tombol ok setelah klik simpan'
-	if (WebUI.verifyElementNotPresent(findTestObject('Eendigo/Page_Edit Profile/button_OK'), GlobalVariable.Timeout)) 
-	{
+	if (WebUI.verifyElementNotPresent(findTestObject('Profile/Page_Edit Profile/button_OK'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		'buat flag failed menjadi 1 agar tidak menulis status sukses pada excel'
 		GlobalVariable.FlagFailed = 1
-		
+
 		'tulis error ke excel'
-	   CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed,
-		   (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSubmitError)
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed,
+			(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSubmitError)
+	} else {
+		'klik pada button OK jika muncul pop-up'
+		WebUI.click(findTestObject('Profile/Page_Edit Profile/button_OK'), GlobalVariable.Timeout)
 	}
-	'kondisi jika tidak ada failed pada bagia lain testcase'
-	if (GlobalVariable.FlagFailed == 0)
-	{
-		'tulis status sukses pada excel'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Success,
-		GlobalVariable.SuccessReason)
-	}
-	WebUI.closeBrowser()
+
+    'panggil fungsi verifikasi jika checkdatabase = yes'
+    if (GlobalVariable.KondisiCekDB == 'Yes') {
+        'verifikasi data yang ada di excel dengan di database sesudah diEdit'
+        WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfileStoreDBVerif'), [:], FailureHandling.STOP_ON_FAILURE)
+    }
+    
+    'kondisi jika tidak ada failed pada bagia lain testcase'
+    if (GlobalVariable.FlagFailed == 0) {
+        'tulis status sukses pada excel'
+        CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Success, 
+            GlobalVariable.SuccessReason)
+    }
+    
+    WebUI.closeBrowser()
 }
 

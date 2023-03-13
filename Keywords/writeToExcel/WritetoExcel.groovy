@@ -28,7 +28,7 @@ public class writeExcel {
 	/**
 	 * Write to Excel
 	 */
-	//'keyword dibawah bisa digunakan untuk menulis data ke dalam excel dalam bentuk string'
+	//fungsi digunakan untuk menulis data ke dalam excel dalam bentuk string
 	@Keyword
 	def writeToExcel(String filePath, String sheetName, int rowNo, int collNo, String cellValue) {
 		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
@@ -46,7 +46,7 @@ public class writeExcel {
 		outFile.close();
 	}
 
-	//'keyword dibawah bisa digunakan untuk menulis ke dalam excel dengan tipe data angka'
+	//fungsi digunakan untuk menulis ke dalam excel dengan tipe data angka
 	@Keyword
 	def writeToExcelNumber(String filePath, String sheetName, int rowNo, int collNo, Integer cellValue) {
 		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
@@ -64,7 +64,7 @@ public class writeExcel {
 		outFile.close();
 	}
 
-	//'keyword dibawah bisa digunakan untuk menulis inputan decimal(float) ke excel'
+	//fungsi digunakan untuk menulis inputan decimal(float) ke excel
 	@Keyword
 	def writeToExcelDecimal(String filePath, String sheetName, int rowNo, int collNo, Double cellValue) {
 		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
@@ -82,7 +82,7 @@ public class writeExcel {
 		outFile.close();
 	}
 
-	//'keyword dibawah bisa digunakan untuk menulis ke dalam excel dengan status dan alasan gagalnya case tersebut'
+	//fungsi digunakan untuk menulis ke dalam excel dengan status dan alasan gagalnya case tersebut
 	// write to excel status and reason
 	@Keyword
 	public writeToExcelStatusReason (String sheetname, int colm, String status, String reason){
@@ -94,7 +94,7 @@ public class writeExcel {
 	}
 
 
-	//'keyword dibawah bisa digunakan untuk menulis rumus ke dalam cell excel'
+	//fungsi digunakan untuk menulis rumus ke dalam cell excel
 	@Keyword
 	public void writeToExcelFormula(String filePath, String sheetName, int rowNo, int collNo, String cellValue) throws IOException{
 		FileInputStream file = new FileInputStream (new File(filePath))
@@ -112,7 +112,7 @@ public class writeExcel {
 
 	}
 
-	//'keyword ini digunakan untuk mengambil directory dari file excel yang akan digunakan'
+	//fungsi digunakan untuk mengambil directory dari file excel yang akan digunakan
 	//keyword getExcelPath
 	@Keyword
 	public getExcelPath(String Path){

@@ -1,0 +1,10 @@
+{
+  "keywordFileContentHash": "8D9A78B9EBBEC0B0E7FC48AE3BDCD065",
+  "keywordClasses": [
+    {
+      "name": "otp.checkRegisterProfile",
+      "keywordMethods": []
+    }
+  ],
+  "javadocParsed": true
+}

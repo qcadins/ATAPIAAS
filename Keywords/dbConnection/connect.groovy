@@ -25,7 +25,7 @@ import internal.GlobalVariable
 
 public class connect {
 
-	//'fungsi dibawah digunakan untuk koneksi dengan database adins_apiaas'
+	//fungsi digunakan untuk koneksi dengan database eendigo_prod_test_deploy_modify
 	@Keyword
 	def connectDBAPIAAS() {
 
