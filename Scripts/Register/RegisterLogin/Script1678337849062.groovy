@@ -35,16 +35,16 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 	WebUI.delay(20)
 	
 	'hover pointer ke button buat akun'
-	WebUI.focus(findTestObject('Eendigo/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'))
+	WebUI.focus(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'))
 	
 	'simpan data email dari testdata'
 	String email = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8)
 	
 	'kondisi jika button create akun bisa di-klik'
-	if (WebUI.verifyElementClickable(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'),FailureHandling.OPTIONAL)) 
+	if (WebUI.verifyElementClickable(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'),FailureHandling.OPTIONAL)) 
 	{
 		'klik pada button buat akun'
-		WebUI.click(findTestObject('Eendigo/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'))
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'))
 		
 		WebUI.delay(5)
 		
@@ -52,41 +52,52 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 		ArrayList<String> iniotp = CustomKeywords.'otp.getOTPfromDB.getOTPforRegister'(conn, email)
 		
 		'input otp dari DB'
-		WebUI.setText(findTestObject('Eendigo/Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), iniotp[0])
+		WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), iniotp[0])
 		
 		WebUI.delay(5)
 		
 		'klik pada button verifikasi otp'
-		WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/button_Verifikasi'))
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Verifikasi'))
 		
 		WebUI.delay(3)
 		
+		'verifikasi data hasil registrasi dan yang ada pada db'
+		WebUI.callTestCase(findTestCase('Test Cases/Register/VerifyRegistration'), [:], FailureHandling.STOP_ON_FAILURE)
+		
 		'klik button Masuk'
-		WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/div_Masuk'))
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Masuk'))
 		
 		'input email yang sudah diregist pada field'
-		WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4'),
+		WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4'),
 			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8))
 		
 		'input password yang sudah diregist ke field'
-		WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2'),
+		WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2'),
 			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 10))
 		
 	//	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (1)'))
 		WebUI.delay(10)
 		
 		'kondisi jika button login clickable'
-		if (WebUI.verifyElementClickable(findTestObject('Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'), FailureHandling.OPTIONAL) == true)
+		if (WebUI.verifyElementClickable(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'), FailureHandling.OPTIONAL))
 		{	
 			'klik pada button login'
-			WebUI.click(findTestObject('Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 		}
 		//kondisi dibawah jika button tidak clickable
 		else
 		{
+			'penanda ada error, status sukses tidak akan ditulis'
+			GlobalVariable.FlagFailed = 1
 			'tulis status dan reason error ke excel'
 			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn, GlobalVariable.Failed,
 			(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSubmitError)
+		}
+		if (GlobalVariable.FlagFailed == 0)
+		{
+			'tulis status sukses pada excel'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn, GlobalVariable.Success,
+			GlobalVariable.SuccessReason)
 		}
 	} 
 	else 

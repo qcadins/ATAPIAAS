@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>VerifyRegistration</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>41d2e1b7-1413-483a-80fc-ec4c00425c39</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>e8f73814-3e1c-40df-bdf4-520363ecdb85</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'APIAAS/DataRegistLogin'</defaultValue>
+      <description></description>
+      <id>e8f73814-3e1c-40df-bdf4-520363ecdb85</id>
+      <masked>false</masked>
+      <name>ExcelPathRegisterLogin</name>
+   </variable>
+</TestCaseEntity>

@@ -15,7 +15,8 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.kms.katalon.entity.global.GlobalVariableEntity as GlobalVariableEntity
+import com.kms.katalon.entity.global.GlobalVariableEntity
+
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 import groovy.sql.Sql as Sql
@@ -23,32 +24,35 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
-'deklarasi variabel untuk konek ke Database APIAAS'
 def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS'()
 
-'ambil email dari testdata, disimpan ke string'
-String email = WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__email'), 'value')
+'simpan email ke dalam sebuah variabel'
+String email = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8)
 
-'ambil nama negara dari excel'
-String country = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 18)
+'simpan data yang diambil dari database'
+ArrayList<String> credential = CustomKeywords.'profile.checkRegisterProfile.checkDBafterRegister'(conn, email)
 
-'kumpulan string dari data yang diambil langsung dari database'
-ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getProfilefromDB'(conn, email, country)
+'kumpulan string dari excel'
+ArrayList<String> exceldata = new ArrayList<String>()
 
-'ambil text dari UI Web APIAAS'
-ArrayList<String> hasilweb = CustomKeywords.'profile.checkProfile.getAttributeValueProfile'()
+'data dari excel disimpan ke arraylist'
+for (int i=8; i<=credential.size; i++)
+{
+		exceldata.add(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, i))
+}
 
-'verifikasi data pada WEB dan DB sama'
-for (int j = 0; j < hasildb.size; j++) {
-    checkVerifyEqualorMatch(WebUI.verifyMatch(hasilweb[j], hasildb[j], false, FailureHandling.CONTINUE_ON_FAILURE))
+'verifikasi data pada WEB dan excel sama'
+for (int j = 0; j < exceldata.size ; j++) {
+	checkVerifyEqualorMatch(WebUI.verifyMatch(credential[j], exceldata[j], false, FailureHandling.CONTINUE_ON_FAILURE))
 }
 
 def checkVerifyEqualorMatch(Boolean isMatch) {
-    if (isMatch == false) {
-        'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+	if(isMatch == false)
+	{
 		GlobalVariable.FlagFailed = 1
-        CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed, 
-            (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonDataNotMatch)
-    }
+		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+		GlobalVariable.Failed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		GlobalVariable.FailedReasonDataNotMatch)
+	}
 }
-

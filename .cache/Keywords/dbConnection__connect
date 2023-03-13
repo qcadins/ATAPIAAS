@@ -6,10 +6,11 @@
       "keywordMethods": [
         {
           "name": "connectDBAPIAAS",
-          "parameters": []
+          "parameters": [],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

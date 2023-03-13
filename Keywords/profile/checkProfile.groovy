@@ -61,10 +61,13 @@ public class checkProfile {
 		Select select
 		String optionLabel
 
+		'klik pada frame login'
 		WebUI.click(findTestObject('Profile/Page_Edit Profile/framelogin'))
 
+		'fungsi select untuk yang mengarah ke element dropdown list negara'
 		select = new Select(DriverFactory.getWebDriver().findElement(By.xpath("//select[@id='countryCodes']")))
 
+		'ambil text yang diselect oleh dropdown list tersebut'
 		optionLabel = select.getFirstSelectedOption().getText()
 
 		'kumpulan string yang menyimpan hasil text dari User Interface APIAAS'
@@ -98,11 +101,13 @@ public class checkProfile {
 		'mengambil text dari field jabatan kerja'
 		hasilgetText.add(WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__position'), 'value'))
 
+		'mengambil text dari field negara'
 		hasilgetText.add(optionLabel)
 
 		//		'mengambil value dari ddl negara'
 		//		hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/Profile/Page_Edit Profile/select_Afghanistan 93Albania 355Algeria 213_ddb156'), 'text'))
 
+		'sekelompok data akan dikembalikan dalam bentuk array'
 		return hasilgetText
 	}
 }

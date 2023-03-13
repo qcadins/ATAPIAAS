@@ -32,7 +32,7 @@ public class getOTPfromDB {
 	@Keyword
 	public getOTPforRegister(Connection conn, String email) {
 		String data
-		int columnCount = metadata.getColumnCount()
+		int columnCount
 
 		ArrayList<String> listdata = new ArrayList<>()
 
@@ -41,6 +41,8 @@ public class getOTPfromDB {
 		ResultSet resultSet = stm.executeQuery("SELECT otp_code FROM tr_otp WHERE login_id = '"+ email +"'")
 
 		ResultSetMetaData metadata  = resultSet.getMetaData()
+		
+		columnCount = metadata.getColumnCount()
 
 		while(resultSet.next()) {
 			for(int i=1; i<=columnCount ; i++) {

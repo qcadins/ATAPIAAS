@@ -1,10 +1,42 @@
 {
-  "keywordFileContentHash": "8D9A78B9EBBEC0B0E7FC48AE3BDCD065",
+  "keywordFileContentHash": "1A5CFB3E734B4AD4A9042418180D087C",
   "keywordClasses": [
     {
       "name": "otp.checkRegisterProfile",
-      "keywordMethods": []
+      "keywordMethods": [
+        {
+          "name": "checkDBafterRegister",
+          "parameters": [
+            {
+              "name": "conn",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "email",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ]
+        }
+      ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

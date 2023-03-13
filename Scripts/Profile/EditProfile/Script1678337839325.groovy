@@ -133,6 +133,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
     
     'kondisi jika tidak ada failed pada bagia lain testcase'
     if (GlobalVariable.FlagFailed == 0) {
+		
         'tulis status sukses pada excel'
         CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Success, 
             GlobalVariable.SuccessReason)
