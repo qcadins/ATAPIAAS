@@ -26,14 +26,22 @@ import java.sql.ResultSetMetaData
 import internal.GlobalVariable
 
 public class checkProfile {
+	
+	//'fungsi dibawah ini bisa digunakan untuk mengambil data dari database'
+	//'data yang diambil berupa tenant, nama belakang, industri, nomor telepon, dan posisi kerja dari user'
 	@Keyword
-	public getDBdata(Connection conn, String email) {
+	public getProfilefromDB(Connection conn, String email) {
 		String data
-		ArrayList<String> listdata = new ArrayList<>()
-		Statement stm = conn.createStatement()
-		ResultSet resultSet = stm.executeQuery("SELECT ms_tenant.tenant_name, a.last_name, ms_tenant.tenant_industry, a.hashed_phone, am_user_personal_data.position from am_msuser a, am_user_personal_data , ms_tenant WHERE a.login_id = am_user_personal_data.email AND a.login_id = ms_tenant.email_reminder_dest AND a.login_id ='"+ email +"'")
-		ResultSetMetaData metadata  = resultSet.getMetaData()
 		int columnCount = metadata.getColumnCount()
+		
+		ArrayList<String> listdata = new ArrayList<>()
+		
+		Statement stm = conn.createStatement()
+		
+		ResultSet resultSet = stm.executeQuery("SELECT ms_tenant.tenant_name, a.last_name, ms_tenant.tenant_industry, a.hashed_phone, am_user_personal_data.position from am_msuser a, am_user_personal_data , ms_tenant WHERE a.login_id = am_user_personal_data.email AND a.login_id = ms_tenant.email_reminder_dest AND a.login_id ='"+ email +"'")
+		
+		ResultSetMetaData metadata  = resultSet.getMetaData()
+		
 		while(resultSet.next()) {
 			for(int i=1; i<=columnCount ; i++) {
 				data = resultSet.getObject(i)
@@ -41,11 +49,11 @@ public class checkProfile {
 			}
 		}
 		return listdata
-		listdata.removeAll(listdata)
 	}
-	
+
+	//'fungsi dibawah bisa digunakan untuk mengambil text dari attribut website yang memiliki textbox'
 	@Keyword
-	public getTextfromField() {
+	public getAttributeValueProfile() {
 
 		'kumpulan string yang menyimpan hasil text dari User Interface APIAAS'
 		ArrayList<String> hasilgetText = new ArrayList<String>()

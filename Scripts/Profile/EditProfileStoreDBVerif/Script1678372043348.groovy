@@ -28,10 +28,10 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS'()
 
 'ambil email dari testdata, disimpan ke string'
-String email = WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__email'), 'value')
+String email = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8)
 
 'kumpulan string yang menyimpan hasil data dari DB'
-ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getDBdata'(conn, email)
+ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getProfilefromDB'(conn, email)
 
 'kumpulan string dari data yang diambil langsung dari excel'
 ArrayList<String> hasilexcel = new ArrayList<String>()

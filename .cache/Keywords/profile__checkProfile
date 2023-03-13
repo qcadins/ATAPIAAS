@@ -1,11 +1,11 @@
 {
-  "keywordFileContentHash": "2EA83E465F1B26AB1292AC5A34A94D04",
+  "keywordFileContentHash": "8EF2B7F7864D6DAA5FCD578A09F5DB30",
   "keywordClasses": [
     {
       "name": "profile.checkProfile",
       "keywordMethods": [
         {
-          "name": "getDBdata",
+          "name": "getProfilefromDB",
           "parameters": [
             {
               "name": "conn",
@@ -37,7 +37,7 @@
           "javadoc": ""
         },
         {
-          "name": "getTextfromField",
+          "name": "getAttributeValueProfile",
           "parameters": [],
           "javadoc": ""
         }

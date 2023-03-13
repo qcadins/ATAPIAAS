@@ -1,11 +1,11 @@
 {
-  "keywordFileContentHash": "38824E8C745F91DB01AF08A3D86D32F6",
+  "keywordFileContentHash": "03D84F625C4179B270FA3DDEFAA7A272",
   "keywordClasses": [
     {
-      "name": "otp.getDatafromDB",
+      "name": "otp.getOTPfromDB",
       "keywordMethods": [
         {
-          "name": "getDBdata",
+          "name": "getOTPforRegister",
           "parameters": [
             {
               "name": "conn",

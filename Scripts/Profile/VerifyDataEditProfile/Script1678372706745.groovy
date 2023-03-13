@@ -30,10 +30,10 @@ def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS'()
 String email = WebUI.getAttribute(findTestObject('Eendigo/Page_Edit Profile/input__email'), 'value')
 
 'kumpulan string dari data yang diambil langsung dari database'
-ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getDBdata'(conn, email)
+ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getProfilefromDB'(conn, email)
 
 'ambil text dari UI Web APIAAS'
-ArrayList<String> hasilweb = CustomKeywords.'profile.checkProfile.getTextfromField'()
+ArrayList<String> hasilweb = CustomKeywords.'profile.checkProfile.getAttributeValueProfile'()
 
 'verifikasi data pada WEB dan DB sama'
 for (int j = 0; j < hasildb.size; j++) {

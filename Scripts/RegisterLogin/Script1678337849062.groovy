@@ -50,6 +50,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 //		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 10))
 	
 	//WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (1)'))
+	'pada delay ini, bisa melakukan captcha secara manual, karena automation testing dianggap sebagai robot'
 	WebUI.delay(20)
 	
 	'hover pointer ke button buat akun'
@@ -59,18 +60,24 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 	String email = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8)
 	
 	'kondisi jika button create akun bisa di-klik'
-	if (WebUI.verifyElementClickable(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'))) {
+	if (WebUI.verifyElementClickable(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'))) 
+	{
 		'klik pada button buat akun'
 		WebUI.click(findTestObject('Eendigo/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'))
 		
 		WebUI.delay(5)
 		
 		'mengambil otp dari db, disimpan ke iniotp'
-		ArrayList<String> iniotp = CustomKeywords.'otp.getDatafromDB.getDBdata'(conn, email)
+		ArrayList<String> iniotp = CustomKeywords.'otp.getOTPfromDB.getOTPforRegister'(conn, email)
 		
 		'input otp dari DB'
 		WebUI.setText(findTestObject('Eendigo/Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), iniotp[0])
-	} else {
+	} 
+	else 
+	{
+		'buat flag failed menjadi 1 agar tidak menulis status sukses pada excel'
+		GlobalVariable.FlagFailed = 1
+		
 		'tulis error ke excel'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn, GlobalVariable.Failed,
 			(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSubmitError)
@@ -97,18 +104,26 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 //	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (1)'))
 	WebUI.delay(10)
 	
-	if (WebUI.verifyElementClickable(findTestObject('Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))) {
+	'kondisi jika button login clickable'
+	if (WebUI.verifyElementClickable(findTestObject('Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))) 
+	{
+		'buat flag failed menjadi 1 agar tidak menulis status sukses pada excel'
+		GlobalVariable.FlagFailed = 1
+		
 		'klik pada button login'
 		WebUI.click(findTestObject('Eendigo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+		
 		'tulis success ke excel'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn, GlobalVariable.Success,
-			GlobalVariable.SuccessReason)
-	} else {
+		GlobalVariable.SuccessReason)
+	}
+	'kondisi jika tidak ada failed pada bagia lain testcase'
+	if(GlobalVariable.FlagFailed == 0)
+	{
 		'tulis status dan reason error ke excel'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn, GlobalVariable.Failed,
-			(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSubmitError)
+		(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSubmitError)
 	}
-	
 	WebUI.closeBrowser()
 }
 

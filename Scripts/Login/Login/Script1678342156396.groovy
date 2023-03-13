@@ -23,6 +23,9 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
+'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
+GlobalVariable.FlagFailed = 0
+
 'buka chrome\r\n'
 WebUI.openBrowser('')
 

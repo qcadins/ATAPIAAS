@@ -49,4 +49,9 @@
       <initValue>'Data tidak cocok pada DB/Excel'</initValue>
       <name>FailedReasonDataNotMatch</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>FlagFailed</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

@@ -42,7 +42,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 //	'input password'
 //	WebUI.setText(findTestObject('Object Repository/Eendigo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
 //		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
-	
+	'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
 	WebUI.delay(20)
 	
 	'focus pada button login'
@@ -102,36 +102,29 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 	'klik tombol simpan'
 	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/button_Simpan'))
 
-	'klik tombol garis tiga di kanan atas web'
-	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/i_LINA_ft-chevron-down'))
-
-	'klik tombol profil saya'
-	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Balance/a_Profil Saya'))
-
-	'klik tombol edit profile'
-	WebUI.click(findTestObject('Object Repository/Eendigo/Page_My Profile/button_Edit Profile'))
-
 	'panggil fungsi verifikasi jika checkdatabase = yes'
 	if (GlobalVariable.KondisiCekDB == 'Yes') {
 		'verifikasi data yang ada di excel dengan di database sesudah diEdit'
 		WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfileStoreDBVerif'), [:], FailureHandling.STOP_ON_FAILURE)
 	}
-	
-	'klik pada tombol simpan'
-	WebUI.click(findTestObject('Object Repository/Eendigo/Page_Edit Profile/button_Simpan'))
 
 	'verifikasi adanya tombol ok setelah klik simpan'
-	if (WebUI.verifyElementNotPresent(findTestObject('Eendigo/Page_Edit Profile/button_OK'), GlobalVariable.Timeout)) {
+	if (WebUI.verifyElementNotPresent(findTestObject('Eendigo/Page_Edit Profile/button_OK'), GlobalVariable.Timeout)) 
+	{
+		'buat flag failed menjadi 1 agar tidak menulis status sukses pada excel'
+		GlobalVariable.FlagFailed = 1
+		
 		'tulis error ke excel'
 	   CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed,
 		   (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSubmitError)
-	   WebUI.closeBrowser()
 	}
-	else
+	'kondisi jika tidak ada failed pada bagia lain testcase'
+	if (GlobalVariable.FlagFailed == 0)
 	{
+		'tulis status sukses pada excel'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Success,
 		GlobalVariable.SuccessReason)
-		WebUI.closeBrowser()
 	}
+	WebUI.closeBrowser()
 }
 

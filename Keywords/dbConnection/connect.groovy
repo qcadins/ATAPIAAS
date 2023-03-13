@@ -24,6 +24,8 @@ import java.sql.DriverManager
 import internal.GlobalVariable
 
 public class connect {
+
+	//'fungsi dibawah digunakan untuk koneksi dengan database adins_apiaas'
 	@Keyword
 	def connectDBAPIAAS() {
 

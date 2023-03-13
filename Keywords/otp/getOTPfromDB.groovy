@@ -26,15 +26,22 @@ import java.sql.ResultSetMetaData
 
 import internal.GlobalVariable
 
-public class getDatafromDB {
+public class getOTPfromDB {
+
+	//'fungsi dibawah ini bisa digunakan untuk mengambil kode otp secara realtime dengan parameter email'
 	@Keyword
-	public getDBdata(Connection conn, String email) {
+	public getOTPforRegister(Connection conn, String email) {
 		String data
-		ArrayList<String> listdata = new ArrayList<>()
-		Statement stm = conn.createStatement()
-		ResultSet resultSet = stm.executeQuery("SELECT otp_code FROM tr_otp WHERE login_id = '"+ email +"'")
-		ResultSetMetaData metadata  = resultSet.getMetaData()
 		int columnCount = metadata.getColumnCount()
+
+		ArrayList<String> listdata = new ArrayList<>()
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT otp_code FROM tr_otp WHERE login_id = '"+ email +"'")
+
+		ResultSetMetaData metadata  = resultSet.getMetaData()
+
 		while(resultSet.next()) {
 			for(int i=1; i<=columnCount ; i++) {
 				data = resultSet.getObject(i)
