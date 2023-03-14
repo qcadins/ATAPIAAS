@@ -34,14 +34,14 @@ public class checkProfile {
 
 	//fungsi untuk mengambil data profile dari database
 	@Keyword
-	public getProfilefromDB(Connection conn, String email, String country) {
+	public getProfilefromDB(Connection conn, String email) {
 		String data
 
 		ArrayList<String> listdata = new ArrayList<>()
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT a.initial_name, a.last_name, ms_tenant.tenant_name, ms_tenant.tenant_industry, am_user_personal_data.gender, ms_tenant.tenant_website, a.hashed_phone, am_user_personal_data.position, ms_country_code.country_name || ' ' || ms_country_code.country_code from am_msuser a, am_user_personal_data , ms_tenant, ms_country_code WHERE a.login_id = am_user_personal_data.email AND a.login_id = ms_tenant.email_reminder_dest AND a.login_id ='"+ email +"' AND ms_country_code.country_name || ' ' || ms_country_code.country_code = '"+ country +"'")
+		ResultSet resultSet = stm.executeQuery("SELECT amu.initial_name, amu.last_name, mt.tenant_name, mt.tenant_industry, aupd.gender, mt.tenant_website, amu.hashed_phone, aupd.position, mcc.country_name || ' ' || mcc.country_code from am_msuser amu join am_user_personal_data aupd on amu.id_ms_user = aupd.id_ms_user join ms_useroftenant mut on mut.id_ms_user = amu.id_ms_user join ms_tenant mt on mt.id_ms_tenant = mut.id_ms_tenant join ms_country_code mcc on mcc.id_country_code = amu.id_country_code WHERE amu.login_id = '"+email+"'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()

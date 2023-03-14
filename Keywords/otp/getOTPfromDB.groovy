@@ -41,7 +41,7 @@ public class getOTPfromDB {
 		ResultSet resultSet = stm.executeQuery("SELECT otp_code FROM tr_otp WHERE login_id = '"+ email +"'")
 
 		ResultSetMetaData metadata  = resultSet.getMetaData()
-		
+
 		columnCount = metadata.getColumnCount()
 
 		while(resultSet.next()) {

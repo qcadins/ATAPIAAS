@@ -29,11 +29,8 @@ def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS'()
 'ambil email dari testdata, disimpan ke string'
 String email = WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__email'), 'value')
 
-'ambil nama negara dari excel'
-String country = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 18)
-
 'kumpulan string dari data yang diambil langsung dari database'
-ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getProfilefromDB'(conn, email, country)
+ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getProfilefromDB'(conn, email)
 
 'ambil text dari UI Web APIAAS'
 ArrayList<String> hasilweb = CustomKeywords.'profile.checkProfile.getAttributeValueProfile'()
@@ -48,7 +45,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
         'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
         CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed, 
-            (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonDataNotMatch)
+            (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonStoreDB)
     }
 }
 

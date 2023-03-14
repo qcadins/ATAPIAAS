@@ -30,11 +30,8 @@ def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS'()
 'ambil email dari testdata, disimpan ke string'
 String email = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8)
 
-'ambil nama negara dari excel'
-String country = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 18)
-
 'kumpulan string yang menyimpan hasil data dari DB'
-ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getProfilefromDB'(conn, email, country)
+ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getProfilefromDB'(conn, email)
 
 'kumpulan string dari data yang diambil langsung dari excel'
 ArrayList<String> hasilexcel = new ArrayList<String>()
@@ -45,7 +42,7 @@ for (int i=10; i<=hasilexcel.size; i++)
 	hasilexcel.add(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, i))
 }
 
-'verifikasi data pada WEB dan excel sama'
+'verifikasi data pada db dan excel sama'
 for (int j = 0; j < hasilexcel.size ; j++) {
 	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[j], hasilexcel[j], false, FailureHandling.CONTINUE_ON_FAILURE))
 }
@@ -57,6 +54,6 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
 		GlobalVariable.Failed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonDataNotMatch)
+		GlobalVariable.FailedReasonVerifyEqualorMatch)
 	}
 }

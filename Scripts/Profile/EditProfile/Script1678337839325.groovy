@@ -113,16 +113,20 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
     WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/button_Simpan'))
 	
 	'verifikasi adanya tombol ok setelah klik simpan'
-	if (WebUI.verifyElementNotPresent(findTestObject('Profile/Page_Edit Profile/button_OK'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+	if (WebUI.verifyElementPresent(findTestObject('Profile/Page_Edit Profile/button_OK'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		
+		'klik pada button OK jika muncul pop-up'
+		WebUI.click(findTestObject('Profile/Page_Edit Profile/button_OK'), GlobalVariable.Timeout)
+		
+	} 
+	else 
+	{
 		'buat flag failed menjadi 1 agar tidak menulis status sukses pada excel'
 		GlobalVariable.FlagFailed = 1
 
 		'tulis error ke excel'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed,
 			(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSubmitError)
-	} else {
-		'klik pada button OK jika muncul pop-up'
-		WebUI.click(findTestObject('Profile/Page_Edit Profile/button_OK'), GlobalVariable.Timeout)
 	}
 
     'panggil fungsi verifikasi jika checkdatabase = yes'
