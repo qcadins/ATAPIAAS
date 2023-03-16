@@ -24,7 +24,7 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
-def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS'()
+def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_esign'()
 
 'simpan email ke dalam sebuah variabel'
 String email = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8)
@@ -38,7 +38,7 @@ ArrayList<String> exceldata = new ArrayList<String>()
 'data dari excel disimpan ke arraylist'
 for (int i=8; i<=credential.size; i++)
 {
-		exceldata.add(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, i))
+	exceldata.add(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, i))
 }
 
 'verifikasi data pada WEB dan excel sama'
@@ -52,7 +52,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
-		GlobalVariable.Failed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		GlobalVariable.FailedReasonStoreDB)
 	}
 }

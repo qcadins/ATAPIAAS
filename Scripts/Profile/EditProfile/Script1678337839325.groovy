@@ -23,26 +23,22 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
+//WEbUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/AcceptTnC'))
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 
+int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 4))
+
 'looping kolom dari testdata'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++) {
     'memanggil fungsi untuk login'
     WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf'], FailureHandling.STOP_ON_FAILURE)
 
-    //	'input email'
-    //	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-    //		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
-    //	
-    //	'input password'
-    //	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
-    //		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
     'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
-    WebUI.delay(20)
+    WebUI.delay(10)
 
     'focus pada button login'
     WebUI.focus(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
@@ -109,25 +105,33 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
     WebUI.selectOptionByLabel(findTestObject('Object Repository/Profile/Page_Edit Profile/select_Afghanistan 93Albania 355Algeria 213_ddb156'), 
         findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 18), false)
 
-    'klik tombol simpan'
-    WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/button_Simpan'))
+	'kondisi jika data yang required tidak dipenuhi'
+//	if(isMandatoryComplete > 0)
+//	{
+//		'write status failed karena data mandatory tidak valid'
+//		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+//			(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.StatusFailedReasonMandatory)
+//	}
 	
-	'verifikasi adanya tombol ok setelah klik simpan'
-	if (WebUI.verifyElementPresent(findTestObject('Profile/Page_Edit Profile/button_OK'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+	'klik tombol simpan'
+	WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/button_Simpan'))
+	
+//	'verifikasi adanya tombol ok setelah klik simpan'
+//	if (WebUI.verifyElementPresent(findTestObject('Profile/Page_Edit Profile/button_OK'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		
-		'klik pada button OK jika muncul pop-up'
-		WebUI.click(findTestObject('Profile/Page_Edit Profile/button_OK'), GlobalVariable.Timeout)
-		
-	} 
-	else 
-	{
-		'buat flag failed menjadi 1 agar tidak menulis status sukses pada excel'
-		GlobalVariable.FlagFailed = 1
-
-		'tulis error ke excel'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Failed,
-			(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSubmitError)
-	}
+//		'klik pada button OK jika muncul pop-up'
+//		WebUI.click(findTestObject('Profile/Page_Edit Profile/button_OK'), GlobalVariable.Timeout)
+//		
+//	} 
+//	else 
+//	{
+//		'buat flag failed menjadi 1 agar tidak menulis status sukses pada excel'
+//		GlobalVariable.FlagFailed = 1
+//
+//		'tulis error ke excel'
+//		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+//			(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.StatusFailedReasonSubmitError)
+//	}
 
     'panggil fungsi verifikasi jika checkdatabase = yes'
     if (GlobalVariable.KondisiCekDB == 'Yes') {
@@ -136,12 +140,17 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
     }
     
     'kondisi jika tidak ada failed pada bagia lain testcase'
-    if (GlobalVariable.FlagFailed == 0) {
-		
-        'tulis status sukses pada excel'
-        CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.Success, 
-            GlobalVariable.SuccessReason)
+    if (GlobalVariable.FlagFailed == 0) 
+	{
+		'tulis kondisi sukses'
+       CustomKeywords.'writeToExcel.checkSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Profile/Page_Edit Profile/button_OK'), GlobalVariable.NumOfColumn, 'Edit Profile')
     }
+	else
+	{
+		'tulis kondisi gagal'
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+			GlobalVariable.StatusReasonSystem)
+	}
     
     WebUI.closeBrowser()
 }

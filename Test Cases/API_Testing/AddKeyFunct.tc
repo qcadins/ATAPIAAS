@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>AddKeyFunct</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>355d39e6-3f76-4292-8f34-cab5e1c8302e</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>99c58869-04fc-4289-a7fe-818fecf95187</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'API_KEY/DataAPIKEY'</defaultValue>
+      <description></description>
+      <id>99c58869-04fc-4289-a7fe-818fecf95187</id>
+      <masked>false</masked>
+      <name>ExcelPathAPIKey</name>
+   </variable>
+</TestCaseEntity>

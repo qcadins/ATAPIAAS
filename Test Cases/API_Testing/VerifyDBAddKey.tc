@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>VerifyDBAddKey</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>7bdc9a8f-773f-427e-9c96-8f947e2958f7</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>2873c8f6-c688-4b77-8a40-a98259a183de</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'API_KEY/DataAPIKEY'</defaultValue>
+      <description></description>
+      <id>2873c8f6-c688-4b77-8a40-a98259a183de</id>
+      <masked>false</masked>
+      <name>ExcelPathAPIKey</name>
+   </variable>
+</TestCaseEntity>

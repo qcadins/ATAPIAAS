@@ -25,7 +25,7 @@ import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
 'deklarasi variabel untuk konek ke Database APIAAS'
-def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS'()
+def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_esign'()
 
 'ambil email dari testdata, disimpan ke string'
 String email = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8)
@@ -53,7 +53,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
-		GlobalVariable.Failed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		GlobalVariable.FailedReasonVerifyEqualorMatch)
 	}
 }

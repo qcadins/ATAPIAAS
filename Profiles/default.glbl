@@ -12,7 +12,12 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>'Failed'</initValue>
-      <name>Failed</name>
+      <name>StatusFailed</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Mandatory is incomplete'</initValue>
+      <name>FailedReasonMandatory</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -23,6 +28,11 @@
       <description></description>
       <initValue>'FailedStoreDB'</initValue>
       <name>FailedReasonStoreDB</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Failed Verify Data Match &amp; Equal'</initValue>
+      <name>FailedReasonVerifyEqualorMatch</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -42,7 +52,12 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>'Success'</initValue>
-      <name>Success</name>
+      <name>StatusSuccess</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Berhasil Save tapi mandatory tidak lengkap'</initValue>
+      <name>StatusReasonSystem</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -53,10 +68,5 @@
       <description></description>
       <initValue>2</initValue>
       <name>Timeout</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Failed Verify Data Match &amp; Equal'</initValue>
-      <name>FailedReasonVerifyEqualorMatch</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>div_Pilih Tipe API KeyAll</name>
+   <tag></tag>
+   <elementGuidId>a9dda40a-4fb0-4976-8f75-85b24453bb62</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//ng-select[@id='type']/div</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>div.ng-select-container.ng-has-value</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>div</value>
+      <webElementGuid>19d66cce-ce94-4c23-a545-1b125372b0d2</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ng-select-container ng-has-value</value>
+      <webElementGuid>03194b76-6773-45df-9d41-1d1b3419288d</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Pilih Tipe API Key×All×</value>
+      <webElementGuid>a7ebe06a-ff94-4dc5-a10c-da5a3e01d2d0</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;type&quot;)/div[@class=&quot;ng-select-container ng-has-value&quot;]</value>
+      <webElementGuid>057f669d-af92-456f-986b-92645e068323</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//ng-select[@id='type']/div</value>
+      <webElementGuid>24500d4f-4bba-4371-8c14-86bd58f46da5</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Tipe API Key'])[1]/following::div[1]</value>
+      <webElementGuid>b8175d3c-d81f-4114-884a-9c3839ba3a0d</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Nama Tenant'])[1]/following::div[4]</value>
+      <webElementGuid>f0aa7766-ea8c-4de5-8eec-ba2d98b98051</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//ng-select/div</value>
+      <webElementGuid>25eb62d4-1f84-469d-9806-b6d32455ffd8</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//div[(text() = 'Pilih Tipe API Key×All×' or . = 'Pilih Tipe API Key×All×')]</value>
+      <webElementGuid>4e5b990a-087b-4754-a4fb-3138da2a7a8d</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>VerifyDBafterEditKey</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>837c13d9-5977-4385-9366-a282dbed1e52</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>4a46a381-bc03-47eb-bb7d-b08d97bd03c5</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'API_KEY/DataAPIKEY'</defaultValue>
+      <description></description>
+      <id>4a46a381-bc03-47eb-bb7d-b08d97bd03c5</id>
+      <masked>false</masked>
+      <name>ExcelPathAPIKey</name>
+   </variable>
+</TestCaseEntity>

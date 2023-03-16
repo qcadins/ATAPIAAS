@@ -9,13 +9,65 @@
       <testDataLinkId></testDataLinkId>
       <type>DEFAULT</type>
       <value></value>
+      <variableId>29a51fa4-963a-4c8a-9244-31c6c14f2879</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>4231358b-f3c3-440b-a42c-38205f6e6201</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
       <variableId>b7119612-6230-4996-b220-6c286085236f</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>828db7ce-eb35-429e-9798-4551b070f73b</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>d7337c41-59f7-4512-8720-81cc556af136</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>findTestData('APIAAS/DataRegistLogin').getValue(2, 13)</defaultValue>
+      <description></description>
+      <id>29a51fa4-963a-4c8a-9244-31c6c14f2879</id>
+      <masked>false</masked>
+      <name>AutofillOTP</name>
+   </variable>
+   <variable>
+      <defaultValue>findTestData('APIAAS/DataRegistLogin').getValue(2, 16)</defaultValue>
+      <description></description>
+      <id>4231358b-f3c3-440b-a42c-38205f6e6201</id>
+      <masked>false</masked>
+      <name>CountResendOTP</name>
+   </variable>
    <variable>
       <defaultValue>'APIAAS/DataRegistLogin'</defaultValue>
       <description></description>
       <id>b7119612-6230-4996-b220-6c286085236f</id>
       <masked>false</masked>
       <name>ExcelPathRegisterLogin</name>
+   </variable>
+   <variable>
+      <defaultValue>findTestData('APIAAS/DataRegistLogin').getValue(2, 14)</defaultValue>
+      <description></description>
+      <id>828db7ce-eb35-429e-9798-4551b070f73b</id>
+      <masked>false</masked>
+      <name>OTPfromExcel</name>
+   </variable>
+   <variable>
+      <defaultValue>findTestData('APIAAS/DataRegistLogin').getValue(2, 15)</defaultValue>
+      <description></description>
+      <id>d7337c41-59f7-4512-8720-81cc556af136</id>
+      <masked>false</masked>
+      <name>ResendOTP</name>
    </variable>
 </TestCaseEntity>

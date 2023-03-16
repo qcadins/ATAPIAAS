@@ -1,0 +1,21 @@
+{
+  "keywordFileContentHash": "121CEBE7145496AD826142326B0E14B1",
+  "keywordClasses": [
+    {
+      "name": "dbConnection.connectschemaesign",
+      "keywordMethods": [
+        {
+          "name": "connectDBAPIAAS_esign",
+          "parameters": [],
+          "javadoc": ""
+        },
+        {
+          "name": "connectDBAPIAAS_public",
+          "parameters": [],
+          "javadoc": ""
+        }
+      ]
+    }
+  ],
+  "javadocParsed": true
+}

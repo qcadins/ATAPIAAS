@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>i_KEPIN EDGAR_ft-menu font-medium-3</name>
+   <tag></tag>
+   <elementGuidId>1b2eee74-b204-47e9-8553-7b950a31e6e9</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//i</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>i.ft-menu.font-medium-3</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>i</value>
+      <webElementGuid>b2658e87-7677-404b-b28b-75d47d845eb3</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ft-menu font-medium-3</value>
+      <webElementGuid>8b3f242b-181a-48da-897a-76be8e99a968</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[@class=&quot;vertical-layout menu-hide navbar-static pace-done pace-done&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/app-navbar[1]/nav[@class=&quot;navbar navbar-expand-lg header-navbar navbar-static&quot;]/div[@class=&quot;container-fluid navbar-wrapper&quot;]/div[@class=&quot;navbar-header d-flex&quot;]/div[@class=&quot;navbar-toggle menu-toggle d-xl-none d-block float-left align-items-center justify-content-center&quot;]/i[@class=&quot;ft-menu font-medium-3&quot;]</value>
+      <webElementGuid>e64caca3-5655-4772-ba2d-f96e3ef72061</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//i</value>
+      <webElementGuid>7d541ee2-5cf9-4e30-8a62-6d827207beca</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

@@ -22,7 +22,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>button</value>
-      <webElementGuid>72c2a9f6-0432-473c-a6cd-ce65dc1270f0</webElementGuid>
+      <webElementGuid>776c2e83-3f38-470e-b982-458bf80d47c6</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +30,7 @@
       <name>type</name>
       <type>Main</type>
       <value>submit</value>
-      <webElementGuid>f6623fbd-9312-4c38-aca6-0e5631fb8849</webElementGuid>
+      <webElementGuid>8c57b609-c694-42ab-bf5c-a06652f4abb8</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +38,7 @@
       <name>class</name>
       <type>Main</type>
       <value>login-button</value>
-      <webElementGuid>4f21b1bc-4b4a-4da2-8e04-d045a7fb7923</webElementGuid>
+      <webElementGuid>00d7394e-e119-4ce3-9328-0a21eaad3634</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -46,7 +46,7 @@
       <name>text</name>
       <type>Main</type>
       <value>Lanjutkan Perjalanan Anda</value>
-      <webElementGuid>7fd87c8f-6059-445d-bce0-90ca4bd0b9cd</webElementGuid>
+      <webElementGuid>b675c7d4-483d-492b-a7f0-4628170feb49</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +54,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;mat-tab-content-0-0&quot;)/div[@class=&quot;mat-tab-body-content ng-tns-c240-1 ng-trigger ng-trigger-translateTab&quot;]/form[@class=&quot;ng-star-inserted ng-dirty ng-touched ng-valid&quot;]/button[@class=&quot;login-button&quot;]</value>
-      <webElementGuid>9073a5e6-509c-4439-8dfd-89d808ea19b5</webElementGuid>
+      <webElementGuid>879f1e12-042b-4ad1-b169-6e1edeaeee32</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -62,7 +62,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//button[@type='submit']</value>
-      <webElementGuid>a84f26ea-2a55-4d68-89dc-8e36e0afcb49</webElementGuid>
+      <webElementGuid>1c36b6f1-75f7-4c3b-a203-af67a1a4dc4a</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +70,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//mat-tab-body[@id='mat-tab-content-0-0']/div/form/button</value>
-      <webElementGuid>91b908e9-c7c4-4a6d-9a48-e5b809c92f67</webElementGuid>
+      <webElementGuid>bf363ce1-fb0e-4328-9c63-5a8398bc375e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +78,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Lupa Kata Sandi?'])[1]/following::button[1]</value>
-      <webElementGuid>98e7b45b-6649-490a-a85b-36662d494249</webElementGuid>
+      <webElementGuid>c01c8e12-e53a-47fc-a0e6-53dd08f28ac0</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +86,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Lanjutkan dengan Google'])[2]/following::button[1]</value>
-      <webElementGuid>5c030df4-4c37-4196-89d5-a58a64c65f5e</webElementGuid>
+      <webElementGuid>4f80973d-e039-4e3d-9685-fdb22b01c554</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +94,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='Lanjutkan Perjalanan Anda']/parent::*</value>
-      <webElementGuid>8196b95e-3739-4dca-a9d3-cb7f7d18eec1</webElementGuid>
+      <webElementGuid>ab163782-944e-4d6c-a3f2-f511accfe750</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,7 +102,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//button</value>
-      <webElementGuid>93ca1f71-184e-452b-a45e-85e2d887c7c9</webElementGuid>
+      <webElementGuid>18920101-039f-4e5e-b948-7eb82cc351a0</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -110,6 +110,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//button[@type = 'submit' and (text() = 'Lanjutkan Perjalanan Anda' or . = 'Lanjutkan Perjalanan Anda')]</value>
-      <webElementGuid>593913d2-9587-4826-92e1-a99dc579bf8b</webElementGuid>
+      <webElementGuid>f72185bc-8ca8-40a3-abdb-61cf734226d0</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

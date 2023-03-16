@@ -1,11 +1,16 @@
 {
-  "keywordFileContentHash": "148FFA769673571E6E28FE3B43E36CD3",
+  "keywordFileContentHash": "6D220B768B9E4DA30BE723D72607F305",
   "keywordClasses": [
     {
       "name": "dbConnection.connect",
       "keywordMethods": [
         {
-          "name": "connectDBAPIAAS",
+          "name": "connectDBAPIAAS_esign",
+          "parameters": [],
+          "javadoc": ""
+        },
+        {
+          "name": "connectDBAPIAAS_public",
           "parameters": [],
           "javadoc": ""
         }

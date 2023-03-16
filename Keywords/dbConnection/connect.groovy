@@ -27,7 +27,7 @@ public class connect {
 
 	//fungsi digunakan untuk koneksi dengan database eendigo_prod_test_deploy_modify
 	@Keyword
-	def connectDBAPIAAS() {
+	def connectDBAPIAAS_esign() {
 
 		String servername = findTestData('Data Files/Login/Login').getValue(1, 8)
 
@@ -38,6 +38,27 @@ public class connect {
 		String username = findTestData('Data Files/Login/Login').getValue(4, 8)
 
 		String password = findTestData('Data Files/Login/Login').getValue(5, 8)
+
+		String url = servername + ':' + port + '/' + database
+
+		Connection conn = DriverManager.getConnection(url, username, password)
+
+		return conn
+	}
+	
+	//fungsi digunakan untuk koneksi dengan database eendigo_prod_test_deploy_modify
+	@Keyword
+	def connectDBAPIAAS_public() {
+
+		String servername = findTestData('Data Files/Login/Login').getValue(1, 9)
+
+		String port = findTestData('Data Files/Login/Login').getValue(2, 9)
+
+		String database = findTestData('Data Files/Login/Login').getValue(3, 9)
+
+		String username = findTestData('Data Files/Login/Login').getValue(4, 9)
+
+		String password = findTestData('Data Files/Login/Login').getValue(5, 9)
 
 		String url = servername + ':' + port + '/' + database
 

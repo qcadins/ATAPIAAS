@@ -11,10 +11,14 @@
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>(//button[@type='submit'])[2]</value>
+         <value>/html/body/ngb-modal-window/div/div/app-pop-up/div[2]/div[2]/div[2]/button</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'submit' and (text() = 'Ya!' or . = 'Ya!')]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>button</value>
-      <webElementGuid>cb08ec40-8ce4-485d-91c7-329b927bd82c</webElementGuid>
+      <webElementGuid>10f553a8-69fd-4d02-9604-44ee4c70990c</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +34,7 @@
       <name>type</name>
       <type>Main</type>
       <value>submit</value>
-      <webElementGuid>4aaedaaf-ad08-4f8d-b8c7-3c11875b065a</webElementGuid>
+      <webElementGuid>2f9be7e4-aa57-40ac-882e-028a1ef9cc78</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +42,7 @@
       <name>class</name>
       <type>Main</type>
       <value>btn btn-primary btn-block</value>
-      <webElementGuid>17cdb1f0-b7b8-408a-9afa-ca5c7e10e8b2</webElementGuid>
+      <webElementGuid>118fd316-473b-4398-8351-1bef2fc8076b</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -46,7 +50,7 @@
       <name>text</name>
       <type>Main</type>
       <value>Ya!</value>
-      <webElementGuid>72daff88-7a12-4822-9c5f-54758900deb8</webElementGuid>
+      <webElementGuid>84d6b84e-a6d0-4c39-b78a-2c26b4810635</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout menu-hide navbar-static pace-done modal-open&quot;]/ngb-modal-window[@class=&quot;d-block modal fade show&quot;]/div[@class=&quot;modal-dialog&quot;]/div[@class=&quot;modal-content&quot;]/app-pop-up[1]/div[@class=&quot;modal-body&quot;]/div[@class=&quot;row my-4 px-4 align-items-center&quot;]/div[@class=&quot;col-6 text-center&quot;]/button[@class=&quot;btn btn-primary btn-block&quot;]</value>
-      <webElementGuid>8b43e9ac-6590-4778-ab62-58cee03b01d8</webElementGuid>
+      <webElementGuid>1b7468dc-537d-4969-8294-c10b5ffd5073</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -62,7 +66,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>(//button[@type='submit'])[2]</value>
-      <webElementGuid>430c9c0e-c476-413f-b6cf-c0d30ea0c0b9</webElementGuid>
+      <webElementGuid>c72203db-f055-4903-8247-254d0d721360</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +74,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Periksa lagi'])[1]/following::button[1]</value>
-      <webElementGuid>317fda53-4926-4651-b4cb-dede1083d687</webElementGuid>
+      <webElementGuid>c7571df2-d2cc-4d78-9520-0a622bc6834e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Updates Available'])[1]/following::button[2]</value>
-      <webElementGuid>ba82dbaa-e216-4ccf-af2c-100ff9ff5a43</webElementGuid>
+      <webElementGuid>06805105-b864-42fd-835c-8374b11347d6</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +90,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='Ya!']/parent::*</value>
-      <webElementGuid>74ca57b5-a35f-4129-b439-dc571dc49689</webElementGuid>
+      <webElementGuid>32c89fe6-10f7-4174-b718-f23c63e5bc02</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +98,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[2]/div[2]/button</value>
-      <webElementGuid>411b1d34-3329-40dc-a2e2-db3763a44a63</webElementGuid>
+      <webElementGuid>79fc109e-688f-41df-a7ac-8263ded82f67</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,6 +106,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//button[@type = 'submit' and (text() = 'Ya!' or . = 'Ya!')]</value>
-      <webElementGuid>423689a1-8ec2-4610-b468-1587a8664e32</webElementGuid>
+      <webElementGuid>284cb52c-aadd-4bc6-a066-399f677e532a</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

@@ -13,8 +13,12 @@
          <key>CSS</key>
          <value>button.login-button</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;mat-tab-content-0-1&quot;)/div[@class=&quot;mat-tab-body-content ng-tns-c240-2 ng-trigger ng-trigger-translateTab&quot;]/form[@class=&quot;ng-untouched ng-pristine ng-invalid ng-star-inserted&quot;]/button[@class=&quot;login-button&quot;][count(. | //*[@type = 'submit' and (text() = 'Buat Akun Anda Sekarang' or . = 'Buat Akun Anda Sekarang')]) = count(//*[@type = 'submit' and (text() = 'Buat Akun Anda Sekarang' or . = 'Buat Akun Anda Sekarang')])]</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>button</value>
-      <webElementGuid>46146118-f6d6-4a60-ae41-2042cdd03fa4</webElementGuid>
+      <webElementGuid>8ebcb6d7-65bf-4141-ae55-4377da3a4f02</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +34,7 @@
       <name>type</name>
       <type>Main</type>
       <value>submit</value>
-      <webElementGuid>7c1af5e6-aaeb-46a6-8db7-2950a65f9dd5</webElementGuid>
+      <webElementGuid>6de65ac5-487c-443d-a46b-f6a9123521c2</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +42,7 @@
       <name>class</name>
       <type>Main</type>
       <value>login-button</value>
-      <webElementGuid>e2b638ce-2e38-4ae9-9245-a12f15664957</webElementGuid>
+      <webElementGuid>cb00c93d-6794-452f-a942-818ea9a98b3a</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -46,15 +50,15 @@
       <name>text</name>
       <type>Main</type>
       <value>Buat Akun Anda Sekarang</value>
-      <webElementGuid>45ac9a6a-3b6c-40c6-8438-77ac73c87f2d</webElementGuid>
+      <webElementGuid>abc51d2b-a323-45c5-b8d7-6a485dbd7c00</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;mat-tab-content-0-1&quot;)/div[@class=&quot;mat-tab-body-content ng-tns-c240-2 ng-trigger ng-trigger-translateTab&quot;]/form[@class=&quot;ng-star-inserted ng-touched ng-dirty ng-valid&quot;]/button[@class=&quot;login-button&quot;]</value>
-      <webElementGuid>b576c694-93e9-4b91-9317-5f36ef4db07c</webElementGuid>
+      <value>id(&quot;mat-tab-content-0-1&quot;)/div[@class=&quot;mat-tab-body-content ng-tns-c240-2 ng-trigger ng-trigger-translateTab&quot;]/form[@class=&quot;ng-untouched ng-pristine ng-invalid ng-star-inserted&quot;]/button[@class=&quot;login-button&quot;]</value>
+      <webElementGuid>39d8afdc-9994-412c-8586-f9eb46267f4d</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -62,7 +66,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//button[@type='submit']</value>
-      <webElementGuid>34fcfe02-4562-46bf-9fe6-84a88d304552</webElementGuid>
+      <webElementGuid>44f8b459-7145-4771-9150-9c3fb01eb98f</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,23 +74,23 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//mat-tab-body[@id='mat-tab-content-0-1']/div/form/button</value>
-      <webElementGuid>d683e2a4-27c8-4490-92d6-3dac5c025210</webElementGuid>
+      <webElementGuid>2229474f-3a37-4717-9df2-2de12aca69ac</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Privacy &amp; Cookie Statement'])[1]/following::button[1]</value>
-      <webElementGuid>14ae5733-b2c9-48b4-a5e0-0c66b1247feb</webElementGuid>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Kebijakan Privasi'])[1]/following::button[1]</value>
+      <webElementGuid>7b00c408-9eba-4e38-b381-d5f7a05d8d3e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Terms of Service'])[1]/following::button[1]</value>
-      <webElementGuid>188a41bf-f901-4ff7-a06b-6d1bca88e7d2</webElementGuid>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Syarat Ketentuan'])[1]/following::button[1]</value>
+      <webElementGuid>13fac8a8-5711-42d0-a9ff-7c6f4af3cb6e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +98,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Capture object:'])[1]/preceding::button[1]</value>
-      <webElementGuid>e5b19021-c435-45a7-bb1d-90ed2ac03271</webElementGuid>
+      <webElementGuid>26fa0161-1698-41db-aa21-56d86723c5e6</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,7 +106,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Alt'])[1]/preceding::button[1]</value>
-      <webElementGuid>5de304ee-2143-474d-bdd1-abfad14c4867</webElementGuid>
+      <webElementGuid>aaddab41-ac94-41e7-8d22-a44f2c6ab2fb</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -110,7 +114,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='Buat Akun Anda Sekarang']/parent::*</value>
-      <webElementGuid>6e67cc2d-5961-42a1-b6f9-36834bb0fe45</webElementGuid>
+      <webElementGuid>111da263-b32e-42fa-b105-8174d2c42e88</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -118,7 +122,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//button</value>
-      <webElementGuid>defeb777-eb09-471f-8861-8fe158ec87f3</webElementGuid>
+      <webElementGuid>26ff22ee-4f7c-4eb9-a6fc-e2d0ceb8dd0d</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -126,6 +130,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//button[@type = 'submit' and (text() = 'Buat Akun Anda Sekarang' or . = 'Buat Akun Anda Sekarang')]</value>
-      <webElementGuid>924c2611-789c-42b0-9db0-056eb3a0a86a</webElementGuid>
+      <webElementGuid>124665d5-f2c6-4fe0-bf4b-4e39dda78873</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>
