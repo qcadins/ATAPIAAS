@@ -31,6 +31,7 @@ public class checkSaveProcess {
 						0, colm - 1, GlobalVariable.StatusSuccess)
 			}
 			else{
+				GlobalVariable.FlagFailed = 1
 				(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						0, colm - 1, GlobalVariable.StatusFailed)
 				(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
@@ -38,12 +39,14 @@ public class checkSaveProcess {
 			}
 		}else{
 			if(count==0){
+				GlobalVariable.FlagFailed = 1
 				(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						0, colm - 1, GlobalVariable.StatusFailed)
 				(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						1, colm - 1, GlobalVariable.FailedReasonSubmitError)
 			}
 			else{
+				GlobalVariable.FlagFailed = 1
 				(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						0, colm - 1, GlobalVariable.StatusFailed)
 				(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
@@ -86,6 +89,7 @@ public class checkSaveProcess {
 						0, colm - 1, GlobalVariable.StatusSuccess)
 			}
 			else{
+				GlobalVariable.FlagFailed = 1
 				(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						0, colm - 1, GlobalVariable.StatusFailed)
 				(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
@@ -93,12 +97,14 @@ public class checkSaveProcess {
 			}
 		}else{
 			if(count==0){
+				GlobalVariable.FlagFailed = 1
 				(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						0, colm - 1, GlobalVariable.StatusFailed)
 				(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						1, colm - 1, GlobalVariable.FailedReasonSubmitError)
 			}
 			else{
+				GlobalVariable.FlagFailed = 1
 				(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						0, colm - 1, GlobalVariable.StatusFailed)
 				(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,

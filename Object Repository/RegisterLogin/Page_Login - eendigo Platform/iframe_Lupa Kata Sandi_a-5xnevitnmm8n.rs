@@ -7,11 +7,15 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//iframe[@name='a-5xnevitnmm8n']</value>
+         <value>//div/div/div/div/iframe</value>
       </entry>
       <entry>
          <key>CSS</key>
          <value>iframe[name=&quot;a-5xnevitnmm8n&quot;]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@title = 'reCAPTCHA' and @src = 'https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcDnrckAAAAAOvOHY_-Rd-L-T6KyqwMtloQn_61&amp;co=aHR0cDovL2dka3dlYnN2cjo0MTAw&amp;hl=id&amp;type=image&amp;v=Trd6gj1dhC_fx0ma_AWHc1me&amp;theme=light&amp;size=normal&amp;cb=du8luzjve8t0' and @name = 'a-5xnevitnmm8n']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>iframe</value>
-      <webElementGuid>a32ca722-9bb0-479c-8fda-e3d77796c383</webElementGuid>
+      <webElementGuid>5e0599e0-9075-46dc-b160-e3b91bb646c5</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +34,7 @@
       <name>title</name>
       <type>Main</type>
       <value>reCAPTCHA</value>
-      <webElementGuid>231694e2-480d-43fc-9fc7-9a0f7093cca6</webElementGuid>
+      <webElementGuid>85d248ae-024f-481c-86db-011f472a795e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -38,7 +42,7 @@
       <name>src</name>
       <type>Main</type>
       <value>https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcDnrckAAAAAOvOHY_-Rd-L-T6KyqwMtloQn_61&amp;co=aHR0cDovL2dka3dlYnN2cjo0MTAw&amp;hl=id&amp;type=image&amp;v=Trd6gj1dhC_fx0ma_AWHc1me&amp;theme=light&amp;size=normal&amp;cb=du8luzjve8t0</value>
-      <webElementGuid>4e497757-5c6a-48eb-9839-4ca0954382ff</webElementGuid>
+      <webElementGuid>4748b67e-fce5-477f-9ec4-ef990658cc7a</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +50,7 @@
       <name>width</name>
       <type>Main</type>
       <value>304</value>
-      <webElementGuid>4081d666-93c2-49a6-8260-4cc881aa7a33</webElementGuid>
+      <webElementGuid>6fc45520-c7d5-4f72-b9bc-94c77900a4b1</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>height</name>
       <type>Main</type>
       <value>78</value>
-      <webElementGuid>7da7301b-7aab-44be-90b7-46127bf6caa5</webElementGuid>
+      <webElementGuid>cfd1f0f1-7c53-4d13-a399-f41b3f8efe78</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -62,7 +66,7 @@
       <name>role</name>
       <type>Main</type>
       <value>presentation</value>
-      <webElementGuid>5770247c-3b16-4897-9508-98a75d44d865</webElementGuid>
+      <webElementGuid>ea3a4fa2-59c2-4b0e-8e29-c17951685fc0</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -70,7 +74,7 @@
       <name>name</name>
       <type>Main</type>
       <value>a-5xnevitnmm8n</value>
-      <webElementGuid>6368dbb3-3cf0-40b5-9bb3-71a402f294dc</webElementGuid>
+      <webElementGuid>3eb02dec-21c3-4c50-b172-825b24ba97c6</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>frameborder</name>
       <type>Main</type>
       <value>0</value>
-      <webElementGuid>17de4ea6-f941-4fd6-9cb5-11a325780a59</webElementGuid>
+      <webElementGuid>886bc568-afda-4857-821a-004c3102b0a0</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -86,7 +90,7 @@
       <name>scrolling</name>
       <type>Main</type>
       <value>no</value>
-      <webElementGuid>4078a108-af19-4ab9-9646-0f5c91b16e1a</webElementGuid>
+      <webElementGuid>495d2089-1fe9-45cf-871e-8551835228e1</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -94,7 +98,7 @@
       <name>sandbox</name>
       <type>Main</type>
       <value>allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox</value>
-      <webElementGuid>0dcc4214-3262-47f3-a7c4-f84f71254f4e</webElementGuid>
+      <webElementGuid>d87cbfd1-ad0c-411a-b7f2-4b04d28b0ecf</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -102,7 +106,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;ngx_captcha_id_1510&quot;)/div[1]/div[1]/iframe[1]</value>
-      <webElementGuid>a7f24246-ef38-48e3-b908-1387a15050a3</webElementGuid>
+      <webElementGuid>dd425e52-6ebe-43dc-8f2f-699cdb2556a7</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -110,7 +114,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//iframe[@name='a-5xnevitnmm8n']</value>
-      <webElementGuid>a0f7c633-69b6-408b-b089-ff6ffdccfaf2</webElementGuid>
+      <webElementGuid>e70c766d-3e5c-4cf0-90ef-78a9576b4c7c</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -118,7 +122,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//div[@id='ngx_captcha_id_1510']/div/div/iframe</value>
-      <webElementGuid>d16ede11-08d9-4ce2-9b91-b61727cfaf9b</webElementGuid>
+      <webElementGuid>1ecb6be7-ce16-4f04-9bb5-d0facdb9ad4d</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -126,7 +130,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div/div/div/div/iframe</value>
-      <webElementGuid>0f9cfa6d-a18f-409a-a18c-42b8318b4a47</webElementGuid>
+      <webElementGuid>7163479b-04d0-4d9e-b63c-f2cfd4771ace</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -134,6 +138,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//iframe[@title = 'reCAPTCHA' and @src = 'https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcDnrckAAAAAOvOHY_-Rd-L-T6KyqwMtloQn_61&amp;co=aHR0cDovL2dka3dlYnN2cjo0MTAw&amp;hl=id&amp;type=image&amp;v=Trd6gj1dhC_fx0ma_AWHc1me&amp;theme=light&amp;size=normal&amp;cb=du8luzjve8t0' and @name = 'a-5xnevitnmm8n']</value>
-      <webElementGuid>7f1ec014-b037-4753-91fe-126ddcccb629</webElementGuid>
+      <webElementGuid>9cb02cd5-6c4e-4f67-8d59-19e48f32090f</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

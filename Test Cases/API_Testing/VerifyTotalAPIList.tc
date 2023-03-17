@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>VerifyTotalAPIList</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>f23fa320-c3b7-49b9-9149-590f110dbfd8</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>5a6d0a78-68e8-47ee-9db0-94f1c919915d</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'API_KEY/DataAPIKEY'</defaultValue>
+      <description></description>
+      <id>5a6d0a78-68e8-47ee-9db0-94f1c919915d</id>
+      <masked>false</masked>
+      <name>ExcelPathAPIKey</name>
+   </variable>
+</TestCaseEntity>

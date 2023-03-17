@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>div_Status Pilih StatusActive</name>
+   <tag></tag>
+   <elementGuidId>b79ae6b9-c50c-4936-811a-2349365e6f5b</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value></value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//form[@id='searchForm']/div/div[4]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>div</value>
+      <webElementGuid>0a31bc0f-e9b3-4c60-930d-8cf8427f8b70</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>col-6 ng-star-inserted</value>
+      <webElementGuid>d0a0bf1b-c12c-42f2-8a89-d1750972a4dd</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Status Pilih Status×Active×</value>
+      <webElementGuid>25d11a0a-f898-4a9c-b443-061bb4e6336f</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;searchForm&quot;)/div[@class=&quot;row&quot;]/div[@class=&quot;col-6 ng-star-inserted&quot;]</value>
+      <webElementGuid>8deffbbb-e3b4-4577-9ca6-c9a3de4213e6</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//form[@id='searchForm']/div/div[4]</value>
+      <webElementGuid>21db8fa4-933f-44a4-9d60-08276fa8d7c7</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='PRODUCTION'])[1]/following::div[2]</value>
+      <webElementGuid>5c973d98-ca11-40f1-98fa-ee4e999feeda</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Pilih Tipe API Key'])[1]/following::div[3]</value>
+      <webElementGuid>deaafdc0-24e1-4434-983d-db6367fb2acd</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div/div[4]</value>
+      <webElementGuid>596185e5-7d88-4e50-b200-bbc0fc15dfd3</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//div[(text() = 'Status Pilih Status×Active×' or . = 'Status Pilih Status×Active×')]</value>
+      <webElementGuid>c0766175-3127-4ca6-bcdc-50cbcdfd859e</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

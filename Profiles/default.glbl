@@ -21,6 +21,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Resend OTP Gagal'</initValue>
+      <name>FailedReasonOTP</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Submit Gagal'</initValue>
       <name>FailedReasonSubmitError</name>
    </GlobalVariableEntity>

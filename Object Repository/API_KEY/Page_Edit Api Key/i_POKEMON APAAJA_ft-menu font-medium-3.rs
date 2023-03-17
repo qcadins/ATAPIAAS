@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>i_POKEMON APAAJA_ft-menu font-medium-3</name>
+   <tag></tag>
+   <elementGuidId>64239271-c7b7-4e58-a4bb-f070fd58e3eb</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>i.ft-menu.font-medium-3</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//i</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>i</value>
+      <webElementGuid>47faa1d7-2d07-41e4-830f-fc22444f95b2</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ft-menu font-medium-3</value>
+      <webElementGuid>850a0f34-555a-40b2-9b04-479e771319da</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-hide&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/app-navbar[1]/nav[@class=&quot;navbar navbar-expand-lg header-navbar navbar-static&quot;]/div[@class=&quot;container-fluid navbar-wrapper&quot;]/div[@class=&quot;navbar-header d-flex&quot;]/div[@class=&quot;navbar-toggle menu-toggle d-xl-none d-block float-left align-items-center justify-content-center&quot;]/i[@class=&quot;ft-menu font-medium-3&quot;]</value>
+      <webElementGuid>65a38303-8d81-479b-baab-f97bc7da3df6</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//i</value>
+      <webElementGuid>fd3d3482-b61e-4ad1-831d-bf6aced3756c</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

@@ -36,8 +36,6 @@ GlobalVariable.FlagFailed = 0
 'buka website APIAAS SIT, data diambil dari TestData Login'
 WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
 
-WebUI.maximizeWindow()
-
 def js = (JavascriptExecutor)driver
 
 if (TC == 'EditProf')
@@ -51,10 +49,12 @@ if (TC == 'EditProf')
 		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (3)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'))
 }
 else if(TC == 'Regist')
 {
+	WebUI.maximizeWindow()
+	
 	WebUI.delay(GlobalVariable.Timeout)
 	'klik pada tombol buat akun'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
@@ -102,7 +102,7 @@ else if (TC == 'Key')
 		findTestData('API_KEY/DataAPIKEY').getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (3)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'))
 	
 }
 

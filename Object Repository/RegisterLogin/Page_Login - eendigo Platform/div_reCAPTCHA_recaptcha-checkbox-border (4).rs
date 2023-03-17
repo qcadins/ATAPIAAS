@@ -13,8 +13,12 @@
          <key>CSS</key>
          <value>div.recaptcha-checkbox-border</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@class = 'recaptcha-checkbox-border' and @ref_element = 'Object Repository/RegisterLogin/Page_Login - eendigo Platform/iframe_Lupa Kata Sandi_a-5xnevitnmm8n']</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,15 +26,15 @@
       <name>tag</name>
       <type>Main</type>
       <value>div</value>
-      <webElementGuid>7fe508c0-173e-4fe8-960d-93d101d1e4f9</webElementGuid>
+      <webElementGuid>f2946f0e-f481-4d71-bfad-e79cb31c81ae</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
       <value>recaptcha-checkbox-border</value>
-      <webElementGuid>86ba3282-a87a-4163-9257-c6cd73da582e</webElementGuid>
+      <webElementGuid>299c606d-b205-4857-820f-ed7fe61f96e7</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,15 +42,15 @@
       <name>role</name>
       <type>Main</type>
       <value>presentation</value>
-      <webElementGuid>98310ed6-4734-4cd2-b6ba-8caa8c0dde3b</webElementGuid>
+      <webElementGuid>bf941184-0027-4d7a-be5d-b097e59cc5cd</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;recaptcha-anchor&quot;)/div[@class=&quot;recaptcha-checkbox-border&quot;]</value>
-      <webElementGuid>38e41a00-4cf1-46d7-90d0-b105c2ffe250</webElementGuid>
+      <webElementGuid>68afb846-4086-42bf-adcb-65ecd2eac413</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -54,7 +58,7 @@
       <name>ref_element</name>
       <type>Main</type>
       <value>Object Repository/RegisterLogin/Page_Login - eendigo Platform/iframe_Lupa Kata Sandi_a-5xnevitnmm8n</value>
-      <webElementGuid>73af74f2-b2bf-42cf-8df1-493e8e7322e0</webElementGuid>
+      <webElementGuid>0efd220b-f6be-425c-9a14-c8bd6d0fa143</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -62,7 +66,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//span[@id='recaptcha-anchor']/div</value>
-      <webElementGuid>3fcc854d-c1f0-4c9f-9db3-68889258fba9</webElementGuid>
+      <webElementGuid>f2585412-83d2-4ce3-88f0-440b3d6721a7</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,6 +74,6 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//span/div</value>
-      <webElementGuid>03a93abb-9898-4a45-a67a-874ec2638942</webElementGuid>
+      <webElementGuid>b3cf9ad8-b9dd-420d-9863-ca2947e7b9de</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

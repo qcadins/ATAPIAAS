@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>(.//*[normalize-space(text()) and normalize-space(.)='Edit Profil'])[1]/following::div[4]</value>
+         <value>(.//*[normalize-space(text()) and normalize-space(.)='Saldo'])[1]/following::div[15]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

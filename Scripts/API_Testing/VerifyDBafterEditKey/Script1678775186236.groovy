@@ -28,10 +28,10 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
 
 'ambil email dari testdata, disimpan ke string'
-String email = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 8)
+String namaAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12)
 
 'kumpulan string yang menyimpan hasil data dari DB'
-ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getProfilefromDB'(conn, email)
+ArrayList<String> hasildb = CustomKeywords.'apikey.checkAPIKey.getAPIStatusfromDB'(conn, namaAPI)
 
 'kumpulan string dari data yang diambil langsung dari excel'
 ArrayList<String> hasilexcel = new ArrayList<String>()
@@ -54,6 +54,6 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.StatusFailedReasonVerifyEqualorMatch)
+		GlobalVariable.FailedReasonVerifyEqualorMatch)
 	}
 }

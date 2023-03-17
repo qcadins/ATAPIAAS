@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>i_Aksi_datatable-icon-prev</name>
+   <tag></tag>
+   <elementGuidId>bbcfa623-d581-43d2-a0da-6f46710bfc70</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>i.datatable-icon-prev</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//datatable-pager/ul/li/a/i</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>i</value>
+      <webElementGuid>7304fd46-ecea-4cca-b6b0-2484a5953a75</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>datatable-icon-prev</value>
+      <webElementGuid>03db9b6c-5042-4835-803f-569d89ad6305</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done page-scrolled&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[@class=&quot;content-wrapper&quot;]/app-list-api-key[@class=&quot;ng-star-inserted&quot;]/app-msx-paging[1]/app-msx-datatable[@class=&quot;ng-star-inserted&quot;]/section[@class=&quot;msx-datatable&quot;]/ngx-datatable[@class=&quot;ngx-datatable material bootstrap fixed-header virtualized selectable checkbox-selection&quot;]/div[@class=&quot;visible&quot;]/datatable-footer[@class=&quot;datatable-footer ng-star-inserted&quot;]/div[@class=&quot;datatable-footer-inner&quot;]/datatable-pager[@class=&quot;datatable-pager ng-star-inserted&quot;]/ul[@class=&quot;pager&quot;]/li[1]/a[1]/i[@class=&quot;datatable-icon-prev&quot;]</value>
+      <webElementGuid>3f48a27b-0ac4-4566-a83c-d251b04495fc</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//datatable-pager/ul/li/a/i</value>
+      <webElementGuid>c00f64af-13fc-4246-8ac2-652728f23bb7</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

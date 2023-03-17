@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>div_API Key copied to clipboard</name>
+   <tag></tag>
+   <elementGuidId>4d28dda0-5060-4c04-9fef-f34114898681</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>div.ng-tns-c95-2.ng-star-inserted.ng-trigger.ng-trigger-flyInOut.ngx-toastr.toast-info</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='toast-container']/div</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>div</value>
+      <webElementGuid>b5896305-5a1c-490f-a6f6-686394c6e694</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ng-tns-c95-2 ng-star-inserted ng-trigger ng-trigger-flyInOut ngx-toastr toast-info</value>
+      <webElementGuid>d35256b7-376d-426f-a99f-77d4ba3c4089</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value> API Key copied to clipboard </value>
+      <webElementGuid>9a642e31-8208-41a9-865a-0556aa1b58c8</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;toast-container&quot;)/div[@class=&quot;ng-tns-c95-2 ng-star-inserted ng-trigger ng-trigger-flyInOut ngx-toastr toast-info&quot;]</value>
+      <webElementGuid>ffebb38d-5e4f-47ed-8d35-7225fbaabcfa</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='toast-container']/div</value>
+      <webElementGuid>76bd2417-2593-41ae-a7c2-1eb2d543c261</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='`'])[2]/following::div[4]</value>
+      <webElementGuid>1286e9e4-cb9f-4de5-b6ec-c6f11b3e0930</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Alt'])[2]/following::div[4]</value>
+      <webElementGuid>2a221861-56ce-436b-a26b-44e916fb34b1</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div[4]/div/div</value>
+      <webElementGuid>072e98d4-36ac-4014-a5fb-44a6dd3f12ad</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//div[(text() = ' API Key copied to clipboard ' or . = ' API Key copied to clipboard ')]</value>
+      <webElementGuid>cadd6a0e-fa26-4233-b754-e06a358ee522</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>
