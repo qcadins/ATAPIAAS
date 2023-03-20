@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>AddKeyFunct</name>
+   <name>VerifyDataAPIKey</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>355d39e6-3f76-4292-8f34-cab5e1c8302e</testCaseGuid>
+   <testCaseGuid>50e1408f-31a1-4061-ad72-cee5aa40dc4f</testCaseGuid>
    <variableLinks>
       <testDataLinkId></testDataLinkId>
       <type>DEFAULT</type>
       <value></value>
-      <variableId>99c58869-04fc-4289-a7fe-818fecf95187</variableId>
+      <variableId>12bee71c-b985-4a9d-9f3f-e041de4d66f3</variableId>
    </variableLinks>
    <variable>
       <defaultValue>'API_KEY/DataAPIKEY'</defaultValue>
       <description></description>
-      <id>99c58869-04fc-4289-a7fe-818fecf95187</id>
+      <id>12bee71c-b985-4a9d-9f3f-e041de4d66f3</id>
       <masked>false</masked>
       <name>ExcelPathAPIKey</name>
    </variable>

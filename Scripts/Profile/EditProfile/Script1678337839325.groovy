@@ -33,7 +33,8 @@ int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 4))
 
 'looping kolom dari testdata'
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++) {
+for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++) 
+{
     'memanggil fungsi untuk login'
     WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf'], FailureHandling.STOP_ON_FAILURE)
 
@@ -115,23 +116,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 	
 	'klik tombol simpan'
 	WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/button_Simpan'))
-	
-//	'verifikasi adanya tombol ok setelah klik simpan'
-//	if (WebUI.verifyElementPresent(findTestObject('Profile/Page_Edit Profile/button_OK'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-		
-//		'klik pada button OK jika muncul pop-up'
-//		WebUI.click(findTestObject('Profile/Page_Edit Profile/button_OK'), GlobalVariable.Timeout)
-//		
-//	} 
-//	else 
-//	{
-//		'buat flag failed menjadi 1 agar tidak menulis status sukses pada excel'
-//		GlobalVariable.FlagFailed = 1
-//
-//		'tulis error ke excel'
-//		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-//			(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.StatusFailedReasonSubmitError)
-//	}
 
     'panggil fungsi verifikasi jika checkdatabase = yes'
     if (GlobalVariable.KondisiCekDB == 'Yes') {

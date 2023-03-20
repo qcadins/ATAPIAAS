@@ -36,8 +36,11 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/em_Aksi_
 'klik pada panah ddl Status API'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/span_Inactive_ng-arrow-wrapper'))
 
-'verifikasi data ke DB sebelum diedit'
-WebUI.callTestCase(findTestCase('Test Cases/API_Testing/VerifyDBbeforeEditKey'), [:], FailureHandling.STOP_ON_FAILURE)
+if(GlobalVariable.KondisiCekDB == 'Yes')
+{
+	'verifikasi data ke DB sebelum diedit'
+	WebUI.callTestCase(findTestCase('Test Cases/API Key/VerifyDataAPIKey'), [:], FailureHandling.STOP_ON_FAILURE)
+}
 
 'input nama API'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'), findTestData(ExcelPathAPIKey).getValue(
@@ -54,20 +57,28 @@ WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_API Platform - Adi
 'klik tombol untuk simpan ubahan'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Lanjut'))
 
-'klik pada tombol ya'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Ya'))
+'cek jika adanya tombol "YA" pada popup'
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Ya'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) 
+{
+	'klik pada tombol ya'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Ya'))
+	
+	'cek ke DB jika memang diperlukan'
+	if(GlobalVariable.KondisiCekDB == 'Yes')
+	{
+		'verifikasi data ke db setelah di edit'
+		WebUI.callTestCase(findTestCase('Test Cases/API Key/EditKeyStoreDBVerif'), [:], FailureHandling.STOP_ON_FAILURE)
+	}
+}
 
 WebUI.delay(2)
 
 'periksa status edit dan tulis ke excel'
 CustomKeywords.'writeToExcel.checkSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK'), GlobalVariable.NumOfColumn, 'API KEY')
 
+'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) 
 {
 	'klik tombol ok'
     WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK'))
 }
-
-'verifikasi data ke db setelah di edit'
-WebUI.callTestCase(findTestCase('Test Cases/API_Testing/VerifyDBafterEditKey'), [:], FailureHandling.STOP_ON_FAILURE)
-

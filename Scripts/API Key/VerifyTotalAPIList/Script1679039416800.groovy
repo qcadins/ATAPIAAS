@@ -34,9 +34,6 @@ ArrayList<String> totaldataDB = CustomKeywords.'apikey.checkAPIKey.getTotalAPIKe
 
 totaldata.add(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Api Key List/Footer')))
 
-print totaldata
-print totaldataDB
-
 'cek kesamaan data'
 for (int j = 0; j < totaldataDB.size; j++) {
 	checkVerifyEqualorMatch(WebUI.verifyMatch(totaldata[j], totaldataDB[j], false, FailureHandling.CONTINUE_ON_FAILURE))

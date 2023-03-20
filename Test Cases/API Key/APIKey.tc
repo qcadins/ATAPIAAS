@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>APIKey</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>94bc73b2-a26f-448d-8469-11df000bb5f0</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>846b699a-1d8d-401a-b3c9-67987f85c9d2</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>2ef243d0-54f6-4d83-9ead-6e4382b4c281</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>466fb751-f3ea-4180-b4c0-b08d0baa6443</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>4d15121f-95ec-4641-89ae-95e12ebb4040</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>findTestData('API_KEY/DataAPIKEY').getValue(2, 19)</defaultValue>
+      <description></description>
+      <id>846b699a-1d8d-401a-b3c9-67987f85c9d2</id>
+      <masked>false</masked>
+      <name>CopyAPILink</name>
+   </variable>
+   <variable>
+      <defaultValue>'API_KEY/DataAPIKEY'</defaultValue>
+      <description></description>
+      <id>2ef243d0-54f6-4d83-9ead-6e4382b4c281</id>
+      <masked>false</masked>
+      <name>ExcelPathAPIKey</name>
+   </variable>
+   <variable>
+      <defaultValue>findTestData('API_KEY/DataAPIKEY').getValue(2, 17)</defaultValue>
+      <description></description>
+      <id>466fb751-f3ea-4180-b4c0-b08d0baa6443</id>
+      <masked>false</masked>
+      <name>WantAddAPI</name>
+   </variable>
+   <variable>
+      <defaultValue>findTestData('API_KEY/DataAPIKEY').getValue(2, 18)</defaultValue>
+      <description></description>
+      <id>4d15121f-95ec-4641-89ae-95e12ebb4040</id>
+      <masked>false</masked>
+      <name>WantEditAPI</name>
+   </variable>
+</TestCaseEntity>

@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "81CC100617FC042F5F9795445F129894",
+  "keywordFileContentHash": "7DD8122C0649083903D89DFC63E07E1D",
   "keywordClasses": [
     {
       "name": "apikey.checkAPIKey",
@@ -33,11 +33,13 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getAttributeValueAPI",
-          "parameters": []
+          "parameters": [],
+          "javadoc": ""
         },
         {
           "name": "getAPIStatusfromDB",
@@ -68,7 +70,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getTotalAPIKeyfromDB",
@@ -86,10 +89,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

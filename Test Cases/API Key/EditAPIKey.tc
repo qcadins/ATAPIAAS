@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>VerifyDBbeforeEditKey</name>
+   <name>EditAPIKey</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>50e1408f-31a1-4061-ad72-cee5aa40dc4f</testCaseGuid>
+   <testCaseGuid>b6a44b14-4f54-4d16-89ae-a4289c62bc77</testCaseGuid>
    <variableLinks>
       <testDataLinkId></testDataLinkId>
       <type>DEFAULT</type>
       <value></value>
-      <variableId>12bee71c-b985-4a9d-9f3f-e041de4d66f3</variableId>
+      <variableId>0c4456a9-caf7-44b2-85a1-1725ac4a88cf</variableId>
    </variableLinks>
    <variable>
       <defaultValue>'API_KEY/DataAPIKEY'</defaultValue>
       <description></description>
-      <id>12bee71c-b985-4a9d-9f3f-e041de4d66f3</id>
+      <id>0c4456a9-caf7-44b2-85a1-1725ac4a88cf</id>
       <masked>false</masked>
       <name>ExcelPathAPIKey</name>
    </variable>

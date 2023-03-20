@@ -26,6 +26,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Gagal ubah page'</initValue>
+      <name>FailedReasonPagingError</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Submit Gagal'</initValue>
       <name>FailedReasonSubmitError</name>
    </GlobalVariableEntity>
@@ -53,6 +58,11 @@
       <description></description>
       <initValue>2</initValue>
       <name>NumOfColumn</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>2</initValue>
+      <name>PageNum</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
