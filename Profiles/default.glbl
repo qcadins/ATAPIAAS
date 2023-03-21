@@ -16,6 +16,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Gagal download file karena kesalahan sistem'</initValue>
+      <name>FailedReasonDownloadProblem</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Mandatory is incomplete'</initValue>
       <name>FailedReasonMandatory</name>
    </GlobalVariableEntity>
@@ -56,7 +61,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>2</initValue>
+      <initValue>9</initValue>
       <name>NumOfColumn</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>

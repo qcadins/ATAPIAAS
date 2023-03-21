@@ -83,7 +83,7 @@ public class checkSaveProcess {
 	//check status untuk write to excel success / failed + reason failed
 	@Keyword
 	public checkStatusbtnClickable (int count, TestObject object, int colm, String sheetname){
-		if(WebUI.verifyElementClickable(object)){
+		if(WebUI.verifyElementClickable(object, FailureHandling.OPTIONAL)){
 			if(count==0){
 				(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						0, colm - 1, GlobalVariable.StatusSuccess)

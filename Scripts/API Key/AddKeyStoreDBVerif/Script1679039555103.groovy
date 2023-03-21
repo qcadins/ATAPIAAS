@@ -27,6 +27,8 @@ ArrayList<String> hasildb = CustomKeywords.'apikey.checkAPIKey.getAPINamefromDB'
 
 ArrayList<String> hasilexcel = new ArrayList<String>()
 
+print hasildb
+
 hasilexcel.add(api_name)
 
 hasilexcel.add(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11))

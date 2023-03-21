@@ -19,8 +19,18 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.kms.katalon.entity.global.GlobalVariableEntity as GlobalVariableEntity
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
+import org.openqa.selenium.By as By
+import org.openqa.selenium.support.ui.Select as Select
+import org.openqa.selenium.JavascriptExecutor
+import org.openqa.selenium.WebElement
+
+def driver = DriverFactory.getWebDriver()
+
+def js = (JavascriptExecutor)driver
 
 int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 4))
+
+String optionLabel
 
 'klik pada tombol garis tiga'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_KEPIN EDGAR_ft-menu font-medium-3'))
@@ -46,13 +56,17 @@ if(GlobalVariable.KondisiCekDB == 'Yes')
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'), findTestData(ExcelPathAPIKey).getValue(
         GlobalVariable.NumOfColumn, 12))
 
-'input status API'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_API Platform - Adicipta Inovasi Teknologi/input'), findTestData(
-        ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
-
-'select status API'
-WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_API Platform - Adicipta Inovasi Teknologi/input'), Keys.chord(
-        Keys.ENTER))
+'cek kondisi status input pada database'
+if(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13) == 'ACTIVE')
+{
+	'pilih status active'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/span_Active'))
+}
+else
+{
+	'pilih status inactive'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/span_Inactive'))
+}
 
 'klik tombol untuk simpan ubahan'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Lanjut'))
@@ -74,7 +88,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Ed
 WebUI.delay(2)
 
 'periksa status edit dan tulis ke excel'
-CustomKeywords.'writeToExcel.checkSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK'), GlobalVariable.NumOfColumn, 'API KEY')
+CustomKeywords.'writeToExcel.checkSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/API_KEY/Page_Edit Api Key/div_Success') , GlobalVariable.NumOfColumn, 'API KEY')
 
 'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) 

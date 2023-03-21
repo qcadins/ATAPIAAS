@@ -48,7 +48,7 @@ public class checkAPIKey {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT api_key_name, CASE lov_api_key_type WHEN 120 THEN 'PRODUCTION' WHEN 121 THEN 'TRIAL' END lov_api_key_type FROM ms_api_key where api_key_name = '"+apiname+"'")
+		ResultSet resultSet = stm.executeQuery("select mk.api_key_name, mlo.description from ms_lov mlo JOIN ms_api_key mk on mlo.id_lov = mk.lov_api_key_type where mk.api_key_name = '"+apiname+"'")
 
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 

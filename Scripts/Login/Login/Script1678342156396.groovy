@@ -3,7 +3,8 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
-import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
+import com.kms.katalon.core.checkpoint.Checkpoint
+import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.main.CustomKeywordDelegatingMetaClass as CustomKeywordDelegatingMetaClass
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -24,6 +25,12 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.support.ui.Select as Select
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.WebElement
+
+HashMap<String, ArrayList> chromePrefs = new HashMap<String, ArrayList>()
+
+chromePrefs.put('download.default_directory', System.getProperty('user.dir') + '\\Download')
+
+RunConfiguration.setWebDriverPreferencesProperty('prefs', chromePrefs)
 
 'buka chrome\r\n'
 WebUI.openBrowser('')
@@ -87,6 +94,7 @@ else if(TC == 'Regist')
 	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'),
 		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 11))
 	
+	'bypass captcha langsung masuk verifikasi otp'
 	WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
 	js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister);
 

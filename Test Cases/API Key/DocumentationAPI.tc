@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>APIKey</name>
+   <name>DocumentationAPI</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>94bc73b2-a26f-448d-8469-11df000bb5f0</testCaseGuid>
+   <testCaseGuid>d8ccbbc7-ad79-4be4-9a9b-d769a89fa35a</testCaseGuid>
    <variableLinks>
       <testDataLinkId></testDataLinkId>
       <type>DEFAULT</type>
       <value></value>
-      <variableId>2ef243d0-54f6-4d83-9ead-6e4382b4c281</variableId>
+      <variableId>93302eac-d34d-4b06-b80e-6f82324b7136</variableId>
    </variableLinks>
    <variable>
-      <defaultValue>'API_KEY/DataAPIKEY'</defaultValue>
+      <defaultValue>'API_KEY/DataDocumentation'</defaultValue>
       <description></description>
-      <id>2ef243d0-54f6-4d83-9ead-6e4382b4c281</id>
+      <id>93302eac-d34d-4b06-b80e-6f82324b7136</id>
       <masked>false</masked>
-      <name>ExcelPathAPIKey</name>
+      <name>ExcelPathAPIDocs</name>
    </variable>
 </TestCaseEntity>

@@ -1,0 +1,29 @@
+{
+  "keywordFileContentHash": "1F4325ADD9F2CC7BAA8D31C9435881A0",
+  "keywordClasses": [
+    {
+      "name": "apikey.checkDownloadedFiles",
+      "keywordMethods": [
+        {
+          "name": "isFileDownloaded",
+          "parameters": [
+            {
+              "name": "deleteFile",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "javadocParsed": false
+}

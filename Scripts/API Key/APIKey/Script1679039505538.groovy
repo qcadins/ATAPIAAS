@@ -17,6 +17,14 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+String WantAddAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 17)
+
+String WantEditAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18)
+
+String CopyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 19)
+
+String DownloadDocs = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 20)
+
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
@@ -30,6 +38,7 @@ String optiontipe, optionstatus, totaldata
 
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
 {
+	'panggil fungsi login'
 	WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Key'], FailureHandling.STOP_ON_FAILURE)
 	
 	'pada delay, lakukan captcha secara manual'
@@ -158,15 +167,18 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	if(WantAddAPI == 'Yes')
 	{
 		'panggil fungsi Add API KEY'
-		WebUI.callTestCase(findTestCase('Test Cases/API Key/AddAPIKey'), [:], FailureHandling.STOP_ON_FAILURE)
+		WebUI.callTestCase(findTestCase('Test Cases/API Key/AddAPIKey'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 	}
 	
 	if(WantEditAPI == 'Yes')
 	{
 		'panggil fungsi Edit API Key'
-		WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'), [:], FailureHandling.STOP_ON_FAILURE)
+		WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 	}
-
+	if(DownloadDocs == 'Yes')
+	{
+		WebUI.callTestCase(findTestCase('Test Cases/API Key/DocumentationAPI'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
 	'kondisi jika tidak ada error'
 	if(GlobalVariable.FlagFailed == 0)
 	{
