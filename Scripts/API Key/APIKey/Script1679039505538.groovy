@@ -17,12 +17,16 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+'cek apakah perlu tambah API'
 String WantAddAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 17)
 
+'cek apakah perlu edit API'
 String WantEditAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18)
 
+'cek apakah perlu copy link API'
 String CopyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 19)
 
+'cek apakah perlu fungsi download dokumentasi API'
 String DownloadDocs = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 20)
 
 'mencari directory excel\r\n'
@@ -36,6 +40,7 @@ int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValu
 
 String optiontipe, optionstatus, totaldata
 
+'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
 {
 	'panggil fungsi login'
@@ -154,6 +159,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	'verifikasi halaman'
 	checkVerifyFooter()
 	
+	'panggil fungsi copy link'
 	if(CopyAPILink == 'Yes')
 	{
 		'klik tombol COPY LINK'
@@ -164,20 +170,24 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 		GlobalVariable.NumOfColumn, 'API KEY')
 	}
 	
+	'panggil fungsi tambah API'
 	if(WantAddAPI == 'Yes')
 	{
 		'panggil fungsi Add API KEY'
 		WebUI.callTestCase(findTestCase('Test Cases/API Key/AddAPIKey'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 	}
 	
+	'panggil fungsi edit API'
 	if(WantEditAPI == 'Yes')
 	{
 		'panggil fungsi Edit API Key'
 		WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 	}
+	'panggil fungsi download dokumentasi'
 	if(DownloadDocs == 'Yes')
 	{
-		WebUI.callTestCase(findTestCase('Test Cases/API Key/DocumentationAPI'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+		'panggil fungsi download dokumentasi API'
+		WebUI.callTestCase(findTestCase('Test Cases/API Key/DocumentationAPI'), [:], FailureHandling.STOP_ON_FAILURE)
 	}
 	'kondisi jika tidak ada error'
 	if(GlobalVariable.FlagFailed == 0)
@@ -188,10 +198,13 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	}
 }
 
+'fungsi cek halaman'
 def checkVerifyFooter()
 {
+	'fokus ke halaman yang sedang dipilih'
 	int PageCheck = Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Api Key List/PageFooter'), 'ng-reflect-page'))
 	
+	'halaman yang dipilih harus sama dengan yang di sistem'
 	if(GlobalVariable.PageNum == PageCheck)
 	{
 		GlobalVariable.PageNum -= 1
@@ -200,6 +213,7 @@ def checkVerifyFooter()
 			GlobalVariable.PageNum = 2
 		}
 	}
+	//tulis halaman error jika tidak sesuai
 	else
 	{
 		GlobalVariable.FlagFailed = 1

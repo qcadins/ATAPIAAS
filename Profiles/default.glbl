@@ -16,6 +16,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Data di ddl tidak sesuai dengan DB'</initValue>
+      <name>FailedReasonDDL</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Gagal download file karena kesalahan sistem'</initValue>
       <name>FailedReasonDownloadProblem</name>
    </GlobalVariableEntity>
@@ -61,7 +66,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>9</initValue>
+      <initValue>10</initValue>
       <name>NumOfColumn</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>VerifyDocumentListAPI</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>a26264ac-d18b-4b65-991d-de19d44a2abd</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>1c67663e-e7e9-44d0-9256-dd0a9eaa5c10</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'API_KEY/DataDocumentation'</defaultValue>
+      <description></description>
+      <id>1c67663e-e7e9-44d0-9256-dd0a9eaa5c10</id>
+      <masked>false</masked>
+      <name>ExcelPathAPIDocs</name>
+   </variable>
+</TestCaseEntity>

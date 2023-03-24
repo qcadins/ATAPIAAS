@@ -15,7 +15,8 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import com.kms.katalon.entity.global.GlobalVariableEntity as GlobalVariableEntity
+import com.kms.katalon.entity.global.GlobalVariableEntity
+
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 import groovy.sql.Sql as Sql
@@ -26,26 +27,35 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 'deklarasi variabel untuk konek ke Database APIAAS'
 def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
 
-'kumpulan string dari WEB'
-ArrayList<String> totaldata = new ArrayList<String>()
+'kumpulan string yang menyimpan hasil data dari DB'
+ArrayList<String> hasildb = CustomKeywords.'apikey.checkAPIKey.getDocumentationAPIName'(conn)
 
-'kumpulan string dari DB'
-ArrayList<String> totaldataDB = CustomKeywords.'apikey.checkAPIKey.getTotalAPIKeyfromDB'(conn)
+'klik pada panah turun ddl'
+WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/span_Pilih API_ng-arrow-wrapper'))
 
-'masukkan hasil perhitungan jumlah key ke totaldata'
-totaldata.add(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Api Key List/Footer')))
+'ambil text dari UI Web APIAAS'
+ArrayList<String> hasilweb = CustomKeywords.'apikey.checkAPIKey.getValueDDLDocumentationAPI'()
 
-'cek jumlah data dari DB dan WEB adalah sama'
-for (int j = 0; j < totaldataDB.size; j++) {
-	checkVerifyEqualorMatch(WebUI.verifyMatch(totaldata[j], totaldataDB[j], false, FailureHandling.CONTINUE_ON_FAILURE))
+'klik kembali panah turun ddl'
+WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/span_Pilih API_ng-arrow-wrapper'))
+
+'sortir data pada hasil web'
+Collections.sort(hasilweb)
+
+'sortir data pada hasil db'
+Collections.sort(hasildb)
+
+for (int j = 0; j < hasildb.size ; j++)
+{
+	'verifikasi semua opsi pada web sesuai dengan database'
+	checkVerifyEqualorMatch(WebUI.verifyEqual(hasilweb[j], hasildb[j], FailureHandling.STOP_ON_FAILURE))
 }
 
 def checkVerifyEqualorMatch(Boolean isMatch) {
-	if (isMatch == false) {
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+    if (isMatch == false) {
+        'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-		(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonStoreDB)
-	}
+        CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Documentation', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
+            (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonDDL)
+    }
 }
-

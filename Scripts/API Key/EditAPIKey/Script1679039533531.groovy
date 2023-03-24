@@ -24,13 +24,14 @@ import org.openqa.selenium.support.ui.Select as Select
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.WebElement
 
+'ambil driver chrome'
 def driver = DriverFactory.getWebDriver()
 
+'panggil java script executor'
 def js = (JavascriptExecutor)driver
 
+'cek apakah mandatory lengkap pada excel'
 int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 4))
-
-String optionLabel
 
 'klik pada tombol garis tiga'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_KEPIN EDGAR_ft-menu font-medium-3'))

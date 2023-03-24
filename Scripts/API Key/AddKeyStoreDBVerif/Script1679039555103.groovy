@@ -23,14 +23,16 @@ def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
 'menyimpan nama api ke dalam sebuah variabel'
 String api_name = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 10)
 
+'ambil data dari DB sesudah tambah API baru'
 ArrayList<String> hasildb = CustomKeywords.'apikey.checkAPIKey.getAPINamefromDB'(conn, api_name)
 
+'list nama API dari excel'
 ArrayList<String> hasilexcel = new ArrayList<String>()
 
-print hasildb
-
+'tambah nama API ke hasilexcel'
 hasilexcel.add(api_name)
 
+'tambah jenis API key(production/trial)'
 hasilexcel.add(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11))
 
 'verifikasi data pada db dan excel sama'

@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "145EECFAE40A4AB53C1EA530A72604EB",
+  "keywordFileContentHash": "2E2DF19E114A322B168C5045800B62D3",
   "keywordClasses": [
     {
       "name": "apikey.checkAPIKey",
@@ -33,13 +33,33 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getAttributeValueAPI",
-          "parameters": [],
-          "javadoc": ""
+          "parameters": []
+        },
+        {
+          "name": "getValueDDLDocumentationAPI",
+          "parameters": []
+        },
+        {
+          "name": "getDocumentationAPIName",
+          "parameters": [
+            {
+              "name": "conn",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ]
         },
         {
           "name": "getAPIStatusfromDB",
@@ -70,8 +90,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getTotalAPIKeyfromDB",
@@ -89,11 +108,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

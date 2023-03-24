@@ -105,14 +105,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
     'pilih dari dropdownlist +62 Indonesia'
     WebUI.selectOptionByLabel(findTestObject('Object Repository/Profile/Page_Edit Profile/select_Afghanistan 93Albania 355Algeria 213_ddb156'), 
         findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 18), false)
-
-	'kondisi jika data yang required tidak dipenuhi'
-//	if(isMandatoryComplete > 0)
-//	{
-//		'write status failed karena data mandatory tidak valid'
-//		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-//			(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.StatusFailedReasonMandatory)
-//	}
 	
 	'klik tombol simpan'
 	WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/button_Simpan'))

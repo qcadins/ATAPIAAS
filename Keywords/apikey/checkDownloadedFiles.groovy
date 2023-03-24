@@ -32,7 +32,7 @@ public class checkDownloadedFiles {
 		for (File f : fList)
 		{
 			//checking the extension of the file with endsWith method.
-			if (f.exists()) 
+			if (f.exists())
 			{
 				if(deleteFile == 'Yes')
 				{

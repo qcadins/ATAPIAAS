@@ -6,14 +6,16 @@
       "keywordMethods": [
         {
           "name": "connectDBAPIAAS_esign",
-          "parameters": []
+          "parameters": [],
+          "javadoc": ""
         },
         {
           "name": "connectDBAPIAAS_public",
-          "parameters": []
+          "parameters": [],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

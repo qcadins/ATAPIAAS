@@ -20,16 +20,22 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 import org.openqa.selenium.WebDriver as WebDriver
 
+'penanda bahwa data yang diperlukan sudah lengkap di excel'
 int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 4))
 
+'nama dokumen yang akan diambil'
 String namadokumentasi = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 8)
 
+'user menentukan apakah file yang didownload langsung dihapus atau tidak lewat excel'
 String FlagDelete = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 9)
 
+'mengambil alamat dari project katalon ini'
 String userDir = System.getProperty('user.dir')
 
+'directory tempat file akan didownload'
 String filePath = userDir + '\\Download'
 
+'driver chrome untuk pengalihan proses download'
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Wait for Some time so that file gets downloaded and Stored in user defined path'
@@ -43,7 +49,14 @@ WebUI.delay(1)
 'klik pada menu dokumentasi API'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/span_Dokumentasi API'))
 
-'input jensi dokumentasi yang akan diupload'
+'jika perlu, akan memanggil fungsi cek ddl dokumentasi'
+if (GlobalVariable.KondisiCekDB == 'Yes')
+{
+	'verifikasi data DDL yang ada di web dengan DB'
+	WebUI.callTestCase(findTestCase('Test Cases/API Key/VerifyDocumentListAPI'), [:], FailureHandling.STOP_ON_FAILURE)
+}
+
+'input jenis dokumentasi yang akan diupload'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_API Documentation/input'), namadokumentasi)
 
 'select status API'
@@ -54,16 +67,19 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/but
 
 WebUI.delay(GlobalVariable.Timeout)
 
+'pengecekan file yang sudah didownload'
 boolean isDownloaded = CustomKeywords.'apikey.checkDownloadedFiles.isFileDownloaded'(FlagDelete)
 
 'jika file tidak terunduh, tulis gagal'
-if (WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL)) 
+{
     'tulis status sukses pada excel'
     CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Documentation', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess, 
         GlobalVariable.SuccessReason)
-} else {
+}
+else 
+{
     GlobalVariable.FlagFailed = 1
-
     'tulis kondisi gagal'
     CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Documentation', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
         GlobalVariable.FailedReasonDownloadProblem)
