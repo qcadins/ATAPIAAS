@@ -101,86 +101,6 @@ public class checkAPIKey {
 		return hasilgetText
 	}
 
-	//fungsi digunakan untuk mengambil text dari dropdownlist documentation API
-	@Keyword
-	public getValueDDLDocumentationAPI() {
-				
-		String ariachoice,ariaid
-		
-		ariaid = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_API Documentation/input'), 'aria-owns')
-		
-		ArrayList<String> hasilddl = new ArrayList<>()
-		
-		for(int i = 0; i <10; i++)
-		{
-			ariachoice = ariaid + "-" + i
-			if(ariachoice.contains("-0"))
-			{
-				hasilddl.add('OCR BPKB')
-			}
-			else if(ariachoice.contains("-1"))
-			{
-				hasilddl.add('OCR REK KORAN MANDIRI')
-			}
-			else if(ariachoice.contains("-2"))
-			{
-				hasilddl.add('LIVENESS + FACECOMPARE')
-			}
-			else if(ariachoice.contains("-3"))
-			{
-				hasilddl.add('OCR KK')
-			}
-			else if(ariachoice.contains("-4"))
-			{
-				hasilddl.add('OCR REK KORAN BCA')
-			}
-			else if(ariachoice.contains("-5"))
-			{
-				hasilddl.add('OCR STNK')
-			}
-			else if(ariachoice.contains("-6"))
-			{
-				hasilddl.add('FACECOMPARE')
-			}
-			else if(ariachoice.contains("-7"))
-			{
-				hasilddl.add('OCR KTP')
-			}
-			else if(ariachoice.contains("-8"))
-			{
-				hasilddl.add('OCR NPWP')
-			}
-			else if(ariachoice.contains("-9"))
-			{
-				hasilddl.add('LIVENESS')
-			}
-		}
-		return hasilddl
-	}
-
-	//fungsi untuk mengambil data dokumentasi dari DB
-	@Keyword
-	public getDocumentationAPIName(Connection conn) {
-		String data
-
-		ArrayList<String> listdata = new ArrayList<>()
-
-		Statement stm = conn.createStatement()
-
-		ResultSet resultSet = stm.executeQuery("SELECT api_name from ms_api")
-		ResultSetMetaData metadata  = resultSet.getMetaData()
-
-		columnCount = metadata.getColumnCount()
-
-		while(resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
-				data = resultSet.getObject(i)
-				listdata.add(data)
-			}
-		}
-		return listdata
-	}
-
 	//fungsi untuk mengambil data APIKEY dari database
 	@Keyword
 	public getAPIStatusfromDB(Connection conn, String apiname) {
@@ -215,6 +135,52 @@ public class checkAPIKey {
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("SELECT CONCAT(COUNT(api_key_name), ' total') AS total_count FROM ms_api_key WHERE id_ms_tenant = 29")
+		ResultSetMetaData metadata  = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while(resultSet.next()) {
+			for(int i=1; i<=columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		return listdata
+	}
+
+	//fungsi untuk mengambil KEY dari database
+	@Keyword
+	public getAPIKeyfromDB(Connection conn) {
+		String data
+
+		ArrayList<String> listdata = new ArrayList<>()
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT api_key_code FROM ms_api_key WHERE is_active = '1' AND lov_api_key_type = 121 AND id_ms_tenant = 29")
+		ResultSetMetaData metadata  = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while(resultSet.next()) {
+			for(int i=1; i<=columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		return listdata
+	}
+
+	//fungsi untuk mengambil jumlah data APIKEY dari database
+	@Keyword
+	public getTenantCodefromDB(Connection conn) {
+		String data
+
+		ArrayList<String> listdata = new ArrayList<>()
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT tenant_code FROM ms_tenant WHERE tenant_name = 'CHUAKZ'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()

@@ -187,7 +187,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	if(DownloadDocs == 'Yes')
 	{
 		'panggil fungsi download dokumentasi API'
-		WebUI.callTestCase(findTestCase('Test Cases/API Key/DocumentationAPI'), [:], FailureHandling.STOP_ON_FAILURE)
+		WebUI.callTestCase(findTestCase('Test Cases/Dokumentasi API/DocumentationAPI'), [:], FailureHandling.STOP_ON_FAILURE)
 	}
 	'kondisi jika tidak ada error'
 	if(GlobalVariable.FlagFailed == 0)

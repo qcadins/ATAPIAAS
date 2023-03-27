@@ -127,7 +127,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 			GlobalVariable.StatusReasonSystem)
 	}
-    
     WebUI.closeBrowser()
 }
 

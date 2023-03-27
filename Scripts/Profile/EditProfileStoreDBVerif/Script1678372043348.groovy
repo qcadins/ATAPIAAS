@@ -54,6 +54,6 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonVerifyEqualorMatch)
+		GlobalVariable.FailedReasonStoreDB)
 	}
 }

@@ -59,25 +59,21 @@ public class checkSaveProcess {
 	//check alert pojok kanan atas jika failed akan write to excel failed + reason failed
 	@Keyword
 	public checkAlert(int colm, String sheetname){
-		int flagFailed=0
-		if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), 1, FailureHandling.OPTIONAL)){
-			String erroralert = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), FailureHandling.OPTIONAL)
+		if(WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/div_Kunci API dengan tipe tersebut sudah aktif'), 1, FailureHandling.OPTIONAL)){
+			String erroralert = WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/div_Kunci API dengan tipe tersebut sudah aktif'), FailureHandling.OPTIONAL)
 			if(erroralert!=null){
 				if(!erroralert.contains("Success".toUpperCase())){
 
-					String FailedAlertReason = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/texterroralert'), 'aria-label', FailureHandling.OPTIONAL)
-
+					String FailedAlertReason = 'Pengubahan API KEY gagal karena sudah aktif'
 					(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 							0, colm - 1, GlobalVariable.StatusFailed)
 					(new writeToExcel.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 							1, colm - 1, FailedAlertReason)
-					flagFailed=1
+					GlobalVariable.FlagFailed = 1
 				}
 			}
 
 		}
-		return flagFailed
-
 	}
 
 	//check status untuk write to excel success / failed + reason failed

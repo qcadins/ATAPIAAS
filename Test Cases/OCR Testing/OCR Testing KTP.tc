@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>OCR Testing KTP</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>f9f6799b-23b6-4f24-aa0e-48f346363ad1</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>d57ed280-a495-4776-92be-0a0eff45938c</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'API_KEY/DataOCRTestingKTP'</defaultValue>
+      <description></description>
+      <id>d57ed280-a495-4776-92be-0a0eff45938c</id>
+      <masked>false</masked>
+      <name>ExcelPathOCRTesting</name>
+   </variable>
+</TestCaseEntity>

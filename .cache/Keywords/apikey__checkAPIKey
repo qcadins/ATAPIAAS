@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "2E2DF19E114A322B168C5045800B62D3",
+  "keywordFileContentHash": "8499D4C2D2CE9AD3F3C91D5A0B7EAD3B",
   "keywordClasses": [
     {
       "name": "apikey.checkAPIKey",
@@ -33,33 +33,13 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getAttributeValueAPI",
-          "parameters": []
-        },
-        {
-          "name": "getValueDDLDocumentationAPI",
-          "parameters": []
-        },
-        {
-          "name": "getDocumentationAPIName",
-          "parameters": [
-            {
-              "name": "conn",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.sql.Connection",
-                "unresolvedClassName": "Connection",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            }
-          ]
+          "parameters": [],
+          "javadoc": ""
         },
         {
           "name": "getAPIStatusfromDB",
@@ -90,7 +70,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getTotalAPIKeyfromDB",
@@ -108,10 +89,49 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
+        },
+        {
+          "name": "getAPIKeyfromDB",
+          "parameters": [
+            {
+              "name": "conn",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ],
+          "javadoc": ""
+        },
+        {
+          "name": "getTenantCodefromDB",
+          "parameters": [
+            {
+              "name": "conn",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

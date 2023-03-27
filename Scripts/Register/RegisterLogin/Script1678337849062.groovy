@@ -23,6 +23,8 @@ def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_esign'()
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
+String email, AutofillOTP, OTPfromExcel, ResendOTP, CountResendOTP
+
 'mendapat jumlah kolom dari sheet Edit Profile'
 int CountColumnEdit = findTestData(ExcelPathRegisterLogin).getColumnNumbers()
 
@@ -37,7 +39,15 @@ otpmanual.add(OTPfromExcel)
 int countresend = Integer.parseInt(CountResendOTP)
 
 'simpan data email dari testdata'
-String email = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8)
+email = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8)
+
+AutofillOTP = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 13)
+
+OTPfromExcel = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 14)
+
+ResendOTP = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 15)
+
+CountResendOTP = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 16)
 
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; GlobalVariable.NumOfColumn++)
 {
@@ -57,6 +67,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 	'mengambil otp dari db, disimpan ke iniotp'
 	ArrayList<String> iniotp = CustomKeywords.'otp.getOTPfromDB.getOTPforRegister'(conn, email)
 	
+	'cek apakah field untuk input otp muncul'
 	CustomKeywords.'writeToExcel.checkSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), GlobalVariable.NumOfColumn, 'Register')
 	
 	if(AutofillOTP == 'Yes')
@@ -207,12 +218,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 	{
 		'tulis status sukses pada excel'
 		CustomKeywords.'writeToExcel.checkSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/Profile/Page_Balance/i_LINA_ft-chevron-down'), GlobalVariable.NumOfColumn, 'Register')
-	}
-	else
-	{
-		'tulis gagal ke excel'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-			GlobalVariable.StatusReasonSystem)
 	}
 	
 	WebUI.closeBrowser()

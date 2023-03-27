@@ -89,11 +89,17 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Ed
 WebUI.delay(2)
 
 'periksa status edit dan tulis ke excel'
-CustomKeywords.'writeToExcel.checkSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/API_KEY/Page_Edit Api Key/div_Success') , GlobalVariable.NumOfColumn, 'API KEY')
+CustomKeywords.'writeToExcel.checkSaveProcess.checkAlert'(GlobalVariable.NumOfColumn, 'API KEY')
 
 'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) 
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_success'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) 
 {
 	'klik tombol ok'
-    WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK'))
+    WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_success'))
+}
+//kondisi untuk tombol ok jika edit error
+else if(WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_gagal'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE))
+{
+	'klik tombol ok'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_gagal'))
 }
