@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebServiceRequestEntity>
    <description></description>
-   <name>OCR RK Mandiri ✔ Copy</name>
+   <name>OCR RK Mandiri</name>
    <tag></tag>
    <elementGuidId>27bb1aa3-2420-467b-8837-0f8382c81af6</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>

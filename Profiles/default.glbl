@@ -16,8 +16,13 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'Image terlalu blur'</initValue>
-      <name>FailedReasonBlurryImage</name>
+      <initValue>'Hit SUCCESS tapi saldo tidak berkurang'</initValue>
+      <name>FailedReasonBalanceNotChange</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Kriteria Foto tidak sesuai, tapi tembus HIT'</initValue>
+      <name>FailedReasonCriteriaBypass</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -36,21 +41,6 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'Resolusi gambar terlalu besar/kecil'</initValue>
-      <name>FailedReasonImageSize</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Tenant code dan/atau key salah'</initValue>
-      <name>FailedReasonInvalidTenantKey</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'KTP tidak sesuai syarat OCR'</initValue>
-      <name>FailedReasonKTPInvalid</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
       <initValue>'Mandatory is incomplete'</initValue>
       <name>FailedReasonMandatory</name>
    </GlobalVariableEntity>
@@ -66,13 +56,8 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'Parameter Invalid'</initValue>
-      <name>FailedReasonParameterAPI</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Saldo kurang'</initValue>
-      <name>FailedReasonSaldoAPI</name>
+      <initValue>'HIT gagal, tapi saldo berkurang'</initValue>
+      <name>FailedReasonSaldoBocor</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -83,6 +68,11 @@
       <description></description>
       <initValue>'FailedStoreDB'</initValue>
       <name>FailedReasonStoreDB</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'HIT API berhasil, tapi tidak tersimpan di DB'</initValue>
+      <name>FailedReasonTrxNotinDB</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

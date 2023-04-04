@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebServiceRequestEntity>
    <description></description>
-   <name>OCR KK Copy</name>
+   <name>OCR KTP</name>
    <tag></tag>
-   <elementGuidId>021bf3f0-88db-41b6-bd7e-159eb8c0ef95</elementGuidId>
+   <elementGuidId>641186d6-74d2-4654-9752-5946d302c684</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <connectionTimeout>-1</connectionTimeout>
@@ -37,13 +37,13 @@
       <matchCondition>equals</matchCondition>
       <name>Content-Type</name>
       <type>Main</type>
-      <webElementGuid>bb718537-d30b-4124-a9ba-d635b6395b8d</webElementGuid>
+      <webElementGuid>7b0fd9c0-ee52-4788-aad8-45355dc9d3c9</webElementGuid>
    </httpHeaderProperties>
    <katalonVersion>8.5.5</katalonVersion>
    <maxResponseSize>-1</maxResponseSize>
    <migratedVersion>5.4.1</migratedVersion>
    <restRequestMethod>POST</restRequestMethod>
-   <restUrl>https://5236635838005115.ap-southeast-5.fc.aliyuncs.com/2016-08-15/proxy/ocr/kk/</restUrl>
+   <restUrl>https://ktp-cutbalance-ocr-dev-crjwksmytj.ap-southeast-5.fcapp.run</restUrl>
    <serviceType>RESTful</serviceType>
    <soapBody></soapBody>
    <soapHeader></soapHeader>

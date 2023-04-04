@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebServiceRequestEntity>
    <description></description>
-   <name>OCR BPKB ✔ Copy</name>
+   <name>OCR BPKB</name>
    <tag></tag>
    <elementGuidId>6b31c15f-60ef-49dc-acee-c0e922147246</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>
@@ -10,17 +10,42 @@
    <followRedirects>false</followRedirects>
    <httpBody></httpBody>
    <httpBodyContent>{
-  &quot;contentType&quot;: &quot;application/x-www-form-urlencoded&quot;,
+  &quot;contentType&quot;: &quot;multipart/form-data&quot;,
   &quot;charset&quot;: &quot;UTF-8&quot;,
-  &quot;parameters&quot;: []
+  &quot;parameters&quot;: [
+    {
+      &quot;name&quot;: &quot;halaman2&quot;,
+      &quot;value&quot;: &quot;${page2}&quot;,
+      &quot;type&quot;: &quot;File&quot;,
+      &quot;contentType&quot;: &quot;&quot;
+    },
+    {
+      &quot;name&quot;: &quot;halaman3&quot;,
+      &quot;value&quot;: &quot;${page3}&quot;,
+      &quot;type&quot;: &quot;File&quot;,
+      &quot;contentType&quot;: &quot;&quot;
+    },
+    {
+      &quot;name&quot;: &quot;key&quot;,
+      &quot;value&quot;: &quot;${key}&quot;,
+      &quot;type&quot;: &quot;Text&quot;,
+      &quot;contentType&quot;: &quot;&quot;
+    },
+    {
+      &quot;name&quot;: &quot;tenant_code&quot;,
+      &quot;value&quot;: &quot;${tenant}&quot;,
+      &quot;type&quot;: &quot;Text&quot;,
+      &quot;contentType&quot;: &quot;&quot;
+    }
+  ]
 }</httpBodyContent>
-   <httpBodyType>x-www-form-urlencoded</httpBodyType>
+   <httpBodyType>form-data</httpBodyType>
    <httpHeaderProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>Content-Type</name>
       <type>Main</type>
-      <value>application/x-www-form-urlencoded</value>
+      <value>multipart/form-data</value>
       <webElementGuid>27f00439-365b-4abd-9709-3b09706a7d21</webElementGuid>
    </httpHeaderProperties>
    <katalonVersion>8.5.5</katalonVersion>

@@ -77,13 +77,6 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Ed
 {
 	'klik pada tombol ya'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Ya'))
-	
-	'cek ke DB jika memang diperlukan'
-	if(GlobalVariable.KondisiCekDB == 'Yes')
-	{
-		'verifikasi data ke db setelah di edit'
-		WebUI.callTestCase(findTestCase('Test Cases/API Key/EditKeyStoreDBVerif'), [:], FailureHandling.STOP_ON_FAILURE)
-	}
 }
 
 WebUI.delay(2)
@@ -96,6 +89,13 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Ed
 {
 	'klik tombol ok'
     WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_success'))
+	
+	'cek ke DB jika memang diperlukan'
+	if(GlobalVariable.KondisiCekDB == 'Yes')
+	{
+		'verifikasi data ke db setelah di edit'
+		WebUI.callTestCase(findTestCase('Test Cases/API Key/EditKeyStoreDBVerif'), [:], FailureHandling.STOP_ON_FAILURE)
+	}
 }
 //kondisi untuk tombol ok jika edit error
 else if(WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_gagal'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE))

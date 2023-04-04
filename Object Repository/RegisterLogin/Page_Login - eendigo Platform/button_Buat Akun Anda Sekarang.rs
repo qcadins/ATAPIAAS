@@ -7,15 +7,15 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//button[@type='submit']</value>
+         <value>/html/body/app-root/app-content-layout/div/div/div/div[2]/app-login-page/div/div/section/div/div[2]/div/mat-tab-group/div/mat-tab-body[2]/div/form/button</value>
       </entry>
       <entry>
          <key>CSS</key>
-         <value>button.login-button</value>
+         <value>#mat-tab-content-0-1 > div > form > button</value>
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>id(&quot;mat-tab-content-0-1&quot;)/div[@class=&quot;mat-tab-body-content ng-tns-c240-2 ng-trigger ng-trigger-translateTab&quot;]/form[@class=&quot;ng-untouched ng-pristine ng-invalid ng-star-inserted&quot;]/button[@class=&quot;login-button&quot;][count(. | //*[@type = 'submit' and (text() = 'Buat Akun Anda Sekarang' or . = 'Buat Akun Anda Sekarang')]) = count(//*[@type = 'submit' and (text() = 'Buat Akun Anda Sekarang' or . = 'Buat Akun Anda Sekarang')])]</value>
+         <value>//*[@type = 'submit' and @class = 'login-button' and (text() = 'Buat Akun Anda Sekarang' or . = 'Buat Akun Anda Sekarang')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -26,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>button</value>
-      <webElementGuid>8ebcb6d7-65bf-4141-ae55-4377da3a4f02</webElementGuid>
+      <webElementGuid>210f4508-1136-4a25-a4cf-644de01f3ebc</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -34,15 +34,15 @@
       <name>type</name>
       <type>Main</type>
       <value>submit</value>
-      <webElementGuid>6de65ac5-487c-443d-a46b-f6a9123521c2</webElementGuid>
+      <webElementGuid>890e2869-b2d0-4200-a731-b30bd3843f2b</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
       <value>login-button</value>
-      <webElementGuid>cb00c93d-6794-452f-a942-818ea9a98b3a</webElementGuid>
+      <webElementGuid>db4da4ed-3f4d-41cd-8b38-4dfd8abadac8</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -50,15 +50,15 @@
       <name>text</name>
       <type>Main</type>
       <value>Buat Akun Anda Sekarang</value>
-      <webElementGuid>abc51d2b-a323-45c5-b8d7-6a485dbd7c00</webElementGuid>
+      <webElementGuid>c25ac10e-32e7-446e-993d-152883f2ad1b</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;mat-tab-content-0-1&quot;)/div[@class=&quot;mat-tab-body-content ng-tns-c240-2 ng-trigger ng-trigger-translateTab&quot;]/form[@class=&quot;ng-untouched ng-pristine ng-invalid ng-star-inserted&quot;]/button[@class=&quot;login-button&quot;]</value>
-      <webElementGuid>39d8afdc-9994-412c-8586-f9eb46267f4d</webElementGuid>
+      <value>id(&quot;mat-tab-content-0-1&quot;)/div[@class=&quot;mat-tab-body-content ng-tns-c241-2 ng-trigger ng-trigger-translateTab&quot;]/form[@class=&quot;ng-invalid ng-star-inserted ng-touched ng-dirty&quot;]/button[@class=&quot;login-button&quot;]</value>
+      <webElementGuid>aa257731-7a44-4014-887a-28fe60abd5c4</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -66,7 +66,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//button[@type='submit']</value>
-      <webElementGuid>44f8b459-7145-4771-9150-9c3fb01eb98f</webElementGuid>
+      <webElementGuid>48c20db3-f0ee-4b65-8727-f36e9c3d6e25</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -74,15 +74,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//mat-tab-body[@id='mat-tab-content-0-1']/div/form/button</value>
-      <webElementGuid>2229474f-3a37-4717-9df2-2de12aca69ac</webElementGuid>
-   </webElementXpaths>
-   <webElementXpaths>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>xpath:neighbor</name>
-      <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Kebijakan Privasi'])[1]/following::button[1]</value>
-      <webElementGuid>7b00c408-9eba-4e38-b381-d5f7a05d8d3e</webElementGuid>
+      <webElementGuid>2207284b-5e82-4bc4-b6c4-4d4fa7039794</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -90,7 +82,15 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Syarat Ketentuan'])[1]/following::button[1]</value>
-      <webElementGuid>13fac8a8-5711-42d0-a9ff-7c6f4af3cb6e</webElementGuid>
+      <webElementGuid>1b7d5e28-5a1f-4bf3-b96f-1a9ec144afee</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Kebijakan Privasi'])[1]/following::button[1]</value>
+      <webElementGuid>f6c84584-fa4d-400f-834b-8d400199d1cb</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -98,7 +98,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Capture object:'])[1]/preceding::button[1]</value>
-      <webElementGuid>26fa0161-1698-41db-aa21-56d86723c5e6</webElementGuid>
+      <webElementGuid>dc546434-6223-4f3d-a68e-afdb9ac88db6</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -106,7 +106,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Alt'])[1]/preceding::button[1]</value>
-      <webElementGuid>aaddab41-ac94-41e7-8d22-a44f2c6ab2fb</webElementGuid>
+      <webElementGuid>cce01fd8-f5c0-46e6-9541-253a963e14d1</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -114,7 +114,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='Buat Akun Anda Sekarang']/parent::*</value>
-      <webElementGuid>111da263-b32e-42fa-b105-8174d2c42e88</webElementGuid>
+      <webElementGuid>d3eafa3d-5c7c-445e-b4eb-b1411d8e9656</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -122,7 +122,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//button</value>
-      <webElementGuid>26ff22ee-4f7c-4eb9-a6fc-e2d0ceb8dd0d</webElementGuid>
+      <webElementGuid>34095807-25d6-493b-8300-b4eb724632b6</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -130,6 +130,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//button[@type = 'submit' and (text() = 'Buat Akun Anda Sekarang' or . = 'Buat Akun Anda Sekarang')]</value>
-      <webElementGuid>124665d5-f2c6-4fe0-bf4b-4e39dda78873</webElementGuid>
+      <webElementGuid>36904f5a-e78f-47be-836e-40a4ae6356bc</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

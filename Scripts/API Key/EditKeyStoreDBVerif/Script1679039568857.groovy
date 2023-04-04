@@ -44,9 +44,11 @@ for (int i=12; i<=hasilexcel.size; i++)
 
 'verifikasi data pada db dan excel sama'
 for (int j = 0; j < hasilexcel.size ; j++) {
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[j], hasilexcel[j], false, FailureHandling.CONTINUE_ON_FAILURE))
+	if(checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[j], hasilexcel[j], false, FailureHandling.OPTIONAL)) == false)
+	{
+		break;
+	}
 }
-
 def checkVerifyEqualorMatch(Boolean isMatch) {
 	if(isMatch == false)
 	{
@@ -54,6 +56,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonVerifyEqualorMatch)
+		GlobalVariable.FailedReasonStoreDB)
+		break;
 	}
 }

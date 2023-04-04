@@ -49,7 +49,12 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Ad
 {
 	'klik pada button YA jika muncul pop-up'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Ya'))
-	
+}
+
+WebUI.delay(GlobalVariable.Timeout)
+
+if(!WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Add Api Key/div_Code 1202  Tidak bisa memiliki lebih dari 1 tipe api key yang sama'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE))
+{
 	'cek ke DB jika memang diperlukan'
 	if(GlobalVariable.KondisiCekDB == 'Yes')
 	{
@@ -57,8 +62,6 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Ad
 		WebUI.callTestCase(findTestCase('Test Cases/API Key/AddKeyStoreDBVerif'), [:], FailureHandling.STOP_ON_FAILURE)
 	}
 }
-
-WebUI.delay(GlobalVariable.Timeout)
 
 'jika button ok muncul, tulis ke excel tidak gagal'
 CustomKeywords.'writeToExcel.checkSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_OK'), GlobalVariable.NumOfColumn, 'API KEY')

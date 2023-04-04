@@ -54,7 +54,7 @@ println tenantcode[0]
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
 {
-	ResponseObject response = WS.sendRequest(findTestObject('Object Repository/Postman/OCR KTP Copy', [('img'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 8),
+	ResponseObject response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/OCR KTP', [('img'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 8),
 		('key'):thekey[0], ('tenant'):tenantcode[0]]))
 	
 	data = response.getResponseText()

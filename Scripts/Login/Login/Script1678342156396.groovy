@@ -97,7 +97,6 @@ else if(TC == 'Regist')
 	'bypass captcha langsung masuk verifikasi otp'
 	WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
 	js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister);
-
 }
 else if (TC == 'Key')
 {

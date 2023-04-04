@@ -43,11 +43,11 @@ import java.io.IOException;
 import internal.GlobalVariable
 
 public class checkDocumentation {
-	
+
 	def driver = DriverFactory.getWebDriver()
-	
+
 	def js = (JavascriptExecutor)driver
-	
+
 	int columnCount
 
 	@Keyword
@@ -70,7 +70,7 @@ public class checkDocumentation {
 		}
 		return isDownloaded
 	}
-	
+
 	//fungsi untuk mengambil data dokumentasi dari DB
 	@Keyword
 	public getDocumentationAPIName(Connection conn) {
@@ -93,7 +93,7 @@ public class checkDocumentation {
 		}
 		return listdata
 	}
-	
+
 	//fungsi digunakan untuk mengambil text dari dropdownlist documentation API
 	@Keyword
 	public getValueDDLDocumentationAPI() {

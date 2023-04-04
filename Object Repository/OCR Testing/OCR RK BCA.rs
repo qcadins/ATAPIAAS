@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebServiceRequestEntity>
    <description></description>
-   <name>OCR RK BCA ✔ Copy</name>
+   <name>OCR RK BCA</name>
    <tag></tag>
    <elementGuidId>6332ae72-57c4-4021-8c48-33e2f7d4e584</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>

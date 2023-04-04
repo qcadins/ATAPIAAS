@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(.//*[normalize-space(text()) and normalize-space(.)='`'])[2]/following::span[1]</value>
+         <value>/html/body/ngb-modal-window/div/div/app-verification-email/form/div/button[1]/span</value>
       </entry>
       <entry>
          <key>CSS</key>
@@ -22,7 +22,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>span</value>
-      <webElementGuid>b611a0f5-8258-46f2-8afd-c0ddeaf19a2d</webElementGuid>
+      <webElementGuid>91c8e386-a988-44b3-af15-ffb66c8ebd30</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -30,7 +30,7 @@
       <name>aria-hidden</name>
       <type>Main</type>
       <value>true</value>
-      <webElementGuid>551a4e36-7bea-43b4-aab2-fc4c88555820</webElementGuid>
+      <webElementGuid>19265f98-fbbb-4f58-a9d7-378d24c49ea0</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -38,15 +38,15 @@
       <name>text</name>
       <type>Main</type>
       <value>×</value>
-      <webElementGuid>358ddf43-bcf5-468c-836b-f397e5507748</webElementGuid>
+      <webElementGuid>993aa0c5-8e67-46d8-8c3b-c414821499ae</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html[1]/body[@class=&quot;auth-page blank-page pace-done modal-open&quot;]/ngb-modal-window[@class=&quot;d-block modal fade show&quot;]/div[@class=&quot;modal-dialog&quot;]/div[@class=&quot;modal-content&quot;]/app-verification-email[1]/form[@class=&quot;ng-untouched ng-pristine ng-invalid&quot;]/div[@class=&quot;modal-body&quot;]/button[@class=&quot;close&quot;]/span[1]</value>
-      <webElementGuid>2b7772cb-c1ba-4850-83cc-56eb1e19a764</webElementGuid>
+      <value>/html[1]/body[@class=&quot;auth-page blank-page pace-done modal-open&quot;]/ngb-modal-window[@class=&quot;d-block modal fade show&quot;]/div[@class=&quot;modal-dialog&quot;]/div[@class=&quot;modal-content&quot;]/app-verification-email[1]/form[@class=&quot;ng-dirty ng-valid ng-touched&quot;]/div[@class=&quot;modal-body&quot;]/button[@class=&quot;close&quot;]/span[1]</value>
+      <webElementGuid>06433451-63ed-499b-b4a4-02e1a8a8c99e</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -54,7 +54,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='`'])[2]/following::span[1]</value>
-      <webElementGuid>f1f3e6fe-eac9-4430-a976-704651e540d6</webElementGuid>
+      <webElementGuid>7c46378e-a804-4605-8f75-a91931ac3e14</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -62,15 +62,15 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Alt'])[2]/following::span[1]</value>
-      <webElementGuid>25f9f0c3-fd60-4d7a-bdf0-07c67b29789b</webElementGuid>
+      <webElementGuid>922770e4-13e4-4f3a-b2d9-59b9299b6fa7</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Tunggu 116 detik'])[1]/preceding::span[1]</value>
-      <webElementGuid>de366881-0852-4c4d-a60a-a749f929f0ad</webElementGuid>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Tunggu 111 detik'])[1]/preceding::span[1]</value>
+      <webElementGuid>606a78c4-b950-463a-adbe-493e2b1e4fb9</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +78,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Verifikasi'])[1]/preceding::span[1]</value>
-      <webElementGuid>106aeaa1-ab6f-489f-8669-1800ca5121d1</webElementGuid>
+      <webElementGuid>1411e928-eceb-4934-8ad6-d7acf4292f98</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +86,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='×']/parent::*</value>
-      <webElementGuid>4700fefb-f0e9-48b5-a0ea-5cdb87bdeeff</webElementGuid>
+      <webElementGuid>7e17cb13-8b06-47e1-9136-3bf77fe19119</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +94,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//button/span</value>
-      <webElementGuid>bf869654-52b5-4fdb-903e-13a7d21dd7b6</webElementGuid>
+      <webElementGuid>8f8868e0-8d2e-4099-bbaa-52f9af040f1f</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,6 +102,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//span[(text() = '×' or . = '×')]</value>
-      <webElementGuid>74cc83af-2987-4dfe-a191-1be8e88037a7</webElementGuid>
+      <webElementGuid>65b97340-78ae-4670-91bd-af3277f97d17</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

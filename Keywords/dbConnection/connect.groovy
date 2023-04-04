@@ -66,4 +66,25 @@ public class connect {
 
 		return conn
 	}
+
+	//fungsi digunakan untuk koneksi dengan database adins apiaas uat tipe production
+	@Keyword
+	def connectDBAPIAAS_uatProduction() {
+
+		String servername = findTestData('Data Files/Login/Login').getValue(1, 9)
+
+		String port = findTestData('Data Files/Login/Login').getValue(2, 9)
+
+		String database = findTestData('Data Files/Login/Login').getValue(3, 9)
+
+		String username = findTestData('Data Files/Login/Login').getValue(4, 9)
+
+		String password = findTestData('Data Files/Login/Login').getValue(5, 9)
+
+		String url = servername + ':' + port + '/' + database
+
+		Connection conn = DriverManager.getConnection(url, username, password)
+
+		return conn
+	}
 }

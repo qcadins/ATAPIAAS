@@ -23,18 +23,17 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
-//WEbUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/AcceptTnC'))
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 
-int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 4))
-
 'looping kolom dari testdata'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++) 
 {
+	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 4))
+	
     'memanggil fungsi untuk login'
     WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf'], FailureHandling.STOP_ON_FAILURE)
 
@@ -61,7 +60,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
     'panggil fungsi verifikasi jika checkdatabase = yes'
     if (GlobalVariable.KondisiCekDB == 'Yes') {
         'verifikasi data yang ada di web dengan di database sebelum diEdit'
-        WebUI.callTestCase(findTestCase('Test Cases/Profile/VerifyDataEditProfile'), [:], FailureHandling.STOP_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('Test Cases/Profile/VerifyDataEditProfile'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
     
     'input nama depan pengguna'
@@ -108,14 +107,16 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 	
 	'klik tombol simpan'
 	WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/button_Simpan'))
+	
+	WebUI.delay(3)
 
     'panggil fungsi verifikasi jika checkdatabase = yes'
     if (GlobalVariable.KondisiCekDB == 'Yes') {
         'verifikasi data yang ada di excel dengan di database sesudah diEdit'
-        WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfileStoreDBVerif'), [:], FailureHandling.STOP_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfileStoreDBVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
     
-    'kondisi jika tidak ada failed pada bagia lain testcase'
+    'kondisi jika tidak ada failed pada bagian lain testcase'
     if (GlobalVariable.FlagFailed == 0) 
 	{
 		'tulis kondisi sukses'

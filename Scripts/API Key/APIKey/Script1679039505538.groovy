@@ -17,32 +17,32 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-'cek apakah perlu tambah API'
-String WantAddAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 17)
-
-'cek apakah perlu edit API'
-String WantEditAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18)
-
-'cek apakah perlu copy link API'
-String CopyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 19)
-
-'cek apakah perlu fungsi download dokumentasi API'
-String DownloadDocs = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 20)
-
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int CountColumnEdit = findTestData(ExcelPathAPIKey).getColumnNumbers()
 
-'angka untuk menghitung data mandatory yang tidak terpenuhi'
-int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 4))
-
-String optiontipe, optionstatus, totaldata
-
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
 {
+	String optiontipe, optionstatus, totaldata
+		
+	'cek apakah perlu tambah API'
+	String WantAddAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 17)
+	
+	'cek apakah perlu edit API'
+	String WantEditAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18)
+	
+	'cek apakah perlu copy link API'
+	String CopyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 19)
+	
+	'cek apakah perlu fungsi download dokumentasi API'
+	String DownloadDocs = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 20)
+	
+	'angka untuk menghitung data mandatory yang tidak terpenuhi'
+	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 4))
+	
 	'panggil fungsi login'
 	WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Key'], FailureHandling.STOP_ON_FAILURE)
 	
@@ -123,41 +123,46 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 		WebUI.callTestCase(findTestCase('Test Cases/API Key/VerifyTotalAPIList'), [:], FailureHandling.STOP_ON_FAILURE)
 	}
 	
-	'klik panah ke kanan di footer'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_Aksi_datatable-icon-right'))
+	String isPaging = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Api Key List/isPagingDisabled'), 'class')
 	
-	'verifikasi halaman ada di 2'
-	checkVerifyFooter()
-	
-	'klik panah kiri pada footer'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_Aksi_datatable-icon-left'))
-	
-	'verifikasi halaman ada di 1'
-	checkVerifyFooter()
-	
-	'klik angka halaman 2'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_2'))
-	
-	'verifikasi halaman ada di 2'
-	checkVerifyFooter()
-	
-	'klik angka halaman 1'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_1'))
-	
-	'verifikasi halaman ada di 1'
-	checkVerifyFooter()
-	
-	'klik skip page ke paling akhir'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_Aksi_datatable-icon-skip'))
-	
-	'verifikasi halaman'
-	checkVerifyFooter()
-	
-	'klik skip page ke paling awal'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_Aksi_datatable-icon-prev'))
-	
-	'verifikasi halaman'
-	checkVerifyFooter()
+	if(isPaging != "disabled")
+	{
+		'klik panah ke kanan di footer'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_Aksi_datatable-icon-right'))
+		
+		'verifikasi halaman ada di 2'
+		checkVerifyFooter()
+		
+		'klik panah kiri pada footer'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_Aksi_datatable-icon-left'))
+		
+		'verifikasi halaman ada di 1'
+		checkVerifyFooter()
+		
+		'klik angka halaman 2'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_2'))
+		
+		'verifikasi halaman ada di 2'
+		checkVerifyFooter()
+		
+		'klik angka halaman 1'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_1'))
+		
+		'verifikasi halaman ada di 1'
+		checkVerifyFooter()
+		
+		'klik skip page ke paling akhir'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_Aksi_datatable-icon-skip'))
+		
+		'verifikasi halaman'
+		checkVerifyFooter()
+		
+		'klik skip page ke paling awal'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_Aksi_datatable-icon-prev'))
+		
+		'verifikasi halaman'
+		checkVerifyFooter()
+	}
 	
 	'panggil fungsi copy link'
 	if(CopyAPILink == 'Yes')

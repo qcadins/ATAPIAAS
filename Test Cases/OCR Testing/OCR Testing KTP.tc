@@ -12,7 +12,7 @@
       <variableId>d57ed280-a495-4776-92be-0a0eff45938c</variableId>
    </variableLinks>
    <variable>
-      <defaultValue>'API_KEY/DataOCRTestingKTP'</defaultValue>
+      <defaultValue>'OCR Testing/DataOCRTestingKTP'</defaultValue>
       <description></description>
       <id>d57ed280-a495-4776-92be-0a0eff45938c</id>
       <masked>false</masked>
