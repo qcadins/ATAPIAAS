@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>Saldo</name>
+   <name>NamaSaldo</name>
    <tag></tag>
-   <elementGuidId>3903bcf2-fa36-4a3a-b632-bf6a278530da</elementGuidId>
+   <elementGuidId>a5ef71fb-f3f0-4298-bff8-22badce878c9</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[1]/datatable-body-row/div[2]/datatable-body-cell[9]/div/text()</value>
-      </entry>
       <entry>
          <key>BASIC</key>
          <value></value>
@@ -22,6 +18,6 @@
       <name>xpath</name>
       <type>Main</type>
       <value></value>
-      <webElementGuid>5fcad8b2-2209-4e4f-8c24-cd1797ca049f</webElementGuid>
+      <webElementGuid>6ffcf8c6-cf9a-4160-af4d-199abb81e8a7</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

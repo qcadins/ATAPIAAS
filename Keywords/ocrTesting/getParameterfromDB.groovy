@@ -22,6 +22,9 @@ import java.sql.Statement
 
 import javax.servlet.http.HttpServletRequest
 import javax.swing.ComboBoxModel
+import org.apache.poi.ss.usermodel.WorkbookFactory
+import org.apache.poi.ss.usermodel.Workbook
+import org.apache.poi.ss.usermodel.Sheet
 
 import java.sql.DriverManager
 import java.sql.ResultSet
@@ -49,6 +52,41 @@ public class getParameterfromDB {
 
 	int columnCount
 
+	//fungsi mengambil nama sheet yang digunakan
+	@Keyword
+	public getIDPaymentType(Connection conn, String tenantcode, String testedOCR) {
+		int data
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("Select ml.id_lov FROM esign.ms_balancevendoroftenant mbt join esign.ms_tenant mt on mt.id_ms_tenant = mbt.id_ms_tenant Join esign.ms_lov ml on ml.id_lov = mbt.lov_balance_type Where mt.tenant_code = '"+ tenantcode +"' AND ml.description = '"+testedOCR+"'")
+
+		while(resultSet.next())
+		{
+			data = resultSet.getObject(1);
+		}
+
+		return data
+	}
+
+	//fungsi mengambil jenis penagihan saldo (quantity/price)
+	@Keyword
+	public getPaymentType(Connection conn, String tenantcode, int idPayment) {
+		String data
+
+		ArrayList<String> listdata = new ArrayList<>()
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("Select description From esign.ms_lov ml join esign.ms_balancevendoroftenant mbt on ml.id_lov = mbt.lov_balance_charge_type Join esign.ms_tenant mt on mt.id_ms_tenant = mbt.id_ms_tenant Where ml.lov_group = 'BALANCE_CHARGE_TYPE' and mt.tenant_code = '"+ tenantcode +"' AND mbt.lov_balance_type = "+ idPayment +"")
+
+		while(resultSet.next())
+		{
+			data = resultSet.getObject(1)
+		}
+		return listdata
+	}
+
 	//fungsi untuk mengambil KEY dari database
 	@Keyword
 	public getAPIKeyfromDB(Connection conn, String tenantcode) {
@@ -58,7 +96,7 @@ public class getParameterfromDB {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT mk.api_key_code FROM ms_api_key mk JOIN ms_tenant mt ON mk.id_ms_tenant = mt.id_ms_tenant WHERE mt.tenant_code = '"+tenantcode+"' AND mk.is_active = '1' AND lov_api_key_type = 121")
+		ResultSet resultSet = stm.executeQuery("SELECT api_key_code FROM ms_api_key mk JOIN ms_tenant mt ON mk.id_ms_tenant = mt.id_ms_tenant JOIN ms_lov mlo ON mlo.id_lov = mk.lov_api_key_type  WHERE mt.tenant_code = '"+ tenantcode +"' AND mk.is_active = '1' AND mlo.description = 'TRIAL'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
@@ -116,5 +154,22 @@ public class getParameterfromDB {
 			}
 		}
 		return listdata
+	}
+
+	//fungsi untuk ambil harga service OCR dari DB
+	@Keyword
+	public getServicePricefromDB(Connection conn, String tenantcode) {
+		int data
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT msp.service_price FROM esign.ms_service_price msp JOIN esign.tr_balance_mutation tm ON msp.lov_balance_type = tm.lov_balance_type WHERE tm.usr_crt = '"+ tenantcode +"' ORDER BY tm.trx_no DESC LIMIT 1")
+
+		while(resultSet.next())
+		{
+			data = resultSet.getObject(1);
+		}
+
+		return data
 	}
 }

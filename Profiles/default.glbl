@@ -21,11 +21,6 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'Kriteria Foto tidak sesuai, tapi tembus HIT'</initValue>
-      <name>FailedReasonCriteriaBypass</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
       <initValue>'Data di ddl tidak sesuai dengan DB'</initValue>
       <name>FailedReasonDDL</name>
    </GlobalVariableEntity>
@@ -38,6 +33,11 @@
       <description></description>
       <initValue>'Error pada pemrosesan oleh API'</initValue>
       <name>FailedReasonHITAPI</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Key salah tapi HIT berhasil'</initValue>
+      <name>FailedReasonKeyBypass</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
