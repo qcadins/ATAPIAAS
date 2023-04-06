@@ -5,8 +5,6 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.testobject.ResponseObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
-import java.awt.Robot
-import java.awt.event.KeyEvent
 import java.sql.Driver
 
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
@@ -39,6 +37,7 @@ def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
 def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
+
 'buka chrome'
 WebUI.openBrowser('')
 
@@ -90,7 +89,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 4))
 	
 	'deklarasi variabel angka'
-	int isSaldoBerkurang, Saldobefore, Saldoafter, isTrxIncreased, HitAPITrx
+	int isSaldoBerkurang, Saldobefore, UISaldoafter, KatalonSaldoafter, isTrxIncreased, HitAPITrx
 	
 	'penanda untuk HIT yang berhasil dan gagal'
 	HitAPITrx = 1
@@ -116,6 +115,17 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		'lakukan proses HIT api dengan parameter image, key, dan juga tenant'
 		response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/OCR KK', [('img'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 8),
 		('key'):thekey[0], ('tenant'):tenantcode[0]]))
+		
+		'ambil message respon dari HIT tersebut'
+		message_temp = WS.getElementPropertyValue(response, 'message')
+		
+		'ambil status dari respon HIT tersebut'
+		state_temp = WS.getElementPropertyValue(response, 'status')
+		
+		if(state_temp == 'FAILED' && message_temp == 'Insufficient balance')
+		{
+			break;
+		}
 	}
 	//jika user ingin mencoba key yang diambil dari excel
 	else
@@ -135,7 +145,6 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		
 		if(state_ocr == 'FAILED')
 		{
-			GlobalVariable.FlagFailed = 1
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KK', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
@@ -145,7 +154,6 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		}
 		else
 		{
-			GlobalVariable.FlagFailed = 1
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KK', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
@@ -176,16 +184,10 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	if(GlobalVariable.KondisiCekDB == 'Yes')
 	{
 		'simpan trx number terbaru dari DB'
-		ArrayList<String> LatestMutation= CustomKeywords.'ocrTesting.getParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode[0])
-		
-		'simpan transaction number dari web'
-		ArrayList<String> trxnum = new ArrayList<>()
-		
-		'data transaction number dari web dimasukkan ke array'
-		trxnum.add(no_Trx_after)
+		String LatestMutation= CustomKeywords.'ocrTesting.getParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode[0])
 		
 		'jika data transaction number di web dan DB tidak sesuai'
-		if(!WebUI.verifyMatch(LatestMutation[0], trxnum[0], false, FailureHandling.CONTINUE_ON_FAILURE))
+		if(!WebUI.verifyMatch(LatestMutation, no_Trx_after, false, FailureHandling.CONTINUE_ON_FAILURE))
 		{
 			'anggap HIT Api gagal'
 			HitAPITrx = 0
@@ -193,7 +195,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	}
 	
 	'simpan harga OCR KTP ke dalam integer'
-	int Service_price = CustomKeywords.'ocrTesting.getParameterfromDB.getServicePricefromDB'(connProd, tenantcode[0])
+	int Service_price = CustomKeywords.'ocrTesting.getParameterfromDB.getServicePricefromDB'(connProd, idPayment)
 	
 	'jika HIT API successful'
 	if(HitAPITrx == 1)
@@ -202,47 +204,27 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		if(BalanceChargeType == 'Price')
 		{
 			'input saldo setelah penagihan'
-			Saldoafter = Saldobefore - Service_price
+			KatalonSaldoafter = Saldobefore - Service_price
 		}
 		else
 		{
 			'input saldo setelah penagihan dikurangi qty'
-			Saldoafter = Saldobefore - 1
+			KatalonSaldoafter = Saldobefore - 1
 		}
 	}	
 	
-//	'simpan saldo setelah di HIT'
-//	Saldoafter = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_45,649')).replace(',',''))
+	'simpan saldo setelah di HIT'
+	UISaldoafter = getSaldoforTransaction('OCR KK')
+//	Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_45,649')).replace(',',''))
 	
-	'jika penagihan didasarkan by harga'
-	if(BalanceChargeType == 'Price')
+	'jika saldoafter match'
+	if(KatalonSaldoafter == UISaldoafter)
 	{
-		'jika selisih saldo sesuai dengan service price KK yaitu 1000'
-		if(Saldobefore - Saldoafter == Service_price)
-		{
-			'saldo berkurang'
-			isSaldoBerkurang = 1
-		}
-		else
-		{
-			'saldo tidak berkurang'
-			isSaldoBerkurang = 0
-		}
+		isSaldoBerkurang = 1
 	}
-	//jika penagihan berdasarkan Quantity/jumlah
 	else
 	{
-		'jika saldo di -1'
-		if(Saldoafter == Saldobefore - 1)
-		{
-			'saldo berhasil diambil'
-			isSaldoBerkurang = 1
-		}
-		else
-		{
-			'saldo tidak berhasil diambil'
-			isSaldoBerkurang = 0
-		}
+		isSaldoBerkurang = 0
 	}
 	
 	'jika transaksi bertambah di DB dan di web'
@@ -256,12 +238,6 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		'web tidak mencatat transaksi terbaru'
 		isTrxIncreased = 0
 	}
-
-	println isSaldoBerkurang
-	println isTrxIncreased
-	println HitAPITrx
-	println no_Trx_before
-	println no_Trx_after
 	
 	'jika tidak ada message error dan kondisi lain terpenuhi'
 	if(message_ocr == '' && state_ocr == 'SUCCESS' && isTrxIncreased == 1 && isSaldoBerkurang == 1 && HitAPITrx == 1)
@@ -336,32 +312,32 @@ def getSaldoforTransaction(String NamaOCR) {
 	int saldoNow
 	
 	'cari element dengan nama saldo'
-	def elementNamaSaldo = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div'))
+	def elementNamaSaldo = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
 	
 	'lakukan loop untuk cari nama saldo yang ditentukan'
 	for(int i=0; i<elementNamaSaldo.size(); i++)
 	{
 		'cari nama saldo yang sesuai di list saldo'
-		def modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/NamaSaldo'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i+1) +"]/div/div/div/div/div[1]/span", true)
+		def modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i+1) +"]/div/div/div/div/div[1]/span", true)
 		
 		'jika nama object sesuai dengan nama saldo'
-		if(WebUI.getAttribute(modifyNamaSaldo, 'value') == NamaOCR)
+		if(WebUI.getText(modifyNamaSaldo) == NamaOCR)
 		{
 			'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
-			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/Saldo'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i+1) +"]/div/div/div/div/div[1]/h3", true)
+			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i+1) +"]/div/div/div/div/div[1]/h3", true)
 			
 			'simpan jumlah saldo sekarang di variabel'
-		 	saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/OCR Testing/Saldo')).replace(',',''))
+		 	saldoNow = Integer.parseInt(WebUI.getText(modifySaldoDipilih).replace(',',''))
 		}
-		//pakai saldo IDR
-		else
-		{
-			'ubah alamat ke jumlah saldo IDR'
-			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/Saldo'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ elementNamaSaldo.size() +"]/div/div/div/div/div[1]/h3", true)
+	}
+	'pakai saldo IDR jika lainnya tidak ada'
+	if(saldoNow == '')
+	{
+		'ubah alamat ke jumlah saldo IDR'
+		def modifySaldoIDR = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/Saldo'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ elementNamaSaldo.size() +"]/div/div/div/div/div[1]/h3", true)
 
-			'simpan jumlah saldo sekarang di variabel'
-			saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/OCR Testing/Saldo')).replace(',',''))
-		}
+		'simpan jumlah saldo sekarang di variabel'
+		saldoNow = Integer.parseInt(WebUI.getText(modifySaldoIDR).replace(',',''))
 	}
 	'kembalikan nilai saldo sekarang'
 	return saldoNow

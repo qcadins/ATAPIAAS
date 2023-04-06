@@ -74,8 +74,6 @@ public class getParameterfromDB {
 	public getPaymentType(Connection conn, String tenantcode, int idPayment) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
-
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("Select description From esign.ms_lov ml join esign.ms_balancevendoroftenant mbt on ml.id_lov = mbt.lov_balance_charge_type Join esign.ms_tenant mt on mt.id_ms_tenant = mbt.id_ms_tenant Where ml.lov_group = 'BALANCE_CHARGE_TYPE' and mt.tenant_code = '"+ tenantcode +"' AND mbt.lov_balance_type = "+ idPayment +"")
@@ -84,7 +82,7 @@ public class getParameterfromDB {
 		{
 			data = resultSet.getObject(1)
 		}
-		return listdata
+		return data
 	}
 
 	//fungsi untuk mengambil KEY dari database
@@ -138,32 +136,25 @@ public class getParameterfromDB {
 	public getLatestMutationfromDB(Connection conn, String tenantcode) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
-
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("select trx_no from esign.tr_balance_mutation WHERE usr_crt = '"+tenantcode+"' ORDER BY trx_no DESC limit 1;")
-		ResultSetMetaData metadata  = resultSet.getMetaData()
 
-		columnCount = metadata.getColumnCount()
-
-		while(resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
-				data = resultSet.getObject(i)
-				listdata.add(data)
-			}
+		while(resultSet.next())
+		{
+			data = resultSet.getObject(1)
 		}
-		return listdata
+		return data
 	}
 
 	//fungsi untuk ambil harga service OCR dari DB
 	@Keyword
-	public getServicePricefromDB(Connection conn, String tenantcode) {
+	public getServicePricefromDB(Connection conn, int idPayment) {
 		int data
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT msp.service_price FROM esign.ms_service_price msp JOIN esign.tr_balance_mutation tm ON msp.lov_balance_type = tm.lov_balance_type WHERE tm.usr_crt = '"+ tenantcode +"' ORDER BY tm.trx_no DESC LIMIT 1")
+		ResultSet resultSet = stm.executeQuery("SELECT msp.service_price FROM esign.ms_service_price msp WHERE lov_balance_type = "+idPayment+" AND effective_date >= '2023-03-25'")
 
 		while(resultSet.next())
 		{
