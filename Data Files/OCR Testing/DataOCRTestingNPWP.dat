@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataFileEntity>
    <description></description>
-   <name>DataOCRTestingBPKB</name>
+   <name>DataOCRTestingNPWP</name>
    <tag></tag>
    <containsHeaders>false</containsHeaders>
    <csvSeperator></csvSeperator>
-   <dataFileGUID>ba5e2fe3-a1b5-4995-a796-575c9cd453d8</dataFileGUID>
+   <dataFileGUID>5afc2576-5fb8-4625-ae4c-f59e46131fe0</dataFileGUID>
    <dataSourceUrl>Excel/2. APIAAS.xlsx</dataSourceUrl>
    <driver>ExcelFile</driver>
    <isInternalPath>true</isInternalPath>
    <query></query>
    <secureUserAccount>false</secureUserAccount>
-   <sheetName>OCR BPKB</sheetName>
+   <sheetName>OCR NPWP</sheetName>
    <usingGlobalDBSetting>false</usingGlobalDBSetting>
 </DataFileEntity>

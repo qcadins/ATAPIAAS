@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@type = 'text' and @id = 'transactionType']</value>
+         <value>//input[@type = 'text' and @id = 'transactionType']</value>
       </entry>
       <entry>
          <key>CSS</key>
@@ -21,12 +21,12 @@
    <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>bc1e9cfa-2488-459d-87e5-2c0a01ae1215</webElementGuid>
+      <webElementGuid>3b67daa9-9f58-40d5-8126-2353998126b6</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -34,7 +34,7 @@
       <name>role</name>
       <type>Main</type>
       <value>combobox</value>
-      <webElementGuid>b8698092-0af8-4903-831b-22c18ece9ffb</webElementGuid>
+      <webElementGuid>c8b67203-4e57-447d-a478-f67eea2b46ef</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -42,7 +42,7 @@
       <name>type</name>
       <type>Main</type>
       <value>text</value>
-      <webElementGuid>1d5ca63e-b4d4-4c5d-baa0-da2dbed95897</webElementGuid>
+      <webElementGuid>42e4fabc-dc35-489e-89d2-adfdb19e4dfa</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -50,7 +50,7 @@
       <name>autocorrect</name>
       <type>Main</type>
       <value>off</value>
-      <webElementGuid>56333004-78f9-4f33-a4f5-f7bde1e9c203</webElementGuid>
+      <webElementGuid>8a3f86c8-074d-4ee4-8233-72a738e1f516</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -58,7 +58,7 @@
       <name>autocapitalize</name>
       <type>Main</type>
       <value>off</value>
-      <webElementGuid>030a9541-3f10-45f9-aa15-d70e33fe3ae4</webElementGuid>
+      <webElementGuid>af927dc1-93b2-48ce-b573-eb41b1e931c9</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -66,7 +66,7 @@
       <name>autocomplete</name>
       <type>Main</type>
       <value>accffb523b44</value>
-      <webElementGuid>794d5d7a-df42-4088-ba8c-2feed2aa7d48</webElementGuid>
+      <webElementGuid>d2e0f6d8-66fa-48eb-9d9b-386912823d64</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -74,7 +74,7 @@
       <name>aria-expanded</name>
       <type>Main</type>
       <value>false</value>
-      <webElementGuid>4b47ba8c-52f3-4e3f-8d7f-31e0d1df2b39</webElementGuid>
+      <webElementGuid>c72d8547-088f-496c-903d-a6eff9492d6c</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -82,7 +82,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;transactionType&quot;)/div[@class=&quot;ng-select-container ng-has-value&quot;]/div[@class=&quot;ng-value-container&quot;]/div[@class=&quot;ng-input&quot;]/input[1]</value>
-      <webElementGuid>091ad77a-70bf-492d-8ef8-a4370c3a2ab6</webElementGuid>
+      <webElementGuid>af38fac8-8cc0-4fc6-8d56-fd79eda50033</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -90,7 +90,7 @@
       <name>id</name>
       <type>Main</type>
       <value>transactionType</value>
-      <webElementGuid>a3f20e62-486a-47e7-ae41-415cfc8b579e</webElementGuid>
+      <webElementGuid>35bb9c40-b00f-4860-9582-a6d6c2d9ae94</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -98,7 +98,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>(//input[@type='text'])[3]</value>
-      <webElementGuid>fb385c86-7284-4901-82f8-8c9a791de690</webElementGuid>
+      <webElementGuid>9057bf3e-0d37-493c-b7c0-c8fbb0f734ea</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -106,7 +106,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//ng-select[@id='transactionType']/div/div/div[3]/input</value>
-      <webElementGuid>7f34d98a-b330-4091-9aa4-17b968d2ace7</webElementGuid>
+      <webElementGuid>378e0559-b922-47c5-b14f-ee28f8a02dc9</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -114,7 +114,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[3]/app-select/div/div[2]/ng-select/div/div/div[3]/input</value>
-      <webElementGuid>cdddfc8e-41ab-46c7-8700-e9b99b101c91</webElementGuid>
+      <webElementGuid>e09b06d4-384f-4fab-9300-af1a95669e26</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -122,6 +122,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//input[@type = 'text']</value>
-      <webElementGuid>96e5dd67-5da4-4118-b8b1-71bdb07a9ab6</webElementGuid>
+      <webElementGuid>19a8aedb-85c2-4962-8f90-1f9d080be24b</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>
