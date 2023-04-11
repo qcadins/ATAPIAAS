@@ -38,28 +38,8 @@ def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
 'deklarasi koneksi ke Database adins_apiaas_uat'
 def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
 
-'buka chrome'
-WebUI.openBrowser('')
-
-'buka website APIAAS SIT, data diambil dari TestData Login'
-WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
-
-'input data email'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-	findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 11))
-
-'input password'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
-	findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 12))
-
-'ceklis pada reCaptcha'
-WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'))
-
-'pada delay, lakukan captcha secara manual'
-WebUI.delay(10)
-
-'klik pada button login'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+'panggil fungsi login'
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR'], FailureHandling.STOP_ON_FAILURE)
 
 'ambil kode tenant di DB'
 ArrayList<String> tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 11))
