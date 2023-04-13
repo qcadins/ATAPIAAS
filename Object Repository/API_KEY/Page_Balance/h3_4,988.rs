@@ -11,14 +11,13 @@
       </entry>
       <entry>
          <key>CSS</key>
-         <value></value>
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>(.//*[normalize-space(text()) and normalize-space(.)='OCR STNK'])[1]/following::h3[1]</value>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[1]/div/div/div/div/div[1]/h3</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -26,7 +25,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>h3</value>
-      <webElementGuid>8b85f3cf-f314-4563-89dd-73f05f56b78d</webElementGuid>
+      <webElementGuid>ec6f4d45-4072-46bf-877f-4557744bb190</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -34,7 +33,7 @@
       <name>class</name>
       <type>Main</type>
       <value>mb-1 warning</value>
-      <webElementGuid>18f22812-daae-46ff-b0f4-9054f20c9dfb</webElementGuid>
+      <webElementGuid>283ace56-595a-40f0-ae68-755e562e6db3</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -42,7 +41,7 @@
       <name>text</name>
       <type>Main</type>
       <value>4,988</value>
-      <webElementGuid>ab810c28-9bf5-44aa-a2f5-2e7fba7f45f0</webElementGuid>
+      <webElementGuid>ff7799c9-aa20-4668-ba9e-831497642bfa</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -50,7 +49,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value></value>
-      <webElementGuid>15cb4d98-f144-4ce5-99bd-c74956fa9509</webElementGuid>
+      <webElementGuid>a879c5b1-a7d2-4fb2-9466-623ebc5a218d</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -58,7 +57,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='OCR STNK'])[1]/following::h3[1]</value>
-      <webElementGuid>a59aa8f1-7d0b-49a7-a425-969a0d21ea5c</webElementGuid>
+      <webElementGuid>1119b749-67b1-4e76-8b69-88fa542c18d9</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -66,7 +65,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='OCR Rek. Koran Mandiri'])[1]/following::h3[2]</value>
-      <webElementGuid>fc187acd-40a0-4179-9a21-5f6c72897324</webElementGuid>
+      <webElementGuid>8fa7a76b-9eff-4cf9-9d91-75bd81eb7e79</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -74,7 +73,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='OCR KK'])[1]/preceding::h3[1]</value>
-      <webElementGuid>22671fd4-6d8d-40d4-9de4-6a11159983ce</webElementGuid>
+      <webElementGuid>4dd2b1ff-02b3-4f90-b334-d4b5ab00580f</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -82,7 +81,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='IDR'])[1]/preceding::h3[2]</value>
-      <webElementGuid>ab7837fe-c6e1-4f30-bab6-ef39c82be93e</webElementGuid>
+      <webElementGuid>cb447910-4e79-4235-bd0f-1bdf9ff1db67</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -90,7 +89,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='4,988']/parent::*</value>
-      <webElementGuid>f41201d8-585b-4601-b9c5-dae082d0fa27</webElementGuid>
+      <webElementGuid>95980032-ea23-4d4f-b376-0973ca3cfcfa</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -98,7 +97,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[7]/div/div/div/div/div/h3</value>
-      <webElementGuid>656a1177-a8cd-42e3-8bf4-8937ab7be66b</webElementGuid>
+      <webElementGuid>38b360b8-9620-405d-9352-2893eca542f1</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -106,6 +105,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//h3[(text() = '4,988' or . = '4,988')]</value>
-      <webElementGuid>b595392d-f76c-48b8-a0f5-6fd47b960400</webElementGuid>
+      <webElementGuid>57193bc6-6a61-43c8-ab8b-c6cb56355361</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

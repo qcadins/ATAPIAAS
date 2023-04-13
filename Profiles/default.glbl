@@ -36,8 +36,8 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'Key salah tapi HIT berhasil'</initValue>
-      <name>FailedReasonKeyBypass</name>
+      <initValue>'Key/Tenant salah tapi HIT berhasil'</initValue>
+      <name>FailedReasonKeyTenantBypass</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

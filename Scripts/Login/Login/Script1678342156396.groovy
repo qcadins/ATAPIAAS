@@ -116,11 +116,11 @@ else if (TC == 'OCR')
 {
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-		findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 11))
+		findTestData(Path).getValue(2, 25))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
-		findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 12))
+		findTestData(Path).getValue(2, 26))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'))

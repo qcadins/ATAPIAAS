@@ -39,10 +39,10 @@ def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
 def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR'], FailureHandling.STOP_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR',('Path'): ExcelPathOCRTesting], FailureHandling.STOP_ON_FAILURE)
 
 'ambil kode tenant di DB'
-ArrayList<String> tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 11))
+ArrayList<String> tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCRTesting).getValue(2, 25))
 
 'ambil key trial yang aktif dari DB'
 ArrayList<String> thekey = CustomKeywords.'ocrTesting.getParameterfromDB.getAPIKeyfromDB'(conn, tenantcode[0])
@@ -56,14 +56,20 @@ String BalanceChargeType = CustomKeywords.'ocrTesting.getParameterfromDB.getPaym
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.NumOfColumn)++)
 {
+	'jika data di kolom selanjutnya kosong, berhentikan loop'
+	if(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1) == '')
+	{
+		break;
+	}
+	
 	'deklarasi variable response'
 	ResponseObject response
 	
 	'cek apakah perlu tambah API'
 	String UseCorrectKey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 14)
 	
-	'ambil data emailuser'
-	String emailuser = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 11)
+	'cek apakah perlu gunakan tenantcode yang salah'
+	String UseCorrectTenant = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 12)
 	
 	'angka untuk menghitung data mandatory yang tidak terpenuhi'
 	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 4))
@@ -90,7 +96,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	Saldobefore = getSaldoforTransaction('OCR KK')
 	
 	'jika user ingin menggunakan key yang valid'
-	if(UseCorrectKey == 'Yes')
+	if(UseCorrectKey == 'Yes' && UseCorrectTenant == 'Yes')
 	{
 		'lakukan proses HIT api dengan parameter image, key, dan juga tenant'
 		response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/OCR KK', 
@@ -119,7 +125,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		}
 	}
 	//jika user ingin mencoba key yang diambil dari excel
-	else
+	else if(UseCorrectKey == 'No')
 	{
 		'ambil data key yang salah dari excel'
 		String WrongKey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 15)
@@ -159,7 +165,100 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KK', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			GlobalVariable.FailedReasonKeyBypass)
+			GlobalVariable.FailedReasonKeyTenantBypass)
+			
+			continue;
+		}
+	}
+	else if(UseCorrectTenant == 'No')
+	{
+		'ambil data tenant yang salah dari excel'
+		String WrongTenant = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13)
+		
+		'lakukan proses HIT api dengan parameter image, key, dan juga tenant'
+		response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/OCR KK',
+		[
+		('img'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 8),
+		('key'):thekey[0], 
+		('tenant'):WrongTenant,
+		('custno'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 17),
+		('loginId'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 18),
+		('refNum'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 19),
+		('off_code'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 20),
+		('off_name'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 21),
+		('question'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 22),
+		('source'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 23)
+		]))
+		
+		'ambil message respon dari HIT tersebut'
+		message_ocr = WS.getElementPropertyValue(response, 'message')
+		
+		'ambil status dari respon HIT tersebut'
+		state_ocr = WS.getElementPropertyValue(response, 'status')
+		
+		if(state_ocr == 'FAILED')
+		{
+			'write to excel status failed dan reason'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KK', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			message_ocr)
+			
+			continue;
+		}
+		else
+		{
+			'write to excel status failed dan reason'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KK', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			GlobalVariable.FailedReasonKeyTenantBypass)
+			
+			continue;
+		}
+	}
+	else
+	{
+		'ambil data tenant yang salah dari excel'
+		String WrongTenant = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13)
+		
+		'ambil data key yang salah dari excel'
+		String WrongKey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 15)
+		
+		'lakukan proses HIT api dengan parameter image, key, dan juga tenant'
+		response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/OCR KK',
+		[
+		('img'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 8),
+		('key'):WrongKey, 
+		('tenant'):WrongTenant,
+		('custno'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 17),
+		('loginId'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 18),
+		('refNum'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 19),
+		('off_code'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 20),
+		('off_name'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 21),
+		('question'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 22),
+		('source'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 23)
+		]))
+		
+		'ambil message respon dari HIT tersebut'
+		message_ocr = WS.getElementPropertyValue(response, 'message')
+		
+		'ambil status dari respon HIT tersebut'
+		state_ocr = WS.getElementPropertyValue(response, 'status')
+		
+		if(state_ocr == 'FAILED')
+		{
+			'write to excel status failed dan reason'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KK', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			message_ocr)
+			
+			continue;
+		}
+		else
+		{
+			'write to excel status failed dan reason'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KK', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			GlobalVariable.FailedReasonKeyTenantBypass)
 			
 			continue;
 		}
@@ -196,7 +295,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		}
 	}
 	
-	'simpan harga OCR KTP ke dalam integer'
+	'simpan harga OCR KK ke dalam integer'
 	int Service_price = CustomKeywords.'ocrTesting.getParameterfromDB.getServicePricefromDB'(connProd, idPayment)
 	
 	'jika HIT API successful'
@@ -317,29 +416,29 @@ def getSaldoforTransaction(String NamaOCR) {
 	def elementNamaSaldo = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
 	
 	'lakukan loop untuk cari nama saldo yang ditentukan'
-	for(int i=0; i<elementNamaSaldo.size(); i++)
+	for(int i=1; i<=elementNamaSaldo.size(); i++)
 	{
 		'cari nama saldo yang sesuai di list saldo'
-		def modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i+1) +"]/div/div/div/div/div[1]/span", true)
-		
+		def modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/span", true)
+
 		'jika nama object sesuai dengan nama saldo'
 		if(WebUI.getText(modifyNamaSaldo) == NamaOCR)
 		{
+			println WebUI.getText(modifyNamaSaldo)
+			println NamaOCR
+			
 			'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
-			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i+1) +"]/div/div/div/div/div[1]/h3", true)
+			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/h3", true)
 			
 			'simpan jumlah saldo sekarang di variabel'
-		 	saldoNow = Integer.parseInt(WebUI.getText(modifySaldoDipilih).replace(',',''))
+			 saldoNow = Integer.parseInt(WebUI.getText(modifySaldoDipilih).replace(',',''))
 		}
 	}
 	'pakai saldo IDR jika lainnya tidak ada'
-	if(saldoNow == '')
+	if(saldoNow == '' || saldoNow == 0)
 	{
-		'ubah alamat ke jumlah saldo IDR'
-		def modifySaldoIDR = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/Saldo'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ elementNamaSaldo.size() +"]/div/div/div/div/div[1]/h3", true)
-
 		'simpan jumlah saldo sekarang di variabel'
-		saldoNow = Integer.parseInt(WebUI.getText(modifySaldoIDR).replace(',',''))
+		saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988')).replace(',',''))
 	}
 	'kembalikan nilai saldo sekarang'
 	return saldoNow

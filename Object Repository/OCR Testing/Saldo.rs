@@ -7,11 +7,10 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value></value>
       </entry>
       <entry>
          <key>BASIC</key>
-         <value></value>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[1]/div/div/div/div/div[1]/h3</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -21,7 +20,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value></value>
-      <webElementGuid>b98401f6-39b6-4f86-9bb9-262096268787</webElementGuid>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[1]/div/div/div/div/div[1]/h3</value>
+      <webElementGuid>bb298d58-19a4-4b8a-b218-f4c4e2fee77e</webElementGuid>
    </webElementProperties>
 </WebElementEntity>
