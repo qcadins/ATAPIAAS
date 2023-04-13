@@ -7,17 +7,17 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value></value>
-      </entry>
-      <entry>
-         <key>CSS</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[1]/div/div/div/div/div[1]/h3</value>
       </entry>
       <entry>
          <key>XPATH</key>
          <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[1]/div/div/div/div/div[1]/h3</value>
       </entry>
+      <entry>
+         <key>CSS</key>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -25,7 +25,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>h3</value>
-      <webElementGuid>ec6f4d45-4072-46bf-877f-4557744bb190</webElementGuid>
+      <webElementGuid>3708efdf-124a-43fe-9f52-6457aa0277d1</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -33,7 +33,7 @@
       <name>class</name>
       <type>Main</type>
       <value>mb-1 warning</value>
-      <webElementGuid>283ace56-595a-40f0-ae68-755e562e6db3</webElementGuid>
+      <webElementGuid>5d0e0404-2426-4242-9b6c-04eb120faee9</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -41,15 +41,15 @@
       <name>text</name>
       <type>Main</type>
       <value>4,988</value>
-      <webElementGuid>ff7799c9-aa20-4668-ba9e-831497642bfa</webElementGuid>
+      <webElementGuid>f24a7fc4-8d5b-4870-94e0-0ff19ca832e1</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value></value>
-      <webElementGuid>a879c5b1-a7d2-4fb2-9466-623ebc5a218d</webElementGuid>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[1]/div/div/div/div/div[1]/h3</value>
+      <webElementGuid>1debd651-28ce-467d-8cf0-718d6de85a14</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -57,7 +57,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='OCR STNK'])[1]/following::h3[1]</value>
-      <webElementGuid>1119b749-67b1-4e76-8b69-88fa542c18d9</webElementGuid>
+      <webElementGuid>763d74d8-aea9-46f9-9353-da21496c0e36</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -65,7 +65,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='OCR Rek. Koran Mandiri'])[1]/following::h3[2]</value>
-      <webElementGuid>8fa7a76b-9eff-4cf9-9d91-75bd81eb7e79</webElementGuid>
+      <webElementGuid>0e2ba0db-e5b5-4680-a393-554aefb0d9ab</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -73,7 +73,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='OCR KK'])[1]/preceding::h3[1]</value>
-      <webElementGuid>4dd2b1ff-02b3-4f90-b334-d4b5ab00580f</webElementGuid>
+      <webElementGuid>9fa52cba-bcc7-4c3c-93d0-ff2dd41626ae</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -81,7 +81,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='IDR'])[1]/preceding::h3[2]</value>
-      <webElementGuid>cb447910-4e79-4235-bd0f-1bdf9ff1db67</webElementGuid>
+      <webElementGuid>5468c941-4feb-41ea-be74-dc4b11368954</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -89,7 +89,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='4,988']/parent::*</value>
-      <webElementGuid>95980032-ea23-4d4f-b376-0973ca3cfcfa</webElementGuid>
+      <webElementGuid>8ca0e5c7-ce6b-4c96-aefa-345f3e038041</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -97,7 +97,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[7]/div/div/div/div/div/h3</value>
-      <webElementGuid>38b360b8-9620-405d-9352-2893eca542f1</webElementGuid>
+      <webElementGuid>7b30e636-eb05-4b10-a39a-e39fa1a6e22e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -105,6 +105,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//h3[(text() = '4,988' or . = '4,988')]</value>
-      <webElementGuid>57193bc6-6a61-43c8-ab8b-c6cb56355361</webElementGuid>
+      <webElementGuid>1984ea30-3fe0-486a-a0ca-c0fa768da9ad</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

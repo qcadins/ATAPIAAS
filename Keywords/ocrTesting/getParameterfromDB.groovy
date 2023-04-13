@@ -90,22 +90,15 @@ public class getParameterfromDB {
 	public getAPIKeyfromDB(Connection conn, String tenantcode) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
-
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("SELECT api_key_code FROM ms_api_key mk JOIN ms_tenant mt ON mk.id_ms_tenant = mt.id_ms_tenant JOIN ms_lov mlo ON mlo.id_lov = mk.lov_api_key_type  WHERE mt.tenant_code = '"+ tenantcode +"' AND mk.is_active = '1' AND mlo.description = 'TRIAL'")
-		ResultSetMetaData metadata  = resultSet.getMetaData()
 
-		columnCount = metadata.getColumnCount()
-
-		while(resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
-				data = resultSet.getObject(i)
-				listdata.add(data)
-			}
+		while(resultSet.next()) 
+		{
+			data = resultSet.getObject(1)
 		}
-		return listdata
+		return data
 	}
 
 	//fungsi untuk mengambil jumlah data APIKEY dari database
@@ -113,22 +106,15 @@ public class getParameterfromDB {
 	public getTenantCodefromDB(Connection conn, String email) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
-
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("SELECT tenant_code FROM ms_tenant WHERE email_reminder_dest = '"+ email +"'")
-		ResultSetMetaData metadata  = resultSet.getMetaData()
 
-		columnCount = metadata.getColumnCount()
-
-		while(resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
-				data = resultSet.getObject(i)
-				listdata.add(data)
-			}
+		while(resultSet.next()) 
+		{
+				data = resultSet.getObject(1)
 		}
-		return listdata
+		return data
 	}
 
 	//fungsi untuk mengambil jumlah data APIKEY dari database
