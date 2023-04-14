@@ -59,9 +59,13 @@ String BalanceChargeType = CustomKeywords.'ocrTesting.getParameterfromDB.getPaym
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.NumOfColumn)++)
 {
-	if(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1) == '')
+	'ambil status TC'
+	StatusTC = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1)
+	
+	'jika data di kolom selanjutnya kosong, berhentikan loop'
+	if(StatusTC == '' || StatusTC == 'Failed' || StatusTC == 'Success')
 	{
-		break;
+		continue;
 	}
 	
 	'deklarasi variable response'
@@ -77,7 +81,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 4))
 	
 	'deklarasi variabel angka'
-	int isSaldoBerkurang, Saldobefore, UISaldoafter, KatalonSaldoafter, isTrxIncreased, HitAPITrx, Service_price, pageCount
+	int isSaldoBerkurang, Saldobefore, UISaldoafter, KatalonSaldoafter, isTrxIncreased, HitAPITrx, Service_price, totalPage
 	
 	'penanda untuk HIT yang berhasil dan gagal'
 	HitAPITrx = 1
@@ -97,6 +101,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	'variabel yang menyimpan saldo sebelum adanya transaksi'
 	Saldobefore = getSaldoforTransaction('OCR RK Mandiri')
 	
+	'cek apa perlu penggunaan key dan tenant yang benar'
 	if(UseCorrectKey != 'Yes')
 	{
 		thekey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 15)
@@ -147,7 +152,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		continue;
 	}
 	//jika mandatory tidak terpenuhi atau ada error
-	else if(message_ocr == 'RK Mandiri not found' || message_ocr == 'Unexpected Error')
+	else if(message_ocr == 'RK Mandiri not found' || message_ocr == 'Unexpected Error' || message_ocr == 'Invalid API key or tenant code')
 	{
 		'write to excel status failed dan reason'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR RK Mandiri', GlobalVariable.NumOfColumn,
@@ -182,17 +187,14 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		}
 	}
 	
+	'cari path dari object dari excel'
 	String Objek = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 8)
 	
+	'hitung jumlah halaman dari file pdf untuk dikali service price'
 	if(Objek.contains('.pdf'))
 	{
-		String pdfPath = "ImageFolder/RKMandiri/RKMandiri"+(GlobalVariable.NumOfColumn-1)+".pdf";
-		println pdfPath
-		PDFParser parser = new PDFParser(new RandomAccessFile(new File(pdfPath), "r"));
-		parser.parse();
-		PDDocument document = parser.getPDDocument();
-		pageCount = document.getNumberOfPages();
-		document.close();
+		'simpan total halaman di variabel'
+		totalPage = CustomKeywords.'ocrTesting.pdfprocessor.CountPages'()
 	}
 	
 	'jika HIT API successful'
@@ -202,7 +204,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		if(BalanceChargeType == 'Price')
 		{	
 			'simpan harga OCR RK Mandiri ke dalam integer'
-			Service_price = CustomKeywords.'ocrTesting.getParameterfromDB.getServicePricefromDB'(connProd, idPayment) * pageCount
+			Service_price = CustomKeywords.'ocrTesting.getParameterfromDB.getServicePricefromDB'(connProd, idPayment) * totalPage
 			
 			'input saldo setelah penagihan'
 			KatalonSaldoafter = Saldobefore - Service_price

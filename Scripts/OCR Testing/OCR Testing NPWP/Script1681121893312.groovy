@@ -61,7 +61,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	'jika data di kolom selanjutnya kosong, berhentikan loop'
 	if(StatusTC == '' || StatusTC == 'Failed' || StatusTC == 'Success')
 	{
-		break;
+		continue;
 	}
 	
 	'deklarasi variable response'
@@ -147,7 +147,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 		continue;
 	}
 	//jika mandatory tidak terpenuhi atau ada error
-	else if(message_ocr == 'NPWP not found' || message_ocr == 'Unexpected Error')
+	else if(message_ocr == 'NPWP not found' || message_ocr == 'Unexpected Error' || message_ocr == 'Invalid API key or tenant code')
 	{
 		'write to excel status failed dan reason'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR NPWP', GlobalVariable.NumOfColumn,

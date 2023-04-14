@@ -94,7 +94,7 @@ public class getParameterfromDB {
 
 		ResultSet resultSet = stm.executeQuery("SELECT api_key_code FROM ms_api_key mk JOIN ms_tenant mt ON mk.id_ms_tenant = mt.id_ms_tenant JOIN ms_lov mlo ON mlo.id_lov = mk.lov_api_key_type  WHERE mt.tenant_code = '"+ tenantcode +"' AND mk.is_active = '1' AND mlo.description = 'TRIAL'")
 
-		while(resultSet.next()) 
+		while(resultSet.next())
 		{
 			data = resultSet.getObject(1)
 		}
@@ -110,9 +110,9 @@ public class getParameterfromDB {
 
 		ResultSet resultSet = stm.executeQuery("SELECT tenant_code FROM ms_tenant WHERE email_reminder_dest = '"+ email +"'")
 
-		while(resultSet.next()) 
+		while(resultSet.next())
 		{
-				data = resultSet.getObject(1)
+			data = resultSet.getObject(1)
 		}
 		return data
 	}

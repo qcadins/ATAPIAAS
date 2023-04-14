@@ -1,0 +1,15 @@
+{
+  "keywordFileContentHash": "1427FCB700395519CA709C738EFA21FE",
+  "keywordClasses": [
+    {
+      "name": "ocrTesting.pdfprocessor",
+      "keywordMethods": [
+        {
+          "name": "CountPages",
+          "parameters": []
+        }
+      ]
+    }
+  ],
+  "javadocParsed": false
+}
