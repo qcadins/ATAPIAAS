@@ -40,8 +40,16 @@ def driver = DriverFactory.getWebDriver()
 'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
 GlobalVariable.FlagFailed = 0
 
-'buka website APIAAS SIT, data diambil dari TestData Login'
-WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
+if(TC != 'SaldoAPI')
+{
+	'buka website APIAAS SIT, data diambil dari TestData Login'
+	WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
+}
+else
+{
+	'buka website billing system, untuk isi saldo'
+	WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 3))
+}
 
 def js = (JavascriptExecutor)driver
 
@@ -131,5 +139,16 @@ else if (TC == 'OCR')
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
+}
+
+else if (TC == 'SaldoAPI')
+{
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_95ee84'),
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 8))
+	
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_768062'),
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 9))
+	
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
 }
 

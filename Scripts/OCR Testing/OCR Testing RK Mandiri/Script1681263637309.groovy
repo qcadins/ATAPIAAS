@@ -99,7 +99,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	String no_Trx_before = getTrxNumber()
 	
 	'variabel yang menyimpan saldo sebelum adanya transaksi'
-	Saldobefore = getSaldoforTransaction('OCR RK Mandiri')
+	Saldobefore = getSaldoforTransaction('OCR Rek. Koran Mandiri')
 	
 	'cek apa perlu penggunaan key dan tenant yang benar'
 	if(UseCorrectKey != 'Yes')
@@ -212,12 +212,12 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		else
 		{
 			'input saldo setelah penagihan dikurangi qty'
-			KatalonSaldoafter = Saldobefore - 1
+			KatalonSaldoafter = Saldobefore - totalPage
 		}
 	}
 	
 	'simpan saldo setelah di HIT'
-	UISaldoafter = getSaldoforTransaction('OCR RK Mandiri')
+	UISaldoafter = getSaldoforTransaction('OCR Rek. Koran Mandiri')
 
 	'jika saldoafter match'
 	if(KatalonSaldoafter == UISaldoafter)
@@ -324,10 +324,7 @@ def getSaldoforTransaction(String NamaOCR) {
 
 		'jika nama object sesuai dengan nama saldo'
 		if(WebUI.getText(modifyNamaSaldo) == NamaOCR)
-		{
-			println WebUI.getText(modifyNamaSaldo)
-			println NamaOCR
-			
+		{	
 			'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
 			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/h3", true)
 			
@@ -336,7 +333,7 @@ def getSaldoforTransaction(String NamaOCR) {
 		}
 	}
 	'pakai saldo IDR jika lainnya tidak ada'
-	if(saldoNow == '' || saldoNow == 0)
+	if(saldoNow == 0)
 	{
 		'simpan jumlah saldo sekarang di variabel'
 		saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988')).replace(',',''))

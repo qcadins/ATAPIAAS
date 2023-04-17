@@ -17,6 +17,12 @@
       <value></value>
       <variableId>f2c97a73-f75c-4050-a0c8-9ec06e28f7d7</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>e7f2b944-6138-4f3a-a185-16eaf0844e67</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'APIAAS/DataEditProfile'</defaultValue>
       <description></description>
@@ -30,5 +36,12 @@
       <id>f2c97a73-f75c-4050-a0c8-9ec06e28f7d7</id>
       <masked>false</masked>
       <name>ExcelPathRegisterLogin</name>
+   </variable>
+   <variable>
+      <defaultValue>'APIAAS/DataSaldoAPIKEY'</defaultValue>
+      <description></description>
+      <id>e7f2b944-6138-4f3a-a185-16eaf0844e67</id>
+      <masked>false</masked>
+      <name>ExcelPathSaldoAPI</name>
    </variable>
 </TestCaseEntity>

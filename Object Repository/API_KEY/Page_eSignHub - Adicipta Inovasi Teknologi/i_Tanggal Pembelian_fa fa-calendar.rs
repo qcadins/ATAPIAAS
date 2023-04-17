@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>i_Tanggal Pembelian_fa fa-calendar</name>
+   <tag></tag>
+   <elementGuidId>a4a5b0f5-bae7-4875-9083-ec2d42661324</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//form[@id='xForm']/div/div[7]/app-date/fieldset/div/div/div/i</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>i.fa.fa-calendar</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>i</value>
+      <webElementGuid>cd92a486-91ff-4f15-8bd7-a1b6e70f344c</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>fa fa-calendar</value>
+      <webElementGuid>53092a50-aa6f-4011-8bef-d2a392fd96e0</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;xForm&quot;)/div[@class=&quot;row&quot;]/div[@class=&quot;col-12&quot;]/app-date[1]/fieldset[@class=&quot;form-group ng-invalid ng-star-inserted ng-touched ng-dirty&quot;]/div[@class=&quot;input-group&quot;]/div[@class=&quot;input-group-append&quot;]/div[@class=&quot;input-group-text&quot;]/i[@class=&quot;fa fa-calendar&quot;]</value>
+      <webElementGuid>c871be6a-73bf-4945-9afe-250327b140fa</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//form[@id='xForm']/div/div[7]/app-date/fieldset/div/div/div/i</value>
+      <webElementGuid>a0ff8f32-58aa-4709-82aa-ee26fccef2a5</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//fieldset/div/div/div/i</value>
+      <webElementGuid>a4eb3a51-4928-4c81-acea-eb03dc17756f</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

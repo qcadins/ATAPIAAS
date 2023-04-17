@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Coba</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>e61d06cc-feb6-45c5-a8d9-9a2ccf11d672</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>164353a6-d390-4e01-b503-f2526a072b3d</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'APIAAS/DataSaldoAPIKEY'</defaultValue>
+      <description></description>
+      <id>164353a6-d390-4e01-b503-f2526a072b3d</id>
+      <masked>false</masked>
+      <name>ExcelPathSaldoAPI</name>
+   </variable>
+</TestCaseEntity>

@@ -210,7 +210,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 		else
 		{
 			'input saldo setelah penagihan dikurangi qty'
-			KatalonSaldoafter = Saldobefore - 1
+			KatalonSaldoafter = Saldobefore - totalPage
 		}
 	}
 	
