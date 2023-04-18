@@ -61,21 +61,21 @@ WebUI.delay(10)
 'klik pada button login'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
-'ambil kode tenant di DB'
-String tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCRTesting).getValue(2, 26))
-
-'ambil key trial yang aktif dari DB'
-String thekey = CustomKeywords.'ocrTesting.getParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
-
-'deklarasi id untuk harga pembayaran OCR'
-int idPayment = CustomKeywords.'ocrTesting.getParameterfromDB.getIDPaymentType'(connProd, tenantcode, 'OCR BPKB')
-
-'ambil jenis penagihan transaksi (by qty/price)'
-String BalanceChargeType = CustomKeywords.'ocrTesting.getParameterfromDB.getPaymentType'(connProd, tenantcode, idPayment)
-
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.NumOfColumn)++)
 {
+	'ambil kode tenant di DB'
+	String tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCRTesting).getValue(2, 26))
+	
+	'ambil key trial yang aktif dari DB'
+	String thekey = CustomKeywords.'ocrTesting.getParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
+	
+	'deklarasi id untuk harga pembayaran OCR'
+	int idPayment = CustomKeywords.'ocrTesting.getParameterfromDB.getIDPaymentType'(connProd, tenantcode, 'OCR BPKB')
+	
+	'ambil jenis penagihan transaksi (by qty/price)'
+	String BalanceChargeType = CustomKeywords.'ocrTesting.getParameterfromDB.getPaymentType'(connProd, tenantcode, idPayment)
+	
 	StatusTC = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1)
 	
 	'jika data di kolom selanjutnya kosong, berhentikan loop'
@@ -195,8 +195,11 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		'simpan trx number terbaru dari DB'
 		String LatestMutation= CustomKeywords.'ocrTesting.getParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
 		
+		'simpan trx number terbaru milik tenant lain dari DB'
+		String LatestOtherTenantMutation = CustomKeywords.'ocrTesting.getParameterfromDB.getNotMyLatestMutationfromDB'(connProd, tenantcode)
+		
 		'jika data transaction number di web dan DB tidak sesuai'
-		if(LatestMutation != no_Trx_after)
+		if(LatestMutation != no_Trx_after || LatestMutation == LatestOtherTenantMutation)
 		{
 			'anggap HIT Api gagal'
 			HitAPITrx = 0

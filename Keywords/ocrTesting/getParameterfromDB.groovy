@@ -132,6 +132,22 @@ public class getParameterfromDB {
 		}
 		return data
 	}
+	
+	//fungsi untuk mengambil jumlah data APIKEY dari database
+	@Keyword
+	public getNotMyLatestMutationfromDB(Connection conn, String tenantcode) {
+		String data
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("select trx_no from esign.tr_balance_mutation WHERE usr_crt != '"+tenantcode+"' ORDER BY trx_no DESC limit 1;")
+
+		while(resultSet.next())
+		{
+			data = resultSet.getObject(1)
+		}
+		return data
+	}
 
 	//fungsi untuk ambil harga service OCR dari DB
 	@Keyword

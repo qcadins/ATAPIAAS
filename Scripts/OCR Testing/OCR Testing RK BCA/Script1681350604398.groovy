@@ -44,21 +44,21 @@ def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProductio
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('Path'): ExcelPathOCRTesting], FailureHandling.STOP_ON_FAILURE)
 
-'ambil kode tenant di DB'
-String tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCRTesting).getValue(2, 25))
-
-'ambil key trial yang aktif dari DB'
-String thekey = CustomKeywords.'ocrTesting.getParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
-
-'deklarasi id untuk harga pembayaran OCR'
-int idPayment = CustomKeywords.'ocrTesting.getParameterfromDB.getIDPaymentType'(connProd, tenantcode, 'OCR Rek. Koran BCA')
-
-'ambil jenis penagihan transaksi (by qty/price)'
-String BalanceChargeType = CustomKeywords.'ocrTesting.getParameterfromDB.getPaymentType'(connProd, tenantcode, idPayment)
-
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
 {
+	'ambil kode tenant di DB'
+	String tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCRTesting).getValue(2, 25))
+	
+	'ambil key trial yang aktif dari DB'
+	String thekey = CustomKeywords.'ocrTesting.getParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
+	
+	'deklarasi id untuk harga pembayaran OCR'
+	int idPayment = CustomKeywords.'ocrTesting.getParameterfromDB.getIDPaymentType'(connProd, tenantcode, 'OCR Rek. Koran BCA')
+	
+	'ambil jenis penagihan transaksi (by qty/price)'
+	String BalanceChargeType = CustomKeywords.'ocrTesting.getParameterfromDB.getPaymentType'(connProd, tenantcode, idPayment)
+	
 	StatusTC = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1)
 	
 	'jika data di kolom selanjutnya kosong, berhentikan loop'

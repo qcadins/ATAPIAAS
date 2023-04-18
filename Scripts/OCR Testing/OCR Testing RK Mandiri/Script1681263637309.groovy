@@ -44,21 +44,21 @@ def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProductio
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('Path'): ExcelPathOCRTesting], FailureHandling.STOP_ON_FAILURE)
 
-'ambil kode tenant di DB'
-String tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCRTesting).getValue(2, 25))
-
-'ambil key trial yang aktif dari DB'
-String thekey = CustomKeywords.'ocrTesting.getParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
-
-'deklarasi id untuk harga pembayaran OCR'
-int idPayment = CustomKeywords.'ocrTesting.getParameterfromDB.getIDPaymentType'(connProd, tenantcode, 'OCR Rek. Koran Mandiri')
-
-'ambil jenis penagihan transaksi (by qty/price)'
-String BalanceChargeType = CustomKeywords.'ocrTesting.getParameterfromDB.getPaymentType'(connProd, tenantcode, idPayment)
-
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.NumOfColumn)++)
 {
+	'ambil kode tenant di DB'
+	String tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCRTesting).getValue(2, 25))
+	
+	'ambil key trial yang aktif dari DB'
+	String thekey = CustomKeywords.'ocrTesting.getParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
+	
+	'deklarasi id untuk harga pembayaran OCR'
+	int idPayment = CustomKeywords.'ocrTesting.getParameterfromDB.getIDPaymentType'(connProd, tenantcode, 'OCR Rek. Koran Mandiri')
+	
+	'ambil jenis penagihan transaksi (by qty/price)'
+	String BalanceChargeType = CustomKeywords.'ocrTesting.getParameterfromDB.getPaymentType'(connProd, tenantcode, idPayment)
+	
 	'ambil status TC'
 	StatusTC = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1)
 	
@@ -179,8 +179,11 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		'simpan trx number terbaru dari DB'
 		String LatestMutation= CustomKeywords.'ocrTesting.getParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
 		
+		'simpan trx number terbaru milik tenant lain dari DB'
+		String LatestOtherTenantMutation = CustomKeywords.'ocrTesting.getParameterfromDB.getNotMyLatestMutationfromDB'(connProd, tenantcode)
+		
 		'jika data transaction number di web dan DB tidak sesuai'
-		if(LatestMutation != no_Trx_after)
+		if(LatestMutation != no_Trx_after || LatestMutation == LatestOtherTenantMutation)
 		{
 			'anggap HIT Api gagal'
 			HitAPITrx = 0
