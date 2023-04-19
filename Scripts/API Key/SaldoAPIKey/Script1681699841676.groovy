@@ -77,7 +77,12 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	'angka untuk menghitung data mandatory yang tidak terpenuhi'
 	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 4))
 	
-	int Saldobefore, Saldoafter, JumlahTopUp
+	int Saldobefore, Saldoafter, JumlahTopUp, TopupSaldoCorrectTenant
+	
+	String no_TrxfromUI, no_TrxfromDB, no_TrxOtherTenant
+	
+	'flag apakah topup masuk ke tenant yang benar'
+	TopupSaldoCorrectTenant = 1
 	
 	'ambil saldo sebelum isi ulang'
 	Saldobefore = getSaldoforTransaction(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 14))
@@ -146,9 +151,22 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	'klik di luar textbox agar memunculkan tombol lanjut'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/containerForm'))
 	
-	'klik pada tombol lanjut'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Lanjut'))
-	
+	'verifikasi element bisa diceklis'
+	if(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Lanjut'), 'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL) && isMandatoryComplete != 0)
+	{
+		GlobalVariable.FlagFailed = 1
+		'tulis kondisi gagal'
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('APIAAS-Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+		GlobalVariable.FailedReasonMandatory)
+		
+		continue;
+	}
+	else
+	{
+		'klik pada tombol lanjut'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Lanjut'))
+	}
+		
 	'klik pada tombol proses isi ulang  saldo'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Ya, proses'))
 	
@@ -161,11 +179,37 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	'ambil jumlah saldo pada menu trial'
 	Saldoafter = getSaldoforTransaction(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 14))
 	
+	'filter saldo sesuai kebutuhan user'
+	filterSaldo()
+	
+	'pindah ke halaman terakhir dari tabel'
+	SkiptotheLastPages()
+	
+	'ambil nomor transaksi terakhir di tabel'
+	no_TrxfromUI = getTrxNumber()
+	
+	'jika perlu cek ke DB'
+	if(GlobalVariable.KondisiCekDB == 'Yes')
+	{
+		'ambil nomor transaksi terbaru dari DB'
+		no_TrxfromDB = CustomKeywords.'apikey.checkSaldoAPI.getLatestMutation'(connProd, tenantcode)
+		
+		'ambil nomor transaksi terbaru tenant lain'
+		no_TrxOtherTenant = CustomKeywords.'apikey.checkSaldoAPI.getLatestMutationOtherTenant'(connProd, tenantcode)
+		
+		'cek apakah saldo '
+		if(no_TrxfromDB != no_TrxfromUI || no_TrxfromDB == no_TrxOtherTenant)
+		{
+			'topup dianggap gagal'
+			TopupSaldoCorrectTenant = 0
+		}
+	}
+	
 	'ambil jumlah topup yang diinput oleh user dari excel'
 	JumlahTopUp = Integer.parseInt(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 15))
 	
 	'saldo sekarang harus sama dengan saldo sebelumnya ditambah jumlah topup'
-	if(Saldobefore + JumlahTopUp == Saldoafter)
+	if(Saldobefore + JumlahTopUp == Saldoafter && GlobalVariable.FlagFailed == 0 && TopupSaldoCorrectTenant == 1)
 	{
 		'tulis status sukses pada excel'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('APIAAS-Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
@@ -362,4 +406,62 @@ def getSaldoforTransaction(String NamaSaldo) {
 	}
 	'kembalikan nilai saldo sekarang'
 	return saldoNow
+}
+
+'fungsi untuk filter saldo berdasarkan input user'
+def filterSaldo() {
+	'tunggu webpage load'
+	WebUI.delay(4)
+	
+	'isi field input tipe saldo'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 20))
+	
+	'pencet enter'
+	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
+	
+	'isi field tipe transaksi'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 21))
+	
+	'pencet enter'
+	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), Keys.chord(Keys.ENTER))
+		
+	'klik pada button cari'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/button_Cari'))
+}
+
+'fungsi langsung ke laman akhir'
+def SkiptotheLastPages() {
+	'cari button skip di footer'
+	def elementbuttonskip = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 > app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
+	
+	'ambil banyaknya laman footer'
+	int lastPage = elementbuttonskip.size()
+	
+	'ubah path object button skip'
+	def modifybuttonskip = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage) +"]", true)
+
+	'cek apakah button enable atau disable'
+	if(WebUI.getAttribute(modifybuttonskip, 'class', FailureHandling.CONTINUE_ON_FAILURE) == '')
+	{
+		'klik button skip to last page'
+		WebUI.click(modifybuttonskip)
+	}
+}
+
+'ambil no. transaksi pada tabel'
+def getTrxNumber() {
+	'ambil alamat trxnumber'
+	def variable = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
+	
+	'banyaknya row table'
+	int lastIndex = variable.size()
+		
+	'modifikasi alamat object trxnumber'
+	def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[6]/div/p", true)
+							
+	'simpan nomor transaction number ke string'
+	String no_Trx = WebUI.getText(modifytrxnumber)
+	
+	'kembalikan nomor transaksi'
+	return no_Trx
 }

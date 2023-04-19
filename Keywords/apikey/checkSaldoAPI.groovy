@@ -46,9 +46,9 @@ import java.io.IOException;
 import internal.GlobalVariable
 
 public class checkSaldoAPI {
-	
+
 	int columnCount
-	
+
 	//fungsi mengambil jumlah tenant
 	@Keyword
 	public gettotalTenant(Connection conn) {
@@ -65,7 +65,7 @@ public class checkSaldoAPI {
 
 		return data
 	}
-	
+
 	//fungsi mengambil jumlah vendor
 	@Keyword
 	public gettotalVendor(Connection conn, String tenant) {
@@ -82,7 +82,7 @@ public class checkSaldoAPI {
 
 		return data
 	}
-	
+
 	//fungsi mengambil nama vendor dari DB
 	@Keyword
 	public getVendorName(Connection conn, String tenant) {
@@ -99,7 +99,7 @@ public class checkSaldoAPI {
 
 		return data
 	}
-	
+
 	//fungsi mengambil jumlah saldo yang diaktifkan user
 	@Keyword
 	public gettotalTipeSaldo(Connection conn, String tenant) {
@@ -116,7 +116,7 @@ public class checkSaldoAPI {
 
 		return data
 	}
-	
+
 	//fungsi mengambil nama saldo yang diaktifkan user
 	@Keyword
 	public getNamaTipeSaldo(Connection conn, String tenant) {
@@ -138,5 +138,39 @@ public class checkSaldoAPI {
 			}
 		}
 		return listdata
+	}
+
+	//fungsi mengambil jumlah saldo yang diaktifkan user
+	@Keyword
+	public getLatestMutation(Connection conn, String tenant) {
+		String data
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("select trx_no from esign.tr_balance_mutation bm JOIN esign.ms_tenant mt ON mt.id_ms_tenant = bm.id_ms_tenant WHERE tenant_code = '"+tenant+"' ORDER BY id_balance_mutation DESC limit 1;")
+
+		while(resultSet.next())
+		{
+			data = resultSet.getObject(1);
+		}
+
+		return data
+	}
+	
+	//fungsi mengambil jumlah saldo yang diaktifkan user
+	@Keyword
+	public getLatestMutationOtherTenant(Connection conn, String tenant) {
+		String data
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("select trx_no from esign.tr_balance_mutation bm JOIN esign.ms_tenant mt ON mt.id_ms_tenant = bm.id_ms_tenant WHERE tenant_code != '"+tenant+"' ORDER BY id_balance_mutation DESC limit 1;")
+
+		while(resultSet.next())
+		{
+			data = resultSet.getObject(1);
+		}
+
+		return data
 	}
 }
