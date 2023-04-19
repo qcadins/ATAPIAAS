@@ -132,7 +132,7 @@ public class getParameterfromDB {
 		}
 		return data
 	}
-	
+
 	//fungsi untuk mengambil jumlah data APIKEY dari database
 	@Keyword
 	public getNotMyLatestMutationfromDB(Connection conn, String tenantcode) {

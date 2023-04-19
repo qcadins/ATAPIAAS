@@ -7,6 +7,8 @@ import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import java.sql.Driver
 
+import org.openqa.selenium.JavascriptExecutor as JavascriptExecutor
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -22,7 +24,6 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys
 
-
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
@@ -37,6 +38,24 @@ def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProductio
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'SaldoAPI'], FailureHandling.STOP_ON_FAILURE)
+
+'ambil index tab yang sedang dibuka di chrome'
+int currentTab = WebUI.getWindowIndex()
+
+'ambil WebDriver untuk menjalankan js executor'
+WebDriver driver = DriverFactory.getWebDriver()
+
+'siapkan js executor'
+JavascriptExecutor js = ((driver) as JavascriptExecutor)
+
+'buka tab baru'
+js.executeScript('window.open();')
+
+'ganti fokus robot ke tab baru'
+WebUI.switchToWindowIndex(currentTab + 1)
+
+'arahkan tab baru ke url eendigo beta dan lakukan login'
+navigatetoeendigoBeta()
 
 'ambil kode tenant di DB'
 String tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 10))
@@ -57,6 +76,14 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	
 	'angka untuk menghitung data mandatory yang tidak terpenuhi'
 	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 4))
+	
+	int Saldobefore, Saldoafter, JumlahTopUp
+	
+	'ambil saldo sebelum isi ulang'
+	Saldobefore = getSaldoforTransaction(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 14))
+	
+	'ubah ke tab billing system'
+	WebUI.switchToWindowIndex(currentTab)
 	
 	'klik pada input tenant'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'))
@@ -124,10 +151,38 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	
 	'klik pada tombol proses isi ulang  saldo'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Ya, proses'))
+	
+	'ubah fokus ke tab eendigo beta'
+	WebUI.switchToWindowIndex(currentTab+1)
+	
+	'refresh laman web untuk ambil saldo baru'
+	WebUI.refresh()
+	
+	'ambil jumlah saldo pada menu trial'
+	Saldoafter = getSaldoforTransaction(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 14))
+	
+	'ambil jumlah topup yang diinput oleh user dari excel'
+	JumlahTopUp = Integer.parseInt(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 15))
+	
+	'saldo sekarang harus sama dengan saldo sebelumnya ditambah jumlah topup'
+	if(Saldobefore + JumlahTopUp == Saldoafter)
+	{
+		'tulis status sukses pada excel'
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('APIAAS-Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
+		GlobalVariable.SuccessReason)
+	}
+	else
+	{
+		GlobalVariable.FlagFailed = 1
+		'tulis kondisi gagal'
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('APIAAS-Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+		GlobalVariable.FailedReasonTopUpFailed)
+	}
 }
 
 'tutup browser'
 WebUI.closeBrowser()
+
 
 'cek jumlah tenant di DB dan UI'
 def checkTenantcount(connection) {
@@ -144,7 +199,7 @@ def checkTenantcount(connection) {
 	if(countWeb != countDB)
 	{
 		GlobalVariable.FlagFailed = 1
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+		'Write to excel status failed and reason topup failed'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('APIAAS-Saldo', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		GlobalVariable.FailedReasonVerifyEqualorMatch)
@@ -248,4 +303,63 @@ def checkTipeSaldocount(connection, tenantcode) {
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		GlobalVariable.FailedReasonVerifyEqualorMatch)
 	}
+}
+
+def navigatetoeendigoBeta() {
+	'buka website APIAAS SIT, data diambil dari TestData Login'
+	WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
+	
+	'isi username dengan email yang terdaftar'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 10))
+	
+	'isi password yang sesuai'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 11))
+	
+	'ceklis pada reCaptcha'
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+
+	'pada delay, lakukan captcha secara manual'
+	WebUI.delay(10)
+	
+	'klik pada button login'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+}
+
+'ambil saldo sesuai testing yang dilakukan'
+def getSaldoforTransaction(String NamaSaldo) {
+	
+	'deklarasi jumlah saldo sekarang'
+	int saldoNow
+	
+	'cari element dengan nama saldo'
+	def elementNamaSaldo = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
+	
+	'lakukan loop untuk cari nama saldo yang ditentukan'
+	for(int i=1; i<=elementNamaSaldo.size(); i++)
+	{
+		'cari nama saldo yang sesuai di list saldo'
+		def modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/span", true)
+
+		'jika nama object sesuai dengan nama saldo'
+		if(WebUI.getText(modifyNamaSaldo) == NamaSaldo)
+		{
+			'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
+			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/h3", true)
+			
+			'simpan jumlah saldo sekarang di variabel'
+			 saldoNow = Integer.parseInt(WebUI.getText(modifySaldoDipilih).replace(',',''))
+			 
+			 break;
+		}
+	}
+	'pakai saldo IDR jika lainnya tidak ada'
+	if(saldoNow == 0)
+	{
+		'simpan jumlah saldo sekarang di variabel'
+		saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988')).replace(',',''))
+	}
+	'kembalikan nilai saldo sekarang'
+	return saldoNow
 }

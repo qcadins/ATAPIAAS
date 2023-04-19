@@ -19,7 +19,6 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import java.sql.Connection
 import java.sql.Statement
-import java.sql.Statement
 import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.ResultSetMetaData
@@ -30,9 +29,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory
 import org.apache.poi.ss.usermodel.Workbook
 import org.apache.poi.ss.usermodel.Sheet
 
-import java.sql.DriverManager
-import java.sql.ResultSet
-import java.sql.ResultSetMetaData
+
 import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.Select
 import com.kms.katalon.core.webui.driver.DriverFactory

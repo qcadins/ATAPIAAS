@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "262C3403A2D4582800FF49CC484E84F0",
+  "keywordFileContentHash": "F78B0FFFADB89008EE9B3D8F0E814E8E",
   "keywordClasses": [
     {
       "name": "apikey.checkSaldoAPI",
@@ -20,8 +20,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "gettotalVendor",
@@ -52,8 +51,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getVendorName",
@@ -84,8 +82,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "gettotalTipeSaldo",
@@ -116,8 +113,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getNamaTipeSaldo",
@@ -148,11 +144,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

@@ -71,6 +71,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Topup terjadi failure'</initValue>
+      <name>FailedReasonTopUpFailed</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'HIT API berhasil, tapi tidak tersimpan di DB'</initValue>
       <name>FailedReasonTrxNotinDB</name>
    </GlobalVariableEntity>
