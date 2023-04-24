@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>sumberTrx</name>
+   <tag></tag>
+   <elementGuidId>9755e500-1b52-42e1-b77b-ce03c40fc1ff</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value></value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value></value>
+      <webElementGuid>8f7cb2b6-cbcf-4d27-96f5-d4d9074fb2bf</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

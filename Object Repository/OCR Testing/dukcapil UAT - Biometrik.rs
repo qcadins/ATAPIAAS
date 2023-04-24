@@ -97,7 +97,7 @@
    <maxResponseSize>-1</maxResponseSize>
    <migratedVersion>5.4.1</migratedVersion>
    <restRequestMethod>POST</restRequestMethod>
-   <restUrl>https://testpotgsaldofc-verifiction-dev-pxmupahcbb.ap-southeast-5.fcapp.run</restUrl>
+   <restUrl>https://dukcapiiometric-verifiction-dev-hlepnyycdr.ap-southeast-5.fcapp.run</restUrl>
    <serviceType>RESTful</serviceType>
    <soapBody></soapBody>
    <soapHeader></soapHeader>

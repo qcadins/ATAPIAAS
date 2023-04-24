@@ -69,7 +69,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	StatusTC = findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 1)
 	
 	'jika data di kolom selanjutnya kosong, lanjutkan loop'
-	if(StatusTC == '' || StatusTC == 'Failed' || StatusTC == 'Success')
+	if(StatusTC != 'Unexecuted')
 	{
 		continue;
 	}
@@ -156,7 +156,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	{
 		GlobalVariable.FlagFailed = 1
 		'tulis kondisi gagal'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('APIAAS-Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('APIAAS-Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' + 
 		GlobalVariable.FailedReasonMandatory)
 		
 		continue;
@@ -197,11 +197,28 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		'ambil nomor transaksi terbaru tenant lain'
 		no_TrxOtherTenant = CustomKeywords.'apikey.checkSaldoAPI.getLatestMutationOtherTenant'(connProd, tenantcode)
 		
+		'call test case store db'
+		 WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoStoreDB'), [('tenant') : tenantcode], 
+			 FailureHandling.CONTINUE_ON_FAILURE)
+		
 		'cek apakah saldo '
 		if(no_TrxfromDB != no_TrxfromUI || no_TrxfromDB == no_TrxOtherTenant)
 		{
 			'topup dianggap gagal'
 			TopupSaldoCorrectTenant = 0
+		}
+		else
+		{
+			'jika ada konten pada tabel yang tidak sesuai dengan DB'
+			if(verifyTableContent(connProd, tenantcode) == 1)
+			{
+				'topup dianggap gagal'
+				TopupSaldoCorrectTenant = 0
+				
+				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
+				CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('APIAAS-Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' + GlobalVariable.FailedReasonStoreDB)
+				
+			}
 		}
 	}
 	
@@ -212,14 +229,15 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	if(Saldobefore + JumlahTopUp == Saldoafter && GlobalVariable.FlagFailed == 0 && TopupSaldoCorrectTenant == 1)
 	{
 		'tulis status sukses pada excel'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('APIAAS-Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('APIAAS-Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' + 
 		GlobalVariable.SuccessReason)
+				
 	}
 	else
 	{
 		GlobalVariable.FlagFailed = 1
 		'tulis kondisi gagal'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('APIAAS-Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('APIAAS-Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' + 
 		GlobalVariable.FailedReasonTopUpFailed)
 	}
 }
@@ -236,11 +254,45 @@ def checkTenantcount(connection) {
 	'ambil hitungan tenant yang ada'
 	int countWeb = (elementjumlahlisttenant.size()) - 1
 	
+	'flag apakah tenant sesuai pada verifikasi'
+	int isTenantMatch = 1
+	
+	'ambil nama vendor dari DB'
+	ArrayList<String> namatenantDB = CustomKeywords.'apikey.checkSaldoAPI.getTenantName'(connection)
+	
+	'nama-nama tipe saldo sedang aktif dari UI'
+	ArrayList<String> namatenantUI = new ArrayList<String>()
+	
 	'ambil hitungan tenant dari DB'
-	int countDB = CustomKeywords.'apikey.checkSaldoAPI.gettotalTenant'(connection)
+	int countDB = namatenantDB.size()
+	
+	for(int i=1; i<=countWeb; i++)
+	{
+		'ambil object dari ddl'
+		def modifyNamaTenant = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/TenantList'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-balance/div[2]/div/div/div/div/form/div[1]/div[1]/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
+		
+		'tambahkan nama tipe saldo ke array'
+		String data = WebUI.getText(modifyNamaTenant)
+		namatenantUI.add(data)
+	}
+	
+	'cek setiap data di UI dengan data di DB sebagai pembanding'
+	for (String tipe : namatenantDB)
+	{
+		'jika ada data yang tidak terdapat pada arraylist yang lain'
+		if (!namatenantUI.contains(tipe))
+		{
+			'ada data yang tidak match'
+			isTenantMatch = 0;
+			'berhentikan loop'
+			break;
+		}
+		'kondisi ini bisa ditemui jika data match'
+		isTenantMatch = 1
+	}
 	
 	'jika hitungan di UI dan DB tidak sesuai'
-	if(countWeb != countDB)
+	if(countWeb != countDB || isTenantMatch == 0)
 	{
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and reason topup failed'
@@ -261,24 +313,38 @@ def checkVendorcount(connection, tenantcode) {
 	'flag vendor sesuai'
 	int isVendorFound = 0
 	
-	'ambil hitungan vendor dari DB'
-	int countDB = CustomKeywords.'apikey.checkSaldoAPI.gettotalVendor'(connection, tenantcode)
-	
 	'ambil nama vendor dari DB'
-	String namaVendorDB = CustomKeywords.'apikey.checkSaldoAPI.getVendorName'(connection, tenantcode)
+	ArrayList<String> namaVendorDB = CustomKeywords.'apikey.checkSaldoAPI.getVendorName'(connection, tenantcode)
 	
-	'cari nama vendor'
-	for(int i=0; i<=countWeb ; i++)
+	'nama-nama tipe saldo sedang aktif dari UI'
+	ArrayList<String> namaVendorUI = new ArrayList<String>()
+	
+	'hitung banyak data didalam array DB'
+	int countDB = namaVendorDB.size()
+	
+	for(int i=1; i<=countWeb; i++)
 	{
 		'ambil object dari ddl'
 		def modifyNamaVendor = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/VendorList'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-balance/div[2]/div/div/div/div/form/div[1]/div[2]/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
 		
-		'cari nama vendor yang sesuai'
-		if(WebUI.getText(modifyNamaVendor) == namaVendorDB)
+		'tambahkan nama tipe saldo ke array'
+		String data = WebUI.getText(modifyNamaVendor)
+		namaVendorUI.add(data)
+	}
+
+	'cek setiap data di UI dengan data di DB sebagai pembanding'
+	for (String tipe : namaVendorDB) 
+	{
+		'jika ada data yang tidak terdapat pada arraylist yang lain'
+		if (!namaVendorUI.contains(tipe)) 
 		{
-			'ubah flag menjadi ketemu'
-			isVendorFound = 1
+			'ada data yang tidak match'
+			isVendorFound = 0;
+			'berhentikan loop'
+			break;
 		}
+		'kondisi ini bisa ditemui jika data match'
+		isVendorFound = 1
 	}
 	
 	'jika tidak ada match pada jumlah count atau nama vendor'
@@ -302,9 +368,6 @@ def checkTipeSaldocount(connection, tenantcode) {
 	
 	'ambil hitungan vendor yang ada'
 	int countWeb = (elementjumlahtipe.size()) - 1
-	
-	'ambil hitungan tenant dari DB'
-	int countDB = CustomKeywords.'apikey.checkSaldoAPI.gettotalTipeSaldo'(connection, tenantcode)
 	
 	'nama-nama tipe saldo yang sedang aktif dari DB'
 	ArrayList<String> namaTipefromDB = CustomKeywords.'apikey.checkSaldoAPI.getNamaTipeSaldo'(connection, tenantcode)
@@ -337,6 +400,8 @@ def checkTipeSaldocount(connection, tenantcode) {
 		'kondisi ini bisa ditemui jika data match'
 		isDataMatch = 1
 	}
+	
+	int countDB = namaTipefromDB.size()
 	
 	'jika hitungan di UI dan DB tidak sesuai atau data tidak match'
 	if(countWeb != countDB || isDataMatch == 0)
@@ -445,6 +510,109 @@ def SkiptotheLastPages() {
 	{
 		'klik button skip to last page'
 		WebUI.click(modifybuttonskip)
+	}
+}
+
+'ambil no. transaksi pada tabel'
+def verifyTableContent(connection, String tenant) {
+	'ambil alamat trxnumber'
+	def variable = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
+	
+	'banyaknya row table'
+	int lastIndex = variable.size()
+	
+	'flag jika ada error pada verifikasi'
+	int flagError = 0
+	
+	'modifikasi object tanggal transaksi'
+	def modifytglTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TglTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[1]/div/p", true)
+		
+	'modifikasi object kantor'
+	def modifyKantor = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/KantorLocation'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[2]/div/p", true)
+
+	'modifikasi object tipe transaksi'
+	def modifytipeTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TipeTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[3]/div/p", true)
+
+	'modifikasi object sumber transaksi'
+	def modifysumberTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/sumberTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[4]/div/p", true)
+
+	'modifikasi object tenant transaksi'
+	def modifytenantTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TenantTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[5]/div/p", true)
+
+	'modifikasi object trxnumber'
+	def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[6]/div/p", true)
+		
+	'modifikasi object reference transaksi'
+	def modifyrefTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/refTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[7]/div/p", true)
+
+	'modifikasi object quantity transaksi'
+	def modifyqtyTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/div_500'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[8]/div", true)
+
+	'modifikasi object hasil proses transaksi'
+	def modifyprocTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/procTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[10]/div/p", true)
+
+	'modifikasi object hasil proses transaksi'
+	def modifycatatanTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/catatan'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[11]/div/p", true)
+
+	'ambil data table dari db'
+	ArrayList<String> result = CustomKeywords.'apikey.checkSaldoAPI.getTrialTableContent'(connection, tenant)
+	
+	'check status semua match data'
+	ArrayList<String> arrayMatch = new ArrayList<String>()
+		
+	'kembalikan nomor transaksi'
+	int arrayIndex = 0
+	
+	'verify tanggal transaksi ui = db'
+	checkVerifyEqualOrMatch(arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifytglTrx), result[arrayIndex++].replace('.0',''), false, FailureHandling.CONTINUE_ON_FAILURE)))
+	
+	'verify kantor ui = db'
+	checkVerifyEqualOrMatch(arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyKantor), result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE)))
+	
+	'verify tipe transaksi ui = db'
+	checkVerifyEqualOrMatch(arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifytipeTrx), result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE)))
+	
+	'verify sumber transaksi ui = db'
+	checkVerifyEqualOrMatch(arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifysumberTrx), result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE)))
+	
+	'verify tenant transaksi ui = db'
+	checkVerifyEqualOrMatch(arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifytenantTrx), result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE)))
+	
+	'verify nomor transaksi ui = db'
+	checkVerifyEqualOrMatch(arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifytrxnumber), result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE)))
+	
+	'verify reference number transaksi ui = db'
+	checkVerifyEqualOrMatch(arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyrefTrx), result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE)))
+	
+	'verify quantity transaksi ui = db'
+	checkVerifyEqualOrMatch(arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyqtyTrx) , result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE)))
+	
+	'verify hasil proses transaksi ui = db'
+	checkVerifyEqualOrMatch(arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyprocTrx), result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE)))
+	
+	'verify catatan transaksi ui = db'
+	checkVerifyEqualOrMatch(arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifycatatanTrx), result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE)))
+	
+	if (arrayMatch.contains(false)) 
+	{
+		flagError = 1
+		'kembalikan flag error'
+		return flagError 	
+	}
+	else
+	{
+		return flagError
+	}
+}
+
+'fungsi untuk melakukan pengecekan '
+def checkVerifyEqualOrMatch(Boolean isMatch) {
+	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('APIAAS-Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+			(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
+
+		GlobalVariable.FlagFailed = 1
 	}
 }
 

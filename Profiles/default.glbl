@@ -11,11 +11,6 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'Failed'</initValue>
-      <name>StatusFailed</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
       <initValue>'Hit SUCCESS tapi saldo tidak berkurang'</initValue>
       <name>FailedReasonBalanceNotChange</name>
    </GlobalVariableEntity>
@@ -106,13 +101,18 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'Success'</initValue>
-      <name>StatusSuccess</name>
+      <initValue>'Failed'</initValue>
+      <name>StatusFailed</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
       <initValue>'Berhasil Save tapi mandatory tidak lengkap'</initValue>
       <name>StatusReasonSystem</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Success'</initValue>
+      <name>StatusSuccess</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

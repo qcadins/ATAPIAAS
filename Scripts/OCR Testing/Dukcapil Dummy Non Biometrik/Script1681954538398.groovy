@@ -38,20 +38,40 @@ def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
 'deklarasi koneksi ke Database adins_apiaas_uat'
 def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
 
-'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('Path'): ExcelPathOCRTesting], FailureHandling.STOP_ON_FAILURE)
+'buka chrome\r\n'
+WebUI.openBrowser('')
+
+'buka website APIAAS SIT, data diambil dari TestData Login'
+WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
+
+'input data email'
+WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	findTestData(ExcelPathOCRTesting).getValue(2, 27))
+
+'input password'
+WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	findTestData(ExcelPathOCRTesting).getValue(2, 28))
+
+'ceklis pada reCaptcha'
+WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+
+'pada delay, lakukan captcha secara manual'
+WebUI.delay(10)
+
+'klik pada button login'
+WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.NumOfColumn)++)
 {
 	'ambil kode tenant di DB'
-	String tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCRTesting).getValue(2, 25))
+	String tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCRTesting).getValue(2, 27))
 	
 	'ambil key trial yang aktif dari DB'
 	String thekey = CustomKeywords.'ocrTesting.getParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
 	
 	'deklarasi id untuk harga pembayaran OCR'
-	int idPayment = CustomKeywords.'ocrTesting.getParameterfromDB.getIDPaymentType'(connProd, tenantcode, 'OCR KTP')
+	int idPayment = CustomKeywords.'ocrTesting.getParameterfromDB.getIDPaymentType'(connProd, tenantcode, 'Verifikasi Dukcapil Tanpa Biometrik')
 	
 	'ambil jenis penagihan transaksi (by qty/price)'
 	String BalanceChargeType = CustomKeywords.'ocrTesting.getParameterfromDB.getPaymentType'(connProd, tenantcode, idPayment)
@@ -59,7 +79,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	StatusTC = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1)
 	
 	'jika data di kolom selanjutnya kosong, berhentikan loop'
-	if(StatusTC == '' || StatusTC == 'Failed' || StatusTC == 'Success')
+	if(StatusTC != 'Unexecuted')
 	{
 		continue;
 	}
@@ -68,10 +88,10 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	ResponseObject response
 	
 	'cek apakah perlu tambah API'
-	String UseCorrectKey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 14)
+	String UseCorrectKey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 19)
 	
 	'cek apakah perlu gunakan tenantcode yang salah'
-	String UseCorrectTenant = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 12)
+	String UseCorrectTenant = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 17)
 	
 	'angka untuk menghitung data mandatory yang tidak terpenuhi'
 	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 4))
@@ -95,41 +115,50 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	String no_Trx_before = getTrxNumber()
 	
 	'variabel yang menyimpan saldo sebelum adanya transaksi'
-	Saldobefore = getSaldoforTransaction('OCR KTP')
+	Saldobefore = getSaldoforTransaction('Verifikasi Dukcapil Tanpa Biometrik')
 	
 	if(UseCorrectKey != 'Yes')
 	{
-		thekey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 15)
+		thekey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 20)
 	}
 	if(UseCorrectTenant != 'Yes')
 	{
-		tenantcode = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13)
+		tenantcode = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 18)
 	}
 	
+	println thekey
+	println tenantcode
+	
 	'lakukan proses HIT api dengan parameter image, key, dan juga tenant'
-	response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/OCR KTP', 
+	response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/dukcapil UAT - Non Biometrik', 
 	[('img'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 8),
-	('key'):thekey, 
 	('tenant'):tenantcode,
-	('nik'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 17),
-	('loginId'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 18),
-	('refNum'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 19),
-	('off_code'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 20),
-	('off_name'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 21),
-	('question'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 22),
-	('source'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 23)]))
+	('key'):thekey,
+	('loginId'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 22),
+	('refNum'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 23),
+	('off_code'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 24),
+	('off_name'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 25),
+	('phoneNum'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 9),
+	('idNo'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 10),
+	('fullName'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 11),
+	('DOB'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 12),
+	('email'):findTestData(ExcelPathOCRTesting).getValue(2, 27)
+	]))
 		
 	'ambil message respon dari HIT tersebut'
 	message_ocr = WS.getElementPropertyValue(response, 'message')
 	
 	'ambil status dari respon HIT tersebut'
 	state_ocr = WS.getElementPropertyValue(response, 'status')
+	
+	println message_ocr
+	println state_ocr
 		
 	'jika kurang saldo hentikan proses testing'
 	if(state_ocr == 'FAILED' && message_ocr == 'Insufficient balance')
 	{
 		'write to excel status failed dan reason'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KTP', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		message_ocr)
 		break;
@@ -138,7 +167,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	else if(state_ocr == 'SUCCESS' && UseCorrectKey != 'Yes' && UseCorrectTenant != 'Yes')
 	{
 		'write to excel status failed dan reason'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KTP', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		GlobalVariable.FailedReasonKeyTenantBypass)
 			
@@ -148,7 +177,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	else if(message_ocr == 'KTP NOT FOUND' || message_ocr == 'Unexpected Error' || message_ocr == 'Invalid API key or tenant code')
 	{
 		'write to excel status failed dan reason'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KTP', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		message_ocr)
 		continue;
@@ -183,7 +212,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		}
 	}
 	
-	'simpan harga OCR KTP ke dalam integer'
+	'simpan harga Dukcapil(NonBiom) ke dalam integer'
 	int Service_price = CustomKeywords.'ocrTesting.getParameterfromDB.getServicePricefromDB'(connProd, idPayment)
 	
 	'jika HIT API successful'
@@ -203,7 +232,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	}
 	
 	'simpan saldo setelah di HIT'
-	UISaldoafter = getSaldoforTransaction('OCR KTP')
+	UISaldoafter = getSaldoforTransaction('Verifikasi Dukcapil Tanpa Biometrik')
 	
 	'jika saldoafter match'
 	if(KatalonSaldoafter == UISaldoafter)
@@ -231,7 +260,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	if(message_ocr == '' && state_ocr == 'SUCCESS' && isTrxIncreased == 1 && isSaldoBerkurang == 1 && HitAPITrx == 1)
 	{
 		'tulis status sukses pada excel'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KTP', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 		GlobalVariable.SuccessReason)
 	
 	}
@@ -240,7 +269,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	{
 		GlobalVariable.FlagFailed = 1
 		'tulis kondisi gagal'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KTP', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 		GlobalVariable.FailedReasonTrxNotinDB)
 	}
 	//kondisi jika transaksi berhasil tapi saldo tidak berkurang
@@ -248,7 +277,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	{
 		GlobalVariable.FlagFailed = 1
 		'tulis kondisi gagal'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KTP', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 		GlobalVariable.FailedReasonBalanceNotChange)
 	}
 	//kondisi transaksi tidak tampil dan tidak tersimpan di DB
@@ -256,14 +285,14 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	{
 		GlobalVariable.FlagFailed = 1
 		'tulis kondisi gagal'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KTP', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 		GlobalVariable.FailedReasonSaldoBocor)
 	}
 	else
 	{
 		GlobalVariable.FlagFailed = 1
 		'write to excel status failed dan reason'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR KTP', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		message_ocr)
 	}
@@ -353,13 +382,13 @@ def filterSaldo() {
 	WebUI.delay(4)
 	
 	'isi field input tipe saldo'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 9))
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
 	
 	'isi field tipe transaksi'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 10))
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 14))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), Keys.chord(Keys.ENTER))

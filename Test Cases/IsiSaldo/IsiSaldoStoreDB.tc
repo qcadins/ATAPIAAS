@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>IsiSaldoStoreDB</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>b6c00e71-fc1c-4159-8902-b92cbc47c179</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>3898683e-8a37-426c-b2e0-1431f578a13b</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'APIAAS/DataSaldoAPIKEY'</defaultValue>
+      <description></description>
+      <id>3898683e-8a37-426c-b2e0-1431f578a13b</id>
+      <masked>false</masked>
+      <name>ExcelPathSaldoAPI</name>
+   </variable>
+</TestCaseEntity>

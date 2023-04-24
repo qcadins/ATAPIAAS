@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>TipeTrx</name>
+   <tag></tag>
+   <elementGuidId>b2468fcd-d37c-404e-bc35-c4ac4b3547b1</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value></value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value></value>
+      <webElementGuid>ec7f33ed-2de9-431b-bcbc-9ce5b3bc154c</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

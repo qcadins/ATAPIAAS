@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>SaldoAPIKey</name>
+   <name>Dukcapil Dummy Non Biometrik</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>bc5bbf2e-e6c0-469b-a372-2a4f67185be0</testCaseGuid>
+   <testCaseGuid>2d8e873a-564c-4a15-a0c4-5632d9676091</testCaseGuid>
    <variableLinks>
       <testDataLinkId></testDataLinkId>
       <type>DEFAULT</type>
       <value></value>
-      <variableId>7519ef77-d3eb-4649-a5a2-36def9531d74</variableId>
+      <variableId>f7b0ed4a-0763-4fc5-b875-3f096f596e10</variableId>
    </variableLinks>
    <variable>
-      <defaultValue>'APIAAS/DataSaldoAPIKEY'</defaultValue>
+      <defaultValue>'OCR Testing/DataOCRTestingDukcapilNonBiom'</defaultValue>
       <description></description>
-      <id>7519ef77-d3eb-4649-a5a2-36def9531d74</id>
+      <id>f7b0ed4a-0763-4fc5-b875-3f096f596e10</id>
       <masked>false</masked>
-      <name>ExcelPathSaldoAPI</name>
+      <name>ExcelPathOCRTesting</name>
    </variable>
 </TestCaseEntity>
