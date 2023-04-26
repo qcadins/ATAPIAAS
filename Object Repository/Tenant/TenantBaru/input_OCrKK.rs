@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_OCRKK</name>
+   <tag></tag>
+   <elementGuidId>fada278e-191e-4e34-8156-81ee84ca8593</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;OCR_KK&quot;]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;OCR_KK&quot;]</value>
+      <webElementGuid>56201a0c-8f88-4c3b-897f-b52357bcf57d</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

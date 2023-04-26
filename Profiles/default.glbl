@@ -46,6 +46,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Job Process Sign Belum Selesai'</initValue>
+      <name>FailedReasonPaging</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Gagal ubah page'</initValue>
       <name>FailedReasonPagingError</name>
    </GlobalVariableEntity>
@@ -53,6 +58,11 @@
       <description></description>
       <initValue>'HIT gagal, tapi saldo berkurang'</initValue>
       <name>FailedReasonSaldoBocor</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Fungsi pencarian gagal, no result'</initValue>
+      <name>FailedReasonSearchFailed</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -91,7 +101,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>2</initValue>
+      <initValue>7</initValue>
       <name>NumOfColumn</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>

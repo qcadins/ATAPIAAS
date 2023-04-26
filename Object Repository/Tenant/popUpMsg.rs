@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>popUpMsg</name>
+   <tag></tag>
+   <elementGuidId>4c9e78c6-0699-4049-8117-69ad1a538548</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;swal2-content&quot;]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;swal2-content&quot;]</value>
+      <webElementGuid>82e8bfcc-c8da-41f4-a88d-935f3c36536f</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

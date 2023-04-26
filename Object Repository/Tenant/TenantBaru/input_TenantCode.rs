@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_TenantCode</name>
+   <tag></tag>
+   <elementGuidId>a7aaae43-1bc3-4e51-a6ce-99334ccb2287</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@formcontrolname = 'tenantCode']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;tenantCode&quot;]</value>
+      <webElementGuid>d89bcb6b-20f8-49af-83b4-f2db5603eb4a</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>formcontrolname</name>
+      <type>Main</type>
+      <value>tenantCode</value>
+      <webElementGuid>8311a460-6420-4e70-a98b-1f38860eb5b7</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

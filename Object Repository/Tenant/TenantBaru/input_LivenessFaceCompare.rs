@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_LivenessFaceCompare</name>
+   <tag></tag>
+   <elementGuidId>ac072359-bf1d-462e-ba7f-3b2234a78b90</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;LIVENESS_FACECOMPARE&quot;]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;LIVENESS_FACECOMPARE&quot;]</value>
+      <webElementGuid>056a581f-f788-4087-9f10-b6b4c174dc14</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

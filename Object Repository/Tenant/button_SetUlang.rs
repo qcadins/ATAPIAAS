@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>button_SetUlang</name>
+   <tag></tag>
+   <elementGuidId>d34e8fab-bbd9-4c08-829f-233bdf7ab80b</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;searchForm&quot;]/div[2]/div/button[1]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;searchForm&quot;]/div[2]/div/button[1]</value>
+      <webElementGuid>562fbdbd-0f61-4433-9c18-c08ccfc4389f</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

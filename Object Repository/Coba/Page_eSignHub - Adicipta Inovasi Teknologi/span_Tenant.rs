@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>span_Tenant</name>
+   <tag></tag>
+   <elementGuidId>7da495f2-a3c5-4291-8b77-cac4b494b5e7</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>(.//*[normalize-space(text()) and normalize-space(.)='Isi Saldo'])[1]/following::span[1]</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value></value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>span</value>
+      <webElementGuid>dbfd9066-d2fa-4224-a30a-68896d4726a2</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>menu-title ng-tns-c99-1</value>
+      <webElementGuid>eb011a51-93ac-49e0-9353-91c0115c799f</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Tenant</value>
+      <webElementGuid>f0e8644f-ba0b-4efc-9503-81b9a44ad383</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-expanded vertical-menu menu-open&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;app-sidebar main-menu menu-fixed menu-native-scroll expanded ng-star-inserted&quot;]/app-sidebar[@class=&quot;ng-tns-c99-1&quot;]/div[@class=&quot;sidebar-content main-menu-content ng-tns-c99-1 ps&quot;]/div[@class=&quot;nav-container ng-tns-c99-1&quot;]/ul[@class=&quot;navigation ng-tns-c99-1&quot;]/li[@class=&quot;ng-tns-c99-1 ng-star-inserted&quot;]/a[@class=&quot;ng-tns-c99-1 ng-star-inserted&quot;]/span[@class=&quot;menu-title ng-tns-c99-1&quot;]</value>
+      <webElementGuid>dd773395-7973-4c77-95db-e0035b614ce5</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Isi Saldo'])[1]/following::span[1]</value>
+      <webElementGuid>c2aa2caa-12cf-4c03-92fb-38614c0dae02</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Keluar'])[1]/following::span[2]</value>
+      <webElementGuid>2cce821c-8f79-4482-9a95-233355cceb08</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Isi Saldo'])[2]/preceding::span[1]</value>
+      <webElementGuid>a674d300-2d02-4cf2-b86b-5fd29740cead</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Tenant'])[2]/preceding::span[1]</value>
+      <webElementGuid>29952972-3918-47a1-b2eb-2c2475ad7100</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>//*/text()[normalize-space(.)='Tenant']/parent::*</value>
+      <webElementGuid>7f549e1e-b787-4a08-8ea1-89e500d6dc96</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//li[2]/a/span</value>
+      <webElementGuid>664b38de-7dd6-4d96-b2f5-2d7a72349675</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//span[(text() = 'Tenant' or . = 'Tenant')]</value>
+      <webElementGuid>a81f0363-0d73-4220-bf6b-7b1c3d64e6d6</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

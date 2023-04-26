@@ -201,7 +201,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		 WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoStoreDB'), [('tenant') : tenantcode], 
 			 FailureHandling.CONTINUE_ON_FAILURE)
 		
-		'cek apakah saldo '
+		'cek apakah transaksi tercatat, memastikan tenant lain tidak memiliki transaksi yang sama'
 		if(no_TrxfromDB != no_TrxfromUI || no_TrxfromDB == no_TrxOtherTenant)
 		{
 			'topup dianggap gagal'
@@ -214,10 +214,6 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 			{
 				'topup dianggap gagal'
 				TopupSaldoCorrectTenant = 0
-				
-				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-				CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('APIAAS-Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' + GlobalVariable.FailedReasonStoreDB)
-				
 			}
 		}
 	}
@@ -593,16 +589,13 @@ def verifyTableContent(connection, String tenant) {
 	'verify catatan transaksi ui = db'
 	checkVerifyEqualOrMatch(arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifycatatanTrx), result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE)))
 	
+	'jika ada verifikasi yang gagal'
 	if (arrayMatch.contains(false)) 
 	{
-		flagError = 1
 		'kembalikan flag error'
-		return flagError 	
+		flagError = 1
 	}
-	else
-	{
-		return flagError
-	}
+	return flagError
 }
 
 'fungsi untuk melakukan pengecekan '

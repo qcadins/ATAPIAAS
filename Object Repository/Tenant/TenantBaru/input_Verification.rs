@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_Verification</name>
+   <tag></tag>
+   <elementGuidId>ca34e15b-1b75-4d4b-8f80-3e547642553e</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;VRF&quot;]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;VRF&quot;]</value>
+      <webElementGuid>b6e6b464-bd92-4926-9907-718883226b2d</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

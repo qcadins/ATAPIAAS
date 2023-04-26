@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_OCRKTP</name>
+   <tag></tag>
+   <elementGuidId>efb00b5e-1a93-46fc-806d-a11e69b5fef8</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;OCR_KTP&quot;]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;OCR_KTP&quot;]</value>
+      <webElementGuid>1badc8c5-4761-49ff-b560-4eb63cf9a53a</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

@@ -40,7 +40,7 @@ def driver = DriverFactory.getWebDriver()
 'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
 GlobalVariable.FlagFailed = 0
 
-if(TC != 'SaldoAPI')
+if(TC != 'SaldoAPI' && TC != 'Tenant')
 {
 	'buka website APIAAS SIT, data diambil dari TestData Login'
 	WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
@@ -149,6 +149,19 @@ else if (TC == 'SaldoAPI')
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_768062'),
 		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 9))
 	
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
+}
+
+else if (TC == 'Tenant')
+{
+	WebUI.maximizeWindow()
+	
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_95ee84'),
+		findTestData('Login/Login').getValue(2, 3))
+		
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_768062'),
+		findTestData('Login/Login').getValue(3, 3))
+		
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
 }
 

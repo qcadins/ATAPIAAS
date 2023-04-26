@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_Status</name>
+   <tag></tag>
+   <elementGuidId>712b70f2-cf1c-4694-919e-7f87057b3289</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;status&quot;]/div/div/div[3]/input</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;status&quot;]/div/div/div[3]/input</value>
+      <webElementGuid>f1645335-7a88-4f07-897b-ca16c62ba04d</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_TTD</name>
+   <tag></tag>
+   <elementGuidId>e5dd6002-dc75-4d8d-a9bf-f0040397799f</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;SGN&quot;]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;SGN&quot;]</value>
+      <webElementGuid>c2f97716-c9e8-4284-ada5-fc055bf655eb</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

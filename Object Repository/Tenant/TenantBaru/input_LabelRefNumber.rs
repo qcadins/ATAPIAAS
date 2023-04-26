@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_LabelRefNumber</name>
+   <tag></tag>
+   <elementGuidId>5f61f8e1-874b-42ea-8911-3497df147dd8</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;refNumberLabel&quot;]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;refNumberLabel&quot;]</value>
+      <webElementGuid>7374b069-0b84-4e27-a801-351df3b28b69</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

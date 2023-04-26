@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_KodeAksesUserAdmin</name>
+   <tag></tag>
+   <elementGuidId>e7c5c782-28a2-4a2a-8df5-76e11636ddea</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;passwordUserAdmin&quot;]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;passwordUserAdmin&quot;]</value>
+      <webElementGuid>7770acc5-728f-483d-b06f-bb78ba80f378</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

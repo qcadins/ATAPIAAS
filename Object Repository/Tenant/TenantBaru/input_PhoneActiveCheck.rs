@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_PhoneActiveCheck</name>
+   <tag></tag>
+   <elementGuidId>e86afeed-cc9c-420e-b622-afd0e2ffb100</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;PHONE_ACTIVE_CHECK&quot;]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;PHONE_ACTIVE_CHECK&quot;]</value>
+      <webElementGuid>207a2059-3dcf-4a42-9d2b-482f786a943b</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_OCRBPKB</name>
+   <tag></tag>
+   <elementGuidId>0408d6cb-1df6-4614-9943-ab77ce3792d8</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;OCR_BPKB&quot;]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;OCR_BPKB&quot;]</value>
+      <webElementGuid>42b80c83-60f1-42ce-ab2d-9549fb429416</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

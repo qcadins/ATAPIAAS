@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_StampDutyPostPaid</name>
+   <tag></tag>
+   <elementGuidId>920d5e5e-ce47-43ea-b9db-b44b4c99ab28</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;SDT_POSTPAID&quot;]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;SDT_POSTPAID&quot;]</value>
+      <webElementGuid>40d9c026-bf82-4981-9724-c8fc6a51173d</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>
