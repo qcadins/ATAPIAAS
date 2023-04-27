@@ -29,7 +29,7 @@ def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
 'deklarasi koneksi ke Database adins_apiaas_uat'
 def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
 
-'mendapat jumlah kolom dari sheet Edit Profile'
+'mendapat jumlah kolom dari sheet Tenant'
 int CountColumnEdit = findTestData(ExcelPathTenant).getColumnNumbers()
 
 'call test case login admin esign'
@@ -53,7 +53,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 	} 
 	else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) 
 	{
-	'check if action new/services'
+	'check if action new/services/edit/balancechargetype'
 		if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('New')) 
 		{
 			'click button Baru'
@@ -61,8 +61,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 
 			'get total form'
 			variable = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-add-tenant > div.row.match-height > div > div > div > div > form div'))
-			
-			println variable.size()
 			
 			'input nama tenant'
 			WebUI.setText(findTestObject('Tenant/TenantBaru/input_NamaTenant'), findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn,
@@ -117,9 +115,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 					{
 						break
 					}
-					
-					println (WebUI.getText(modifyObjectButtonServices))
-					println (arrayServices[indexExcel])
 			
 					'check if button contain service name'
 					if (WebUI.verifyElementNotPresent(modifyObjectButtonServices, GlobalVariable.Timeout, FailureHandling.OPTIONAL))
@@ -601,14 +596,15 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 				
 				continue
 			}
-		
-			'get array Services dari excel'
-			arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 29).split(';', -1)
 			
-			println arrayServices[0]
+			'fungsi untuk cek apakah tenant yang aktif sesuai dengan tenant yang muncul'
+			checkActiveTenant(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13), connProd)
 			
 //			'penanda apakah service ditagih by price atau quantity'
 //			ArrayList<Integer>isChargedByPrice= new ArrayList<Integer>()
+			
+			'get array Services dari excel'
+			arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 29).split(';', -1)
 
 			'looping untuk input services check'
 			for (index = 0; index < arrayServices.size(); index++)
@@ -629,6 +625,24 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 //				{
 //					isChargedByPrice.add(0)
 //				}
+			}
+			
+			'get array Services uncheck dari excel'
+			arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 30).split(';', -1)
+
+			'looping untuk input services uncheck'
+			for (index = 0; index < arrayServices.size(); index++)
+			{
+				'modify object checkbox'
+				modifyObjectCheckbox = WebUI.modifyObjectProperty(findTestObject('Tenant/Services/modifyObject'), 'xpath',
+					'equals', ('//*[@id="'+ arrayServices[index] +'"]'), true)
+				
+				'check if check box is checked'
+				if (WebUI.verifyElementChecked(modifyObjectCheckbox, GlobalVariable.Timeout, FailureHandling.OPTIONAL))
+				{
+					'click checkbox'
+					WebUI.click(modifyObjectCheckbox)
+				}
 			}
 		
 			'check if mandatory complete dan button simpan clickable'
@@ -768,6 +782,31 @@ def checkVerifyPaging(Boolean isMatch) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 			(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonPaging)
+
+		GlobalVariable.FlagFailed = 1
+	}
+}
+
+def checkActiveTenant(String tenantcode, Connection connProd) {
+	
+	ArrayList<String> ActiveTenantfromDB = CustomKeywords.'tenant.tenantVerif.getActiveTenant'(connProd, tenantcode)
+	
+	ArrayList<String> ActiveTenantfromUI = new ArrayList<String>()
+	
+	for(int i=0; i< ActiveTenantfromDB.size(); i++)
+	{
+		'modify object checkbox'
+		def modifyObjectNamaTenant = WebUI.modifyObjectProperty(findTestObject('Tenant/ChargeType/namaTenant'), 'xpath',
+			'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-charge/div[2]/div/div/div/div/table/tr['+ (i+2) +']/th[1]'), true)
+		
+		ActiveTenantfromUI.add(WebUI.getText(modifyObjectNamaTenant))
+	}
+	
+	if(!ActiveTenantfromUI.containsAll(ActiveTenantfromDB))
+	{
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+			(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonServiceNotMatch)
 
 		GlobalVariable.FlagFailed = 1
 	}

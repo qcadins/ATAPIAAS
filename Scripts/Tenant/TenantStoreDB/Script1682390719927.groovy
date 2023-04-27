@@ -108,12 +108,8 @@ else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).e
 		'ambil id pembayaran untuk service pertama yang diubah'
 		int IDPaymentType = CustomKeywords.'tenant.tenantVerif.getIDPaymentType'(connProd, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13), arrayServices[index])
 		
-		println IDPaymentType
-		
 		'ambil jenis pembayaran untuk service yang terpilih'
 		String PaymentType = CustomKeywords.'tenant.tenantVerif.getPaymentType'(connProd, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13), IDPaymentType)
-		
-		println PaymentType
 		
 		'split result to array'
 		if(PaymentType == 'Price')

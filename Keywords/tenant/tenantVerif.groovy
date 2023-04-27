@@ -123,7 +123,7 @@ public class tenantVerif {
 		}
 		return data
 	}
-	
+
 	//fungsi mengambil nama sheet yang digunakan
 	@Keyword
 	public getIDPaymentType(Connection conn, String tenantcode, String testedOCR) {
@@ -155,5 +155,25 @@ public class tenantVerif {
 			data = resultSet.getObject(1)
 		}
 		return data
+	}
+	
+	@Keyword
+	public getActiveTenant(Connection conn, String tenantcode){
+		String data
+		ArrayList<String> listdata = new ArrayList<>()
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '"+ tenantcode +"'")
+		ResultSetMetaData metadata = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while (resultSet.next()) {
+			for(int i = 1 ; i <= columnCount ; i++){
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		return listdata
 	}
 }

@@ -27,7 +27,7 @@ import org.openqa.selenium.Keys
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
-'mendapat jumlah kolom dari sheet Edit Profile'
+'mendapat jumlah kolom dari sheet Isi Saldo'
 int CountColumnEdit = findTestData(ExcelPathSaldoAPI).getColumnNumbers()
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'

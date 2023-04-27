@@ -66,6 +66,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Service di UI tidak sama dengan DB'</initValue>
+      <name>FailedReasonServiceNotMatch</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Submit Gagal'</initValue>
       <name>FailedReasonSubmitError</name>
    </GlobalVariableEntity>
