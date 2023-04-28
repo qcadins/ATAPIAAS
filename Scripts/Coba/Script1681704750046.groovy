@@ -23,36 +23,41 @@ import java.sql.Driver as Driver
 
 WebUI.openBrowser('')
 
-WebUI.navigateToUrl('http://websvr:8000/login')
+WebUI.navigateToUrl('http://gdkwebsvr:4100/login')
 
-WebUI.setText(findTestObject('Object Repository/Coba/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_95ee84'), 
-    'admesign')
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Login - eendigo Platform/div_Buat Akun_input'))
 
-WebUI.click(findTestObject('Object Repository/Coba/Page_eSignHub - Adicipta Inovasi Teknologi/div_Selamat datang kembali di Billing System_input'))
+WebUI.setText(findTestObject('Object Repository/Saldo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'), 
+    'usera@gmail.com')
 
-WebUI.setText(findTestObject('Object Repository/Coba/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_768062'), 
-    'password')
+WebUI.setEncryptedText(findTestObject('Object Repository/Saldo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'), 
+    'iFGeFYmXIrU6ruIopQUS+w==')
 
-WebUI.click(findTestObject('Object Repository/Coba/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Login - eendigo Platform/div_id(katalon-rec_elementInfoDiv)'))
 
-WebUI.click(findTestObject('Object Repository/Coba/Page_eSignHub - Adicipta Inovasi Teknologi/i_Indonesian_ft-menu font-medium-3'))
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
-WebUI.click(findTestObject('Object Repository/Coba/Page_eSignHub - Adicipta Inovasi Teknologi/span_Tenant'))
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input'))
 
-WebUI.click(findTestObject('Object Repository/Coba/Page_eSignHub - Adicipta Inovasi Teknologi/a_Baru'))
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input'))
 
-'get total form'
-variable = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-add-tenant > div.row.match-height > div > div > div > div > form div'))
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Dari_transactionDateStart'))
 
-println(variable.size())
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Pengguna_user'))
 
-'get total form'
-variable2 = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-add-tenant > div.row.match-height > div > div > div > div > form > div div'))
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input'))
 
-println(variable2.size())
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Ref Number_referenceNo'))
 
-'get total form'
-variable3 = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-add-tenant > div.row.match-height > div > div > div > div > form > row'))
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Nama Dokumen_documentName'))
 
-println(variable3.size())
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Sampai_transactionDateEnd'))
+
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input'))
+
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Unduh Excel'))
+
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Set Ulang'))
+
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Cari'))
 

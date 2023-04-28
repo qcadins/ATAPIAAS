@@ -16,6 +16,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Balance UI != DB'</initValue>
+      <name>FailedReasonBalanceUI</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Data di ddl tidak sesuai dengan DB'</initValue>
       <name>FailedReasonDDL</name>
    </GlobalVariableEntity>
@@ -43,11 +48,6 @@
       <description></description>
       <initValue>'Resend OTP Gagal'</initValue>
       <name>FailedReasonOTP</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Job Process Sign Belum Selesai'</initValue>
-      <name>FailedReasonPaging</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

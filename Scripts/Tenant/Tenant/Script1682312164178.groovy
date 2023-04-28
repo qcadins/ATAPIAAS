@@ -215,19 +215,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 		} 
 		else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('Service')) 
 		{
-			'input nama tenant'
-			WebUI.setText(findTestObject('Tenant/input_NamaTenant'), findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn,
-					9))
-
-			'input status'
-			WebUI.setText(findTestObject('Tenant/input_Status'), findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn,
-					10))
-
-			'click enter untuk input select ddl'
-			WebUI.sendKeys(findTestObject('Tenant/input_Status'), Keys.chord(Keys.ENTER))
-
-			'click button cari'
-			WebUI.click(findTestObject('Tenant/button_Cari'))
+			searchTenant()
 
 			if(WebUI.verifyElementPresent(findTestObject('Tenant/button_ServiceBalance'), GlobalVariable.Timeout, FailureHandling.OPTIONAL))
 			{
@@ -317,19 +305,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 		} 
 		else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('Edit')) 
 		{
-			'input nama tenant'
-			WebUI.setText(findTestObject('Tenant/input_NamaTenant'), findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn,
-					9))
-
-			'input status'
-			WebUI.setText(findTestObject('Tenant/input_Status'), findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn,
-					10))
-
-			'click enter untuk input select ddl'
-			WebUI.sendKeys(findTestObject('Tenant/input_Status'), Keys.chord(Keys.ENTER))
-
-			'click button cari'
-			WebUI.click(findTestObject('Tenant/button_Cari'))
+			'panggil fungsi search'
+			searchTenant()
 
 			'click button edit'
 			WebUI.click(findTestObject('Tenant/button_Edit'))
@@ -568,19 +545,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 		}
 		else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('ChargeType'))
 		{
-			'input nama tenant'
-			WebUI.setText(findTestObject('Tenant/input_NamaTenant'), findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn,
-					9))
-
-			'input status'
-			WebUI.setText(findTestObject('Tenant/input_Status'), findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn,
-					10))
-
-			'click enter untuk input select ddl'
-			WebUI.sendKeys(findTestObject('Tenant/input_Status'), Keys.chord(Keys.ENTER))
-
-			'click button cari'
-			WebUI.click(findTestObject('Tenant/button_Cari'))
+			'panggil fungsi search'
+			searchTenant()
 
 			if(WebUI.verifyElementPresent(findTestObject('Tenant/button_chargeType'), GlobalVariable.Timeout, FailureHandling.OPTIONAL))
 			{
@@ -810,4 +776,20 @@ def checkActiveTenant(String tenantcode, Connection connProd) {
 
 		GlobalVariable.FlagFailed = 1
 	}
+}
+
+def searchTenant() {
+	'input nama tenant'
+	WebUI.setText(findTestObject('Tenant/input_NamaTenant'), findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn,
+			9))
+
+	'input status'
+	WebUI.setText(findTestObject('Tenant/input_Status'), findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn,
+			10))
+
+	'click enter untuk input select ddl'
+	WebUI.sendKeys(findTestObject('Tenant/input_Status'), Keys.chord(Keys.ENTER))
+
+	'click button cari'
+	WebUI.click(findTestObject('Tenant/button_Cari'))
 }
