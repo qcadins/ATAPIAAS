@@ -59,7 +59,7 @@ public class checkSaldoAPI {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT tenant_code FROM esign.ms_tenant")
+		ResultSet resultSet = stm.executeQuery("SELECT tenant_name FROM esign.ms_tenant WHERE is_active = '1'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
@@ -176,7 +176,7 @@ public class checkSaldoAPI {
 		}
 		return listdata
 	}
-	
+
 	@Keyword
 	public getIsiSaldoStoreDB(Connection conn, String tenant){
 		String data

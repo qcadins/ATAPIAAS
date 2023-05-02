@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataFileEntity>
    <description></description>
-   <name>DataSaldoAPIKEY</name>
+   <name>DataTestingLayanan</name>
    <tag></tag>
    <containsHeaders>false</containsHeaders>
    <csvSeperator></csvSeperator>
-   <dataFileGUID>f86663b0-561b-4d53-b85a-01cad563fc92</dataFileGUID>
+   <dataFileGUID>598f22fa-cb06-4fcf-a47d-f69b14ab5192</dataFileGUID>
    <dataSourceUrl>Excel/2. APIAAS.xlsx</dataSourceUrl>
    <driver>ExcelFile</driver>
    <isInternalPath>true</isInternalPath>
    <query></query>
    <secureUserAccount>false</secureUserAccount>
-   <sheetName>IsiSaldo</sheetName>
+   <sheetName>LayananSaya</sheetName>
    <usingGlobalDBSetting>false</usingGlobalDBSetting>
 </DataFileEntity>

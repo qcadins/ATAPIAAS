@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>LayananSaya</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>58eb92be-1baf-4e52-b20f-0fc2adf2359f</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>d3ef3e7a-9771-421e-adb6-624cc097a21e</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'Layanan Saya/DataTestingLayanan'</defaultValue>
+      <description></description>
+      <id>d3ef3e7a-9771-421e-adb6-624cc097a21e</id>
+      <masked>false</masked>
+      <name>ExcelPathLayananSaya</name>
+   </variable>
+</TestCaseEntity>

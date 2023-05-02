@@ -87,4 +87,25 @@ public class connect {
 
 		return conn
 	}
+	
+	//fungsi digunakan untuk koneksi dengan database eendigo dev_uat
+	@Keyword
+	def connectDBAPIAAS_devUat() {
+
+		String servername = findTestData('Data Files/Login/Login').getValue(1, 10)
+
+		String port = findTestData('Data Files/Login/Login').getValue(2, 10)
+
+		String database = findTestData('Data Files/Login/Login').getValue(3, 10)
+
+		String username = findTestData('Data Files/Login/Login').getValue(4, 10)
+
+		String password = findTestData('Data Files/Login/Login').getValue(5, 10)
+
+		String url = servername + ':' + port + '/' + database
+
+		Connection conn = DriverManager.getConnection(url, username, password)
+
+		return conn
+	}
 }

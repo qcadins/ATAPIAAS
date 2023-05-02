@@ -40,7 +40,7 @@ def driver = DriverFactory.getWebDriver()
 'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
 GlobalVariable.FlagFailed = 0
 
-if(TC != 'IsiSaldo' && TC != 'Tenant')
+if(TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'Layanan')
 {
 	'buka website APIAAS SIT, data diambil dari TestData Login'
 	WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
@@ -143,12 +143,15 @@ else if (TC == 'OCR')
 
 else if (TC == 'IsiSaldo')
 {
+	'input data username'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_95ee84'),
 		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 8))
 	
+	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_768062'),
 		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 9))
 	
+	'klik tombol masuk'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
 }
 
@@ -156,12 +159,15 @@ else if (TC == 'Tenant')
 {
 	WebUI.maximizeWindow()
 	
+	'input data username'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_95ee84'),
 		findTestData('Login/Login').getValue(2, 3))
-		
+	
+	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_768062'),
 		findTestData('Login/Login').getValue(3, 3))
 		
+	'klik tombol masuk'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
 }
 else if (TC == 'Saldo')
@@ -183,4 +189,16 @@ else if (TC == 'Saldo')
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 }
-
+else if (TC == 'Layanan')
+{
+	'input data username'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_95ee84'),
+		findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 8))
+		
+	'input password'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_768062'),
+		findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 9))
+		
+	'klik tombol masuk'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
+}

@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "889B1CF958156F0B8B46AB05359F615B",
+  "keywordFileContentHash": "B06D8D8FC1EC7754B5F243E336D778F3",
   "keywordClasses": [
     {
       "name": "apikey.checkSaldoAPI",
@@ -20,8 +20,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getVendorName",
@@ -52,8 +51,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getNamaTipeSaldo",
@@ -84,8 +82,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getLatestMutation",
@@ -116,8 +113,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getLatestMutationOtherTenant",
@@ -148,8 +144,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getTrialTableContent",
@@ -180,8 +175,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getIsiSaldoStoreDB",
@@ -212,11 +206,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }
