@@ -71,6 +71,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Set Ulang tidak berfungsi dengan benar'</initValue>
+      <name>FailedReasonSetFailed</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Submit Gagal'</initValue>
       <name>FailedReasonSubmitError</name>
    </GlobalVariableEntity>

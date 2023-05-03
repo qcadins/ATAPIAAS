@@ -97,7 +97,29 @@ public class verifSaldo {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '"+ tenantcode +"'")
+		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '"+ tenantcode +"' AND mbt.lov_balance_charge_type = 141")
+		ResultSetMetaData metadata  = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while(resultSet.next()) {
+			for(int i=1; i<=columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		return listdata
+	}
+
+	@Keyword
+	public getListTipeTransaksi(Connection conn, String tipeSaldo) {
+		String data
+
+		ArrayList<String> listdata = new ArrayList<>()
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT description FROM ms_lov WHERE description LIKE '%Use "+ tipeSaldo +"%' OR description LIKE '%Topup "+ tipeSaldo +"%'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
@@ -111,14 +133,36 @@ public class verifSaldo {
 		return listdata
 	}
 	
+	@Keyword
+	public getListTipeSaldo(Connection conn, String tenantcode) {
+		String data
+
+		ArrayList<String> listdata = new ArrayList<>()
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '"+tenantcode+"'")
+		ResultSetMetaData metadata  = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while(resultSet.next()) {
+			for(int i=1; i<=columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		return listdata
+	}
+
 	//fungsi untuk mengambil tenant code dari database
 	@Keyword
-	public getCountTotalData(Connection conn, String tenantcode, String description) {
+	public getCountTotalData(Connection conn, String tenantcode, String tipeSaldo) {
 		int data
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT COUNT(trx_no) FROM esign.tr_balance_mutation bm JOIN esign.ms_lov ml ON ml.id_lov = bm.lov_balance_type JOIN esign.ms_tenant mt ON mt.id_ms_tenant = bm.id_ms_tenant WHERE tenant_code = '"+tenantcode+"' AND description = '"+description+"'")
+		ResultSet resultSet = stm.executeQuery("SELECT COUNT(*) FROM esign.tr_balance_mutation bm JOIN esign.ms_lov ml ON ml.id_lov = bm.lov_balance_type JOIN esign.ms_tenant mt ON mt.id_ms_tenant = bm.id_ms_tenant WHERE tenant_code = '"+tenantcode+"' AND description = '"+tipeSaldo+"' AND trx_date >= '2023-05-01 00:00:00.0'")
 
 		while(resultSet.next())
 		{

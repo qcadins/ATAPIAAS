@@ -35,8 +35,11 @@ int CountColumnEdit = findTestData(ExcelPathOCRTesting).getColumnNumbers()
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
 
+//'deklarasi koneksi ke Database adins_apiaas_uat'
+//def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
+
 'deklarasi koneksi ke Database adins_apiaas_uat'
-def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
+def conndevUAT = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_devUat'()
 
 'buka chrome\r\n'
 WebUI.openBrowser('')
@@ -71,10 +74,10 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	String thekey = CustomKeywords.'ocrTesting.getParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
 	
 	'deklarasi id untuk harga pembayaran OCR'
-	int idPayment = CustomKeywords.'ocrTesting.getParameterfromDB.getIDPaymentType'(connProd, tenantcode, 'Verifikasi Dukcapil Tanpa Biometrik')
+	int idPayment = CustomKeywords.'ocrTesting.getParameterfromDB.getIDPaymentType'(conndevUAT, tenantcode, 'Verifikasi Dukcapil Tanpa Biometrik')
 	
 	'ambil jenis penagihan transaksi (by qty/price)'
-	String BalanceChargeType = CustomKeywords.'ocrTesting.getParameterfromDB.getPaymentType'(connProd, tenantcode, idPayment)
+	String BalanceChargeType = CustomKeywords.'ocrTesting.getParameterfromDB.getPaymentType'(conndevUAT, tenantcode, idPayment)
 	
 	StatusTC = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1)
 	
@@ -130,7 +133,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	println tenantcode
 	
 	'lakukan proses HIT api dengan parameter image, key, dan juga tenant'
-	response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/dukcapil UAT - Non Biometrik', 
+	response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/dukcapil UAT - Biometrik', 
 	[('img'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 8),
 	('tenant'):tenantcode,
 	('key'):thekey,
@@ -149,7 +152,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	message_ocr = WS.getElementPropertyValue(response, 'message')
 	
 	'ambil status dari respon HIT tersebut'
-	state_ocr = WS.getElementPropertyValue(response, 'status')
+	state_ocr = WS.getElementPropertyValue(response, 'verifStatus')
 	
 	println message_ocr
 	println state_ocr
@@ -199,10 +202,10 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	if(GlobalVariable.KondisiCekDB == 'Yes')
 	{
 		'simpan trx number terbaru dari DB'
-		String LatestMutation= CustomKeywords.'ocrTesting.getParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
+		String LatestMutation= CustomKeywords.'ocrTesting.getParameterfromDB.getLatestMutationfromDB'(conndevUAT, tenantcode)
 		
 		'simpan trx number terbaru milik tenant lain dari DB'
-		String LatestOtherTenantMutation = CustomKeywords.'ocrTesting.getParameterfromDB.getNotMyLatestMutationfromDB'(connProd, tenantcode)
+		String LatestOtherTenantMutation = CustomKeywords.'ocrTesting.getParameterfromDB.getNotMyLatestMutationfromDB'(conndevUAT, tenantcode)
 		
 		'jika data transaction number di web dan DB tidak sesuai'
 		if(LatestMutation != no_Trx_after || LatestMutation == LatestOtherTenantMutation)
@@ -213,7 +216,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	}
 	
 	'simpan harga Dukcapil(NonBiom) ke dalam integer'
-	int Service_price = CustomKeywords.'ocrTesting.getParameterfromDB.getServicePricefromDB'(connProd, idPayment)
+	int Service_price = CustomKeywords.'ocrTesting.getParameterfromDB.getServicePricefromDB'(conndevUAT, idPayment)
 	
 	'jika HIT API successful'
 	if(HitAPITrx == 1)

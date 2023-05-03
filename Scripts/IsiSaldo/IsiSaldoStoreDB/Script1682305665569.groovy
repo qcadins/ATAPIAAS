@@ -21,8 +21,8 @@ import java.sql.Connection
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
 
-'deklarasi koneksi ke Database adins_apiaas_uat'
-def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
+//'deklarasi koneksi ke Database adins_apiaas_uat'
+//def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
 def conndevUAT = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_devUat'()

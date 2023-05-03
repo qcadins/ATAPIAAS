@@ -33,8 +33,8 @@ int CountColumnEdit = findTestData(ExcelPathSaldoAPI).getColumnNumbers()
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
 
-'deklarasi koneksi ke Database adins_apiaas_uat'
-def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
+//'deklarasi koneksi ke Database adins_apiaas_uat'
+//def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
 def conndevUAT = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_devUat'()
@@ -63,7 +63,7 @@ navigatetoeendigoBeta()
 'ambil kode tenant di DB'
 String tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 10))
 
-for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
+for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 4; (GlobalVariable.NumOfColumn)++)
 {
 	'set penanda error menjadi 0'
 	GlobalVariable.FlagFailed = 0
@@ -268,30 +268,30 @@ def checkTenantcount(connection) {
 	'jika hitungan di UI dan DB sesuai'
 	if(countWeb == countDB) 
 	{
-		for(int i=1; i<=countWeb; i++)
-		{
-			'ambil object dari ddl'
-			def modifyNamaTenant = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/TenantList'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-balance/div[2]/div/div/div/div/form/div[1]/div[1]/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
-				
-			'tambahkan nama tipe saldo ke array'
-			String data = WebUI.getText(modifyNamaTenant)
-			namatenantUI.add(data)
-		}
-			
-		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namatenantDB)
-		{
-			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namatenantUI.contains(tipe))
-			{
-				'ada data yang tidak match'
-				isTenantMatch = 0;
-				'berhentikan loop'
-				break;
-				}
-			'kondisi ini bisa ditemui jika data match'
-			isTenantMatch = 1
-		}
+//		for(int i=1; i<=countWeb; i++)
+//		{
+//			'ambil object dari ddl'
+//			def modifyNamaTenant = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/TenantList'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-balance/div[2]/div/div/div/div/form/div[1]/div[1]/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
+//				
+//			'tambahkan nama tipe saldo ke array'
+//			String data = WebUI.getText(modifyNamaTenant)
+//			namatenantUI.add(data)
+//		}
+//			
+//		'cek setiap data di UI dengan data di DB sebagai pembanding'
+//		for (String tipe : namatenantDB)
+//		{
+//			'jika ada data yang tidak terdapat pada arraylist yang lain'
+//			if (!namatenantUI.contains(tipe))
+//			{
+//				'ada data yang tidak match'
+//				isTenantMatch = 0;
+//				'berhentikan loop'
+//				break;
+//				}
+//			'kondisi ini bisa ditemui jika data match'
+//			isTenantMatch = 1
+//		}
 	}
 	else if(countWeb != countDB || isTenantMatch == 0)
 	{

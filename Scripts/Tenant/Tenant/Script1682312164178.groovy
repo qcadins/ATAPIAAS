@@ -26,8 +26,11 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPa
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
 
+//'deklarasi koneksi ke Database adins_apiaas_uat'
+//def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
+
 'deklarasi koneksi ke Database adins_apiaas_uat'
-def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
+def conndevUAT = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_devUat'()
 
 'mendapat jumlah kolom dari sheet Tenant'
 int CountColumnEdit = findTestData(ExcelPathTenant).getColumnNumbers()
@@ -39,10 +42,10 @@ WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Tenant'], 
 WebUI.click(findTestObject('Tenant/menu_Tenant'))
 
 'call function check paging'
-checkPaging(connProd)
+checkPaging(conndevUAT)
 
 'looping tenant'
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable.NumOfColumn)++) {
+for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'declare isMmandatory Complete'
 	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 4))
@@ -106,12 +109,12 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 				'modify object button services'
 				modifyObjectButtonServices = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
 					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					index) + ']/button', true)
+					index) + ']/button[1]', true)
 				
 				'looping untuk array service excel'
 				for (indexExcel = 0; indexExcel < arrayServices.size(); indexExcel++)
 				{
-					if(index > 29)
+					if(index > 34)
 					{
 						break
 					}
@@ -152,12 +155,12 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 			'ubah lokasi xpath dari button simpan'
 			modifyobjectbuttonSimpan = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/button_Simpan'), 'xpath',
 					'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					(30 + EmailReminderTotal).toString()) + ']/div/button[2]', true)
+					(36 + EmailReminderTotal).toString()) + ']/div/button[2]', true)
 			
 			'ubah lokasi xpath dari button simpan'
 			modifyobjectbuttonBatal = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/button_Batal'), 'xpath',
 					'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					(30 + EmailReminderTotal).toString()) + ']/div/button[1]', true)
+					(36 + EmailReminderTotal).toString()) + ']/div/button[1]', true)
 
 			'looping untuk input email reminder'
 			for (index = 1; index <= EmailReminderTotal; index++) 
@@ -165,7 +168,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 				'modify object input email'
 				modifyObjectInputEmail = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'), 'xpath',
 					'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					(28 + index).toString()) + ']/div/input', true)
+					(34 + index).toString()) + ']/div/input', true)
 
 				'click tambah email'
 				WebUI.click(findTestObject('Tenant/TenantBaru/button_TambahEmail'))
@@ -364,10 +367,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 				'modify object button services'
 				modifyObjectButtonServices = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
 					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					index) + ']/button', true)
+					index) + ']/div/button', true)
 
 				'break if index udah lebih dari 28 HARDCODE karena tidak bisa di track objectnya'
-				if (index > 28) 
+				if (index > 34) 
 				{
 					break
 				}
@@ -427,22 +430,21 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 			'get array email reminder dari excel'
 			arrayEmailReminder = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 21).split(';', -1)
 			
-			
 			'ambil ukuran dari array email reminder'
 			int EmailReminderTotal = arrayEmailReminder.size()
 			
 			'ubah lokasi xpath dari button simpan'
 			modifyobjectbuttonSimpan = WebUI.modifyObjectProperty(findTestObject('Tenant/Edit/button_Simpan'), 'xpath',
 					'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					(30 + EmailReminderTotal).toString()) + ']/div/button[2]', true)
+					(34 + EmailReminderTotal).toString()) + ']/div/button[2]', true)
 			
 			'ubah lokasi xpath dari button simpan'
 			modifyobjectbuttonBatal = WebUI.modifyObjectProperty(findTestObject('Tenant/Edit/button_Batal'), 'xpath',
 					'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					(30 + EmailReminderTotal).toString()) + ']/div/button[1]', true)
+					(34 + EmailReminderTotal).toString()) + ']/div/button[1]', true)
 
 			'looping untuk hapus email reminder yang tidak ada di excel'
-			for (index = 29; index <= variable.size(); index++) 
+			for (index = 35; index <= variable.size(); index++) 
 			{
 				'modify object input email'
 				modifyObjectInputEmail = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'), 'xpath',
@@ -487,7 +489,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 			for (indexexcel = 1; indexexcel <= arrayEmailReminder.size(); indexexcel++) 
 			{
 				'looping untuk input email reminder'
-				for (index = 29; index <= variable.size(); index++) 
+				for (index = 35; index <= variable.size(); index++) 
 				{
 					'modify object input email'
 					modifyObjectInputEmail = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
@@ -564,7 +566,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 8; (GlobalVariable
 			}
 			
 			'fungsi untuk cek apakah tenant yang aktif sesuai dengan tenant yang muncul'
-			checkActiveTenant(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13), connProd)
+			checkActiveTenant(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13), conndevUAT)
 			
 //			'penanda apakah service ditagih by price atau quantity'
 //			ArrayList<Integer>isChargedByPrice= new ArrayList<Integer>()
@@ -753,9 +755,9 @@ def checkVerifyPaging(Boolean isMatch) {
 	}
 }
 
-def checkActiveTenant(String tenantcode, Connection connProd) {
+def checkActiveTenant(String tenantcode, Connection conndevUAT) {
 	
-	ArrayList<String> ActiveTenantfromDB = CustomKeywords.'tenant.tenantVerif.getActiveTenant'(connProd, tenantcode)
+	ArrayList<String> ActiveTenantfromDB = CustomKeywords.'tenant.tenantVerif.getActiveTenant'(conndevUAT, tenantcode)
 	
 	ArrayList<String> ActiveTenantfromUI = new ArrayList<String>()
 	

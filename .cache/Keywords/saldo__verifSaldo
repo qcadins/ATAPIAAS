@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "AC1AC2D1280B1AA42D13B743F3D73D25",
+  "keywordFileContentHash": "739E22236A189C1BAF40A6D97E2BABFB",
   "keywordClasses": [
     {
       "name": "saldo.verifSaldo",
@@ -88,6 +88,70 @@
           "javadoc": ""
         },
         {
+          "name": "getListTipeTransaksi",
+          "parameters": [
+            {
+              "name": "conn",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "tipeSaldo",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ],
+          "javadoc": ""
+        },
+        {
+          "name": "getListTipeSaldo",
+          "parameters": [
+            {
+              "name": "conn",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "tenantcode",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ],
+          "javadoc": ""
+        },
+        {
           "name": "getCountTotalData",
           "parameters": [
             {
@@ -117,7 +181,7 @@
               }
             },
             {
-              "name": "description",
+              "name": "tipeSaldo",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
