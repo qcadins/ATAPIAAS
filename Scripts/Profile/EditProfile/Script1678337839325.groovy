@@ -32,6 +32,16 @@ int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 'looping kolom dari testdata'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++) 
 {
+	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
+	if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).length() == 0)
+	{
+		break
+	}
+	else if (!findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted'))
+	{
+		continue
+	}
+	
 	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 4))
 	
     'memanggil fungsi untuk login'

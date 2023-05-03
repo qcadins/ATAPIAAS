@@ -26,6 +26,16 @@ int CountColumnEdit = findTestData(ExcelPathAPIKey).getColumnNumbers()
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
 {
+	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
+	if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 1).length() == 0)
+	{
+		break
+	}
+	else if (!findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted'))
+	{
+		continue
+	}
+	
 	String optiontipe, optionstatus, totaldata
 		
 	'cek apakah perlu tambah API'

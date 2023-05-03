@@ -56,13 +56,16 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	'ambil jenis penagihan transaksi (by qty/price)'
 	String BalanceChargeType = CustomKeywords.'ocrTesting.getParameterfromDB.getPaymentType'(connProd, tenantcode, idPayment)
 	
-	StatusTC = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1)
-	
-	'jika data di kolom selanjutnya kosong, berhentikan loop'
-	if(StatusTC == '' || StatusTC == 'Failed' || StatusTC == 'Success')
+	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
+	if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) 
 	{
-		continue;
+		break
+	} 
+	else if (!findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) 
+	{
+		continue
 	}
+
 	
 	'deklarasi variable response'
 	ResponseObject response

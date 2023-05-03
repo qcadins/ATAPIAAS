@@ -74,17 +74,19 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	String thekey = CustomKeywords.'ocrTesting.getParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
 	
 	'deklarasi id untuk harga pembayaran OCR'
-	int idPayment = CustomKeywords.'ocrTesting.getParameterfromDB.getIDPaymentType'(conndevUAT, tenantcode, 'Verifikasi Dukcapil Tanpa Biometrik')
+	int idPayment = CustomKeywords.'ocrTesting.getParameterfromDB.getIDPaymentType'(conndevUAT, tenantcode, findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
 	
 	'ambil jenis penagihan transaksi (by qty/price)'
 	String BalanceChargeType = CustomKeywords.'ocrTesting.getParameterfromDB.getPaymentType'(conndevUAT, tenantcode, idPayment)
 	
-	StatusTC = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1)
-	
-	'jika data di kolom selanjutnya kosong, berhentikan loop'
-	if(StatusTC != 'Unexecuted')
+	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
+	if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) 
 	{
-		continue;
+		break
+	} 
+	else if (!findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) 
+	{
+		continue
 	}
 	
 	'deklarasi variable response'
@@ -118,7 +120,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	String no_Trx_before = getTrxNumber()
 	
 	'variabel yang menyimpan saldo sebelum adanya transaksi'
-	Saldobefore = getSaldoforTransaction('Verifikasi Dukcapil Tanpa Biometrik')
+	Saldobefore = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
 	
 	if(UseCorrectKey != 'Yes')
 	{
@@ -128,9 +130,6 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	{
 		tenantcode = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 18)
 	}
-	
-	println thekey
-	println tenantcode
 	
 	'lakukan proses HIT api dengan parameter image, key, dan juga tenant'
 	response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/dukcapil UAT - Biometrik', 
@@ -152,11 +151,11 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	message_ocr = WS.getElementPropertyValue(response, 'message')
 	
 	'ambil status dari respon HIT tersebut'
-	state_ocr = WS.getElementPropertyValue(response, 'verifStatus')
+	state_ocr = WS.getElementPropertyValue(response, 'status')
 	
-	println message_ocr
-	println state_ocr
-		
+	'ambil verifStatus dari respon HIT'
+	verifState_ocr = WS.getElementPropertyValue(response, 'verifStatus')
+
 	'jika kurang saldo hentikan proses testing'
 	if(state_ocr == 'FAILED' && message_ocr == 'Insufficient balance')
 	{
@@ -167,22 +166,13 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		break;
 	}
 	//jika status sukses dengan key dan kode tenant yang salah, anggap sebagai bug dan lanjutkan ke tc berikutnya
-	else if(state_ocr == 'SUCCESS' && UseCorrectKey != 'Yes' && UseCorrectTenant != 'Yes')
+	else if(state_ocr == '0' && UseCorrectKey != 'Yes' && UseCorrectTenant != 'Yes')
 	{
 		'write to excel status failed dan reason'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		GlobalVariable.FailedReasonKeyTenantBypass)
 			
-		continue;
-	}
-	//jika mandatory tidak terpenuhi atau ada error
-	else if(message_ocr == 'KTP NOT FOUND' || message_ocr == 'Unexpected Error' || message_ocr == 'Invalid API key or tenant code')
-	{
-		'write to excel status failed dan reason'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		message_ocr)
 		continue;
 	}
 	
@@ -235,7 +225,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	}
 	
 	'simpan saldo setelah di HIT'
-	UISaldoafter = getSaldoforTransaction('Verifikasi Dukcapil Tanpa Biometrik')
+	UISaldoafter = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
 	
 	'jika saldoafter match'
 	if(KatalonSaldoafter == UISaldoafter)
@@ -260,7 +250,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	}
 	
 	'jika tidak ada message error dan kondisi lain terpenuhi'
-	if(message_ocr == '' && state_ocr == 'SUCCESS' && isTrxIncreased == 1 && isSaldoBerkurang == 1 && HitAPITrx == 1)
+	if(message_ocr == 'ID has been checked.' && state_ocr == 0 && verifState_ocr == true && isTrxIncreased == 1 && isSaldoBerkurang == 1 && HitAPITrx == 1)
 	{
 		'tulis status sukses pada excel'
 		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
@@ -268,7 +258,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	
 	}
 	//kondisi jika transaksi berhasil tapi tidak tercatat/tersimpan di DB
-	else if(state_ocr == 'SUCCESS' && isTrxIncreased == 0 && isSaldoBerkurang == 1)
+	else if(state_ocr == 0 && isTrxIncreased == 0 && isSaldoBerkurang == 1)
 	{
 		GlobalVariable.FlagFailed = 1
 		'tulis kondisi gagal'
@@ -276,7 +266,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		GlobalVariable.FailedReasonTrxNotinDB)
 	}
 	//kondisi jika transaksi berhasil tapi saldo tidak berkurang
-	else if(state_ocr == 'SUCCESS' && isTrxIncreased == 1 && isSaldoBerkurang == 0)
+	else if(state_ocr == 0 && isTrxIncreased == 1 && isSaldoBerkurang == 0)
 	{
 		GlobalVariable.FlagFailed = 1
 		'tulis kondisi gagal'
@@ -284,7 +274,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 		GlobalVariable.FailedReasonBalanceNotChange)
 	}
 	//kondisi transaksi tidak tampil dan tidak tersimpan di DB
-	else if(HitAPITrx == 0 && state_ocr == 'FAILED' && isTrxIncreased == 0 && isSaldoBerkurang == 1)
+	else if(HitAPITrx == 0 && state_ocr == 0 && isTrxIncreased == 0 && isSaldoBerkurang == 1)
 	{
 		GlobalVariable.FlagFailed = 1
 		'tulis kondisi gagal'

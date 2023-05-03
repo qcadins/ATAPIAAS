@@ -28,6 +28,16 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPa
 
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; GlobalVariable.NumOfColumn++)
 {
+	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
+	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 1).length() == 0)
+	{
+		break
+	}
+	else if (!findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted'))
+	{
+		continue
+	}
+	
 	String email, AutofillOTP, OTPfromExcel, ResendOTP, CountResendOTP
 	
 	'simpan data email dari testdata'

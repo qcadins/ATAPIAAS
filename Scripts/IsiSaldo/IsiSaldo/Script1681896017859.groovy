@@ -68,13 +68,14 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 4; (GlobalVariable.
 	'set penanda error menjadi 0'
 	GlobalVariable.FlagFailed = 0
 	
-	'Lihat status TC di excel'
-	StatusTC = findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 1)
-	
-	'jika data di kolom selanjutnya kosong, lanjutkan loop'
-	if(StatusTC != 'Unexecuted')
+	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
+	if (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 1).length() == 0)
 	{
-		continue;
+		break
+	}
+	else if (!findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted'))
+	{
+		continue
 	}
 	
 	'angka untuk menghitung data mandatory yang tidak terpenuhi'

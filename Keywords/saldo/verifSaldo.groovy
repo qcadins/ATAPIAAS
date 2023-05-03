@@ -132,7 +132,7 @@ public class verifSaldo {
 		}
 		return listdata
 	}
-	
+
 	@Keyword
 	public getListTipeSaldo(Connection conn, String tenantcode) {
 		String data
@@ -142,6 +142,28 @@ public class verifSaldo {
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '"+tenantcode+"'")
+		ResultSetMetaData metadata  = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while(resultSet.next()) {
+			for(int i=1; i<=columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		return listdata
+	}
+	
+	@Keyword
+	public getListKantor(Connection conn, String tenantcode) {
+		String data
+
+		ArrayList<String> listdata = new ArrayList<>()
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT office_name FROM ms_office mo JOIN ms_tenant mt ON mo.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '"+tenantcode+"'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()

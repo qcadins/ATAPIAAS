@@ -53,13 +53,14 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	'set penanda error menjadi 0'
 	GlobalVariable.FlagFailed = 0
 		
-	'Lihat status TC di excel'
-	StatusTC = findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 1)
-		
-	'jika data di kolom selanjutnya kosong, lanjutkan loop'
-	if(StatusTC != 'Unexecuted')
+	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
+	if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) 
 	{
-		continue;
+		break
+	} 
+	else if (!findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) 
+	{
+		continue
 	}
 		
 	'angka untuk menghitung data mandatory yang tidak terpenuhi'
@@ -76,6 +77,9 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	
 	'check dropdownlist dari tipe saldo'
 	checkddlTipeTransaksi(conndevUAT, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 8))
+	
+	'check dropdownlist dari office'
+	checkddlOffice(conndevUAT, tenantcode)
 	
 	'ambil nama saldo tenant yang aktif di DB'
 	ArrayList<String> ActiveBalanceDB = CustomKeywords.'saldo.verifSaldo.getListActiveBalance'(conndevUAT, tenantcode)
@@ -432,21 +436,12 @@ def checkddlTipeSaldo(Connection Conn, String tenantcode) {
 			namatipesaldoUI.add(data)
 		}
 			
-		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namatipesaldoDB)
+		'jika ada data yang tidak terdapat pada arraylist yang lain'
+		if (!namatipesaldoUI.containsAll(namatipesaldoDB))
 		{
-			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namatipesaldoUI.contains(tipe))
-			{
-				'ada data yang tidak match'
-				isTipeSaldoMatch = 0;
-				'berhentikan loop'
-				break;
-				}
-			'kondisi ini bisa ditemui jika data match'
-			isTipeSaldoMatch = 1
+			'ada data yang tidak match'
+			isTipeSaldoMatch = 0;
 		}
-		
 	}
 	
 	'jika hitungan di UI dan DB tidak sesuai'
@@ -501,19 +496,11 @@ def checkddlTipeTransaksi(Connection Conn, String tipeSaldo) {
 			namatipetransaksiUI.add(data)
 		}
 			
-		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namatipetransaksiDB)
+		'jika ada data yang tidak terdapat pada arraylist yang lain'
+		if (!namatipetransaksiUI.containsAll(namatipetransaksiDB))
 		{
-			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namatipetransaksiUI.contains(tipe))
-			{
-				'ada data yang tidak match'
-				isTipeTransaksiMatch = 0;
-				'berhentikan loop'
-				break;
-				}
-			'kondisi ini bisa ditemui jika data match'
-			isTipeTransaksiMatch = 1
+			'ada data yang tidak match'
+			isTipeTransaksiMatch = 0;
 		}
 		
 	}
@@ -530,6 +517,67 @@ def checkddlTipeTransaksi(Connection Conn, String tipeSaldo) {
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetransaksi'), Keys.chord(Keys.ENTER))
+}
+
+'cek jumlah ddl tipe saldo DB dan UI'
+def checkddlOffice(Connection Conn, String tenantcode) {
+	
+	'klik pada tipe saldo'
+	WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/inputkantor'))
+	
+	'ambil list tipesaldo'
+	def elementjumlahKantor = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-search-filter-v2/div/div/div/div/div/form/div[1]/div[8]/app-question/app-select/div/div[2]/ng-select/ng-dropdown-panel/div/div[2]/div'))
+		
+	'ambil hitungan tipesaldo yang ada'
+	int countWeb = (elementjumlahKantor.size()) - 1
+	
+	'flag apakah tipesaldo sesuai pada verifikasi'
+	int isKantorMatch = 1
+	
+	'ambil nama balance dari DB'
+	ArrayList<String> namaKantorDB = CustomKeywords.'saldo.verifSaldo.getListTipeTransaksi'(Conn, tenantcode)
+	
+	'nama-nama tipe saldo sedang aktif dari UI'
+	ArrayList<String> namaKantorUI = new ArrayList<String>()
+	
+	'ambil hitungan tipesaldo dari DB'
+	int countDB = namaKantorDB.size()
+	
+	'jika jumlah data di UI sama dengan DB'
+	if(countWeb == countDB)
+	{
+		'mulai perhitungan data'
+		for(int i=1; i<=countWeb; i++)
+		{
+			'ambil object dari ddl'
+			def modifyNamaKantor = WebUI.modifyObjectProperty(findTestObject('Object Repository/Saldo/Page_Balance/modifyobjectddl'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-search-filter-v2/div/div/div/div/div/form/div[1]/div[8]/app-question/app-select/div/div[2]/ng-select/ng-dropdown-panel/div/div["+(i+1)+"]/div/span", true)
+																																						
+			'tambahkan nama tipe saldo ke array'
+			String data = WebUI.getText(modifyNamaKantor)
+			namaKantorUI.add(data)
+		}
+			
+		'jika ada data yang tidak terdapat pada arraylist yang lain'
+		if (!namaKantorUI.containsAll(namaKantorDB))
+		{
+			'ada data yang tidak match'
+			isKantorMatch = 0;
+		}
+		
+	}
+	
+	'jika hitungan di UI dan DB tidak sesuai'
+	if(countWeb != countDB || isKantorMatch == 0)
+	{
+		GlobalVariable.FlagFailed = 1
+		'Write to excel status failed and reason topup failed'
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		GlobalVariable.FailedReasonDDL)
+	}
+	
+	'pencet enter'
+	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputkantor'), Keys.chord(Keys.ENTER))
 }
 
 def checkVerifyReset(Boolean isMatch) {

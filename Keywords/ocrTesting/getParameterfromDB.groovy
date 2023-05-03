@@ -124,7 +124,7 @@ public class getParameterfromDB {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("select trx_no from esign.tr_balance_mutation WHERE usr_crt = '"+tenantcode+"' ORDER BY trx_no DESC limit 1;")
+		ResultSet resultSet = stm.executeQuery("select trx_no from esign.tr_balance_mutation WHERE usr_crt = '"+tenantcode+"' ORDER BY id_balance_mutation DESC limit 1;")
 
 		while(resultSet.next())
 		{
@@ -140,7 +140,7 @@ public class getParameterfromDB {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("select trx_no from esign.tr_balance_mutation WHERE usr_crt != '"+tenantcode+"' ORDER BY trx_no DESC limit 1;")
+		ResultSet resultSet = stm.executeQuery("select trx_no from esign.tr_balance_mutation WHERE usr_crt != '"+tenantcode+"' ORDER BY id_balance_mutation DESC limit 1;")
 
 		while(resultSet.next())
 		{
