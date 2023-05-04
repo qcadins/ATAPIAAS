@@ -96,6 +96,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Table error/tidak muncul'</initValue>
+      <name>FailedReasonTable</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Topup terjadi failure'</initValue>
       <name>FailedReasonTopUpFailed</name>
    </GlobalVariableEntity>

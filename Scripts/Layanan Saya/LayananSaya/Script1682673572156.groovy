@@ -28,7 +28,7 @@ import org.openqa.selenium.Keys
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Isi Saldo'
-int CountColumnEdit = findTestData(ExcelPathLayanan).getColumnNumbers()
+int CountColumnEdit = findTestData(ExcelPathLayananSaya).getColumnNumbers()
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
@@ -49,7 +49,7 @@ WebUI.click(findTestObject('Object Repository/LayananSaya/Page_Balance/span_CHEC
 WebUI.click(findTestObject('Object Repository/LayananSaya/Page_Balance/span_Layanan Saya'))
 
 'user memilih perlu cek layanan production atau trial'
-if(findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 12) == 'PRODUCTION')
+if(findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 12) == 'PRODUCTION')
 {
 	'klik pada api key production'
 	WebUI.click(findTestObject('Object Repository/LayananSaya/Page_List Service/label_PRODUCTION'))
@@ -61,7 +61,7 @@ else
 }
 
 'ambil kode tenant di DB'
-String tenantcode = CustomKeywords.'layananSaya.verifLayanan.getTenantCodefromDB'(conn, findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 8))
+String tenantcode = CustomKeywords.'layananSaya.verifLayanan.getTenantCodefromDB'(conn, findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 8))
 
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
 {
@@ -69,17 +69,17 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	GlobalVariable.FlagFailed = 0
 		
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) 
+	if (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) 
 	{
 		break
 	} 
-	else if (!findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) 
+	else if (!findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) 
 	{
 		continue
 	}
 		
 	'angka untuk menghitung data mandatory yang tidak terpenuhi'
-	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 4))
+	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 4))
 	
 	'service name dari DB'
 	ArrayList<String> serviceNameDB = CustomKeywords.'layananSaya.verifLayanan.getListServiceName'(conndevUAT, tenantcode)
@@ -149,7 +149,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 		'ambil banyaknya laman footer'
 		int lastPage = elementbuttonskip.size()
 		
-		for(int i=0; i<(lastPage-4); i++)
+		for(int j=0; j<(lastPage-4); j++)
 		{
 			'ubah path object button next'
 			def modifybuttonnext = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/buttonNextPage'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage-1) +"]", true)
@@ -172,7 +172,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 			int IndexOther = otherpage.size()
 			
 			'mulai perhitungan data service name'
-			for(int i=1; i<=Index; i++)
+			for(int i=1; i<=IndexOther; i++)
 			{
 				'ambil object dari ddl'
 				def modifyServiceName = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[1]/div/p", true)
@@ -183,7 +183,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 			}
 			
 			'mulai perhitungan data service status'
-			for(int i=1; i<=Index; i++)
+			for(int i=1; i<=IndexOther; i++)
 			{
 				'ambil object dari ddl'
 				def modifyServiceStatus = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[2]/div/p", true)
@@ -194,7 +194,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 			}
 			
 			'mulai perhitungan data charge type'
-			for(int i=1; i<=Index; i++)
+			for(int i=1; i<=IndexOther; i++)
 			{
 				'ambil object dari ddl'
 				def modifyChargeType = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[3]/div/p", true)
@@ -211,7 +211,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 			GlobalVariable.FlagFailed = 1
 			'Write to excel status failed and reason service tidak sesuai'
 			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					GlobalVariable.FailedReasonServiceNotMatch)
 		}
 		else if (!serviceStatusUI.containsAll(serviceStatusDB))
@@ -220,7 +220,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 			GlobalVariable.FlagFailed = 1
 			'Write to excel status failed and reason status tidak sesuai'
 			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					GlobalVariable.FailedReasonStatusNotMatch)
 		}
 		else if (!chargeTypeUI.containsAll(chargeTypeDB))
@@ -229,9 +229,25 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 			GlobalVariable.FlagFailed = 1
 			'Write to excel status failed and reason chargetype'
 			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					GlobalVariable.FailedReasonChargeTypeNotMatch)
 		}
+		else
+		{
+			'jika chargetype yang tampil UI tidak sesuai dengan DB'
+			GlobalVariable.FlagFailed = 1
+			'Write to excel status failed and reason chargetype'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonMandatory)
+		}
+	}
+	else
+	{
+		'Write to excel status failed karena table bermasalah'
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				GlobalVariable.FailedReasonTable)
 	}
 	'lakukan refresh laman untuk kembali ke halaman 1'
 	WebUI.refresh()

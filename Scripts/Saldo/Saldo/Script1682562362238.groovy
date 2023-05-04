@@ -535,7 +535,7 @@ def checkddlOffice(Connection Conn, String tenantcode) {
 	int isKantorMatch = 1
 	
 	'ambil nama balance dari DB'
-	ArrayList<String> namaKantorDB = CustomKeywords.'saldo.verifSaldo.getListTipeTransaksi'(Conn, tenantcode)
+	ArrayList<String> namaKantorDB = CustomKeywords.'saldo.verifSaldo.getListKantor'(Conn, tenantcode)
 	
 	'nama-nama tipe saldo sedang aktif dari UI'
 	ArrayList<String> namaKantorUI = new ArrayList<String>()
