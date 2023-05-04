@@ -45,6 +45,8 @@ import java.io.IOException;
 import internal.GlobalVariable
 
 public class verifLayanan {
+	
+	int columnCount
 
 	//fungsi untuk mengambil tenant code dari database
 	@Keyword
@@ -60,5 +62,71 @@ public class verifLayanan {
 			data = resultSet.getObject(1)
 		}
 		return data
+	}
+	
+	@Keyword
+	public getListServiceName(Connection conn, String tenantcode) {
+		String data
+
+		ArrayList<String> listdata = new ArrayList<>()
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT description FROM ms_balancevendoroftenant mbt LEFT JOIN ms_lov mlo ON mlo.id_lov = mbt.lov_balance_type LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mbt.id_ms_tenant WHERE tenant_code = '"+tenantcode+"'")
+		ResultSetMetaData metadata  = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while(resultSet.next()) {
+			for(int i=1; i<=columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		return listdata
+	}
+	
+	@Keyword
+	public getListServiceStatus(Connection conn, String tenantcode) {
+		String data
+
+		ArrayList<String> listdata = new ArrayList<>()
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT CASE WHEN mbt.is_active = '1' THEN 'Active' ELSE 'Inactive' END AS status FROM ms_balancevendoroftenant mbt LEFT JOIN ms_lov mlo ON mlo.id_lov = mbt.lov_balance_type LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mbt.id_ms_tenant WHERE tenant_code = '"+tenantcode+"'")
+		ResultSetMetaData metadata  = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while(resultSet.next()) {
+			for(int i=1; i<=columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		return listdata
+	}
+	
+	@Keyword
+	public getListChargeType(Connection conn, String tenantcode) {
+		String data
+
+		ArrayList<String> listdata = new ArrayList<>()
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT description FROM ms_balancevendoroftenant mbt LEFT JOIN ms_lov mlo ON mlo.id_lov = mbt.lov_balance_charge_type LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mbt.id_ms_tenant WHERE tenant_code = '"+tenantcode+"'")
+		ResultSetMetaData metadata  = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while(resultSet.next()) {
+			for(int i=1; i<=columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		return listdata
 	}
 }

@@ -40,7 +40,7 @@ def driver = DriverFactory.getWebDriver()
 'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
 GlobalVariable.FlagFailed = 0
 
-if(TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'Layanan')
+if(TC != 'IsiSaldo' && TC != 'Tenant')
 {
 	'buka website APIAAS SIT, data diambil dari TestData Login'
 	WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
@@ -191,14 +191,21 @@ else if (TC == 'Saldo')
 }
 else if (TC == 'Layanan')
 {
-	'input data username'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_95ee84'),
+	'input data email'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
 		findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 8))
-		
+	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_768062'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
 		findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 9))
-		
-	'klik tombol masuk'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
+	
+	'ceklis pada reCaptcha'
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	
+	'pada delay, lakukan captcha secara manual'
+	WebUI.delay(10)
+	
+	'klik pada button login'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+
 }

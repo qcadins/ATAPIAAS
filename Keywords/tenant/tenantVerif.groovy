@@ -156,7 +156,7 @@ public class tenantVerif {
 		}
 		return data
 	}
-	
+
 	@Keyword
 	public getActiveTenant(Connection conn, String tenantcode){
 		String data

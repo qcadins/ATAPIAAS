@@ -33,32 +33,35 @@ int CountColumnEdit = findTestData(ExcelPathLayanan).getColumnNumbers()
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
 
+//'deklarasi koneksi ke Database adins_apiaas_uat'
+//def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
+
 'deklarasi koneksi ke Database adins_apiaas_uat'
-def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
+def conndevUAT = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Layanan'], FailureHandling.STOP_ON_FAILURE)
 
-'ambil index tab yang sedang dibuka di chrome'
-int currentTab = WebUI.getWindowIndex()
+'klik pada tombol profil di kanan atas'
+WebUI.click(findTestObject('Object Repository/LayananSaya/Page_Balance/span_CHECK FINANCE'))
 
-'ambil WebDriver untuk menjalankan js executor'
-WebDriver driver = DriverFactory.getWebDriver()
+'pilih layanan saya'
+WebUI.click(findTestObject('Object Repository/LayananSaya/Page_Balance/span_Layanan Saya'))
 
-'siapkan js executor'
-JavascriptExecutor js = ((driver) as JavascriptExecutor)
-
-'buka tab baru'
-js.executeScript('window.open();')
-
-'ganti fokus robot ke tab baru'
-WebUI.switchToWindowIndex(currentTab + 1)
-
-'arahkan tab baru ke url eendigo beta dan lakukan login'
-navigatetoeendigoBeta()
+'user memilih perlu cek layanan production atau trial'
+if(findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 12) == 'PRODUCTION')
+{
+	'klik pada api key production'
+	WebUI.click(findTestObject('Object Repository/LayananSaya/Page_List Service/label_PRODUCTION'))
+}
+else
+{
+	'klik pada api key trial'
+	WebUI.click(findTestObject('Object Repository/LayananSaya/Page_List Service/label_TRIAL'))
+}
 
 'ambil kode tenant di DB'
-String tenantcode = CustomKeywords.'layananSaya.verifLayanan.getTenantCodefromDB'(conn, findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 10))
+String tenantcode = CustomKeywords.'layananSaya.verifLayanan.getTenantCodefromDB'(conn, findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 8))
 
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
 {
@@ -78,73 +81,160 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	'angka untuk menghitung data mandatory yang tidak terpenuhi'
 	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 4))
 	
-	'ubah ke tab billing system'
-	WebUI.switchToWindowIndex(currentTab)
+	'service name dari DB'
+	ArrayList<String> serviceNameDB = CustomKeywords.'layananSaya.verifLayanan.getListServiceName'(conndevUAT, tenantcode)
 	
-	'click menu tenant'
-	WebUI.click(findTestObject('Tenant/menu_Tenant'))
+	'service status dari DB'
+	ArrayList<String> serviceStatusDB = CustomKeywords.'layananSaya.verifLayanan.getListServiceStatus'(conndevUAT, tenantcode)
 	
-	'panggil fungsi search tenant'
-	searchTenant()
-	
-	'cek apakah object muncul setelah tenant dicari'
-	if(WebUI.verifyElementPresent(findTestObject('Object Repository/LayananSaya/Page_eSignHub - Adicipta Inovasi Teknologi/ServiceSetting'), GlobalVariable.Timeout, FailureHandling.OPTIONAL))
-	{
-		'klik ke bagian service balance setting'
-		WebUI.click(findTestObject('Object Repository/LayananSaya/Page_eSignHub - Adicipta Inovasi Teknologi/ServiceSetting'))
-	}
-	else
-	{
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 2) +
-				';') + GlobalVariable.FailedReasonSearchFailed)
-			
-		continue
-	}
+	'service charge type dari DB'
+	ArrayList<String> chargeTypeDB = CustomKeywords.'layananSaya.verifLayanan.getListChargeType'(conndevUAT, tenantcode)
 	
 	'deklarasi service yang aktif di UI'
-	ArrayList<String> arrayServicesUI = new ArrayList<String>()
+	ArrayList<String> serviceNameUI = new ArrayList<String>()
 	
-	//lanjut ambil data dari DB
-}
+	'deklarasi status service di UI'
+	ArrayList<String> serviceStatusUI = new ArrayList<String>()
+	
+	'deklarasi charge type di UI'
+	ArrayList<String> chargeTypeUI = new ArrayList<String>()
+	
+	'ambil total data pada tabel'
+	Total = WebUI.getText(findTestObject('Object Repository/LayananSaya/totalData')).split(' ')
+	
+	if(WebUI.verifyEqual(serviceNameDB.size(), Integer.parseInt(Total[0]), FailureHandling.OPTIONAL) == true)
+	{
+		'ambil alamat trxnumber'
+		def onepage = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-service > div > div > div > div:nth-child(3) > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
 		
-
-
-def navigatetoeendigoBeta() {
-	'buka website APIAAS SIT, data diambil dari TestData Login'
-	WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
+		'banyaknya row table'
+		int Index = onepage.size()
+		
+		'mulai perhitungan data service name'
+		for(int i=1; i<=Index; i++)
+		{
+			'ambil object dari ddl'
+			def modifyServiceName = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[1]/div/p", true)
+				
+			'tambahkan nama service name UI ke array'
+			String data = WebUI.getText(modifyServiceName)
+			serviceNameUI.add(data)
+		}
+		
+		'mulai perhitungan data service status'
+		for(int i=1; i<=Index; i++)
+		{
+			'ambil object dari ddl'
+			def modifyServiceStatus = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[2]/div/p", true)
+				
+			'tambahkan nama service name UI ke array'
+			String data = WebUI.getText(modifyServiceStatus)
+			serviceStatusUI.add(data)
+		}
+		
+		'mulai perhitungan data charge type'
+		for(int i=1; i<=Index; i++)
+		{
+			'ambil object dari ddl'
+			def modifyChargeType = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[3]/div/p", true)
+				
+			'tambahkan nama service name UI ke array'
+			String data = WebUI.getText(modifyChargeType)
+			chargeTypeUI.add(data)
+		}
+		
+		'cari button skip di footer'
+		def elementbuttonskip = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-service > div > div > div > div:nth-child(3) > app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
 	
-	'isi username dengan email yang terdaftar'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-		findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 10))
+		'ambil banyaknya laman footer'
+		int lastPage = elementbuttonskip.size()
+		
+		for(int i=0; i<(lastPage-4); i++)
+		{
+			'ubah path object button next'
+			def modifybuttonnext = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/buttonNextPage'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage-1) +"]", true)
+		
+			'cek apakah button enable atau disable'
+			if(WebUI.getAttribute(modifybuttonnext, 'class', FailureHandling.CONTINUE_ON_FAILURE) == '')
+			{
+				'klik button next page'
+				WebUI.click(modifybuttonnext)
+			}
+			else
+			{
+				break
+			}
+			
+			'ambil alamat trxnumber'
+			def otherpage = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-service > div > div > div > div:nth-child(3) > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
 	
-	'isi password yang sesuai'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
-		findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 11))
-	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'))
-
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+			'banyaknya row table'
+			int IndexOther = otherpage.size()
+			
+			'mulai perhitungan data service name'
+			for(int i=1; i<=Index; i++)
+			{
+				'ambil object dari ddl'
+				def modifyServiceName = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[1]/div/p", true)
+					
+				'tambahkan nama service name UI ke array'
+				String data = WebUI.getText(modifyServiceName)
+				serviceNameUI.add(data)
+			}
+			
+			'mulai perhitungan data service status'
+			for(int i=1; i<=Index; i++)
+			{
+				'ambil object dari ddl'
+				def modifyServiceStatus = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[2]/div/p", true)
+					
+				'tambahkan nama service name UI ke array'
+				String data = WebUI.getText(modifyServiceStatus)
+				serviceStatusUI.add(data)
+			}
+			
+			'mulai perhitungan data charge type'
+			for(int i=1; i<=Index; i++)
+			{
+				'ambil object dari ddl'
+				def modifyChargeType = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[3]/div/p", true)
+					
+				'tambahkan nama service name UI ke array'
+				String data = WebUI.getText(modifyChargeType)
+				chargeTypeUI.add(data)
+			}
+		}
+		
+		'jika service name yang tampil UI tidak sesuai dengan DB'
+		if (!serviceNameUI.containsAll(serviceNameDB))
+		{
+			GlobalVariable.FlagFailed = 1
+			'Write to excel status failed and reason service tidak sesuai'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonServiceNotMatch)
+		}
+		else if (!serviceStatusUI.containsAll(serviceStatusDB))
+		{
+			'jika service status yang tampil UI tidak sesuai dengan DB'
+			GlobalVariable.FlagFailed = 1
+			'Write to excel status failed and reason status tidak sesuai'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonStatusNotMatch)
+		}
+		else if (!chargeTypeUI.containsAll(chargeTypeDB))
+		{
+			'jika chargetype yang tampil UI tidak sesuai dengan DB'
+			GlobalVariable.FlagFailed = 1
+			'Write to excel status failed and reason chargetype'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonChargeTypeNotMatch)
+		}
+	}
+	'lakukan refresh laman untuk kembali ke halaman 1'
+	WebUI.refresh()
 }
-
-def searchTenant() {
-	'input nama tenant'
-	WebUI.setText(findTestObject('Tenant/input_NamaTenant'), findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn,
-			15))
-
-	'input status'
-	WebUI.setText(findTestObject('Tenant/input_Status'), findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn,
-			16))
-
-	'click enter untuk input select ddl'
-	WebUI.sendKeys(findTestObject('Tenant/input_Status'), Keys.chord(Keys.ENTER))
-
-	'click button cari'
-	WebUI.click(findTestObject('Tenant/button_Cari'))
-}
+'tutup browser'
+WebUI.closeBrowser()

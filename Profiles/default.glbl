@@ -21,6 +21,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'ChargeType di UI tidak sama dengan DB'</initValue>
+      <name>FailedReasonChargeTypeNotMatch</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Data di ddl tidak sesuai dengan DB'</initValue>
       <name>FailedReasonDDL</name>
    </GlobalVariableEntity>
@@ -73,6 +78,11 @@
       <description></description>
       <initValue>'Set Ulang tidak berfungsi dengan benar'</initValue>
       <name>FailedReasonSetFailed</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Status di UI tidak sama dengan DB'</initValue>
+      <name>FailedReasonStatusNotMatch</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

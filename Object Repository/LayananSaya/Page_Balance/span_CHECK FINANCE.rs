@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>span_CHECK FINANCE</name>
+   <tag></tag>
+   <elementGuidId>45c98ac6-3e85-4e37-a2d6-f5e7af67f8ad</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>span.text-center.text-dark</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//a[@id='dropdownBasic2']/div/span</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>span</value>
+      <webElementGuid>1615571c-2123-4a8a-b680-f8d771a46ee8</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>text-center text-dark</value>
+      <webElementGuid>e5f8673d-64aa-4b03-b089-98c2f5fd74fe</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>CHECK FINANCE</value>
+      <webElementGuid>7d1ad885-4632-4690-b0e0-e9ecd5d16fc9</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;dropdownBasic2&quot;)/div[@class=&quot;user mr-3 ml-3&quot;]/span[@class=&quot;text-center text-dark&quot;]</value>
+      <webElementGuid>0839fc14-06a9-442f-9e57-6ee9036bfe7e</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//a[@id='dropdownBasic2']/div/span</value>
+      <webElementGuid>544952a4-49a4-4a01-8959-957e3d36993c</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Profil Saya'])[1]/preceding::span[1]</value>
+      <webElementGuid>2c65c6a8-d197-42c6-8c80-2e9f02495f36</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Ubah Kata Sandi'])[1]/preceding::span[2]</value>
+      <webElementGuid>e1c0185c-927d-40c3-828a-1b085535d440</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>//*/text()[normalize-space(.)='CHECK FINANCE']/parent::*</value>
+      <webElementGuid>d05c0a10-d161-4711-8b1a-70b147f9a823</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//span</value>
+      <webElementGuid>18ef7d0f-5a2c-4be5-9050-b7dde8aaf216</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//span[(text() = 'CHECK FINANCE' or . = 'CHECK FINANCE')]</value>
+      <webElementGuid>a8a60cdb-b1e2-4103-b119-24eb7c8fa9ef</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

@@ -154,7 +154,7 @@ public class verifSaldo {
 		}
 		return listdata
 	}
-	
+
 	@Keyword
 	public getListKantor(Connection conn, String tenantcode) {
 		String data
