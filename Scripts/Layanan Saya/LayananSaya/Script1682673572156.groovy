@@ -104,104 +104,66 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	
 	if(WebUI.verifyEqual(serviceNameDB.size(), Integer.parseInt(Total[0]), FailureHandling.OPTIONAL) == true)
 	{
-		'ambil alamat trxnumber'
-		def onepage = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-service > div > div > div > div:nth-child(3) > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
-		
-		'banyaknya row table'
-		int Index = onepage.size()
-		
-		'mulai perhitungan data service name'
-		for(int i=1; i<=Index; i++)
+		for(int row=0; row<serviceNameDB.size(); row++)
 		{
-			'ambil object dari ddl'
-			def modifyServiceName = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[1]/div/p", true)
-				
-			'tambahkan nama service name UI ke array'
-			String data = WebUI.getText(modifyServiceName)
-			serviceNameUI.add(data)
-		}
-		
-		'mulai perhitungan data service status'
-		for(int i=1; i<=Index; i++)
-		{
-			'ambil object dari ddl'
-			def modifyServiceStatus = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[2]/div/p", true)
-				
-			'tambahkan nama service name UI ke array'
-			String data = WebUI.getText(modifyServiceStatus)
-			serviceStatusUI.add(data)
-		}
-		
-		'mulai perhitungan data charge type'
-		for(int i=1; i<=Index; i++)
-		{
-			'ambil object dari ddl'
-			def modifyChargeType = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[3]/div/p", true)
-				
-			'tambahkan nama service name UI ke array'
-			String data = WebUI.getText(modifyChargeType)
-			chargeTypeUI.add(data)
-		}
-		
-		'cari button skip di footer'
-		def elementbuttonskip = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-service > div > div > div > div:nth-child(3) > app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
-	
-		'ambil banyaknya laman footer'
-		int lastPage = elementbuttonskip.size()
-		
-		for(int j=0; j<(lastPage-4); j++)
-		{
-			'ubah path object button next'
-			def modifybuttonnext = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/buttonNextPage'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage-1) +"]", true)
-		
-			'cek apakah button enable atau disable'
-			if(WebUI.getAttribute(modifybuttonnext, 'class', FailureHandling.CONTINUE_ON_FAILURE) == '')
+			if(row%10 == 0)
 			{
-				'klik button next page'
-				WebUI.click(modifybuttonnext)
+				'cari button skip di footer'
+				def elementbuttonskip = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-service > div > div > div > div:nth-child(3) > app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
+			
+				'ambil banyaknya laman footer'
+				int lastPage = elementbuttonskip.size()
+				
+				'ubah path object button next'
+				def modifybuttonnext = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/buttonNextPage'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage-1) +"]", true)
+			
+				'cek apakah button enable atau disable'
+				if(WebUI.getAttribute(modifybuttonnext, 'class', FailureHandling.CONTINUE_ON_FAILURE) == '')
+				{
+					'klik button next page'
+					WebUI.click(modifybuttonnext)
+				}
 			}
 			else
 			{
-				break
-			}
-			
-			'ambil alamat trxnumber'
-			def otherpage = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-service > div > div > div > div:nth-child(3) > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
-	
-			'banyaknya row table'
-			int IndexOther = otherpage.size()
-			
-			'mulai perhitungan data service name'
-			for(int i=1; i<=IndexOther; i++)
-			{
-				'ambil object dari ddl'
-				def modifyServiceName = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[1]/div/p", true)
-					
-				'tambahkan nama service name UI ke array'
-				String data = WebUI.getText(modifyServiceName)
-				serviceNameUI.add(data)
-			}
-			
-			'mulai perhitungan data service status'
-			for(int i=1; i<=IndexOther; i++)
-			{
-				'ambil object dari ddl'
-				def modifyServiceStatus = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[2]/div/p", true)
-					
-				'tambahkan nama service name UI ke array'
-				String data = WebUI.getText(modifyServiceStatus)
-				serviceStatusUI.add(data)
-			}
-			
-			'mulai perhitungan data charge type'
-			for(int i=1; i<=IndexOther; i++)
-			{
-				'ambil object dari ddl'
-				def modifyChargeType = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[3]/div/p", true)
-					
-				'tambahkan nama service name UI ke array'
-				String data = WebUI.getText(modifyChargeType)
-				chargeTypeUI.add(data)
+				'ambil alamat trxnumber'
+				def onepage = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-service > div > div > div > div:nth-child(3) > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
+				
+				'banyaknya row table'
+				int Index = onepage.size()
+				
+				'mulai perhitungan data service name'
+				for(int i=1; i<=Index; i++)
+				{
+					'ambil object dari ddl'
+					def modifyServiceName = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[1]/div/p", true)
+						
+					'tambahkan nama service name UI ke array'
+					String data = WebUI.getText(modifyServiceName)
+					serviceNameUI.add(data)
+				}
+				
+				'mulai perhitungan data service status'
+				for(int i=1; i<=Index; i++)
+				{
+					'ambil object dari ddl'
+					def modifyServiceStatus = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[2]/div/p", true)
+						
+					'tambahkan nama service name UI ke array'
+					String data = WebUI.getText(modifyServiceStatus)
+					serviceStatusUI.add(data)
+				}
+				
+				'mulai perhitungan data charge type'
+				for(int i=1; i<=Index; i++)
+				{
+					'ambil object dari ddl'
+					def modifyChargeType = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+(i)+"]/datatable-body-row/div[2]/datatable-body-cell[3]/div/p", true)
+						
+					'tambahkan nama service name UI ke array'
+					String data = WebUI.getText(modifyChargeType)
+					chargeTypeUI.add(data)
+				}
 			}
 		}
 		
@@ -249,6 +211,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonTable)
 	}
+	
 	'lakukan refresh laman untuk kembali ke halaman 1'
 	WebUI.refresh()
 }

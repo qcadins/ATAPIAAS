@@ -119,7 +119,7 @@ public class verifSaldo {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT description FROM ms_lov WHERE description LIKE '%Use "+ tipeSaldo +"%' OR description LIKE '%Topup "+ tipeSaldo +"%'")
+		ResultSet resultSet = stm.executeQuery("SELECT description FROM ms_lov WHERE description LIKE '%Use "+ tipeSaldo +"%' OR description LIKE '%Topup "+ tipeSaldo +"%' AND is_active = '1'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
@@ -141,7 +141,7 @@ public class verifSaldo {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '"+tenantcode+"' AND is_active = '1'")
+		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '"+tenantcode+"' AND mbt.is_active = '1'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
@@ -163,7 +163,7 @@ public class verifSaldo {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT office_name FROM ms_office mo JOIN ms_tenant mt ON mo.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '"+tenantcode+"'")
+		ResultSet resultSet = stm.executeQuery("SELECT office_name FROM ms_office mo JOIN ms_tenant mt ON mo.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '"+tenantcode+"' AND mo.is_active = '1'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
