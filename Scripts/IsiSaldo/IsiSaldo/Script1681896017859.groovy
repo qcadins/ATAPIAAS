@@ -63,7 +63,7 @@ navigatetoeendigoBeta()
 'ambil kode tenant di DB'
 String tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 10))
 
-for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 4; (GlobalVariable.NumOfColumn)++)
+for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
 {
 	'set penanda error menjadi 0'
 	GlobalVariable.FlagFailed = 0
@@ -155,7 +155,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 4; (GlobalVariable.
 	'klik di luar textbox agar memunculkan tombol lanjut'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/containerForm'))
 	
-	'verifikasi element bisa diceklis'
+	'verifikasi button tidak di disable'
 	if(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Lanjut'), 'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL) && isMandatoryComplete != 0)
 	{
 		GlobalVariable.FlagFailed = 1
@@ -187,7 +187,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 4; (GlobalVariable.
 	filterSaldo()
 	
 	'cek apakah button skip enable atau disable'
-	if(WebUI.verifyElementClickable(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
+	if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
 	{
 		'klik button skip to last page'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))

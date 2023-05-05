@@ -109,7 +109,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 			if(row/10 == 1)
 			{
 				'cek apakah button next enable atau disable'
-				if(WebUI.verifyElementClickable(findTestObject('Object Repository/OCR Testing/Page_Balance/i_Catatan_datatable-icon-right'), FailureHandling.OPTIONAL))
+				if(WebUI.verifyElementVisible(findTestObject('Object Repository/OCR Testing/Page_Balance/i_Catatan_datatable-icon-right'), FailureHandling.OPTIONAL))
 				{
 					'klik button next page'
 					WebUI.click(findTestObject('Object Repository/OCR Testing/Page_Balance/i_Catatan_datatable-icon-right'))
