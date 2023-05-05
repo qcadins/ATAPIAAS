@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>i_Catatan_datatable-icon-skip</name>
+   <name>i_Catatan_datatable-icon-right</name>
    <tag></tag>
-   <elementGuidId>5cabfc2a-4734-42fe-afa5-531159619d95</elementGuidId>
+   <elementGuidId>47fe5917-44f7-4033-97e3-2a24c28275dc</elementGuidId>
    <selectorCollection>
       <entry>
          <key>CSS</key>
-         <value>i.datatable-icon-skip</value>
-      </entry>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@class = 'datatable-icon-skip']</value>
+         <value>i.datatable-icon-right</value>
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>//*[@class = 'datatable-icon-skip']</value>
+         <value>//*[@class=&quot;datatable-icon-right&quot;]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@class=&quot;datatable-icon-right&quot;]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -26,30 +26,30 @@
       <name>tag</name>
       <type>Main</type>
       <value>i</value>
-      <webElementGuid>9ad2746a-85ba-4333-8565-20858eaa87fe</webElementGuid>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>class</name>
-      <type>Main</type>
-      <value>datatable-icon-skip</value>
-      <webElementGuid>3ffa4c5c-d6dc-4b5c-98dd-fe3d78037bcc</webElementGuid>
+      <webElementGuid>273557d2-494a-4fcc-917d-3ca4a4060cb4</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>datatable-icon-right</value>
+      <webElementGuid>ca6e2c2b-c731-4ac5-af59-12c405de83f9</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value></value>
-      <webElementGuid>ccda3356-5646-47b4-b352-d7b6f1672d1f</webElementGuid>
+      <value>//*[@class=&quot;datatable-icon-right&quot;]</value>
+      <webElementGuid>70888aa8-020f-4d5c-bb82-79e280daa756</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:position</name>
       <type>Main</type>
-      <value>//li[7]/a/i</value>
-      <webElementGuid>f5d8ee86-ec9d-43a4-8d38-50d80a19cad5</webElementGuid>
+      <value>//li[6]/a/i</value>
+      <webElementGuid>c6c58f38-9480-4530-b4dd-eabd3b4878b3</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

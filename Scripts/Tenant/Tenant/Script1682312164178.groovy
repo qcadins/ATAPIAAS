@@ -707,11 +707,8 @@ def checkPaging(Connection connectProd) {
 	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Tenant/button_Page1'), 'class', FailureHandling.CONTINUE_ON_FAILURE),
 			'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 
-	'ubah path object button next page'
-	def modifybuttonnextpage = WebUI.modifyObjectProperty(findTestObject('Tenant/button_NextPage'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-tenant/app-msx-paging/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage - 1) +"]", true)
-	
-	'click next page'
-	WebUI.click(modifybuttonnextpage)
+	'klik button next page'
+	WebUI.click(findTestObject('Object Repository/OCR Testing/Page_Balance/i_Catatan_datatable-icon-right'))
 
 	'verify paging di page 2'
 	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Tenant/button_Page2'), 'class', FailureHandling.CONTINUE_ON_FAILURE),
@@ -724,11 +721,8 @@ def checkPaging(Connection connectProd) {
 	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Tenant/button_Page1'), 'class', FailureHandling.CONTINUE_ON_FAILURE),
 			'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 
-	'modify object last Page'
-	def modifyObjectLastPage = WebUI.modifyObjectProperty(findTestObject('Tenant/button_MaxPage'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-tenant/app-msx-paging/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage) +"]", true)
-
-	'click max page'
-	WebUI.click(modifyObjectLastPage)
+	'klik button skip to last page'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
 	
 	'modify object last Page'
 	def modifyObjectmaxPage = WebUI.modifyObjectProperty(findTestObject('Tenant/button_MaxPage'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-tenant/app-msx-paging/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage - 2) +"]", true)

@@ -42,7 +42,7 @@ def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProductio
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('Path'): ExcelPathOCRTesting], FailureHandling.STOP_ON_FAILURE)
 
 'pindah testcase sesuai jumlah di excel'
-for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.NumOfColumn)++)
+for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
 {
 	'ambil kode tenant di DB'
 	String tenantcode = CustomKeywords.'ocrTesting.getParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCRTesting).getValue(2, 25))
@@ -91,8 +91,12 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	'panggil fungsi filter saldo berdasarkan input user'
 	filterSaldo()
 	
-	'panggil fungsi skip ke page terakhir'
-	SkiptotheLastPages()
+	'cek apakah button skip enable atau disable'
+	if(WebUI.verifyElementClickable(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
+	{
+		'klik button skip to last page'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
+	}
 	
 	'panggil fungsi ambil transaksi terakhir di tabel'
 	String no_Trx_before = getTrxNumber()
@@ -163,8 +167,12 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 	'panggil fungsi filter saldo berdasarkan inputan user'
 	filterSaldo()
 	
-	'panggil fungsi untuk pindah ke laman terakhir table'
-	SkiptotheLastPages()
+	'cek apakah button skip enable atau disable'
+	if(WebUI.verifyElementClickable(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
+	{
+		'klik button skip to last page'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
+	}
 	
 	'variabel yang diharapkan menyimpan number transaksi sesudah hit'
 	String no_Trx_after = getTrxNumber()
@@ -277,25 +285,6 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 3; (GlobalVariable.
 
 'tutup browser jika loop sudah selesai'
 WebUI.closeBrowser()
-
-'fungsi langsung ke laman akhir'
-def SkiptotheLastPages() {
-	'cari button skip di footer'
-	def elementbuttonskip = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 > app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
-	
-	'ambil banyaknya laman footer'
-	int lastPage = elementbuttonskip.size()
-	
-	'ubah path object button skip'
-	def modifybuttonskip = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage) +"]", true)
-
-	'cek apakah button enable atau disable'
-	if(WebUI.getAttribute(modifybuttonskip, 'class', FailureHandling.CONTINUE_ON_FAILURE) == '')
-	{
-		'klik button skip to last page'
-		WebUI.click(modifybuttonskip)
-	}
-}
 
 'ambil saldo sesuai testing yang dilakukan'
 def getSaldoforTransaction(String NamaOCR) {

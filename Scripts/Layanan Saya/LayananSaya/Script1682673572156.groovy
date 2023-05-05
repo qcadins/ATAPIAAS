@@ -106,22 +106,13 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	{
 		for(int row=0; row<serviceNameDB.size(); row++)
 		{
-			if(row%10 == 0)
+			if(row/10 == 1)
 			{
-				'cari button skip di footer'
-				def elementbuttonskip = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-service > div > div > div > div:nth-child(3) > app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
-			
-				'ambil banyaknya laman footer'
-				int lastPage = elementbuttonskip.size()
-				
-				'ubah path object button next'
-				def modifybuttonnext = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/buttonNextPage'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage-1) +"]", true)
-			
-				'cek apakah button enable atau disable'
-				if(WebUI.getAttribute(modifybuttonnext, 'class', FailureHandling.CONTINUE_ON_FAILURE) == '')
+				'cek apakah button next enable atau disable'
+				if(WebUI.verifyElementClickable(findTestObject('Object Repository/OCR Testing/Page_Balance/i_Catatan_datatable-icon-right'), FailureHandling.OPTIONAL))
 				{
 					'klik button next page'
-					WebUI.click(modifybuttonnext)
+					WebUI.click(findTestObject('Object Repository/OCR Testing/Page_Balance/i_Catatan_datatable-icon-right'))
 				}
 			}
 			else

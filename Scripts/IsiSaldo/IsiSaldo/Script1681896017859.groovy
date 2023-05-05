@@ -186,8 +186,12 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn < 4; (GlobalVariable.
 	'filter saldo sesuai kebutuhan user'
 	filterSaldo()
 	
-	'pindah ke halaman terakhir dari tabel'
-	SkiptotheLastPages()
+	'cek apakah button skip enable atau disable'
+	if(WebUI.verifyElementClickable(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
+	{
+		'klik button skip to last page'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
+	}
 	
 	'ambil nomor transaksi terakhir di tabel'
 	no_TrxfromUI = getTrxNumber()
@@ -500,25 +504,6 @@ def filterSaldo() {
 		
 	'klik pada button cari'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/button_Cari'))
-}
-
-'fungsi langsung ke laman akhir'
-def SkiptotheLastPages() {
-	'cari button skip di footer'
-	def elementbuttonskip = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 > app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
-	
-	'ambil banyaknya laman footer'
-	int lastPage = elementbuttonskip.size()
-	
-	'ubah path object button skip'
-	def modifybuttonskip = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage) +"]", true)
-
-	'cek apakah button enable atau disable'
-	if(WebUI.getAttribute(modifybuttonskip, 'class', FailureHandling.CONTINUE_ON_FAILURE) == '')
-	{
-		'klik button skip to last page'
-		WebUI.click(modifybuttonskip)
-	}
 }
 
 'ambil no. transaksi pada tabel'
