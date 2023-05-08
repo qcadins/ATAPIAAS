@@ -71,6 +71,7 @@ else if(TC == 'Regist')
 	WebUI.maximizeWindow()
 	
 	WebUI.delay(GlobalVariable.Timeout)
+	
 	'klik pada tombol buat akun'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
 	
@@ -89,6 +90,21 @@ else if(TC == 'Regist')
 	'input pada field email'
 	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4'),
 		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8))
+	
+	'ubah ke laman login'
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Masuk'))
+	
+	'klik pada tombol buat akun'
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
+	
+	'ambil teks dari field input email'
+	if(WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4'), FailureHandling.OPTIONAL) != findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8))
+	{
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) +
+			';') + GlobalVariable.FailedReasonEmailField)
+	}
 	
 	'input pada field nama pengguna'
 	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1'),
@@ -158,6 +174,9 @@ else if (TC == 'IsiSaldo')
 else if (TC == 'Tenant')
 {
 	WebUI.maximizeWindow()
+	
+	'klik tombol masuk'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
 	
 	'input data username'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Selamat datang kembali di Billing Sys_95ee84'),

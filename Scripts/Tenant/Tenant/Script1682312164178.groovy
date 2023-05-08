@@ -628,6 +628,15 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 					CustomKeywords.'writeToExcel.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Tenant', 0,
 						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 				}
+				else
+				{
+					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
+					CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 2) +
+						';') + GlobalVariable.FailedReasonQuantityNotNull)
+					
+					continue
+				}
 			}
 			else if (isMandatoryComplete > 0)
 			{
@@ -779,6 +788,9 @@ def checkActiveTenant(String tenantcode, Connection conndevUAT) {
 }
 
 def searchTenant() {
+	'click button cari'
+	WebUI.click(findTestObject('Tenant/button_Cari'))
+	
 	'input nama tenant'
 	WebUI.setText(findTestObject('Tenant/input_NamaTenant'), findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn,
 			9))

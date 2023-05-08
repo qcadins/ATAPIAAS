@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>span_Balance</name>
+   <tag></tag>
+   <elementGuidId>bb3a5012-eeaf-4e63-92f2-a38a5361a2f3</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>span.menu-title.ng-tns-c133-5</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>(.//*[normalize-space(text()) and normalize-space(.)='Logout'])[1]/following::span[1]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>span</value>
+      <webElementGuid>d592261d-e4aa-40cd-9273-9e5400f0074d</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>menu-title ng-tns-c133-5</value>
+      <webElementGuid>b3588eb0-51f6-4336-b0b2-e039e3474989</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Balance</value>
+      <webElementGuid>89951acf-258c-4b40-916d-9793311471d4</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-expanded vertical-menu menu-open&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;app-sidebar main-menu menu-fixed menu-native-scroll expanded ng-star-inserted&quot;]/app-sidebar[@class=&quot;ng-tns-c133-5&quot;]/div[@class=&quot;sidebar-content main-menu-content ng-tns-c133-5 ps&quot;]/div[@class=&quot;nav-container ng-tns-c133-5&quot;]/ul[@class=&quot;navigation ng-tns-c133-5&quot;]/li[@class=&quot;ng-tns-c133-5 ng-star-inserted active&quot;]/a[@class=&quot;ng-tns-c133-5 ng-star-inserted&quot;]/span[@class=&quot;menu-title ng-tns-c133-5&quot;]</value>
+      <webElementGuid>55069a6e-4685-4fed-889e-2fde29563cbc</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Logout'])[1]/following::span[1]</value>
+      <webElementGuid>df308244-17aa-437e-b77e-f918cff0d17b</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='List Service'])[1]/following::span[2]</value>
+      <webElementGuid>6d56dcea-ab3c-4ada-b751-73cd50ce07e6</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='API Key'])[1]/preceding::span[1]</value>
+      <webElementGuid>b56103cf-4d69-41c9-ae97-5b235d618e39</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='API Documentation'])[1]/preceding::span[2]</value>
+      <webElementGuid>759b64ef-ad55-41a7-86d6-c9bb17c802a5</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//a/span</value>
+      <webElementGuid>265063e8-0680-409b-a4de-2834751e8a12</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//span[(text() = 'Balance' or . = 'Balance')]</value>
+      <webElementGuid>21b350bb-bf4f-44f2-a808-4a372b665cc4</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

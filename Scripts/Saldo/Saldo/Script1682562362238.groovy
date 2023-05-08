@@ -129,6 +129,19 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	WebUI.refresh()
 }
 
+'klik garis tiga di kanan atas web'
+WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/i_LINA_ft-chevron-down'))
+
+'klik tombol keluar'
+WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/span_Logout'))
+
+'verifikasi apakah login dengan google muncul'
+WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'), GlobalVariable.Timeout)
+
+'verifikasi apakah captcha muncul'
+WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/Page_Login - eendigo Platform/span_Lanjutkan dengan Google'), GlobalVariable.Timeout)
+
+'tutup browser'
 WebUI.closeBrowser()
 
 'fungsi untuk filter saldo berdasarkan input user'

@@ -36,6 +36,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Email tidak tersimpan di field'</initValue>
+      <name>FailedReasonEmailField</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Error pada pemrosesan oleh API'</initValue>
       <name>FailedReasonHITAPI</name>
    </GlobalVariableEntity>
@@ -58,6 +63,11 @@
       <description></description>
       <initValue>'Gagal ubah page'</initValue>
       <name>FailedReasonPagingError</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Saldo != 0, tidak bisa ubah charge type'</initValue>
+      <name>FailedReasonQuantityNotNull</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

@@ -87,7 +87,7 @@ public class connect {
 
 		return conn
 	}
-	
+
 	//fungsi digunakan untuk koneksi dengan database eendigo dev_uat
 	@Keyword
 	def connectDBAPIAAS_devUat() {

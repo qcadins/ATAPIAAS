@@ -29,6 +29,18 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPa
 'mendapat jumlah kolom dari sheet Edit Profile'
 int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 
+'memanggil fungsi untuk login'
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf'], FailureHandling.STOP_ON_FAILURE)
+
+'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
+WebUI.delay(10)
+
+'focus pada button login'
+WebUI.focus(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+
+'Klik Login'
+WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+
 'looping kolom dari testdata'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++) 
 {
@@ -43,18 +55,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 	}
 	
 	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 4))
-	
-    'memanggil fungsi untuk login'
-    WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf'], FailureHandling.STOP_ON_FAILURE)
-
-    'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
-    WebUI.delay(10)
-
-    'focus pada button login'
-    WebUI.focus(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-
-    'Klik Login'
-    WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
     'klik garis tiga di kanan atas web'
     WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/i_LINA_ft-chevron-down'))
@@ -125,7 +125,22 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
         'verifikasi data yang ada di excel dengan di database sesudah diEdit'
         WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfileStoreDBVerif'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
-    
+	
+	'klik pada tombol balance'
+	WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/span_Balance'))
+	
+	'klik pada tombol API KEY'
+	WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/span_API Key'))
+	
+	'klik garis tiga di kanan atas web'
+	WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/i_LINA_ft-chevron-down'))
+
+	'klik profil saya'
+	WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/a_Profil Saya'))
+
+	'klik tombol edit profile'
+	WebUI.click(findTestObject('Object Repository/Profile/Page_My Profile/button_Edit Profile'))
+	
     'kondisi jika tidak ada failed pada bagian lain testcase'
     if (GlobalVariable.FlagFailed == 0) 
 	{
@@ -134,10 +149,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
     }
 	else
 	{
-		'tulis kondisi gagal'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-			GlobalVariable.StatusReasonSystem)
+		'Write To Excel GlobalVariable.StatusFailed and gagal karena reason status'
+		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) +
+			';') + GlobalVariable.StatusReasonSystem)
 	}
-    WebUI.closeBrowser()
 }
-
+WebUI.closeBrowser()
