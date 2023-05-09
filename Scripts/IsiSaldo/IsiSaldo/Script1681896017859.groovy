@@ -73,177 +73,175 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	{
 		break
 	}
-	else if (!findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted'))
+	else if (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted'))
 	{
-		continue
-	}
-	
-	'angka untuk menghitung data mandatory yang tidak terpenuhi'
-	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 4))
-	
-	int Saldobefore, Saldoafter, JumlahTopUp, TopupSaldoCorrectTenant
-	
-	String no_TrxfromUI, no_TrxfromDB, no_TrxOtherTenant
-	
-	'flag apakah topup masuk ke tenant yang benar'
-	TopupSaldoCorrectTenant = 1
-	
-	'ambil saldo sebelum isi ulang'
-	Saldobefore = getSaldoforTransaction(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 14))
-	
-	'ubah ke tab billing system'
-	WebUI.switchToWindowIndex(currentTab)
-	
-	'klik pada input tenant'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'))
-	
-	'panggil fungsi check jumlah tenant di DB dan UI'
-	checkTenantcount(conndevUAT)
-	
-	'input nama tenant yang akan digunakan'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'), findTestData(
-		ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 12))
-	
-	'pencet enter pada textbox'
-	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'), Keys.chord(
-		Keys.ENTER))
-	
-	'klik pada input vendor'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'))
-	
-	'check jumlah vendor di DB dan UI'
-	checkVendorcount(conndevUAT, tenantcode)
-	
-	'input nama vendor yang akan digunakan'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'), findTestData(
-		ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 13))
-	
-	'pencet enter pada textbox'
-	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'), Keys.chord(
-		Keys.ENTER))
-	
-	'klik pada input tipe saldo'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'))
-	
-	'panggil fungsi cek banyak tipe saldo yang bisa diisi ulang'
-	checkTipeSaldocount(conndevUAT, tenantcode)
-	
-	'input nama saldo yang akan diisi ulang'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'), findTestData(
-		ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 14))
-	
-	'pencet enter pada textbox'
-	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'), Keys.chord(
-		Keys.ENTER))
-	
-	'input jumlah saldo yang akan ditambahkan'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Tambah Saldo_qty'),
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 15))
-	
-	'input nomor tagihan untuk proses isi ulang saldo'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Nomor Tagihan_refNo'),
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 16))
-	
-	'input notes/catatan untuk proses isi ulang saldo'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Catatan_notes'),
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 17))
-	
-	'input tanggal isi ulang saldo'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Tanggal Pembelian_trxDate'),
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 18))
-	
-	'klik di luar textbox agar memunculkan tombol lanjut'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/containerForm'))
-	
-	'verifikasi button tidak di disable'
-	if(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Lanjut'), 'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL) && isMandatoryComplete != 0)
-	{
-		GlobalVariable.FlagFailed = 1
-		'tulis kondisi gagal'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' + 
-		GlobalVariable.FailedReasonMandatory)
+		'angka untuk menghitung data mandatory yang tidak terpenuhi'
+		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 4))
 		
-		continue;
-	}
-	else
-	{
-		'klik pada tombol lanjut'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Lanjut'))
-	}
+		int Saldobefore, Saldoafter, JumlahTopUp, TopupSaldoCorrectTenant
 		
-	'klik pada tombol proses isi ulang  saldo'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Ya, proses'))
-	
-	'ubah fokus ke tab eendigo beta'
-	WebUI.switchToWindowIndex(currentTab+1)
-	
-	'refresh laman web untuk ambil saldo baru'
-	WebUI.refresh()
-	
-	'ambil jumlah saldo pada menu trial'
-	Saldoafter = getSaldoforTransaction(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 14))
-	
-	'filter saldo sesuai kebutuhan user'
-	filterSaldo()
-	
-	'cek apakah button skip enable atau disable'
-	if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
-	{
-		'klik button skip to last page'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
-	}
-	
-	'ambil nomor transaksi terakhir di tabel'
-	no_TrxfromUI = getTrxNumber()
-	
-	'jika perlu cek ke DB'
-	if(GlobalVariable.KondisiCekDB == 'Yes')
-	{
-		'ambil nomor transaksi terbaru dari DB'
-		no_TrxfromDB = CustomKeywords.'apikey.checkSaldoAPI.getLatestMutation'(conndevUAT, tenantcode)
+		String no_TrxfromUI, no_TrxfromDB, no_TrxOtherTenant
 		
-		'ambil nomor transaksi terbaru tenant lain'
-		no_TrxOtherTenant = CustomKeywords.'apikey.checkSaldoAPI.getLatestMutationOtherTenant'(conndevUAT, tenantcode)
+		'flag apakah topup masuk ke tenant yang benar'
+		TopupSaldoCorrectTenant = 1
 		
-		'call test case store db'
-		 WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoStoreDB'), [('tenant') : tenantcode], 
-			 FailureHandling.CONTINUE_ON_FAILURE)
+		'ambil saldo sebelum isi ulang'
+		Saldobefore = getSaldoforTransaction(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 14))
 		
-		'cek apakah transaksi tercatat, memastikan tenant lain tidak memiliki transaksi yang sama'
-		if(no_TrxfromDB != no_TrxfromUI || no_TrxfromDB == no_TrxOtherTenant)
+		'ubah ke tab billing system'
+		WebUI.switchToWindowIndex(currentTab)
+		
+		'klik pada input tenant'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'))
+		
+		'panggil fungsi check jumlah tenant di DB dan UI'
+		checkTenantcount(conndevUAT)
+		
+		'input nama tenant yang akan digunakan'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'), findTestData(
+			ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 12))
+		
+		'pencet enter pada textbox'
+		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'), Keys.chord(
+			Keys.ENTER))
+		
+		'klik pada input vendor'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'))
+		
+		'check jumlah vendor di DB dan UI'
+		checkVendorcount(conndevUAT, tenantcode)
+		
+		'input nama vendor yang akan digunakan'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'), findTestData(
+			ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 13))
+		
+		'pencet enter pada textbox'
+		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'), Keys.chord(
+			Keys.ENTER))
+		
+		'klik pada input tipe saldo'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'))
+		
+		'panggil fungsi cek banyak tipe saldo yang bisa diisi ulang'
+		checkTipeSaldocount(conndevUAT, tenantcode)
+		
+		'input nama saldo yang akan diisi ulang'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'), findTestData(
+			ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 14))
+		
+		'pencet enter pada textbox'
+		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'), Keys.chord(
+			Keys.ENTER))
+		
+		'input jumlah saldo yang akan ditambahkan'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Tambah Saldo_qty'),
+			findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 15))
+		
+		'input nomor tagihan untuk proses isi ulang saldo'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Nomor Tagihan_refNo'),
+			findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 16))
+		
+		'input notes/catatan untuk proses isi ulang saldo'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Catatan_notes'),
+			findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 17))
+		
+		'input tanggal isi ulang saldo'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Tanggal Pembelian_trxDate'),
+			findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 18))
+		
+		'klik di luar textbox agar memunculkan tombol lanjut'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/containerForm'))
+		
+		'verifikasi button tidak di disable'
+		if(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Lanjut'), 'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL) && isMandatoryComplete != 0)
 		{
-			'topup dianggap gagal'
-			TopupSaldoCorrectTenant = 0
+			GlobalVariable.FlagFailed = 1
+			'tulis kondisi gagal'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' +
+			GlobalVariable.FailedReasonMandatory)
+			
+			continue;
 		}
 		else
 		{
-			'jika ada konten pada tabel yang tidak sesuai dengan DB'
-			if(verifyTableContent(conndevUAT, tenantcode) == 0)
+			'klik pada tombol lanjut'
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Lanjut'))
+		}
+			
+		'klik pada tombol proses isi ulang  saldo'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Ya, proses'))
+		
+		'ubah fokus ke tab eendigo beta'
+		WebUI.switchToWindowIndex(currentTab+1)
+		
+		'refresh laman web untuk ambil saldo baru'
+		WebUI.refresh()
+		
+		'ambil jumlah saldo pada menu trial'
+		Saldoafter = getSaldoforTransaction(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 14))
+		
+		'filter saldo sesuai kebutuhan user'
+		filterSaldo()
+		
+		'cek apakah button skip enable atau disable'
+		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
+		{
+			'klik button skip to last page'
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
+		}
+		
+		'ambil nomor transaksi terakhir di tabel'
+		no_TrxfromUI = getTrxNumber()
+		
+		'jika perlu cek ke DB'
+		if(GlobalVariable.KondisiCekDB == 'Yes')
+		{
+			'ambil nomor transaksi terbaru dari DB'
+			no_TrxfromDB = CustomKeywords.'apikey.checkSaldoAPI.getLatestMutation'(conndevUAT, tenantcode)
+			
+			'ambil nomor transaksi terbaru tenant lain'
+			no_TrxOtherTenant = CustomKeywords.'apikey.checkSaldoAPI.getLatestMutationOtherTenant'(conndevUAT, tenantcode)
+			
+			'call test case store db'
+			 WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoStoreDB'), [('tenant') : tenantcode],
+				 FailureHandling.CONTINUE_ON_FAILURE)
+			
+			'cek apakah transaksi tercatat, memastikan tenant lain tidak memiliki transaksi yang sama'
+			if(no_TrxfromDB != no_TrxfromUI || no_TrxfromDB == no_TrxOtherTenant)
 			{
 				'topup dianggap gagal'
 				TopupSaldoCorrectTenant = 0
 			}
+			else
+			{
+				'jika ada konten pada tabel yang tidak sesuai dengan DB'
+				if(verifyTableContent(conndevUAT, tenantcode) == 0)
+				{
+					'topup dianggap gagal'
+					TopupSaldoCorrectTenant = 0
+				}
+			}
 		}
-	}
-	
-	'ambil jumlah topup yang diinput oleh user dari excel'
-	JumlahTopUp = Integer.parseInt(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 15))
-	
-	'saldo sekarang harus sama dengan saldo sebelumnya ditambah jumlah topup'
-	if(Saldobefore + JumlahTopUp == Saldoafter && GlobalVariable.FlagFailed == 0 && TopupSaldoCorrectTenant == 1)
-	{
-		'tulis status sukses pada excel'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' + 
-		GlobalVariable.SuccessReason)
-				
-	}
-	else
-	{
-		GlobalVariable.FlagFailed = 1
-		'tulis kondisi gagal'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' + 
-		GlobalVariable.FailedReasonTopUpFailed)
-	}
+		
+		'ambil jumlah topup yang diinput oleh user dari excel'
+		JumlahTopUp = Integer.parseInt(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 15))
+		
+		'saldo sekarang harus sama dengan saldo sebelumnya ditambah jumlah topup'
+		if(Saldobefore + JumlahTopUp == Saldoafter && GlobalVariable.FlagFailed == 0 && TopupSaldoCorrectTenant == 1)
+		{
+			'tulis status sukses pada excel'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' +
+			GlobalVariable.SuccessReason)
+					
+		}
+		else
+		{
+			GlobalVariable.FlagFailed = 1
+			'tulis kondisi gagal'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' +
+			GlobalVariable.FailedReasonTopUpFailed)
+		}
+	}	
 }
 
 'tutup browser'

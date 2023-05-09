@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "C067B909DB3C8A65F24C8A2C62502530",
+  "keywordFileContentHash": "333E2B42EBD62DAE77C32296AA916FA3",
   "keywordClasses": [
     {
       "name": "profile.checkProfile",
@@ -39,6 +39,38 @@
         {
           "name": "getAttributeValueProfile",
           "parameters": [],
+          "javadoc": ""
+        },
+        {
+          "name": "getTenantCodefromDB",
+          "parameters": [
+            {
+              "name": "conn",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "tenantname",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ],
           "javadoc": ""
         }
       ]

@@ -61,13 +61,9 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	{
 		break
 	} 
-	else if (!findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) 
+	else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) 
 	{
-		continue
-	}
-
-	
-	'deklarasi variable response'
+		'deklarasi variable response'
 	ResponseObject response
 	
 	'cek apakah perlu tambah API'
@@ -278,9 +274,9 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		message_ocr)
 	}
-	
 	'refresh halaman web'
 	WebUI.refresh()
+	}
 }
 
 'tutup browser jika loop sudah selesai'

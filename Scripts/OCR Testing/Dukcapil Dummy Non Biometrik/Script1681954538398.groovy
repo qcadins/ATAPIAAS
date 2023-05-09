@@ -84,222 +84,220 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	{
 		break
 	} 
-	else if (!findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) 
+	else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) 
 	{
-		continue
-	}
-	
-	'deklarasi variable response'
-	ResponseObject response
-	
-	'cek apakah perlu tambah API'
-	String UseCorrectKey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 19)
-	
-	'cek apakah perlu gunakan tenantcode yang salah'
-	String UseCorrectTenant = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 17)
-	
-	'angka untuk menghitung data mandatory yang tidak terpenuhi'
-	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 4))
-	
-	'deklarasi variabel angka'
-	int isSaldoBerkurang, Saldobefore, UISaldoafter, KatalonSaldoafter, isTrxIncreased, HitAPITrx
-	
-	'penanda untuk HIT yang berhasil dan gagal'
-	HitAPITrx = 1
-	
-	'set penanda error menjadi 0'
-	GlobalVariable.FlagFailed = 0
-	
-	'panggil fungsi filter saldo berdasarkan input user'
-	filterSaldo()
-	
-	'cek apakah button skip enable atau disable'
-	if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
-	{
-		'klik button skip to last page'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
-	}
-	
-	'panggil fungsi ambil transaksi terakhir di tabel'
-	String no_Trx_before = getTrxNumber()
-	
-	'variabel yang menyimpan saldo sebelum adanya transaksi'
-	Saldobefore = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
-	
-	if(UseCorrectKey != 'Yes')
-	{
-		thekey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 20)
-	}
-	if(UseCorrectTenant != 'Yes')
-	{
-		tenantcode = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 18)
-	}
-	
-	'lakukan proses HIT api dengan parameter image, key, dan juga tenant'
-	response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/dukcapil UAT - Biometrik', 
-	[('img'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 8),
-	('tenant'):tenantcode,
-	('key'):thekey,
-	('loginId'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 22),
-	('refNum'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 23),
-	('off_code'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 24),
-	('off_name'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 25),
-	('phoneNum'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 9),
-	('idNo'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 10),
-	('fullName'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 11),
-	('DOB'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 12),
-	('email'):findTestData(ExcelPathOCRTesting).getValue(2, 27)
-	]))
+		'deklarasi variable response'
+		ResponseObject response
 		
-	'ambil message respon dari HIT tersebut'
-	message_ocr = WS.getElementPropertyValue(response, 'message')
-	
-	'ambil status dari respon HIT tersebut'
-	state_ocr = WS.getElementPropertyValue(response, 'status')
-	
-	'ambil verifStatus dari respon HIT'
-	verifState_ocr = WS.getElementPropertyValue(response, 'verifStatus')
-
-	'jika kurang saldo hentikan proses testing'
-	if(state_ocr == 'FAILED' && message_ocr == 'Insufficient balance')
-	{
-		'write to excel status failed dan reason'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		message_ocr)
-		break;
-	}
-	//jika status sukses dengan key dan kode tenant yang salah, anggap sebagai bug dan lanjutkan ke tc berikutnya
-	else if(state_ocr == '0' && UseCorrectKey != 'Yes' && UseCorrectTenant != 'Yes')
-	{
-		'write to excel status failed dan reason'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonKeyTenantBypass)
-			
-		continue;
-	}
-	
-	'refresh halaman web'
-	WebUI.refresh()
-	
-	'panggil fungsi filter saldo berdasarkan inputan user'
-	filterSaldo()
-	
-	'cek apakah button skip enable atau disable'
-	if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
-	{
-		'klik button skip to last page'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
-	}
-	
-	'variabel yang diharapkan menyimpan number transaksi sesudah hit'
-	String no_Trx_after = getTrxNumber()
-	
-	'jika user ingin cek ke DB hasil HIT API nya'
-	if(GlobalVariable.KondisiCekDB == 'Yes')
-	{
-		'simpan trx number terbaru dari DB'
-		String LatestMutation= CustomKeywords.'ocrTesting.getParameterfromDB.getLatestMutationfromDB'(conndevUAT, tenantcode)
+		'cek apakah perlu tambah API'
+		String UseCorrectKey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 19)
 		
-		'simpan trx number terbaru milik tenant lain dari DB'
-		String LatestOtherTenantMutation = CustomKeywords.'ocrTesting.getParameterfromDB.getNotMyLatestMutationfromDB'(conndevUAT, tenantcode)
+		'cek apakah perlu gunakan tenantcode yang salah'
+		String UseCorrectTenant = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 17)
 		
-		'jika data transaction number di web dan DB tidak sesuai'
-		if(LatestMutation != no_Trx_after || LatestMutation == LatestOtherTenantMutation)
+		'angka untuk menghitung data mandatory yang tidak terpenuhi'
+		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 4))
+		
+		'deklarasi variabel angka'
+		int isSaldoBerkurang, Saldobefore, UISaldoafter, KatalonSaldoafter, isTrxIncreased, HitAPITrx
+		
+		'penanda untuk HIT yang berhasil dan gagal'
+		HitAPITrx = 1
+		
+		'set penanda error menjadi 0'
+		GlobalVariable.FlagFailed = 0
+		
+		'panggil fungsi filter saldo berdasarkan input user'
+		filterSaldo()
+		
+		'cek apakah button skip enable atau disable'
+		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
 		{
-			'anggap HIT Api gagal'
-			HitAPITrx = 0
+			'klik button skip to last page'
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
 		}
-	}
-	
-	'simpan harga Dukcapil(NonBiom) ke dalam integer'
-	int Service_price = CustomKeywords.'ocrTesting.getParameterfromDB.getServicePricefromDB'(conndevUAT, idPayment)
-	
-	'jika HIT API successful'
-	if(HitAPITrx == 1)
-	{
-		'cek apakah jenis penagihan berdasarkan harga'
-		if(BalanceChargeType == 'Price')
+		
+		'panggil fungsi ambil transaksi terakhir di tabel'
+		String no_Trx_before = getTrxNumber()
+		
+		'variabel yang menyimpan saldo sebelum adanya transaksi'
+		Saldobefore = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
+		
+		if(UseCorrectKey != 'Yes')
 		{
-			'input saldo setelah penagihan'
-			KatalonSaldoafter = Saldobefore - Service_price
+			thekey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 20)
+		}
+		if(UseCorrectTenant != 'Yes')
+		{
+			tenantcode = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 18)
+		}
+		
+		'lakukan proses HIT api dengan parameter image, key, dan juga tenant'
+		response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/dukcapil UAT - Biometrik',
+		[('img'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 8),
+		('tenant'):tenantcode,
+		('key'):thekey,
+		('loginId'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 22),
+		('refNum'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 23),
+		('off_code'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 24),
+		('off_name'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 25),
+		('phoneNum'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 9),
+		('idNo'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 10),
+		('fullName'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 11),
+		('DOB'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 12),
+		('email'):findTestData(ExcelPathOCRTesting).getValue(2, 27)
+		]))
+			
+		'ambil message respon dari HIT tersebut'
+		message_ocr = WS.getElementPropertyValue(response, 'message')
+		
+		'ambil status dari respon HIT tersebut'
+		state_ocr = WS.getElementPropertyValue(response, 'status')
+		
+		'ambil verifStatus dari respon HIT'
+		verifState_ocr = WS.getElementPropertyValue(response, 'verifStatus')
+	
+		'jika kurang saldo hentikan proses testing'
+		if(state_ocr == 'FAILED' && message_ocr == 'Insufficient balance')
+		{
+			'write to excel status failed dan reason'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			message_ocr)
+			break;
+		}
+		//jika status sukses dengan key dan kode tenant yang salah, anggap sebagai bug dan lanjutkan ke tc berikutnya
+		else if(state_ocr == '0' && UseCorrectKey != 'Yes' && UseCorrectTenant != 'Yes')
+		{
+			'write to excel status failed dan reason'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			GlobalVariable.FailedReasonKeyTenantBypass)
+				
+			continue;
+		}
+		
+		'refresh halaman web'
+		WebUI.refresh()
+		
+		'panggil fungsi filter saldo berdasarkan inputan user'
+		filterSaldo()
+		
+		'cek apakah button skip enable atau disable'
+		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
+		{
+			'klik button skip to last page'
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
+		}
+		
+		'variabel yang diharapkan menyimpan number transaksi sesudah hit'
+		String no_Trx_after = getTrxNumber()
+		
+		'jika user ingin cek ke DB hasil HIT API nya'
+		if(GlobalVariable.KondisiCekDB == 'Yes')
+		{
+			'simpan trx number terbaru dari DB'
+			String LatestMutation= CustomKeywords.'ocrTesting.getParameterfromDB.getLatestMutationfromDB'(conndevUAT, tenantcode)
+			
+			'simpan trx number terbaru milik tenant lain dari DB'
+			String LatestOtherTenantMutation = CustomKeywords.'ocrTesting.getParameterfromDB.getNotMyLatestMutationfromDB'(conndevUAT, tenantcode)
+			
+			'jika data transaction number di web dan DB tidak sesuai'
+			if(LatestMutation != no_Trx_after || LatestMutation == LatestOtherTenantMutation)
+			{
+				'anggap HIT Api gagal'
+				HitAPITrx = 0
+			}
+		}
+		
+		'simpan harga Dukcapil(NonBiom) ke dalam integer'
+		int Service_price = CustomKeywords.'ocrTesting.getParameterfromDB.getServicePricefromDB'(conndevUAT, idPayment)
+		
+		'jika HIT API successful'
+		if(HitAPITrx == 1)
+		{
+			'cek apakah jenis penagihan berdasarkan harga'
+			if(BalanceChargeType == 'Price')
+			{
+				'input saldo setelah penagihan'
+				KatalonSaldoafter = Saldobefore - Service_price
+			}
+			else
+			{
+				'input saldo setelah penagihan dikurangi qty'
+				KatalonSaldoafter = Saldobefore - 1
+			}
+		}
+		
+		'simpan saldo setelah di HIT'
+		UISaldoafter = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
+		
+		'jika saldoafter match'
+		if(KatalonSaldoafter == UISaldoafter)
+		{
+			isSaldoBerkurang = 1
 		}
 		else
 		{
-			'input saldo setelah penagihan dikurangi qty'
-			KatalonSaldoafter = Saldobefore - 1
+			isSaldoBerkurang = 0
 		}
+		
+		'jika transaksi bertambah di DB dan di web'
+		if(no_Trx_after > no_Trx_before)
+		{
+			'web mencatat transaksi terbaru'
+			isTrxIncreased = 1
+		}
+		else
+		{
+			'web tidak mencatat transaksi terbaru'
+			isTrxIncreased = 0
+		}
+		
+		'jika tidak ada message error dan kondisi lain terpenuhi'
+		if(message_ocr == 'ID has been checked.' && state_ocr == 0 && verifState_ocr == true && isTrxIncreased == 1 && isSaldoBerkurang == 1 && HitAPITrx == 1)
+		{
+			'tulis status sukses pada excel'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
+			GlobalVariable.SuccessReason)
+		
+		}
+		//kondisi jika transaksi berhasil tapi tidak tercatat/tersimpan di DB
+		else if(state_ocr == 0 && isTrxIncreased == 0 && isSaldoBerkurang == 1)
+		{
+			GlobalVariable.FlagFailed = 1
+			'tulis kondisi gagal'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+			GlobalVariable.FailedReasonTrxNotinDB)
+		}
+		//kondisi jika transaksi berhasil tapi saldo tidak berkurang
+		else if(state_ocr == 0 && isTrxIncreased == 1 && isSaldoBerkurang == 0)
+		{
+			GlobalVariable.FlagFailed = 1
+			'tulis kondisi gagal'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+			GlobalVariable.FailedReasonBalanceNotChange)
+		}
+		//kondisi transaksi tidak tampil dan tidak tersimpan di DB
+		else if(HitAPITrx == 0 && state_ocr == 0 && isTrxIncreased == 0 && isSaldoBerkurang == 1)
+		{
+			GlobalVariable.FlagFailed = 1
+			'tulis kondisi gagal'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+			GlobalVariable.FailedReasonSaldoBocor)
+		}
+		else
+		{
+			GlobalVariable.FlagFailed = 1
+			'write to excel status failed dan reason'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			message_ocr)
+		}
+		
+		'refresh halaman web'
+		WebUI.refresh()
 	}
-	
-	'simpan saldo setelah di HIT'
-	UISaldoafter = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
-	
-	'jika saldoafter match'
-	if(KatalonSaldoafter == UISaldoafter)
-	{
-		isSaldoBerkurang = 1
-	}
-	else
-	{
-		isSaldoBerkurang = 0
-	}
-	
-	'jika transaksi bertambah di DB dan di web'
-	if(no_Trx_after > no_Trx_before)
-	{
-		'web mencatat transaksi terbaru'
-		isTrxIncreased = 1
-	}
-	else
-	{
-		'web tidak mencatat transaksi terbaru'
-		isTrxIncreased = 0
-	}
-	
-	'jika tidak ada message error dan kondisi lain terpenuhi'
-	if(message_ocr == 'ID has been checked.' && state_ocr == 0 && verifState_ocr == true && isTrxIncreased == 1 && isSaldoBerkurang == 1 && HitAPITrx == 1)
-	{
-		'tulis status sukses pada excel'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
-		GlobalVariable.SuccessReason)
-	
-	}
-	//kondisi jika transaksi berhasil tapi tidak tercatat/tersimpan di DB
-	else if(state_ocr == 0 && isTrxIncreased == 0 && isSaldoBerkurang == 1)
-	{
-		GlobalVariable.FlagFailed = 1
-		'tulis kondisi gagal'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-		GlobalVariable.FailedReasonTrxNotinDB)
-	}
-	//kondisi jika transaksi berhasil tapi saldo tidak berkurang
-	else if(state_ocr == 0 && isTrxIncreased == 1 && isSaldoBerkurang == 0)
-	{
-		GlobalVariable.FlagFailed = 1
-		'tulis kondisi gagal'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-		GlobalVariable.FailedReasonBalanceNotChange)
-	}
-	//kondisi transaksi tidak tampil dan tidak tersimpan di DB
-	else if(HitAPITrx == 0 && state_ocr == 0 && isTrxIncreased == 0 && isSaldoBerkurang == 1)
-	{
-		GlobalVariable.FlagFailed = 1
-		'tulis kondisi gagal'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-		GlobalVariable.FailedReasonSaldoBocor)
-	}
-	else
-	{
-		GlobalVariable.FlagFailed = 1
-		'write to excel status failed dan reason'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		message_ocr)
-	}
-	
-	'refresh halaman web'
-	WebUI.refresh()
 }
 
 'tutup browser jika loop sudah selesai'

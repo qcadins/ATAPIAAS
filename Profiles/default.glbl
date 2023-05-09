@@ -111,8 +111,18 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Tenant name/code tidak sesuai'</initValue>
+      <name>FailedReasonTenant</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Topup terjadi failure'</initValue>
       <name>FailedReasonTopUpFailed</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Saldo trial tidak muncul'</initValue>
+      <name>FailedReasonTrial</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

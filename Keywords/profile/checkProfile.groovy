@@ -110,4 +110,20 @@ public class checkProfile {
 		'sekelompok data akan dikembalikan dalam bentuk array'
 		return hasilgetText
 	}
+	
+	//fungsi untuk mengambil tenant code dari database
+	@Keyword
+	public getTenantCodefromDB(Connection conn, String tenantname) {
+		String data
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT tenant_code FROM ms_tenant WHERE tenant_name = '"+tenantname+"'")
+
+		while(resultSet.next())
+		{
+			data = resultSet.getObject(1)
+		}
+		return data
+	}
 }
