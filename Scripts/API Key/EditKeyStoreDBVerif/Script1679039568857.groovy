@@ -25,13 +25,13 @@ import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
 'deklarasi variabel untuk konek ke Database APIAAS'
-def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
+def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'ambil email dari testdata, disimpan ke string'
 String namaAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12)
 
 'kumpulan string yang menyimpan hasil data dari DB'
-ArrayList<String> hasildb = CustomKeywords.'apikey.checkAPIKey.getAPIStatusfromDB'(conn, namaAPI)
+ArrayList<String> hasildb = CustomKeywords.'apikey.CheckAPIKey.getAPIStatusfromDB'(conn, namaAPI)
 
 'kumpulan string dari data yang diambil langsung dari excel'
 ArrayList<String> hasilexcel = new ArrayList<String>()
@@ -54,7 +54,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 	{
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		GlobalVariable.FailedReasonStoreDB)
 		break;

@@ -1,11 +1,30 @@
 {
-  "keywordFileContentHash": "5FE1255A3097E5B235709B6D493EF253",
+  "keywordFileContentHash": "8A513669F45478973B836B61BA2D26F6",
   "keywordClasses": [
     {
-      "name": "otp.GetOTPfromDB",
+      "name": "documentationAPI.CheckDocum",
       "keywordMethods": [
         {
-          "name": "getOTPforRegister",
+          "name": "isFileDownloaded",
+          "parameters": [
+            {
+              "name": "deleteFile",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ],
+          "javadoc": ""
+        },
+        {
+          "name": "getDocumentationAPIName",
           "parameters": [
             {
               "name": "conn",
@@ -19,21 +38,13 @@
                 "genericsTypes": [],
                 "errorOnParsing": false
               }
-            },
-            {
-              "name": "email",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.lang.String",
-                "unresolvedClassName": "String",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
             }
           ],
+          "javadoc": ""
+        },
+        {
+          "name": "getValueDDLDocumentationAPI",
+          "parameters": [],
           "javadoc": ""
         }
       ]

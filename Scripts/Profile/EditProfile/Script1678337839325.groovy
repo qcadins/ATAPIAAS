@@ -24,13 +24,13 @@ import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
-def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
+def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'memanggil fungsi untuk login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf'], FailureHandling.STOP_ON_FAILURE)
@@ -150,7 +150,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 		{
 			GlobalVariable.FlagFailed = 1
 			'Write to excel status failed and reason topup failed'
-			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonTrial)
 		}
@@ -165,14 +165,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 		String tenantnameExcel = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 10) + " " + findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 11)
 		
 		'nama tenant dari DB'
-		String tenantnameDB = CustomKeywords.'profile.checkProfile.getTenantNamefromDB'(conn, findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
+		String tenantnameDB = CustomKeywords.'profile.CheckProfile.getTenantNamefromDB'(conn, findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
 		
 		'verifikasi adanya tenant code dan name yang sesuai DB'
 		if(WebUI.verifyMatch(tenantnameDB, tenantnameExcel, false) == false)
 		{
 			GlobalVariable.FlagFailed = 1
 			'Write to excel status failed and reason topup failed'
-			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonTenant)
 		}
@@ -181,13 +181,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 		if (GlobalVariable.FlagFailed == 0)
 		{
 			'write to excel success'
-			CustomKeywords.'writeToExcel.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Edit Profile', 0,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Edit Profile', 0,
 				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 		}
 		else
 		{
 			'Write To Excel GlobalVariable.StatusFailed and gagal karena reason status'
-			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) +
 				';') + GlobalVariable.StatusReasonSystem)
 		}

@@ -101,7 +101,7 @@ else if(TC == 'Regist')
 	if(WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4'), FailureHandling.OPTIONAL) != findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8))
 	{
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) +
 			';') + GlobalVariable.FailedReasonEmailField)
 	}

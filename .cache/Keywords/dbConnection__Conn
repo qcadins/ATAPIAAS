@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "7119485E521E131BB01C37E3D48AB99A",
+  "keywordFileContentHash": "1B77A248BF4362870155E6080E70A2EF",
   "keywordClasses": [
     {
-      "name": "dbConnection.Connect",
+      "name": "dbConnection.Conn",
       "keywordMethods": [
         {
           "name": "connectDBAPIAAS_esign",

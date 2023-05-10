@@ -18,13 +18,13 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_esign'()
+def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int CountColumnEdit = findTestData(ExcelPathRegisterLogin).getColumnNumbers()
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; GlobalVariable.NumOfColumn++)
 {
@@ -66,7 +66,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 		WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), ["TC":'Regist'], FailureHandling.STOP_ON_FAILURE)
 		
 		'cek apakah button register bisa di klik'
-		CustomKeywords.'writeToExcel.checkSaveProcess.checkStatusbtnClickable'(isMandatoryComplete, findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'), GlobalVariable.NumOfColumn, 'Register')
+		CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatusbtnClickable'(isMandatoryComplete, findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'), GlobalVariable.NumOfColumn, 'Register')
 		
 		'pencet enter'
 		WebUI.sendKeys(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'), Keys.chord(Keys.ENTER))
@@ -82,10 +82,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 		WebUI.delay(5)
 		
 		'mengambil otp dari db, disimpan ke iniotp'
-		ArrayList<String> iniotp = CustomKeywords.'otp.getOTPfromDB.getOTPforRegister'(conn, email)
+		ArrayList<String> iniotp = CustomKeywords.'otp.GetOTPfromDB.getOTPforRegister'(conn, email)
 		
 		'cek apakah field untuk input otp muncul'
-		CustomKeywords.'writeToExcel.checkSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), GlobalVariable.NumOfColumn, 'Register')
+		CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), GlobalVariable.NumOfColumn, 'Register')
 		
 		if(AutofillOTP == 'Yes')
 		{
@@ -105,14 +105,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 					WebUI.delay(2)
 					
 					'mengambil otp dari db, disimpan ke iniotp'
-					iniotp = CustomKeywords.'otp.getOTPfromDB.getOTPforRegister'(conn, email)
+					iniotp = CustomKeywords.'otp.GetOTPfromDB.getOTPforRegister'(conn, email)
 					
 					if(WebUI.verifyMatch(iniotp[i], iniotp[i+1], false, FailureHandling.CONTINUE_ON_FAILURE))
 					{
 						GlobalVariable.FlagFailed = 1
 						
 						'tulis gagal resend otp ke excel'
-						CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 						GlobalVariable.FailedReasonOTP)
 					}
@@ -127,7 +127,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 			WebUI.delay(2)
 			
 			'verifikasi adanya sukses isi otp'
-			CustomKeywords.'writeToExcel.checkSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Verifikasi OTP Email berhasil'), GlobalVariable.NumOfColumn, 'Register')
+			CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Verifikasi OTP Email berhasil'), GlobalVariable.NumOfColumn, 'Register')
 		}
 		else
 		{
@@ -147,14 +147,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 						WebUI.delay(2)
 						
 						'mengambil otp dari db, disimpan ke iniotp'
-						iniotp = CustomKeywords.'otp.getOTPfromDB.getOTPforRegister'(conn, email)
+						iniotp = CustomKeywords.'otp.GetOTPfromDB.getOTPforRegister'(conn, email)
 						
 						if(WebUI.verifyMatch(iniotp[i], otpmanual[0], false, FailureHandling.CONTINUE_ON_FAILURE))
 						{
 							GlobalVariable.FlagFailed = 1
 								
 							'tulis gagal resend otp ke excel'
-							CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 							GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 							GlobalVariable.FailedReasonOTP)
 						}
@@ -169,7 +169,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 				WebUI.delay(2)
 				
 				'verifikasi adanya alert otp'
-				CustomKeywords.'writeToExcel.checkSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'), GlobalVariable.NumOfColumn, 'Register')
+				CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'), GlobalVariable.NumOfColumn, 'Register')
 				
 				if(WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE))
 				{
@@ -208,7 +208,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 	//	if(isMandatoryComplete > 0)
 	//	{
 	//		'write status failed karena data mandatory tidak valid'
-	//		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+	//		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 	//			(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.StatusFailedReasonMandatory)
 	//	}
 		
@@ -226,14 +226,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; G
 	//		GlobalVariable.FlagFailed = 1
 	//		
 	//		'tulis status dan reason error ke excel'
-	//		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+	//		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 	//		(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.StatusFailedReasonSubmitError)
 	//		
 	//	}
 		if (GlobalVariable.FlagFailed == 0)
 		{
 			'tulis status sukses pada excel'
-			CustomKeywords.'writeToExcel.checkSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/Profile/Page_Balance/i_LINA_ft-chevron-down'), GlobalVariable.NumOfColumn, 'Register')
+			CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/Profile/Page_Balance/i_LINA_ft-chevron-down'), GlobalVariable.NumOfColumn, 'Register')
 		}
 		
 		WebUI.closeBrowser()

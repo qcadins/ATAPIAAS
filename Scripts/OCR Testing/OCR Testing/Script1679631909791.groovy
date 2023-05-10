@@ -25,7 +25,7 @@ String userDir = System.getProperty('user.dir')
 GlobalVariable.FlagFailed = 0
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int CountColumnEdit = findTestData(ExcelPathOCRTesting).getColumnNumbers()
@@ -34,7 +34,7 @@ int CountColumnEdit = findTestData(ExcelPathOCRTesting).getColumnNumbers()
 int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 4))
 
 'deklarasi variabel untuk konek ke Database APIAAS'
-def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
+def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'buka chrome'
 WebUI.openBrowser('')
@@ -43,10 +43,10 @@ WebUI.openBrowser('')
 WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
 
 'ambil key trial yang aktif dari DB'
-ArrayList<String> thekey = CustomKeywords.'apikey.checkAPIKey.getAPIKeyfromDB'(conn)
+ArrayList<String> thekey = CustomKeywords.'apikey.CheckAPIKey.getAPIKeyfromDB'(conn)
 
 'ambil kode tenant di DB'
-ArrayList<String> tenantcode = CustomKeywords.'apikey.checkAPIKey.getTenantCodefromDB'(conn)
+ArrayList<String> tenantcode = CustomKeywords.'apikey.CheckAPIKey.getTenantCodefromDB'(conn)
 
 println thekey[0]
 println tenantcode[0]
@@ -65,13 +65,13 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	{
 		GlobalVariable.FlagFailed = 1
 		'tulis kondisi gagal'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
         GlobalVariable.FailedReasonSaldoAPI)
 	}
 	else
 	{
 		'tulis status sukses pada excel'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('OCR', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 		GlobalVariable.SuccessReason)
 	}
 }

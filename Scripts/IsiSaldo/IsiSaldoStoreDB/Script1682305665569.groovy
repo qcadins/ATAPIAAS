@@ -18,17 +18,14 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 import java.sql.Connection
 
-'deklarasi variabel untuk konek ke Database eendigo_dev'
-def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
-
 //'deklarasi koneksi ke Database adins_apiaas_uat'
-//def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
+//def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-def conndevUAT = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_devUat'()
+def conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'get data balance mutation dari DB'
-ArrayList<String> result = CustomKeywords.'apikey.checkSaldoAPI.getIsiSaldoStoreDB'(conndevUAT, tenant)
+ArrayList<String> result = CustomKeywords.'apikey.CheckSaldoAPI.getIsiSaldoStoreDB'(conndevUAT, tenant)
 
 'declare arraylist arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
@@ -68,6 +65,6 @@ arrayMatch.add(WebUI.verifyMatch(findTestData(ExcelPathSaldoAPI).getValue(Global
 if (arrayMatch.contains(false)) {
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' + GlobalVariable.FailedReasonStoreDB)
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' + GlobalVariable.FailedReasonStoreDB)
 	
 }

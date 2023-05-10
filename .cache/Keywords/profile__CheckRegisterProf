@@ -1,11 +1,11 @@
 {
-  "keywordFileContentHash": "5FE1255A3097E5B235709B6D493EF253",
+  "keywordFileContentHash": "85B31FCFD0800B5677B0BBDB95D053B6",
   "keywordClasses": [
     {
-      "name": "otp.GetOTPfromDB",
+      "name": "profile.CheckRegisterProf",
       "keywordMethods": [
         {
-          "name": "getOTPforRegister",
+          "name": "checkDBafterRegister",
           "parameters": [
             {
               "name": "conn",

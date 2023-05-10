@@ -1,29 +1,11 @@
 {
-  "keywordFileContentHash": "8E2D0EC89820813D030270385C8C167D",
+  "keywordFileContentHash": "2A42E0994902DCADD996DE969D645EEA",
   "keywordClasses": [
     {
-      "name": "apikey.CheckSaldoAPI",
+      "name": "layananSaya.VerifLayan",
       "keywordMethods": [
         {
-          "name": "getTenantName",
-          "parameters": [
-            {
-              "name": "conn",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.sql.Connection",
-                "unresolvedClassName": "Connection",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            }
-          ]
-        },
-        {
-          "name": "getVendorName",
+          "name": "getTenantCodefromDB",
           "parameters": [
             {
               "name": "conn",
@@ -39,7 +21,7 @@
               }
             },
             {
-              "name": "tenant",
+              "name": "email",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -51,10 +33,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
-          "name": "getNamaTipeSaldo",
+          "name": "getListServiceName",
           "parameters": [
             {
               "name": "conn",
@@ -70,7 +53,7 @@
               }
             },
             {
-              "name": "tenant",
+              "name": "tenantcode",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -82,10 +65,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
-          "name": "getLatestMutation",
+          "name": "getListServiceStatus",
           "parameters": [
             {
               "name": "conn",
@@ -101,7 +85,7 @@
               }
             },
             {
-              "name": "tenant",
+              "name": "tenantcode",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -113,10 +97,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
-          "name": "getLatestMutationOtherTenant",
+          "name": "getListChargeType",
           "parameters": [
             {
               "name": "conn",
@@ -132,7 +117,7 @@
               }
             },
             {
-              "name": "tenant",
+              "name": "tenantcode",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -144,72 +129,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
-        },
-        {
-          "name": "getTrialTableContent",
-          "parameters": [
-            {
-              "name": "conn",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.sql.Connection",
-                "unresolvedClassName": "Connection",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            },
-            {
-              "name": "tenant",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.lang.String",
-                "unresolvedClassName": "String",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            }
-          ]
-        },
-        {
-          "name": "getIsiSaldoStoreDB",
-          "parameters": [
-            {
-              "name": "conn",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.sql.Connection",
-                "unresolvedClassName": "Connection",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            },
-            {
-              "name": "tenant",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.lang.String",
-                "unresolvedClassName": "String",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            }
-          ]
+          ],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

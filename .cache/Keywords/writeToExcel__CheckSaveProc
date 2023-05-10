@@ -1,36 +1,31 @@
 {
-  "keywordFileContentHash": "8E2D0EC89820813D030270385C8C167D",
+  "keywordFileContentHash": "D66D7AF41A24679AF753B29D18779EE0",
   "keywordClasses": [
     {
-      "name": "apikey.CheckSaldoAPI",
+      "name": "writeToExcel.CheckSaveProc",
       "keywordMethods": [
         {
-          "name": "getTenantName",
+          "name": "checkStatus",
           "parameters": [
             {
-              "name": "conn",
+              "name": "count",
               "initialExpression": "",
               "type": {
-                "fullClassName": "java.sql.Connection",
-                "unresolvedClassName": "Connection",
+                "fullClassName": "int",
+                "unresolvedClassName": "int",
                 "isArray": false,
                 "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
+                "hasImmutableClassName": true,
                 "genericsTypes": [],
                 "errorOnParsing": false
               }
-            }
-          ]
-        },
-        {
-          "name": "getVendorName",
-          "parameters": [
+            },
             {
-              "name": "conn",
+              "name": "object",
               "initialExpression": "",
               "type": {
-                "fullClassName": "java.sql.Connection",
-                "unresolvedClassName": "Connection",
+                "fullClassName": "com.kms.katalon.core.testobject.TestObject",
+                "unresolvedClassName": "TestObject",
                 "isArray": false,
                 "isGnericsPlaceHolder": false,
                 "hasImmutableClassName": false,
@@ -39,7 +34,20 @@
               }
             },
             {
-              "name": "tenant",
+              "name": "colm",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "int",
+                "unresolvedClassName": "int",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": true,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "sheetname",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -51,26 +59,27 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
-          "name": "getNamaTipeSaldo",
+          "name": "checkAlert",
           "parameters": [
             {
-              "name": "conn",
+              "name": "colm",
               "initialExpression": "",
               "type": {
-                "fullClassName": "java.sql.Connection",
-                "unresolvedClassName": "Connection",
+                "fullClassName": "int",
+                "unresolvedClassName": "int",
                 "isArray": false,
                 "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
+                "hasImmutableClassName": true,
                 "genericsTypes": [],
                 "errorOnParsing": false
               }
             },
             {
-              "name": "tenant",
+              "name": "sheetname",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -82,17 +91,31 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
-          "name": "getLatestMutation",
+          "name": "checkStatusbtnClickable",
           "parameters": [
             {
-              "name": "conn",
+              "name": "count",
               "initialExpression": "",
               "type": {
-                "fullClassName": "java.sql.Connection",
-                "unresolvedClassName": "Connection",
+                "fullClassName": "int",
+                "unresolvedClassName": "int",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": true,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "object",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "com.kms.katalon.core.testobject.TestObject",
+                "unresolvedClassName": "TestObject",
                 "isArray": false,
                 "isGnericsPlaceHolder": false,
                 "hasImmutableClassName": false,
@@ -101,7 +124,20 @@
               }
             },
             {
-              "name": "tenant",
+              "name": "colm",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "int",
+                "unresolvedClassName": "int",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": true,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "sheetname",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -113,103 +149,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
-        },
-        {
-          "name": "getLatestMutationOtherTenant",
-          "parameters": [
-            {
-              "name": "conn",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.sql.Connection",
-                "unresolvedClassName": "Connection",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            },
-            {
-              "name": "tenant",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.lang.String",
-                "unresolvedClassName": "String",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            }
-          ]
-        },
-        {
-          "name": "getTrialTableContent",
-          "parameters": [
-            {
-              "name": "conn",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.sql.Connection",
-                "unresolvedClassName": "Connection",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            },
-            {
-              "name": "tenant",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.lang.String",
-                "unresolvedClassName": "String",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            }
-          ]
-        },
-        {
-          "name": "getIsiSaldoStoreDB",
-          "parameters": [
-            {
-              "name": "conn",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.sql.Connection",
-                "unresolvedClassName": "Connection",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            },
-            {
-              "name": "tenant",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.lang.String",
-                "unresolvedClassName": "String",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            }
-          ]
+          ],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

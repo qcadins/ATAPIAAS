@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "9A43CE17AEBD47CD55C508FFF28B61E3",
+  "keywordFileContentHash": "ED3497C24E2D99A8C6942EE1EB12B47E",
   "keywordClasses": [
     {
-      "name": "tenant.tenantVerif",
+      "name": "tenant.TenantVerif",
       "keywordMethods": [
         {
           "name": "getTenantTotal",

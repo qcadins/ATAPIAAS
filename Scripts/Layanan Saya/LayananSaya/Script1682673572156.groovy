@@ -25,19 +25,19 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Isi Saldo'
 int CountColumnEdit = findTestData(ExcelPathLayananSaya).getColumnNumbers()
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
-def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
+def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 //'deklarasi koneksi ke Database adins_apiaas_uat'
-//def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
+//def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-def conndevUAT = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_devUat'()
+def conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Layanan'], FailureHandling.STOP_ON_FAILURE)
@@ -61,7 +61,7 @@ else
 }
 
 'ambil kode tenant di DB'
-String tenantcode = CustomKeywords.'layananSaya.verifLayanan.getTenantCodefromDB'(conn, findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 8))
+String tenantcode = CustomKeywords.'layananSaya.VerifLayanan.getTenantCodefromDB'(conn, findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 8))
 
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
 {
@@ -79,13 +79,13 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 4))
 		
 		'service name dari DB'
-		ArrayList<String> serviceNameDB = CustomKeywords.'layananSaya.verifLayanan.getListServiceName'(conndevUAT, tenantcode)
+		ArrayList<String> serviceNameDB = CustomKeywords.'layananSaya.VerifLayanan.getListServiceName'(conndevUAT, tenantcode)
 		
 		'service status dari DB'
-		ArrayList<String> serviceStatusDB = CustomKeywords.'layananSaya.verifLayanan.getListServiceStatus'(conndevUAT, tenantcode)
+		ArrayList<String> serviceStatusDB = CustomKeywords.'layananSaya.VerifLayanan.getListServiceStatus'(conndevUAT, tenantcode)
 		
 		'service charge type dari DB'
-		ArrayList<String> chargeTypeDB = CustomKeywords.'layananSaya.verifLayanan.getListChargeType'(conndevUAT, tenantcode)
+		ArrayList<String> chargeTypeDB = CustomKeywords.'layananSaya.VerifLayanan.getListChargeType'(conndevUAT, tenantcode)
 		
 		'deklarasi service yang aktif di UI'
 		ArrayList<String> serviceNameUI = new ArrayList<String>()
@@ -160,7 +160,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 			{
 				GlobalVariable.FlagFailed = 1
 				'Write to excel status failed and reason service tidak sesuai'
-				CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 						GlobalVariable.FailedReasonServiceNotMatch)
 			}
@@ -169,7 +169,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 				'jika service status yang tampil UI tidak sesuai dengan DB'
 				GlobalVariable.FlagFailed = 1
 				'Write to excel status failed and reason status tidak sesuai'
-				CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 						GlobalVariable.FailedReasonStatusNotMatch)
 			}
@@ -178,24 +178,30 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 				'jika chargetype yang tampil UI tidak sesuai dengan DB'
 				GlobalVariable.FlagFailed = 1
 				'Write to excel status failed and reason chargetype'
-				CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 						GlobalVariable.FailedReasonChargeTypeNotMatch)
 			}
-			else
+			if(isMandatoryComplete != 0)
 			{
 				'jika chargetype yang tampil UI tidak sesuai dengan DB'
 				GlobalVariable.FlagFailed = 1
 				'Write to excel status failed and reason chargetype'
-				CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 						GlobalVariable.FailedReasonMandatory)
+			}
+			if(isMandatoryComplete  == 0 && GlobalVariable.FlagFailed == 0)
+			{
+				'write to excel success'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'LayananSaya', 0,
+					GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 			}
 		}
 		else
 		{
 			'Write to excel status failed karena table bermasalah'
-			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					GlobalVariable.FailedReasonTable)
 		}

@@ -18,13 +18,13 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 'koneksi untuk ke database APIAAS'
-def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
+def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'menyimpan nama api ke dalam sebuah variabel'
 String api_name = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 10)
 
 'ambil data dari DB sesudah tambah API baru'
-ArrayList<String> hasildb = CustomKeywords.'apikey.checkAPIKey.getAPINamefromDB'(conn, api_name)
+ArrayList<String> hasildb = CustomKeywords.'apikey.CheckAPIKey.getAPINamefromDB'(conn, api_name)
 
 'list nama API dari excel'
 ArrayList<String> hasilexcel = new ArrayList<String>()
@@ -45,7 +45,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 	{
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		GlobalVariable.FailedReasonSubmitError)
 	}

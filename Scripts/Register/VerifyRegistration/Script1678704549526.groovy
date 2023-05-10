@@ -24,13 +24,13 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
-def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_esign'()
+def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
 'simpan email ke dalam sebuah variabel'
 String email = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8)
 
 'simpan data yang diambil dari database'
-ArrayList<String> credential = CustomKeywords.'profile.checkRegisterProfile.checkDBafterRegister'(conn, email)
+ArrayList<String> credential = CustomKeywords.'profile.CheckRegisterProfile.checkDBafterRegister'(conn, email)
 
 'kumpulan string dari excel'
 ArrayList<String> exceldata = new ArrayList<String>()
@@ -51,7 +51,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 	{
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		GlobalVariable.FailedReasonStoreDB)
 	}

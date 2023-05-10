@@ -19,10 +19,10 @@ import org.openqa.selenium.Keys as Keys
 import java.sql.Connection
 
 //'deklarasi koneksi ke Database adins_apiaas_uat'
-//def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
+//def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-def conndevUAT = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_devUat'()
+def conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'declare arraylist arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
@@ -31,10 +31,10 @@ ArrayList<String> arrayMatch = new ArrayList<String>()
 if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('New') || findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('Edit')) {
 	
 'get data balance mutation dari DB'
-ArrayList<String> result = CustomKeywords.'tenant.tenantVerif.getTenantStoreDB'(conndevUAT, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14))
+ArrayList<String> result = CustomKeywords.'tenant.TenantVerif.getTenantStoreDB'(conndevUAT, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14))
 
 'get data services dari DB'
-ArrayList<String> resultServices = CustomKeywords.'tenant.tenantVerif.getTenantServicesDescription'(conndevUAT, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13))
+ArrayList<String> resultServices = CustomKeywords.'tenant.TenantVerif.getTenantServicesDescription'(conndevUAT, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13))
 
 'declare arrayindex'
 arrayindex = 0
@@ -88,7 +88,7 @@ for(indexExcel = 0 ; indexExcel < arrayServices.size(); indexExcel++) {
 
 }else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('Service')) {
 	'get data balacne mutation dari DB'
-	String result = CustomKeywords.'tenant.tenantVerif.getTenantServices'(conndevUAT, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 9)).replace('{','').replace('}','').replace('"','').replace(',','')
+	String result = CustomKeywords.'tenant.TenantVerif.getTenantServices'(conndevUAT, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 9)).replace('{','').replace('}','').replace('"','').replace(',','')
 	
 	'split result to array'
 	ArrayList<String> resultarray = result.split(':0')
@@ -109,10 +109,10 @@ else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).e
 	for (index = 0; index < arrayServices.size(); index++)
 	{
 		'ambil id pembayaran untuk service pertama yang diubah'
-		int IDPaymentType = CustomKeywords.'tenant.tenantVerif.getIDPaymentType'(conndevUAT, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13), arrayServices[index])
+		int IDPaymentType = CustomKeywords.'tenant.TenantVerif.getIDPaymentType'(conndevUAT, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13), arrayServices[index])
 		
 		'ambil jenis pembayaran untuk service yang terpilih'
-		String PaymentType = CustomKeywords.'tenant.tenantVerif.getPaymentType'(conndevUAT, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13), IDPaymentType)
+		String PaymentType = CustomKeywords.'tenant.TenantVerif.getPaymentType'(conndevUAT, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13), IDPaymentType)
 		
 		'split result to array'
 		if(PaymentType == 'Price')
@@ -133,6 +133,6 @@ else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).e
 if (arrayMatch.contains(false)) {
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 2) + ';' + GlobalVariable.FailedReasonStoreDB)
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 2) + ';' + GlobalVariable.FailedReasonStoreDB)
 	
 }

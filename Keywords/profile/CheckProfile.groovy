@@ -28,13 +28,13 @@ import com.kms.katalon.core.webui.driver.DriverFactory
 
 import internal.GlobalVariable
 
-public class checkProfile {
+public class CheckProfile {
 
 	int columnCount
 
 	//fungsi untuk mengambil data profile dari database
 	@Keyword
-	public getProfilefromDB(Connection conn, String email) {
+	getProfilefromDB(Connection conn, String email) {
 		String data
 
 		ArrayList<String> listdata = new ArrayList<>()
@@ -52,12 +52,12 @@ public class checkProfile {
 				listdata.add(data)
 			}
 		}
-		return listdata
+		listdata
 	}
 
 	//fungsi digunakan untuk mengambil text dari attribut website yang memiliki textbox
 	@Keyword
-	public getAttributeValueProfile() {
+	getAttributeValueProfile() {
 		Select select
 		String optionLabel
 
@@ -108,12 +108,12 @@ public class checkProfile {
 		//		hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/Profile/Page_Edit Profile/select_Afghanistan 93Albania 355Algeria 213_ddb156'), 'text'))
 
 		'sekelompok data akan dikembalikan dalam bentuk array'
-		return hasilgetText
+		hasilgetText
 	}
 
 	//fungsi untuk mengambil tenant code dari database
 	@Keyword
-	public getTenantNamefromDB(Connection conn, String email) {
+	getTenantNamefromDB(Connection conn, String email) {
 		String data
 
 		Statement stm = conn.createStatement()
@@ -124,6 +124,6 @@ public class checkProfile {
 		{
 			data = resultSet.getObject(1)
 		}
-		return data
+		data
 	}
 }

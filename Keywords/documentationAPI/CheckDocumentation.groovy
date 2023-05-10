@@ -1,52 +1,18 @@
 package documentationAPI
 
-
-import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
-import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
-import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
 import com.kms.katalon.core.annotation.Keyword
-import com.kms.katalon.core.checkpoint.Checkpoint
-import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
-import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
-import com.kms.katalon.core.model.FailureHandling
-import com.kms.katalon.core.testcase.TestCase
-import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import java.sql.Connection
 import java.sql.Statement
 
-import javax.servlet.http.HttpServletRequest
-import javax.swing.ComboBoxModel
-
-import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.ResultSetMetaData
-import org.openqa.selenium.By
-import org.openqa.selenium.support.ui.Select
-import com.kms.katalon.core.webui.driver.DriverFactory
 import groovy.sql.Sql as Sql
-import org.openqa.selenium.JavascriptExecutor
-import org.openqa.selenium.WebElement
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import java.io.IOException;
-
-import internal.GlobalVariable
-
-public class checkDocumentation {
-
-	def driver = DriverFactory.getWebDriver()
-
-	def js = (JavascriptExecutor)driver
+public class CheckDocumentation {
 
 	int columnCount
 
@@ -68,12 +34,12 @@ public class checkDocumentation {
 				isDownloaded = true
 			}
 		}
-		return isDownloaded
+		isDownloaded
 	}
 
 	//fungsi untuk mengambil data dokumentasi dari DB
 	@Keyword
-	public getDocumentationAPIName(Connection conn) {
+	getDocumentationAPIName(Connection conn) {
 		String data
 
 		ArrayList<String> listdata = new ArrayList<>()
@@ -91,12 +57,12 @@ public class checkDocumentation {
 				listdata.add(data)
 			}
 		}
-		return listdata
+		listdata
 	}
 
 	//fungsi digunakan untuk mengambil text dari dropdownlist documentation API
 	@Keyword
-	public getValueDDLDocumentationAPI() {
+	getValueDDLDocumentationAPI() {
 
 		String ariachoice,ariaid
 
@@ -148,6 +114,6 @@ public class checkDocumentation {
 				hasilddl.add('LIVENESS')
 			}
 		}
-		return hasilddl
+		hasilddl
 	}
 }

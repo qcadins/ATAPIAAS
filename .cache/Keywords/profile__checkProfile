@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "732B615486F17986579F1AD6567EFF12",
+  "keywordFileContentHash": "75ACD88D5F78F77C2653E8B4BB7415BA",
   "keywordClasses": [
     {
-      "name": "profile.checkProfile",
+      "name": "profile.CheckProfile",
       "keywordMethods": [
         {
           "name": "getProfilefromDB",
@@ -33,13 +33,11 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getAttributeValueProfile",
-          "parameters": [],
-          "javadoc": ""
+          "parameters": []
         },
         {
           "name": "getTenantNamefromDB",
@@ -70,11 +68,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

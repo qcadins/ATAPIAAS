@@ -1,57 +1,22 @@
 package apikey
 
-import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
-import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
-import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
-import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
-
 import com.kms.katalon.core.annotation.Keyword
-import com.kms.katalon.core.checkpoint.Checkpoint
-import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
-import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
-import com.kms.katalon.core.model.FailureHandling
-import com.kms.katalon.core.testcase.TestCase
-import com.kms.katalon.core.testdata.TestData
-import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import java.sql.Connection
 import java.sql.Statement
 import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
-import javax.servlet.http.HttpServletRequest
-import javax.swing.ComboBoxModel
-import org.apache.poi.ss.usermodel.WorkbookFactory
-import org.apache.poi.ss.usermodel.Workbook
-import org.apache.poi.ss.usermodel.Sheet
-
-
-import org.openqa.selenium.By
-import org.openqa.selenium.support.ui.Select
-import com.kms.katalon.core.webui.driver.DriverFactory
 import groovy.sql.Sql as Sql
-import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.WebElement
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import java.io.IOException;
-
-import internal.GlobalVariable
-
-public class checkSaldoAPI {
+public class CheckSaldoAPI {
 
 	int columnCount
 
 	//fungsi mengambil jumlah tenant
 	@Keyword
-	public getTenantName(Connection conn) {
+	getTenantName(Connection conn) {
 
 		String data
 
@@ -70,12 +35,12 @@ public class checkSaldoAPI {
 				listdata.add(data)
 			}
 		}
-		return listdata
+		listdata
 	}
 
 	//fungsi mengambil nama vendor dari DB
 	@Keyword
-	public getVendorName(Connection conn, String tenant) {
+	getVendorName(Connection conn, String tenant) {
 
 		String data
 
@@ -94,12 +59,12 @@ public class checkSaldoAPI {
 				listdata.add(data)
 			}
 		}
-		return listdata
+		listdata
 	}
 
 	//fungsi mengambil nama saldo yang diaktifkan user
 	@Keyword
-	public getNamaTipeSaldo(Connection conn, String tenant) {
+	getNamaTipeSaldo(Connection conn, String tenant) {
 		String data
 
 		ArrayList<String> listdata = new ArrayList<>()
@@ -117,12 +82,12 @@ public class checkSaldoAPI {
 				listdata.add(data)
 			}
 		}
-		return listdata
+		listdata
 	}
 
 	//fungsi mengambil jumlah saldo yang diaktifkan user
 	@Keyword
-	public getLatestMutation(Connection conn, String tenant) {
+	getLatestMutation(Connection conn, String tenant) {
 		String data
 
 		Statement stm = conn.createStatement()
@@ -134,12 +99,12 @@ public class checkSaldoAPI {
 			data = resultSet.getObject(1);
 		}
 
-		return data
+		data
 	}
 
 	//fungsi mengambil jumlah saldo yang diaktifkan user
 	@Keyword
-	public getLatestMutationOtherTenant(Connection conn, String tenant) {
+	getLatestMutationOtherTenant(Connection conn, String tenant) {
 		String data
 
 		Statement stm = conn.createStatement()
@@ -151,12 +116,12 @@ public class checkSaldoAPI {
 			data = resultSet.getObject(1);
 		}
 
-		return data
+		data
 	}
 
 	//fungsi mengambil nama saldo yang diaktifkan user
 	@Keyword
-	public getTrialTableContent(Connection conn, String tenant) {
+	getTrialTableContent(Connection conn, String tenant) {
 		String data
 
 		ArrayList<String> listdata = new ArrayList<>()
@@ -174,11 +139,11 @@ public class checkSaldoAPI {
 				listdata.add(data)
 			}
 		}
-		return listdata
+		listdata
 	}
 
 	@Keyword
-	public getIsiSaldoStoreDB(Connection conn, String tenant){
+	getIsiSaldoStoreDB(Connection conn, String tenant){
 		String data
 		ArrayList<String> listdata = new ArrayList<>()
 		Statement stm = conn.createStatement()
@@ -194,6 +159,6 @@ public class checkSaldoAPI {
 				listdata.add(data)
 			}
 		}
-		return listdata
+		listdata
 	}
 }

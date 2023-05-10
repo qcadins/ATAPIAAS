@@ -24,9 +24,6 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
-'penanda bahwa data yang diperlukan sudah lengkap di excel'
-int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 4))
-
 'nama dokumen yang akan diambil'
 String namadokumentasi = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 8)
 
@@ -35,12 +32,6 @@ String FlagDelete = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOf
 
 'mengambil alamat dari project katalon ini'
 String userDir = System.getProperty('user.dir')
-
-'directory tempat file akan didownload'
-String filePath = userDir + '\\Download'
-
-'driver chrome untuk pengalihan proses download'
-WebDriver driver = DriverFactory.getWebDriver()
 
 'Wait for Some time so that file gets downloaded and Stored in user defined path'
 WebUI.delay(5)
@@ -72,35 +63,35 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/but
 WebUI.delay(GlobalVariable.Timeout)
 
 'pengecekan file yang sudah didownload'
-boolean isDownloaded = CustomKeywords.'documentationAPI.checkDocumentation.isFileDownloaded'(FlagDelete)
+boolean isDownloaded = CustomKeywords.'documentationAPI.CheckDocumentation.isFileDownloaded'(FlagDelete)
 
 'jika file tidak terunduh, tulis gagal'
 if (WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL)) 
 {
     'tulis status sukses pada excel'
-    CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dokumentasi API', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess, 
+    CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dokumentasi API', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess, 
         GlobalVariable.SuccessReason)
 }
 else 
 {
     GlobalVariable.FlagFailed = 1
     'tulis kondisi gagal'
-    CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dokumentasi API', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
+    CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dokumentasi API', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
         GlobalVariable.FailedReasonDownloadProblem)
 }
 
 def VerifyDocumentListAPI(){
 	'deklarasi variabel untuk konek ke Database APIAAS'
-	def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
+	def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 	
 	'kumpulan string yang menyimpan hasil data dari DB'
-	ArrayList<String> hasildb = CustomKeywords.'documentationAPI.checkDocumentation.getDocumentationAPIName'(conn)
+	ArrayList<String> hasildb = CustomKeywords.'documentationAPI.CheckDocumentation.getDocumentationAPIName'(conn)
 	
 	'klik pada panah turun ddl'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/span_Pilih API_ng-arrow-wrapper'))
 	
 	'ambil text dari UI Web APIAAS'
-	ArrayList<String> hasilweb = CustomKeywords.'documentationAPI.checkDocumentation.getValueDDLDocumentationAPI'()
+	ArrayList<String> hasilweb = CustomKeywords.'documentationAPI.CheckDocumentation.getValueDDLDocumentationAPI'()
 	
 	'klik kembali panah turun ddl'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/span_Pilih API_ng-arrow-wrapper'))
@@ -122,7 +113,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Dokumentasi API', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dokumentasi API', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 			(findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonDDL)
 	}
 }

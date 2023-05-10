@@ -28,25 +28,25 @@ import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.writeExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int CountColumnEdit = findTestData(ExcelPathSaldo).getColumnNumbers()
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
-def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
+def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 //'deklarasi koneksi ke Database adins_apiaas_uat'
-//def connProd = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_uatProduction'()
+//def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-def conndevUAT = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_devUat'()
+def conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Saldo'], FailureHandling.STOP_ON_FAILURE)
 
 'ambil kode tenant di DB'
-String tenantcode = CustomKeywords.'saldo.verifSaldo.getTenantCodefromDB'(conn, findTestData(ExcelPathSaldo).getValue(2,24))
+String tenantcode = CustomKeywords.'saldo.VerifSaldo.getTenantCodefromDB'(conn, findTestData(ExcelPathSaldo).getValue(2,24))
 
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
 {
@@ -82,7 +82,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	checkddlOffice(conndevUAT, tenantcode)
 	
 	'ambil nama saldo tenant yang aktif di DB'
-	ArrayList<String> ActiveBalanceDB = CustomKeywords.'saldo.verifSaldo.getListActiveBalance'(conndevUAT, tenantcode)
+	ArrayList<String> ActiveBalanceDB = CustomKeywords.'saldo.VerifSaldo.getListActiveBalance'(conndevUAT, tenantcode)
 	
 	'ambil nama saldo tenant aktif di UI'
 	ArrayList<String> ActiveBalanceUI = new ArrayList<String>()
@@ -106,7 +106,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonBalanceUI'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
 		';') + GlobalVariable.FailedReasonBalanceUI)
 	}
@@ -115,13 +115,13 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 	if ((isMandatoryComplete == 0) && GlobalVariable.FlagFailed == 0)
 	{
 		'write to excel success'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Saldo', 0,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Saldo', 0,
 			GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 	}
 	else if (isMandatoryComplete > 0)
 	{
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
 			';') + GlobalVariable.FailedReasonMandatory)
 	}
@@ -165,7 +165,7 @@ def filterSaldo() {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
 	}
@@ -219,7 +219,7 @@ def filterSaldo() {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
 	}
@@ -285,7 +285,7 @@ def filterSaldo() {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
 	}
@@ -310,7 +310,7 @@ def filterSaldo() {
 		WebUI.delay(GlobalVariable.Timeout)
 		
 		'pengecekan file yang sudah didownload'
-		boolean isDownloaded = CustomKeywords.'documentationAPI.checkDocumentation.isFileDownloaded'(FlagDelete)
+		boolean isDownloaded = CustomKeywords.'documentationAPI.CheckDocumentation.isFileDownloaded'(FlagDelete)
 		
 		'jika file tidak terdeteksi telah terdownload'
 		if (!WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL))
@@ -318,7 +318,7 @@ def filterSaldo() {
 			GlobalVariable.FlagFailed = 1
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-			CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
 			';') + GlobalVariable.FailedReasonDownloadProblem)
 		}
@@ -329,7 +329,7 @@ def filterSaldo() {
 def checkTableandPaging(Connection connection, String tenantcode, String tipeSaldo) {
 	
 	'ambil total data yang dicari dari DB'
-	int resultTotalData = CustomKeywords.'saldo.verifSaldo.getCountTotalData'(connection, tenantcode, tipeSaldo)
+	int resultTotalData = CustomKeywords.'saldo.VerifSaldo.getCountTotalData'(connection, tenantcode, tipeSaldo)
 	
 	'cek apakah total data di table dan db equal'
 	Total = WebUI.getText(findTestObject('Object Repository/Saldo/Page_Balance/totalDataTable')).split(' ')
@@ -340,7 +340,7 @@ def checkTableandPaging(Connection connection, String tenantcode, String tipeSal
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
 		';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
 	}
@@ -427,7 +427,7 @@ def checkddlTipeSaldo(Connection Conn, String tenantcode) {
 	int isTipeSaldoMatch = 1
 	
 	'ambil nama balance dari DB'
-	ArrayList<String> namatipesaldoDB = CustomKeywords.'saldo.verifSaldo.getListTipeSaldo'(Conn, tenantcode)
+	ArrayList<String> namatipesaldoDB = CustomKeywords.'saldo.VerifSaldo.getListTipeSaldo'(Conn, tenantcode)
 	
 	'nama-nama tipe saldo sedang aktif dari UI'
 	ArrayList<String> namatipesaldoUI = new ArrayList<String>()
@@ -462,7 +462,7 @@ def checkddlTipeSaldo(Connection Conn, String tenantcode) {
 	{
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and reason topup failed'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		GlobalVariable.FailedReasonDDL)
 	}
@@ -487,7 +487,7 @@ def checkddlTipeTransaksi(Connection Conn, String tipeSaldo) {
 	int isTipeTransaksiMatch = 1
 	
 	'ambil nama balance dari DB'
-	ArrayList<String> namatipetransaksiDB = CustomKeywords.'saldo.verifSaldo.getListTipeTransaksi'(Conn, tipeSaldo)
+	ArrayList<String> namatipetransaksiDB = CustomKeywords.'saldo.VerifSaldo.getListTipeTransaksi'(Conn, tipeSaldo)
 	
 	'nama-nama tipe saldo sedang aktif dari UI'
 	ArrayList<String> namatipetransaksiUI = new ArrayList<String>()
@@ -523,7 +523,7 @@ def checkddlTipeTransaksi(Connection Conn, String tipeSaldo) {
 	{
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and reason topup failed'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		GlobalVariable.FailedReasonDDL)
 	}
@@ -548,7 +548,7 @@ def checkddlOffice(Connection Conn, String tenantcode) {
 	int isKantorMatch = 1
 	
 	'ambil nama kantor dari DB'
-	ArrayList<String> namaKantorDB = CustomKeywords.'saldo.verifSaldo.getListKantor'(Conn, tenantcode)
+	ArrayList<String> namaKantorDB = CustomKeywords.'saldo.VerifSaldo.getListKantor'(Conn, tenantcode)
 	
 	'nama-nama kantor yang aktif dari UI'
 	ArrayList<String> namaKantorUI = new ArrayList<String>()
@@ -584,7 +584,7 @@ def checkddlOffice(Connection Conn, String tenantcode) {
 	{
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and reason topup failed'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		GlobalVariable.FailedReasonDDL)
 	}
@@ -596,7 +596,7 @@ def checkddlOffice(Connection Conn, String tenantcode) {
 def checkVerifyReset(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 			(findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonSetFailed)
 
 		GlobalVariable.FlagFailed = 1
@@ -606,7 +606,7 @@ def checkVerifyReset(Boolean isMatch) {
 def checkVerifyPaging(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 			(findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonPagingError)
 
 		GlobalVariable.FlagFailed = 1

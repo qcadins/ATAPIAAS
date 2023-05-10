@@ -1,60 +1,20 @@
 package saldo
 
-import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
-import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
-import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
-import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
-
 import com.kms.katalon.core.annotation.Keyword
-import com.kms.katalon.core.checkpoint.Checkpoint
-import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
-import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
-import com.kms.katalon.core.model.FailureHandling
-import com.kms.katalon.core.testcase.TestCase
-import com.kms.katalon.core.testdata.TestData
-import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import java.sql.Connection
 import java.sql.Statement
 
-import javax.servlet.http.HttpServletRequest
-import javax.swing.ComboBoxModel
-import org.apache.poi.ss.usermodel.WorkbookFactory
-import org.apache.poi.ss.usermodel.Workbook
-import org.apache.poi.ss.usermodel.Sheet
-
-import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.ResultSetMetaData
-import org.openqa.selenium.By
-import org.openqa.selenium.support.ui.Select
-import com.kms.katalon.core.webui.driver.DriverFactory
 import groovy.sql.Sql as Sql
-import org.openqa.selenium.JavascriptExecutor
-import org.openqa.selenium.WebElement
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import java.io.IOException;
-
-import internal.GlobalVariable
-
-public class verifSaldo {
-
-	def driver = DriverFactory.getWebDriver()
-
-	def js = (JavascriptExecutor)driver
+public class VerifSaldo {
 
 	int columnCount
 
 	//fungsi untuk mengambil tenant code dari database
 	@Keyword
-	public getTenantCodefromDB(Connection conn, String email) {
+	getTenantCodefromDB(Connection conn, String email) {
 		String data
 
 		Statement stm = conn.createStatement()
@@ -65,7 +25,7 @@ public class verifSaldo {
 		{
 			data = resultSet.getObject(1)
 		}
-		return data
+		data
 	}
 
 	@Keyword
@@ -86,11 +46,11 @@ public class verifSaldo {
 				isDownloaded = true
 			}
 		}
-		return isDownloaded
+		isDownloaded
 	}
 
 	@Keyword
-	public getListActiveBalance(Connection conn, String tenantcode) {
+	getListActiveBalance(Connection conn, String tenantcode) {
 		String data
 
 		ArrayList<String> listdata = new ArrayList<>()
@@ -108,11 +68,11 @@ public class verifSaldo {
 				listdata.add(data)
 			}
 		}
-		return listdata
+		listdata
 	}
 
 	@Keyword
-	public getListTipeTransaksi(Connection conn, String tipeSaldo) {
+	getListTipeTransaksi(Connection conn, String tipeSaldo) {
 		String data
 
 		ArrayList<String> listdata = new ArrayList<>()
@@ -130,11 +90,11 @@ public class verifSaldo {
 				listdata.add(data)
 			}
 		}
-		return listdata
+		listdata
 	}
 
 	@Keyword
-	public getListTipeSaldo(Connection conn, String tenantcode) {
+	getListTipeSaldo(Connection conn, String tenantcode) {
 		String data
 
 		ArrayList<String> listdata = new ArrayList<>()
@@ -152,11 +112,11 @@ public class verifSaldo {
 				listdata.add(data)
 			}
 		}
-		return listdata
+		listdata
 	}
 
 	@Keyword
-	public getListKantor(Connection conn, String tenantcode) {
+	getListKantor(Connection conn, String tenantcode) {
 		String data
 
 		ArrayList<String> listdata = new ArrayList<>()
@@ -174,12 +134,12 @@ public class verifSaldo {
 				listdata.add(data)
 			}
 		}
-		return listdata
+		listdata
 	}
 
 	//fungsi untuk mengambil tenant code dari database
 	@Keyword
-	public getCountTotalData(Connection conn, String tenantcode, String tipeSaldo) {
+	getCountTotalData(Connection conn, String tenantcode, String tipeSaldo) {
 		int data
 
 		Statement stm = conn.createStatement()
@@ -190,6 +150,6 @@ public class verifSaldo {
 		{
 			data = resultSet.getObject(1)
 		}
-		return data
+		data
 	}
 }

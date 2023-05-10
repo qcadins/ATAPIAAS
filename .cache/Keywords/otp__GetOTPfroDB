@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "5FE1255A3097E5B235709B6D493EF253",
+  "keywordFileContentHash": "3BFE25EB62BC2A39456307AA2733687A",
   "keywordClasses": [
     {
-      "name": "otp.GetOTPfromDB",
+      "name": "otp.GetOTPfroDB",
       "keywordMethods": [
         {
           "name": "getOTPforRegister",

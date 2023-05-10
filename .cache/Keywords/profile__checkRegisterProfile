@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "EF697BA6A38150C5691D94E2B1244C80",
+  "keywordFileContentHash": "B325B161A635CD1C239A4982383FE3F6",
   "keywordClasses": [
     {
-      "name": "profile.checkRegisterProfile",
+      "name": "profile.CheckRegisterProfile",
       "keywordMethods": [
         {
           "name": "checkDBafterRegister",

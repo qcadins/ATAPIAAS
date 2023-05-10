@@ -24,16 +24,16 @@ import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
 'deklarasi variabel untuk konek ke Database APIAAS'
-def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_esign'()
+def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
 'ambil email dari testdata, disimpan ke string'
 String email = WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__email'), 'value')
 
 'kumpulan string dari data yang diambil langsung dari database'
-ArrayList<String> hasildb = CustomKeywords.'profile.checkProfile.getProfilefromDB'(conn, email)
+ArrayList<String> hasildb = CustomKeywords.'profile.CheckProfile.getProfilefromDB'(conn, email)
 
 'ambil text dari UI Web APIAAS'
-ArrayList<String> hasilweb = CustomKeywords.'profile.checkProfile.getAttributeValueProfile'()
+ArrayList<String> hasilweb = CustomKeywords.'profile.CheckProfile.getAttributeValueProfile'()
 
 'verifikasi data pada WEB dan DB sama'
 for (int j = 0; j < hasildb.size; j++) {
@@ -44,7 +44,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
     if (isMatch == false) {
         'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-        CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
+        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
             (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
     }
 }

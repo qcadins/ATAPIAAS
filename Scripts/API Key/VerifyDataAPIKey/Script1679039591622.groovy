@@ -24,16 +24,16 @@ import org.openqa.selenium.support.ui.Select as Select
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
 'deklarasi variabel untuk konek ke Database APIAAS'
-def conn = CustomKeywords.'dbConnection.connect.connectDBAPIAAS_public'()
+def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'ambil nama API dari testdata, disimpan ke string'
 String namaAPI = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'), 'value')
 
 'kumpulan string dari data yang diambil langsung dari database'
-ArrayList<String> hasildb = CustomKeywords.'apikey.checkAPIKey.getAPIStatusfromDB'(conn, namaAPI)
+ArrayList<String> hasildb = CustomKeywords.'apikey.CheckAPIKey.getAPIStatusfromDB'(conn, namaAPI)
 
 'ambil text dari UI Web APIAAS'
-ArrayList<String> hasilweb = CustomKeywords.'apikey.checkAPIKey.getAttributeValueAPI'()
+ArrayList<String> hasilweb = CustomKeywords.'apikey.CheckAPIKey.getAttributeValueAPI'()
 
 'verifikasi data pada WEB dan DB sama'
 for (int j = 0; j < hasildb.size; j++) {
@@ -44,7 +44,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
     if (isMatch == false) {
         'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-        CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
+        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
             (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
     }
 }

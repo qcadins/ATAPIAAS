@@ -24,15 +24,6 @@ import org.openqa.selenium.support.ui.Select as Select
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.WebElement
 
-'ambil driver chrome'
-def driver = DriverFactory.getWebDriver()
-
-'panggil java script executor'
-def js = (JavascriptExecutor)driver
-
-'cek apakah mandatory lengkap pada excel'
-int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 4))
-
 'klik pada tombol garis tiga'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_KEPIN EDGAR_ft-menu font-medium-3'))
 
@@ -82,7 +73,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Ed
 WebUI.delay(2)
 
 'periksa status edit dan tulis ke excel'
-CustomKeywords.'writeToExcel.checkSaveProcess.checkAlert'(GlobalVariable.NumOfColumn, 'API KEY')
+CustomKeywords.'writeToExcel.CheckSaveProcess.checkAlert'(GlobalVariable.NumOfColumn, 'API KEY')
 
 'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
 if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_success'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) 

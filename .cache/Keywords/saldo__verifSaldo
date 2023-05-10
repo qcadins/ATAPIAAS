@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "9E1EDDB43A8F31EA20C4F1F64A545CAE",
+  "keywordFileContentHash": "6DDC8F3336937DFB82DCBBEC98D799D0",
   "keywordClasses": [
     {
-      "name": "saldo.verifSaldo",
+      "name": "saldo.VerifSaldo",
       "keywordMethods": [
         {
           "name": "getTenantCodefromDB",
@@ -33,8 +33,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "isFileDownloaded",
@@ -52,8 +51,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getListActiveBalance",
@@ -84,8 +82,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getListTipeTransaksi",
@@ -116,8 +113,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getListTipeSaldo",
@@ -148,8 +144,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getListKantor",
@@ -180,8 +175,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getCountTotalData",
@@ -225,11 +219,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

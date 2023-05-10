@@ -64,7 +64,7 @@ if(!WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Ad
 }
 
 'jika button ok muncul, tulis ke excel tidak gagal'
-CustomKeywords.'writeToExcel.checkSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_OK'), GlobalVariable.NumOfColumn, 'API KEY')
+CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_OK'), GlobalVariable.NumOfColumn, 'API KEY')
 
 'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
 if(WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE))
