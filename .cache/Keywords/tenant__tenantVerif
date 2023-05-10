@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "9B4D056659BD8FB5B510E156ECB2C0BC",
+  "keywordFileContentHash": "9A43CE17AEBD47CD55C508FFF28B61E3",
   "keywordClasses": [
     {
       "name": "tenant.tenantVerif",
@@ -20,8 +20,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getTenantStoreDB",
@@ -52,8 +51,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getTenantServicesDescription",
@@ -84,8 +82,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getTenantServices",
@@ -116,8 +113,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getIDPaymentType",
@@ -161,8 +157,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getPaymentType",
@@ -206,8 +201,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getActiveTenant",
@@ -238,11 +232,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

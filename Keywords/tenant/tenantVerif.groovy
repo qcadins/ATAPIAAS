@@ -163,7 +163,7 @@ public class tenantVerif {
 		ArrayList<String> listdata = new ArrayList<>()
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '"+ tenantcode +"'")
+		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant JOIN esign.ms_vendor mv ON mv.id_ms_vendor = mbt.id_ms_vendor WHERE tenant_code = '"+ tenantcode +"' AND vendor_name = 'ADINS'")
 		ResultSetMetaData metadata = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()

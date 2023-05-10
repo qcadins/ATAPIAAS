@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>/html/body/div[4]/div/div[3]/button[1]</value>
+         <value>(//button[@type='button'])[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +22,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>button</value>
-      <webElementGuid>77cb3eea-8986-45b7-97d8-4ef0132d35ea</webElementGuid>
+      <webElementGuid>6ea93da5-3f11-4a49-aa09-f432c535bf7c</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +30,7 @@
       <name>type</name>
       <type>Main</type>
       <value>button</value>
-      <webElementGuid>d624e321-6acb-4257-9b24-cc83d61bf46a</webElementGuid>
+      <webElementGuid>35d467f8-db9b-4dcc-9adb-0ef5920b5bdc</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +38,7 @@
       <name>class</name>
       <type>Main</type>
       <value>swal2-confirm btn btn-info</value>
-      <webElementGuid>3d4ed10d-0a84-47e5-8701-e6745f6fd97a</webElementGuid>
+      <webElementGuid>b03a1079-5b13-4504-9141-f5ddfb2667cf</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -46,15 +46,15 @@
       <name>text</name>
       <type>Main</type>
       <value>OK</value>
-      <webElementGuid>cf060d72-9eda-442e-beff-4e468d06073e</webElementGuid>
+      <webElementGuid>18343e7f-b645-47ea-b872-f93ec893d8f7</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html[@class=&quot;swal2-shown swal2-height-auto&quot;]/body[@class=&quot;vertical-layout menu-hide navbar-static pace-done page-scrolled navbar-scrolled swal2-shown swal2-height-auto&quot;]/div[@class=&quot;swal2-container swal2-center swal2-backdrop-show&quot;]/div[@class=&quot;swal2-popup swal2-modal swal2-icon-success swal2-show&quot;]/div[@class=&quot;swal2-actions&quot;]/button[@class=&quot;swal2-confirm btn btn-info&quot;]</value>
-      <webElementGuid>99017aaa-ae52-4f6f-9524-97f96394bce9</webElementGuid>
+      <value>/html[@class=&quot;swal2-shown swal2-height-auto&quot;]/body[@class=&quot;vertical-layout navbar-static pace-done menu-hide menu-expanded page-scrolled navbar-scrolled swal2-shown swal2-height-auto&quot;]/div[@class=&quot;swal2-container swal2-center swal2-backdrop-show&quot;]/div[@class=&quot;swal2-popup swal2-modal swal2-icon-success swal2-show&quot;]/div[@class=&quot;swal2-actions&quot;]/button[@class=&quot;swal2-confirm btn btn-info&quot;]</value>
+      <webElementGuid>ca7616c2-6f1d-4eca-ba1d-1dce6f4c43c6</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -62,7 +62,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>(//button[@type='button'])[2]</value>
-      <webElementGuid>6f152ca4-fbcf-48f7-9a48-50d316a24ce2</webElementGuid>
+      <webElementGuid>4e547473-5b0d-499f-bdc5-f6b607fe4ab9</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +70,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Success'])[1]/following::button[1]</value>
-      <webElementGuid>104634ad-e7a2-49b5-b48a-c4415c61e63f</webElementGuid>
+      <webElementGuid>5486adaf-2e08-4d01-9c40-2e16d8ad9321</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +78,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='×'])[1]/following::button[1]</value>
-      <webElementGuid>4a395610-5614-4118-935f-80f10b0ed13e</webElementGuid>
+      <webElementGuid>752d4e03-a59f-45e2-ae92-3354a598843a</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +86,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='No'])[1]/preceding::button[1]</value>
-      <webElementGuid>0e5d084d-83fc-4e59-9141-498d84c0c34c</webElementGuid>
+      <webElementGuid>0185bb23-9490-4585-a12f-58499980cc95</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +94,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Cancel'])[1]/preceding::button[2]</value>
-      <webElementGuid>6f86460f-d37b-47d1-9b90-ebe2f7f84f85</webElementGuid>
+      <webElementGuid>d5a83a0d-aea9-495f-af56-4e32f2e035ca</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,15 +102,15 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='OK']/parent::*</value>
-      <webElementGuid>7b8f778e-328a-49c3-8e75-9272717c85e0</webElementGuid>
+      <webElementGuid>98111467-6cbd-45fb-8e41-4fb9f8d1560e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:position</name>
       <type>Main</type>
-      <value>//div[6]/div/div[3]/button</value>
-      <webElementGuid>d63a04d5-dd59-4301-a411-d9772a7d4c9a</webElementGuid>
+      <value>//div[3]/button</value>
+      <webElementGuid>50d5a95a-79f7-4fdc-b04d-46bbb25fee01</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -118,6 +118,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//button[@type = 'button' and (text() = 'OK' or . = 'OK')]</value>
-      <webElementGuid>78dd606d-9d84-424f-a414-4bf16d20a86f</webElementGuid>
+      <webElementGuid>2be4bd39-2954-4267-8a85-aae48f6e9613</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

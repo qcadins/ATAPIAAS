@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "333E2B42EBD62DAE77C32296AA916FA3",
+  "keywordFileContentHash": "732B615486F17986579F1AD6567EFF12",
   "keywordClasses": [
     {
       "name": "profile.checkProfile",
@@ -42,7 +42,7 @@
           "javadoc": ""
         },
         {
-          "name": "getTenantCodefromDB",
+          "name": "getTenantNamefromDB",
           "parameters": [
             {
               "name": "conn",
@@ -58,7 +58,7 @@
               }
             },
             {
-              "name": "tenantname",
+              "name": "email",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",

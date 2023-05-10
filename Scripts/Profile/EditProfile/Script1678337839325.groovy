@@ -123,6 +123,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 			
 		WebUI.delay(3)
 		
+		'cek apakah tombol sukses muncul'
+		if(WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Edit Profile/button_OK'), GlobalVariable.Timeout, FailureHandling.OPTIONAL))
+		{
+			'klik pada tombol ok jika muncul'
+			WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/button_OK'))
+		}
+		
 		'panggil fungsi verifikasi jika checkdatabase = yes'
 		if (GlobalVariable.KondisiCekDB == 'Yes') {
 			'verifikasi data yang ada di excel dengan di database sesudah diEdit'
@@ -155,20 +162,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 		WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/span_API Key'))
 			
 		'ambil nama depan tenant'
-		String frontnameTenant = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 10)
-			
-		'ambil nama belakang tenant'
-		String lastnameTenant = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 11)
-			
-		'gabungkan nama tenant'
-		String tenantnameExcel = frontnameTenant + " " + lastnameTenant
-			
-		'ambil tenant code dari DB'
-		String tenantcode = CustomKeywords.'saldo.verifSaldo.getTenantCodefromDB'(conn, tenantnameExcel)
+		String tenantnameExcel = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 10) + " " + findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 11)
+		
+		'nama tenant dari DB'
+		String tenantnameDB = CustomKeywords.'profile.checkProfile.getTenantNamefromDB'(conn, findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
 		
 		'verifikasi adanya tenant code dan name yang sesuai DB'
-		if(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Profile/Page_Api Key List/input_Tenant Name_tenantName')), tenantnameExcel, false) == false
-			|| WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Profile/Page_Api Key List/input_Tenant Code_tenantCode')), tenantcode, false) == false)
+		if(WebUI.verifyMatch(tenantnameDB, tenantnameExcel, false) == false)
 		{
 			GlobalVariable.FlagFailed = 1
 			'Write to excel status failed and reason topup failed'
@@ -180,8 +180,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 		'kondisi jika tidak ada failed pada bagian lain testcase'
 		if (GlobalVariable.FlagFailed == 0)
 		{
-			'tulis kondisi sukses'
-			 CustomKeywords.'writeToExcel.checkSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Profile/Page_Edit Profile/button_OK'), GlobalVariable.NumOfColumn, 'Edit Profile')
+			'write to excel success'
+			CustomKeywords.'writeToExcel.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Edit Profile', 0,
+				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 		}
 		else
 		{

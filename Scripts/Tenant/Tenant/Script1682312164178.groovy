@@ -59,6 +59,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 	'check if action new/services/edit/balancechargetype'
 		if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('New')) 
 		{
+			'click menu tenant'
+			WebUI.click(findTestObject('Tenant/menu_Tenant'))
+			
 			'click button Baru'
 			WebUI.click(findTestObject('Tenant/Button_Baru'))
 
@@ -109,7 +112,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 				'modify object button services'
 				modifyObjectButtonServices = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
 					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					index) + ']/button[1]', true)
+					index) + ']/button', true)
 				
 				'looping untuk array service excel'
 				for (indexExcel = 0; indexExcel < arrayServices.size(); indexExcel++)
@@ -202,11 +205,20 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 					CustomKeywords.'writeToExcel.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Tenant', 0,
 						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 				}
+				else
+				{
+					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
+					CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 2) +
+						';') + GlobalVariable.FailedReasonSubmitError)
+					
+					continue
+				}
 			} 
 			else if (isMandatoryComplete > 0) 
 			{
 				'click button Batal'
-				WebUI.click(findTestObject('Tenant/TenantBaru/button_Batal'))
+				WebUI.click(modifyobjectbuttonBatal)
 
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
 				CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn,
@@ -218,6 +230,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 		} 
 		else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('Service')) 
 		{
+			'click menu tenant'
+			WebUI.click(findTestObject('Tenant/menu_Tenant'))
+			
 			searchTenant()
 
 			if(WebUI.verifyElementPresent(findTestObject('Tenant/button_ServiceBalance'), GlobalVariable.Timeout, FailureHandling.OPTIONAL))
@@ -308,6 +323,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 		} 
 		else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('Edit')) 
 		{
+			'click menu tenant'
+			WebUI.click(findTestObject('Tenant/menu_Tenant'))
+			
 			'panggil fungsi search'
 			searchTenant()
 
@@ -367,9 +385,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 				'modify object button services'
 				modifyObjectButtonServices = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
 					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					index) + ']/div/button', true)
-
-				'break if index udah lebih dari 28 HARDCODE karena tidak bisa di track objectnya'
+					index) + ']/button', true)
+				
+				'break if index udah lebih dari 34 HARDCODE karena tidak bisa di track objectnya'
 				if (index > 34) 
 				{
 					break
@@ -436,12 +454,12 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 			'ubah lokasi xpath dari button simpan'
 			modifyobjectbuttonSimpan = WebUI.modifyObjectProperty(findTestObject('Tenant/Edit/button_Simpan'), 'xpath',
 					'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					(34 + EmailReminderTotal).toString()) + ']/div/button[2]', true)
+					(35 + EmailReminderTotal).toString()) + ']/div/button[2]', true)
 			
 			'ubah lokasi xpath dari button simpan'
 			modifyobjectbuttonBatal = WebUI.modifyObjectProperty(findTestObject('Tenant/Edit/button_Batal'), 'xpath',
 					'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					(34 + EmailReminderTotal).toString()) + ']/div/button[1]', true)
+					(35 + EmailReminderTotal).toString()) + ']/div/button[1]', true)
 
 			'looping untuk hapus email reminder yang tidak ada di excel'
 			for (index = 35; index <= variable.size(); index++) 
@@ -519,7 +537,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 				'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL))) 
 			{
 				'click button simpan'
-				WebUI.click(findTestObject('Tenant/Edit/button_Simpan'))
+				WebUI.click(modifyobjectbuttonSimpan)
 
 				'verify pop up message berhasil'
 				if (WebUI.verifyElementPresent(findTestObject('Tenant/popUpMsg'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) 
@@ -531,11 +549,20 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 					CustomKeywords.'writeToExcel.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Tenant', 0,
 						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 				}
+				else
+				{
+					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
+					CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 2) +
+						';') + GlobalVariable.FailedReasonSubmitError)
+					
+					continue
+				}
 			} 
 			else if (isMandatoryComplete > 0) 
 			{
 				'click button Batal'
-				WebUI.click(findTestObject('Tenant/Edit/button_Batal'))
+				WebUI.click(modifyobjectbuttonBatal)
 
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
 				CustomKeywords.'writeToExcel.writeExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn,
@@ -547,6 +574,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 		}
 		else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('ChargeType'))
 		{
+			'click menu tenant'
+			WebUI.click(findTestObject('Tenant/menu_Tenant'))
+			
 			'panggil fungsi search'
 			searchTenant()
 
@@ -659,9 +689,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; 
 			WebUI.callTestCase(findTestCase('Tenant/TenantStoreDB'), [('ExcelPathTenant') : 'Tenant/DataTestingTenant'], FailureHandling.STOP_ON_FAILURE)
 		}
 	}
-	
-	WebUI.closeBrowser()
 }
+
+WebUI.closeBrowser()
 
 def checkPaging(Connection connectProd) {
 	'input nama tenant'
@@ -764,8 +794,10 @@ def checkVerifyPaging(Boolean isMatch) {
 
 def checkActiveTenant(String tenantcode, Connection conndevUAT) {
 	
+	'ambil list tenant aktif di DB'
 	ArrayList<String> ActiveTenantfromDB = CustomKeywords.'tenant.tenantVerif.getActiveTenant'(conndevUAT, tenantcode)
 	
+	'ambil list tenant aktif dari UI'
 	ArrayList<String> ActiveTenantfromUI = new ArrayList<String>()
 	
 	for(int i=0; i< ActiveTenantfromDB.size(); i++)
@@ -774,6 +806,7 @@ def checkActiveTenant(String tenantcode, Connection conndevUAT) {
 		def modifyObjectNamaTenant = WebUI.modifyObjectProperty(findTestObject('Tenant/ChargeType/namaTenant'), 'xpath',
 			'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-charge/div[2]/div/div/div/div/table/tr['+ (i+2) +']/th[1]'), true)
 		
+		'tambahkan nama tenant ke array'
 		ActiveTenantfromUI.add(WebUI.getText(modifyObjectNamaTenant))
 	}
 	

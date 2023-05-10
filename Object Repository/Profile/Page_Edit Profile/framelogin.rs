@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>(.//*[normalize-space(text()) and normalize-space(.)='Saldo'])[1]/following::div[15]</value>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-edit-my-profile/div[2]/div</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +22,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>div</value>
-      <webElementGuid>e98d4a19-36da-47ee-8f47-b224342880ac</webElementGuid>
+      <webElementGuid>b01b6e81-6487-4acf-ba12-7cdcde1b45eb</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -30,7 +30,7 @@
       <name>class</name>
       <type>Main</type>
       <value>row</value>
-      <webElementGuid>0b174596-4724-4a07-aabc-b67a291c05ce</webElementGuid>
+      <webElementGuid>46b0d60f-e110-4c0d-b2c5-0e527b90d605</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -38,7 +38,7 @@
       <name>text</name>
       <type>Main</type>
       <value>Email *Nama Perusahaan *Industri WebsiteJabatan KerjaNama Depan *Nama Belakang *Jenis Kelamin Pria WanitaNomor HPKode NegaraKembaliSimpan</value>
-      <webElementGuid>2a737bb4-c56b-425f-9e0e-1f32440aef87</webElementGuid>
+      <webElementGuid>cd3759ce-bba4-4593-9e6c-056263f04a6e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +46,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout menu-hide navbar-static  pace-done&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[@class=&quot;content-wrapper&quot;]/app-edit-my-profile[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;container-fluid&quot;]/div[@class=&quot;row bg-white rounded&quot;]/div[@class=&quot;col-12&quot;]/div[@class=&quot;row&quot;]</value>
-      <webElementGuid>93c8525e-80ac-48d3-aeec-d3c9a8e870c8</webElementGuid>
+      <webElementGuid>8996a6ec-be08-4edb-a56e-e1cf66fc6918</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -54,7 +54,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Edit Profil'])[1]/following::div[4]</value>
-      <webElementGuid>f6fa5c64-c568-455a-a0cd-1a2bc58d7c11</webElementGuid>
+      <webElementGuid>7a97c882-373d-4320-94fb-763f70a540af</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -62,7 +62,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Saldo'])[1]/following::div[15]</value>
-      <webElementGuid>428ab484-a664-47f0-bf17-3c44bf798799</webElementGuid>
+      <webElementGuid>f8fa1382-4057-4adb-b422-06a840c08f0b</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +70,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[2]/div/div/div</value>
-      <webElementGuid>98d282fd-7172-4017-b4b6-d36756bf4d2d</webElementGuid>
+      <webElementGuid>57622e3c-7194-44ed-a3dc-37f8a96ca25c</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,6 +78,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//div[(text() = 'Email *Nama Perusahaan *Industri WebsiteJabatan KerjaNama Depan *Nama Belakang *Jenis Kelamin Pria WanitaNomor HPKode NegaraKembaliSimpan' or . = 'Email *Nama Perusahaan *Industri WebsiteJabatan KerjaNama Depan *Nama Belakang *Jenis Kelamin Pria WanitaNomor HPKode NegaraKembaliSimpan')]</value>
-      <webElementGuid>7437d3b7-d3df-42f0-b9f1-5d14ac36be87</webElementGuid>
+      <webElementGuid>2ae5e579-6d05-43e3-a9a8-aa7f5651a71a</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>
