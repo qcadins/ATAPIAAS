@@ -30,7 +30,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPa
 def conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'mendapat jumlah kolom dari sheet Tenant'
-int CountColumnEdit = findTestData(ExcelPathTenant).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathTenant).getColumnNumbers()
 
 'call test case login admin esign'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Tenant'], FailureHandling.STOP_ON_FAILURE)
@@ -42,7 +42,7 @@ WebUI.click(findTestObject('Tenant/menu_Tenant'))
 checkPaging(conndevUAT)
 
 'looping tenant'
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++) {
+for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'declare isMmandatory Complete'
 	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 4))

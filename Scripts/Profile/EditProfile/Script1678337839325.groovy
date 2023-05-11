@@ -27,7 +27,7 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int CountColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
@@ -45,7 +45,7 @@ WebUI.focus(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo
 WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
 'looping kolom dari testdata'
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++) 
+for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) 
 {
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).length() == 0)

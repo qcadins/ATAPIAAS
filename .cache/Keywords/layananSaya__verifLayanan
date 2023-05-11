@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "DA5F91D572FD37A003EE182A7BE69B71",
+  "keywordFileContentHash": "B5307D889DBFF63916DD974850F0B285",
   "keywordClasses": [
     {
       "name": "layananSaya.VerifLayanan",
@@ -33,7 +33,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getListServiceName",
@@ -64,7 +65,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getListServiceStatus",
@@ -95,7 +97,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getListChargeType",
@@ -126,10 +129,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

@@ -38,7 +38,13 @@ public class VerifLayanan {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT description FROM ms_balancevendoroftenant mbt LEFT JOIN ms_lov mlo ON mlo.id_lov = mbt.lov_balance_type LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mbt.id_ms_tenant WHERE tenant_code = '"+tenantcode+"'")
+		ResultSet resultSet = stm.executeQuery(
+	"SELECT description " +
+	"FROM ms_balancevendoroftenant mbt " +
+    "LEFT JOIN ms_lov mlo ON mlo.id_lov = mbt.lov_balance_type " +
+    "LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mbt.id_ms_tenant " +
+    "WHERE tenant_code = '" + tenantcode + "'")
+		
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()

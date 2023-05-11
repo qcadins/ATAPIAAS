@@ -30,7 +30,7 @@ import org.openqa.selenium.WebDriver
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int CountColumnEdit = findTestData(ExcelPathOCRTesting).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathOCRTesting).getColumnNumbers()
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
@@ -42,7 +42,7 @@ def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProductio
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR',('Path'): ExcelPathOCRTesting], FailureHandling.STOP_ON_FAILURE)
 
 'pindah testcase sesuai jumlah di excel'
-for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
+for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++)
 {
 	'ambil kode tenant di DB'
 	String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCRTesting).getValue(2, 25))

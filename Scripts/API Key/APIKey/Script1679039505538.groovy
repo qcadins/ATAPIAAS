@@ -1,19 +1,11 @@
-import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
-import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
-import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
-import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
-import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
 import com.kms.katalon.core.testobject.TestObject as TestObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
@@ -21,31 +13,31 @@ import org.openqa.selenium.Keys as Keys
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int CountColumnEdit = findTestData(ExcelPathAPIKey).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathAPIKey).getColumnNumbers()
 
 'pindah testcase sesuai jumlah di excel'
-for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
-{
+for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
+	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 1).length() == 0)
-	{
+	if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 1).length() == 0){
+		
 		break
 	}
-	else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted'))
-	{
+	else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')){
+		
 		String optiontipe, optionstatus
 		
 		'cek apakah perlu tambah API'
-		String WantAddAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 17)
+		String wantAddAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 17)
 		
 		'cek apakah perlu edit API'
-		String WantEditAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18)
+		String wantEditAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18)
 		
 		'cek apakah perlu copy link API'
-		String CopyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 19)
+		String copyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 19)
 		
 		'cek apakah perlu fungsi download dokumentasi API'
-		String DownloadDocs = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 20)
+		String downloadDocs = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 20)
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 4))
@@ -115,6 +107,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 		
 		'jika semua pilihan ddl kembali ke "ALL"'
 		if (optiontipe.contains('-0') && optionstatus.contains('-0')) {
+			
 			'klik tombol cari'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
 		
@@ -124,16 +117,16 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 		}
 		
 		'cek ke DB jika memang diperlukan'
-		if(GlobalVariable.KondisiCekDB == 'Yes')
-		{
+		if(GlobalVariable.KondisiCekDB == 'Yes'){
+			
 			'verifikasi jumlah baris di DB dan di WEB'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/VerifyTotalAPIList'), [:], FailureHandling.STOP_ON_FAILURE)
 		}
 		
 		String isPaging = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Api Key List/isPagingDisabled'), 'class')
 		
-		if(isPaging != "disabled")
-		{
+		if(isPaging != "disabled"){
+			
 			'klik panah ke kanan di footer'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_Aksi_datatable-icon-right'))
 			
@@ -172,8 +165,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 		}
 		
 		'panggil fungsi copy link'
-		if(CopyAPILink == 'Yes')
-		{
+		if(copyAPILink == 'Yes'){
+			
 			'klik tombol COPY LINK'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/em_Aksi_align-middle cursor-pointer font-medium-3 ft-copy'))
 				
@@ -183,27 +176,27 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 		}
 		
 		'panggil fungsi tambah API'
-		if(WantAddAPI == 'Yes')
-		{
+		if(wantAddAPI == 'Yes'){
+			
 			'panggil fungsi Add API KEY'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/AddAPIKey'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 		}
 		
 		'panggil fungsi edit API'
-		if(WantEditAPI == 'Yes')
-		{
+		if(wantEditAPI == 'Yes'){
+			
 			'panggil fungsi Edit API Key'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 		}
 		'panggil fungsi download dokumentasi'
-		if(DownloadDocs == 'Yes')
-		{
+		if(downloadDocs == 'Yes'){
+			
 			'panggil fungsi download dokumentasi API'
 			WebUI.callTestCase(findTestCase('Test Cases/Dokumentasi API/DocumentationAPI'), [:], FailureHandling.STOP_ON_FAILURE)
 		}
 		'kondisi jika tidak ada error'
-		if(GlobalVariable.FlagFailed == 0)
-		{
+		if(GlobalVariable.FlagFailed == 0){
+			
 			'tulis status sukses pada excel'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 			GlobalVariable.SuccessReason)
@@ -212,25 +205,27 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (
 }
 
 'fungsi cek halaman'
-def checkVerifyFooter()
-{
+def checkVerifyFooter(){
+	
 	'fokus ke halaman yang sedang dipilih'
-	int PageCheck = Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Api Key List/PageFooter'), 'ng-reflect-page'))
+	int pageCheck = Integer.parseInt(
+		WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Api Key List/PageFooter'), 'ng-reflect-page'))
 	
 	'halaman yang dipilih harus sama dengan yang di sistem'
-	if(GlobalVariable.PageNum == PageCheck)
-	{
+	if(GlobalVariable.PageNum == pageCheck){
+		
 		GlobalVariable.PageNum -= 1
-		if(GlobalVariable.PageNum < 1)
-		{
+		if(GlobalVariable.PageNum < 1){
+			
 			GlobalVariable.PageNum = 2
 		}
 	}
 	//tulis halaman error jika tidak sesuai
-	else
-	{
+	else{
+		
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-			(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonPagingError)
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, 
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') 
+			+ GlobalVariable.FailedReasonPagingError)
 	}
 }

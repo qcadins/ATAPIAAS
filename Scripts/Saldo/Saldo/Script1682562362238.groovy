@@ -31,7 +31,7 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int CountColumnEdit = findTestData(ExcelPathSaldo).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathSaldo).getColumnNumbers()
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
@@ -48,7 +48,7 @@ WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Saldo'], F
 'ambil kode tenant di DB'
 String tenantcode = CustomKeywords.'saldo.VerifSaldo.getTenantCodefromDB'(conn, findTestData(ExcelPathSaldo).getValue(2,24))
 
-for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= CountColumnEdit; (GlobalVariable.NumOfColumn)++)
+for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++)
 {
 	'set penanda error menjadi 0'
 	GlobalVariable.FlagFailed = 0

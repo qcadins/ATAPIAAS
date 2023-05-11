@@ -21,12 +21,12 @@ import org.openqa.selenium.Keys as Keys
 def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int CountColumnEdit = findTestData(ExcelPathRegisterLogin).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathRegisterLogin).getColumnNumbers()
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= CountColumnEdit; GlobalVariable.NumOfColumn++)
+for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn<= countColumnEdit; GlobalVariable.NumOfColumn++)
 {
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 1).length() == 0)

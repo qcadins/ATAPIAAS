@@ -11,11 +11,50 @@
       <value></value>
       <variableId>99c58869-04fc-4289-a7fe-818fecf95187</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>34004a3d-0659-4288-a727-7186f9294bd8</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>920090c6-cd2e-466a-bb14-1a8a9c8ed3d1</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>25011949-710b-4c7c-af41-6325fefb4774</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'API_KEY/DataAPIKEY'</defaultValue>
       <description></description>
       <id>99c58869-04fc-4289-a7fe-818fecf95187</id>
       <masked>false</masked>
       <name>ExcelPathAPIKey</name>
+   </variable>
+   <variable>
+      <defaultValue>findTestObject('API_KEY/Page_Add Api Key/button_Ya')</defaultValue>
+      <description></description>
+      <id>34004a3d-0659-4288-a727-7186f9294bd8</id>
+      <masked>false</masked>
+      <name>TombolYes</name>
+   </variable>
+   <variable>
+      <defaultValue>findTestObject('API_KEY/Page_Add Api Key/div_Code 1202  Tidak bisa memiliki lebih dari 1 tipe api key yang sama')</defaultValue>
+      <description></description>
+      <id>920090c6-cd2e-466a-bb14-1a8a9c8ed3d1</id>
+      <masked>false</masked>
+      <name>ButtonGagalEditTenant</name>
+   </variable>
+   <variable>
+      <defaultValue>findTestObject('API_KEY/Page_Add Api Key/button_OK')</defaultValue>
+      <description></description>
+      <id>25011949-710b-4c7c-af41-6325fefb4774</id>
+      <masked>false</masked>
+      <name>ButtonOK</name>
    </variable>
 </TestCaseEntity>
