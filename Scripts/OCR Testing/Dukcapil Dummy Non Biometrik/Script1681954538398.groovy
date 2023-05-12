@@ -1,25 +1,15 @@
-import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.testobject.ResponseObject
-import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
 import java.sql.Driver
 
-import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
-import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
-import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase
-import com.kms.katalon.core.testcase.Variable
 import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
 import com.kms.katalon.core.testobject.TestObject as TestObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import internal.GlobalVariable
 
 import org.openqa.selenium.By
@@ -48,15 +38,18 @@ WebUI.openBrowser('')
 WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
 
 'input data email'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+	'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
 	findTestData(ExcelPathOCRTesting).getValue(2, 27))
 
 'input password'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
+WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+	'input_Buat Akun_form-control ng-untouched n_dd86a2'),
 	findTestData(ExcelPathOCRTesting).getValue(2, 28))
 
 'ceklis pada reCaptcha'
-WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
+	'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
 
 'pada delay, lakukan captcha secara manual'
 WebUI.delay(10)
@@ -65,27 +58,30 @@ WebUI.delay(10)
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
 'pindah testcase sesuai jumlah di excel'
-for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++)
-{
+for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
+	
 	'ambil kode tenant di DB'
-	String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCRTesting).getValue(2, 27))
+	String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, 
+		findTestData(ExcelPathOCRTesting).getValue(2, 27))
 	
 	'ambil key trial yang aktif dari DB'
 	String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
 	
 	'deklarasi id untuk harga pembayaran OCR'
-	int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(conndevUAT, tenantcode, findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
+	int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(conndevUAT, 
+		tenantcode, findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
 	
 	'ambil jenis penagihan transaksi (by qty/price)'
-	String BalanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(conndevUAT, tenantcode, idPayment)
+	String BalanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(conndevUAT, 
+		tenantcode, idPayment)
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) 
-	{
+	if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
+		
 		break
 	} 
-	else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) 
-	{
+	else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+		
 		'deklarasi variable response'
 		ResponseObject response
 		
@@ -111,7 +107,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		filterSaldo()
 		
 		'cek apakah button skip enable atau disable'
-		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
+		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/'+
+			'i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
 		{
 			'klik button skip to last page'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
@@ -123,12 +120,12 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		'variabel yang menyimpan saldo sebelum adanya transaksi'
 		Saldobefore = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
 		
-		if(UseCorrectKey != 'Yes')
-		{
+		if(UseCorrectKey != 'Yes'){
+			
 			thekey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 20)
 		}
-		if(UseCorrectTenant != 'Yes')
-		{
+		if(UseCorrectTenant != 'Yes'){
+			
 			tenantcode = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 18)
 		}
 		
@@ -158,8 +155,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		verifState_ocr = WS.getElementPropertyValue(response, 'verifStatus')
 	
 		'jika kurang saldo hentikan proses testing'
-		if(state_ocr == 'FAILED' && message_ocr == 'Insufficient balance')
-		{
+		if(state_ocr == 'FAILED' && message_ocr == 'Insufficient balance'){
+			
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
@@ -167,8 +164,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			break;
 		}
 		//jika status sukses dengan key dan kode tenant yang salah, anggap sebagai bug dan lanjutkan ke tc berikutnya
-		else if(state_ocr == '0' && UseCorrectKey != 'Yes' && UseCorrectTenant != 'Yes')
-		{
+		else if(state_ocr == '0' && UseCorrectKey != 'Yes' && UseCorrectTenant != 'Yes'){
+			
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
@@ -184,8 +181,9 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		filterSaldo()
 		
 		'cek apakah button skip enable atau disable'
-		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
-		{
+		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/'+
+			'i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)){
+		
 			'klik button skip to last page'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
 		}
@@ -194,10 +192,11 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		String no_Trx_after = getTrxNumber()
 		
 		'jika user ingin cek ke DB hasil HIT API nya'
-		if(GlobalVariable.KondisiCekDB == 'Yes')
-		{
+		if(GlobalVariable.KondisiCekDB == 'Yes'){
+			
 			'simpan trx number terbaru dari DB'
-			String LatestMutation= CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(conndevUAT, tenantcode)
+			String LatestMutation= CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(conndevUAT, 
+				tenantcode)
 			
 			'simpan trx number terbaru milik tenant lain dari DB'
 			String LatestOtherTenantMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(conndevUAT, tenantcode)
@@ -214,8 +213,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		int Service_price = CustomKeywords.'ocrTesting.GetParameterfromDB.getServicePricefromDB'(conndevUAT, idPayment)
 		
 		'jika HIT API successful'
-		if(HitAPITrx == 1)
-		{
+		if(HitAPITrx == 1){
+			
 			'cek apakah jenis penagihan berdasarkan harga'
 			if(BalanceChargeType == 'Price')
 			{
@@ -233,61 +232,66 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		UISaldoafter = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
 		
 		'jika saldoafter match'
-		if(KatalonSaldoafter == UISaldoafter)
-		{
+		if(KatalonSaldoafter == UISaldoafter){
+			
 			isSaldoBerkurang = 1
 		}
-		else
-		{
+		else{
+			
 			isSaldoBerkurang = 0
 		}
 		
 		'jika transaksi bertambah di DB dan di web'
-		if(no_Trx_after > no_Trx_before)
-		{
+		if(no_Trx_after > no_Trx_before){
+			
 			'web mencatat transaksi terbaru'
 			isTrxIncreased = 1
 		}
-		else
-		{
+		else{
+			
 			'web tidak mencatat transaksi terbaru'
 			isTrxIncreased = 0
 		}
 		
 		'jika tidak ada message error dan kondisi lain terpenuhi'
-		if(message_ocr == 'ID has been checked.' && state_ocr == 0 && verifState_ocr == true && isTrxIncreased == 1 && isSaldoBerkurang == 1 && HitAPITrx == 1)
-		{
+		if(message_ocr == 'ID has been checked.' && state_ocr == 0 && verifState_ocr == true && isTrxIncreased == 1 
+			&& isSaldoBerkurang == 1 && HitAPITrx == 1){
+			
 			'tulis status sukses pada excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
-			GlobalVariable.SuccessReason)
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', 
+				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
+					GlobalVariable.SuccessReason)
 		
 		}
 		//kondisi jika transaksi berhasil tapi tidak tercatat/tersimpan di DB
-		else if(state_ocr == 0 && isTrxIncreased == 0 && isSaldoBerkurang == 1)
-		{
+		else if(state_ocr == 0 && isTrxIncreased == 0 && isSaldoBerkurang == 1){
+			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-			GlobalVariable.FailedReasonTrxNotinDB)
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', 
+				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+					GlobalVariable.FailedReasonTrxNotinDB)
 		}
 		//kondisi jika transaksi berhasil tapi saldo tidak berkurang
-		else if(state_ocr == 0 && isTrxIncreased == 1 && isSaldoBerkurang == 0)
-		{
+		else if(state_ocr == 0 && isTrxIncreased == 1 && isSaldoBerkurang == 0){
+			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-			GlobalVariable.FailedReasonBalanceNotChange)
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', 
+				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+					GlobalVariable.FailedReasonBalanceNotChange)
 		}
 		//kondisi transaksi tidak tampil dan tidak tersimpan di DB
-		else if(HitAPITrx == 0 && state_ocr == 0 && isTrxIncreased == 0 && isSaldoBerkurang == 1)
-		{
+		else if(HitAPITrx == 0 && state_ocr == 0 && isTrxIncreased == 0 && isSaldoBerkurang == 1){
+			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-			GlobalVariable.FailedReasonSaldoBocor)
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', 
+				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+					GlobalVariable.FailedReasonSaldoBocor)
 		}
-		else
-		{
+		else{
+			
 			GlobalVariable.FlagFailed = 1
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
@@ -313,14 +317,14 @@ def getSaldoforTransaction(String NamaOCR) {
 	def elementNamaSaldo = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
 	
 	'lakukan loop untuk cari nama saldo yang ditentukan'
-	for(int i=1; i<=elementNamaSaldo.size(); i++)
-	{
+	for(int i=1; i<=elementNamaSaldo.size(); i++){
+		
 		'cari nama saldo yang sesuai di list saldo'
 		def modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/span", true)
 
 		'jika nama object sesuai dengan nama saldo'
-		if(WebUI.getText(modifyNamaSaldo) == NamaOCR)
-		{
+		if(WebUI.getText(modifyNamaSaldo) == NamaOCR){
+			
 			'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
 			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/h3", true)
 			
@@ -329,8 +333,8 @@ def getSaldoforTransaction(String NamaOCR) {
 		}
 	}
 	'pakai saldo IDR jika lainnya tidak ada'
-	if(saldoNow == 0)
-	{
+	if(saldoNow == 0){
+		
 		'simpan jumlah saldo sekarang di variabel'
 		saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988')).replace(',',''))
 	}
@@ -362,13 +366,15 @@ def filterSaldo() {
 	WebUI.delay(4)
 	
 	'isi field input tipe saldo'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
+		findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
 	
 	'isi field tipe transaksi'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 14))
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), 
+		findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 14))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), Keys.chord(Keys.ENTER))

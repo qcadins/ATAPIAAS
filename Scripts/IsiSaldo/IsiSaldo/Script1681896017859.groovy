@@ -146,8 +146,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		
 		'verifikasi button tidak di disable'
 		if(WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Lanjut'), 
-			'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL) && isMandatoryComplete != 0)
-		{
+			'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL) && isMandatoryComplete != 0){
+		
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', 
@@ -157,8 +157,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			
 			continue;
 		}
-		else
-		{
+		else{
+			
 			'klik pada tombol lanjut'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Lanjut'))
 		}
@@ -179,8 +179,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		filterSaldo()
 		
 		'cek apakah button skip enable atau disable'
-		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL))
-		{
+		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)){
+			
 			'klik button skip to last page'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
 		}
@@ -189,8 +189,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		no_TrxfromUI = getTrxNumber()
 		
 		'jika perlu cek ke DB'
-		if(GlobalVariable.KondisiCekDB == 'Yes')
-		{
+		if(GlobalVariable.KondisiCekDB == 'Yes'){
+			
 			'ambil nomor transaksi terbaru dari DB'
 			no_TrxfromDB = CustomKeywords.'apikey.CheckSaldoAPI.getLatestMutation'(conndevUAT, tenantcode)
 			
@@ -202,16 +202,16 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 				 FailureHandling.CONTINUE_ON_FAILURE)
 			
 			'cek apakah transaksi tercatat, memastikan tenant lain tidak memiliki transaksi yang sama'
-			if(no_TrxfromDB != no_TrxfromUI || no_TrxfromDB == no_TrxOtherTenant)
-			{
+			if(no_TrxfromDB != no_TrxfromUI || no_TrxfromDB == no_TrxOtherTenant){
+				
 				'topup dianggap gagal'
 				TopupSaldoCorrectTenant = 0
 			}
-			else
-			{
+			else{
+				
 				'jika ada konten pada tabel yang tidak sesuai dengan DB'
-				if(verifyTableContent(conndevUAT, tenantcode) == 0)
-				{
+				if(verifyTableContent(conndevUAT, tenantcode) == 0){
+					
 					'topup dianggap gagal'
 					TopupSaldoCorrectTenant = 0
 				}
@@ -225,8 +225,9 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		if(Saldobefore + JumlahTopUp == Saldoafter && GlobalVariable.FlagFailed == 0 && TopupSaldoCorrectTenant == 1)
 		{
 			'tulis status sukses pada excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' +
-			GlobalVariable.SuccessReason)
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, 
+				GlobalVariable.StatusSuccess, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' +
+					GlobalVariable.SuccessReason)
 					
 		}
 		else
@@ -264,8 +265,7 @@ def checkTenantcount(connection) {
 	int countDB = namatenantDB.size()
 	
 	'jika hitungan di UI dan DB sesuai'
-	if(countWeb == countDB) 
-	{
+	if(countWeb == countDB) {
 //		for(int i=1; i<=countWeb; i++)
 //		{
 //			'ambil object dari ddl'
@@ -291,8 +291,8 @@ def checkTenantcount(connection) {
 //			isTenantMatch = 1
 //		}
 	}
-	else if(countWeb != countDB || isTenantMatch == 0)
-	{
+	else if(countWeb != countDB || isTenantMatch == 0){
+		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and reason topup failed'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn,
@@ -322,10 +322,10 @@ def checkVendorcount(connection, tenantcode) {
 	int countDB = namaVendorDB.size()
 	
 	'jika hitungan di UI dan DB sesuai'
-	if(countWeb == countDB)
-	{
-		for(int i=1; i<=countWeb; i++)
-		{
+	if(countWeb == countDB){
+		
+		for(int i=1; i<=countWeb; i++){
+			
 			'ambil object dari ddl'
 			def modifyNamaVendor = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/VendorList'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-balance/div[2]/div/div/div/div/form/div[1]/div[2]/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
 				
@@ -335,11 +335,11 @@ def checkVendorcount(connection, tenantcode) {
 		}
 		
 		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaVendorDB)
-		{
+		for (String tipe : namaVendorDB){
+			
 			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaVendorUI.contains(tipe))
-			{
+			if (!namaVendorUI.contains(tipe)){
+				
 				'ada data yang tidak match'
 				isVendorFound = 0;
 				'berhentikan loop'
@@ -350,8 +350,8 @@ def checkVendorcount(connection, tenantcode) {
 		}
 			
 	}
-	else if(isVendorFound == 0 || countWeb != countDB)
-	{
+	else if(isVendorFound == 0 || countWeb != countDB){
+		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn,
@@ -381,11 +381,11 @@ def checkTipeSaldocount(connection, tenantcode) {
 	int countDB = namaTipefromDB.size()
 	
 	'jika hitungan di UI dan DB sesuai lakukan pengecekan'
-	if(countWeb == countDB)
-	{
+	if(countWeb == countDB){
+		
 		'loop untuk tambah data ke array from UI'
-		for(int i=1; i<=countWeb; i++)
-		{
+		for(int i=1; i<=countWeb; i++){
+			
 			'ambil object dari ddl'
 			def modifyNamaTipe = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/TipeSaldoList'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-balance/div[2]/div/div/div/div/form/div[1]/div[3]/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
 			
@@ -395,11 +395,11 @@ def checkTipeSaldocount(connection, tenantcode) {
 		}
 	
 		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaTipefromDB)
-		{
+		for (String tipe : namaTipefromDB){
+			
 			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaTipefromUI.contains(tipe))
-			{
+			if (!namaTipefromUI.contains(tipe)){
+				
 				'ada data yang tidak match'
 				isDataMatch = 0;
 				'berhentikan loop'
@@ -409,8 +409,8 @@ def checkTipeSaldocount(connection, tenantcode) {
 			isDataMatch = 1
 		}
 	}
-	else if(countWeb != countDB || isDataMatch == 0)
-	{
+	else if(countWeb != countDB || isDataMatch == 0){
+		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn,
@@ -591,6 +591,7 @@ def verifyTableContent(connection, String tenant) {
 'fungsi untuk melakukan pengecekan '
 def checkVerifyEqualOrMatch(Boolean isMatch) {
 	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 			(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
