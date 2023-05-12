@@ -272,8 +272,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			GlobalVariable.FlagFailed = 1
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR NPWP', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			message_ocr)
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					message_ocr)
 		}
 		'refresh laman web sesudah kondisi write to excel'
 		WebUI.refresh()
