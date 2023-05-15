@@ -72,7 +72,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		tenantcode, findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
 	
 	'ambil jenis penagihan transaksi (by qty/price)'
-	String BalanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(conndevUAT, 
+	String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(conndevUAT, 
 		tenantcode, idPayment)
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
@@ -86,16 +86,13 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		ResponseObject response
 		
 		'cek apakah perlu tambah API'
-		String UseCorrectKey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 19)
+		String useCorrectKey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 19)
 		
 		'cek apakah perlu gunakan tenantcode yang salah'
-		String UseCorrectTenant = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 17)
-		
-		'angka untuk menghitung data mandatory yang tidak terpenuhi'
-		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 4))
-		
+		String useCorrectTenant = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 17)
+				
 		'deklarasi variabel angka'
-		int isSaldoBerkurang, Saldobefore, UISaldoafter, KatalonSaldoafter, isTrxIncreased, HitAPITrx
+		int isSaldoBerkurang, saldobefore, uiSaldoafter, katalonSaldoafter, isTrxIncreased, HitAPITrx
 		
 		'penanda untuk HIT yang berhasil dan gagal'
 		HitAPITrx = 1
@@ -118,13 +115,13 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		String no_Trx_before = getTrxNumber()
 		
 		'variabel yang menyimpan saldo sebelum adanya transaksi'
-		Saldobefore = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
+		saldobefore = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
 		
-		if(UseCorrectKey != 'Yes'){
+		if(useCorrectKey != 'Yes'){
 			
 			thekey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 20)
 		}
-		if(UseCorrectTenant != 'Yes'){
+		if(useCorrectTenant != 'Yes'){
 			
 			tenantcode = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 18)
 		}
@@ -164,7 +161,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			break;
 		}
 		//jika status sukses dengan key dan kode tenant yang salah, anggap sebagai bug dan lanjutkan ke tc berikutnya
-		else if(state_ocr == '0' && UseCorrectKey != 'Yes' && UseCorrectTenant != 'Yes'){
+		else if(state_ocr == '0' && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes'){
 			
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dukcapil(NonBiom)', GlobalVariable.NumOfColumn,
@@ -195,14 +192,14 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		if(GlobalVariable.KondisiCekDB == 'Yes'){
 			
 			'simpan trx number terbaru dari DB'
-			String LatestMutation= CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(conndevUAT, 
+			String latestMutation= CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(conndevUAT, 
 				tenantcode)
-			
+	
 			'simpan trx number terbaru milik tenant lain dari DB'
-			String LatestOtherTenantMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(conndevUAT, tenantcode)
+			String latestOtherTenantMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(conndevUAT, tenantcode)
 			
 			'jika data transaction number di web dan DB tidak sesuai'
-			if(LatestMutation != no_Trx_after || LatestMutation == LatestOtherTenantMutation)
+			if(latestMutation != no_Trx_after || latestMutation == latestOtherTenantMutation)
 			{
 				'anggap HIT Api gagal'
 				HitAPITrx = 0
@@ -210,29 +207,29 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		}
 		
 		'simpan harga Dukcapil(NonBiom) ke dalam integer'
-		int Service_price = CustomKeywords.'ocrTesting.GetParameterfromDB.getServicePricefromDB'(conndevUAT, idPayment)
+		int serviceprice = CustomKeywords.'ocrTesting.GetParameterfromDB.getServicePricefromDB'(conndevUAT, idPayment)
 		
 		'jika HIT API successful'
 		if(HitAPITrx == 1){
 			
 			'cek apakah jenis penagihan berdasarkan harga'
-			if(BalanceChargeType == 'Price')
+			if(balanceChargeType == 'Price')
 			{
 				'input saldo setelah penagihan'
-				KatalonSaldoafter = Saldobefore - Service_price
+				katalonSaldoafter = saldobefore - serviceprice
 			}
 			else
 			{
 				'input saldo setelah penagihan dikurangi qty'
-				KatalonSaldoafter = Saldobefore - 1
+				katalonSaldoafter = saldobefore - 1
 			}
 		}
 		
 		'simpan saldo setelah di HIT'
-		UISaldoafter = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
+		uiSaldoafter = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
 		
 		'jika saldoafter match'
-		if(KatalonSaldoafter == UISaldoafter){
+		if(katalonSaldoafter == uiSaldoafter){
 			
 			isSaldoBerkurang = 1
 		}

@@ -68,7 +68,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 	int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(connProd, tenantcode, 'OCR BPKB')
 	
 	'ambil jenis penagihan transaksi (by qty/price)'
-	String BalanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(connProd, 
+	String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(connProd, 
 		tenantcode, idPayment)
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
@@ -82,16 +82,13 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		ResponseObject response
 		
 		'cek apakah perlu tambah API'
-		String UseCorrectKey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 15)
+		String useCorrectKey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 15)
 		
 		'cek apakah perlu gunakan tenantcode yang salah'
-		String UseCorrectTenant = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13)
-		
-		'angka untuk menghitung data mandatory yang tidak terpenuhi'
-		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 4))
+		String useCorrectTenant = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13)
 		
 		'deklarasi variabel angka'
-		int isSaldoBerkurang, Saldobefore, UISaldoafter, KatalonSaldoafter, isTrxIncreased, HitAPITrx
+		int isSaldoBerkurang, saldobefore, uisaldoafter, katalonSaldoafter, isTrxIncreased, HitAPITrx
 		
 		'penanda untuk HIT yang berhasil dan gagal'
 		HitAPITrx = 1
@@ -114,13 +111,13 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		String no_Trx_before = getTrxNumber()
 		
 		'variabel yang menyimpan saldo sebelum adanya transaksi'
-		Saldobefore = getSaldoforTransaction('OCR BPKB')
+		saldobefore = getSaldoforTransaction('OCR BPKB')
 		
-		if(UseCorrectKey != 'Yes'){
+		if(useCorrectKey != 'Yes'){
 			
 			thekey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 16)
 		}
-		else if(UseCorrectTenant != 'Yes'){
+		else if(useCorrectTenant != 'Yes'){
 			
 			tenantcode = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 14)
 		}
@@ -157,7 +154,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			break;
 		}
 		//jika status sukses dengan key dan kode tenant yang salah, anggap sebagai bug dan lanjutkan ke tc berikutnya
-		else if(state_ocr == 'SUCCESS' && UseCorrectKey != 'Yes' && UseCorrectTenant != 'Yes'){
+		else if(state_ocr == 'SUCCESS' && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes'){
 			
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR BPKB', GlobalVariable.NumOfColumn,
@@ -197,13 +194,13 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		if(GlobalVariable.KondisiCekDB == 'Yes'){
 			
 			'simpan trx number terbaru dari DB'
-			String LatestMutation= CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
+			String latestMutation= CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
 			
 			'simpan trx number terbaru milik tenant lain dari DB'
-			String LatestOtherTenantMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(connProd, tenantcode)
+			String latestOtherTenantMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(connProd, tenantcode)
 			
 			'jika data transaction number di web dan DB tidak sesuai'
-			if(LatestMutation != no_Trx_after || LatestMutation == LatestOtherTenantMutation){
+			if(latestMutation != no_Trx_after || latestMutation == latestOtherTenantMutation){
 				
 				'anggap HIT Api gagal'
 				HitAPITrx = 0
@@ -211,29 +208,29 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		}
 		
 		'simpan harga OCR BPKB ke dalam integer'
-		int Service_price = CustomKeywords.'ocrTesting.GetParameterfromDB.getServicePricefromDB'(connProd, idPayment)
+		int serviceprice = CustomKeywords.'ocrTesting.GetParameterfromDB.getServicePricefromDB'(connProd, idPayment)
 		
 		'jika HIT API successful'
 		if(HitAPITrx == 1){
 			
 			'cek apakah jenis penagihan berdasarkan harga'
-			if(BalanceChargeType == 'Price'){
+			if(balanceChargeType == 'Price'){
 				
 				'input saldo setelah penagihan'
-				KatalonSaldoafter = Saldobefore - Service_price
+				katalonSaldoafter = saldobefore - serviceprice
 			}
 			else{
 				
 				'input saldo setelah penagihan dikurangi qty'
-				KatalonSaldoafter = Saldobefore - 1
+				katalonSaldoafter = saldobefore - 1
 			}
 		}
 		
 		'simpan saldo setelah di HIT'
-		UISaldoafter = getSaldoforTransaction('OCR BPKB')
+		uisaldoafter = getSaldoforTransaction('OCR BPKB')
 	
 		'jika saldoafter match'
-		if(KatalonSaldoafter == UISaldoafter){
+		if(katalonSaldoafter == uisaldoafter){
 			
 			isSaldoBerkurang = 1
 		}
