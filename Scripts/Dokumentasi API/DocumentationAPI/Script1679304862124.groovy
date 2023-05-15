@@ -14,9 +14,6 @@ String namadokumentasi = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.
 'user menentukan apakah file yang didownload langsung dihapus atau tidak lewat excel'
 String FlagDelete = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 9)
 
-'mengambil alamat dari project katalon ini'
-String userDir = System.getProperty('user.dir')
-
 'Wait for Some time so that file gets downloaded and Stored in user defined path'
 WebUI.delay(5)
 

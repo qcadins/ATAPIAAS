@@ -21,13 +21,13 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPa
 int countColumnEdit = findTestData(ExcelPathSaldo).columnNumbers()
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
-def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 //'deklarasi koneksi ke Database adins_apiaas_uat'
 //def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-def conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Saldo'], FailureHandling.STOP_ON_FAILURE)
@@ -36,7 +36,7 @@ WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Saldo'], F
 String tenantcode = CustomKeywords.'saldo.VerifSaldo.getTenantCodefromDB'(conn, 
 	findTestData(ExcelPathSaldo).getValue(2,24))
 
-for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
+for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'set penanda error menjadi 0'
 	GlobalVariable.FlagFailed = 0
@@ -416,7 +416,8 @@ def checkTableandPaging(Connection connection, String tenantcode, String tipeSal
 		'ubah path object button skip'
 		def modifybuttonskip = WebUI.modifyObjectProperty(findTestObject('Object Repository/Saldo/Page_Balance/lastPage'),
 			'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/"+
-			"app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage) +"]", true)
+			"app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/"+
+			"datatable-pager/ul/li["+ (lastPage) +"]", true)
 	
 		'cek apakah button enable atau disable'
 		if(WebUI.getAttribute(modifybuttonskip, 'class', FailureHandling.CONTINUE_ON_FAILURE) == ''){

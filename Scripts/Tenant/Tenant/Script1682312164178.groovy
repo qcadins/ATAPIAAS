@@ -19,7 +19,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPa
 //def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-def conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'mendapat jumlah kolom dari sheet Tenant'
 int countColumnEdit = findTestData(ExcelPathTenant).columnNumbers()
@@ -737,7 +737,8 @@ def checkPaging(Connection connectProd) {
 
 	'verify paging di page 2'
 	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Tenant/button_Page2'), 
-		'class', FailureHandling.CONTINUE_ON_FAILURE), 'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
+		'class', FailureHandling.CONTINUE_ON_FAILURE), 'pages active ng-star-inserted', 
+			false, FailureHandling.CONTINUE_ON_FAILURE))
 
 	'click page 1'
 	WebUI.click(findTestObject('Tenant/button_Page1'))
