@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>i_Admin Client_ft-edit</name>
+   <tag></tag>
+   <elementGuidId>636b37f3-e697-4e2c-9f02-96be964d7b24</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>i.ft-edit</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//a/i</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>i</value>
+      <webElementGuid>225d416e-d29a-43ca-b97c-a6efeb7fe03f</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ft-edit</value>
+      <webElementGuid>5e5a54cc-0f5d-423c-a192-5ec07c0b1eb5</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[@class=&quot;auth-page blank-page pace-done modal-open&quot;]/ngb-modal-window[@class=&quot;d-block modal fade show&quot;]/div[@class=&quot;modal-dialog modal-md&quot;]/div[@class=&quot;modal-content&quot;]/app-multi-role[1]/div[@class=&quot;modal-body&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-12&quot;]/table[@class=&quot;table table-sm&quot;]/tr[@class=&quot;ng-star-inserted&quot;]/td[2]/a[@class=&quot;btn-link&quot;]/i[@class=&quot;ft-edit&quot;]</value>
+      <webElementGuid>cf1e1785-8cbf-46d3-b9d5-bef7fa6408a9</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//a/i</value>
+      <webElementGuid>e33fd86d-e51c-446c-857f-19b73c80293d</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

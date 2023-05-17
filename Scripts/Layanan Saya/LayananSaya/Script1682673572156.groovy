@@ -3,6 +3,8 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
+
+import java.sql.Connection
 import java.sql.Driver
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
@@ -19,13 +21,13 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPa
 int countColumnEdit = findTestData(ExcelPathLayananSaya).getColumnNumbers()
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
-def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 //'deklarasi koneksi ke Database adins_apiaas_uat'
 //def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-def conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Layanan'], FailureHandling.STOP_ON_FAILURE)
@@ -37,13 +39,13 @@ WebUI.click(findTestObject('Object Repository/LayananSaya/Page_Balance/span_CHEC
 WebUI.click(findTestObject('Object Repository/LayananSaya/Page_Balance/span_Layanan Saya'))
 
 'user memilih perlu cek layanan production atau trial'
-if(findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 12) == 'PRODUCTION')
-{
+if(findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 11) == 'PRODUCTION'){
+	
 	'klik pada api key production'
 	WebUI.click(findTestObject('Object Repository/LayananSaya/Page_List Service/label_PRODUCTION'))
 }
-else
-{
+else{
+	
 	'klik pada api key trial'
 	WebUI.click(findTestObject('Object Repository/LayananSaya/Page_List Service/label_TRIAL'))
 }
@@ -77,13 +79,13 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		ArrayList<String> chargeTypeDB = CustomKeywords.'layananSaya.VerifLayanan.getListChargeType'(conndevUAT, tenantcode)
 		
 		'deklarasi service yang aktif di UI'
-		ArrayList<String> serviceNameUI = new ArrayList<String>()
+		ArrayList<String> serviceNameUI = []
 		
 		'deklarasi status service di UI'
-		ArrayList<String> serviceStatusUI = new ArrayList<String>()
+		ArrayList<String> serviceStatusUI = []
 		
 		'deklarasi charge type di UI'
-		ArrayList<String> chargeTypeUI = new ArrayList<String>()
+		ArrayList<String> chargeTypeUI = []
 		
 		'ambil total data pada tabel'
 		Total = WebUI.getText(findTestObject('Object Repository/LayananSaya/totalData')).split(' ')

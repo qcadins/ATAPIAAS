@@ -32,6 +32,18 @@ WebUI.focus(findTestObject('Object Repository/RegisterLogin/'+
 WebUI.click(findTestObject('Object Repository/RegisterLogin/'+
 	'Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
+'cek apakah muncul error setelah login'
+if(WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/'+
+	'Page_Balance/div_Unknown Error'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+	
+	GlobalVariable.FlagFailed = 1
+	
+	'tulis adanya error pada sistem web'
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			GlobalVariable.FailedReasonUnknown)
+}
+
 'looping kolom dari testdata'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
@@ -188,6 +200,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) +
 				';') + GlobalVariable.StatusReasonSystem)
 		}
+		
+		'reset flagging failed ke 0'
+		GlobalVariable.FlagFailed = 0
 	}
 }
 WebUI.closeBrowser()

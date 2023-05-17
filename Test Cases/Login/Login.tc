@@ -41,6 +41,12 @@
       <value></value>
       <variableId>0f231b6b-7a17-44a4-bbb5-1e3db7660330</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>913c8644-bf7c-47db-848c-0b24bd5826f4</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'APIAAS/DataEditProfile'</defaultValue>
       <description></description>
@@ -82,5 +88,12 @@
       <id>0f231b6b-7a17-44a4-bbb5-1e3db7660330</id>
       <masked>false</masked>
       <name>ExcelPathSaldo</name>
+   </variable>
+   <variable>
+      <defaultValue>'User Management/DataTestingRole'</defaultValue>
+      <description></description>
+      <id>913c8644-bf7c-47db-848c-0b24bd5826f4</id>
+      <masked>false</masked>
+      <name>ExcelPathRole</name>
    </variable>
 </TestCaseEntity>

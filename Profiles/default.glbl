@@ -41,6 +41,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Data sudah pernah diinput'</initValue>
+      <name>FailedReasonExisted</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Error pada pemrosesan oleh API'</initValue>
       <name>FailedReasonHITAPI</name>
    </GlobalVariableEntity>
@@ -53,6 +58,11 @@
       <description></description>
       <initValue>'Mandatory is incomplete'</initValue>
       <name>FailedReasonMandatory</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Akses menu mengalami error'</initValue>
+      <name>FailedReasonMenuRole</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -128,6 +138,11 @@
       <description></description>
       <initValue>'HIT API berhasil, tapi tidak tersimpan di DB'</initValue>
       <name>FailedReasonTrxNotinDB</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Muncul error pada laman web secara acak'</initValue>
+      <name>FailedReasonUnknown</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

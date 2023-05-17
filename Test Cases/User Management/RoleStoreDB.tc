@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>RoleStoreDB</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>631275e2-53e1-4969-b8f5-0ae3ad7c0ae3</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>0cc8d8f3-bf65-4f5b-bbff-fdb6d2ffa519</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'User Management/DataTestingRole'</defaultValue>
+      <description></description>
+      <id>0cc8d8f3-bf65-4f5b-bbff-fdb6d2ffa519</id>
+      <masked>false</masked>
+      <name>ExcelPathRole</name>
+   </variable>
+</TestCaseEntity>

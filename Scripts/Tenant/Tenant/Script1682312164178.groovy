@@ -22,7 +22,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPa
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'mendapat jumlah kolom dari sheet Tenant'
-int countColumnEdit = findTestData(ExcelPathTenant).columnNumbers()
+int countColumnEdit = findTestData(ExcelPathTenant).getColumnNumbers()
 
 'call test case login admin esign'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Tenant'], FailureHandling.STOP_ON_FAILURE)

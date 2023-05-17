@@ -94,7 +94,7 @@ else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).e
 	
 	'get data balacne mutation dari DB'
 	String result = CustomKeywords.'tenant.TenantVerif.getTenantServices'(conndevUAT, 
-		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 9)).replace('{','').replace('}','').replace('"','').replace(',','')
+		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 9)).replace('{','').replace('}','').replace('"','').replace(':0', '')
 	
 	'split result to array'
 	ArrayList<String> resultarray = result.split(':0')
