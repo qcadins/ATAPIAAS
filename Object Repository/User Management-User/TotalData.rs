@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>TotalData</name>
+   <tag></tag>
+   <elementGuidId>3f9b01c5-bfd7-4b30-bce9-ca9e3c255554</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-user/app-msx-paging/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/div</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-user/app-msx-paging/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/div</value>
+      <webElementGuid>f453a7db-0a51-4381-9b45-2e01745b7d77</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

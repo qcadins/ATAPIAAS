@@ -8,9 +8,6 @@ import java.sql.Connection
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
-'declare arraylist arraymatch'
-ArrayList<String> arrayMatch = []
-
 'check if action new/services'
 if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('New')) {
 	
@@ -31,11 +28,14 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 7).equalsIg
 }
 else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('Edit')) {
 	
+	'ambil data role dan status dari DB'
 	ArrayList<String> resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleEdit'(conndevUAT, 
 		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 16))
 	
+	'inisialisasi array dari Excel'
 	ArrayList<String> resultExcel = []
 	
+	'cek data untuk tiap alamat di array'
 	for (int i = 0; i < resultDB.size ; i++){
 		
 		'ambil data dari excel'
@@ -51,12 +51,15 @@ else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 7).equa
 }
 else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('Settings')) {
 	
+	'ambil data result dari DB'
 	ArrayList<String> resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleMenu'(conndevUAT, 
 		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 13), 
 			findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 10))
 	
+	'ambil data menu role pada excel'
 	ArrayList<String> resultExcel = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 21).split(';', -1)
 	
+	'jika hasil kedua sumber tidak sesuai'
 	if(resultDB != resultExcel)
 	{
 		'tulis adanya error pada sistem web'

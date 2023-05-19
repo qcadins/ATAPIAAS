@@ -21,6 +21,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Button Resend tidak muncul'</initValue>
+      <name>FailedReasonButtonResend</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'ChargeType di UI tidak sama dengan DB'</initValue>
       <name>FailedReasonChargeTypeNotMatch</name>
    </GlobalVariableEntity>

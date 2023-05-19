@@ -377,64 +377,69 @@ def checkPaging(Connection connUAT) {
 	'verify total data role'
 	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
 	
-	'klik halaman 2'
-	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/a_2'))
+	'cek apakah hlm 2 tersedia'
+	if(WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/a_2')) == true){
 	
-	'verify paging di page 2'
-	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
-		'Page_List Roles/Page2'),'class', FailureHandling.CONTINUE_ON_FAILURE), 
-			'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
-	
-	'klik halaman 1'
-	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/a_1'))
-	
-	'verify paging di page 1'
-	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
-		'Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
-			'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
-	
-	'klik button next page'
-	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-right'))
-	
-	'verify paging di page 2'
-	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/'+
-		'User Management-Role/Page_List Roles/Page2'),'class', FailureHandling.CONTINUE_ON_FAILURE),
-			'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
-	
-	'klik prev page'
-	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-left'))
-	
-	'verify paging di page 1'
-	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
-		'Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
-			'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
-	
-	'cek apakah button skip disabled atau enabled'
-	if(WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/'+
-		'Page_List Roles/i_Action_datatable-icon-skip'), FailureHandling.OPTIONAL)){
-	
-		'klik pada tombol skip'
-		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-skip'))
+		'klik halaman 2'
+		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/a_2'))
+		
+		'verify paging di page 2'
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
+			'Page_List Roles/Page2'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
+		
+		'klik halaman 1'
+		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/a_1'))
+		
+		'verify paging di page 1'
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
+			'Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
+		
+		'klik button next page'
+		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-right'))
+		
+		'verify paging di page 2'
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/'+
+			'User Management-Role/Page_List Roles/Page2'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
+		
+		'klik prev page'
+		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-left'))
+		
+		'verify paging di page 1'
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
+			'Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
+		
+		'cek apakah button skip disabled atau enabled'
+		if(WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/'+
+			'Page_List Roles/i_Action_datatable-icon-skip'), FailureHandling.OPTIONAL)){
+		
+			'klik pada tombol skip'
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-skip'))
+		}
+		
+		'modify object laman terakhir'
+		def modifyObjectmaxPage = WebUI.modifyObjectProperty(
+			findTestObject('Object Repository/User Management-Role/modifyObject'),
+			'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-roles/app-msx-paging/"+
+			"app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage - 2) +"]", true)
+		
+		'verify paging di page terakhir'
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(modifyObjectmaxPage,
+			'class', FailureHandling.CONTINUE_ON_FAILURE), 'pages active ng-star-inserted',
+				false, FailureHandling.CONTINUE_ON_FAILURE))
+		
+		'click min page'
+		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-prev'))
+		
+		'verify paging di page 1'
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
+			'Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
+		
 	}
-	
-	'modify object laman terakhir'
-	def modifyObjectmaxPage = WebUI.modifyObjectProperty(
-		findTestObject('Object Repository/User Management-Role/modifyObject'),
-		'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-roles/app-msx-paging/"+
-		"app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage - 2) +"]", true)
-	
-	'verify paging di page terakhir'
-	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(modifyObjectmaxPage,
-		'class', FailureHandling.CONTINUE_ON_FAILURE), 'pages active ng-star-inserted',
-			false, FailureHandling.CONTINUE_ON_FAILURE))
-	
-	'click min page'
-	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-prev'))
-	
-	'verify paging di page 1'
-	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
-		'Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
-			'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 }
 
 def checkVerifyPaging(Boolean isMatch) {

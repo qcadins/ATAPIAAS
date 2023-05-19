@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>User</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>97dd8842-6d82-469c-b866-73f0f356ec94</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>07293ebc-1026-40ef-8418-f695b8e22b0d</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'User Management/DataTestingUser'</defaultValue>
+      <description></description>
+      <id>07293ebc-1026-40ef-8418-f695b8e22b0d</id>
+      <masked>false</masked>
+      <name>ExcelPathUser</name>
+   </variable>
+</TestCaseEntity>
