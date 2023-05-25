@@ -15,7 +15,7 @@ public class GetOTPfromDB {
 
 		int columnCount
 
-		ArrayList<String> listdata = new ArrayList<>()
+		ArrayList<String> listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -25,12 +25,13 @@ public class GetOTPfromDB {
 
 		columnCount = metadata.getColumnCount()
 
-		while(resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
+		while (resultSet.next()) {
+			for (int i =1; i <= columnCount ; i++) {
 				data = resultSet.getObject(i)
 				listdata.add(data)
 			}
 		}
 		listdata
 	}
+	
 }

@@ -23,7 +23,7 @@ int countColumnEdit = findTestData(ExcelPathRole).getColumnNumbers()
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Role'], FailureHandling.STOP_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Role', ('SheetName') : 'Role', ('Path') : ExcelPathRole], FailureHandling.STOP_ON_FAILURE)
 
 'klik pada bagian admin client'
 WebUI.click(findTestObject('Object Repository/User Management-Role/'+
@@ -73,7 +73,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'Page_List Roles/i_Logout_ft-x ng-tns-c133-2'))
 		}
 		
-		'check if action new/services/edit/balancechargetype'
+		'check if action new/edit/settings'
 		if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('New')){
 			
 			'klik pada tombol New'
@@ -83,54 +83,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_Add Role/input__roleName'),
 				findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 19))
 			
-			'klik pada tombol lanjut'
-			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_Next'))
-			
-			'klik tombol ya untuk menambahkan'
-			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_Ya'))
-			
-			'jika error muncul'
-			if(WebUI.getText(findTestObject('Object Repository/User Management-Role/'+
-				'Page_Add Role/KonfirmasiAdd')).contains('Sudah Ada')) {
-			
-				'klik tombol OK'
-				WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_OK'))
-			
-				'tulis adanya error pada sistem web'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-					GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-						GlobalVariable.FailedReasonExisted)
-			}
-			else{
-				
-				'klik tombol OK'
-				WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_OK'))
-				
-				'jika mandatory lengkap dan tidak ada failure'
-				if(isMandatoryComplete == 0 && GlobalVariable.FlagFailed == 0)
-				{
-					'write to excel success'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Role', 0,
-						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
-				}
-				else
-				{
-					'tulis adanya mandatory tidak lengkap'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-						GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-							GlobalVariable.FailedReasonMandatory)
-					
-					continue;
-				}
-				
-				'cek apakah perlu untuk cek ke DB'
-				if(GlobalVariable.KondisiCekDB == 'Yes') {
-					
-					'panggil fungsi storeDB'
-					WebUI.callTestCase(findTestCase('Test Cases/User Management/RoleStoreDB'), [:], FailureHandling.STOP_ON_FAILURE)
-	
-				}			
-			}
+			'panggil fungsi cek konfirmasi dialog'
+			checkdialogConfirmation(isMandatoryComplete)
 		}
 		else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('Edit')) {
 			
@@ -140,6 +94,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'klik pada edit role'
 			WebUI.click(findTestObject('Object Repository/User Management-Role/'+
 				'Page_List Roles/em_Action_align-middle cursor-pointer font-_0818c8'))
+			
+			'panggil fungsi verifikasi sebelum edit'
+			beforeEditVerif(conndevUAT)
 			
 			'input nama role yang akan diubah'
 			WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_Edit Role/input__roleName'),
@@ -153,54 +110,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.sendKeys(findTestObject('Object Repository/User Management-Role/Page_Edit Role/input_status'),
 				Keys.chord(Keys.ENTER))
 			
-			'klik tombol next untuk melanjutkan proses edit'
-			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Edit Role/button_Next'))
-			
-			'klik tombol YA untuk konfirmasi perubahan'
-			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Edit Role/button_Ya'))
-			
-			'ambil string dari alert setelah edit'
-			String editCondition = WebUI.getText(findTestObject('Object Repository/User Management-Role/'+
-				'Page_Add Role/KonfirmasiAdd'))
-			
-			'jika muncul error setelah edit'
-			if(editCondition.contains('Sudah Ada')) {
-			
-				'klik pada tombol ok'
-				WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Edit Role/button_OK'))
-			
-				'tulis adanya error saat edit'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-					GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-						editCondition)
-			}
-			else{
-				
-				'klik pada tombol OK'
-				WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Edit Role/button_OK'))
-				
-				'jika mandatory lengkap dan tidak ada failure'
-				if(isMandatoryComplete == 0 && GlobalVariable.FlagFailed == 0) {
-					
-					'write to excel success'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Role', 0,
-						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
-				}
-				else
-				{
-					'tulis adanya mandatory tidak lengkap'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-						GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-							GlobalVariable.FailedReasonMandatory)
-					
-					continue;
-				}
-				if(GlobalVariable.KondisiCekDB == 'Yes') {
-					
-					'panggil fungsi storeDB'
-					WebUI.callTestCase(findTestCase('Test Cases/User Management/RoleStoreDB'), [:], FailureHandling.STOP_ON_FAILURE)
-				}
-			}
+			'panggil fungsi cek konfirmasi dialog'
+			checkdialogConfirmation(isMandatoryComplete)
 		}
 		else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('Settings')) {
 			
@@ -324,6 +235,84 @@ def searchRole() {
 	
 	'klik pada tombol cari'
 	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/button_Search'))
+}
+
+def checkdialogConfirmation(int isMandatoryComplete) {
+	
+	'klik pada tombol lanjut'
+	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_Next'))
+	
+	'klik tombol ya untuk menambahkan'
+	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_Ya'))
+	
+	'jika error muncul'
+	if(WebUI.getText(findTestObject('Object Repository/User Management-Role/'+
+		'Page_Add Role/KonfirmasiAdd')).contains('Sudah Ada')) {
+	
+		'klik tombol OK'
+		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_OK'))
+	
+		'tulis adanya error pada sistem web'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				GlobalVariable.FailedReasonExisted)
+	}
+	else {
+		
+		'klik tombol OK'
+		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_OK'))
+		
+		'jika mandatory lengkap dan tidak ada failure'
+		if (isMandatoryComplete == 0 && GlobalVariable.FlagFailed == 0) {
+			'write to excel success'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Role', 0,
+				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+		}
+		else {
+			'tulis adanya mandatory tidak lengkap'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonMandatory)
+			
+			continue;
+		}
+		
+		'cek apakah perlu untuk cek ke DB'
+		if(GlobalVariable.KondisiCekDB == 'Yes') {
+			
+			'panggil fungsi storeDB'
+			WebUI.callTestCase(findTestCase('Test Cases/User Management/RoleStoreDB'), [:], FailureHandling.STOP_ON_FAILURE)
+
+		}
+	}
+}
+
+def beforeEditVerif (Connection connUAT) {
+	'siapkan array untuk ambil data role dari UI'
+	ArrayList<String> roleUI = []
+	
+	'siapkan array untuk ambil data role dari DB'
+	ArrayList<String> roleDB = CustomKeywords.'userManagement.RoleVerif.getDataRolebeforeVerif'(connUAT, WebUI.getText(findTestObject('Object Repository/User Management-Role/Page_Edit Role/input__roleName')))
+	
+	'ambil text pada nama role dan tambahkan ke array role UI'
+	roleUI.add(WebUI.getText(findTestObject('Object Repository/User Management-Role/Page_Edit Role/input__roleName')))
+	
+	'ambil text pada status role dan tambah ke array role UI'
+	roleUI.add(WebUI.getText(findTestObject('Object Repository/User Management-Role/Page_Edit Role/StatusEditBefore')))
+
+	for (int i = 0; i < roleDB.size(); i++) {
+		
+		'cek apakah tiap isi dari db sesuai'
+		if(roleDB[i] != roleUI[i]) {
+			
+			'Write To Excel gagal dan bermasalah saat verifikasi data'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) +
+					';') + GlobalVariable.FailedReasonEditVerif)
+
+			GlobalVariable.FlagFailed = 1
+		}
+	}
 }
 
 def checkPaging(Connection connUAT) {

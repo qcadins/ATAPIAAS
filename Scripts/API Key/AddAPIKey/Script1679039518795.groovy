@@ -27,7 +27,7 @@ WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Add Api Key/input__
 	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 10))
 
 'pilih jenis API KEY'
-WebUI.selectOptionByLabel(findTestObject('Object Repository/API_KEY/Page_Add Api Key/select_Tipe API KeyPRODUCTIONTRIAL'),
+WebUI.selectOptionByLabel(findTestObject('Object Repository/API_KEY/Page_Add Api Key/select_tipeAPI'),
 	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11), false)
 
 'klik pada tombol simpan'

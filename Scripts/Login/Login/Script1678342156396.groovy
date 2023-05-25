@@ -159,13 +159,11 @@ else if (TC == 'OCR'){
 else if (TC == 'IsiSaldo'){
 	
 	'input data username'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/'+
-		'input_Selamat datang kembali di Billing Sys_95ee84'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
 		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 8))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/'+
-		'input_Selamat datang kembali di Billing Sys_768062'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputpassword'),
 		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'klik tombol masuk'
@@ -180,13 +178,11 @@ else if (TC == 'Tenant'){
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
 	
 	'input data username'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/'+
-		'input_Selamat datang kembali di Billing Sys_95ee84'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
 		findTestData('Login/Login').getValue(2, 3))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/'+
-		'input_Selamat datang kembali di Billing Sys_768062'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputpassword'),
 		findTestData('Login/Login').getValue(3, 3))
 		
 	'klik tombol masuk'
@@ -284,4 +280,16 @@ else if (TC == 'User'){
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'button_Lanjutkan Perjalanan Anda'))
+}
+
+'cek apakah muncul error setelah login'
+if(WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/'+
+	'Page_Balance/div_Unknown Error'), GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+	
+	GlobalVariable.FlagFailed = 1
+	
+	'tulis adanya error pada sistem web'
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			GlobalVariable.FailedReasonUnknown)
 }

@@ -199,7 +199,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		if(objek.contains('.pdf'))
 		{
 			'simpan total halaman di variabel'
-			totalPage = CustomKeywords.'ocrTesting.Pdfprocessor.CountPages'()
+			totalPage = CustomKeywords.'ocrTesting.Pdfprocessor.countPages'()
 		}
 		
 		'jika HIT API successful'

@@ -129,10 +129,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				[:], FailureHandling.STOP_ON_FAILURE)
 		}
 		
-		String isPaging = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/'+
-			'Page_Api Key List/isPagingDisabled'), 'class')
-		
-		if(isPaging != "disabled"){
+		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Api Key List/'+
+			'isPagingEnabled'), FailureHandling.OPTIONAL)  == true){
 			
 			'klik panah ke kanan di footer'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_Aksi_datatable-icon-right'))

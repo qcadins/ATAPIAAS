@@ -9,8 +9,12 @@
          <key>BASIC</key>
          <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/div</value>
       </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@class=&quot;empty-row ng-star-inserted&quot;]</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -18,6 +22,6 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/div</value>
-      <webElementGuid>22824f82-6464-43d2-9ec9-8f29255bd197</webElementGuid>
+      <webElementGuid>5c3b0be8-07c1-472e-8cd1-947411867a81</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

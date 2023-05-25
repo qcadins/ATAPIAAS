@@ -9,8 +9,12 @@
          <key>BASIC</key>
          <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/div</value>
       </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@class = 'page-count ng-star-inserted']</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -18,6 +22,6 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/div</value>
-      <webElementGuid>c4464555-f940-4f44-a422-7c9ad3473c80</webElementGuid>
+      <webElementGuid>1b399f70-b938-4f53-aca1-23ca13fec7f0</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

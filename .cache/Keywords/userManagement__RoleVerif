@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "C6D319192946F77CBBB84DDCF908F351",
+  "keywordFileContentHash": "161468FDA8B9711389CD4F2015AC6BB2",
   "keywordClasses": [
     {
       "name": "userManagement.RoleVerif",
@@ -131,6 +131,38 @@
             },
             {
               "name": "email",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ],
+          "javadoc": ""
+        },
+        {
+          "name": "getDataRolebeforeVerif",
+          "parameters": [
+            {
+              "name": "conn",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "roleName",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",

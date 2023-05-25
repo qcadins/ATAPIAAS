@@ -10,7 +10,6 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
-import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 
 'mencari directory excel\r\n'
@@ -26,11 +25,11 @@ Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_dev
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'User'], FailureHandling.STOP_ON_FAILURE)
 
 'klik pada bagian admin client'
-WebUI.click(findTestObject('Object Repository/User Management-Role/'+
+WebUI.click(findTestObject('Object Repository/User Management-Role/' +
 	'Page_Login - eendigo Platform/i_Admin Client_ft-edit'))
 
 'klik pada menu'
-WebUI.click(findTestObject('Object Repository/User Management-Role/'+
+WebUI.click(findTestObject('Object Repository/User Management-Role/' +
 	'Page_Balance/i_SEDARA MANYURA_ft-menu font-medium-3'))
 
 'pilih submenu manage user'
@@ -58,18 +57,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 4))
 		
 		'klik pada menu'
-		WebUI.click(findTestObject('Object Repository/User Management-Role/'+
+		WebUI.click(findTestObject('Object Repository/User Management-Role/' +
 			'Page_Balance/i_SEDARA MANYURA_ft-menu font-medium-3'))
 		
 		'klik pada user'
 		WebUI.click(findTestObject('Object Repository/User Management-User/Page_Balance/span_User'))
 		
 		'cek apakah tombol menu dalam jangkauan web'
-		if(WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/'+
+		if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/' +
 			'Page_List Roles/i_Logout_ft-x ng-tns-c133-2'), FailureHandling.OPTIONAL)) {
 			
 			'klik pada tombol silang menu'
-			WebUI.click(findTestObject('Object Repository/User Management-Role/'+
+			WebUI.click(findTestObject('Object Repository/User Management-Role/' +
 			'Page_List Roles/i_Logout_ft-x ng-tns-c133-2'))
 		}
 		
@@ -120,20 +119,20 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.click(findTestObject('Object Repository/User Management-User/Page_Add User/button_Ya'))
 			
 			'jika error muncul'
-			if(WebUI.getText(findTestObject('Object Repository/User Management-User/'+
+			if (WebUI.getText(findTestObject('Object Repository/User Management-User/'+
 				'Page_Add User/div_Success')).contains('Success')) {
 			
 				'klik tombol OK'
 				WebUI.click(findTestObject('Object Repository/User Management-User/Page_Add User/button_OK'))
 			
 				'jika mandatory lengkap dan tidak ada failure'
-				if(isMandatoryComplete == 0 && GlobalVariable.FlagFailed == 0){
+				if (isMandatoryComplete == 0 && GlobalVariable.FlagFailed == 0) {
 					
 					'write to excel success'
 					CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'User', 0,
 						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 				}
-				else{
+				else {
 					
 					'tulis adanya mandatory tidak lengkap'
 					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
@@ -151,7 +150,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 //	
 //				}
 			}
-			else{
+			else {
 				
 				'klik tombol OK'
 				WebUI.click(findTestObject('Object Repository/User Management-User/Page_Add User/button_OK'))
@@ -205,19 +204,19 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				'Page_Edit User/div_Success'))
 			
 			'jika muncul error setelah edit'
-			if(editCondition.contains('Success')) {
+			if (editCondition.contains('Success')) {
 			
 				'klik pada tombol ok'
 				WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/button_OK'))
 				
 				'jika mandatory lengkap dan tidak ada failure'
-				if(isMandatoryComplete == 0 && GlobalVariable.FlagFailed == 0) {
+				if (isMandatoryComplete == 0 && GlobalVariable.FlagFailed == 0) {
 					
 					'write to excel success'
 					CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'User', 0,
 						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 				}
-				else{
+				else {
 					
 					'tulis adanya mandatory tidak lengkap'
 					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
@@ -232,7 +231,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 //					WebUI.callTestCase(findTestCase('Test Cases/User Management/RoleStoreDB'), [:], FailureHandling.STOP_ON_FAILURE)
 //				}
 			}
-			else{
+			else {
 				
 				'klik pada tombol OK'
 				WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/button_OK'))
@@ -268,8 +267,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				'klik pada resend verif'
 				WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/ResendVerifEmail'))
 			}
-			else
-			{
+			else{
+				
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 2) +

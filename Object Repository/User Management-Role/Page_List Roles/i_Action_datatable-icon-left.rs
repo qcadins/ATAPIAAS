@@ -11,7 +11,12 @@
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>//datatable-pager/ul/li[2]/a/i</value>
+         <value>//*[@class=&quot;datatable-icon-left&quot;]
+</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide page-scrolled navbar-scrolled pace-done&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[@class=&quot;content-wrapper&quot;]/app-list-roles[@class=&quot;ng-star-inserted&quot;]/app-msx-paging[1]/app-msx-datatable[@class=&quot;ng-star-inserted&quot;]/section[@class=&quot;msx-datatable&quot;]/ngx-datatable[@class=&quot;ngx-datatable material bootstrap fixed-header virtualized selectable checkbox-selection&quot;]/div[@class=&quot;visible&quot;]/datatable-footer[@class=&quot;datatable-footer ng-star-inserted&quot;]/div[@class=&quot;datatable-footer-inner&quot;]/datatable-pager[@class=&quot;datatable-pager ng-star-inserted&quot;]/ul[@class=&quot;pager&quot;]/li[@class=&quot;disabled&quot;]/a[1]/i[@class=&quot;datatable-icon-left&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +27,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>i</value>
-      <webElementGuid>698408c0-2672-43aa-aaa5-6aad24a48a5f</webElementGuid>
+      <webElementGuid>ac22356c-76e1-44b2-980c-5c7c627db055</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -30,7 +35,7 @@
       <name>class</name>
       <type>Main</type>
       <value>datatable-icon-left</value>
-      <webElementGuid>33a0d570-b813-435b-bfdd-74b3ff147f02</webElementGuid>
+      <webElementGuid>268037f8-984f-4b41-86b9-59f222cbe339</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -38,7 +43,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide page-scrolled navbar-scrolled pace-done&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[@class=&quot;content-wrapper&quot;]/app-list-roles[@class=&quot;ng-star-inserted&quot;]/app-msx-paging[1]/app-msx-datatable[@class=&quot;ng-star-inserted&quot;]/section[@class=&quot;msx-datatable&quot;]/ngx-datatable[@class=&quot;ngx-datatable material bootstrap fixed-header virtualized selectable checkbox-selection&quot;]/div[@class=&quot;visible&quot;]/datatable-footer[@class=&quot;datatable-footer ng-star-inserted&quot;]/div[@class=&quot;datatable-footer-inner&quot;]/datatable-pager[@class=&quot;datatable-pager ng-star-inserted&quot;]/ul[@class=&quot;pager&quot;]/li[@class=&quot;disabled&quot;]/a[1]/i[@class=&quot;datatable-icon-left&quot;]</value>
-      <webElementGuid>16605fa5-b911-4c9a-84b6-84e4d975c3e6</webElementGuid>
+      <webElementGuid>015b96fc-a6d2-4215-a227-a45b07d30d36</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -46,6 +51,6 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//datatable-pager/ul/li[2]/a/i</value>
-      <webElementGuid>d9c78b69-f17c-41f7-ad59-dd8a1dfcd083</webElementGuid>
+      <webElementGuid>58baa07d-896d-4495-8fa3-d11a1536baaf</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

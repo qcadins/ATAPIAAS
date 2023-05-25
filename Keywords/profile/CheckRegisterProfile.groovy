@@ -16,18 +16,18 @@ public class CheckRegisterProfile {
 		String data
 		int columnCount
 
-		ArrayList<String> listdata = new ArrayList<>()
+		ArrayList<String> listdata = []
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT login_id, full_name FROM am_msuser WHERE login_id = '"+ email +"'")
+		ResultSet resultSet = stm.executeQuery("SELECT login_id, full_name FROM am_msuser WHERE login_id = '" + email + "'")
 
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
 
-		while(resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
+		while (resultSet.next()) {
+			for (int i = 1; i <= columnCount ; i++) {
 				data = resultSet.getObject(i)
 				listdata.add(data)
 			}

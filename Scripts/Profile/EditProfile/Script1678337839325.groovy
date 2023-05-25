@@ -95,13 +95,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'pilih jenis kelamin'
 		if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 14) == 'M') {
 			
-			WebUI.check(findTestObject('Object Repository/Profile/'+
-				'Page_Edit Profile/input__ng-untouched ng-pristine ng-valid'))
+			WebUI.check(findTestObject('Object Repository/Profile/Page_Edit Profile/input__radioMale'))
 		} 
 		else {
 			
-			WebUI.check(findTestObject('Object Repository/Profile/'+
-				'Page_Edit Profile/input_Pria_ng-untouched ng-pristine ng-valid'))
+			WebUI.check(findTestObject('Object Repository/Profile/Page_Edit Profile/input__radioFemale'))
 		}
 			
 		'input field website'
@@ -109,7 +107,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 15))
 		
 		'input data field nomor telepon'
-		WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input_Wanita_phoneNumber'), 
+		WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__PhoneNum'), 
 			findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 16))
 		
 		'input data field position'
@@ -117,8 +115,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 17))
 		
 		'pilih dari dropdownlist +62 Indonesia'
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/Profile/'+
-			'Page_Edit Profile/select_Afghanistan 93Albania 355Algeria 213_ddb156'),
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/Profile/Page_Edit Profile/select__country'),
 			findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 18), false)
 			
 		'klik tombol simpan'
@@ -169,8 +166,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/span_API Key'))
 			
 		'ambil nama depan tenant'
-		String tenantnameExcel = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 10) + " " 
-		+ findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 11)
+		String tenantnameExcel = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 10) + ' ' 
+			+ findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 11)
 		
 		'nama tenant dari DB'
 		String tenantnameDB = CustomKeywords.'profile.CheckProfile.getTenantNamefromDB'(conn, 

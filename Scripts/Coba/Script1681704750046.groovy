@@ -25,27 +25,27 @@ WebUI.openBrowser('')
 
 WebUI.navigateToUrl('http://gdkwebsvr:4100/login')
 
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Login - eendigo Platform/div_Buat Akun_input'))
+WebUI.click(findTestObject('null'))
 
-WebUI.setText(findTestObject('Object Repository/Saldo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'), 
+WebUI.setText(findTestObject('null'), 
     'usera@gmail.com')
 
-WebUI.setEncryptedText(findTestObject('Object Repository/Saldo/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'), 
+WebUI.setEncryptedText(findTestObject('null'), 
     'iFGeFYmXIrU6ruIopQUS+w==')
 
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Login - eendigo Platform/div_id(katalon-rec_elementInfoDiv)'))
+WebUI.click(findTestObject('null'))
 
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+WebUI.click(findTestObject('null'))
 
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input'))
+WebUI.click(findTestObject('null'))
 
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input'))
+WebUI.click(findTestObject('null'))
 
 WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Dari_transactionDateStart'))
 
 WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Pengguna_user'))
 
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input'))
+WebUI.click(findTestObject('null'))
 
 WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Ref Number_referenceNo'))
 
@@ -53,7 +53,7 @@ WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Nama Doku
 
 WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Sampai_transactionDateEnd'))
 
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input'))
+WebUI.click(findTestObject('null'))
 
 WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Unduh Excel'))
 

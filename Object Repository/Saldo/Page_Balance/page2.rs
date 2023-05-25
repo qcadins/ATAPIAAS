@@ -9,8 +9,12 @@
          <key>BASIC</key>
          <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li[4]</value>
       </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@aria-label=&quot;page 2&quot;]</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -18,6 +22,6 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li[4]</value>
-      <webElementGuid>03374825-06c5-42cb-a685-a35509596436</webElementGuid>
+      <webElementGuid>fa01ec8f-bf0a-4d11-aea7-388bf5b8afd2</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

@@ -9,9 +9,9 @@ import internal.GlobalVariable
 public class Pdfprocessor {
 
 	@Keyword
-	CountPages() {
+	countPages() {
 		int pageCount
-		String pdfPath = "ImageFolder/RKMandiri/RKMandiri"+(GlobalVariable.NumOfColumn-1)+".pdf"
+		String pdfPath = 'ImageFolder/RKMandiri/RKMandiri'+(GlobalVariable.NumOfColumn-1)+'.pdf'
 		PDFParser parser = new PDFParser(new RandomAccessFile(new File(pdfPath), 'r'))
 		parser.parse()
 		PDDocument document = parser.getPDDocument()
@@ -20,4 +20,5 @@ public class Pdfprocessor {
 
 		pageCount
 	}
+	
 }

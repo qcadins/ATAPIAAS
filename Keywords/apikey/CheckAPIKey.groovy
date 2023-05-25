@@ -22,7 +22,7 @@ public class CheckAPIKey {
 	getAPINamefromDB(Connection conn, String apiname) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
+		ArrayList<String> listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -47,15 +47,17 @@ public class CheckAPIKey {
 
 		String optionLabel
 
-		optionLabel = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), 'aria-activedescendant')
+		optionLabel = WebUI.getAttribute(findTestObject('Object Repository/'+
+			'API_KEY/Page_Edit Api Key/input'), 'aria-activedescendant')
 
 		'kumpulan string yang menyimpan hasil text dari User Interface APIAAS'
-		ArrayList<String> hasilgetText = new ArrayList<String>()
+		ArrayList<String> hasilgetText = []
 
 		'mengambil text dari field nama api key'
-		hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'), 'value'))
+		hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/'+
+			'input__apiKeyName'), 'value'))
 
-		if(optionLabel.contains("-0"))
+		if(optionLabel.contains('-0'))
 		{
 			'mengambil text dari field status api key'
 			hasilgetText.add('Active')
@@ -74,7 +76,7 @@ public class CheckAPIKey {
 	getAPIStatusfromDB(Connection conn, String apiname) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
+		ArrayList<String> listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -98,7 +100,7 @@ public class CheckAPIKey {
 	getTotalAPIKeyfromDB(Connection conn) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
+		ArrayList<String> listdata = []
 
 		Statement stm = conn.createStatement()
 

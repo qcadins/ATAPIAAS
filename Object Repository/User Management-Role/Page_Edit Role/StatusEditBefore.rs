@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>lastPage</name>
+   <name>StatusEditBefore</name>
    <tag></tag>
-   <elementGuidId>bc14596b-2662-46f5-a9bc-e04dfa56cc08</elementGuidId>
+   <elementGuidId>e622e1ad-fee5-4ad6-8d67-a99ecbfba03e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value></value>
-      </entry>
-      <entry>
-         <key>XPATH</key>
-         <value>//*[@class=&quot;datatable-icon-skip&quot;]</value>
+         <value>//*[@class = 'ng-value-label ng-star-inserted']</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>xpath</name>
+      <name>class</name>
       <type>Main</type>
-      <value></value>
-      <webElementGuid>1bc9b0b3-de5f-44d8-be6d-5f74d78e170b</webElementGuid>
+      <value>ng-value-label ng-star-inserted</value>
+      <webElementGuid>e4a1d295-997d-4e7c-a62f-d50e538b6279</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

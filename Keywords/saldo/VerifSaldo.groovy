@@ -19,7 +19,7 @@ public class VerifSaldo {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT tenant_code FROM ms_tenant WHERE email_reminder_dest = '"+ email +"'")
+		ResultSet resultSet = stm.executeQuery("SELECT tenant_code FROM ms_tenant WHERE email_reminder_dest = '" + email + "'")
 
 		while(resultSet.next())
 		{
@@ -34,13 +34,13 @@ public class VerifSaldo {
 		File dir = new File(System.getProperty('user.dir') + "\\Download");
 		//Getting the list of all the files in the specific directory
 		File[] fList = dir.listFiles();
-		for (File f : fList)
-		{
+		for (File f : fList){
+			
 			//checking the extension of the file with endsWith method.
-			if (f.exists())
-			{
-				if(deleteFile == 'Yes')
-				{
+			if (f.exists()){
+				
+				if(deleteFile == 'Yes'){
+					
 					f.delete();
 				}
 				isDownloaded = true
@@ -53,11 +53,11 @@ public class VerifSaldo {
 	getListActiveBalance(Connection conn, String tenantcode) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
+		ArrayList<String> listdata = []
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '"+ tenantcode +"' AND mbt.lov_balance_charge_type = 141")
+		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '" + tenantcode + "' AND mbt.lov_balance_charge_type = 141")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
@@ -75,11 +75,11 @@ public class VerifSaldo {
 	getListTipeTransaksi(Connection conn, String tipeSaldo) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
+		ArrayList<String> listdata = []
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT description FROM ms_lov WHERE description LIKE '%Use "+ tipeSaldo +"%' OR description LIKE '%Topup "+ tipeSaldo +"%' AND is_active = '1'")
+		ResultSet resultSet = stm.executeQuery("SELECT description FROM ms_lov WHERE description LIKE '%Use " + tipeSaldo + "%' OR description LIKE '%Topup " + tipeSaldo + "%' OR description LIKE '%Top Up " + tipeSaldo + "' AND is_active = '1'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
@@ -97,17 +97,17 @@ public class VerifSaldo {
 	getListTipeSaldo(Connection conn, String tenantcode) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
+		ArrayList<String> listdata = []
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '"+tenantcode+"' AND mbt.is_active = '1'")
+		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '" + tenantcode + "' AND mbt.is_active = '1'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
 
-		while(resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
+		while (resultSet.next()) {
+			for (int i = 1; i <= columnCount ; i++) {
 				data = resultSet.getObject(i)
 				listdata.add(data)
 			}
@@ -119,17 +119,17 @@ public class VerifSaldo {
 	getListKantor(Connection conn, String tenantcode) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
+		ArrayList<String> listdata = []
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT office_name FROM ms_office mo JOIN ms_tenant mt ON mo.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '"+tenantcode+"' AND mo.is_active = '1'")
+		ResultSet resultSet = stm.executeQuery("SELECT office_name FROM ms_office mo JOIN ms_tenant mt ON mo.id_ms_tenant = mt.id_ms_tenant WHERE tenant_code = '" + tenantcode + "' AND mo.is_active = '1'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
 
-		while(resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
+		while (resultSet.next()) {
+			for (int i=1; i<=columnCount ; i++) {
 				data = resultSet.getObject(i)
 				listdata.add(data)
 			}
@@ -144,9 +144,9 @@ public class VerifSaldo {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT COUNT(*) FROM esign.tr_balance_mutation bm JOIN esign.ms_lov ml ON ml.id_lov = bm.lov_balance_type JOIN esign.ms_tenant mt ON mt.id_ms_tenant = bm.id_ms_tenant WHERE tenant_code = '"+tenantcode+"' AND description = '"+tipeSaldo+"' AND trx_date >= '2023-05-01 00:00:00.0'")
+		ResultSet resultSet = stm.executeQuery("SELECT COUNT(*) FROM esign.tr_balance_mutation bm JOIN esign.ms_lov ml ON ml.id_lov = bm.lov_balance_type JOIN esign.ms_tenant mt ON mt.id_ms_tenant = bm.id_ms_tenant WHERE tenant_code = '" + tenantcode + "' AND description = '" + tipeSaldo + "' AND trx_date >= '2023-05-01 00:00:00.0'")
 
-		while(resultSet.next())
+		while (resultSet.next())
 		{
 			data = resultSet.getObject(1)
 		}

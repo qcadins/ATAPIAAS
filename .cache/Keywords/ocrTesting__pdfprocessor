@@ -1,11 +1,11 @@
 {
-  "keywordFileContentHash": "4060EC1806F982FA1428900780E246C2",
+  "keywordFileContentHash": "AFDE1A7D9AE3A06DF53D7CB4425101A5",
   "keywordClasses": [
     {
       "name": "ocrTesting.Pdfprocessor",
       "keywordMethods": [
         {
-          "name": "CountPages",
+          "name": "countPages",
           "parameters": [],
           "javadoc": ""
         }

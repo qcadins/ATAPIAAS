@@ -223,17 +223,22 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'ambil jumlah topup yang diinput oleh user dari excel'
 		JumlahTopUp = Integer.parseInt(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 15))
 		
+		println Saldobefore
+		println JumlahTopUp
+		println Saldoafter 
+		println TopupSaldoCorrectTenant
+		
 		'saldo sekarang harus sama dengan saldo sebelumnya ditambah jumlah topup'
-		if(Saldobefore + JumlahTopUp == Saldoafter && GlobalVariable.FlagFailed == 0 && TopupSaldoCorrectTenant == 1)
-		{
+		if(Saldobefore + JumlahTopUp == Saldoafter && GlobalVariable.FlagFailed == 0 && TopupSaldoCorrectTenant == 1){
+			
 			'tulis status sukses pada excel'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, 
 				GlobalVariable.StatusSuccess, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' +
 					GlobalVariable.SuccessReason)
 					
 		}
-		else
-		{
+		else{
+			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' +
@@ -261,7 +266,7 @@ def checkTenantcount(connection) {
 	ArrayList<String> namatenantDB = CustomKeywords.'apikey.CheckSaldoAPI.getTenantName'(connection)
 	
 	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList<String> namatenantUI = new ArrayList<String>()
+	ArrayList<String> namatenantUI = []
 	
 	'ambil hitungan tenant dari DB'
 	int countDB = namatenantDB.size()
@@ -318,7 +323,7 @@ def checkVendorcount(connection, tenantcode) {
 	ArrayList<String> namaVendorDB = CustomKeywords.'apikey.CheckSaldoAPI.getVendorName'(connection, tenantcode)
 	
 	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList<String> namaVendorUI = new ArrayList<String>()
+	ArrayList<String> namaVendorUI = []
 	
 	'hitung banyak data didalam array DB'
 	int countDB = namaVendorDB.size()
@@ -377,7 +382,7 @@ def checkTipeSaldocount(connection, tenantcode) {
 	ArrayList<String> namaTipefromDB = CustomKeywords.'apikey.CheckSaldoAPI.getNamaTipeSaldo'(connection, tenantcode)
 	
 	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList<String> namaTipefromUI = new ArrayList<String>()
+	ArrayList<String> namaTipefromUI = []
 	
 	'ambil ukuran array dari db'
 	int countDB = namaTipefromDB.size()
@@ -546,7 +551,7 @@ def verifyTableContent(connection, String tenant) {
 	ArrayList<String> result = CustomKeywords.'apikey.CheckSaldoAPI.getTrialTableContent'(connection, tenant)
 	
 	'check status semua match data'
-	ArrayList<String> arrayMatch = new ArrayList<String>()
+	ArrayList<String> arrayMatch = []
 		
 	'kembalikan nomor transaksi'
 	int arrayIndex = 0

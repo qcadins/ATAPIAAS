@@ -10,7 +10,6 @@ import java.sql.Statement
 
 import java.sql.ResultSet
 import java.sql.ResultSetMetaData
-import groovy.sql.Sql as Sql
 
 public class CheckDocumentation {
 
@@ -19,16 +18,15 @@ public class CheckDocumentation {
 	@Keyword
 	def isFileDownloaded(String deleteFile) {
 		boolean isDownloaded = false
-		File dir = new File(System.getProperty('user.dir') + "\\Download");
+		File dir = new File(System.getProperty('user.dir') + "\\Download")
 		//Getting the list of all the files in the specific directory
-		File[] fList = dir.listFiles();
-		for (File f : fList)
-		{
+		File[] fList = dir.listFiles()
+		for (File f : fList){
 			//checking the extension of the file with endsWith method.
-			if (f.exists())
-			{
-				if(deleteFile == 'Yes')
-				{
+			if (f.exists()){
+				
+				if(deleteFile == 'Yes'){
+					
 					f.delete();
 				}
 				isDownloaded = true
@@ -42,7 +40,7 @@ public class CheckDocumentation {
 	getDocumentationAPIName(Connection conn) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
+		ArrayList<String> listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -52,7 +50,7 @@ public class CheckDocumentation {
 		columnCount = metadata.getColumnCount()
 
 		while(resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
+			for(int i = 1; i <= columnCount ; i++) {
 				data = resultSet.getObject(i)
 				listdata.add(data)
 			}
@@ -66,50 +64,51 @@ public class CheckDocumentation {
 
 		String ariachoice,ariaid
 
-		ariaid = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_API Documentation/input'), 'aria-owns')
+		ariaid = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/'+
+			'Page_API Documentation/input'), 'aria-owns')
 
-		ArrayList<String> hasilddl = new ArrayList<>()
+		ArrayList<String> hasilddl = []
 
 		for(int i = 0; i <10; i++)
 		{
-			ariachoice = ariaid + "-" + i
-			if(ariachoice.contains("-0"))
+			ariachoice = ariaid + '-' + i
+			if(ariachoice.contains('-0'))
 			{
 				hasilddl.add('OCR BPKB')
 			}
-			else if(ariachoice.contains("-1"))
+			else if(ariachoice.contains('-1'))
 			{
 				hasilddl.add('OCR REK KORAN MANDIRI')
 			}
-			else if(ariachoice.contains("-2"))
+			else if(ariachoice.contains('-2'))
 			{
 				hasilddl.add('LIVENESS + FACECOMPARE')
 			}
-			else if(ariachoice.contains("-3"))
+			else if(ariachoice.contains('-3'))
 			{
 				hasilddl.add('OCR KK')
 			}
-			else if(ariachoice.contains("-4"))
+			else if(ariachoice.contains('-4'))
 			{
 				hasilddl.add('OCR REK KORAN BCA')
 			}
-			else if(ariachoice.contains("-5"))
+			else if(ariachoice.contains('-5'))
 			{
 				hasilddl.add('OCR STNK')
 			}
-			else if(ariachoice.contains("-6"))
+			else if(ariachoice.contains('-6'))
 			{
 				hasilddl.add('FACECOMPARE')
 			}
-			else if(ariachoice.contains("-7"))
+			else if(ariachoice.contains('-7'))
 			{
 				hasilddl.add('OCR KTP')
 			}
-			else if(ariachoice.contains("-8"))
+			else if(ariachoice.contains('-8'))
 			{
 				hasilddl.add('OCR NPWP')
 			}
-			else if(ariachoice.contains("-9"))
+			else if(ariachoice.contains('-9'))
 			{
 				hasilddl.add('LIVENESS')
 			}

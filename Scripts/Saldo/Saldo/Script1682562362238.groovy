@@ -29,19 +29,7 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Saldo'], FailureHandling.STOP_ON_FAILURE)
-
-'cek apakah muncul error setelah login'
-if(WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/'+
-	'Page_Balance/div_Unknown Error'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-	
-	GlobalVariable.FlagFailed = 1
-	
-	'tulis adanya error pada sistem web'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			GlobalVariable.FailedReasonUnknown)
-}
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Saldo', ('SheetName') : 'Saldo', ('Path') : ExcelPathSaldo], FailureHandling.STOP_ON_FAILURE)
 
 'ambil kode tenant di DB'
 String tenantcode = CustomKeywords.'saldo.VerifSaldo.getTenantCodefromDB'(conn, 
@@ -89,8 +77,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			' div.row.match-height > div > lib-balance-summary > div > div'))
 		
 		'lakukan loop untuk cari nama saldo yang ditentukan'
-		for(int i=1; i<=elementNamaSaldo.size(); i++)
-		{
+		for (int i=1; i<=elementNamaSaldo.size(); i++){
+			
 			'cari nama saldo yang sesuai di list saldo'
 			def modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'),
 				 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/"+
@@ -101,8 +89,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'jika hasil UI dan DB tidak sama'
-		if(!ActiveBalanceUI.containsAll(ActiveBalanceDB))
-		{
+		if (!ActiveBalanceUI.containsAll(ActiveBalanceDB)){
+			
 			GlobalVariable.FlagFailed = 1
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonBalanceUI'
@@ -112,14 +100,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'check if mandatory complete dan button simpan clickable'
-		if ((isMandatoryComplete == 0) && GlobalVariable.FlagFailed == 0)
-		{
+		if ((isMandatoryComplete == 0) && GlobalVariable.FlagFailed == 0){
+			
 			'write to excel success'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Saldo', 0,
 				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 		}
-		else if (isMandatoryComplete > 0)
-		{
+		else if (isMandatoryComplete > 0){
+			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
@@ -374,7 +362,8 @@ def checkTableandPaging(Connection connection, String tenantcode, String tipeSal
 	}
 	
 	'cek apakah button enable atau disable'
-	if(WebUI.getAttribute(findTestObject('Object Repository/Saldo/Page_Balance/page2'), 'class', FailureHandling.OPTIONAL) == ''){
+	if(WebUI.verifyElementVisible(findTestObject('Object Repository/Saldo/Page_Balance/lastPage'), 
+		FailureHandling.OPTIONAL)){
 		
 		'klik button page 2'
 		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/page2'))
@@ -421,19 +410,9 @@ def checkTableandPaging(Connection connection, String tenantcode, String tipeSal
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
 			findTestObject('Object Repository/Saldo/Page_Balance/page1'), 'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
-		
-		'ubah path object button skip'
-		def modifybuttonskip = WebUI.modifyObjectProperty(findTestObject('Object Repository/Saldo/Page_Balance/lastPage'),
-			'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/"+
-			"app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/"+
-			"datatable-pager/ul/li["+ (lastPage) +"]", true)
 	
-		'cek apakah button enable atau disable'
-		if(WebUI.getAttribute(modifybuttonskip, 'class', FailureHandling.CONTINUE_ON_FAILURE) == ''){
-			
-			'klik button skip to last page'
-			WebUI.click(modifybuttonskip)
-		}
+		'klik button skip to last page'
+		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/lastPage'))
 		
 		'ubah path object button laman terakhir'
 		def modifybuttonMaxPage = WebUI.modifyObjectProperty(findTestObject('Object Repository/Saldo/'+

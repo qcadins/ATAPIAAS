@@ -41,6 +41,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Pengecekan data sebelum edit tidak sesuai DB'</initValue>
+      <name>FailedReasonEditVerif</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Email tidak tersimpan di field'</initValue>
       <name>FailedReasonEmailField</name>
    </GlobalVariableEntity>

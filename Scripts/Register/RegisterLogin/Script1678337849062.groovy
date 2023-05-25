@@ -14,7 +14,7 @@ import org.openqa.selenium.Keys as Keys
 def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathRegisterLogin).columnNumbers()
+int countColumnEdit = findTestData(ExcelPathRegisterLogin).getColumnNumbers()
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')

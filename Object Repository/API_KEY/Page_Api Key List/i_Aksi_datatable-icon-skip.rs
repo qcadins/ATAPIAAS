@@ -6,15 +6,19 @@
    <elementGuidId>f17bb7d7-b81f-4c56-bda4-2330fc7a2fe4</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>CSS</key>
+         <value>i.datatable-icon-skip</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>//li[6]/a/i</value>
       </entry>
       <entry>
-         <key>CSS</key>
-         <value>i.datatable-icon-skip</value>
+         <key>BASIC</key>
+         <value>//*[@class = 'datatable-icon-skip']</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,23 +26,23 @@
       <name>tag</name>
       <type>Main</type>
       <value>i</value>
-      <webElementGuid>b493a816-8681-4c48-a157-93401604fdc3</webElementGuid>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>class</name>
-      <type>Main</type>
-      <value>datatable-icon-skip</value>
-      <webElementGuid>f5278a9e-60f5-4738-b975-4c8e980e76e7</webElementGuid>
+      <webElementGuid>dd82f2e6-7e21-4463-9507-49cdb4c409de</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>datatable-icon-skip</value>
+      <webElementGuid>75ed8961-904a-4022-a0e2-fa1479b73c28</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done page-scrolled navbar-scrolled&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[@class=&quot;content-wrapper&quot;]/app-list-api-key[@class=&quot;ng-star-inserted&quot;]/app-msx-paging[1]/app-msx-datatable[@class=&quot;ng-star-inserted&quot;]/section[@class=&quot;msx-datatable&quot;]/ngx-datatable[@class=&quot;ngx-datatable material bootstrap fixed-header virtualized selectable checkbox-selection&quot;]/div[@class=&quot;visible&quot;]/datatable-footer[@class=&quot;datatable-footer ng-star-inserted&quot;]/div[@class=&quot;datatable-footer-inner&quot;]/datatable-pager[@class=&quot;datatable-pager ng-star-inserted&quot;]/ul[@class=&quot;pager&quot;]/li[6]/a[1]/i[@class=&quot;datatable-icon-skip&quot;]</value>
-      <webElementGuid>a606d7cb-b95c-4199-825a-51c0d18d90b8</webElementGuid>
+      <webElementGuid>52e2c8dc-d29a-42a8-bb7a-d885ab0d96fa</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -46,6 +50,6 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//li[6]/a/i</value>
-      <webElementGuid>46fcc2ae-9f21-4f59-a23c-5a397c725583</webElementGuid>
+      <webElementGuid>e5de0ed6-041b-4b8c-b28b-519ecd9ece94</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

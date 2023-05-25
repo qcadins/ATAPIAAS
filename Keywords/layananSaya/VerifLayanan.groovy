@@ -23,7 +23,7 @@ public class VerifLayanan {
 
 		ResultSet resultSet = stm.executeQuery("SELECT tenant_code FROM ms_tenant WHERE email_reminder_dest = '"+ email +"'")
 
-		while(resultSet.next())
+		while (resultSet.next())
 		{
 			data = resultSet.getObject(1)
 		}
@@ -34,23 +34,23 @@ public class VerifLayanan {
 	getListServiceName(Connection conn, String tenantcode) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
+		ArrayList<String> listdata = []
 
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery(
-	"SELECT description " +
-	"FROM ms_balancevendoroftenant mbt " +
-    "LEFT JOIN ms_lov mlo ON mlo.id_lov = mbt.lov_balance_type " +
-    "LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mbt.id_ms_tenant " +
-    "WHERE tenant_code = '" + tenantcode + "'")
-		
+				"SELECT description " +
+				"FROM ms_balancevendoroftenant mbt " +
+				"LEFT JOIN ms_lov mlo ON mlo.id_lov = mbt.lov_balance_type " +
+				"LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mbt.id_ms_tenant " +
+				"WHERE tenant_code = '" + tenantcode + "'")
+
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
 
-		while(resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
+		while (resultSet.next()) {
+			for (int i = 1; i <= columnCount ; i++) {
 				data = resultSet.getObject(i)
 				listdata.add(data)
 			}
@@ -62,7 +62,7 @@ public class VerifLayanan {
 	getListServiceStatus(Connection conn, String tenantcode) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
+		ArrayList<String> listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -71,8 +71,8 @@ public class VerifLayanan {
 
 		columnCount = metadata.getColumnCount()
 
-		while(resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
+		while (resultSet.next()) {
+			for(int i = 1; i <= columnCount ; i++) {
 				data = resultSet.getObject(i)
 				listdata.add(data)
 			}
@@ -84,7 +84,7 @@ public class VerifLayanan {
 	getListChargeType(Connection conn, String tenantcode) {
 		String data
 
-		ArrayList<String> listdata = new ArrayList<>()
+		ArrayList<String> listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -93,8 +93,8 @@ public class VerifLayanan {
 
 		columnCount = metadata.getColumnCount()
 
-		while(resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
+		while (resultSet.next()) {
+			for (int i = 1; i <= columnCount ; i++) {
 				data = resultSet.getObject(i)
 				listdata.add(data)
 			}
