@@ -12,7 +12,7 @@ import groovy.sql.Sql as Sql
 String namadokumentasi = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 8)
 
 'user menentukan apakah file yang didownload langsung dihapus atau tidak lewat excel'
-String FlagDelete = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 9)
+String flagDelete = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 9)
 
 'Wait for Some time so that file gets downloaded and Stored in user defined path'
 WebUI.delay(5)
@@ -44,7 +44,7 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/but
 WebUI.delay(GlobalVariable.Timeout)
 
 'pengecekan file yang sudah didownload'
-boolean isDownloaded = CustomKeywords.'documentationAPI.CheckDocumentation.isFileDownloaded'(FlagDelete)
+boolean isDownloaded = CustomKeywords.'documentationAPI.CheckDocumentation.isFileDownloaded'(flagDelete)
 
 'jika file tidak terunduh, tulis gagal'
 if (WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL)) {
@@ -85,8 +85,7 @@ def VerifyDocumentListAPI(){
 	'sortir data pada hasil db'
 	Collections.sort(hasildb)
 	
-	for (int j = 0; j < hasildb.size ; j++)
-	{
+	for (int j = 0; j < hasildb.size ; j++) {
 		'verifikasi semua opsi pada web sesuai dengan database'
 		checkVerifyEqualorMatch(WebUI.verifyEqual(hasilweb[j], hasildb[j], FailureHandling.CONTINUE_ON_FAILURE))
 	}

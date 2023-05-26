@@ -10,7 +10,8 @@ import internal.GlobalVariable as GlobalVariable
 def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'ambil nama API dari testdata, disimpan ke string'
-String namaAPI = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'), 'value')
+String namaAPI = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'), 
+	'value')
 
 'kumpulan string dari data yang diambil langsung dari database'
 ArrayList<String> hasildb = CustomKeywords.'apikey.CheckAPIKey.getAPIStatusfromDB'(conn, namaAPI)

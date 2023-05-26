@@ -8,7 +8,7 @@ import java.sql.Connection
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
-'check if action new/services'
+'check if action new/edit/settings'
 if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('New')) {
 	
 	'ambil data role dari db'

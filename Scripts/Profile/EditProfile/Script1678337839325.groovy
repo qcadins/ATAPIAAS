@@ -66,8 +66,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.delay(GlobalVariable.Timeout)
 		
 		'panggil fungsi verifikasi jika checkdatabase = yes'
-		if (GlobalVariable.KondisiCekDB == 'Yes') 
-		{
+		if (GlobalVariable.KondisiCekDB == 'Yes') {
 			'verifikasi data yang ada di web dengan di database sebelum diEdit'
 			WebUI.callTestCase(findTestCase('Test Cases/Profile/VerifyDataEditProfile'), 
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -124,8 +123,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.delay(3)
 		
 		'cek apakah tombol sukses muncul'
-		if(WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/'+
-			'Page_Edit Profile/button_OK'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)){
+		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/'+
+			'Page_Edit Profile/button_OK'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		
 			'klik pada tombol ok jika muncul'
 			WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/button_OK'))
@@ -150,7 +149,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 		'verifikasi adanya saldo trial'
 		if(!WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/'+
-			'Page_Balance/span_IDR'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)){
+			'Page_Balance/span_IDR'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		
 			GlobalVariable.FlagFailed = 1
 			'Write to excel status failed and reason topup failed'
@@ -174,7 +173,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
 		
 		'verifikasi adanya tenant code dan name yang sesuai DB'
-		if(WebUI.verifyMatch(tenantnameDB, tenantnameExcel, false) == false){
+		if (WebUI.verifyMatch(tenantnameDB, tenantnameExcel, false) == false) {
 			
 			GlobalVariable.FlagFailed = 1
 			'Write to excel status failed and reason topup failed'
@@ -184,13 +183,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 			
 		'kondisi jika tidak ada failed pada bagian lain testcase'
-		if (GlobalVariable.FlagFailed == 0){
+		if (GlobalVariable.FlagFailed == 0) {
 			
 			'write to excel success'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Edit Profile', 0,
 				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 		}
-		else{
+		else {
 			
 			'Write To Excel GlobalVariable.StatusFailed and gagal karena reason status'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,

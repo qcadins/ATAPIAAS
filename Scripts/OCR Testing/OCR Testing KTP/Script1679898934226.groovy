@@ -65,10 +65,10 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		String useCorrectTenant = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 12)
 			
 		'deklarasi variabel angka'
-		int isSaldoBerkurang, saldobefore, uiSaldoafter, katalonSaldoafter, isTrxIncreased, HitAPITrx
+		int isSaldoBerkurang, saldobefore, uiSaldoafter, katalonSaldoafter, isTrxIncreased, hitAPITrx
 		
 		'penanda untuk HIT yang berhasil dan gagal'
-		HitAPITrx = 1
+		hitAPITrx = 1
 		
 		'set penanda error menjadi 0'
 		GlobalVariable.FlagFailed = 0
@@ -178,7 +178,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			if(latestMutation != no_Trx_after || latestMutation == latestOtherTenantMutation){
 				
 				'anggap HIT Api gagal'
-				HitAPITrx = 0
+				hitAPITrx = 0
 			}
 		}
 		
@@ -186,15 +186,15 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		int serviceprice = CustomKeywords.'ocrTesting.GetParameterfromDB.getServicePricefromDB'(connProd, idPayment)
 		
 		'jika HIT API successful'
-		if(HitAPITrx == 1){
+		if (hitAPITrx == 1) {
 			
 			'cek apakah jenis penagihan berdasarkan harga'
-			if(BalanceChargeType == 'Price'){
+			if (BalanceChargeType == 'Price') {
 				
 				'input saldo setelah penagihan'
 				katalonSaldoafter = saldobefore - serviceprice
 			}
-			else{
+			else {
 				
 				'input saldo setelah penagihan dikurangi qty'
 				katalonSaldoafter = saldobefore - 1
@@ -205,17 +205,17 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		uiSaldoafter = getSaldoforTransaction('OCR KTP')
 		
 		'jika saldoafter match'
-		if(katalonSaldoafter == uiSaldoafter){
+		if (katalonSaldoafter == uiSaldoafter) {
 			
 			isSaldoBerkurang = 1
 		}
-		else{
+		else {
 			
 			isSaldoBerkurang = 0
 		}
 		
 		'jika transaksi bertambah di DB dan di web'
-		if(no_Trx_after > no_Trx_before){
+		if (no_Trx_after > no_Trx_before) {
 			
 			'web mencatat transaksi terbaru'
 			isTrxIncreased = 1
@@ -228,7 +228,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		
 		'jika tidak ada message error dan kondisi lain terpenuhi'
 		if(message_ocr == '' && state_ocr == 'SUCCESS' && isTrxIncreased == 1 
-			&& isSaldoBerkurang == 1 && HitAPITrx == 1){
+			&& isSaldoBerkurang == 1 && hitAPITrx == 1){
 			
 			'tulis status sukses pada excel'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR KTP', 
@@ -237,7 +237,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		
 		}
 		//kondisi jika transaksi berhasil tapi tidak tercatat/tersimpan di DB
-		else if(state_ocr == 'SUCCESS' && isTrxIncreased == 0 && isSaldoBerkurang == 1){
+		else if(state_ocr == 'SUCCESS' && isTrxIncreased == 0 && isSaldoBerkurang == 1) {
 			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
@@ -246,7 +246,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 					GlobalVariable.FailedReasonTrxNotinDB)
 		}
 		//kondisi jika transaksi berhasil tapi saldo tidak berkurang
-		else if(state_ocr == 'SUCCESS' && isTrxIncreased == 1 && isSaldoBerkurang == 0){
+		else if(state_ocr == 'SUCCESS' && isTrxIncreased == 1 && isSaldoBerkurang == 0) {
 			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
@@ -255,7 +255,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 					GlobalVariable.FailedReasonBalanceNotChange)
 		}
 		//kondisi transaksi tidak tampil dan tidak tersimpan di DB
-		else if(HitAPITrx == 0 && state_ocr == 'FAILED' && isTrxIncreased == 0 && isSaldoBerkurang == 1){
+		else if (hitAPITrx == 0 && state_ocr == 'FAILED' && isTrxIncreased == 0 && isSaldoBerkurang == 1) {
 			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
@@ -263,7 +263,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonSaldoBocor)
 		}
-		else{
+		else {
 			
 			GlobalVariable.FlagFailed = 1
 			'write to excel status failed dan reason'

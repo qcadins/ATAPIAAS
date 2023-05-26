@@ -34,14 +34,14 @@ arrayMatch.add(WebUI.verifyMatch(
 	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 12).toUpperCase(), 
 	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 
-if(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('New')){
+if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('New')) {
 	
 	'verify tenant code'
 	arrayMatch.add(WebUI.verifyMatch(
 		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13).toUpperCase(), 
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 }
-else{
+else {
 	
 	'skip'
 	arrayindex++
@@ -72,11 +72,11 @@ ArrayList<String> arrayServicesBatasSaldo = findTestData(ExcelPathTenant).getVal
 'looping untuk verif services dan batas saldo'
 indexServices = 0
 
-for(indexExcel = 0 ; indexExcel < arrayServices.size(); indexExcel++) {
+for (indexExcel = 0 ; indexExcel < arrayServices.size(); indexExcel++) {
 	
 	String services = resultServices[indexServices++]
 	
-	if(services.equalsIgnoreCase(arrayServices[indexExcel])) {
+	if (services.equalsIgnoreCase(arrayServices[indexExcel])) {
 		
 		'verify services'
 		arrayMatch.add(WebUI.verifyMatch(services.toUpperCase(), arrayServices[indexExcel].toUpperCase(),
@@ -112,7 +112,7 @@ else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).e
 	arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 29).split(';', -1)
 	
 	'looping untuk input services check'
-	for (index = 0; index < arrayServices.size(); index++){
+	for (index = 0; index < arrayServices.size(); index++) {
 		
 		'ambil id pembayaran untuk service pertama yang diubah'
 		int IDPaymentType = CustomKeywords.'tenant.TenantVerif.getIDPaymentType'(conndevUAT, 
@@ -123,12 +123,12 @@ else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).e
 			findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13), IDPaymentType)
 		
 		'split result to array'
-		if(PaymentType == 'Price'){
+		if (PaymentType == 'Price') {
 			
 			'verify services'
 			arrayMatch.add(true)
 		}
-		else{
+		else {
 			
 			'verify services'
 			arrayMatch.add(false)

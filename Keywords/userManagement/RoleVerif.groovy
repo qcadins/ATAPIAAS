@@ -87,7 +87,7 @@ public class RoleVerif {
 		}
 		listdata
 	}
-	
+
 	@Keyword
 	getDataRolebeforeVerif(Connection conn, String roleName){
 		String data

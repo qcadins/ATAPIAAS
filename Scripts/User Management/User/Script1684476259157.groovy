@@ -64,12 +64,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.click(findTestObject('Object Repository/User Management-User/Page_Balance/span_User'))
 		
 		'cek apakah tombol menu dalam jangkauan web'
-		if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/' +
-			'Page_List Roles/i_Logout_ft-x ng-tns-c133-2'), FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementVisible(findTestObject(TombolSilang), FailureHandling.OPTIONAL)) {
 			
 			'klik pada tombol silang menu'
-			WebUI.click(findTestObject('Object Repository/User Management-Role/' +
-			'Page_List Roles/i_Logout_ft-x ng-tns-c133-2'))
+			WebUI.click(findTestObject(TombolSilang))
 		}
 		
 		'check if action new/services/edit/balancechargetype'

@@ -7,13 +7,13 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
 'deklarasi variabel untuk konek ke Database APIAAS'
-def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+def connpublic = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'kumpulan string dari WEB'
 ArrayList<String> totaldata = []
 
 'kumpulan string dari DB'
-ArrayList<String> totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'(conn)
+ArrayList<String> totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'(connpublic)
 
 'masukkan hasil perhitungan jumlah key ke totaldata'
 totaldata.add(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Api Key List/Footer')))

@@ -26,12 +26,12 @@ def driver = DriverFactory.getWebDriver()
 'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
 GlobalVariable.FlagFailed = 0
 
-if(TC != 'IsiSaldo' && TC != 'Tenant'){
+if (TC != 'IsiSaldo' && TC != 'Tenant') {
 	
 	'buka website APIAAS SIT, data diambil dari TestData Login'
 	WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 2))
 }
-else{
+else {
 	
 	'buka website billing system, untuk isi saldo'
 	WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 3))
@@ -39,23 +39,21 @@ else{
 
 def js = (JavascriptExecutor)driver
 
-if (TC == 'EditProf'){
+if (TC == 'EditProf') {
 	
 	'input email'
-	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemail'),
 		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputpassword'),
 		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
 		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
 }
-else if(TC == 'Regist'){
+else if (TC == 'Regist') {
 	
 	WebUI.maximizeWindow()
 	
@@ -64,10 +62,11 @@ else if(TC == 'Regist'){
 	'klik pada tombol buat akun'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
 	
-	if(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 18) == 'Yes')
-	{
-		WebElement linkTerm = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > div:nth-child(6) > div > div > label > a:nth-child(1)"))
-		WebElement linkPrivacy = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > div:nth-child(6) > div > div > label > a:nth-child(2)"))
+	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 18) == 'Yes') {
+		WebElement linkTerm = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >"+
+			" div:nth-child(6) > div > div > label > a:nth-child(1)"))
+		WebElement linkPrivacy = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >"+
+			" div:nth-child(6) > div > div > label > a:nth-child(2)"))
 		
 		js.executeScript("arguments[0].remove()", linkTerm);
 		js.executeScript("arguments[0].remove()", linkPrivacy);
@@ -88,10 +87,9 @@ else if(TC == 'Regist'){
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
 	
 	'ambil teks dari field input email'
-	if(WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
+	if (WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control is-invalid ng-_7788b4'), FailureHandling.OPTIONAL) 
-	!= findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8))
-	{
+	!= findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8)) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) +
@@ -99,22 +97,25 @@ else if(TC == 'Regist'){
 	}
 	
 	'input pada field nama pengguna'
-	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1'),
+	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
+		'input_Buat Akun_form-control is-invalid ng-_7788b4_1'),
 		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'input pada field kata sandi'
-	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2'),
+	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
+		'input_Buat Akun_form-control is-invalid ng-_7788b4_1_2'),
 		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 10))
 	
 	'input pada field ketik ulang kata sandi'
-	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'),
+	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
+		'input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'),
 		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 11))
 	
 	'bypass captcha langsung masuk verifikasi otp'
 	WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
 	js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister);
 }
-else if (TC == 'Key'){
+else if (TC == 'Key') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'
@@ -131,7 +132,7 @@ else if (TC == 'Key'){
 		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
 	
 }
-else if (TC == 'OCR'){
+else if (TC == 'OCR') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
@@ -156,7 +157,7 @@ else if (TC == 'OCR'){
 	
 }
 
-else if (TC == 'IsiSaldo'){
+else if (TC == 'IsiSaldo') {
 	
 	'input data username'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
@@ -170,7 +171,7 @@ else if (TC == 'IsiSaldo'){
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
 }
 
-else if (TC == 'Tenant'){
+else if (TC == 'Tenant') {
 	
 	WebUI.maximizeWindow()
 	
@@ -188,7 +189,7 @@ else if (TC == 'Tenant'){
 	'klik tombol masuk'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
 }
-else if (TC == 'Saldo'){
+else if (TC == 'Saldo') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
@@ -211,7 +212,7 @@ else if (TC == 'Saldo'){
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'button_Lanjutkan Perjalanan Anda'))
 }
-else if (TC == 'Layanan'){
+else if (TC == 'Layanan') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
@@ -235,7 +236,7 @@ else if (TC == 'Layanan'){
 		'button_Lanjutkan Perjalanan Anda'))
 }
 
-else if (TC == 'Role'){
+else if (TC == 'Role') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
@@ -258,7 +259,7 @@ else if (TC == 'Role'){
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'button_Lanjutkan Perjalanan Anda'))
 }
-else if (TC == 'User'){
+else if (TC == 'User') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
@@ -283,8 +284,8 @@ else if (TC == 'User'){
 }
 
 'cek apakah muncul error setelah login'
-if(WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/'+
-	'Page_Balance/div_Unknown Error'), GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), 
+	GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
 	
 	GlobalVariable.FlagFailed = 1
 	

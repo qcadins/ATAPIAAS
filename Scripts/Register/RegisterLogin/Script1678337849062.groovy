@@ -70,14 +70,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.sendKeys(findTestObject('Object Repository/RegisterLogin/'+
 			'Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'), Keys.chord(Keys.ENTER))
 		
-	//	'hover pointer ke button buat akun'
-	//	WebUI.focus(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'))
-	//	
-	//	WebUI.executeJavaScript('document.body.style.zoom = "60%"', null)
-	//	
-	//	'klik pada button buat akun'
-	//	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'))
-	//		
 		WebUI.delay(5)
 		
 		'mengambil otp dari db, disimpan ke iniotp'

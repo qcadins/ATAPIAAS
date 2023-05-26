@@ -23,7 +23,8 @@ int countColumnEdit = findTestData(ExcelPathRole).getColumnNumbers()
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Role', ('SheetName') : 'Role', ('Path') : ExcelPathRole], FailureHandling.STOP_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Role', ('SheetName') : 'Role', 
+	('Path') : ExcelPathRole], FailureHandling.STOP_ON_FAILURE)
 
 'klik pada bagian admin client'
 WebUI.click(findTestObject('Object Repository/User Management-Role/'+

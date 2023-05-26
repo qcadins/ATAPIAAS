@@ -37,7 +37,7 @@ WebUI.delay(3)
 
 'verifikasi tombol "YA" terdapat di layar'
 if (WebUI.verifyElementPresent(TombolYes, 
-	GlobalVariable.Timeout, FailureHandling.OPTIONAL)){
+	GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 
 	'klik pada button YA jika muncul pop-up'
 	WebUI.click(TombolYes)
@@ -45,12 +45,12 @@ if (WebUI.verifyElementPresent(TombolYes,
 
 WebUI.delay(GlobalVariable.Timeout)
 
-if(!WebUI.verifyElementPresent(ButtonGagalEditTenant, 
-	GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE))
-{
+if (!WebUI.verifyElementPresent(ButtonGagalEditTenant, 
+	GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) {
+
 	'cek ke DB jika memang diperlukan'
-	if(GlobalVariable.KondisiCekDB == 'Yes')
-	{
+	if (GlobalVariable.KondisiCekDB == 'Yes'){
+		
 		'verifikasi ke database untuk data yang ditambahkan'
 		WebUI.callTestCase(findTestCase('Test Cases/API Key/AddKeyStoreDBVerif'), [:], FailureHandling.STOP_ON_FAILURE)
 	}
@@ -61,8 +61,8 @@ CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
 	findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_OK'), GlobalVariable.NumOfColumn, 'API KEY')
 
 'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
-if(WebUI.verifyElementPresent(ButtonOK, 
-	GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)){
+if (WebUI.verifyElementPresent(ButtonOK, 
+	GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) {
 
 	'klik tombol ok pada success alert'
 	WebUI.click(ButtonOK)

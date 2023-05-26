@@ -29,7 +29,8 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Saldo', ('SheetName') : 'Saldo', ('Path') : ExcelPathSaldo], FailureHandling.STOP_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Saldo', ('SheetName') : 'Saldo', 
+	('Path') : ExcelPathSaldo], FailureHandling.STOP_ON_FAILURE)
 
 'ambil kode tenant di DB'
 String tenantcode = CustomKeywords.'saldo.VerifSaldo.getTenantCodefromDB'(conn, 
@@ -66,10 +67,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		checkddlOffice(conndevUAT, tenantcode)
 		
 		'ambil nama saldo tenant yang aktif di DB'
-		ArrayList<String> ActiveBalanceDB = CustomKeywords.'saldo.VerifSaldo.getListActiveBalance'(conndevUAT, tenantcode)
+		ArrayList<String> activeBalanceDB = CustomKeywords.'saldo.VerifSaldo.getListActiveBalance'(conndevUAT, tenantcode)
 		
 		'ambil nama saldo tenant aktif di UI'
-		ArrayList<String> ActiveBalanceUI = []
+		ArrayList<String> activeBalanceUI = []
 		
 		'cari element dengan nama saldo'
 		def elementNamaSaldo = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout >'+
@@ -85,11 +86,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				 "lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/span", true)
 			
 			'tambahkan nama saldo ke array'
-			ActiveBalanceUI.add(WebUI.getText(modifyNamaSaldo))
+			activeBalanceUI.add(WebUI.getText(modifyNamaSaldo))
 		}
 		
 		'jika hasil UI dan DB tidak sama'
-		if (!ActiveBalanceUI.containsAll(ActiveBalanceDB)){
+		if (!activeBalanceUI.containsAll(activeBalanceDB)){
 			
 			GlobalVariable.FlagFailed = 1
 			

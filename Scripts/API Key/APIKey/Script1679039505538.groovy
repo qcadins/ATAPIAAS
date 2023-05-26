@@ -49,11 +49,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.delay(10)
 		
 		CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatusbtnClickable'(isMandatoryComplete, 
-			findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'), 
+			findTestObject(TombolLogin), 
 			GlobalVariable.NumOfColumn, 'API KEY')
 			
 		'klik pada button login'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+		WebUI.click(findTestObject(TombolLogin))
 			
 		WebUI.delay(4)
 		
