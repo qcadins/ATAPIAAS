@@ -6,6 +6,10 @@
    <elementGuidId>66bbf46d-5f79-4ab1-904f-28c56dc0da22</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@class = 'msx-action btn btn-primary ng-star-inserted']</value>
+      </entry>
+      <entry>
          <key>CSS</key>
          <value>a.msx-action.btn.btn-primary.ng-star-inserted</value>
       </entry>
@@ -14,7 +18,7 @@
          <value>//a[contains(text(),'New')]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,15 +26,15 @@
       <name>tag</name>
       <type>Main</type>
       <value>a</value>
-      <webElementGuid>728eb8b5-4957-4bbd-8a62-8687b73a9cb1</webElementGuid>
+      <webElementGuid>78e31616-fc60-4361-8393-eb2f8678cefd</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
       <value>msx-action btn btn-primary ng-star-inserted</value>
-      <webElementGuid>998e7866-45e4-44e5-bdd3-03704e1baf36</webElementGuid>
+      <webElementGuid>351d6c14-c3be-4548-9b26-4e71248dd696</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,15 +42,15 @@
       <name>ng-reflect-ng-class</name>
       <type>Main</type>
       <value>btn btn-primary</value>
-      <webElementGuid>e7c7c349-bad3-488b-8b76-9ea48966c0c3</webElementGuid>
+      <webElementGuid>02337c68-2b32-4277-aea1-0190ade4f4f7</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> New</value>
-      <webElementGuid>61a578d9-5893-4baf-be2f-622ec5e85fad</webElementGuid>
+      <webElementGuid>b6fe0129-f9d5-423c-b60b-c6b3d29d22ec</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-expanded menu-open vertical-menu&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[@class=&quot;content-wrapper&quot;]/app-list-user[@class=&quot;ng-star-inserted&quot;]/app-msx-paging[1]/div[@class=&quot;row&quot;]/div[@class=&quot;col-6 text-right&quot;]/a[@class=&quot;msx-action btn btn-primary ng-star-inserted&quot;]</value>
-      <webElementGuid>84a2216a-c60b-495d-9e51-d1aa7925d408</webElementGuid>
+      <webElementGuid>f4f48d1e-912d-48da-b845-2e5bccce8e5e</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -62,7 +66,7 @@
       <name>xpath:link</name>
       <type>Main</type>
       <value>//a[contains(text(),'New')]</value>
-      <webElementGuid>c031a221-1c5a-4b51-8937-ab1f77e98a03</webElementGuid>
+      <webElementGuid>6d294642-6f57-4a62-8f0f-812ce13b31ea</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +74,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='List User'])[2]/following::a[1]</value>
-      <webElementGuid>f21d8f23-e5bd-4c01-8674-6545ad44ecbd</webElementGuid>
+      <webElementGuid>d6470fd9-76b6-40dd-add5-f18bb023d376</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Coupon'])[1]/following::a[1]</value>
-      <webElementGuid>9f780cba-0948-4f21-9bb3-638543be12bf</webElementGuid>
+      <webElementGuid>b925174b-dcc2-48eb-8772-c58bee4c8726</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +90,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Filter'])[1]/preceding::a[1]</value>
-      <webElementGuid>e9a9c051-c17b-4f95-99fd-af7388541a74</webElementGuid>
+      <webElementGuid>f66adeea-fd91-48df-b14f-65afee701067</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +98,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Email'])[1]/preceding::a[1]</value>
-      <webElementGuid>8b7afaf1-e47e-43fb-a58b-fa4420d2f90f</webElementGuid>
+      <webElementGuid>751c6916-74ba-436d-ad48-ec0257761f65</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,7 +106,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='New']/parent::*</value>
-      <webElementGuid>b208296b-7295-4780-87ac-253ba6811e78</webElementGuid>
+      <webElementGuid>fa933b45-8666-4c9d-aca6-d861d75db9d9</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -110,7 +114,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[2]/a</value>
-      <webElementGuid>786f1965-41a6-4aee-9193-adeb6fa1f10e</webElementGuid>
+      <webElementGuid>6b62424e-9ab1-4d99-86b1-c44d57965175</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -118,6 +122,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//a[(text() = ' New' or . = ' New')]</value>
-      <webElementGuid>eee85fb7-0842-4e6c-a56b-6bc1fe3c62ab</webElementGuid>
+      <webElementGuid>9deb394b-c903-4439-9f54-fb80f4ab4842</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

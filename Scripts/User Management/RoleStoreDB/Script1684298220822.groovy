@@ -5,8 +5,11 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
 
-'deklarasi koneksi ke Database adins_apiaas_uat'
+'deklarasi koneksi ke Database eendigo_dev_uat'
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+
+'deklarasi koneksi ke DB eendigo_dev'
+Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
 'check if action new/edit/settings'
 if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
@@ -54,9 +57,9 @@ else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equa
 else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Settings')) {
 	
 	'ambil data result dari DB'
-	ArrayList<String> resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleMenu'(conndevUAT, 
+	ArrayList<String> resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleMenu'(conndev, 
 		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 14), 
-			findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 11))
+			findTestData(ExcelPathRole).getValue(2, 11))
 	
 	'ambil data menu role pada excel'
 	ArrayList<String> resultExcel = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 22).split(';', -1)

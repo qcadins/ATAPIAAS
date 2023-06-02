@@ -26,10 +26,6 @@ Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_dev
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Role', ('SheetName') : 'Role', 
 	('Path') : ExcelPathRole], FailureHandling.STOP_ON_FAILURE)
 
-'klik pada bagian admin client'
-WebUI.click(findTestObject('Object Repository/User Management-Role/'+
-	'Page_Login - eendigo Platform/i_Admin Client_ft-edit'))
-
 'klik pada menu'
 WebUI.click(findTestObject('Object Repository/User Management-Role/'+
 	'Page_Balance/i_SEDARA MANYURA_ft-menu font-medium-3'))
