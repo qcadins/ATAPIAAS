@@ -76,7 +76,7 @@ public class CheckProfile {
 		'mengambil value dari gender'
 		if (findTestData('APIAAS/DataEditProfile').getValue(GlobalVariable.NumOfColumn, 14) == 'M') {
 			hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/Profile/Page_Edit Profile/input__radioMale'), 'value'))
-		} 
+		}
 		else {
 			hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/Profile/Page_Edit Profile/input__radioFemale'), 'value'))
 		}
@@ -110,7 +110,7 @@ public class CheckProfile {
 		ResultSet resultSet = stm.executeQuery("SELECT tenant_name FROM ms_tenant WHERE email_reminder_dest = '"+email+"'")
 
 		while (resultSet.next()) {
-			
+
 			data = resultSet.getObject(1)
 		}
 		data

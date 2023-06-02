@@ -8,7 +8,7 @@ import internal.GlobalVariable as GlobalVariable
 def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'menyimpan nama api ke dalam sebuah variabel'
-String apiname = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 10)
+String apiname = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11)
 
 'ambil data dari DB sesudah tambah API baru'
 ArrayList<String> hasildb = CustomKeywords.'apikey.CheckAPIKey.getAPINamefromDB'(conn, apiname)
@@ -20,7 +20,7 @@ ArrayList<String> hasilexcel = []
 hasilexcel.add(apiname)
 
 'tambah jenis API key(production/trial)'
-hasilexcel.add(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11))
+hasilexcel.add(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12))
 
 'verifikasi data pada db dan excel sama'
 for (int j = 0; j < hasilexcel.size ; j++) {

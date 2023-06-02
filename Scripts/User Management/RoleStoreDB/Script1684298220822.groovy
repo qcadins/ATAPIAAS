@@ -9,28 +9,29 @@ import java.sql.Connection
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'check if action new/edit/settings'
-if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('New')) {
+if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
 	
 	'ambil data role dari db'
 	String resultDB = CustomKeywords.'userManagement.RoleVerif.getNamaRole'(conndevUAT, 
-		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 19))
+		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 20))
 	
 	'ambil data role dari excel'
-	String resultExcel = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 19)
+	String resultExcel = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 20)
 	
 	'jika hasil db tidak sesuai excel'
 	if(resultDB != resultExcel) {
+		
 		'tulis adanya error pada sistem web'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonStoreDB)
 	}
 }
-else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('Edit')) {
+else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 	
 	'ambil data role dan status dari DB'
 	ArrayList<String> resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleEdit'(conndevUAT, 
-		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 16))
+		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 17))
 	
 	'inisialisasi array dari Excel'
 	ArrayList<String> resultExcel = []
@@ -39,9 +40,10 @@ else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 7).equa
 	for (int i = 0; i < resultDB.size ; i++){
 		
 		'ambil data dari excel'
-		resultExcel.add(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, (16+i)))
+		resultExcel.add(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, (17+i)))
 		
 		if(resultExcel[i] != resultDB[i]) {
+			
 			'tulis adanya error pada sistem web'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
@@ -49,19 +51,19 @@ else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 7).equa
 		}
 	}
 }
-else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('Settings')) {
+else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Settings')) {
 	
 	'ambil data result dari DB'
 	ArrayList<String> resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleMenu'(conndevUAT, 
-		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 13), 
-			findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 10))
+		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 14), 
+			findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 11))
 	
 	'ambil data menu role pada excel'
-	ArrayList<String> resultExcel = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 21).split(';', -1)
+	ArrayList<String> resultExcel = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 22).split(';', -1)
 	
 	'jika hasil kedua sumber tidak sesuai'
-	if(resultDB != resultExcel)
-	{
+	if(resultDB != resultExcel) {
+		
 		'tulis adanya error pada sistem web'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +

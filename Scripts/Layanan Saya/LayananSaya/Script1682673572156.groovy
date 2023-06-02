@@ -30,7 +30,8 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Layanan'], FailureHandling.STOP_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Layanan',('SheetName') : 'LayananSaya', 
+	('Path') : ExcelPathLayananSaya], FailureHandling.STOP_ON_FAILURE)
 
 'klik pada tombol profil di kanan atas'
 WebUI.click(findTestObject('Object Repository/LayananSaya/Page_Balance/span_CHECK FINANCE'))
@@ -39,12 +40,12 @@ WebUI.click(findTestObject('Object Repository/LayananSaya/Page_Balance/span_CHEC
 WebUI.click(findTestObject('Object Repository/LayananSaya/Page_Balance/span_Layanan Saya'))
 
 'user memilih perlu cek layanan production atau trial'
-if(findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 11) == 'PRODUCTION'){
+if (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 12) == 'PRODUCTION') {
 	
 	'klik pada api key production'
 	WebUI.click(findTestObject('Object Repository/LayananSaya/Page_List Service/label_PRODUCTION'))
 }
-else{
+else {
 	
 	'klik pada api key trial'
 	WebUI.click(findTestObject('Object Repository/LayananSaya/Page_List Service/label_TRIAL'))
@@ -52,9 +53,9 @@ else{
 
 'ambil kode tenant di DB'
 String tenantcode = CustomKeywords.'layananSaya.VerifLayanan.getTenantCodefromDB'(conn, 
-	findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 8))
+	findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 9))
 
-for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
+for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'set penanda error menjadi 0'
 	GlobalVariable.FlagFailed = 0
@@ -67,7 +68,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 	else if (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
-		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 4))
+		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 5))
 		
 		'service name dari DB'
 		ArrayList<String> serviceNameDB = CustomKeywords.'layananSaya.VerifLayanan.getListServiceName'(conndevUAT, tenantcode)
@@ -101,6 +102,18 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 						
 						'klik button next page'
 						WebUI.click(findTestObject('Object Repository/OCR Testing/Page_Balance/i_Catatan_datatable-icon-right'))
+					}
+					
+					'cek apakah muncul error unknown setelah refresh'
+					if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+						GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+						
+						GlobalVariable.FlagFailed = 1
+						
+						'tulis adanya error pada sistem web'
+						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
+							GlobalVariable.StatusWarning, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+								GlobalVariable.FailedReasonUnknown)
 					}
 				}
 				else{
@@ -199,6 +212,18 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		
 		'lakukan refresh laman untuk kembali ke halaman 1'
 		WebUI.refresh()
+		
+		'cek apakah muncul error unknown setelah refresh'
+		if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+			
+			GlobalVariable.FlagFailed = 1
+			
+			'tulis adanya error pada sistem web'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('LayananSaya', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusWarning, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonUnknown)
+		}
 	}
 }
 'tutup browser'

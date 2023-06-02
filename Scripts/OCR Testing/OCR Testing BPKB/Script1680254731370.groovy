@@ -37,12 +37,12 @@ WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
 'input data email'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 	'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-	findTestData(ExcelPathOCRTesting).getValue(2, 26))
+	findTestData(ExcelPathOCRTesting).getValue(2, 27))
 
 'input password'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 	'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-	findTestData(ExcelPathOCRTesting).getValue(2, 27))
+	findTestData(ExcelPathOCRTesting).getValue(2, 28))
 
 'ceklis pada reCaptcha'
 WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
@@ -59,7 +59,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 	
 	'ambil kode tenant di DB'
 	String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, 
-		findTestData(ExcelPathOCRTesting).getValue(2, 26))
+		findTestData(ExcelPathOCRTesting).getValue(2, 27))
 	
 	'ambil key trial yang aktif dari DB'
 	String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
@@ -82,10 +82,10 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		ResponseObject response
 		
 		'cek apakah perlu tambah API'
-		String useCorrectKey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 15)
+		String useCorrectKey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 16)
 		
 		'cek apakah perlu gunakan tenantcode yang salah'
-		String useCorrectTenant = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13)
+		String useCorrectTenant = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 14)
 		
 		'deklarasi variabel angka'
 		int isSaldoBerkurang, saldobefore, uisaldoafter, katalonSaldoafter, isTrxIncreased, hitAPITrx
@@ -115,27 +115,27 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		
 		if(useCorrectKey != 'Yes'){
 			
-			thekey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 16)
+			thekey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 17)
 		}
 		else if(useCorrectTenant != 'Yes'){
 			
-			tenantcode = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 14)
+			tenantcode = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 15)
 		}
 			
 		'lakukan proses HIT api dengan parameter image, key, dan juga tenant'
 		response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/OCR BPKB',
 		[
-			('page2'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 8),
-			('page3'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 9),
+			('page2'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 9),
+			('page3'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 10),
 			('key'):thekey,
 			('tenant'):tenantcode,
-			('custno'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 18),
-			('off_code'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 19),
-			('off_name'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 20),
-			('question'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 21),
-			('loginId'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 22),
-			('refNum'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 23),
-			('source'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 24)
+			('custno'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 19),
+			('off_code'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 20),
+			('off_name'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 21),
+			('question'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 22),
+			('loginId'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 23),
+			('refNum'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 24),
+			('source'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 25)
 		]))
 						
 		'ambil message respon dari HIT tersebut'
@@ -176,6 +176,18 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		
 		'refresh halaman web'
 		WebUI.refresh()
+		
+		'cek apakah muncul error unknown setelah login'
+		if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+			
+			GlobalVariable.FlagFailed = 1
+			
+			'tulis adanya error pada sistem web'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR BPKB', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusWarning, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonUnknown)
+		}
 		
 		'panggil fungsi filter saldo berdasarkan inputan user'
 		filterSaldo()
@@ -297,6 +309,18 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		}
 		'refresh laman web sesudah kondisi write to excel'
 		WebUI.refresh()
+		
+		'cek apakah muncul error unknown setelah login'
+		if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+			
+			GlobalVariable.FlagFailed = 1
+			
+			'tulis adanya error pada sistem web'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR BPKB', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusWarning, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonUnknown)
+		}
 	}
 }
 
@@ -363,14 +387,14 @@ def filterSaldo() {
 	
 	'isi field input tipe saldo'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
-		findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 10))
+		findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 11))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
 	
 	'isi field tipe transaksi'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), 
-		findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 11))
+		findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 12))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), Keys.chord(Keys.ENTER))

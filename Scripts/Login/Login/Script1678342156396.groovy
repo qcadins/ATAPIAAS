@@ -43,11 +43,11 @@ if (TC == 'EditProf') {
 	
 	'input email'
 	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemail'),
-		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8))
+		findTestData(ExcelPathEditProfile).getValue(2, 9))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputpassword'),
-		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathEditProfile).getValue(2, 10))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
@@ -62,7 +62,7 @@ else if (TC == 'Regist') {
 	'klik pada tombol buat akun'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
 	
-	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 18) == 'Yes') {
+	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 19) == 'Yes') {
 		WebElement linkTerm = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >"+
 			" div:nth-child(6) > div > div > label > a:nth-child(1)"))
 		WebElement linkPrivacy = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >"+
@@ -78,7 +78,7 @@ else if (TC == 'Regist') {
 	'input pada field email'
 	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control is-invalid ng-_7788b4'),
-		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8))
+		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'ubah ke laman login'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Masuk'))
@@ -89,7 +89,8 @@ else if (TC == 'Regist') {
 	'ambil teks dari field input email'
 	if (WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control is-invalid ng-_7788b4'), FailureHandling.OPTIONAL) 
-	!= findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8)) {
+			!= findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9)) {
+	
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) +
@@ -99,17 +100,17 @@ else if (TC == 'Regist') {
 	'input pada field nama pengguna'
 	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control is-invalid ng-_7788b4_1'),
-		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 10))
 	
 	'input pada field kata sandi'
 	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control is-invalid ng-_7788b4_1_2'),
-		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 10))
+		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 11))
 	
 	'input pada field ketik ulang kata sandi'
 	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'),
-		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 11))
+		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 12))
 	
 	'bypass captcha langsung masuk verifikasi otp'
 	WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
@@ -120,12 +121,12 @@ else if (TC == 'Key') {
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'
 		+'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-		findTestData('API_KEY/DataAPIKEY').getValue(GlobalVariable.NumOfColumn, 8))
+		findTestData('API_KEY/DataAPIKEY').getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-		findTestData('API_KEY/DataAPIKEY').getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData('API_KEY/DataAPIKEY').getValue(GlobalVariable.NumOfColumn, 10))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
@@ -137,12 +138,12 @@ else if (TC == 'OCR') {
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-		findTestData(Path).getValue(2, 25))
+		findTestData(Path).getValue(2, 26))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-		findTestData(Path).getValue(2, 26))
+		findTestData(Path).getValue(2, 27))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
@@ -161,11 +162,11 @@ else if (TC == 'IsiSaldo') {
 	
 	'input data username'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 8))
+		findTestData(ExcelPathSaldoAPI).getValue(2, 9))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputpassword'),
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathSaldoAPI).getValue(2, 10))
 	
 	'klik tombol masuk'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
@@ -194,12 +195,12 @@ else if (TC == 'Saldo') {
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-		findTestData(ExcelPathSaldo).getValue(2, 24))
+		findTestData(ExcelPathSaldo).getValue(2, 25))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-		findTestData(ExcelPathSaldo).getValue(2, 25))
+		findTestData(ExcelPathSaldo).getValue(2, 26))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
@@ -217,12 +218,12 @@ else if (TC == 'Layanan') {
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-		findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 8))
+		findTestData(ExcelPathLayanan).getValue(2, 9))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-		findTestData(ExcelPathLayanan).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathLayanan).getValue(2, 10))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
@@ -241,12 +242,12 @@ else if (TC == 'Role') {
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 10))
+		findTestData(ExcelPathRole).getValue(2, 11))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 11))
+		findTestData(ExcelPathRole).getValue(2, 12))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
@@ -264,12 +265,12 @@ else if (TC == 'User') {
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 10))
+		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 11))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 11))
+		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 12))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
@@ -283,14 +284,26 @@ else if (TC == 'User') {
 		'button_Lanjutkan Perjalanan Anda'))
 }
 
-'cek apakah muncul error setelah login'
-if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), 
+'cek apakah muncul error unknown setelah login'
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), 
 	GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
 	
 	GlobalVariable.FlagFailed = 1
 	
 	'tulis adanya error pada sistem web'
 	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		GlobalVariable.StatusWarning, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			GlobalVariable.FailedReasonUnknown)
+}
+
+'cek apakah muncul error gagal login'
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/ErrorMsg')
+	,GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+	
+	GlobalVariable.FlagFailed = 1
+	
+	'tulis adanya error pada sistem web'
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			GlobalVariable.FailedReasonLoginIssue)
 }

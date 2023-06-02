@@ -8,7 +8,7 @@ import internal.GlobalVariable as GlobalVariable
 def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
 'ambil email dari testdata, disimpan ke string'
-String email = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 8)
+String email = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9)
 
 'kumpulan string yang menyimpan hasil data dari DB'
 ArrayList<String> hasildb = CustomKeywords.'profile.CheckProfile.getProfilefromDB'(conn, email)

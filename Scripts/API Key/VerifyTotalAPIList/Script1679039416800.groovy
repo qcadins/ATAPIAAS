@@ -13,7 +13,7 @@ def connpublic = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 ArrayList<String> totaldata = []
 
 'kumpulan string dari DB'
-ArrayList<String> totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'(connpublic)
+ArrayList<String> totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'(connpublic, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
 
 'masukkan hasil perhitungan jumlah key ke totaldata'
 totaldata.add(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Api Key List/Footer')))

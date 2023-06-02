@@ -9,7 +9,7 @@ import groovy.sql.Sql as Sql
 def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'ambil email dari testdata, disimpan ke string'
-String namaAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12)
+String namaAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13)
 
 'kumpulan string yang menyimpan hasil data dari DB'
 ArrayList<String> hasildb = CustomKeywords.'apikey.CheckAPIKey.getAPIStatusfromDB'(conn, namaAPI)

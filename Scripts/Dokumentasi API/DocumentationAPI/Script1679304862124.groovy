@@ -9,10 +9,10 @@ import org.openqa.selenium.Keys as Keys
 import groovy.sql.Sql as Sql
 
 'nama dokumen yang akan diambil'
-String namadokumentasi = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 8)
+String namadokumentasi = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 9)
 
 'user menentukan apakah file yang didownload langsung dihapus atau tidak lewat excel'
-String flagDelete = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 9)
+String flagDelete = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 10)
 
 'Wait for Some time so that file gets downloaded and Stored in user defined path'
 WebUI.delay(5)
@@ -26,7 +26,7 @@ WebUI.delay(1)
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/span_Dokumentasi API'))
 
 'jika perlu, akan memanggil fungsi cek ddl dokumentasi'
-if (GlobalVariable.KondisiCekDB == 'Yes'){
+if (GlobalVariable.KondisiCekDB == 'Yes') {
 	
 	'verifikasi data DDL yang ada di web dengan DB'
 	VerifyDocumentListAPI()
@@ -37,6 +37,13 @@ WebUI.setText(findTestObject('Object Repository/API_KEY/Page_API Documentation/i
 
 'select status API'
 WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_API Documentation/input'), Keys.chord(Keys.ENTER))
+
+'cek apakah perlu kembalikan ddl ke default'
+if (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 11) == 'Yes') {
+	
+	'klik pada tombol silang di ddl'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/CrossDDL'))
+}
 
 'klik pada tombol unduh'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/button_Unduh'))
@@ -86,6 +93,7 @@ def VerifyDocumentListAPI(){
 	Collections.sort(hasildb)
 	
 	for (int j = 0; j < hasildb.size ; j++) {
+		
 		'verifikasi semua opsi pada web sesuai dengan database'
 		checkVerifyEqualorMatch(WebUI.verifyEqual(hasilweb[j], hasildb[j], FailureHandling.CONTINUE_ON_FAILURE))
 	}
@@ -93,6 +101,7 @@ def VerifyDocumentListAPI(){
 
 def checkVerifyEqualorMatch(Boolean isMatch) {
 	if (isMatch == false) {
+		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dokumentasi API', 

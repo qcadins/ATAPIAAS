@@ -48,22 +48,22 @@ public class CheckAPIKey {
 		String optionLabel
 
 		optionLabel = WebUI.getAttribute(findTestObject('Object Repository/'+
-			'API_KEY/Page_Edit Api Key/input'), 'aria-activedescendant')
+				'API_KEY/Page_Edit Api Key/input'), 'aria-activedescendant')
 
 		'kumpulan string yang menyimpan hasil text dari User Interface APIAAS'
 		ArrayList<String> hasilgetText = []
 
 		'mengambil text dari field nama api key'
 		hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/'+
-			'input__apiKeyName'), 'value'))
+				'input__apiKeyName'), 'value'))
 
-		if(optionLabel.contains('-0'))
-		{
+		if (optionLabel.contains('-0')) {
+
 			'mengambil text dari field status api key'
 			hasilgetText.add('Active')
 		}
-		else
-		{
+		else {
+
 			'mengambil text dari field status api key'
 			hasilgetText.add('Inactive')
 		}
@@ -97,14 +97,14 @@ public class CheckAPIKey {
 
 	//fungsi untuk mengambil jumlah data APIKEY dari database
 	@Keyword
-	getTotalAPIKeyfromDB(Connection conn) {
+	getTotalAPIKeyfromDB(Connection conn, String email) {
 		String data
 
 		ArrayList<String> listdata = []
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT CONCAT(COUNT(api_key_name), ' total') AS total_count FROM ms_api_key WHERE id_ms_tenant = 29")
+		ResultSet resultSet = stm.executeQuery("SELECT CONCAT(COUNT(api_key_name), ' total') AS total_count FROM ms_api_key mak LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mak.id_ms_tenant WHERE email_reminder_dest = '" + email + "'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()

@@ -34,7 +34,7 @@ WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Saldo', ('
 
 'ambil kode tenant di DB'
 String tenantcode = CustomKeywords.'saldo.VerifSaldo.getTenantCodefromDB'(conn, 
-	findTestData(ExcelPathSaldo).getValue(2,24))
+	findTestData(ExcelPathSaldo).getValue(2,25))
 
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
@@ -49,19 +49,22 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	else if (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
-		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 4))
+		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 5))
 		
 		'panggil fungsi cek filter saldo'
 		filterSaldo()
 		
+		'scroll ke bawah halaman'
+		WebUI.scrollToElement(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), GlobalVariable.Timeout)
+		
 		'panggil fungsi cek table dan paging'
-		checkTableandPaging(conndevUAT, tenantcode, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 8))
+		checkTableandPaging(conndevUAT, tenantcode, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
 		
 		'check dropdownlist dari tipe saldo'
 		checkddlTipeSaldo(conndevUAT, tenantcode)
 		
 		'check dropdownlist dari tipe saldo'
-		checkddlTipeTransaksi(conndevUAT, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 8))
+		checkddlTipeTransaksi(conndevUAT, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
 		
 		'check dropdownlist dari office'
 		checkddlOffice(conndevUAT, tenantcode)
@@ -116,6 +119,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		WebUI.refresh()
+		
+		'cek apakah muncul error unknown setelah refresh'
+		if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+			
+			GlobalVariable.FlagFailed = 1
+			
+			'tulis adanya error pada sistem web'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusWarning, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonUnknown)
+		}
 	}
 }
 
@@ -144,7 +159,7 @@ def filterSaldo() {
 	
 	'isi field input tipe saldo'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 8))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
@@ -168,49 +183,49 @@ def filterSaldo() {
 	
 	'isi field input tipe saldo'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/inputtipesaldo'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 8))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/Saldo/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
 	
 	'isi field tipe transaksi'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/inputtipetransaksi'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 10))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/Saldo/Page_Balance/inputtipetransaksi'), Keys.chord(Keys.ENTER))
 	
 	'isi tanggal transaksi awal'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/'+
-		'input_Tanggal Transaksi Dari_transactionDateStart'), findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 10))
+		'input_Tanggal Transaksi Dari_transactionDateStart'), findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 11))
 	
 	'input pengguna dari transaksi'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/input_Pengguna_user'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 11))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 12))
 	
 	'input hasil proses berdasarkan ddl di excel'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/inputhasilproses'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 12))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 13))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/Saldo/Page_Balance/inputhasilproses'), Keys.chord(Keys.ENTER))
 	
 	'input reference number transaksi'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/input_Ref Number_referenceNo'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 13))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 14))
 	
 	'input nama dokumen'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/input_Nama Dokumen_documentName'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 14))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 15))
 	
 	'input batas tanggal transaksi terakhir'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/'+
 		'input_Tanggal Transaksi Sampai_transactionDateEnd'), 
-			findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 15))
+			findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 16))
 	
 	'input kantor'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/inputkantor'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 16))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 17))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/Saldo/Page_Balance/inputkantor'), Keys.chord(Keys.ENTER))
@@ -280,14 +295,14 @@ def filterSaldo() {
 
 	'isi field input tipe saldo'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 8))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
 	
 	'isi field tipe transaksi'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 10))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), Keys.chord(Keys.ENTER))
@@ -308,10 +323,10 @@ def filterSaldo() {
 	}
 	
 	'user menentukan apakah file yang didownload langsung dihapus atau tidak lewat excel'
-	String downloadFile = findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 19)
+	String downloadFile = findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 20)
 	
 	'user menentukan apakah file yang didownload langsung dihapus atau tidak lewat excel'
-	String flagDelete = findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 20)
+	String flagDelete = findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 21)
 	
 	'mengambil alamat dari project katalon ini'
 	String userDir = System.getProperty('user.dir')

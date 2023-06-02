@@ -15,30 +15,30 @@ Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_dev
 ArrayList<String> arrayMatch = []
 
 'check if action new/services'
-if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('New') 
-	|| findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('Edit')) {
+if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New') 
+	|| findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 	
 'get data balance mutation dari DB'
 ArrayList<String> result = CustomKeywords.'tenant.TenantVerif.getTenantStoreDB'(conndevUAT, 
-	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14))
+	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 15))
 
 'get data services dari DB'
 ArrayList<String> resultServices = CustomKeywords.'tenant.TenantVerif.getTenantServicesDescription'(conndevUAT, 
-	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13))
+	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14))
 
 'declare arrayindex'
 arrayindex = 0
 
 'verify tenant name'
 arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 12).toUpperCase(), 
+	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13).toUpperCase(), 
 	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 
-if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('New')) {
+if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
 	
 	'verify tenant code'
 	arrayMatch.add(WebUI.verifyMatch(
-		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13).toUpperCase(), 
+		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14).toUpperCase(), 
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 }
 else {
@@ -49,25 +49,25 @@ else {
 
 'verify label ref number'
 arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14).toUpperCase(), 
+	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 15).toUpperCase(), 
 	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 
 'verify API Key'
 arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 16).toUpperCase(), 
+	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 17).toUpperCase(), 
 	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 
 'verify Email reminder'
 arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 21).toUpperCase().replace(';',','), 
+	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 22).toUpperCase().replace(';',','), 
 	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 
 'deklarasi array services'
-ArrayList<String> arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 18).split(';',-1)
+ArrayList<String> arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 19).split(';',-1)
 
 'deklarasi batas saldo tiap service'
 ArrayList<String> arrayServicesBatasSaldo = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 
-	19).split(';',-1)
+	20).split(';',-1)
 
 'looping untuk verif services dan batas saldo'
 indexServices = 0
@@ -90,37 +90,37 @@ for (indexExcel = 0 ; indexExcel < arrayServices.size(); indexExcel++) {
 }
 
 }
-else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('Service')) {
+else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Service')) {
 	
 	'get data balacne mutation dari DB'
 	String result = CustomKeywords.'tenant.TenantVerif.getTenantServices'(conndevUAT, 
-		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 9)).replace('{','').replace('}','').replace('"','').replace(':0', '')
+		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 10)).replace('{','').replace('}','').replace('"','').replace(':0', '')
 	
 	'split result to array'
 	ArrayList<String> resultarray = result.split(':0')
 	
 	'get array Services dari excel'
-	ArrayList<String> arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 25).split(';', -1)
+	ArrayList<String> arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 26).split(';', -1)
 	
 	'verify services'
 	arrayMatch.add(arrayServices.containsAll(resultarray))
 }
 
-else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 7).equalsIgnoreCase('ChargeType')) {
+else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('ChargeType')) {
 	
 	'get array Services dari excel'
-	arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 29).split(';', -1)
+	arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 30).split(';', -1)
 	
 	'looping untuk input services check'
 	for (index = 0; index < arrayServices.size(); index++) {
 		
 		'ambil id pembayaran untuk service pertama yang diubah'
 		int IDPaymentType = CustomKeywords.'tenant.TenantVerif.getIDPaymentType'(conndevUAT, 
-			findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13), arrayServices[index])
+			findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14), arrayServices[index])
 		
 		'ambil jenis pembayaran untuk service yang terpilih'
 		String PaymentType = CustomKeywords.'tenant.TenantVerif.getPaymentType'(conndevUAT, 
-			findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13), IDPaymentType)
+			findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14), IDPaymentType)
 		
 		'split result to array'
 		if (PaymentType == 'Price') {

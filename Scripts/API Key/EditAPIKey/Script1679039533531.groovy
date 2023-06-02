@@ -31,10 +31,10 @@ if(GlobalVariable.KondisiCekDB == 'Yes'){
 
 'input nama API'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'), 
-	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12))
+	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
 
 'cek kondisi status input pada database'
-if(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13) == 'ACTIVE'){
+if(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 14) == 'ACTIVE'){
 	
 	'pilih status active'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/span_Active'))
@@ -54,6 +54,18 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Ed
 	
 	'klik pada tombol ya'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Ya'))
+}
+
+'cek apakah muncul error setelah edit api key'
+if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+	GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+	
+	GlobalVariable.FlagFailed = 1
+	
+	'tulis adanya error pada sistem web'
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusWarning, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			GlobalVariable.FailedReasonUnknown)
 }
 
 WebUI.delay(2)

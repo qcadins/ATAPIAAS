@@ -24,11 +24,11 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_Baru')
 
 'input data API KEY name'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Add Api Key/input__apiKeyName'), 
-	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 10))
+	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11))
 
 'pilih jenis API KEY'
 WebUI.selectOptionByLabel(findTestObject('Object Repository/API_KEY/Page_Add Api Key/select_tipeAPI'),
-	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11), false)
+	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12), false)
 
 'klik pada tombol simpan'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Simpan'))
@@ -43,10 +43,22 @@ if (WebUI.verifyElementPresent(TombolYes,
 	WebUI.click(TombolYes)
 }
 
+'cek apakah muncul error setelah add api key'
+if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+	GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+	
+	GlobalVariable.FlagFailed = 1
+	
+	'tulis adanya error pada sistem web'
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusWarning, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			GlobalVariable.FailedReasonUnknown)
+}
+
 WebUI.delay(GlobalVariable.Timeout)
 
 if (!WebUI.verifyElementPresent(ButtonGagalEditTenant, 
-	GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) {
+	GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 
 	'cek ke DB jika memang diperlukan'
 	if (GlobalVariable.KondisiCekDB == 'Yes'){
@@ -62,7 +74,7 @@ CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
 
 'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
 if (WebUI.verifyElementPresent(ButtonOK, 
-	GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) {
+	GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 
 	'klik tombol ok pada success alert'
 	WebUI.click(ButtonOK)

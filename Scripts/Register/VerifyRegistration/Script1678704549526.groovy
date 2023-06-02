@@ -9,7 +9,7 @@ import internal.GlobalVariable as GlobalVariable
 def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
 'simpan email ke dalam sebuah variabel'
-String email = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 8)
+String email = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9)
 
 'simpan data yang diambil dari database'
 ArrayList<String> credential = CustomKeywords.'profile.CheckRegisterProfile.checkDBafterRegister'(conn, email)

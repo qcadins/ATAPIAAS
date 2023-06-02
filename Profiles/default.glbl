@@ -66,6 +66,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Gagal Login'</initValue>
+      <name>FailedReasonLoginIssue</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Mandatory is incomplete'</initValue>
       <name>FailedReasonMandatory</name>
    </GlobalVariableEntity>
@@ -186,13 +191,18 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'Berhasil Save tapi mandatory tidak lengkap'</initValue>
+      <initValue>'Berhasil Save tapi ada error yang tidak mengganggu flow testing'</initValue>
       <name>StatusReasonSystem</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
       <initValue>'Success'</initValue>
       <name>StatusSuccess</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Warning'</initValue>
+      <name>StatusWarning</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

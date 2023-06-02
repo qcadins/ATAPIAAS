@@ -54,7 +54,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
 		'declare isMmandatory Complete'
-		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 4))
+		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 5))
 		
 		'klik pada menu'
 		WebUI.click(findTestObject('Object Repository/User Management-Role/' +

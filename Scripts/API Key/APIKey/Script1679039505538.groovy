@@ -13,13 +13,13 @@ import org.openqa.selenium.Keys as Keys
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathAPIKey).columnNumbers()
+int countColumnEdit = findTestData(ExcelPathAPIKey).getColumnNumbers()
 
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 1).length() == 0){
+	if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
 	}
@@ -28,22 +28,23 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		String optiontipe, optionstatus
 		
 		'cek apakah perlu tambah API'
-		String wantAddAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 17)
+		String wantAddAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18)
 		
 		'cek apakah perlu edit API'
-		String wantEditAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18)
+		String wantEditAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 19)
 		
 		'cek apakah perlu copy link API'
-		String copyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 19)
+		String copyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 20)
 		
 		'cek apakah perlu fungsi download dokumentasi API'
-		String downloadDocs = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 20)
+		String downloadDocs = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 21)
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
-		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 4))
+		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 5))
 		
 		'panggil fungsi login'
-		WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Key'], FailureHandling.STOP_ON_FAILURE)
+		WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Key', ('SheetName') : 'API KEY', 
+			('Path') : ExcelPathAPIKey], FailureHandling.STOP_ON_FAILURE)
 		
 		'pada delay, lakukan captcha secara manual'
 		WebUI.delay(10)
@@ -55,7 +56,19 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'klik pada button login'
 		WebUI.click(findTestObject(TombolLogin))
 			
-		WebUI.delay(4)
+		'cek apakah muncul error unknown setelah login'
+		if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+			
+			GlobalVariable.FlagFailed = 1
+			
+			'tulis adanya error pada sistem web'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusWarning, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonUnknown)
+		}
+		
+		WebUI.delay(GlobalVariable.Timeout)
 		
 		'klik pada tombol garis tiga'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_KEPIN EDGAR_ft-menu font-medium-3'))
@@ -69,7 +82,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'input tipe API'
 		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
-				ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 14))
+				ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 15))
 		
 		'select tipe API'
 		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(
@@ -77,7 +90,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'input status API'
 		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
-				ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 15))
+				ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 16))
 		
 		'select status API'
 		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(
@@ -126,7 +139,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'verifikasi jumlah baris di DB dan di WEB'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/VerifyTotalAPIList'), 
-				[:], FailureHandling.STOP_ON_FAILURE)
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
 		}
 		
 		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Api Key List/'+
@@ -202,7 +215,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'panggil fungsi download dokumentasi API'
 			WebUI.callTestCase(findTestCase('Test Cases/Dokumentasi API/DocumentationAPI'), 
-				[:], FailureHandling.STOP_ON_FAILURE)
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
 		}
 		'kondisi jika tidak ada error'
 		if(GlobalVariable.FlagFailed == 0){

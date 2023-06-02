@@ -22,37 +22,37 @@ arrayindex = 0
 
 'verify tenant'
 arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 12).toUpperCase(), 
+	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 13).toUpperCase(), 
 	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 
 'verify vendor'
 arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 13).toUpperCase(), 
+	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 14).toUpperCase(), 
 	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 
 'verify tipe saldo'
 arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 14).toUpperCase(), 
+	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 15).toUpperCase(), 
 	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 
 'verify tambah saldo'
 arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 15).toUpperCase(), 
+	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 16).toUpperCase(), 
 	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 
 'verify Nomor tagihan'
 arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 16).toUpperCase(), 
+	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 17).toUpperCase(), 
 	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 
 'verify Catatan'
 arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 17).toUpperCase(), 
+	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 18).toUpperCase(), 
 	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 
 'verify tanggal pembelian'
 arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 18).toUpperCase(), 
+	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 19).toUpperCase(), 
 	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 
 'jika data db tidak sesuai dengan excel'
