@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>makspenebusan</name>
+   <tag></tag>
+   <elementGuidId>f08e2229-3eae-4d66-bbab-6797dd49ccb2</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value></value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>(.//*[normalize-space(text()) and normalize-space(.)='J.CO'])[1]/following::td[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>td</value>
+      <webElementGuid>d761ffca-a403-4354-bc1e-762c771ed8a7</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>coupon-detail-td</value>
+      <webElementGuid>bb8ce8a6-8bd2-4f82-92ea-eaefbd802997</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>1</value>
+      <webElementGuid>5ca62d16-0bae-4ee4-a616-423710cdcb15</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done page-scrolled navbar-scrolled modal-open&quot;]/ngb-modal-window[@class=&quot;d-block modal fade show&quot;]/div[@class=&quot;modal-dialog modal-l&quot;]/div[@class=&quot;modal-content&quot;]/app-view-coupon-detail[1]/div[@class=&quot;modal-body&quot;]/table[@class=&quot;table table-striped table-hover&quot;]/tbody[1]/tr[1]/td[@class=&quot;coupon-detail-td&quot;]</value>
+      <webElementGuid>18a6cd34-e9ce-4f3d-90f9-133112e5dfa3</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='J.CO'])[1]/following::td[2]</value>
+      <webElementGuid>24a598d2-2919-43e5-9ee4-3d12ccb3e5cb</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Maksimal Penebusan'])[1]/following::td[3]</value>
+      <webElementGuid>3971ddea-0b11-4f1e-8bd9-cc17aba07632</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//td[3]</value>
+      <webElementGuid>3d552386-fa1c-496a-8ba2-cc9e098b1217</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//td[(text() = '1' or . = '1')]</value>
+      <webElementGuid>dd67783d-342f-4f7e-94a4-741db66033c2</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

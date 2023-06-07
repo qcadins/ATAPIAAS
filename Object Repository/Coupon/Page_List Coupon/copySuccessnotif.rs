@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>copySuccessnotif</name>
+   <tag></tag>
+   <elementGuidId>3f8ad3da-91a3-48ec-a563-15127b8dd438</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>div.ng-tns-c95-6.ng-star-inserted.ng-trigger.ng-trigger-flyInOut.ngx-toastr.toast-info</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='toast-container']/div</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[(text() = ' Kode Kupon berhasil disalin ' or . = ' Kode Kupon berhasil disalin ')]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>div</value>
+      <webElementGuid>833446c5-2b9e-49f7-a8e4-c9a442841ae5</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ng-tns-c95-6 ng-star-inserted ng-trigger ng-trigger-flyInOut ngx-toastr toast-info</value>
+      <webElementGuid>982636de-befd-47ac-85e1-35368033a175</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value> Kode Kupon berhasil disalin </value>
+      <webElementGuid>653f6379-3b72-4183-b19d-02c604d693d5</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done page-scrolled navbar-scrolled&quot;]/div[@class=&quot;overlay-container&quot;]/div[@id=&quot;toast-container&quot;]/div[@class=&quot;ng-tns-c95-6 ng-star-inserted ng-trigger ng-trigger-flyInOut ngx-toastr toast-info&quot;]</value>
+      <webElementGuid>03599f69-3a9d-4b82-8b3a-f8465219df6d</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='toast-container']/div</value>
+      <webElementGuid>1d482eef-08f5-4b58-ac59-6d5717933d7d</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Updates Available'])[1]/following::div[16]</value>
+      <webElementGuid>abe96f44-a56b-4f22-9999-b38acf5da2e2</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Write a Review!'])[1]/following::div[18]</value>
+      <webElementGuid>4e8d172d-5b83-4b54-a69a-500da91e6e4e</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div[5]/div[2]/div</value>
+      <webElementGuid>c9538ba8-6fa6-44da-b0ca-32256480e830</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//div[(text() = ' Kode Kupon berhasil disalin ' or . = ' Kode Kupon berhasil disalin ')]</value>
+      <webElementGuid>28e7c1c2-ea2f-429d-aa23-ed12a571fde8</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

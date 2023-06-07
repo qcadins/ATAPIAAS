@@ -7,7 +7,7 @@ import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
 public class UserVerif {
-	
+
 	int columnCount
 
 	//fungsi mengambil jumlah tenant
@@ -21,12 +21,12 @@ public class UserVerif {
 		ResultSet resultSet = stm.executeQuery("SELECT * FROM am_msuser WHERE usr_crt = '" + email + "'")
 
 		while (resultSet.next()) {
-			
+
 			data = resultSet.getObject(1);
 		}
 		data
 	}
-	
+
 	@Keyword
 	getNewUserData(Connection conn, String email) {
 

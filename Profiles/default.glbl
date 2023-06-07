@@ -21,6 +21,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Button Copy bermasalah'</initValue>
+      <name>FailedReasonButtonCopy</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Button Resend bermasalah'</initValue>
       <name>FailedReasonButtonResend</name>
    </GlobalVariableEntity>
@@ -33,6 +38,11 @@
       <description></description>
       <initValue>'Data di ddl tidak sesuai dengan DB'</initValue>
       <name>FailedReasonDDL</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Detail tidak sesuai DB'</initValue>
+      <name>FailedReasonDetailNotMatch</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

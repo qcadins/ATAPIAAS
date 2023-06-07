@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>span_Coupon</name>
+   <tag></tag>
+   <elementGuidId>06fc4c9c-8727-428f-a908-ae45aef320bf</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value></value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>(.//*[normalize-space(text()) and normalize-space(.)='Pengguna'])[1]/following::span[1]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@class = 'ng-tns-c133-4 icon-wallet']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>span</value>
+      <webElementGuid>3c37319c-7088-4cf2-81d7-69a5137bdeba</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ng-tns-c133-4 icon-wallet</value>
+      <webElementGuid>0fee3464-6307-4e72-b83a-b77f13b1223d</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Coupon</value>
+      <webElementGuid>523d47e3-2ebe-45af-9d3a-e9778df4cefb</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-expanded vertical-menu menu-open&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;app-sidebar main-menu menu-fixed menu-native-scroll expanded ng-star-inserted&quot;]/app-sidebar[@class=&quot;ng-tns-c133-4&quot;]/div[@class=&quot;sidebar-content main-menu-content ng-tns-c133-4 ps&quot;]/div[@class=&quot;nav-container ng-tns-c133-4&quot;]/ul[@class=&quot;navigation ng-tns-c133-4&quot;]/li[@class=&quot;ng-tns-c133-4 ng-star-inserted&quot;]/a[@class=&quot;ng-tns-c133-4 ng-star-inserted&quot;]/span[@class=&quot;menu-title ng-tns-c133-4&quot;]</value>
+      <webElementGuid>77ee15b9-ed64-48be-9584-06f082c1b47b</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Pengguna'])[1]/following::span[1]</value>
+      <webElementGuid>3ababa77-dee7-4c40-8b5c-94992b8a26ef</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Peran'])[1]/following::span[2]</value>
+      <webElementGuid>ff469fdb-5af1-49e9-89d0-9c838e299168</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='PRODUCTION'])[1]/preceding::span[1]</value>
+      <webElementGuid>050e413b-efe8-4644-a4db-3b35ce091a35</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='TRIAL'])[1]/preceding::span[1]</value>
+      <webElementGuid>e89d8efe-015f-4fca-9a77-ab3ce1853ec2</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>//*/text()[normalize-space(.)='Coupon']/parent::*</value>
+      <webElementGuid>6594064c-090e-43f4-b931-12bd2c054330</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//li[7]/a/span</value>
+      <webElementGuid>6603fea5-133a-45be-8f63-693f54d6ad31</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//span[(text() = 'Coupon' or . = 'Coupon')]</value>
+      <webElementGuid>2cfae2db-b34b-450c-af20-8b0763b266ea</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

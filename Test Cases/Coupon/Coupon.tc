@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Coupon</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>28818c2b-387a-4e51-8579-afdb66853997</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>402df6a4-4b29-4cf4-ab03-6a498a8a5ef1</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'Coupon/DataTestingCoupon'</defaultValue>
+      <description></description>
+      <id>402df6a4-4b29-4cf4-ab03-6a498a8a5ef1</id>
+      <masked>false</masked>
+      <name>ExcelPathCoupon</name>
+   </variable>
+</TestCaseEntity>

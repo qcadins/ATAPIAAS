@@ -1,11 +1,11 @@
 {
-  "keywordFileContentHash": "B608F7C22E67C5827D837BC6A3E040BE",
+  "keywordFileContentHash": "933FDD611B1584EC3F8FDCE28FC8502F",
   "keywordClasses": [
     {
-      "name": "userManagement.UserVerif",
+      "name": "coupon.couponverif",
       "keywordMethods": [
         {
-          "name": "getUserTotal",
+          "name": "getCouponTotal",
           "parameters": [
             {
               "name": "conn",
@@ -33,11 +33,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
-          "name": "getNewUserData",
+          "name": "getDetailCoupon",
           "parameters": [
             {
               "name": "conn",
@@ -53,7 +52,7 @@
               }
             },
             {
-              "name": "email",
+              "name": "kodekupon",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -65,11 +64,41 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
+        },
+        {
+          "name": "getAddEditCoupon",
+          "parameters": [
+            {
+              "name": "conn",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "kodekupon",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

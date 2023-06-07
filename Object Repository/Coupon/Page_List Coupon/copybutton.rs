@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>copybutton</name>
+   <tag></tag>
+   <elementGuidId>d81eedc8-1469-4e43-88f6-618c88c65632</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>em.align-middle.cursor-pointer.font-medium-3.ft-copy</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//em</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>em</value>
+      <webElementGuid>bdc45a7d-c77d-4768-992c-203cecb8110c</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>align-middle cursor-pointer font-medium-3 ft-copy</value>
+      <webElementGuid>fe7a82f8-ac92-45bc-a9de-109c315bf199</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[@class=&quot;content-wrapper&quot;]/app-list-coupon[@class=&quot;ng-star-inserted&quot;]/app-msx-paging[1]/app-msx-datatable[@class=&quot;ng-star-inserted&quot;]/section[@class=&quot;msx-datatable&quot;]/ngx-datatable[@class=&quot;ngx-datatable material bootstrap fixed-header virtualized selectable checkbox-selection&quot;]/div[@class=&quot;visible&quot;]/datatable-body[@class=&quot;datatable-body&quot;]/datatable-selection[1]/datatable-scroller[@class=&quot;datatable-scroll ng-star-inserted&quot;]/datatable-row-wrapper[@class=&quot;datatable-row-wrapper ng-star-inserted&quot;]/datatable-body-row[@class=&quot;datatable-body-row datatable-row-even ng-star-inserted&quot;]/div[@class=&quot;datatable-row-center datatable-row-group ng-star-inserted&quot;]/datatable-body-cell[@class=&quot;datatable-body-cell sort-active ng-star-inserted active&quot;]/div[@class=&quot;datatable-body-cell-label&quot;]/a[@class=&quot;mr-2 text-primary ng-star-inserted&quot;]/em[@class=&quot;align-middle cursor-pointer font-medium-3 ft-copy&quot;]</value>
+      <webElementGuid>2d310f83-608e-4a83-9b15-e20f10d280ba</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//em</value>
+      <webElementGuid>0dc814be-9836-4bb6-b392-54465ea75a93</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

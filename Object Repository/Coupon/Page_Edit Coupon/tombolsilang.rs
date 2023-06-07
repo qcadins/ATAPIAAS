@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>tombolsilang</name>
+   <tag></tag>
+   <elementGuidId>1da971e8-2b98-49d5-a6c4-216532287f4c</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>i.ft-x.ng-tns-c133-4</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//a[@id='sidebarClose']/i</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>i</value>
+      <webElementGuid>78921786-ae19-4374-82ed-2e3b3829db56</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ft-x ng-tns-c133-4</value>
+      <webElementGuid>22e9aef0-1de5-46be-9e43-5810a319be23</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;sidebarClose&quot;)/i[@class=&quot;ft-x ng-tns-c133-4&quot;]</value>
+      <webElementGuid>a39355f3-a0f4-4da3-bb12-c8a11cd455f8</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//a[@id='sidebarClose']/i</value>
+      <webElementGuid>3de29d27-39c7-43c5-8ee0-7399da5321d2</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//a[3]/i</value>
+      <webElementGuid>ea3b9528-9ca6-43d9-b3ab-4fecb4efa943</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

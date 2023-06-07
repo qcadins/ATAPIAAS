@@ -292,26 +292,54 @@ else if (TC == 'User') {
 		'Page_Login - eendigo Platform/i_Admin Client_ft-edit'))
 }
 
-//'cek apakah muncul error unknown setelah login'
-//if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), 
-//	GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
-//	
-//	GlobalVariable.FlagFailed = 1
-//	
-//	'tulis adanya error pada sistem web'
-//	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
-//		GlobalVariable.StatusWarning, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-//			GlobalVariable.FailedReasonUnknown)
-//}
-//
-//'cek apakah muncul error gagal login'
-//if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/ErrorMsg')
-//	,GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-//	
-//	GlobalVariable.FlagFailed = 1
-//	
-//	'tulis adanya error pada sistem web'
-//	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
-//		GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-//			GlobalVariable.FailedReasonLoginIssue)
-//}
+else if (TC == 'Coupon') {
+	
+	'input data email'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+		findTestData(Path).getValue(2, 46))
+	
+	'input password'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+		findTestData(Path).getValue(2, 47))
+	
+	'ceklis pada reCaptcha'
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
+		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	
+	'pada delay, lakukan captcha secara manual'
+	WebUI.delay(10)
+	
+	'klik pada button login'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'button_Lanjutkan Perjalanan Anda'))
+	
+	'klik pada bagian admin client'
+	WebUI.click(findTestObject('Object Repository/User Management-Role/' +
+		'Page_Login - eendigo Platform/i_Admin Client_ft-edit'))
+}
+
+'cek apakah muncul error unknown setelah login'
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), 
+	GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+	
+	GlobalVariable.FlagFailed = 1
+	
+	'tulis adanya error pada sistem web'
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusWarning, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			GlobalVariable.FailedReasonUnknown)
+}
+
+'cek apakah muncul error gagal login'
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/ErrorMsg')
+	,GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+	
+	GlobalVariable.FlagFailed = 1
+	
+	'tulis adanya error pada sistem web'
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			GlobalVariable.FailedReasonLoginIssue)
+}
