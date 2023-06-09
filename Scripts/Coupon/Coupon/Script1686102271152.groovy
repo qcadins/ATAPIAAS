@@ -131,6 +131,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'klik tombol cari'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/button_Cari'))
 			
+			'cek apakah hasil search gagal'
+			if(WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_List Coupon/searchResult')
+				, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+				
+				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) +
+				';') + GlobalVariable.FailedReasonSearchFailed)
+				
+				continue
+			}
+			
 			'klik tombol edit'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/editButton'))
 			
@@ -519,12 +531,18 @@ def checkdialogConfirmation(isMandatoryComplete) {
 					GlobalVariable.FailedReasonSubmitError)
 		}	
 	}
-	else if(isMandatoryComplete != 0) {
+	else if (isMandatoryComplete != 0) {
 		
 		'tulis adanya mandatory tidak lengkap'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonMandatory)
+	}
+	else {
+		'tulis adanya error saat edit'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				GlobalVariable.FailedReasonPercentage)
 	}
 }
 
