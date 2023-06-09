@@ -101,6 +101,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Input pass tidak sesuai dengan excel'</initValue>
+      <name>FailedReasonPassNotMatch</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Saldo != 0, tidak bisa ubah charge type'</initValue>
       <name>FailedReasonQuantityNotNull</name>
    </GlobalVariableEntity>

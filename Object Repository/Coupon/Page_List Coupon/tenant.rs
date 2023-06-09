@@ -11,7 +11,11 @@
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>(.//*[normalize-space(text()) and normalize-space(.)='Maksimal Penebusan'])[1]/following::td[1]</value>
+         <value>/html/body/ngb-modal-window/div/div/app-view-coupon-detail/div[2]/table/tbody/tr/td[1]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[(text() = 'J.CO' or . = 'J.CO')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>td</value>
-      <webElementGuid>9e765095-51f3-49e0-bf51-131e50ace6de</webElementGuid>
+      <webElementGuid>78415bd3-d868-480e-ab91-39123ba5dbd3</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +34,7 @@
       <name>text</name>
       <type>Main</type>
       <value>J.CO</value>
-      <webElementGuid>b4aa1f48-5e30-467f-a47b-5be2bfd8b493</webElementGuid>
+      <webElementGuid>eb864293-c4f8-44fc-9734-d43266e79e19</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +42,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done page-scrolled navbar-scrolled modal-open&quot;]/ngb-modal-window[@class=&quot;d-block modal fade show&quot;]/div[@class=&quot;modal-dialog modal-l&quot;]/div[@class=&quot;modal-content&quot;]/app-view-coupon-detail[1]/div[@class=&quot;modal-body&quot;]/table[@class=&quot;table table-striped table-hover&quot;]/tbody[1]/tr[1]/td[1]</value>
-      <webElementGuid>ffcd7a78-e7a2-40d3-aeff-67d9c8c18082</webElementGuid>
+      <webElementGuid>01f6e6bd-0ac2-49b8-98b0-22cbd61620a7</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -46,7 +50,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Maksimal Penebusan'])[1]/following::td[1]</value>
-      <webElementGuid>0e15a628-4914-42e1-939e-363f2d02e0ee</webElementGuid>
+      <webElementGuid>846d34ad-741f-4696-b97a-5e112c05c5e5</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Minimal Pembayaran'])[1]/following::td[1]</value>
-      <webElementGuid>3e4086b2-9b13-457d-b118-5df8901a93ad</webElementGuid>
+      <webElementGuid>5a058e35-d220-4a74-ae9b-9fe9c577bc23</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -62,7 +66,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='J.CO']/parent::*</value>
-      <webElementGuid>f9c07de2-d6dd-485a-8607-3bda849926ce</webElementGuid>
+      <webElementGuid>503d9c05-cc0e-48c2-a465-6dc423d376f6</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +74,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//td</value>
-      <webElementGuid>58f6fc69-86b1-44b4-bed4-f664e8978cfc</webElementGuid>
+      <webElementGuid>8ba99e16-0711-4119-85c0-e4b4d21b70b5</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,6 +82,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//td[(text() = 'J.CO' or . = 'J.CO')]</value>
-      <webElementGuid>025f2e9f-1a16-492e-82c4-238b96d0070c</webElementGuid>
+      <webElementGuid>72e9fb40-86f6-49ae-936d-1f410ff8f6a8</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

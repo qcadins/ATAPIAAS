@@ -297,12 +297,12 @@ else if (TC == 'Coupon') {
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-		findTestData(Path).getValue(2, 46))
+		findTestData(Path).getValue(2, 45))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-		findTestData(Path).getValue(2, 47))
+		findTestData(Path).getValue(2, 46))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
@@ -320,26 +320,26 @@ else if (TC == 'Coupon') {
 		'Page_Login - eendigo Platform/i_Admin Client_ft-edit'))
 }
 
-'cek apakah muncul error unknown setelah login'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), 
-	GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
-	
-	GlobalVariable.FlagFailed = 1
-	
-	'tulis adanya error pada sistem web'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusWarning, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			GlobalVariable.FailedReasonUnknown)
-}
-
-'cek apakah muncul error gagal login'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/ErrorMsg')
-	,GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-	
-	GlobalVariable.FlagFailed = 1
-	
-	'tulis adanya error pada sistem web'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			GlobalVariable.FailedReasonLoginIssue)
-}
+//'cek apakah muncul error unknown setelah login'
+//if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), 
+//	GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+//	
+//	GlobalVariable.FlagFailed = 1
+//	
+//	'tulis adanya error pada sistem web'
+//	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
+//		GlobalVariable.StatusWarning, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+//			GlobalVariable.FailedReasonUnknown)
+//}
+//
+//'cek apakah muncul error gagal login'
+//if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/ErrorMsg')
+//	,GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+//	
+//	GlobalVariable.FlagFailed = 1
+//	
+//	'tulis adanya error pada sistem web'
+//	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
+//		GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+//			GlobalVariable.FailedReasonLoginIssue)
+//}

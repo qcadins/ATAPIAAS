@@ -21,16 +21,8 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase(
 	'cek data untuk tiap alamat di array'
 	for (int i = 0; i < resultDB.size ; i++){
 		
-		if (i == 3) {
-			
-			'tambahkan data role ke excel'
-			resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (18+i+1)))
-		}
-		else {
-			
-			'tambahkan data ke resultExcel'
-			resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (18+i)))
-		}
+		'tambahkan data ke resultExcel'
+		resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (18+i)))
 		
 		if(resultExcel[i] != resultDB[i]) {
 			
@@ -44,22 +36,17 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase(
 else if(findTestData(Path).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 	
 	'ambil data role dari db'
-	ArrayList<String> resultDB = CustomKeywords.'userManagement.UserVerif.getNewUserData'(conndev, 
+	ArrayList<String> resultDB = CustomKeywords.'userManagement.UserVerif.getEditUserData'(conndev, 
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 14))
 	
 	'ambil data role dari excel'
 	ArrayList<String> resultExcel = []
-	
-	resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, 14))
 		
 	'cek data untuk tiap alamat di array'
 	for (int i = 0; i < resultDB.size ; i++) {
 	
-		if (i != 3) {
-			
-			'tambahkan data ke resultExcel'
-			resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (24+i)))
-		}
+		'tambahkan data ke resultExcel'
+		resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (25+i)))
 		
 		if(resultExcel[i] != resultDB[i]) {
 			

@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>(.//*[normalize-space(text()) and normalize-space(.)='J.CO'])[1]/following::td[1]</value>
+         <value>/html/body/ngb-modal-window/div/div/app-view-coupon-detail/div[2]/table/tbody/tr/td[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +22,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>td</value>
-      <webElementGuid>83f1b8a5-13ef-408b-a11a-3099b9b31d4a</webElementGuid>
+      <webElementGuid>969a8b15-5b11-4cb1-9cc3-b1f067b22329</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -30,7 +30,7 @@
       <name>class</name>
       <type>Main</type>
       <value>coupon-detail-td</value>
-      <webElementGuid>ea66f38f-133b-4410-a49a-7900320e6e4f</webElementGuid>
+      <webElementGuid>71063586-2ec7-4a0f-9f29-f1cef4dfa062</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -38,7 +38,7 @@
       <name>text</name>
       <type>Main</type>
       <value>1</value>
-      <webElementGuid>5a104904-31ee-4ab5-a44e-b2016e7fed73</webElementGuid>
+      <webElementGuid>59cd00c8-aebd-44e7-8af1-4b0b600b8cb2</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +46,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done page-scrolled navbar-scrolled modal-open&quot;]/ngb-modal-window[@class=&quot;d-block modal fade show&quot;]/div[@class=&quot;modal-dialog modal-l&quot;]/div[@class=&quot;modal-content&quot;]/app-view-coupon-detail[1]/div[@class=&quot;modal-body&quot;]/table[@class=&quot;table table-striped table-hover&quot;]/tbody[1]/tr[1]/td[@class=&quot;coupon-detail-td&quot;]</value>
-      <webElementGuid>8ab8fc1c-daba-4ea7-b6e0-65f06e9e0bef</webElementGuid>
+      <webElementGuid>e1393412-ee13-4ae2-befc-05c6c629e815</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -54,7 +54,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='J.CO'])[1]/following::td[1]</value>
-      <webElementGuid>898e563b-0c3e-477e-b400-06c3a67dcdda</webElementGuid>
+      <webElementGuid>33566cd2-6ad5-4d13-9bbc-c7fbc42fcd8f</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -62,7 +62,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Maksimal Penebusan'])[1]/following::td[2]</value>
-      <webElementGuid>1ea41c4e-61dd-4804-acb2-67da90b4932b</webElementGuid>
+      <webElementGuid>e3b6ea72-3f11-4c24-b167-07a4b755585f</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +70,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//td[2]</value>
-      <webElementGuid>bd628c3f-ca49-4a8c-8440-43047513d8d0</webElementGuid>
+      <webElementGuid>c6f9b200-d6fd-4be8-8a22-628993d53ae3</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,6 +78,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//td[(text() = '1' or . = '1')]</value>
-      <webElementGuid>34db19f5-d647-4ebd-bce2-1b3b6bf7f813</webElementGuid>
+      <webElementGuid>606c7938-fe73-406d-8e6b-4bdde8564d03</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

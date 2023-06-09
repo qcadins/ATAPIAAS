@@ -47,4 +47,41 @@ public class UserVerif {
 		}
 		listdata
 	}
+	
+	@Keyword
+	getEditUserData(Connection conn, String email) {
+
+		String data
+		ArrayList<String> listdata = []
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT initial_name, last_name, aro.role_name FROM am_msuser ase LEFT JOIN am_memberofrole amo ON amo.id_ms_user = ase.id_ms_user LEFT JOIN am_msrole aro ON aro.id_ms_role = amo.id_ms_role WHERE login_id = '" + email + "'")
+		ResultSetMetaData metadata = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while (resultSet.next()) {
+			for (int i = 1 ; i <= columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		listdata
+	}
+	
+	@Keyword
+	getUserStatus(Connection conn, String email) {
+
+		String data
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT CASE WHEN is_active = '2' THEN 'Unverified' WHEN is_active = '1' THEN 'Active' Else 'Inactive' END FROM am_msuser WHERE login_id = '" + email + "'")
+
+		while (resultSet.next()) {
+
+			data = resultSet.getObject(1);
+		}
+		data
+	}
 }

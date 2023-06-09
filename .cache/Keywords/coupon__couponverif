@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "933FDD611B1584EC3F8FDCE28FC8502F",
+  "keywordFileContentHash": "DDBD0389702932552F1BECECA7B913CB",
   "keywordClasses": [
     {
       "name": "coupon.couponverif",
@@ -19,21 +19,9 @@
                 "genericsTypes": [],
                 "errorOnParsing": false
               }
-            },
-            {
-              "name": "email",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.lang.String",
-                "unresolvedClassName": "String",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getDetailCoupon",
@@ -64,7 +52,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getAddEditCoupon",
@@ -95,10 +84,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

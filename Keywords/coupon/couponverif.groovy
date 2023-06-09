@@ -11,13 +11,13 @@ public class couponverif {
 	int columnCount
 
 	@Keyword
-	getCouponTotal(Connection conn, String email) {
+	getCouponTotal(Connection conn) {
 
 		int data
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT * FROM am_msuser WHERE usr_crt = '" + email + "'")
+		ResultSet resultSet = stm.executeQuery("SELECT count(*) FROM tr_coupon WHERE coupon_end_date >= CURRENT_DATE AND coupon_start_date <= CURRENT_DATE")
 
 		while (resultSet.next()) {
 
@@ -46,7 +46,7 @@ public class couponverif {
 		}
 		listdata
 	}
-	
+
 	@Keyword
 	getAddEditCoupon(Connection conn, String kodekupon) {
 
@@ -54,7 +54,7 @@ public class couponverif {
 		ArrayList<String> listdata = []
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT mlo.description, DATE(coupon_start_date) as date_start, DATE(coupon_end_date) as date_end, coupon_code,(SELECT mlo.description FROM ms_lov mlo LEFT JOIN tr_coupon tco ON tco.lov_coupon_amount_type = mlo.id_lov WHERE tco.coupon_code = '" + kodekupon + "' LIMIT 1) as coupon_amount_type, coupon_amount, coupon_qty FROM tr_coupon tco LEFT JOIN ms_lov mlo ON mlo.id_lov = tco.lov_coupon_type WHERE tco.coupon_code = '" + kodekupon + "'")
+		ResultSet resultSet = stm.executeQuery("SELECT mlo.description, coupon_code, DATE(coupon_start_date) as date_start, DATE(coupon_end_date) as date_end,(SELECT mlo.description FROM ms_lov mlo LEFT JOIN tr_coupon tco ON tco.lov_coupon_amount_type = mlo.id_lov WHERE tco.coupon_code = '" + kodekupon + "' LIMIT 1) as coupon_amount_type, FLOOR(coupon_amount) as coupon_amount, coupon_qty, redemption_limit, floor(minimum_payment) as minimum_payment FROM tr_coupon tco LEFT JOIN ms_lov mlo ON mlo.id_lov = tco.lov_coupon_type WHERE tco.coupon_code = '" + kodekupon + "'")
 		ResultSetMetaData metadata = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()

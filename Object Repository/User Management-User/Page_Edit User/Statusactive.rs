@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>Statusactive</name>
+   <tag></tag>
+   <elementGuidId>9dc4d07f-c78e-4271-94b7-e00ef856b0d8</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@ng-reflect-ng-item-label = 'Active' and @class = 'ng-option-label ng-star-inserted']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;a4b847a7457b-0&quot;]/span</value>
+      <webElementGuid>83bf0e8b-0944-497d-87a2-2a5ec8953aa0</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-reflect-ng-item-label</name>
+      <type>Main</type>
+      <value>Active</value>
+      <webElementGuid>fa90fa01-d089-4e90-8343-b22f6440ca23</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ng-option-label ng-star-inserted</value>
+      <webElementGuid>4dbd03fb-e5e8-4431-8385-3516ba5d27eb</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

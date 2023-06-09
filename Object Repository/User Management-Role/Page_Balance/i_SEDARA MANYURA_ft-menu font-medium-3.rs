@@ -13,8 +13,12 @@
          <key>XPATH</key>
          <value>//i</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@class = 'ft-menu font-medium-3']</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,23 +26,23 @@
       <name>tag</name>
       <type>Main</type>
       <value>i</value>
-      <webElementGuid>00b83fc9-54d8-4afa-ba2d-b280812c0e20</webElementGuid>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>class</name>
-      <type>Main</type>
-      <value>ft-menu font-medium-3</value>
-      <webElementGuid>fe1b605f-304a-4a2c-8cb3-86bb6e530b76</webElementGuid>
+      <webElementGuid>d336caa6-3d14-45aa-98f6-0183a8f93d0c</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ft-menu font-medium-3</value>
+      <webElementGuid>213daf63-2830-472c-b1d9-54599aa35d0b</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout menu-hide navbar-static pace-done pace-done&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/app-navbar[1]/nav[@class=&quot;navbar navbar-expand-lg header-navbar navbar-static&quot;]/div[@class=&quot;container-fluid navbar-wrapper&quot;]/div[@class=&quot;navbar-header d-flex&quot;]/div[@class=&quot;navbar-toggle menu-toggle d-xl-none d-block float-left align-items-center justify-content-center&quot;]/i[@class=&quot;ft-menu font-medium-3&quot;]</value>
-      <webElementGuid>4a2504bc-c918-4213-a68f-4bd0a6afea61</webElementGuid>
+      <webElementGuid>d0e82fc2-c837-4e8c-9a4d-18036c3ace64</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -46,6 +50,6 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//i</value>
-      <webElementGuid>77071368-2b62-4b47-9a8a-f266cbff8ea1</webElementGuid>
+      <webElementGuid>9ef8aac6-1f6c-421f-8f1a-772776fc5a96</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

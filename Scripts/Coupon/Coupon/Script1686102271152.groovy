@@ -63,7 +63,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'check if action new/services/edit/balancechargetype'
-		if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
+		if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
 			
 			'klik pada tombol tambah coupon'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/a_Tambah'))
@@ -126,7 +126,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'cari kupon yang akan dilakukan edit'
 			WebUI.setText(findTestObject('Object Repository/Coupon/Page_List Coupon/input_Kode Kupon'),
-					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 31))
+					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 15))
 			
 			'klik tombol cari'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/button_Cari'))
@@ -136,27 +136,27 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'input tipe kupon'
 			WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipekupon'),
+					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 31))
+			
+			'input kode kupon'
+			WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputkodekupon'),
 					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 32))
 			
 			'enter pada tipe kupon'
 			WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipekupon'),
 				Keys.chord(Keys.ENTER))
 			
-			'input kode kupon'
-			WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__CouponCode'),
+			'input tanggal mulai berlaku'
+			WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__CouponStartDate'),
 					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 33))
 			
 			'input tanggal mulai berlaku'
-			WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__CouponStartDate'),
-					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 34))
-			
-			'input tanggal mulai berlaku'
 			WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__CouponEndDate'),
-					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 35))
+					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 34))
 			
 			'input tipe nilai kupon'
 			WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipenilaikupon'),
-					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 36))
+					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 35))
 			
 			'enter pada tipe nilai kupon'
 			WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipenilaikupon'),
@@ -164,23 +164,23 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'input tipe nilai kupon'
 			WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__nilaikupon'),
-					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 37))
+					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 36))
 			
 			'input jumlah kupon'
 			WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__jmlkupon'),
-					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 38))
+					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 37))
 			
 			'input maksimal redeem kupon'
 			WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__maxredeem'),
-					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 39))
+					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 38))
 			
 			'input minimal pembayaran untuk pakai kupon'
 			WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__minimumpayment'),
-					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 40))
+					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 39))
 			
 			'input tenant'
 			WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/tenantinput'),
-					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 41))
+					findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 40))
 			
 			'enter pada tenant'
 			WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/tenantinput'),
@@ -211,7 +211,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			detailresultWeb.add(WebUI.getText(findTestObject('Object Repository/Coupon/Page_List Coupon/tenant')))
 			
 			'tambahkan data tenant ke minpayment'
-			detailresultWeb.add(WebUI.getText(findTestObject('Object Repository/Coupon/Page_List Coupon/minimalpembayaran')))
+			detailresultWeb.add(WebUI.getText(findTestObject('Object Repository/Coupon/Page_List Coupon/minimalpembayaran')).replace('.', ''))
 
 			'tambahkan data tenant ke maxredeem'
 			detailresultWeb.add(WebUI.getText(findTestObject('Object Repository/Coupon/Page_List Coupon/makspenebusan')))
@@ -229,12 +229,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					
 					break
 				}
+				else
+				{
+					'write to excel success'
+					CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Coupon', 0,
+						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+				}
 			}
 			
 			'klik pada tombol silang untuk mengakhiri sesi detail'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/span_'))
 		}
-		else if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 43) == 'Yes') {
+		if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 42) == 'Yes') {
 			
 			'klik pada tombol copy kode kupon'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/copybutton'))
@@ -250,6 +256,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 	}
 }
+
+'fungsi untuk menutup browser jika testing berjalan mulus'
+WebUI.closeBrowser()
 
 def checkPaging(Connection conndev) {
 	
@@ -378,53 +387,60 @@ def checkPaging(Connection conndev) {
 	
 	'cari button skip di footer'
 	def elementbutton = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout >'+
-		' div > div.main-panel > div > div.content-wrapper > app-list-user > app-msx-paging > app-msx-datatable >'+
+		' div > div.main-panel > div > div.content-wrapper > app-list-coupon > app-msx-paging > app-msx-datatable >'+
 		' section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
 	
 	'ambil banyaknya laman footer'
 	int lastPage = elementbutton.size()
 	
 	'get text total data dari ui'
-	Total = WebUI.getText(findTestObject('Object Repository/User Management-User/TotalData')).split(' ')
+	Total = WebUI.getText(findTestObject('Object Repository/Coupon/Page_List Coupon/TotalData')).split(' ')
+	
+	'ambil total data dari db'
+	int resultTotalData = CustomKeywords.'coupon.couponverif.getCouponTotal'(conndev)
 
-//	'verify total data role'
-//	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
+	'verify total data role'
+	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'cek apakah hlm  tersedia'
 	if(WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-User/'+
 		'Page_List User/i_Action_datatable-icon-skip'),FailureHandling.OPTIONAL) == true) {
 		
 		'klik halaman 2'
-		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/Page2'))
+		WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/paging/Page2'))
 		
 		'verify paging di page 2'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/'+
-			'Page_List User/Page2'),'class', FailureHandling.CONTINUE_ON_FAILURE),
-				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
+			findTestObject('Object Repository/Coupon/Page_List Coupon/paging/Page2'),
+				'class', FailureHandling.CONTINUE_ON_FAILURE),
+					'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik halaman 1'
-		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/a_1'))
+		WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/paging/Page1'))
 		
 		'verify paging di page 1'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
-			'Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
-				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
+			findTestObject('Object Repository/Coupon/Page_List Coupon/paging/Page1'),
+				'class', FailureHandling.CONTINUE_ON_FAILURE),
+					'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik button next page'
 		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-right'))
 		
 		'verify paging di page 2'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/'+
-			'User Management-Role/Page_List Roles/Page2'),'class', FailureHandling.CONTINUE_ON_FAILURE),
-				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
+			findTestObject('Object Repository/Coupon/Page_List Coupon/paging/Page2'),
+				'class', FailureHandling.CONTINUE_ON_FAILURE),
+					'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik prev page'
 		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-left'))
 		
 		'verify paging di page 1'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
-			'Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
-				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
+			findTestObject('Object Repository/Coupon/Page_List Coupon/paging/Page1'),
+				'class', FailureHandling.CONTINUE_ON_FAILURE),
+					'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik pada tombol skip'
 		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/i_Action_datatable-icon-skip'))
@@ -432,8 +448,9 @@ def checkPaging(Connection conndev) {
 		'modify object laman terakhir'
 		def modifyObjectmaxPage = WebUI.modifyObjectProperty(
 			findTestObject('Object Repository/User Management-Role/modifyObject'),
-			'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-user/app-msx-paging/"+
-			"app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage - 2) +"]", true)
+			'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-coupon/app-msx-paging/"+
+				"app-msx-datatable/section/ngx-datatable/div/datatable-footer/"+
+					"div/datatable-pager/ul/li["+ (lastPage - 2) +"]", true)
 		
 		'verify paging di page terakhir'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(modifyObjectmaxPage,
@@ -444,10 +461,10 @@ def checkPaging(Connection conndev) {
 		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-prev'))
 		
 		'verify paging di page 1'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
-			'Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
-				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
-		
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
+			findTestObject('Object Repository/Coupon/Page_List Coupon/paging/Page1'),
+				'class', FailureHandling.CONTINUE_ON_FAILURE),
+					'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 	}
 }
 
@@ -463,33 +480,44 @@ def checkdialogConfirmation(isMandatoryComplete) {
 		'klik pada tombol ya, proses'
 		WebUI.click(findTestObject('Object Repository/Coupon/Page_Add Coupon/button_Ya, proses'))
 		
-		'ambil hasil tambah data'
-		String resultcheck = WebUI.getText(findTestObject('Object Repository/Coupon/Page_Add Coupon/div_Success'))
-		
-		'klik pada button ok'
-		WebUI.click(findTestObject('Object Repository/Coupon/Page_Add Coupon/button_OK'))
-		
-		if (GlobalVariable.KondisiCekDB == 'Yes') {
+		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_Add Coupon/div_Success'), 
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 			
-			'panggil fungsi storeDB'
-			WebUI.callTestCase(findTestCase('Test Cases/Coupon/CouponStoreDB'), [('Path') : ExcelPathCoupon],
-				 FailureHandling.CONTINUE_ON_FAILURE)
-		}
-		
-		'cek apakah result memunculkan hasil sukses'
-		if (GlobalVariable.FlagFailed == 0 && isMandatoryComplete == 0 && resultcheck == 'Success') {
+			'ambil hasil tambah data'
+			String resultcheck = WebUI.getText(findTestObject('Object Repository/Coupon/Page_Add Coupon/div_Success'))
+			
+			'klik pada button ok'
+			WebUI.click(findTestObject('Object Repository/Coupon/Page_Add Coupon/button_OK'))
+			
+			if (GlobalVariable.KondisiCekDB == 'Yes') {
 				
-			'write to excel success'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Coupon', 0,
-				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+				'panggil fungsi storeDB'
+				WebUI.callTestCase(findTestCase('Test Cases/Coupon/CouponStoreDB'), [('Path') : ExcelPathCoupon],
+					 FailureHandling.CONTINUE_ON_FAILURE)
+			}
+			
+			'cek apakah result memunculkan hasil sukses'
+			if (GlobalVariable.FlagFailed == 0 && isMandatoryComplete == 0 && resultcheck == 'Success') {
+					
+				'write to excel success'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Coupon', 0,
+					GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+			}
+			else {
+				
+				'tulis adanya error saat edit'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+						resultcheck)
+			}
 		}
 		else {
 			
 			'tulis adanya error saat edit'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-					resultcheck)
-		}
+					GlobalVariable.FailedReasonSubmitError)
+		}	
 	}
 	else if(isMandatoryComplete != 0) {
 		
