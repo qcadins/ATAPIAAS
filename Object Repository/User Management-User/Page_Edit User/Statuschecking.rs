@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>Statuschecking</name>
+   <tag></tag>
+   <elementGuidId>7a19aeb2-4dab-4931-a915-3721fb0ffe2b</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;status&quot;]/div/div/div[2]/span[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;status&quot;]/div/div/div[2]/span[2]</value>
+      <webElementGuid>eba4293c-1c06-4191-9437-a0cbf395fb13</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

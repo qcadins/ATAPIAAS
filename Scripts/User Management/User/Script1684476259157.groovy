@@ -48,7 +48,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		break
 	}
-	else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+	else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted') ||
+		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Warning')) {
 		
 		'declare isMmandatory Complete'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 5))
@@ -119,11 +120,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'klik pada eyeicon untuk melihat password yang diinput'
 			WebUI.click(findTestObject('Object Repository/User Management-User/Page_Add User/eyeicon_1'))
 			
-			'input role'
+			'input peran'
 			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
 				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 21))
 			
-			'klik enter pada role'
+			'klik enter pada peran'
 			WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
 				Keys.chord(Keys.ENTER))
 			
@@ -132,11 +133,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 			
-			'panggil fungsi cari role'
-			searchRole()
+			'panggil fungsi cari user'
+			searchUser()
 			
-			'klik pada edit role'
+			'klik pada edit user'
 			WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/Edit'))
+			
+			checkDBbeforedit(conndev)
 			
 			'ambil status dari user yang dipilih'
 			String statususer = CustomKeywords.'userManagement.UserVerif.getUserStatus'(conndev, 
@@ -150,11 +153,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Edit User/input__lastName'),
 				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 26))
 			
-			'input role user yang akan diubah'
+			'input peran user yang akan diubah'
 			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Edit User/inputuseredit'),
 				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 27))
 			
-			'enter pada role user'
+			'enter pada peran user'
 			WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_Edit User/inputuseredit'),
 				Keys.chord(Keys.ENTER))
 	
@@ -247,7 +250,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 
 WebUI.closeBrowser()
 
-def searchRole() {
+def searchUser() {
 	'input email'
 	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/input_Email_email'),
 			findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 14))
@@ -260,11 +263,11 @@ def searchRole() {
 	WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_List User/inputstatus'),
 		 Keys.chord(Keys.ENTER))
 	
-	'input role'
+	'input peran user'
 	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/inputrole'),
 		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 16))
 	
-	'enter pada role'
+	'enter pada peran user'
 	WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_List User/inputrole'),
 		 Keys.chord(Keys.ENTER))
 	
@@ -390,11 +393,11 @@ def checkPaging(Connection conndev) {
 	WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_List User/inputstatus'),
 		Keys.chord(Keys.ENTER))
 	
-	'input role dari user'
+	'input peran dari user'
 	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/inputrole'),
 		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 16))
 	
-	'klik enter pada role'
+	'klik enter pada peran'
 	WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_List User/inputrole'),
 		Keys.chord(Keys.ENTER))
 	
@@ -430,14 +433,14 @@ def checkPaging(Connection conndev) {
 	'ambil banyaknya laman footer'
 	int lastPage = elementbutton.size()
 
-	'get data total dari tabel role'
+	'get data total dari tabel user'
 	int resultTotalData = CustomKeywords.'userManagement.RoleVerif.getRoleTotal'(conndev,
 		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 11))
 	
 	'get text total data dari ui'
 	Total = WebUI.getText(findTestObject('Object Repository/User Management-User/TotalData')).split(' ')
 
-//	'verify total data role'
+//	'verify total data user'
 //	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'cek apakah hlm  tersedia'
@@ -498,6 +501,46 @@ def checkPaging(Connection conndev) {
 			'Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
+	}
+}
+
+def checkDBbeforedit(Connection conndev) {
+	
+	'buat array untuk ambil data dari UI'
+	ArrayList<String> editUI = []
+	
+	'buat array untuk ambil data dari UI'
+	ArrayList<String> editDB = CustomKeywords.'userManagement.UserVerif.getEditUserData'(conndev, 
+		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 14))
+	
+	'tambahkan data ke array editUI'
+	editUI.add(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/Page_Edit User/EmailPrefill'), 'value'))
+	
+	'tambahkan data ke array editUI'
+	editUI.add(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/Page_Edit User/input__firstName'), 'value'))
+	
+	'tambahkan data ke array editUI'
+	editUI.add(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/Page_Edit User/input__lastName'), 'value'))
+	
+	'tambahkan data ke array editUI'
+	editUI.add(WebUI.getText(findTestObject('Object Repository/User Management-User/Page_Edit User/roleuser')))
+	
+	'tambahkan data ke array editUI'
+	editUI.add(WebUI.getText(findTestObject('Object Repository/User Management-User/Page_Edit User/Statuschecking')))
+	
+	'loop untuk verify data equal'
+	for (int i = 0; i < editDB.size(); i++) {
+		
+		'jika ada data yang tidak sesuai tulis error'
+		if(editUI[i] != editDB[i]) {
+			
+			GlobalVariable.FlagFailed = 1
+			
+			'tulis adanya error pada sistem web'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonEditVerif)
+		}
 	}
 }
 

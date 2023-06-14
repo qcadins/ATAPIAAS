@@ -45,8 +45,16 @@ else if(findTestData(Path).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreC
 	'cek data untuk tiap alamat di array'
 	for (int i = 0; i < resultDB.size ; i++) {
 	
-		'tambahkan data ke resultExcel'
-		resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (25+i)))
+		if (i == 0) {
+			
+			'tambahkan data ke array resultExcel'
+			resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, 14))
+		}
+		else {
+			
+			'tambahkan data ke resultExcel'
+			resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (24+i)))
+		}
 		
 		if(resultExcel[i] != resultDB[i]) {
 			

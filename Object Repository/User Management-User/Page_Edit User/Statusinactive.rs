@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@ng-reflect-ng-item-label = 'Inactive' and @class = 'ng-option-label ng-star-inserted']</value>
+         <value>//*[@ng-reflect-ng-item-label = 'Tidak aktif' and @class = 'ng-option-label ng-star-inserted']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,8 +17,8 @@
       <matchCondition>equals</matchCondition>
       <name>ng-reflect-ng-item-label</name>
       <type>Main</type>
-      <value>Inactive</value>
-      <webElementGuid>16db6c62-73dd-4dc3-891f-35be2e0d0506</webElementGuid>
+      <value>Tidak aktif</value>
+      <webElementGuid>8e2be48f-18fa-4357-aaf0-222a7e1eabdc</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -26,6 +26,6 @@
       <name>class</name>
       <type>Main</type>
       <value>ng-option-label ng-star-inserted</value>
-      <webElementGuid>8160084a-a408-41a8-9c2b-c4cb182e0f75</webElementGuid>
+      <webElementGuid>4ac53396-ea72-402c-bd37-d8e99d346c32</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

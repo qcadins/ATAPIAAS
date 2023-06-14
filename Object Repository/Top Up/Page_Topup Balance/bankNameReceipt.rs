@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>bankNameReceipt</name>
+   <tag></tag>
+   <elementGuidId>a67c6239-f433-45db-98ff-963693cc3876</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>div.wrapper-5 > div</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>(.//*[normalize-space(text()) and normalize-space(.)='Permintaan top up saldo Anda berhasil diproses. Harap segera lakukan melalui transfer ke'])[1]/following::div[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>div</value>
+      <webElementGuid>19088fe8-4eaf-4818-9184-81577a863f1f</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>ABC</value>
+      <webElementGuid>234ccfb0-5622-41a2-9e18-ca99b3796639</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done page-scrolled navbar-scrolled modal-open&quot;]/ngb-modal-window[@class=&quot;d-block modal fade show&quot;]/div[@class=&quot;modal-dialog modal-lg&quot;]/div[@class=&quot;modal-content&quot;]/app-payment-instruction[1]/div[@class=&quot;col-12&quot;]/div[@class=&quot;modal-body&quot;]/div[@class=&quot;wrapper-5&quot;]/div[1]</value>
+      <webElementGuid>c6131786-481d-4b85-84ec-50881b3c5fed</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Permintaan top up saldo Anda berhasil diproses. Harap segera lakukan melalui transfer ke'])[1]/following::div[2]</value>
+      <webElementGuid>bc27a03a-b3ed-432b-9889-ec26e020bc2d</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Nomor Transaksi Anda : EENDIGO/23/06/00055'])[1]/following::div[4]</value>
+      <webElementGuid>9b40148b-4421-49e9-b8d0-99164e0143cf</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Acc Name ABC'])[1]/preceding::div[2]</value>
+      <webElementGuid>77a8fddd-f5c6-40c3-81a9-1897fc11e113</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>//*/text()[normalize-space(.)='ABC']/parent::*</value>
+      <webElementGuid>fe89de08-3166-4209-b26d-89835c594624</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div[2]/div[4]/div</value>
+      <webElementGuid>40cab02c-60b7-4b18-bac4-6763c0bc6e77</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//div[(text() = 'ABC' or . = 'ABC')]</value>
+      <webElementGuid>73a067b2-a69d-476f-b899-71d9331bf135</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>
