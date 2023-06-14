@@ -6,7 +6,6 @@ import java.sql.Statement
 
 import java.sql.ResultSet
 import java.sql.ResultSetMetaData
-import groovy.sql.Sql as Sql
 
 public class VerifSaldo {
 
@@ -34,12 +33,12 @@ public class VerifSaldo {
 		File dir = new File(System.getProperty('user.dir') + "\\Download");
 		//Getting the list of all the files in the specific directory
 		File[] fList = dir.listFiles();
-		for (File f : fList){
+		for (File f : fList) {
 
 			//checking the extension of the file with endsWith method.
-			if (f.exists()){
+			if (f.exists()) {
 
-				if(deleteFile == 'Yes'){
+				if (deleteFile == 'Yes') {
 
 					f.delete();
 				}
@@ -62,7 +61,7 @@ public class VerifSaldo {
 
 		columnCount = metadata.getColumnCount()
 
-		while(resultSet.next()) {
+		while (resultSet.next()) {
 			for(int i=1; i<=columnCount ; i++) {
 				data = resultSet.getObject(i)
 				listdata.add(data)
@@ -84,7 +83,7 @@ public class VerifSaldo {
 
 		columnCount = metadata.getColumnCount()
 
-		while(resultSet.next()) {
+		while (resultSet.next()) {
 			for(int i=1; i<=columnCount ; i++) {
 				data = resultSet.getObject(i)
 				listdata.add(data)
@@ -146,8 +145,8 @@ public class VerifSaldo {
 
 		ResultSet resultSet = stm.executeQuery("SELECT COUNT(*) FROM esign.tr_balance_mutation bm JOIN esign.ms_lov ml ON ml.id_lov = bm.lov_balance_type JOIN esign.ms_tenant mt ON mt.id_ms_tenant = bm.id_ms_tenant WHERE tenant_code = '" + tenantcode + "' AND description = '" + tipeSaldo + "' AND trx_date >= '2023-05-01 00:00:00.0'")
 
-		while (resultSet.next())
-		{
+		while (resultSet.next()) {
+			
 			data = resultSet.getObject(1)
 		}
 		data

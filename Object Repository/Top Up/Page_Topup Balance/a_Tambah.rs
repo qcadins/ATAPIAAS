@@ -6,6 +6,10 @@
    <elementGuidId>7acc169d-6ba9-483c-aaad-15da494e53d3</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@href = 'javascript:' and (text() = 'Tambah' or . = 'Tambah')]</value>
+      </entry>
+      <entry>
          <key>CSS</key>
          <value>div.col-6.text-right > a</value>
       </entry>
@@ -14,7 +18,7 @@
          <value>//form[@id='msxForm']/div[4]/div[2]/a</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>a</value>
-      <webElementGuid>8b33425d-34c9-49d1-9ec2-312068e9cc3f</webElementGuid>
+      <webElementGuid>7465413e-7cda-4bf1-96f3-ad4c1eab5ee0</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +34,7 @@
       <name>href</name>
       <type>Main</type>
       <value>javascript:</value>
-      <webElementGuid>529d0cbc-4b48-43be-a852-8e39037df716</webElementGuid>
+      <webElementGuid>7489b533-25bb-4d5b-a8ba-efa73ca8e588</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -38,7 +42,7 @@
       <name>text</name>
       <type>Main</type>
       <value>Tambah</value>
-      <webElementGuid>e4799260-77bc-47e4-9cd1-ce52a2525bfb</webElementGuid>
+      <webElementGuid>d117a568-afcb-4737-86ce-e9f27395f37e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +50,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;msxForm&quot;)/div[@class=&quot;row&quot;]/div[@class=&quot;col-6 text-right&quot;]/a[1]</value>
-      <webElementGuid>4f91378e-bf5f-439f-a9b9-b3d482964324</webElementGuid>
+      <webElementGuid>8209cf26-b8e8-4550-b1be-c9aa0841045a</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -54,7 +58,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//form[@id='msxForm']/div[4]/div[2]/a</value>
-      <webElementGuid>93aaa9b3-f63d-4b8e-95e2-f32ede48601c</webElementGuid>
+      <webElementGuid>03fef3c2-2bd3-4553-b156-1f4efc5012a9</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -62,7 +66,7 @@
       <name>xpath:link</name>
       <type>Main</type>
       <value>//a[contains(text(),'Tambah')]</value>
-      <webElementGuid>be7be2cc-056a-4ef5-9cc1-a65a14ebbeb2</webElementGuid>
+      <webElementGuid>484b7ca9-0d2d-48e3-8b84-2a3112f612a5</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +74,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Layanan'])[1]/following::a[1]</value>
-      <webElementGuid>6a98d256-4a0b-47fe-8acf-ad3bf4fb7668</webElementGuid>
+      <webElementGuid>3ea1aa70-a063-4fdc-8bc1-0c105baa69e6</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Bank ABC'])[1]/following::a[1]</value>
-      <webElementGuid>7d18d853-eae4-45fb-ab50-3c1fe45654d3</webElementGuid>
+      <webElementGuid>82e20f9c-098d-4674-a41d-09d3915372ea</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +90,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Belum ada daftar layanan!'])[1]/preceding::a[1]</value>
-      <webElementGuid>ca3e9cfb-67d4-4a66-b220-a74f70b1e39a</webElementGuid>
+      <webElementGuid>32f2fd23-dfd3-4655-8591-cd972a5ea326</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +98,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Total'])[1]/preceding::a[1]</value>
-      <webElementGuid>52d315bc-e054-4fe8-a1d7-6feba2e8cd07</webElementGuid>
+      <webElementGuid>13de0cdc-91e7-4fa1-9cd6-2225b26e9fd3</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,7 +106,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='Tambah']/parent::*</value>
-      <webElementGuid>79a500ad-83e2-4159-90da-c3d90f6c5c5d</webElementGuid>
+      <webElementGuid>4d473333-09dd-4571-bc29-bb9a61cf85a9</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -110,7 +114,7 @@
       <name>xpath:href</name>
       <type>Main</type>
       <value>(//a[contains(@href, 'javascript:')])[4]</value>
-      <webElementGuid>307232b8-2f51-4fb8-8fb1-b4ae88869695</webElementGuid>
+      <webElementGuid>fdc57e97-916c-4f75-b93c-5b72370ebfdb</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -118,7 +122,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[2]/a</value>
-      <webElementGuid>e241e7fb-c39e-4095-bcfd-8605d31dfe3f</webElementGuid>
+      <webElementGuid>13864425-c3de-430f-9ee7-a6e02b34abaf</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -126,6 +130,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//a[@href = 'javascript:' and (text() = 'Tambah' or . = 'Tambah')]</value>
-      <webElementGuid>b07f1dca-a67e-4256-a67c-712a770418c8</webElementGuid>
+      <webElementGuid>9bc8815d-b363-4d25-813f-67311154af7c</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

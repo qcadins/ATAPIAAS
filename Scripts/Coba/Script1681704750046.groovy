@@ -20,44 +20,16 @@ import org.openqa.selenium.Keys as Keys
 import org.openqa.selenium.By as By
 import org.openqa.selenium.WebDriver as WebDriver
 import java.sql.Driver as Driver
+import java.sql.Connection
 
-WebUI.openBrowser('')
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
-WebUI.navigateToUrl('http://gdkwebsvr:4100/login')
+'deklarasi koneksi ke Database adins_apiaas_uat'
+Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
-WebUI.click(findTestObject('null'))
+int a = 2000
 
-WebUI.setText(findTestObject('null'), 
-    'usera@gmail.com')
+int ppnfromDB = Integer.parseInt(CustomKeywords.'topup.TopupVerif.getPPNvalue'(conndev))
 
-WebUI.setEncryptedText(findTestObject('null'), 
-    'iFGeFYmXIrU6ruIopQUS+w==')
-
-WebUI.click(findTestObject('null'))
-
-WebUI.click(findTestObject('null'))
-
-WebUI.click(findTestObject('null'))
-
-WebUI.click(findTestObject('null'))
-
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Dari_transactionDateStart'))
-
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Pengguna_user'))
-
-WebUI.click(findTestObject('null'))
-
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Ref Number_referenceNo'))
-
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Nama Dokumen_documentName'))
-
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Sampai_transactionDateEnd'))
-
-WebUI.click(findTestObject('null'))
-
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Unduh Excel'))
-
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Set Ulang'))
-
-WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Cari'))
-
+println ppnfromDB * a /100

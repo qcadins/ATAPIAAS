@@ -42,7 +42,7 @@ public class WriteExcel {
 		sheet.getRow(rowNo).createCell(collNo).setCellValue(cellValue) //getrow = row, dimulai dari 0. create cell = coll, dimulai dari 0, setCellValue = write string to excel
 
 		file.close()
-		FileOutputStream outFile =new FileOutputStream(new File(filePath))
+		FileOutputStream outFile = new FileOutputStream(new File(filePath))
 		workbook.write(outFile)
 		outFile.close()
 	}
@@ -60,7 +60,7 @@ public class WriteExcel {
 		sheet.getRow(rowNo).createCell(collNo).setCellValue(cellValue) //getrow = row, dimulai dari 0. create cell = coll, dimulai dari 0, setCellValue = write string to excel
 
 		file.close()
-		FileOutputStream outFile =new FileOutputStream(new File(filePath))
+		FileOutputStream outFile = new FileOutputStream(new File(filePath))
 		workbook.write(outFile)
 		outFile.close()
 	}
@@ -87,7 +87,7 @@ public class WriteExcel {
 		sheet.getRow(rowNo).createCell(collNo).setCellFormula(cellValue)
 
 		file.close()
-		FileOutputStream outFile =new FileOutputStream(new File(filePath))
+		FileOutputStream outFile = new FileOutputStream(new File(filePath))
 		workbook.write(outFile)
 		outFile.close()
 

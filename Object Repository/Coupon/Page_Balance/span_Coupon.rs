@@ -6,15 +6,15 @@
    <elementGuidId>06fc4c9c-8727-428f-a908-ae45aef320bf</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@ng-reflect-parent = 'Coupon']</value>
+      </entry>
+      <entry>
          <key>CSS</key>
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>(.//*[normalize-space(text()) and normalize-space(.)='Pengguna'])[1]/following::span[1]</value>
-      </entry>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@ng-reflect-parent = 'Coupon']</value>
+         <value>/html/body/app-root/app-full-layout/div/div[1]/app-sidebar/div[2]/div[1]/ul/li[23]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -25,7 +25,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>span</value>
-      <webElementGuid>edc26f0d-2af7-4438-b077-c71063228aef</webElementGuid>
+      <webElementGuid>41b03130-9eb6-44a7-b25c-ea0605137a53</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -33,7 +33,7 @@
       <name>class</name>
       <type>Main</type>
       <value>ng-tns-c133-4 icon-wallet</value>
-      <webElementGuid>4ee5468a-8e28-42b2-882c-47e436f1decd</webElementGuid>
+      <webElementGuid>602880af-47da-46d8-8989-573de161fcdb</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -41,7 +41,7 @@
       <name>text</name>
       <type>Main</type>
       <value>Coupon</value>
-      <webElementGuid>28f09dfa-6d2f-471a-ae95-e40ab5cf8982</webElementGuid>
+      <webElementGuid>8e405406-181e-4740-bd23-254db470ac03</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -49,7 +49,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-expanded vertical-menu menu-open&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;app-sidebar main-menu menu-fixed menu-native-scroll expanded ng-star-inserted&quot;]/app-sidebar[@class=&quot;ng-tns-c133-4&quot;]/div[@class=&quot;sidebar-content main-menu-content ng-tns-c133-4 ps&quot;]/div[@class=&quot;nav-container ng-tns-c133-4&quot;]/ul[@class=&quot;navigation ng-tns-c133-4&quot;]/li[@class=&quot;ng-tns-c133-4 ng-star-inserted&quot;]/a[@class=&quot;ng-tns-c133-4 ng-star-inserted&quot;]/span[@class=&quot;menu-title ng-tns-c133-4&quot;]</value>
-      <webElementGuid>10fc69af-08c9-42b6-ba8c-e3bfcc579365</webElementGuid>
+      <webElementGuid>82e6b6c4-3279-464c-8144-8aacce96026e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -57,7 +57,15 @@
       <name>ng-reflect-parent</name>
       <type>Main</type>
       <value>Coupon</value>
-      <webElementGuid>4f4b8af6-aed1-422d-bd5e-632a6324b2b2</webElementGuid>
+      <webElementGuid>16c1a814-e057-4354-a236-0b43d23beeb1</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-reflect-router-link</name>
+      <type>Main</type>
+      <value>/coupon</value>
+      <webElementGuid>e632f0b7-2b81-43f9-aad4-867bbb064ed4</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -65,7 +73,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Pengguna'])[1]/following::span[1]</value>
-      <webElementGuid>55fc9430-4d1b-4aa0-91bb-169029b99c92</webElementGuid>
+      <webElementGuid>b317d995-74a4-48fe-b2a0-e8251d016d8c</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -73,7 +81,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Peran'])[1]/following::span[2]</value>
-      <webElementGuid>9c93176b-1fa0-43e6-872f-cf0999b0d280</webElementGuid>
+      <webElementGuid>ee0d9847-26b2-416b-b7c9-285712ca4012</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -81,7 +89,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='PRODUCTION'])[1]/preceding::span[1]</value>
-      <webElementGuid>889b41d6-68d5-4ec2-a7b8-efbfce9d0865</webElementGuid>
+      <webElementGuid>4464602e-87e9-45b0-9ffe-319bfc4829e1</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -89,7 +97,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='TRIAL'])[1]/preceding::span[1]</value>
-      <webElementGuid>f0519640-8cca-4e0b-8bea-fe4e18377d29</webElementGuid>
+      <webElementGuid>df9ba473-4177-45f1-9766-8cb93cdf1265</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -97,7 +105,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='Coupon']/parent::*</value>
-      <webElementGuid>664b40d9-8bbc-4450-8dc4-e577f2a6f71a</webElementGuid>
+      <webElementGuid>03f14d27-f3b1-4684-b91f-99fa9ab4f1d6</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -105,7 +113,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//li[7]/a/span</value>
-      <webElementGuid>816ca756-c807-4dcf-bd99-1b13cb705928</webElementGuid>
+      <webElementGuid>b421c8ab-9f90-476f-9460-fd0853878fbd</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -113,6 +121,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//span[(text() = 'Coupon' or . = 'Coupon')]</value>
-      <webElementGuid>0f659647-c724-4d63-b24f-e572f1943fe7</webElementGuid>
+      <webElementGuid>4118e5b7-b0e1-4867-a7f5-0def8947f0e9</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

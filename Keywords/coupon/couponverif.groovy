@@ -11,13 +11,13 @@ public class couponverif {
 	int columnCount
 
 	@Keyword
-	getCouponTotal(Connection conn) {
+	getCouponTotal(Connection conn, String startDate, String endDate) {
 
 		int data
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT count(*) FROM tr_coupon WHERE coupon_end_date >= CURRENT_DATE AND coupon_start_date <= CURRENT_DATE")
+		ResultSet resultSet = stm.executeQuery("SELECT count(*) FROM tr_coupon WHERE coupon_end_date <= '" + endDate + "' AND coupon_start_date >= '" + startDate + "'")
 
 		while (resultSet.next()) {
 

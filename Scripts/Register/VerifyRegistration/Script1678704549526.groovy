@@ -4,9 +4,10 @@ import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
+import java.sql.Connection
 
 'siapkan koneksi ke database apiaas lama'
-def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
+Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
 'simpan email ke dalam sebuah variabel'
 String email = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9)

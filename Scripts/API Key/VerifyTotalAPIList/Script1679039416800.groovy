@@ -5,9 +5,10 @@ import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
+import java.sql.Connection
 
 'deklarasi variabel untuk konek ke Database APIAAS'
-def connpublic = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection connpublic = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'kumpulan string dari WEB'
 ArrayList<String> totaldata = []

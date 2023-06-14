@@ -11,6 +11,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Gagal tambah layanan'</initValue>
+      <name>FailedReasonAddServices</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Hit SUCCESS tapi saldo tidak berkurang'</initValue>
       <name>FailedReasonBalanceNotChange</name>
    </GlobalVariableEntity>
@@ -63,6 +68,11 @@
       <description></description>
       <initValue>'Data sudah pernah diinput'</initValue>
       <name>FailedReasonExisted</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Harga satuan UI tidak sesuai DB'</initValue>
+      <name>FailedReasonHargaSatuan</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -143,6 +153,11 @@
       <description></description>
       <initValue>'Submit Gagal'</initValue>
       <name>FailedReasonSubmitError</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Perhitungan subtotal tidak sesuai'</initValue>
+      <name>FailedReasonSubTotalCalc</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>

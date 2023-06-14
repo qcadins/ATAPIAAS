@@ -310,10 +310,6 @@ else if (TC == 'Coupon') {
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'button_Lanjutkan Perjalanan Anda'))
-	
-	'klik pada bagian admin client'
-	WebUI.click(findTestObject('Object Repository/User Management-Role/' +
-		'Page_Login - eendigo Platform/i_Admin Client_ft-edit'))
 }
 
 else if (TC == 'TopUp') {

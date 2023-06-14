@@ -11,6 +11,8 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 import org.openqa.selenium.By as By
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
@@ -82,6 +84,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			searchfunction()
 			
+			'cek apakah hasil search gagal'
+			if(WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_List Coupon/searchResult')
+				, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+				
+				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) +
+				';') + GlobalVariable.FailedReasonSearchFailed)
+				
+				continue
+			}
+			
 			'klik tombol edit'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/editButton'))
 			
@@ -92,6 +106,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		else if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Detail')) {
 			
 			searchfunction()
+			
+			'cek apakah hasil search gagal'
+			if(WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_List Coupon/searchResult')
+				, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+				
+				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) +
+				';') + GlobalVariable.FailedReasonSearchFailed)
+				
+				continue
+			}
 			
 			'klik tombol detail'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/detailbutton'))
@@ -163,18 +189,6 @@ def searchfunction() {
 	
 	'klik tombol cari'
 	WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/button_Cari'))
-	
-	'cek apakah hasil search gagal'
-	if(WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_List Coupon/searchResult')
-		, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-		
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) +
-		';') + GlobalVariable.FailedReasonSearchFailed)
-		
-		continue
-	}
 }
 
 def inputparameter(String action) {
@@ -383,8 +397,14 @@ def checkPaging(Connection conndev) {
 	'get text total data dari ui'
 	Total = WebUI.getText(findTestObject('Object Repository/Coupon/Page_List Coupon/TotalData')).split(' ')
 	
+	'ambil waktu start untuk filter hasil qury'
+	String thestartDate = callStartDate()
+	
+	'ambil batas waktu untuk filter hasil query'
+	String theendDate = callendDate()
+	
 	'ambil total data dari db'
-	int resultTotalData = CustomKeywords.'coupon.couponverif.getCouponTotal'(conndev)
+	int resultTotalData = CustomKeywords.'coupon.couponverif.getCouponTotal'(conndev, thestartDate, theendDate)
 
 	'verify total data role'
 	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
@@ -736,4 +756,30 @@ def checkVerifyReset(Boolean isMatch) {
 
 		GlobalVariable.FlagFailed = 1
 	}
+}
+	
+def callStartDate() {
+	
+	LocalDate currentDate = LocalDate.now()
+	
+	LocalDate startDate = currentDate.withDayOfMonth(1)
+	
+	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+	
+	String formattedStartDate = startDate.format(dateFormatter)
+	
+	return formattedStartDate
+}
+
+def callendDate() {
+	
+	LocalDate currentDate = LocalDate.now()
+	
+	LocalDate endDate = currentDate
+	
+	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+	
+	String formattedEndDate = endDate.format(dateFormatter)
+	
+	return formattedEndDate
 }

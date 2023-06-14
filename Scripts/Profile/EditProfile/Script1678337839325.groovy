@@ -16,7 +16,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPa
 int countColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
-def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'memanggil fungsi untuk login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf', ('SheetName') : 'Edit Profile', 

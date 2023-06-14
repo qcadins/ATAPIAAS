@@ -4,9 +4,10 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
+import java.sql.Connection
 
 'deklarasi variabel untuk konek ke Database APIAAS'
-def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
+Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
 'ambil email dari testdata, disimpan ke string'
 String email = WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__email'), 'value')

@@ -3,9 +3,10 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
+import java.sql.Connection
 
 'koneksi untuk ke database APIAAS'
-def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'menyimpan nama api ke dalam sebuah variabel'
 String apiname = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11)

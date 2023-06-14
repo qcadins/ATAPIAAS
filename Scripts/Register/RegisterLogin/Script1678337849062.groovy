@@ -9,9 +9,10 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
+import java.sql.Connection
 
 'siapkan koneksi ke db eendigo'
-def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
+Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathRegisterLogin).getColumnNumbers()
