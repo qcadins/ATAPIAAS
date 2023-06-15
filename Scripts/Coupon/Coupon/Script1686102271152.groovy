@@ -50,19 +50,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'declare isMmandatory Complete'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 5))
 		
-		'klik pada tombol untuk span menu'
-		WebUI.click(findTestObject('Object Repository/Coupon/Page_Balance/Spanmenu'))
-		
-		'klik pada tombol coupon'
-		WebUI.click(findTestObject('Object Repository/Coupon/Page_Balance/span_Coupon'))
-		
-		'cek apakah tombol silang terlihat di web'
-		if (WebUI.verifyElementVisible(findTestObject('Object Repository/Coupon/Page_Edit Coupon/tombolsilang'), 
-			FailureHandling.OPTIONAL)) {
-			
-			'klik pada tombol silang menu'
-			WebUI.click(findTestObject('Object Repository/Coupon/Page_Edit Coupon/tombolsilang'))
-		}
+		openMenu()
 		
 		'check if action new/edit/detail'
 		if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
@@ -84,6 +72,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'panggil fungsi menjalankan konfirmasi dialog'
 			checkdialogConfirmation(isMandatoryComplete)
+			
+			'cek apa perlu lakukan copy link'
+			copylinkfunction()
 		}
 		else if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 			
@@ -113,6 +104,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'panggil fungsi menjalankan konfirmasi dialog'
 			checkdialogConfirmation(isMandatoryComplete)
+			
+			'cek apa perlu lakukan copy link'
+			copylinkfunction()
 		}
 		else if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Detail')) {
 			
@@ -174,21 +168,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'klik pada tombol silang untuk mengakhiri sesi detail'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/span_'))
 		}
-		'cek apakah perlu copy kode kupon'
-		if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 31) == 'Yes') {
-			
-			'klik pada tombol copy kode kupon'
-			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/copybutton'))
-			
-			if(!WebUI.getText(findTestObject('Object Repository/Coupon/Page_List Coupon/copySuccessnotif'))== 
-				' Kode Kupon berhasil disalin ') {
-				
-				'tulis ada masalah pada button copy'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) +
-				';') + GlobalVariable.FailedReasonButtonCopy)
-			}
-		}
 	}
 }
 
@@ -196,12 +175,56 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 WebUI.closeBrowser()
 
 def searchfunction() {
+	
 	'cari kupon yang akan dilakukan edit'
 	WebUI.setText(findTestObject('Object Repository/Coupon/Page_List Coupon/input_Kode Kupon'),
 			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 15))
 	
 	'klik tombol cari'
 	WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/button_Cari'))
+}
+
+def openMenu() {
+	
+	'klik pada tombol untuk span menu'
+	WebUI.click(findTestObject('Object Repository/Coupon/Page_Balance/Spanmenu'))
+	
+	'klik pada tombol coupon'
+	WebUI.click(findTestObject('Object Repository/Coupon/Page_Balance/span_Coupon'))
+	
+	'cek apakah tombol silang terlihat di web'
+	if (WebUI.verifyElementVisible(findTestObject('Object Repository/Coupon/Page_Edit Coupon/tombolsilang'),
+		FailureHandling.OPTIONAL)) {
+		
+		'klik pada tombol silang menu'
+		WebUI.click(findTestObject('Object Repository/Coupon/Page_Edit Coupon/tombolsilang'))
+	}
+}
+
+def copylinkfunction() {
+	
+	'panggil fungsi kembali ke menu'
+	openMenu()
+	
+	'panggil fungsi search kupon'
+	searchfunction()
+	
+	'cek apakah perlu copy kode kupon'
+	if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 31) == 'Yes') {
+		
+		'klik pada tombol copy kode kupon'
+		WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/copybutton'))
+		
+		'jika tidak ada notifikasi sukses'
+		if(!WebUI.getText(findTestObject('Object Repository/Coupon/Page_List Coupon/copySuccessnotif'))==
+			' Kode Kupon berhasil disalin ') {
+			
+			'tulis ada masalah pada button copy'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) +
+			';') + GlobalVariable.FailedReasonButtonCopy)
+		}
+	}
 }
 
 def inputparameter(String action) {

@@ -293,12 +293,12 @@ else if (TC == 'Coupon') {
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-		findTestData(Path).getValue(2, 34))
+		findTestData(Path).getValue(2, 33))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-		findTestData(Path).getValue(2, 35))
+		findTestData(Path).getValue(2, 34))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
