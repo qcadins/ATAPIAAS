@@ -34,7 +34,7 @@ public class VerifLayanan {
 	getListServiceName(Connection conn, String tenantcode) {
 		String data
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -62,7 +62,7 @@ public class VerifLayanan {
 	getListServiceStatus(Connection conn, String tenantcode) {
 		String data
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -84,7 +84,7 @@ public class VerifLayanan {
 	getListChargeType(Connection conn, String tenantcode) {
 		String data
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 

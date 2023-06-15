@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "CEA916AC5AB9B9340972FE1EC300FB9E",
+  "keywordFileContentHash": "A6C5F2D89632AEC55464443DE2ECFF73",
   "keywordClasses": [
     {
-      "name": "coupon.couponverif",
+      "name": "coupon.CouponVerif",
       "keywordMethods": [
         {
           "name": "getCouponTotal",

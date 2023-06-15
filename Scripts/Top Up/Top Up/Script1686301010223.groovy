@@ -269,7 +269,7 @@ def checkddlTipeSaldo(Connection conndev) {
 	'jika hitungan di UI dan DB sesuai'
 	if(countWeb == countDB){
 		
-		for(int i=1; i<=countWeb; i++) {
+		for (int i=1; i<=countWeb; i++) {
 			
 			'ambil object dari ddl'
 			def modifyNamaTipeSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/modifyObject'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-eendigo/div[2]/div/div/div/div/div/form/div[1]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
@@ -280,10 +280,10 @@ def checkddlTipeSaldo(Connection conndev) {
 		}
 		
 		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaTipeSaldoDB){
+		for (String tipe : namaTipeSaldoDB) {
 			
 			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaTipeSaldoUI.contains(tipe)){
+			if (!namaTipeSaldoUI.contains(tipe)) {
 				
 				'ada data yang tidak match'
 				isTipeSaldoFound = 0;
@@ -295,7 +295,7 @@ def checkddlTipeSaldo(Connection conndev) {
 		}
 			
 	}
-	else if(isTipeSaldoFound == 0 || countWeb != countDB){
+	else if (isTipeSaldoFound == 0 || countWeb != countDB) {
 		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
@@ -332,9 +332,9 @@ def checkddlMetodeTransfer(Connection conndev) {
 	int countDB = namaTrfMethodDB.size()
 	
 	'jika hitungan di UI dan DB sesuai'
-	if(countWeb == countDB){
+	if (countWeb == countDB) {
 		
-		for(int i=1; i<=countWeb; i++) {
+		for (int i=1; i<=countWeb; i++) {
 			
 			'ambil object dari ddl'
 			def modifyNamaTrfMethod = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/modifyObject'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-eendigo/div[2]/div/div/div/div/div/form/div[2]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
@@ -345,10 +345,10 @@ def checkddlMetodeTransfer(Connection conndev) {
 		}
 		
 		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaTrfMethodDB){
+		for (String tipe : namaTrfMethodDB) {
 			
 			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaTrfMethodUI.contains(tipe)){
+			if (!namaTrfMethodUI.contains(tipe)) {
 				
 				'ada data yang tidak match'
 				isTrfMethodFound = 0;
@@ -360,7 +360,7 @@ def checkddlMetodeTransfer(Connection conndev) {
 		}
 			
 	}
-	else if(isTrfMethodFound == 0 || countWeb != countDB){
+	else if (isTrfMethodFound == 0 || countWeb != countDB) {
 		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
@@ -397,9 +397,9 @@ def checkddlBankDestination(Connection conndev) {
 	int countDB = namaBankDestDB.size()
 	
 	'jika hitungan di UI dan DB sesuai'
-	if(countWeb == countDB){
+	if (countWeb == countDB) {
 		
-		for(int i=1; i<=countWeb; i++) {
+		for (int i=1; i<=countWeb; i++) {
 			
 			'ambil object dari ddl'
 			def modifyNamaBankDest = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/modifyObject'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-eendigo/div[2]/div/div/div/div/div/form/div[3]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
@@ -410,10 +410,10 @@ def checkddlBankDestination(Connection conndev) {
 		}
 		
 		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaBankDestDB){
+		for (String tipe : namaBankDestDB) {
 			
 			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaBankDestUI.contains(tipe)){
+			if (!namaBankDestUI.contains(tipe)) {
 				
 				'ada data yang tidak match'
 				isBankDestFound = 0;
@@ -425,7 +425,7 @@ def checkddlBankDestination(Connection conndev) {
 		}
 			
 	}
-	else if(isBankDestFound == 0 || countWeb != countDB){
+	else if (isBankDestFound == 0 || countWeb != countDB) {
 		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
@@ -462,7 +462,7 @@ def checkddlActiveSaldo(Connection conndevUAT, String email) {
 	int countDB = namaActiveSaldoDB.size()
 	
 	'jika hitungan di UI dan DB sesuai'
-	if(countWeb == countDB){
+	if (countWeb == countDB) {
 		
 		for(int i=1; i<=countWeb; i++) {
 			
@@ -475,10 +475,10 @@ def checkddlActiveSaldo(Connection conndevUAT, String email) {
 		}
 		
 		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaActiveSaldoDB){
+		for (String tipe : namaActiveSaldoDB) {
 			
 			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaActiveSaldoUI.contains(tipe)){
+			if (!namaActiveSaldoUI.contains(tipe)) {
 				
 				'ada data yang tidak match'
 				isActiveSaldoFound = 0;
@@ -490,7 +490,7 @@ def checkddlActiveSaldo(Connection conndevUAT, String email) {
 		}
 			
 	}
-	else if(isActiveSaldoFound == 0 || countWeb != countDB){
+	else if (isActiveSaldoFound == 0 || countWeb != countDB) {
 		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'

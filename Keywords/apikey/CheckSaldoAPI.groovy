@@ -19,7 +19,7 @@ public class CheckSaldoAPI {
 	getTenantName(Connection conn) {
 		String data
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -42,7 +42,7 @@ public class CheckSaldoAPI {
 	getVendorName(Connection conn, String tenant) {
 		String data
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -65,7 +65,7 @@ public class CheckSaldoAPI {
 	getNamaTipeSaldo(Connection conn, String tenant) {
 		String data
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -122,7 +122,7 @@ public class CheckSaldoAPI {
 	getTrialTableContent(Connection conn, String tenant) {
 		String data
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -141,9 +141,9 @@ public class CheckSaldoAPI {
 	}
 
 	@Keyword
-	getIsiSaldoStoreDB(Connection conn, String tenant){
+	getIsiSaldoStoreDB(Connection conn, String tenant) {
 		String data
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("SELECT tenant_name, vendor_name, description, qty, ref_no, notes, to_char(trx_date, 'yyyy-mm-dd') FROM esign.tr_balance_mutation tbm JOIN esign.ms_tenant mt ON mt.id_ms_tenant = tbm.id_ms_tenant JOIN esign.ms_vendor mv ON mv.id_ms_vendor = tbm.id_ms_vendor JOIN esign.ms_lov ml ON ml.id_lov = tbm.lov_balance_type WHERE tenant_code = '"+ tenant +"' ORDER BY tbm.id_balance_mutation DESC LIMIT 1")

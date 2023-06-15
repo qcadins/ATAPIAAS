@@ -51,7 +51,7 @@ public class RoleVerif {
 	@Keyword
 	getRoleEdit(Connection conn, String namarole){
 		String data
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("SELECT role_name, CASE WHEN is_active = '1' THEN 'Active' ELSE 'Inactive' END FROM am_msrole WHERE role_name = '" + namarole + "' LIMIT 1;")
@@ -71,7 +71,7 @@ public class RoleVerif {
 	@Keyword
 	getRoleMenu(Connection conn, String roleName, String email){
 		String data
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("SELECT menu_code FROM am_msmenu mn LEFT JOIN am_menuofrole mor ON mor.id_ms_menu = mn.id_ms_menu LEFT JOIN am_msrole msr ON msr.id_ms_role = mor.id_ms_role WHERE msr.role_name = '" + roleName + "' AND msr.usr_crt = '" + email + "'")
@@ -91,7 +91,7 @@ public class RoleVerif {
 	@Keyword
 	getDataRolebeforeVerif(Connection conn, String roleName){
 		String data
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("SELECT role_name, CASE WHEN is_active = '1' THEN 'Active' ELSE 'Inactive' END FROM am_msrole WHERE role_name = '" + roleName + "'")

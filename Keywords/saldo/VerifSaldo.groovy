@@ -20,8 +20,7 @@ public class VerifSaldo {
 
 		ResultSet resultSet = stm.executeQuery("SELECT tenant_code FROM ms_tenant WHERE email_reminder_dest = '" + email + "'")
 
-		while(resultSet.next())
-		{
+		while (resultSet.next()) {
 			data = resultSet.getObject(1)
 		}
 		data
@@ -52,7 +51,7 @@ public class VerifSaldo {
 	getListActiveBalance(Connection conn, String tenantcode) {
 		String data
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -62,7 +61,7 @@ public class VerifSaldo {
 		columnCount = metadata.getColumnCount()
 
 		while (resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
+			for (int i=1; i<=columnCount ; i++) {
 				data = resultSet.getObject(i)
 				listdata.add(data)
 			}
@@ -74,7 +73,7 @@ public class VerifSaldo {
 	getListTipeTransaksi(Connection conn, String tipeSaldo) {
 		String data
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -84,7 +83,7 @@ public class VerifSaldo {
 		columnCount = metadata.getColumnCount()
 
 		while (resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
+			for (int i=1; i<=columnCount ; i++) {
 				data = resultSet.getObject(i)
 				listdata.add(data)
 			}
@@ -96,7 +95,7 @@ public class VerifSaldo {
 	getListTipeSaldo(Connection conn, String tenantcode) {
 		String data
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -118,7 +117,7 @@ public class VerifSaldo {
 	getListKantor(Connection conn, String tenantcode) {
 		String data
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -146,7 +145,7 @@ public class VerifSaldo {
 		ResultSet resultSet = stm.executeQuery("SELECT COUNT(*) FROM esign.tr_balance_mutation bm JOIN esign.ms_lov ml ON ml.id_lov = bm.lov_balance_type JOIN esign.ms_tenant mt ON mt.id_ms_tenant = bm.id_ms_tenant WHERE tenant_code = '" + tenantcode + "' AND description = '" + tipeSaldo + "' AND trx_date >= '2023-05-01 00:00:00.0'")
 
 		while (resultSet.next()) {
-			
+
 			data = resultSet.getObject(1)
 		}
 		data

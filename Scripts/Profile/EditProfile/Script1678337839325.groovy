@@ -19,7 +19,7 @@ int countColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'memanggil fungsi untuk login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf', ('SheetName') : 'Edit Profile', 
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf', ('SheetName') : 'Edit Profile',
 	('Path') : ExcelPathEditProfile], FailureHandling.STOP_ON_FAILURE)
 
 'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
@@ -49,11 +49,11 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/'+
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).length() == 0){
+	if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
 	}
-	else if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')){
+	else if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 5))
@@ -83,28 +83,29 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'panggil fungsi verifikasi jika checkdatabase = yes'
 		if (GlobalVariable.KondisiCekDB == 'Yes') {
+			
 			'verifikasi data yang ada di web dengan di database sebelum diEdit'
-			WebUI.callTestCase(findTestCase('Test Cases/Profile/VerifyDataEditProfile'), 
+			WebUI.callTestCase(findTestCase('Test Cases/Profile/VerifyDataEditProfile'),
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
 		}
 			
 		'input nama depan pengguna'
-		WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__firstName'), 
+		WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__firstName'),
 			findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 11))
 		
 		'klik pada field nama belakang'
 		WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/input__lastName'))
 		
 		'input data nama belakang'
-		WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__lastName'), 
+		WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__lastName'),
 			findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 12))
 		
 		'input data nama perusahaan'
-		WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__tenantName'), 
+		WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__tenantName'),
 			findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 13))
 		
 		'input data industri'
-		WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__industry'), 
+		WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__industry'),
 			findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 14))
 		
 		'pilih jenis kelamin'
@@ -188,7 +189,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/label_TRIAL'))
 			
 		'verifikasi adanya saldo trial'
-		if(!WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/'+
+		if (!WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/'+
 			'Page_Balance/span_IDR'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		
 			GlobalVariable.FlagFailed = 1
@@ -222,7 +223,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 			
 		'kondisi jika tidak ada failed pada bagian lain testcase'
-		if(isMandatoryComplete != 0) {
+		if (isMandatoryComplete != 0) {
 			
 			'Write To Excel GlobalVariable.StatusFailed and gagal karena reason status'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,

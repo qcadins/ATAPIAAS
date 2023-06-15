@@ -15,7 +15,7 @@ public class GetOTPfromDB {
 
 		int columnCount
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -33,5 +33,5 @@ public class GetOTPfromDB {
 		}
 		listdata
 	}
-	
+
 }

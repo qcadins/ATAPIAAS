@@ -9,7 +9,7 @@ import java.sql.Connection
 Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
 'ambil data coupon dari db'
-ArrayList<String> resultDB = CustomKeywords.'coupon.couponverif.getAddEditCoupon'(conndev, 
+ArrayList<String> resultDB = CustomKeywords.'coupon.CouponVerif.getAddEditCoupon'(conndev, 
 	findTestData(Path).getValue(GlobalVariable.NumOfColumn, 21))
 	
 'ambil data coupon dari excel'

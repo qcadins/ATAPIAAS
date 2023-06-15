@@ -23,7 +23,7 @@ int countColumnEdit = findTestData(ExcelPathRole).getColumnNumbers()
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Role', ('SheetName') : 'Role', 
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Role', ('SheetName') : 'Role',
 	('Path') : ExcelPathRole], FailureHandling.STOP_ON_FAILURE)
 
 'klik pada menu'
@@ -126,8 +126,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			for (index = 0; index < arrayServices.size(); index++){
 				
 				'modify object checkbox'
-				modifyObjectCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/'+
-					'User Management-Role/modifyObject'), 'xpath', 'equals',
+				modifyObjectCheckbox = WebUI.modifyObjectProperty(
+					findTestObject('Object Repository/User Management-Role/modifyObject'), 'xpath', 'equals',
 				 		('//*[@id="'+ arrayServices[index] +'"]'), true)
 			
 				'check if check box is unchecked'
@@ -145,8 +145,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			for (index = 0; index < arrayServices.size(); index++){
 				
 				'modify object checkbox'
-				modifyObjectCheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/'+
-					'User Management-Role/modifyObject'), 'xpath', 'equals',
+				modifyObjectCheckbox = WebUI.modifyObjectProperty(
+					findTestObject('Object Repository/User Management-Role/modifyObject'), 'xpath', 'equals',
 				 		('//*[@id="'+ arrayServices[index] +'"]'), true)
 				
 				'check if check box is checked'
@@ -339,7 +339,7 @@ def beforeEditVerif (Connection connUAT) {
 	for (int i = 0; i < roleDB.size(); i++) {
 		
 		'cek apakah tiap isi dari db sesuai'
-		if(roleDB[i] != roleUI[i]) {
+		if (roleDB[i] != roleUI[i]) {
 			
 			'Write To Excel gagal dan bermasalah saat verifikasi data'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
@@ -403,7 +403,7 @@ def checkPaging(Connection connUAT) {
 	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'cek apakah hlm 2 tersedia'
-	if(WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/a_2')) == true){
+	if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/a_2')) == true) {
 	
 		'klik halaman 2'
 		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/a_2'))
@@ -438,8 +438,8 @@ def checkPaging(Connection connUAT) {
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'cek apakah button skip disabled atau enabled'
-		if(WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/'+
-			'Page_List Roles/i_Action_datatable-icon-skip'), FailureHandling.OPTIONAL)){
+		if (WebUI.verifyElementVisible(
+			findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-skip'), FailureHandling.OPTIONAL)) {
 		
 			'klik pada tombol skip'
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-skip'))
@@ -469,6 +469,7 @@ def checkPaging(Connection connUAT) {
 
 def checkVerifyPaging(Boolean isMatch) {
 	if (isMatch == false) {
+		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) +

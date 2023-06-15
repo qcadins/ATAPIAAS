@@ -32,7 +32,7 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 Connection connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR RK Mandiri', 
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR RK Mandiri',
 	('Path') : ExcelPathOCRTesting], FailureHandling.STOP_ON_FAILURE)
 
 'pindah testcase sesuai jumlah di excel'
@@ -188,7 +188,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		if (GlobalVariable.KondisiCekDB == 'Yes') {
 			
 			'simpan trx number terbaru dari DB'
-			String latestMutation= CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
+			String latestMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
 			
 			'simpan trx number terbaru milik tenant lain dari DB'
 			String latestOtherTenantMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(connProd, tenantcode)
@@ -235,7 +235,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		uiSaldoafter = getSaldoforTransaction('OCR Rek. Koran Mandiri')
 	
 		'jika saldoafter match'
-		if(katalonSaldoafter == uiSaldoafter) {
+		if (katalonSaldoafter == uiSaldoafter) {
 			
 			isSaldoBerkurang = 1
 		}
@@ -245,7 +245,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'jika transaksi bertambah di DB dan di web'
-		if(noTrxafter > noTrxbefore) {
+		if (noTrxafter > noTrxbefore) {
 			
 			'web mencatat transaksi terbaru'
 			isTrxIncreased = 1
@@ -332,13 +332,13 @@ def getSaldoforTransaction(String NamaOCR) {
 	def elementNamaSaldo = DriverFactory.webDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
 	
 	'lakukan loop untuk cari nama saldo yang ditentukan'
-	for (int i=1; i<=elementNamaSaldo.size(); i++){
+	for (int i=1; i<=elementNamaSaldo.size(); i++) {
 		
 		'cari nama saldo yang sesuai di list saldo'
 		def modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/span", true)
 
 		'jika nama object sesuai dengan nama saldo'
-		if (WebUI.getText(modifyNamaSaldo) == NamaOCR){	
+		if (WebUI.getText(modifyNamaSaldo) == NamaOCR) {	
 			
 			'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
 			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/h3", true)
@@ -369,10 +369,10 @@ def getTrxNumber() {
 	def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[6]/div/p", true)
 							
 	'simpan nomor transaction number ke string'
-	String no_Trx = WebUI.getText(modifytrxnumber)
+	String noTrx = WebUI.getText(modifytrxnumber)
 	
 	'kembalikan nomor transaksi'
-	return no_Trx
+	return noTrx
 }
 
 'fungsi untuk filter saldo berdasarkan input user'
@@ -381,14 +381,14 @@ def filterSaldo() {
 	WebUI.delay(4)
 	
 	'isi field input tipe saldo'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'),
 		findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 10))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
 	
 	'isi field tipe transaksi'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), 
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'),
 		findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 11))
 	
 	'pencet enter'

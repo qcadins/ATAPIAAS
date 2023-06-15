@@ -105,8 +105,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		filterSaldo()
 		
 		'cek apakah button skip enable atau disable'
-		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/'+
-			'i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementVisible(
+			findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)) {
 		
 			'klik button skip to last page'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
@@ -191,8 +191,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		filterSaldo()
 		
 		'cek apakah button skip enable atau disable'
-		if (WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/'+
-			'i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementVisible(
+			findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)) {
 		
 			'klik button skip to last page'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
@@ -205,7 +205,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		if (GlobalVariable.KondisiCekDB == 'Yes') {
 			
 			'simpan trx number terbaru dari DB'
-			String latestMutation= CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(conndevUAT, 
+			String latestMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(conndevUAT, 
 				tenantcode)
 	
 			'simpan trx number terbaru milik tenant lain dari DB'

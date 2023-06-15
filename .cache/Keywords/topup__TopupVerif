@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "4852FE7B02C89C758BE3369F31A4914A",
+  "keywordFileContentHash": "4E34E465B56FD2E04FAF5597C9A26737",
   "keywordClasses": [
     {
       "name": "topup.TopupVerif",
@@ -20,8 +20,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getDDLMetodeTrf",
@@ -39,8 +38,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getDDLBank",
@@ -58,8 +56,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getDDLSaldoactive",
@@ -90,8 +87,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getServicePrice",
@@ -122,8 +118,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getPPNvalue",
@@ -141,8 +136,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getCouponDetail",
@@ -173,11 +167,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

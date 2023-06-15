@@ -16,7 +16,7 @@ public class CheckRegisterProfile {
 		String data
 		int columnCount
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 

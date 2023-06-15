@@ -23,7 +23,7 @@ WebUI.click(
 'klik pada panah ddl Status API'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/span_Inactive_ng-arrow-wrapper'))
 
-if(GlobalVariable.KondisiCekDB == 'Yes'){
+if (GlobalVariable.KondisiCekDB == 'Yes') {
 	
 	'verifikasi data ke DB sebelum diedit'
 	WebUI.callTestCase(findTestCase('Test Cases/API Key/VerifyDataAPIKey'), [:], FailureHandling.STOP_ON_FAILURE)
@@ -81,10 +81,10 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Ed
     WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_success'))
 	
 	'cek ke DB jika memang diperlukan'
-	if(GlobalVariable.KondisiCekDB == 'Yes'){
+	if (GlobalVariable.KondisiCekDB == 'Yes') {
 		
 		'verifikasi data ke db setelah di edit'
-		WebUI.callTestCase(findTestCase('Test Cases/API Key/EditKeyStoreDBVerif'), [:], 
+		WebUI.callTestCase(findTestCase('Test Cases/API Key/EditKeyStoreDBVerif'), [:],
 			FailureHandling.STOP_ON_FAILURE)
 	}
 }

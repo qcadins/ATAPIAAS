@@ -25,7 +25,7 @@ public class CheckProfile {
 	getProfilefromDB(Connection conn, String email) {
 		String data
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
@@ -59,7 +59,7 @@ public class CheckProfile {
 		optionLabel = select.getFirstSelectedOption().getText()
 
 		'kumpulan string yang menyimpan hasil text dari User Interface APIAAS'
-		ArrayList<String> hasilgetText = []
+		ArrayList hasilgetText = []
 
 		'mengambil first name dari field nama depan'
 		hasilgetText.add(WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__firstName'), 'value'))

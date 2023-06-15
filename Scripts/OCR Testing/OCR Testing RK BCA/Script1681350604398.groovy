@@ -32,12 +32,12 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 Connection connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR RK BCA', 
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR RK BCA',
 	('Path') : ExcelPathOCRTesting], FailureHandling.STOP_ON_FAILURE)
 
 'pindah testcase sesuai jumlah di excel'
-for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++)
-{
+for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
+	
 	'ambil kode tenant di DB'
 	String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, 
 		findTestData(ExcelPathOCRTesting).getValue(2, 26))
@@ -46,11 +46,11 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 	String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
 	
 	'deklarasi id untuk harga pembayaran OCR'
-	int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(connProd, 
+	int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(connProd,
 		tenantcode, 'OCR Rek. Koran BCA')
 	
 	'ambil jenis penagihan transaksi (by qty/price)'
-	String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(connProd, 
+	String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(connProd,
 		tenantcode, idPayment)
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
@@ -85,7 +85,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		filterSaldo()
 		
 		'cek apakah button skip enable atau disable'
-		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementVisible(
+			findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)) {
 			
 			'klik button skip to last page'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
@@ -148,7 +149,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			continue;
 		}
 		//jika mandatory tidak terpenuhi atau ada error
-		else if(message_ocr == 'RK BCA not found' || message_ocr == 'Unexpected Error' 
+		else if (message_ocr == 'RK BCA not found' || message_ocr == 'Unexpected Error' 
 			|| message_ocr == 'Invalid API key or tenant code') {
 			
 			'write to excel status failed dan reason'
@@ -177,8 +178,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		filterSaldo()
 		
 		'cek apakah button skip enable atau disable'
-		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/'+
-			'Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)) {
+		if(WebUI.verifyElementVisible(
+			findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)) {
 		
 			'klik button skip to last page'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
@@ -191,7 +192,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		if (GlobalVariable.KondisiCekDB == 'Yes') {
 			
 			'simpan trx number terbaru dari DB'
-			String latestMutation= CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
+			String latestMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
 			
 			'jika data transaction number di web dan DB tidak sesuai'
 			if (!WebUI.verifyMatch(latestMutation, noTrxafter, false, FailureHandling.CONTINUE_ON_FAILURE)) {
@@ -204,7 +205,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		'hitung jumlah halaman pada pdf dan dikali dengan service price'
 		if (objek.contains('.pdf')) {
 			
-			totalPage = CustomKeywords.'ocrTesting.Pdfprocessor.CountPages'()
+			totalPage = CustomKeywords.'ocrTesting.Pdfprocessor.countPages'()
 		}
 		
 		'jika HIT API successful'
@@ -252,7 +253,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		}
 		
 		'jika tidak ada message error dan kondisi lain terpenuhi'
-		if(message_ocr == '' && state_ocr == 'SUCCESS' && isTrxIncreased == 1 && isSaldoBerkurang == 1 && hitAPITrx == 1) {
+		if (message_ocr == '' && state_ocr == 'SUCCESS' && isTrxIncreased == 1 
+			&& isSaldoBerkurang == 1 && hitAPITrx == 1) {
 			
 			'tulis status sukses pada excel'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR RK BCA', GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
@@ -260,7 +262,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		
 		}
 		//kondisi jika transaksi berhasil tapi tidak tercatat/tersimpan di DB
-		else if (state_ocr == 'SUCCESS' && isTrxIncreased == 0 && isSaldoBerkurang == 1)	{
+		else if (state_ocr == 'SUCCESS' && isTrxIncreased == 0 && isSaldoBerkurang == 1) {
 			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
@@ -291,6 +293,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			message_ocr)
 		}
+		
 		'refresh laman web sesudah kondisi write to excel'
 		WebUI.refresh()
 		
@@ -337,7 +340,7 @@ def getSaldoforTransaction(String NamaOCR) {
 		}
 	}
 	'pakai saldo IDR jika lainnya tidak ada'
-	if(saldoNow == 0) {
+	if (saldoNow == 0) {
 		
 		'simpan jumlah saldo sekarang di variabel'
 		saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/'+

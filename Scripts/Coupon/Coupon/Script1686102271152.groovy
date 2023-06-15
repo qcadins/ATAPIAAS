@@ -132,7 +132,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			ArrayList<String> detailresultWeb = []
 			
 			'inisialisasi array detail dari DB'
-			ArrayList<String> detailresultDB = CustomKeywords.'coupon.couponverif.getDetailCoupon'(conndev, 
+			ArrayList<String> detailresultDB = CustomKeywords.'coupon.CouponVerif.getDetailCoupon'(conndev, 
 				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 15))
 			
 			'tambahkan data tenant ke array'
@@ -425,7 +425,7 @@ def checkPaging(Connection conndev) {
 	String theendDate = callendDate()
 	
 	'ambil total data dari db'
-	int resultTotalData = CustomKeywords.'coupon.couponverif.getCouponTotal'(conndev, thestartDate, theendDate)
+	int resultTotalData = CustomKeywords.'coupon.CouponVerif.getCouponTotal'(conndev, thestartDate, theendDate)
 
 	'verify total data role'
 	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
@@ -568,7 +568,7 @@ def checkDBbeforeEdit(Connection conndev) {
 	ArrayList editUI = []
 	
 	'deklarasi array list dari DB'
-	ArrayList editDB = CustomKeywords.'coupon.couponverif.getAddEditCoupon'(conndev, 
+	ArrayList editDB = CustomKeywords.'coupon.CouponVerif.getAddEditCoupon'(conndev, 
 	findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 15))
 	
 	'tambahkan data ke array editUI'
@@ -629,7 +629,7 @@ def checkddlTipekupon(Connection conndev) {
 	int isCouponTypeFound = 0
 	
 	'ambil nama CouponType dari DB'
-	ArrayList<String> namaCouponTypeDB = CustomKeywords.'coupon.couponverif.getTipeKuponList'(conndev)
+	ArrayList<String> namaCouponTypeDB = CustomKeywords.'coupon.CouponVerif.getTipeKuponList'(conndev)
 	
 	'nama-nama tipe saldo sedang aktif dari UI'
 	ArrayList<String> namaCouponTypeUI = []
@@ -694,7 +694,7 @@ def checkddlTipeNilaikupon(Connection conndev) {
 	int isTipeNilaiKuponFound = 0
 	
 	'ambil nama TipeNilaiKupon dari DB'
-	ArrayList<String> namaTipeNilaiKuponDB = CustomKeywords.'coupon.couponverif.getTipeNilaiKuponList'(conndev)
+	ArrayList<String> namaTipeNilaiKuponDB = CustomKeywords.'coupon.CouponVerif.getTipeNilaiKuponList'(conndev)
 	
 	'nama-nama tipe saldo sedang aktif dari UI'
 	ArrayList<String> namaTipeNilaiKuponUI = []
@@ -759,7 +759,7 @@ def checkddlTenant(Connection conndev) {
 	int isTenantFound = 0
 	
 	'ambil nama Tenant dari DB'
-	ArrayList<String> namaTenantDB = CustomKeywords.'coupon.couponverif.getTenantList'(conndev)
+	ArrayList<String> namaTenantDB = CustomKeywords.'coupon.CouponVerif.getTenantList'(conndev)
 	
 	'nama-nama tipe saldo sedang aktif dari UI'
 	ArrayList<String> namaTenantUI = []

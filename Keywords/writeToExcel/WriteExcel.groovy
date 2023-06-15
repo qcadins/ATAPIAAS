@@ -79,7 +79,7 @@ public class WriteExcel {
 
 	//fungsi digunakan untuk menulis rumus ke dalam cell excel
 	@Keyword
-	void writeToExcelFormula(String filePath, String sheetName, int rowNo, int collNo, String cellValue) throws IOException{
+	void writeToExcelFormula(String filePath, String sheetName, int rowNo, int collNo, String cellValue) throws IOException {
 		FileInputStream file = new FileInputStream (new File(filePath))
 		XSSFWorkbook workbook = new XSSFWorkbook(file)
 		XSSFSheet sheet = workbook.getSheet(sheetName)
@@ -96,7 +96,7 @@ public class WriteExcel {
 	//fungsi digunakan untuk mengambil directory dari file excel yang akan digunakan
 	//keyword getExcelPath
 	@Keyword
-	getExcelPath(String Path){
+	getExcelPath(String Path) {
 		String userDir = System.getProperty('user.dir')
 
 		String filePath = userDir + Path

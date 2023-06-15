@@ -31,7 +31,7 @@ public class UserVerif {
 	getNewUserData(Connection conn, String email) {
 
 		String data
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("SELECT login_id, initial_name, last_name, aro.role_name FROM am_msuser ase LEFT JOIN am_memberofrole amo ON amo.id_ms_user = ase.id_ms_user LEFT JOIN am_msrole aro ON aro.id_ms_role = amo.id_ms_role WHERE login_id = '" + email + "'")
@@ -52,7 +52,7 @@ public class UserVerif {
 	getEditUserData(Connection conn, String email) {
 
 		String data
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("SELECT ase.login_id, initial_name, last_name, aro.role_name, CASE WHEN ase.is_active = '2' THEN 'Belum verifikasi' WHEN ase.is_active = '1' THEN 'Aktif' Else 'Tidak aktif' END FROM am_msuser ase LEFT JOIN am_memberofrole amo ON amo.id_ms_user = ase.id_ms_user LEFT JOIN am_msrole aro ON aro.id_ms_role = amo.id_ms_role WHERE login_id = '" + email + "'")

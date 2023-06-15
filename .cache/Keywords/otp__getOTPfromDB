@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "4C6CA96CE1E4520F250EEA5DFAA0A604",
+  "keywordFileContentHash": "5725F35DBB037FB1F6B0624D8A68792D",
   "keywordClasses": [
     {
       "name": "otp.GetOTPfromDB",
@@ -33,11 +33,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

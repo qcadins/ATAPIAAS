@@ -69,7 +69,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'check if action new/edit'
-		if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')){
+		if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
 			
 			'klik pada tombol New'
 			WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/a_New'))
@@ -106,7 +106,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				findTestObject('Object Repository/User Management-User/Page_Add User/input__confirmpass'), 'value')
 			
 			'cek apakah pass yang diinput sudah sesuai dengan excel'
-			if(textpass != findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 22) ||
+			if (textpass != findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 22) ||
 					textconf != findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 23)) {
 						
 				GlobalVariable.FlagFailed = 1		
@@ -187,12 +187,12 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/inputstatusUser'))
 				
 				'cek kondisi status input pada database'
-				if(findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 28) == 'Active'){
+				if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 28) == 'Active') {
 					
 					'pilih status active'
 					WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/Statusactive'))
 				}
-				else{
+				else {
 					
 					'pilih status inactive'
 					WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/Statusinactive'))
@@ -203,7 +203,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			}
 		}
 		'cek apakah perlu resend verif email'
-		if(findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 30).equalsIgnoreCase('Yes')) {
+		if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 30).equalsIgnoreCase('Yes')) {
 			
 			'input email'
 			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/input_Email_email'),
@@ -224,7 +224,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/ResendVerifEmail'))
 			
 			'cek apakah button resend muncul'
-			if(WebUI.getText(findTestObject('Object Repository/User Management-User/Page_List User/msgResend'))
+			if (WebUI.getText(findTestObject('Object Repository/User Management-User/Page_List User/msgResend'))
 				!= 'Tenant tidak ditemukan') {
 				
 				'klik pada tombol OK'
@@ -234,7 +234,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'User', 0,
 					GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 			}
-			else{
+			else {
 				
 				'klik pada tombol OK'
 				WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/button_OK'))
@@ -277,7 +277,7 @@ def searchUser() {
 
 def checkdialogConfirmation (int isMandatoryComplete) {
 	
-	if(WebUI.verifyElementHasAttribute(
+	if (WebUI.verifyElementHasAttribute(
 		findTestObject('Object Repository/User Management-User/Page_Edit User/button_Next'), 'disabled', 
 		GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		
@@ -346,7 +346,7 @@ def checkdialogConfirmation (int isMandatoryComplete) {
 				}
 				
 				'jika perlu cek status ke DB'
-				if(GlobalVariable.KondisiCekDB == 'Yes') {
+				if (GlobalVariable.KondisiCekDB == 'Yes') {
 		
 					'panggil fungsi storeDB'
 					WebUI.callTestCase(findTestCase('Test Cases/User Management/UserStoreDB'), [('Path') : ExcelPathUser],
@@ -383,7 +383,7 @@ def checkPaging(Connection conndev) {
 	
 	'input nama email'
 	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/input_Email_email'),
-			findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 14))
+		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 14))
 	
 	'input status user'
 	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/inputstatus'),
@@ -408,18 +408,18 @@ def checkPaging(Connection conndev) {
 	WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/button_Reset'))
 	
 	'verify field ke reset'
-	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/'+
-		'Page_List User/input_Email_email'),
+	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
+		findTestObject('Object Repository/User Management-User/Page_List User/input_Email_email'),
 			'value', FailureHandling.CONTINUE_ON_FAILURE),'', false, FailureHandling.CONTINUE_ON_FAILURE))
 
 	'verify field ke reset'
-	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/'+
-		'Page_List User/inputstatus'),
+	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
+		findTestObject('Object Repository/User Management-User/Page_List User/inputstatus'),
 			'value', FailureHandling.CONTINUE_ON_FAILURE),'', false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field ke reset'
-	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/'+
-		'Page_List User/inputrole'),
+	checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
+		findTestObject('Object Repository/User Management-User/Page_List User/inputrole'),
 			'value', FailureHandling.CONTINUE_ON_FAILURE),'', false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'klik pada tombol cari'
@@ -444,15 +444,17 @@ def checkPaging(Connection conndev) {
 //	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'cek apakah hlm  tersedia'
-	if(WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-User/'+
-		'Page_List User/i_Action_datatable-icon-skip'),FailureHandling.OPTIONAL) == true){
+	if (WebUI.verifyElementVisible(
+		findTestObject('Object Repository/User Management-User/Page_List User/i_Action_datatable-icon-skip'),
+			FailureHandling.OPTIONAL) == true) {
 		
 		'klik halaman 2'
 		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/Page2'))
 		
 		'verify paging di page 2'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/'+
-			'Page_List User/Page2'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
+			findTestObject('Object Repository/User Management-User/Page_List User/Page2'),
+			'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik halaman 1'
@@ -500,7 +502,6 @@ def checkPaging(Connection conndev) {
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
 			'Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
-		
 	}
 }
 
@@ -532,7 +533,7 @@ def checkDBbeforedit(Connection conndev) {
 	for (int i = 0; i < editDB.size(); i++) {
 		
 		'jika ada data yang tidak sesuai tulis error'
-		if(editUI[i] != editDB[i]) {
+		if (editUI[i] != editDB[i]) {
 			
 			GlobalVariable.FlagFailed = 1
 			
@@ -554,4 +555,3 @@ def checkVerifyPaging(Boolean isMatch) {
 		GlobalVariable.FlagFailed = 1
 	}
 }
-

@@ -6,7 +6,7 @@ import java.sql.Statement
 import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
-public class couponverif {
+public class CouponVerif {
 
 	int columnCount
 

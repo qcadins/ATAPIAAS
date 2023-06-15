@@ -14,7 +14,8 @@ Connection connpublic = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_pub
 ArrayList<String> totaldata = []
 
 'kumpulan string dari DB'
-ArrayList<String> totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'(connpublic, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
+ArrayList<String> totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'(connpublic, 
+	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
 
 'masukkan hasil perhitungan jumlah key ke totaldata'
 totaldata.add(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Api Key List/Footer')))
@@ -30,8 +31,9 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-		(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonStoreDB)
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				GlobalVariable.FailedReasonStoreDB)	
 	}
 }
 
