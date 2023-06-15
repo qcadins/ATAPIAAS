@@ -46,6 +46,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	}
 	else if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
+		'deklarasi integer yang akan dipakai'
+		int totalbefore, ppnbefore, grandTotalbefore, totalKatalon
+		
 		'deklarasi array untuk simpan data subtotal'
 		ArrayList allsubtotal = []
 		
@@ -98,8 +101,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				
 			for (int i = 0; i <= listServices.size(); i++) {
 				
-				'deklarasi variabel integer'
-				int subtotal
+				'deklarasi string subtotal'
+				String subtotal
+				
+				'deklarasi subtotal convert'
+				int subtotalconvert
 				
 				'klik pada tambah layanan'
 				WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/a_Tambah'))
@@ -127,8 +133,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					listServices[i])
 				
 				'ambil data dari subtotal'
-				subtotal = Integer.parseInt(WebUI.getAttribute(
-					findTestObject('Object Repository/Top Up/Page_Topup Balance/inputsubTotal'), 'value'))
+				subtotal = WebUI.getAttribute(
+					findTestObject('Object Repository/Top Up/Page_Topup Balance/inputsubTotal'), 'value').replace('.', '')
+					
+				'ubah subtotal ke integer'
+				subtotalconvert = Integer.parseInt(subtotal)
 				
 				'jika harga layanan di ui dan db sesuai'
 				if (hargasatuanUI == hargasatuanDB) {
@@ -163,7 +172,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/button_Save'))
 					
 					'tambah subtotal ke array'
-					allsubtotal.add(subtotal)
+					allsubtotal.add(subtotalconvert)
 				}
 				else {
 					
@@ -179,8 +188,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				}
 			}
 		}
-		
-		int totalKatalon = 0
 		
 		'lakukan penghitungan untuk subtotal'
 		for (int i = 0; i < allsubtotal.size(); i++) {
@@ -198,25 +205,39 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'ambil ppn dari DB'
 		int ppnfromDB = CustomKeywords.'topup.TopupVerif.getPPNvalue'(conndev)
 		
+		'ambil data total'
+		totalbefore = Integer.parseInt(WebUI.getAttribute(
+			findTestObject('Object Repository/Top Up/Page_Topup Balance/totalprice'),
+			'value', FailureHandling.CONTINUE_ON_FAILURE))
+		
+		'ambil data ppn'
+		ppnbefore = Integer.parseInt(WebUI.getAttribute(
+			findTestObject('Object Repository/Top Up/Page_Topup Balance/PPN11'),
+			'value', FailureHandling.CONTINUE_ON_FAILURE))
+		
+		'ambil data grandtotal'
+		grandTotalbefore = Integer.parseInt(WebUI.getAttribute(
+			findTestObject('Object Repository/Top Up/Page_Topup Balance/grandTotal'),
+			'value', FailureHandling.CONTINUE_ON_FAILURE))
+		
+		'hitung jumlah ppn'
+		int ppnKatalon = ppnfromDB * totalbefore / 100
+		
+		'cek penghitungan ppn di katalon dan di web'
+		checkVerifyEqualorMatch(WebUI.verifyEqual(ppnKatalon, ppnbefore,
+			FailureHandling.CONTINUE_ON_FAILURE), 'Penghitungan PPn salah')
+		
+		'cek penghitungan grandtotal di katalon dan web'
+		checkVerifyEqualorMatch(WebUI.verifyEqual((totalKatalon + ppnKatalon), grandTotalbefore,
+			FailureHandling.CONTINUE_ON_FAILURE), 'Penghitungan GrandTotal salah')
+		
 		'pilihan untuk pakai kupon'
 		if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 17) == 'Yes') {
 			
-			'deklarasi integer yang akan dipakai'
-			int totalbefore, ppnbefore, grandTotalbefore
-			
-			'ambil data total'
-			totalbefore = WebUI.getAttribute(findTestObject('Object Repository/Top Up/Page_Topup Balance/totalprice'), 
-				'value', FailureHandling.CONTINUE_ON_FAILURE)
-			
-			'ambil data ppn'
-			ppnbefore = WebUI.getAttribute(findTestObject('Object Repository/Top Up/Page_Topup Balance/PPN11'), 
-				'value', FailureHandling.CONTINUE_ON_FAILURE)
-			
-			'ambil data grandtotal'
-			grandTotalbefore = WebUI.getAttribute(findTestObject('Object Repository/Top Up/Page_Topup Balance/grandTotal'), 
-				'value', FailureHandling.CONTINUE_ON_FAILURE)
-			
-			'grandtotal dari'
+			'ambil detail coupon dari DB'
+			ArrayList coupondetail = CustomKeywords.'topup.TopupVerif.getCouponDetail'(conndev,
+				findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 14))
+				
 		}
 		
 	}

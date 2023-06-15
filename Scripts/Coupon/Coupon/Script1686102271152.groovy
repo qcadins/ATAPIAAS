@@ -70,18 +70,24 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'klik pada tombol tambah coupon'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/a_Tambah'))
 			
+			'panggil fungsi cek ddl tipe kupon'
 			checkddlTipekupon(conndev)
 			
+			'panggil fungsi cek ddl nilai kupon'
 			checkddlTipeNilaikupon(conndev)
 			
+			'panggil fungsi cek ddl tenant'
 			checkddlTenant(conndev)
 			
+			'panggil fungsi input data dari excel'
 			inputparameter(findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8))
 			
+			'panggil fungsi menjalankan konfirmasi dialog'
 			checkdialogConfirmation(isMandatoryComplete)
 		}
 		else if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 			
+			'panggil fungsi search'
 			searchfunction()
 			
 			'cek apakah hasil search gagal'
@@ -99,12 +105,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'klik tombol edit'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/editButton'))
 			
+			'panggil fungsi cek sebelum edit'
+			checkDBbeforeEdit(conndev)
+			
+			'panggil fungsi input data dari excel'
 			inputparameter(findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8))
 			
+			'panggil fungsi menjalankan konfirmasi dialog'
 			checkdialogConfirmation(isMandatoryComplete)
 		}
 		else if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Detail')) {
 			
+			'panggil fungsi search'
 			searchfunction()
 			
 			'cek apakah hasil search gagal'
@@ -162,7 +174,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'klik pada tombol silang untuk mengakhiri sesi detail'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/span_'))
 		}
-		if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 42) == 'Yes') {
+		'cek apakah perlu copy kode kupon'
+		if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 31) == 'Yes') {
 			
 			'klik pada tombol copy kode kupon'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/copybutton'))
@@ -179,7 +192,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	}
 }
 
-'fungsi untuk menutup browser jika testing berjalan mulus'
+'fungsi untuk menutup browser'
 WebUI.closeBrowser()
 
 def searchfunction() {
@@ -193,28 +206,13 @@ def searchfunction() {
 
 def inputparameter(String action) {
 	
-	'deklarasi angka row'
-	int rownum
-	
-	'jika action adalah new coupon'
-	if (action == "New") {
-		
-		'mulai row dari 20'
-		rownum = 20
-	}
-	else
-	{
-		'mulai row dari 31'
-		rownum = 31
-	}
-	
 	'input tipe kupon'
 	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipekupon'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rownum))
+			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 20))
 	
 	'input kode kupon'
 	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputkodekupon'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rownum+1))
+			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 21))
 	
 	'enter pada tipe kupon'
 	WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipekupon'),
@@ -222,15 +220,15 @@ def inputparameter(String action) {
 	
 	'input tanggal mulai berlaku'
 	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__CouponStartDate'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rownum+2))
+			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 22))
 	
 	'input tanggal mulai berlaku'
 	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__CouponEndDate'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rownum+3))
+			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 23))
 	
 	'input tipe nilai kupon'
 	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipenilaikupon'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rownum+4))
+			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 24))
 	
 	'enter pada tipe nilai kupon'
 	WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipenilaikupon'),
@@ -238,23 +236,23 @@ def inputparameter(String action) {
 	
 	'input tipe nilai kupon'
 	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__nilaikupon'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rownum+5))
+			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 25))
 	
 	'input jumlah kupon'
 	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__jmlkupon'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rownum+6))
+			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 26))
 	
 	'input maksimal redeem kupon'
 	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__maxredeem'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rownum+7))
+			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 27))
 	
 	'input minimal pembayaran untuk pakai kupon'
 	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__minimumpayment'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rownum+8))
+			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 28))
 	
 	'input tenant'
 	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/tenantinput'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rownum+9))
+			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 29))
 	
 	'enter pada tenant'
 	WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/tenantinput'),
@@ -538,6 +536,58 @@ def checkdialogConfirmation(isMandatoryComplete) {
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonPercentage)
+	}
+}
+
+def checkDBbeforeEdit(Connection conndev) {
+	
+	'deklarasi array list dari UI'
+	ArrayList editUI = []
+	
+	'deklarasi array list dari DB'
+	ArrayList editDB = CustomKeywords.'coupon.couponverif.getAddEditCoupon'(conndev, 
+	findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 15))
+	
+	'tambahkan data ke array editUI'
+	editUI.add(WebUI.getText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/CheckTipeKupon')))
+
+	'tambahkan data ke array editUI'
+	editUI.add(WebUI.getAttribute(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputkodekupon'), 'value'))
+	
+	'tambahkan data ke array editUI'
+	editUI.add(WebUI.getAttribute(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__CouponStartDate'), 'value'))
+
+	'tambahkan data ke array editUI'
+	editUI.add(WebUI.getAttribute(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__CouponEndDate'), 'value'))
+	
+	'tambahkan data ke array editUI'
+	editUI.add(WebUI.getText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/CheckTipeNilaiKupon')))
+	
+	'tambahkan data ke array editUI'
+	editUI.add(WebUI.getAttribute(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__nilaikupon'), 'value'))
+
+	'tambahkan data ke array editUI'
+	editUI.add(WebUI.getAttribute(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__jmlkupon'), 'value'))
+
+	'tambahkan data ke array editUI'
+	editUI.add(WebUI.getAttribute(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__maxredeem'), 'value'))
+
+	'tambahkan data ke array editUI'
+	editUI.add(WebUI.getAttribute(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__minimumpayment'), 'value'))
+	
+	'loop untuk verify data equal'
+	for (int i = 0; i < editDB.size(); i++) {
+		
+		'jika ada data yang tidak sesuai tulis error'
+		if(editUI[i] != editDB[i]) {
+			
+			GlobalVariable.FlagFailed = 1
+			
+			'tulis adanya error pada sistem web'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonEditVerif)
+		}
 	}
 }
 

@@ -110,7 +110,7 @@ public class TopupVerif {
 		}
 		data
 	}
-	
+
 	@Keyword
 	getPPNvalue(Connection conn) {
 
@@ -126,7 +126,7 @@ public class TopupVerif {
 		}
 		data
 	}
-	
+
 	@Keyword
 	getCouponDetail(Connection conn, String kodekupon) {
 
