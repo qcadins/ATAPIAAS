@@ -33,11 +33,13 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getAttributeValueProfile",
-          "parameters": []
+          "parameters": [],
+          "javadoc": ""
         },
         {
           "name": "getTenantNamefromDB",
@@ -68,10 +70,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>span_Logout</name>
+   <tag></tag>
+   <elementGuidId>8dbacfbd-9c63-4f11-8ec7-8803e172dcc6</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>i.ft-log-out.mr-3</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='navbarSupportedContent']/ul/li/div/a[4]/div/i</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>i</value>
+      <webElementGuid>eb9a4184-c37e-4cc3-8416-8f688758b3f4</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ft-log-out mr-3</value>
+      <webElementGuid>cdf80f66-5529-4fd3-b521-55bacc911cb2</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;navbarSupportedContent&quot;)/ul[@class=&quot;navbar-nav&quot;]/li[@class=&quot;nav-item mr-4 ng-star-inserted show dropdown&quot;]/div[@class=&quot;dropdown-menu text-left dropdown-menu-right m-0 pb-0 show&quot;]/a[@class=&quot;dropdown-item&quot;]/div[@class=&quot;d-flex align-items-center&quot;]/i[@class=&quot;ft-log-out mr-3&quot;]</value>
+      <webElementGuid>614fea2d-1fb4-49d7-aec3-22228e933c69</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='navbarSupportedContent']/ul/li/div/a[4]/div/i</value>
+      <webElementGuid>762d582a-1595-4319-af66-61598eb6a7fc</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//a[4]/div/i</value>
+      <webElementGuid>1a6457be-c944-49f4-ac7b-0b9b52e0d632</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

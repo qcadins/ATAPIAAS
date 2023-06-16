@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>changepass</name>
+   <tag></tag>
+   <elementGuidId>19674de0-13d7-4afa-9d2d-a04df3db351a</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>i.icon-lock.mr-3</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='navbarSupportedContent']/ul/li/div/a[2]/div/i</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>i</value>
+      <webElementGuid>2e43f707-07e9-46d0-89a7-07bfa5bf1153</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>icon-lock mr-3</value>
+      <webElementGuid>d5696cdf-da77-4745-addc-b681767272ed</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;navbarSupportedContent&quot;)/ul[@class=&quot;navbar-nav&quot;]/li[@class=&quot;nav-item mr-4 ng-star-inserted show dropdown&quot;]/div[@class=&quot;dropdown-menu text-left dropdown-menu-right m-0 pb-0 show&quot;]/a[@class=&quot;dropdown-item ng-star-inserted&quot;]/div[@class=&quot;d-flex align-items-center mt-2&quot;]/i[@class=&quot;icon-lock mr-3&quot;]</value>
+      <webElementGuid>90b0736e-71d1-4e90-9d4b-c902180d41f8</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='navbarSupportedContent']/ul/li/div/a[2]/div/i</value>
+      <webElementGuid>bc151db3-ec47-4821-a05a-50685f47d766</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//a[2]/div/i</value>
+      <webElementGuid>77bb83eb-2bbb-4916-8abd-8bf41642e043</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

@@ -33,11 +33,13 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getAttributeValueAPI",
-          "parameters": []
+          "parameters": [],
+          "javadoc": ""
         },
         {
           "name": "getAPIStatusfromDB",
@@ -68,7 +70,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getTotalAPIKeyfromDB",
@@ -99,10 +102,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

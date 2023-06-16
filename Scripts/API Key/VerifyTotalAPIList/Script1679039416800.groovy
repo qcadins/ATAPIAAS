@@ -11,10 +11,10 @@ import java.sql.Connection
 Connection connpublic = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'kumpulan string dari WEB'
-ArrayList<String> totaldata = []
+ArrayList totaldata = []
 
 'kumpulan string dari DB'
-ArrayList<String> totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'(connpublic, 
+ArrayList totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'(connpublic, 
 	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
 
 'masukkan hasil perhitungan jumlah key ke totaldata'

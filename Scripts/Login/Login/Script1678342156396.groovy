@@ -335,6 +335,38 @@ else if (TC == 'TopUp') {
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'button_Lanjutkan Perjalanan Anda'))
 }
+else if (TC == 'ChangePass') {
+	
+	'input data email'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 9))
+	
+	'input password'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 10))
+	
+	'ceklis pada reCaptcha'
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
+		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	
+	'pada delay, lakukan captcha secara manual'
+	WebUI.delay(10)
+	
+	'klik pada button login'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'button_Lanjutkan Perjalanan Anda'))
+	
+	'jika ada pilihan role'
+	if (WebUI.verifyElementPresent(
+		findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'), 
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+	
+		'pilih admin client'
+		WebUI.click(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'))
+	}
+}
 
 //'cek apakah muncul error unknown setelah login'
 //if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), 
