@@ -9,6 +9,7 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
+import org.openqa.selenium.By
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
@@ -45,15 +46,15 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'input password lama'
 		WebUI.setText(findTestObject('Object Repository/Change Password/Page_Change Password/input__currentPass'),
-			findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 11))
+			findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 12))
 		
 		'input password baru'
 		WebUI.setText(findTestObject('Object Repository/Change Password/Page_Change Password/input__newPass'),
-			findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 12))
+			findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 13))
 		
 		'input password baru confirm'
 		WebUI.setText(findTestObject('Object Repository/Change Password/Page_Change Password/input__confirmnewPass'),
-			findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 13))
+			findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 14))
 		
 		'pastikan tombol lanjut tidak disabled'
 		if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Change Password/Page_Change Password/button_Lanjut'),
@@ -117,8 +118,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'),
 					GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 			
-				'pilih admin client'
-				WebUI.click(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'))
+				'panggil fungsi cari role'
+				roleSelect()
 			}
 			
 			'cek apakah muncul error gagal login'
@@ -194,9 +195,9 @@ def loginFunction() {
 	if (WebUI.verifyElementPresent(
 		findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'),
 			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-	
-		'pilih admin client'
-		WebUI.click(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'))
+		
+		'panggil fungsi cari role'
+		roleSelect()
 	}
 	
 	'cek apakah muncul error gagal login'
@@ -209,5 +210,41 @@ def loginFunction() {
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('ChangePassword', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonLoginIssue)
+	}
+}
+
+def roleSelect() {
+	'cari element dengan nama saldo'
+	def elementRole = DriverFactory.getWebDriver().findElements(By.cssSelector('body > ngb-modal-window > div > div > app-multi-role > div > div.row > div > table tr'))
+	
+	int isSelected = 0
+	
+	'lakukan loop untuk cari nama saldo yang ditentukan'
+	for (int i = 1; i <= elementRole.size() - 1; i++) {
+		
+		'cari nama role yag sesuai di opsi role'
+		def modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[1]", true)
+
+		'jika nama object sesuai dengan nama role'
+		if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 11).equalsIgnoreCase(
+			WebUI.getAttribute(modifyRole, 'value', FailureHandling.STOP_ON_FAILURE))) {
+			
+			'ubah alamat xpath ke role yang dipilih'
+			modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[2]/a", true)
+		
+			'klik role yang dipilih'
+			WebUI.click(findTestObject('Object Repository/Change Password/modifyobject'))
+			
+			'penanda adanya role yang dipilih'
+			isSelected = 1
+			
+			break;
+		}
+	}
+	'pakai saldo IDR jika lainnya tidak ada'
+	if (isSelected == 0) {
+		
+		'simpan jumlah saldo sekarang di variabel'
+		WebUI.click(findTestObject('Object Repository/Change Password/modifyobject'))
 	}
 }

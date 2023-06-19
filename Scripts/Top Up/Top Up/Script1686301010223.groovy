@@ -28,17 +28,11 @@ Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_dev
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'TopUp', ('SheetName') : 'TopUp',
 	('Path') : ExcelPathTopUp], FailureHandling.STOP_ON_FAILURE)
 
-'klik pada tombol menu'
-WebUI.click(findTestObject('Object Repository/Top Up/Page_Balance/spanMenu'))
-
-'klik pada menu isi saldo'
-WebUI.click(findTestObject('Object Repository/Top Up/Page_Balance/span_Isi Saldo'))
-
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'set penanda error menjadi 0'
 	GlobalVariable.FlagFailed = 0
-		
+	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
@@ -46,11 +40,27 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	}
 	else if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
+		'klik pada tombol menu'
+		WebUI.click(findTestObject('Object Repository/Top Up/Page_Balance/spanMenu'))
+		
+		'klik pada menu isi saldo'
+		WebUI.click(findTestObject('Object Repository/Top Up/Page_Balance/span_Isi Saldo'))
+		
+		'cek apakah tombol menu dalam jangkauan web'
+		if (WebUI.verifyElementVisible(findTestObject(TombolSilang), FailureHandling.OPTIONAL)) {
+			
+			'klik pada tombol silang menu'
+			WebUI.click(findTestObject(TombolSilang))
+		}
+		
 		'deklarasi integer yang akan dipakai'
-		int totalbefore, ppnbefore, grandTotalbefore, totalKatalon
+		int totalKatalon, modifyint, totalafter, ppnafter, grandTotalafter, ppnbefore, grandTotalbefore, cashbacknominal
+		
+		int cashbackbagian
 		
 		'deklarasi array untuk simpan data subtotal'
 		ArrayList allsubtotal = []
+		ArrayList newqty = []
 		
 		'declare isMmandatory Complete'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 5))
@@ -205,31 +215,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'ambil ppn dari DB'
 		int ppnfromDB = CustomKeywords.'topup.TopupVerif.getPPNvalue'(conndev)
 		
-		'ambil data total'
-		totalbefore = Integer.parseInt(WebUI.getAttribute(
-			findTestObject('Object Repository/Top Up/Page_Topup Balance/totalprice'),
-			'value', FailureHandling.CONTINUE_ON_FAILURE))
+		'hitung ppn sebelumnya'
+		ppnbefore = ppnfromDB * totalKatalon / 100
 		
-		'ambil data ppn'
-		ppnbefore = Integer.parseInt(WebUI.getAttribute(
-			findTestObject('Object Repository/Top Up/Page_Topup Balance/PPN11'),
-			'value', FailureHandling.CONTINUE_ON_FAILURE))
+		'hitung grand total'
+		grandTotalbefore = ppnbefore + totalKatalon
 		
-		'ambil data grandtotal'
-		grandTotalbefore = Integer.parseInt(WebUI.getAttribute(
-			findTestObject('Object Repository/Top Up/Page_Topup Balance/grandTotal'),
-			'value', FailureHandling.CONTINUE_ON_FAILURE))
-		
-		'hitung jumlah ppn'
-		int ppnKatalon = ppnfromDB * totalbefore / 100
-		
-		'cek penghitungan ppn di katalon dan di web'
-		checkVerifyEqualorMatch(WebUI.verifyEqual(ppnKatalon, ppnbefore,
-			FailureHandling.CONTINUE_ON_FAILURE), 'Penghitungan PPn salah')
-		
-		'cek penghitungan grandtotal di katalon dan web'
-		checkVerifyEqualorMatch(WebUI.verifyEqual((totalKatalon + ppnKatalon), grandTotalbefore,
-			FailureHandling.CONTINUE_ON_FAILURE), 'Penghitungan GrandTotal salah')
+		'panggil fungsi pengecekan data'
+		statschecking(conndev, ppnfromDB, totalKatalon, ppnbefore, grandTotalbefore)
 		
 		'pilihan untuk pakai kupon'
 		if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 17) == 'Yes') {
@@ -237,8 +230,128 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'ambil detail coupon dari DB'
 			ArrayList coupondetail = CustomKeywords.'topup.TopupVerif.getCouponDetail'(conndev,
 				findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 14))
+			
+			'input kode kupon'
+			WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/input_Kupon_kupon'),
+				findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 14))
+			
+			'cek apakah tipe kupon adalah diskon'
+			if (coupondetail[0].equals('Discount')) {
 				
+				'cek apakah minimum pembayaran terpenuhi'
+				if (Integer.parseInt(coupondetail[4]) <= totalKatalon) {
+					
+					'lihat jenis nilai kupon'
+					if (coupondetail[1].equals('Percentage')) {
+						
+						'hitung persentase discount dari total harga'
+						totalafter = totalKatalon - (totalKatalon * coupondetail[2] / 100)
+						
+						'hitung ppn setelah dikenakan diskon'
+						ppnafter = totalafter * ppnfromDB / 100
+						
+						'hitung grand total setelah diskon'
+						grandTotalafter = totalafter + ppnafter
+						
+						'panggil fungsi pengecekan data'
+						statschecking(conndev, ppnfromDB, totalafter, ppnafter, grandTotalafter)
+					}
+					else if (coupondetail[1].equals('Nominal')) {
+						
+						'hitung nominal diskon dari total harga'
+						totalafter = totalKatalon - coupondetail[2]
+						
+						'itung ppn setelah dikenakan diskon'
+						ppnafter = totalafter * ppnfromDB / 100
+						
+						'hitung grand total setelah diskon'
+						grandTotalafter = totalafter + ppnafter
+						
+						'panggil fungsi pengecekan data'
+						statschecking(conndev, ppnfromDB, totalafter, ppnafter, grandTotalafter)
+					}
+				}
+				else {
+					
+					GlobalVariable.FlagFailed = 1
+					
+					'tulis error karena minimum payment tidak terpenuhi'
+					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('TopUp', GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+							GlobalVariable.FailedReasonMinimumPayment)
+					
+				}
+			}
+			else if (coupondetail[0].equals('Cashback')) {
+				
+				'cek apakah minimum pembayaran terpenuhi'
+				if (Integer.parseInt(coupondetail[4]) <= totalKatalon) {
+					
+					'lihat jenis nilai kupon'
+					if (coupondetail[1].equals('Percentage')) {
+						
+						'lakukan loop untuk tambah data ke array qty'
+						for (int i = 0; i < allsubtotal.size ; i++) {
+							
+							'hitung persentase cashback dari total harga'
+							newqty.add(allsubtotal[i] + (allsubtotal[i]*coupondetail[2]/100))
+						}
+						
+						'hitung total setelah apply coupon'
+						totalafter = totalKatalon
+						
+						'hitung ppn setelah dikenakan cashback'
+						ppnafter = totalafter * ppnfromDB / 100
+						
+						'hitung grand total setelah cashback'
+						grandTotalafter = totalafter + ppnafter
+						
+						'panggil fungsi pengecekan data'
+						statschecking(conndev, ppnfromDB, totalafter, ppnafter, grandTotalafter)
+					}
+					else if (coupondetail[1].equals('Nominal')) {
+						
+						for (int i = 0; i < allsubtotal.size(); i++) {
+							
+							'hitung bagian cashback dari total harga'
+							cashbackbagian = allsubtotal[i]/totalKatalon
+							
+							'simpan data hitungan bagian sementara'
+							modifyint = cashbackbagian * coupondetail[2]
+							
+							'tambahkan ke nominal cashback'
+							cashbacknominal = modifyint / cashbackbagian
+							
+							'masukkan saldo baru ke array'
+							newqty.add((cashbacknominal + allsubtotal[i]))
+						}
+						
+						'hitung total setelah pengaplikasian kupon'
+						totalafter = totalKatalon
+						
+						'itung ppn setelah dikenakan cashback'
+						ppnafter = totalafter * ppnfromDB / 100
+						
+						'hitung grand total setelah cashback'
+						grandTotalafter = totalafter + ppnafter
+						
+						'panggil fungsi pengecekan data'
+						statschecking(conndev, ppnfromDB, totalafter, ppnafter, grandTotalafter)
+					}
+				}
+				else {
+					
+					GlobalVariable.FlagFailed = 1
+					
+					'tulis error karena minimum payment tidak terpenuhi'
+					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('TopUp', GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+							GlobalVariable.FailedReasonMinimumPayment)
+					
+				}
+			}
 		}
+		
 		
 	}
 }
@@ -371,6 +484,39 @@ def checkddlMetodeTransfer(Connection conndev) {
 	
 	'klik pada ddl metodetransfer'
 	WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/span_paymentmethod'))
+}
+
+def statschecking(Connection conndev, int ppnfromDB, int totalkatalon, int ppnkatalon, int grandTotalkatalon) {
+	
+	'inisialisasi variabel integer'
+	int total, ppn, grandTotal
+	
+	'ambil data total'
+	total = Integer.parseInt(WebUI.getAttribute(
+		findTestObject('Object Repository/Top Up/Page_Topup Balance/totalprice'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'ambil data ppn'
+	ppn = Integer.parseInt(WebUI.getAttribute(
+		findTestObject('Object Repository/Top Up/Page_Topup Balance/PPN11'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'ambil data grandtotal'
+	grandTotal = Integer.parseInt(WebUI.getAttribute(
+		findTestObject('Object Repository/Top Up/Page_Topup Balance/grandTotal'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'cek penghitungan total di katalon dan web'
+	checkVerifyEqualorMatch(WebUI.verifyEqual(total, totalkatalon,
+		FailureHandling.CONTINUE_ON_FAILURE), 'Penghitungan Total salah')
+	
+	'cek penghitungan ppn di katalon dan web'
+	checkVerifyEqualorMatch(WebUI.verifyEqual(ppn, ppnkatalon,
+		FailureHandling.CONTINUE_ON_FAILURE), 'Penghitungan PPN salah')
+	
+	'cek penghitungan grandtotal di katalon dan web'
+	checkVerifyEqualorMatch(WebUI.verifyEqual(grandTotal, grandTotalkatalon,
+		FailureHandling.CONTINUE_ON_FAILURE), 'Penghitungan GrandTotal salah')
 }
 
 def checkddlBankDestination(Connection conndev) {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>modifyobject</name>
+   <tag></tag>
+   <elementGuidId>18f393dc-f759-4a43-89a6-a68d334704fd</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr[2]/td[2]/a</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr[2]/td[2]/a</value>
+      <webElementGuid>7b9c2d3e-8e06-46eb-95c1-36e81003acc7</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

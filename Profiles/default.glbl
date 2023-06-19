@@ -96,6 +96,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Minimum pembayaran belum terpenuhi'</initValue>
+      <name>FailedReasonMinimumPayment</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Akses menu mengalami error'</initValue>
       <name>FailedReasonMenuRole</name>
    </GlobalVariableEntity>

@@ -11,11 +11,24 @@
       <value></value>
       <variableId>43050c00-8fce-46f2-816d-99412ad57f14</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>9a9812aa-36a6-4708-bddc-614969d52d18</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'Top Up/DataTestingTopUp'</defaultValue>
       <description></description>
       <id>43050c00-8fce-46f2-816d-99412ad57f14</id>
       <masked>false</masked>
       <name>ExcelPathTopUp</name>
+   </variable>
+   <variable>
+      <defaultValue>'Object Repository/User Management-Role/Page_List Roles/i_Logout_ft-x ng-tns-c133-2'</defaultValue>
+      <description></description>
+      <id>9a9812aa-36a6-4708-bddc-614969d52d18</id>
+      <masked>false</masked>
+      <name>TombolSilang</name>
    </variable>
 </TestCaseEntity>
