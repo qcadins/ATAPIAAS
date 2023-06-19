@@ -131,6 +131,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Gagal pilih role saat login'</initValue>
+      <name>FailedReasonRoleLogin</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'HIT gagal, tapi saldo berkurang'</initValue>
       <name>FailedReasonSaldoBocor</name>
    </GlobalVariableEntity>
