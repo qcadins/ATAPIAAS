@@ -35,8 +35,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	}
 	else if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
-		'panggil fungsi login'
-		loginFunction()
+		'jika gagal pilih role saat login'
+		if (loginFunction(10) == 0) {
+			
+			continue
+		}
 		
 		'klik pada tombol untuk span profile'
 		WebUI.click(findTestObject('Object Repository/Change Password/Page_Balance/span_profile'))
@@ -92,34 +95,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'panggil fungsi logout'
 			logoutFunction()
 			
-			'input data email'
-			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-				'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-				findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 9))
+			'jika gagal pilih role saat login'
+			if (loginFunction(10) == 0) {
 			
-			'input password'
-			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-				'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-				findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 13))
-			
-			'ceklis pada reCaptcha'
-			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-				'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
-			
-			'pada delay, lakukan captcha secara manual'
-			WebUI.delay(10)
-			
-			'klik pada button login'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-				'button_Lanjutkan Perjalanan Anda'))
-			
-			'jika ada pilihan role'
-			if (WebUI.verifyElementPresent(
-				findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'),
-					GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-			
-				'panggil fungsi cari role'
-				roleSelect()
+				continue
 			}
 			
 			'cek apakah muncul error gagal login'
@@ -168,7 +147,10 @@ def logoutFunction() {
 	WebUI.click(findTestObject('Object Repository/Change Password/Page_Balance/span_Logout'))
 }
 
-def loginFunction() {
+def loginFunction(int row) {
+	
+	'penentu apakah ada role yang sudah di'
+	int isSelected = 0
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
@@ -178,7 +160,7 @@ def loginFunction() {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-		findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 10))
+		findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, row))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
@@ -196,8 +178,39 @@ def loginFunction() {
 		findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'),
 			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		
-		'panggil fungsi cari role'
-		roleSelect()
+		'cari element dengan nama role'
+		def elementRole = DriverFactory.getWebDriver().findElements(By.cssSelector('body > ngb-modal-window > div > div > app-multi-role > div > div.row > div > table tr'))
+		
+		'lakukan loop untuk cari nama saldo yang ditentukan'
+		for (int i = 1; i <= elementRole.size() - 1; i++) {
+			
+			'cari nama role yag sesuai di opsi role'
+			def modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[1]", true)
+	
+			'jika nama object sesuai dengan nama role'
+			if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 11).equalsIgnoreCase(
+				WebUI.getAttribute(modifyRole, 'value', FailureHandling.STOP_ON_FAILURE))) {
+				
+				'ubah alamat xpath ke role yang dipilih'
+				modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[2]/a", true)
+			
+				'klik role yang dipilih'
+				WebUI.click(findTestObject('Object Repository/Change Password/modifyobject'))
+				
+				'penanda adanya role yang dipilih'
+				isSelected = 1
+				
+				break;
+			}
+		}
+		'tulis error dan lanjut testcase berikutnya'
+		if (isSelected == 0) {
+			
+			'tulis adanya error pada sistem web'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('ChangePassword', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonRoleLogin)
+		}
 	}
 	
 	'cek apakah muncul error gagal login'
@@ -211,40 +224,6 @@ def loginFunction() {
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonLoginIssue)
 	}
-}
-
-def roleSelect() {
-	'cari element dengan nama saldo'
-	def elementRole = DriverFactory.getWebDriver().findElements(By.cssSelector('body > ngb-modal-window > div > div > app-multi-role > div > div.row > div > table tr'))
 	
-	int isSelected = 0
-	
-	'lakukan loop untuk cari nama saldo yang ditentukan'
-	for (int i = 1; i <= elementRole.size() - 1; i++) {
-		
-		'cari nama role yag sesuai di opsi role'
-		def modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[1]", true)
-
-		'jika nama object sesuai dengan nama role'
-		if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 11).equalsIgnoreCase(
-			WebUI.getAttribute(modifyRole, 'value', FailureHandling.STOP_ON_FAILURE))) {
-			
-			'ubah alamat xpath ke role yang dipilih'
-			modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[2]/a", true)
-		
-			'klik role yang dipilih'
-			WebUI.click(findTestObject('Object Repository/Change Password/modifyobject'))
-			
-			'penanda adanya role yang dipilih'
-			isSelected = 1
-			
-			break;
-		}
-	}
-	'pakai saldo IDR jika lainnya tidak ada'
-	if (isSelected == 0) {
-		
-		'simpan jumlah saldo sekarang di variabel'
-		WebUI.click(findTestObject('Object Repository/Change Password/modifyobject'))
-	}
+	return isSelected
 }
