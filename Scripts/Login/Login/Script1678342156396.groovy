@@ -317,12 +317,12 @@ else if (TC == 'TopUp') {
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-		findTestData(Path).getValue(2, 21))
+		findTestData(Path).getValue(2, 19))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-		findTestData(Path).getValue(2, 22))
+		findTestData(Path).getValue(2, 20))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+

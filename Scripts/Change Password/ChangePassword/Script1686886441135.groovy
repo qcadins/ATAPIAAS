@@ -181,7 +181,7 @@ def loginFunction(int row) {
 		'cari element dengan nama role'
 		def elementRole = DriverFactory.getWebDriver().findElements(By.cssSelector('body > ngb-modal-window > div > div > app-multi-role > div > div.row > div > table tr'))
 		
-		'lakukan loop untuk cari nama saldo yang ditentukan'
+		'lakukan loop untuk cari nama role yang ditentukan'
 		for (int i = 1; i <= elementRole.size() - 1; i++) {
 			
 			'cari nama role yag sesuai di opsi role'

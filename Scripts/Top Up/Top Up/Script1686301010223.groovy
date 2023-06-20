@@ -55,12 +55,12 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'deklarasi integer yang akan dipakai'
 		int totalKatalon, modifyint, totalafter, ppnafter, grandTotalafter, ppnbefore, grandTotalbefore, cashbacknominal
-		
 		int cashbackbagian
 		
 		'deklarasi array untuk simpan data subtotal'
 		ArrayList allsubtotal = []
 		ArrayList newqty = []
+		ArrayList dataDBInstruction = []
 		
 		'declare isMmandatory Complete'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 5))
@@ -352,7 +352,54 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			}
 		}
 		
+		'periksa apakah button disabled'
+		if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Top Up/Page_Topup Balance/button_Next'),
+			'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		
+			'klik pada tombol next'
+			WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/button_Next'))
+			
+			'ambil data nomor transaksi'
+			String noTrxKatalon = WebUI.getAttribute(
+				findTestObject('Object Repository/Top Up/Page_Topup Balance/noTrxReceipt'),
+				'value', FailureHandling.OPTIONAL).replace('Nomor Transaksi Anda : ', '')
+			
+			'ambil data instruction dari DB'
+			dataDBInstruction =  CustomKeywords.'topup.TopupVerif.getInstructionDetail'(conndev, noTrxKatalon)
+			
+			'cek apakah total transaksi sesuai'
+			checkVerifyEqualorMatch(WebUI.verifyEqual(grandTotalafter,
+				WebUI.getAttribute(findTestObject('Object Repository/Top Up/Page_Topup Balance/totalTranxReceipt'), 
+					'value', FailureHandling.OPTIONAL).replace('Rp. ', '').replace('.', ''),
+						FailureHandling.OPTIONAL), 'Total transaksi receipt')
+			
+			'cek apakah nomor transaksi sesuai'
+			checkVerifyEqualorMatch(WebUI.verifyEqual(dataDBInstruction[0], noTrxKatalon,
+						FailureHandling.OPTIONAL), 'Nomor transaksi receipt')
+			
+			'cek apakah bank sesuai'
+			checkVerifyEqualorMatch(WebUI.verifyEqual(dataDBInstruction[1],
+				WebUI.getAttribute(findTestObject('Object Repository/Top Up/Page_Topup Balance/bankNameReceipt'),
+					'value', FailureHandling.OPTIONAL),
+						FailureHandling.OPTIONAL), 'Nama Bank receipt')
+			
+			'cek apakah virtual account sesuai'
+			checkVerifyEqualorMatch(WebUI.verifyEqual(dataDBInstruction[2],
+				WebUI.getAttribute(findTestObject('Object Repository/Top Up/Page_Topup Balance/VANumReceipt'),
+					'value', FailureHandling.OPTIONAL),
+						FailureHandling.OPTIONAL), 'Virtual Account receipt')
+			
+			'cek apakah nama akun virtual sesuai'
+			checkVerifyEqualorMatch(WebUI.verifyEqual(dataDBInstruction[3],
+				WebUI.getAttribute(findTestObject('Object Repository/Top Up/Page_Topup Balance/NameAccReceipt'),
+					'value', FailureHandling.OPTIONAL),
+						FailureHandling.OPTIONAL), 'VA Name receipt')
+			
+			'klik pada clickable text'
+			WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/LinkReceipt'))
+			
+			
+		}
 	}
 }
 

@@ -10,8 +10,12 @@
          <value>div.wrapper-5 > div</value>
       </entry>
       <entry>
+         <key>BASIC</key>
+         <value>//*[(text() = 'ABC' or . = 'ABC')]</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
-         <value>(.//*[normalize-space(text()) and normalize-space(.)='Permintaan top up saldo Anda berhasil diproses. Harap segera lakukan melalui transfer ke'])[1]/following::div[2]</value>
+         <value>/html/body/ngb-modal-window/div/div/app-payment-instruction/div/div[2]/div[5]/div[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>div</value>
-      <webElementGuid>19088fe8-4eaf-4818-9184-81577a863f1f</webElementGuid>
+      <webElementGuid>987cc006-6e37-43d1-aaac-4d5969ad07e5</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +34,7 @@
       <name>text</name>
       <type>Main</type>
       <value>ABC</value>
-      <webElementGuid>234ccfb0-5622-41a2-9e18-ca99b3796639</webElementGuid>
+      <webElementGuid>f52b5ecb-119b-4f78-bfe4-a1b40c09b37d</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +42,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done page-scrolled navbar-scrolled modal-open&quot;]/ngb-modal-window[@class=&quot;d-block modal fade show&quot;]/div[@class=&quot;modal-dialog modal-lg&quot;]/div[@class=&quot;modal-content&quot;]/app-payment-instruction[1]/div[@class=&quot;col-12&quot;]/div[@class=&quot;modal-body&quot;]/div[@class=&quot;wrapper-5&quot;]/div[1]</value>
-      <webElementGuid>c6131786-481d-4b85-84ec-50881b3c5fed</webElementGuid>
+      <webElementGuid>9fbb23bb-467b-41e7-81d6-a20beddf8562</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -46,7 +50,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Permintaan top up saldo Anda berhasil diproses. Harap segera lakukan melalui transfer ke'])[1]/following::div[2]</value>
-      <webElementGuid>bc27a03a-b3ed-432b-9889-ec26e020bc2d</webElementGuid>
+      <webElementGuid>bef0f4ee-8121-40f7-8c47-0d412495d2d0</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Nomor Transaksi Anda : EENDIGO/23/06/00055'])[1]/following::div[4]</value>
-      <webElementGuid>9b40148b-4421-49e9-b8d0-99164e0143cf</webElementGuid>
+      <webElementGuid>df3b2c3e-ee54-439e-bafa-435e9e0e332d</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -62,7 +66,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Acc Name ABC'])[1]/preceding::div[2]</value>
-      <webElementGuid>77a8fddd-f5c6-40c3-81a9-1897fc11e113</webElementGuid>
+      <webElementGuid>259e0ceb-2cef-4b22-9cf3-bb344f44b371</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +74,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='ABC']/parent::*</value>
-      <webElementGuid>fe89de08-3166-4209-b26d-89835c594624</webElementGuid>
+      <webElementGuid>7055a293-8909-4fb9-9e55-84fe43e839b4</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[2]/div[4]/div</value>
-      <webElementGuid>40cab02c-60b7-4b18-bac4-6763c0bc6e77</webElementGuid>
+      <webElementGuid>0007a0ee-22f0-4b9d-877a-7cd548842aa2</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,6 +90,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//div[(text() = 'ABC' or . = 'ABC')]</value>
-      <webElementGuid>73a067b2-a69d-476f-b899-71d9331bf135</webElementGuid>
+      <webElementGuid>83715877-6663-4206-b3d6-7f63202f4465</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

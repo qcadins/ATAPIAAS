@@ -147,4 +147,25 @@ public class TopupVerif {
 		}
 		listdata
 	}
+
+	@Keyword
+	getInstructionDetail(Connection conn, String noTrx) {
+
+		String data
+		ArrayList listdata = []
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT toh.topup_order_number, bank_code, mapt.account_number, mapt.account_name FROM tr_topup_order_d tod LEFT JOIN tr_topup_order_h toh ON toh.id_topup_order_h = tod.id_topup_order_h LEFT JOIN ms_account_payment mapt ON mapt.id_account_payment = toh.id_account_payment LEFT JOIN ms_bank mb ON mb.id_bank = mapt.id_bank WHERE toh.topup_order_number = '" + noTrx + "' ORDER BY topup_order_date DESC LIMIT 1")
+		ResultSetMetaData metadata = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while (resultSet.next()) {
+			for (int i = 1 ; i <= columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		listdata
+	}
 }
