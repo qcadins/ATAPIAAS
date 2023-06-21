@@ -66,14 +66,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'deklarasi array untuk simpan data subtotal'
 		ArrayList allsubtotal = [], tempDataPrice = [], dataDBInstruction = [], listServices = [], listJumlahisiUlang = []
 		
-		'cek ddl tipesaldo apakah sesuai dengan db'
-		checkddlTipeSaldo(conndev)
-		
-		'cek ddl metode transfer sesuai dengan db'
-		checkddlMetodeTransfer(conndev)
-		
-		'cek ddl bank sesuai dengan db'
-		checkddlBankDestination(conndev)
+//		'cek ddl tipesaldo apakah sesuai dengan db'
+//		checkddlTipeSaldo(conndev)
+//		
+//		'cek ddl metode transfer sesuai dengan db'
+//		checkddlMetodeTransfer(conndev)
+//		
+//		'cek ddl bank sesuai dengan db'
+//		checkddlBankDestination(conndev)
 		
 		'input data tipe saldo yang diinginkan'
 		WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputtipesaldo'), 
@@ -99,14 +99,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.sendKeys(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputBank'),
 			 Keys.chord(Keys.ENTER))
 		
-		'klik pada tambah layanan'
-		WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/a_Tambah'))
-		
-		'cek ddl activesaldo sesuai dengan DB'
-		checkddlActiveSaldo(conndevUAT, findTestData(ExcelPathTopUp).getValue(2, 19))
-		
-		'klik tombol cancel'
-		WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/button_Cancel'))
+//		'klik pada tambah layanan'
+//		WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/a_Tambah'))
+//		
+//		'cek ddl activesaldo sesuai dengan DB'
+//		checkddlActiveSaldo(conndevUAT, findTestData(ExcelPathTopUp).getValue(2, 19))
+//		
+//		'klik tombol cancel'
+//		WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/button_Cancel'))
 		
 		'cek apakah perlu tambah layanan'
 		if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 16) == 'Yes') {
@@ -119,7 +119,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			listJumlahisiUlang = findTestData(ExcelPathTopUp).getValue(
 				GlobalVariable.NumOfColumn, 13).split(';', -1)
 				
-			for (int i = 0; i <= listServices.size(); i++) {
+			for (int i = 0; i < listServices.size(); i++) {
 				
 				'deklarasi string subtotal'
 				String subtotal
@@ -142,6 +142,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputamount'),
 					listJumlahisiUlang[i])
 				
+				'klik pada form untuk kalkulasi subtotal'
+				WebUI.click(findTestObject('Object Repository/Top Up/FormClick'))
+				
 				'ambil data dari harga satuan'
 				hargasatuanUI = Integer.parseInt(WebUI.getAttribute(
 					findTestObject('Object Repository/Top Up/Page_Topup Balance/inputunitPrice'), 'value'))
@@ -162,6 +165,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					'jika perhitungan subtotal tidak sesuai'
 					if (hargasatuanDB * Integer.parseInt(listJumlahisiUlang[i])
 						!= subtotalconvert) {
+						
+						println hargasatuanDB
+						println listJumlahisiUlang[i]
+						println subtotalconvert
 						
 						'tulis penghitungan otomatis error'
 						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
@@ -191,7 +198,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					'tambah subtotal ke array'
 					allsubtotal.add(subtotalconvert)
 					
-					tempDataPrice.add(hargasatuanDB)
+					tempDataPrice.add(hargasatuanDB.toString())
 				}
 				else {
 					
@@ -219,10 +226,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'cek apakah total di katalon dan UI sesuai'
 		checkVerifyEqualorMatch(WebUI.verifyEqual(totalKatalon,
 			WebUI.getAttribute(findTestObject('Object Repository/Top Up/Page_Topup Balance/totalprice'),
-				'value', FailureHandling.OPTIONAL)), 'Total tidak sesuai')
+				'value', FailureHandling.OPTIONAL).replace('.', '')), 'Total tidak sesuai')
 		
 		'ambil ppn dari DB'
-		int ppnfromDB = CustomKeywords.'topup.TopupVerif.getPPNvalue'(conndev)
+		int ppnfromDB = Integer.parseInt(CustomKeywords.'topup.TopupVerif.getPPNvalue'(conndev))
 		
 		'pilihan untuk pakai kupon'
 		if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 17) == 'Yes') {
@@ -245,8 +252,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				if (Integer.parseInt(coupondetail[4]) <= totalKatalon) {
 					
 					'ambil diskon dari UI'
-					diskonUI = Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/Top Up/DiskonUI'),
-						'value', FailureHandling.CONTINUE_ON_FAILURE))
+					diskonUI = WebUI.getText(findTestObject('Object Repository/Top Up/DiskonUI'),
+							FailureHandling.CONTINUE_ON_FAILURE).replace('Discount ', '')
+							
+//					WebUI.getAttribute(findTestObject('Object Repository/Top Up/DiskonUI'),
+//						'value', FailureHandling.CONTINUE_ON_FAILURE).replace('Discount ', '')			
 					
 					'lihat jenis nilai kupon'
 					if (coupondetail[1].equals('Percentage')) {

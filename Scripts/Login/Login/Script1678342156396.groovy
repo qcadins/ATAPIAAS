@@ -334,6 +334,15 @@ else if (TC == 'TopUp') {
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'button_Lanjutkan Perjalanan Anda'))
+	
+	'jika ada pilihan role'
+	if (WebUI.verifyElementPresent(
+		findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'),
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+	
+		'pilih admin client'
+		WebUI.click(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'))
+	}
 }
 else if (TC == 'ChangePass') {
 	
