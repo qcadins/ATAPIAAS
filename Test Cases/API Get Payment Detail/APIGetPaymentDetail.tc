@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>APIGetPaymentDetail</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>b1433bf3-a0fb-49c8-a1ed-9331d9bb0e57</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>d9537f5f-3aef-474e-825f-108655aec5d2</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'API Get Payment Detail/APIGetPaymentDetail'</defaultValue>
+      <description></description>
+      <id>d9537f5f-3aef-474e-825f-108655aec5d2</id>
+      <masked>false</masked>
+      <name>excelPathAPIGetPaymentDetail</name>
+   </variable>
+</TestCaseEntity>

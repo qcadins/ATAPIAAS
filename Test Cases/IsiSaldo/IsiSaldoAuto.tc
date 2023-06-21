@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>IsiSaldoAuto</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>b45c503a-c9dc-4aa0-a913-8ca76ba10a72</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>6c8eefb5-bcfa-4e3a-a444-dadddabdc2b1</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>31a508d7-f77c-4492-ba19-446f18f302b4</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>a628edd3-678e-4026-b731-2d2cbba36011</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'Login/Login'</defaultValue>
+      <description></description>
+      <id>6c8eefb5-bcfa-4e3a-a444-dadddabdc2b1</id>
+      <masked>false</masked>
+      <name>ExcelPath</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>31a508d7-f77c-4492-ba19-446f18f302b4</id>
+      <masked>false</masked>
+      <name>tipeSaldo</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>a628edd3-678e-4026-b731-2d2cbba36011</id>
+      <masked>false</masked>
+      <name>sheet</name>
+   </variable>
+</TestCaseEntity>

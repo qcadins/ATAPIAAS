@@ -47,12 +47,12 @@ public class GetParameterfromDB {
 
 	//fungsi untuk mengambil KEY dari database
 	@Keyword
-	getAPIKeyfromDB(Connection conn, String tenantcode) {
+	getAPIKeyfromDB(Connection conn, String tenantCode) {
 		String data
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT api_key_code FROM ms_api_key mk JOIN ms_tenant mt ON mk.id_ms_tenant = mt.id_ms_tenant JOIN ms_lov mlo ON mlo.id_lov = mk.lov_api_key_type  WHERE mt.tenant_code = '" + tenantcode + "' AND mk.is_active = '1' AND mlo.description = 'TRIAL'")
+		ResultSet resultSet = stm.executeQuery("select api_key_code from ms_tenant mt join ms_api_key amk on amk.id_ms_tenant = mt.id_ms_tenant where tenant_code = '"+ tenantCode +"'")
 
 		while (resultSet.next()){
 
@@ -68,7 +68,7 @@ public class GetParameterfromDB {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("select tenant_code from am_msuser amu join ms_useroftenant muot on amu.id_ms_user = muot.id_ms_user join ms_tenant mt on mt.id_ms_tenant = muot.id_ms_tenant join ms_api_key amk on amk.id_ms_tenant = mt.id_ms_tenant where login_id = '" + email + "'")
+		ResultSet resultSet = stm.executeQuery("select tenant_code from am_msuser amu join ms_useroftenant muot on amu.id_ms_user = muot.id_ms_user join ms_tenant mt on mt.id_ms_tenant = muot.id_ms_tenant join ms_api_key amk on amk.id_ms_tenant = mt.id_ms_tenant where login_id = '"+ email +"'")
 
 		while (resultSet.next()){
 
