@@ -145,6 +145,14 @@ def logoutFunction() {
 	
 	'lakukan logout'
 	WebUI.click(findTestObject('Object Repository/Change Password/Page_Balance/span_Logout'))
+	
+	'verifikasi apakah login dengan google muncul'
+	WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/'+
+		'Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'), GlobalVariable.Timeout)
+	
+	'verifikasi apakah captcha muncul'
+	WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/'+
+		'Page_Login - eendigo Platform/span_Lanjutkan dengan Google'), GlobalVariable.Timeout)
 }
 
 def loginFunction(int row) {

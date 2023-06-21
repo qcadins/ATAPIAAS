@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "4DC1FA31400561714F4CADD8CC1469DE",
+  "keywordFileContentHash": "E0B4CBAC61A830EB1D5A4347D59240DB",
   "keywordClasses": [
     {
       "name": "ocrTesting.GetParameterfromDB",
@@ -46,8 +46,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getPaymentType",
@@ -91,8 +90,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getAPIKeyfromDB",
@@ -123,8 +121,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getTenantCodefromDB",
@@ -155,8 +152,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getLatestMutationfromDB",
@@ -187,8 +183,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getNotMyLatestMutationfromDB",
@@ -219,8 +214,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getServicePricefromDB",
@@ -251,11 +245,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

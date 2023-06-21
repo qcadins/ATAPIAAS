@@ -22,7 +22,7 @@ public class GetParameterfromDB {
 		ResultSet resultSet = stm.executeQuery("Select ml.id_lov FROM esign.ms_balancevendoroftenant mbt join esign.ms_tenant mt on mt.id_ms_tenant = mbt.id_ms_tenant Join esign.ms_lov ml on ml.id_lov = mbt.lov_balance_type Where mt.tenant_code = '" + tenantcode + "' AND ml.description = '" + testedOCR + "'")
 
 		while (resultSet.next()){
-			
+
 			data = resultSet.getObject(1);
 		}
 
@@ -39,7 +39,7 @@ public class GetParameterfromDB {
 		ResultSet resultSet = stm.executeQuery("Select description From esign.ms_lov ml join esign.ms_balancevendoroftenant mbt on ml.id_lov = mbt.lov_balance_charge_type Join esign.ms_tenant mt on mt.id_ms_tenant = mbt.id_ms_tenant Where ml.lov_group = 'BALANCE_CHARGE_TYPE' and mt.tenant_code = '" + tenantcode + "' AND mbt.lov_balance_type = " + idPayment + "")
 
 		while (resultSet.next()){
-			
+
 			data = resultSet.getObject(1)
 		}
 		data
@@ -55,7 +55,7 @@ public class GetParameterfromDB {
 		ResultSet resultSet = stm.executeQuery("SELECT api_key_code FROM ms_api_key mk JOIN ms_tenant mt ON mk.id_ms_tenant = mt.id_ms_tenant JOIN ms_lov mlo ON mlo.id_lov = mk.lov_api_key_type  WHERE mt.tenant_code = '" + tenantcode + "' AND mk.is_active = '1' AND mlo.description = 'TRIAL'")
 
 		while (resultSet.next()){
-			
+
 			data = resultSet.getObject(1)
 		}
 		data
@@ -68,10 +68,10 @@ public class GetParameterfromDB {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT tenant_code FROM ms_tenant WHERE email_reminder_dest = '" + email + "'")
+		ResultSet resultSet = stm.executeQuery("select tenant_code from am_msuser amu join ms_useroftenant muot on amu.id_ms_user = muot.id_ms_user join ms_tenant mt on mt.id_ms_tenant = muot.id_ms_tenant join ms_api_key amk on amk.id_ms_tenant = mt.id_ms_tenant where login_id = '" + email + "'")
 
 		while (resultSet.next()){
-			
+
 			data = resultSet.getObject(1)
 		}
 		data
@@ -87,7 +87,7 @@ public class GetParameterfromDB {
 		ResultSet resultSet = stm.executeQuery("select trx_no from esign.tr_balance_mutation WHERE usr_crt = '" + tenantcode + "' ORDER BY id_balance_mutation DESC limit 1;")
 
 		while (resultSet.next()){
-			
+
 			data = resultSet.getObject(1)
 		}
 		data
@@ -103,7 +103,7 @@ public class GetParameterfromDB {
 		ResultSet resultSet = stm.executeQuery("select trx_no from esign.tr_balance_mutation WHERE usr_crt != '" + tenantcode + "' ORDER BY id_balance_mutation DESC limit 1;")
 
 		while (resultSet.next()){
-			
+
 			data = resultSet.getObject(1)
 		}
 		data
@@ -119,7 +119,7 @@ public class GetParameterfromDB {
 		ResultSet resultSet = stm.executeQuery("SELECT msp.service_price FROM esign.ms_service_price msp WHERE lov_balance_type = " + idPayment + " AND effective_date >= '2023-03-25'")
 
 		while (resultSet.next()){
-			
+
 			data = resultSet.getObject(1);
 		}
 

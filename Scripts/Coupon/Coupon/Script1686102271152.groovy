@@ -472,22 +472,19 @@ def checkPaging(Connection conndev) {
 	
 	'ambil banyaknya laman footer'
 	int lastPage = elementbutton.size()
-//	
-//	'get text total data dari ui'
-//	Total = WebUI.getText(findTestObject('Object Repository/Coupon/Page_List Coupon/TotalData')).split(' ')
-//	
-//	'ambil waktu start untuk filter hasil qury'
-//	String thestartDate = callStartDate()
-//	
-//	'ambil batas waktu untuk filter hasil query'
-//	String theendDate = callendDate()
-//	
-//	'ambil total data dari db'
-//	int resultTotalData = CustomKeywords.'coupon.CouponVerif.getCouponTotal'(conndev, thestartDate, theendDate)
-//
-//	'verify total data role'
-//	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
-//	
+	
+	'get text total data dari ui'
+	Total = WebUI.getText(findTestObject('Object Repository/Coupon/Page_List Coupon/TotalData')).split(' ')
+	
+	'ambil waktu start untuk filter hasil qury'
+	String thestartDate = callStartDate()
+	
+	'ambil total data dari db'
+	int resultTotalData = CustomKeywords.'coupon.CouponVerif.getCouponTotal'(conndev, thestartDate)
+
+	'verify total data role'
+	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
+	
 	'cek apakah hlm  tersedia'
 	if(WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-User/'+
 		'Page_List User/i_Action_datatable-icon-skip'),FailureHandling.OPTIONAL) == true) {
@@ -902,15 +899,15 @@ def callStartDate() {
 	return formattedStartDate
 }
 
-def callendDate() {
-	
-	LocalDate currentDate = LocalDate.now()
-	
-	LocalDate endDate = currentDate
-	
-	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-	
-	String formattedEndDate = endDate.format(dateFormatter)
-	
-	return formattedEndDate
-}
+//def callendDate() {
+//	
+//	LocalDate currentDate = LocalDate.now()
+//	
+//	LocalDate endDate = currentDate
+//	
+//	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+//	
+//	String formattedEndDate = endDate.format(dateFormatter)
+//	
+//	return formattedEndDate
+//}

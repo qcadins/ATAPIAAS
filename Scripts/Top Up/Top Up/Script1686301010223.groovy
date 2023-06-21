@@ -12,8 +12,11 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 import org.openqa.selenium.By as By
 
-'mencari directory excel\r\n'
+'mencari directory excel'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+
+'mencari directory excel lain'
+GlobalVariable.DataFilePath2 = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Simulasi/Simulasi Hitung Top Up Using Coupon.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathTopUp).getColumnNumbers()
@@ -57,13 +60,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'deklarasi integer yang akan dipakai'
-		int totalKatalon, modifyint, totalafter, ppnafter, grandTotalafter, ppnbefore, grandTotalbefore, cashbacknominal
-		int cashbackbagian
+		int totalKatalon, modifyint, totalafter, ppnafter, grandTotalafter, cashbacknominal
+		int cashbackbagian, hargasatuanUI, hargasatuanDB
 		
 		'deklarasi array untuk simpan data subtotal'
-		ArrayList allsubtotal = []
-		ArrayList newqty = []
-		ArrayList dataDBInstruction = []
+		ArrayList allsubtotal = [], tempDataPrice = [], dataDBInstruction = [], listServices = [], listJumlahisiUlang = []
 		
 		'cek ddl tipesaldo apakah sesuai dengan db'
 		checkddlTipeSaldo(conndev)
@@ -111,11 +112,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 16) == 'Yes') {
 			
 			'ambil data services dari excel'
-			ArrayList listServices = findTestData(ExcelPathTopUp).getValue(
+			listServices = findTestData(ExcelPathTopUp).getValue(
 				GlobalVariable.NumOfColumn, 12).split(';', -1)
 				
 			'ambil data services dari excel'
-			ArrayList listJumlahisiUlang = findTestData(ExcelPathTopUp).getValue(
+			listJumlahisiUlang = findTestData(ExcelPathTopUp).getValue(
 				GlobalVariable.NumOfColumn, 13).split(';', -1)
 				
 			for (int i = 0; i <= listServices.size(); i++) {
@@ -142,12 +143,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					listJumlahisiUlang[i])
 				
 				'ambil data dari harga satuan'
-				int hargasatuanUI = Integer.parseInt(WebUI.getAttribute(
+				hargasatuanUI = Integer.parseInt(WebUI.getAttribute(
 					findTestObject('Object Repository/Top Up/Page_Topup Balance/inputunitPrice'), 'value'))
 				
 				'ambil harga satuan dari DB'
-				int hargasatuanDB = CustomKeywords.'topup.TopupVerif.getServicePrice'(conndevUAT,
-					listServices[i])
+				hargasatuanDB = CustomKeywords.'topup.TopupVerif.getServicePrice'(conndevUAT, listServices[i])
 				
 				'ambil data dari subtotal'
 				subtotal = WebUI.getAttribute(
@@ -190,6 +190,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					
 					'tambah subtotal ke array'
 					allsubtotal.add(subtotalconvert)
+					
+					tempDataPrice.add(hargasatuanDB)
 				}
 				else {
 					
@@ -222,15 +224,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'ambil ppn dari DB'
 		int ppnfromDB = CustomKeywords.'topup.TopupVerif.getPPNvalue'(conndev)
 		
-		'hitung ppn sebelumnya'
-		ppnbefore = ppnfromDB * totalKatalon / 100
-		
-		'hitung grand total'
-		grandTotalbefore = ppnbefore + totalKatalon
-		
-		'panggil fungsi pengecekan data'
-		statschecking(conndev, ppnfromDB, totalKatalon, ppnbefore, grandTotalbefore)
-		
 		'pilihan untuk pakai kupon'
 		if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 17) == 'Yes') {
 			
@@ -242,40 +235,113 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/input_Kupon_kupon'),
 				findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 14))
 			
+			'klik pada apply'
+			WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/applyKupon'))
+			
 			'cek apakah tipe kupon adalah diskon'
 			if (coupondetail[0].equals('Discount')) {
 				
 				'cek apakah minimum pembayaran terpenuhi'
 				if (Integer.parseInt(coupondetail[4]) <= totalKatalon) {
 					
+					'ambil diskon dari UI'
+					diskonUI = Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/Top Up/DiskonUI'),
+						'value', FailureHandling.CONTINUE_ON_FAILURE))
+					
 					'lihat jenis nilai kupon'
 					if (coupondetail[1].equals('Percentage')) {
 						
-						'hitung persentase discount dari total harga'
-						totalafter = totalKatalon - (totalKatalon * coupondetail[2] / 100)
+						'looping tulis data ke excel'
+						for (int i = 0; i < listServices.size(); i++) {
+							
+							'tulis layanan ke excel'
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Disc Percent', i+1,
+								0, listServices[i])
+							
+							'tulis unit price ke excel'
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Disc Percent', i+1,
+								1, tempDataPrice[i])
+							
+							'tulis qty ke excel'
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Disc Percent', i+1,
+								2, listJumlahisiUlang[i])
+							
+							'tulis persentase diskon ke excel'
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Disc Percent', i+1,
+								4, coupondetail[2])
+						}
 						
-						'hitung ppn setelah dikenakan diskon'
-						ppnafter = totalafter * ppnfromDB / 100
-						
-						'hitung grand total setelah diskon'
-						grandTotalafter = totalafter + ppnafter
+						'buka excel untuk refresh testdata'
+						CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 						
 						'panggil fungsi pengecekan data'
-						statschecking(conndev, ppnfromDB, totalafter, ppnafter, grandTotalafter)
+						statschecking(conndev, diskonUI)
+						
+						'panggil fungsi penghapusan data column service'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Disc Percent',
+							1, 14, 0)
+						
+						'panggil fungsi penghapusan data column Price'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Disc Percent',
+							1, 14, 1)
+						
+						'panggil fungsi penghapusan data column Jumlah'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Disc Percent',
+							1, 14, 2)
+						
+						'panggil fungsi penghapusan data column Discount Percentage'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Disc Percent',
+							1, 14, 4)
+						
+						'buka excel untuk refresh testdata'
+						CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 					}
 					else if (coupondetail[1].equals('Nominal')) {
 						
-						'hitung nominal diskon dari total harga'
-						totalafter = totalKatalon - coupondetail[2]
+						'looping tulis data ke excel'
+						for (int i = 0; i < listServices.size(); i++) {
+							
+							'tulis layanan ke excel'
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Disc Nominal', i+1,
+								0, listServices[i])
+							
+							'tulis unit price ke excel'
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Disc Nominal', i+1,
+								1, tempDataPrice[i])
+							
+							'tulis qty ke excel'
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Disc Nominal', i+1,
+								2, listJumlahisiUlang[i])
+						}
 						
-						'itung ppn setelah dikenakan diskon'
-						ppnafter = totalafter * ppnfromDB / 100
+						'tulis total discount ke excel'
+						CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Disc Nominal', 16,
+							1, diskonUI)
 						
-						'hitung grand total setelah diskon'
-						grandTotalafter = totalafter + ppnafter
+						'buka excel untuk refresh testdata'
+						CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 						
 						'panggil fungsi pengecekan data'
-						statschecking(conndev, ppnfromDB, totalafter, ppnafter, grandTotalafter)
+						statschecking(conndev, diskonUI)
+						
+						'panggil fungsi penghapusan data column service'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Disc Nominal',
+							1, 14, 0)
+						
+						'panggil fungsi penghapusan data column Price'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Disc Nominal',
+							1, 14, 1)
+						
+						'panggil fungsi penghapusan data column Jumlah'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Disc Nominal',
+							1, 14, 2)
+						
+						'panggil fungsi penghapusan data column Discount Percentage'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Disc Nominal',
+							16, 16, 1)
+						
+						'buka excel untuk refresh testdata'
+						CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 					}
 				}
 				else {
@@ -294,56 +360,105 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				'cek apakah minimum pembayaran terpenuhi'
 				if (Integer.parseInt(coupondetail[4]) <= totalKatalon) {
 					
+					'ambil diskon dari UI'
+					diskonUI = Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/Top Up/DiskonUI'),
+						'value', FailureHandling.CONTINUE_ON_FAILURE))
+					
 					'lihat jenis nilai kupon'
 					if (coupondetail[1].equals('Percentage')) {
 						
-						'lakukan loop untuk tambah data ke array qty'
-						for (int i = 0; i < allsubtotal.size ; i++) {
+						'looping tulis data ke excel'
+						for (int i = 0; i < listServices.size(); i++) {
 							
-							'hitung persentase cashback dari total harga'
-							newqty.add(allsubtotal[i] + (allsubtotal[i]*coupondetail[2]/100))
+							'tulis layanan ke excel'
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Cashback Percent', i+1,
+								0, listServices[i])
+							
+							'tulis unit price ke excel'
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Cashback Percent', i+1,
+								1, tempDataPrice[i])
+							
+							'tulis qty ke excel'
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Cashback Percent', i+1,
+								2, listJumlahisiUlang[i])
+							
+							'tulis qty ke excel'
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Cashback Percent', i+1,
+								4, coupondetail[2])
 						}
 						
-						'hitung total setelah apply coupon'
-						totalafter = totalKatalon
-						
-						'hitung ppn setelah dikenakan cashback'
-						ppnafter = totalafter * ppnfromDB / 100
-						
-						'hitung grand total setelah cashback'
-						grandTotalafter = totalafter + ppnafter
+						'buka excel untuk refresh testdata'
+						CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 						
 						'panggil fungsi pengecekan data'
-						statschecking(conndev, ppnfromDB, totalafter, ppnafter, grandTotalafter)
+						statschecking(conndev, diskonUI)
+						
+						'panggil fungsi penghapusan data column service'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Cashback Percent',
+							1, 14, 0)
+						
+						'panggil fungsi penghapusan data column Price'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Cashback Percent',
+							1, 14, 1)
+						
+						'panggil fungsi penghapusan data column Jumlah'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Cashback Percent',
+							1, 14, 2)
+						
+						'panggil fungsi penghapusan data column Cashback Percentage'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Cashback Percent',
+							1, 14, 4)
+						
+						'buka excel untuk refresh testdata'
+						CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 					}
 					else if (coupondetail[1].equals('Nominal')) {
 						
-						for (int i = 0; i < allsubtotal.size(); i++) {
+						'looping tulis data ke excel'
+						for (int i = 0; i < listServices.size(); i++) {
 							
-							'hitung bagian cashback dari total harga'
-							cashbackbagian = allsubtotal[i]/totalKatalon
+							'tulis layanan ke excel'
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Cashback Nominal', i+1,
+								0, listServices[i])
 							
-							'simpan data hitungan bagian sementara'
-							modifyint = cashbackbagian * coupondetail[2]
+							'tulis unit price ke excel'
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Cashback Nominal', i+1,
+								1, tempDataPrice[i])
 							
-							'tambahkan ke nominal cashback'
-							cashbacknominal = modifyint / cashbackbagian
-							
-							'masukkan saldo baru ke array'
-							newqty.add((cashbacknominal + allsubtotal[i]))
+							'tulis qty ke excel'
+							CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Cashback Nominal', i+1,
+								2, listJumlahisiUlang[i])
 						}
 						
-						'hitung total setelah pengaplikasian kupon'
-						totalafter = totalKatalon
+						'tulis total discount ke excel'
+						CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, 'TopUp Cashback Nominal', 16,
+							1, diskonUI)
 						
-						'itung ppn setelah dikenakan cashback'
-						ppnafter = totalafter * ppnfromDB / 100
-						
-						'hitung grand total setelah cashback'
-						grandTotalafter = totalafter + ppnafter
+						'buka excel untuk refresh testdata'
+						CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 						
 						'panggil fungsi pengecekan data'
-						statschecking(conndev, ppnfromDB, totalafter, ppnafter, grandTotalafter)
+						statschecking(conndev, diskonUI)
+						
+						'panggil fungsi penghapusan data column service'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Cashback Nominal',
+							1, 14, 0)
+						
+						'panggil fungsi penghapusan data column Price'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Cashback Nominal',
+							1, 14, 1)
+						
+						'panggil fungsi penghapusan data column Jumlah'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Cashback Nominal',
+							1, 14, 2)
+						
+						'panggil fungsi penghapusan data column Discount Percentage'
+						CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, 'TopUp Cashback Nominal',
+							16, 16, 1)
+						
+						'buka excel untuk refresh testdata'
+						CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
+
 					}
 				}
 				else {
@@ -555,15 +670,15 @@ def checkddlMetodeTransfer(Connection conndev) {
 	WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/span_paymentmethod'))
 }
 
-def statschecking(Connection conndev, int ppnfromDB, int totalkatalon, int ppnkatalon, int grandTotalkatalon) {
+def statschecking(int ppnfromDB, int diskonUI) {
 	
 	'inisialisasi variabel integer'
 	int total, ppn, grandTotal
 	
-	'ambil data total'
-	total = Integer.parseInt(WebUI.getAttribute(
-		findTestObject('Object Repository/Top Up/Page_Topup Balance/totalprice'),
-		'value', FailureHandling.CONTINUE_ON_FAILURE))
+//	'ambil data total'
+//	total = Integer.parseInt(WebUI.getAttribute(
+//		findTestObject('Object Repository/Top Up/Page_Topup Balance/totalprice'),
+//		'value', FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'ambil data ppn'
 	ppn = Integer.parseInt(WebUI.getAttribute(
@@ -575,17 +690,29 @@ def statschecking(Connection conndev, int ppnfromDB, int totalkatalon, int ppnka
 		findTestObject('Object Repository/Top Up/Page_Topup Balance/grandTotal'),
 		'value', FailureHandling.CONTINUE_ON_FAILURE))
 	
-	'cek penghitungan total di katalon dan web'
-	checkVerifyEqualorMatch(WebUI.verifyEqual(total, totalkatalon,
-		FailureHandling.CONTINUE_ON_FAILURE), 'Penghitungan Total salah')
+	'cek penghitungan diskon di katalon dan web'
+	checkVerifyEqualorMatch(WebUI.verifyEqual(ppn, ppnfromDB,
+			FailureHandling.CONTINUE_ON_FAILURE), 'PPN db dan PPN UI tidak sesuai')
+	
+//	'cek penghitungan total di katalon dan web'
+//	checkVerifyEqualorMatch(WebUI.verifyEqual(total,
+//		findTestData(ExcelPathSimulasi).getValue(2, 17),
+//			FailureHandling.CONTINUE_ON_FAILURE), 'Penghitungan Total salah')
+	
+	'cek penghitungan diskon di katalon dan web'
+	checkVerifyEqualorMatch(WebUI.verifyEqual(diskonUI,
+		findTestData(ExcelPathSimulasi).getValue(2, 18),
+			FailureHandling.CONTINUE_ON_FAILURE), 'Penghitungan akhir diskon salah')
 	
 	'cek penghitungan ppn di katalon dan web'
-	checkVerifyEqualorMatch(WebUI.verifyEqual(ppn, ppnkatalon,
-		FailureHandling.CONTINUE_ON_FAILURE), 'Penghitungan PPN salah')
+	checkVerifyEqualorMatch(WebUI.verifyEqual(ppn,
+		findTestData(ExcelPathSimulasi).getValue(2, 19),
+			FailureHandling.CONTINUE_ON_FAILURE), 'Penghitungan PPN salah')
 	
 	'cek penghitungan grandtotal di katalon dan web'
-	checkVerifyEqualorMatch(WebUI.verifyEqual(grandTotal, grandTotalkatalon,
-		FailureHandling.CONTINUE_ON_FAILURE), 'Penghitungan GrandTotal salah')
+	checkVerifyEqualorMatch(WebUI.verifyEqual(grandTotal,
+		findTestData(ExcelPathSimulasi).getValue(2, 20),
+			FailureHandling.CONTINUE_ON_FAILURE), 'Penghitungan GrandTotal salah')
 }
 
 def checkddlBankDestination(Connection conndev) {

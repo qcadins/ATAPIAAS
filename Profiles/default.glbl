@@ -11,6 +11,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>''</initValue>
+      <name>DataFilePath2</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Gagal tambah layanan'</initValue>
       <name>FailedReasonAddServices</name>
    </GlobalVariableEntity>
