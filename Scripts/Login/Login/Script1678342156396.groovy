@@ -375,7 +375,9 @@ else if (TC == 'ChangePass') {
 		'pilih admin client'
 		WebUI.click(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'))
 	}
-} else if (TC == 'IsiSaldoAuto') {
+} 
+
+else if (TC == 'IsiSaldoAuto') {
 	
 	'input data username'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),

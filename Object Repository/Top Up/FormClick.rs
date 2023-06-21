@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>FormClick</name>
+   <tag></tag>
+   <elementGuidId>537f51f6-f1d8-424f-bb45-0a8c48fc7a71</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/ngb-modal-window/div/div/app-modal-add-service/form</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/ngb-modal-window/div/div/app-modal-add-service/form</value>
+      <webElementGuid>7db56567-8083-4b40-bc00-ac6bcbb7c745</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>
