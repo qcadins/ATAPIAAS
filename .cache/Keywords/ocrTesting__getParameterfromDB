@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "543E00C27B36EAA0089DDD2B5EB151B5",
+  "keywordFileContentHash": "02173714BE6B38CA1DE8B4F1A59FD6D2",
   "keywordClasses": [
     {
       "name": "ocrTesting.GetParameterfromDB",
@@ -111,7 +111,7 @@
               }
             },
             {
-              "name": "email",
+              "name": "tenantCode",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",

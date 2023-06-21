@@ -11,13 +11,13 @@ public class CouponVerif {
 	int columnCount
 
 	@Keyword
-	getCouponTotal(Connection conn, String startDate, String endDate) {
+	getCouponTotal(Connection conn, String startDate) {
 
 		int data
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT count(*) FROM tr_coupon WHERE coupon_end_date <= '" + endDate + "' AND coupon_start_date >= '" + startDate + "'")
+		ResultSet resultSet = stm.executeQuery("SELECT count(*) FROM tr_coupon WHERE coupon_end_date >= CURRENT_DATE AND coupon_start_date <= CURRENT_DATE AND coupon_start_date >= '" + startDate + "'")
 
 		while (resultSet.next()) {
 
@@ -75,7 +75,7 @@ public class CouponVerif {
 		ArrayList<String> listdata = []
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT tenant_name FROM ms_tenant ")
+		ResultSet resultSet = stm.executeQuery("SELECT tenant_name FROM ms_tenant WHERE is_active = '1'")
 		ResultSetMetaData metadata = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()

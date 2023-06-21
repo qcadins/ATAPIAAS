@@ -47,12 +47,12 @@ public class GetParameterfromDB {
 
 	//fungsi untuk mengambil KEY dari database
 	@Keyword
-	getAPIKeyfromDB(Connection conn, String email) {
+	getAPIKeyfromDB(Connection conn, String tenantCode) {
 		String data
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("select api_key_code from am_msuser amu join ms_useroftenant muot on amu.id_ms_user = muot.id_ms_user join ms_tenant mt on mt.id_ms_tenant = muot.id_ms_tenant join ms_api_key amk on amk.id_ms_tenant = mt.id_ms_tenant where login_id = '"+ email +"'")
+		ResultSet resultSet = stm.executeQuery("select api_key_code from ms_tenant mt join ms_api_key amk on amk.id_ms_tenant = mt.id_ms_tenant where tenant_code = '"+ tenantCode +"'")
 
 		while (resultSet.next()){
 

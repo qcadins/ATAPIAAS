@@ -28,13 +28,13 @@ public class UserVerif {
 	}
 
 	@Keyword
-	getNewUserData(Connection conn, String email) {
+	getNewUserData(Connection conn, String email, String emailcreate) {
 
 		String data
 		ArrayList listdata = []
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT login_id, initial_name, last_name, aro.role_name FROM am_msuser ase LEFT JOIN am_memberofrole amo ON amo.id_ms_user = ase.id_ms_user LEFT JOIN am_msrole aro ON aro.id_ms_role = amo.id_ms_role WHERE login_id = '" + email + "'")
+		ResultSet resultSet = stm.executeQuery("SELECT login_id, initial_name, last_name, aro.role_name FROM am_msuser ase LEFT JOIN am_memberofrole amo ON amo.id_ms_user = ase.id_ms_user LEFT JOIN am_msrole aro ON aro.id_ms_role = amo.id_ms_role WHERE login_id = '" + email + "' AND ase.usr_crt = '" + emailcreate + "'")
 		ResultSetMetaData metadata = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
@@ -70,13 +70,21 @@ public class UserVerif {
 	}
 
 	@Keyword
+	updateIsActiveUser(Connection conn, String email) {
+
+		Statement stm = conn.createStatement()
+		
+		int updateCount = stm.executeUpdate("UPDATE am_msuser SET is_active = '1', change_pwd_login = '0', is_verified = '1' WHERE login_id = '" + email + "';")
+	}
+	
+	@Keyword
 	getUserStatus(Connection conn, String email) {
 
 		String data
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT CASE WHEN is_active = '2' THEN 'Unverified' WHEN is_active = '1' THEN 'Active' Else 'Inactive' END FROM am_msuser WHERE login_id = '" + email + "'")
+		ResultSet resultSet = stm.executeQuery("SELECT case when is_active = '0' THEN 'Tidak Aktif' WHEN is_active = '1' Then 'Aktif' WHEN is_active = '2' Then 'Belum verifikasi' END FROM am_msuser WHERE login_id = '" + email + "'")
 
 		while (resultSet.next()) {
 

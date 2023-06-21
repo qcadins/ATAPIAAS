@@ -3,7 +3,7 @@
    <description></description>
    <name>Page1</name>
    <tag></tag>
-   <elementGuidId>c1a5ac6f-88f3-45af-886a-0c479fcd96b5</elementGuidId>
+   <elementGuidId>6b82ba41-9497-4d72-b86f-8a963e97d3a6</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
@@ -18,7 +18,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-roles/app-msx-paging/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li[3]</value>
-      <webElementGuid>85c232be-334f-48e1-ac2f-fa55e5383254</webElementGuid>
+      <webElementGuid>5174df0e-90d8-46b1-b3c8-02191a649349</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -26,6 +26,6 @@
       <name>aria-label</name>
       <type>Main</type>
       <value>page 1</value>
-      <webElementGuid>6cf1eb2d-f3b7-4472-ae64-06c11c8d19fe</webElementGuid>
+      <webElementGuid>fea98874-7814-483b-9277-ad3605ae348f</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

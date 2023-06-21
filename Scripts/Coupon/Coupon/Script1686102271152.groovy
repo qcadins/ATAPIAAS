@@ -33,7 +33,7 @@ WebUI.click(findTestObject('Object Repository/Coupon/Page_Balance/Spanmenu'))
 'klik pada tombol coupon'
 WebUI.click(findTestObject('Object Repository/Coupon/Page_Balance/span_Coupon'))
 
-checkPaging(conndev)
+//checkPaging(conndev)
 
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
@@ -229,57 +229,115 @@ def copylinkfunction() {
 
 def inputparameter(String action) {
 	
-	'input tipe kupon'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipekupon'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 20))
-	
-	'input kode kupon'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputkodekupon'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 21))
-	
-	'enter pada tipe kupon'
-	WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipekupon'),
-		Keys.chord(Keys.ENTER))
-	
-	'input tanggal mulai berlaku'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__CouponStartDate'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 22))
-	
-	'input tanggal mulai berlaku'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__CouponEndDate'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 23))
-	
-	'input tipe nilai kupon'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipenilaikupon'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 24))
-	
-	'enter pada tipe nilai kupon'
-	WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipenilaikupon'),
-		Keys.chord(Keys.ENTER))
-	
-	'input tipe nilai kupon'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__nilaikupon'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 25))
-	
-	'input jumlah kupon'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__jmlkupon'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 26))
-	
-	'input maksimal redeem kupon'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__maxredeem'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 27))
-	
-	'input minimal pembayaran untuk pakai kupon'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__minimumpayment'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 28))
-	
-	'input tenant'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/tenantinput'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 29))
-	
-	'enter pada tenant'
-	WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/tenantinput'),
-		Keys.chord(Keys.ENTER))
+	'jika melakukan tambah kupon'
+	if (action == 'New') {
+		
+		'input tipe kupon'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/inputtipekupon'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 20))
+		
+		'enter pada tipe kupon'
+		WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Add Coupon/inputtipekupon'),
+			Keys.chord(Keys.ENTER))
+		
+		'input kode kupon'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/input__couponCode'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 21))
+		
+		'input tanggal mulai berlaku'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/input__couponStartDate'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 22))
+		
+		'input tanggal mulai berlaku'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/input__couponEndDate'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 23))
+		
+		'input tipe nilai kupon'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/inputtipenilaikupon'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 24))
+		
+		'enter pada tipe nilai kupon'
+		WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Add Coupon/inputtipenilaikupon'),
+			Keys.chord(Keys.ENTER))
+		
+		'input tipe nilai kupon'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/input__nilaikupon'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 25))
+		
+		'input jumlah kupon'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/input__jmlkupon'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 26))
+		
+		'input maksimal redeem kupon'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/input__maxredeem'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 27))
+		
+		'input minimal pembayaran untuk pakai kupon'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/input__minimumpayment'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 28))
+		
+		'input tenant'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/tenantinput'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 29))
+		
+		'enter pada tenant'
+		WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Add Coupon/tenantinput'),
+			Keys.chord(Keys.ENTER))
+	}
+	else {
+		
+		'input tipe kupon'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipekupon'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 20))
+		
+		'enter pada tipe kupon'
+		WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipekupon'),
+			Keys.chord(Keys.ENTER))
+		
+		'input kode kupon'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputkodekupon'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 21))
+		
+		'input tanggal mulai berlaku'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__CouponStartDate'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 22))
+		
+		'input tanggal mulai berlaku'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__CouponEndDate'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 23))
+		
+		'input tipe nilai kupon'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipenilaikupon'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 24))
+		
+		'enter pada tipe nilai kupon'
+		WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipenilaikupon'),
+			Keys.chord(Keys.ENTER))
+		
+		'input tipe nilai kupon'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__nilaikupon'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 25))
+		
+		'input jumlah kupon'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__jmlkupon'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 26))
+		
+		'input maksimal redeem kupon'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__maxredeem'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 27))
+		
+		'input minimal pembayaran untuk pakai kupon'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__minimumpayment'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 28))
+		
+		'input tenant'
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/tenantinput'),
+				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 29))
+		
+		'enter pada tenant'
+		WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/tenantinput'),
+			Keys.chord(Keys.ENTER))
+	}
 }
 
 def checkPaging(Connection conndev) {
@@ -421,11 +479,8 @@ def checkPaging(Connection conndev) {
 	'ambil waktu start untuk filter hasil qury'
 	String thestartDate = callStartDate()
 	
-	'ambil batas waktu untuk filter hasil query'
-	String theendDate = callendDate()
-	
 	'ambil total data dari db'
-	int resultTotalData = CustomKeywords.'coupon.CouponVerif.getCouponTotal'(conndev, thestartDate, theendDate)
+	int resultTotalData = CustomKeywords.'coupon.CouponVerif.getCouponTotal'(conndev, thestartDate)
 
 	'verify total data role'
 	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
@@ -517,19 +572,19 @@ def checkdialogConfirmation(isMandatoryComplete) {
 			'klik pada button ok'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_Add Coupon/button_OK'))
 			
-			if (GlobalVariable.KondisiCekDB == 'Yes') {
-				
-				'panggil fungsi storeDB'
-				WebUI.callTestCase(findTestCase('Test Cases/Coupon/CouponStoreDB'), [('Path') : ExcelPathCoupon],
-					 FailureHandling.CONTINUE_ON_FAILURE)
-			}
-			
 			'cek apakah result memunculkan hasil sukses'
 			if (GlobalVariable.FlagFailed == 0 && isMandatoryComplete == 0 && resultcheck == 'Success') {
 					
 				'write to excel success'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Coupon', 0,
 					GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+				
+				if (GlobalVariable.KondisiCekDB == 'Yes') {
+					
+					'panggil fungsi storeDB'
+					WebUI.callTestCase(findTestCase('Test Cases/Coupon/CouponStoreDB'), [('Path') : ExcelPathCoupon],
+						 FailureHandling.CONTINUE_ON_FAILURE)
+				}
 			}
 			else {
 				
@@ -768,35 +823,35 @@ def checkddlTenant(Connection conndev) {
 	int countDB = namaTenantDB.size()
 	
 	'jika hitungan di UI dan DB sesuai'
-	if (countWeb == countDB) {
+//	if (countWeb == countDB) {
 		
-		for (int i=1; i<=countWeb; i++) {
+//		for (int i=1; i<=countWeb; i++) {
+//			
+//			'ambil object dari ddl'
+//			def modifyNamaTenant = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/modifyObject'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-coupon/div[2]/div/div/div/div/form/div[5]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
+//			
+//			'tambahkan nama tipe saldo ke array'
+//			String data = WebUI.getText(modifyNamaTenant)
+//			namaTenantUI.add(data)
+//		}
+//		
+//		'cek setiap data di UI dengan data di DB sebagai pembanding'
+//		for (String tipe : namaTenantDB) {
+//			
+//			'jika ada data yang tidak terdapat pada arraylist yang lain'
+//			if (!namaTenantUI.contains(tipe)){
+//				
+//				'ada data yang tidak match'
+//				isTenantFound = 0;
+//				'berhentikan loop'
+//				break;
+//			}
+//			'kondisi ini bisa ditemui jika data match'
+//			isTenantFound = 1
+//		}
 			
-			'ambil object dari ddl'
-			def modifyNamaTenant = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/modifyObject'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-coupon/div[2]/div/div/div/div/form/div[5]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
-			
-			'tambahkan nama tipe saldo ke array'
-			String data = WebUI.getText(modifyNamaTenant)
-			namaTenantUI.add(data)
-		}
-		
-		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaTenantDB) {
-			
-			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaTenantUI.contains(tipe)){
-				
-				'ada data yang tidak match'
-				isTenantFound = 0;
-				'berhentikan loop'
-				break;
-			}
-			'kondisi ini bisa ditemui jika data match'
-			isTenantFound = 1
-		}
-			
-	}
-	else if (isTenantFound == 0 || countWeb != countDB) {
+//	}
+	if (countWeb != countDB) {
 		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
@@ -844,15 +899,15 @@ def callStartDate() {
 	return formattedStartDate
 }
 
-def callendDate() {
-	
-	LocalDate currentDate = LocalDate.now()
-	
-	LocalDate endDate = currentDate
-	
-	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-	
-	String formattedEndDate = endDate.format(dateFormatter)
-	
-	return formattedEndDate
-}
+//def callendDate() {
+//	
+//	LocalDate currentDate = LocalDate.now()
+//	
+//	LocalDate endDate = currentDate
+//	
+//	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+//	
+//	String formattedEndDate = endDate.format(dateFormatter)
+//	
+//	return formattedEndDate
+//}

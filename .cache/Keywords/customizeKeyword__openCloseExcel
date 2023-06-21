@@ -1,0 +1,29 @@
+{
+  "keywordFileContentHash": "E86B295032AEFA07E06500FD533F9313",
+  "keywordClasses": [
+    {
+      "name": "customizeKeyword.openCloseExcel",
+      "keywordMethods": [
+        {
+          "name": "openCloseFileWithRefreshVal",
+          "parameters": [
+            {
+              "name": "FilePath",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "javadocParsed": false
+}

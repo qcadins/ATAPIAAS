@@ -81,7 +81,7 @@ public class TopupVerif {
 		ArrayList listdata = []
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant WHERE email_reminder_dest = '" + email + "'")
+		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant WHERE email_reminder_dest = '" + email + "' AND mbt.lov_balance_charge_type = 141")
 		ResultSetMetaData metadata = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
@@ -102,7 +102,7 @@ public class TopupVerif {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT description, service_price FROM ms_service_price msp LEFT JOIN ms_lov mlo ON mlo.id_lov = msp.lov_balance_type WHERE id_ms_tenant is null AND description = '" + service + "' ORDER BY service_price DESC LIMIT 1")
+		ResultSet resultSet = stm.executeQuery("SELECT service_price FROM ms_service_price msp LEFT JOIN ms_lov mlo ON mlo.id_lov = msp.lov_balance_type WHERE id_ms_tenant is null AND description = '" + service + "' ORDER BY service_price DESC LIMIT 1")
 
 		while (resultSet.next()) {
 
@@ -156,6 +156,48 @@ public class TopupVerif {
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("SELECT toh.topup_order_number, bank_code, mapt.account_number, mapt.account_name FROM tr_topup_order_d tod LEFT JOIN tr_topup_order_h toh ON toh.id_topup_order_h = tod.id_topup_order_h LEFT JOIN ms_account_payment mapt ON mapt.id_account_payment = toh.id_account_payment LEFT JOIN ms_bank mb ON mb.id_bank = mapt.id_bank WHERE toh.topup_order_number = '" + noTrx + "' ORDER BY topup_order_date DESC LIMIT 1")
+		ResultSetMetaData metadata = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while (resultSet.next()) {
+			for (int i = 1 ; i <= columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		listdata
+	}
+
+	@Keyword
+	getRiwayatTabelData(Connection conn, String noTrx) {
+
+		String data
+		ArrayList listdata = []
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT toh.topup_order_number, TO_CHAR(tod.dtm_crt::timestamp, 'DD-Mon-YYYY HH24:MI') AS formatted_date, mlo.description, mlov.description,(CASE WHEN toh.status = 0 THEN 'Menunggu Pembayaran' WHEN toh.status = 1 THEN 'Menunggu Verifikasi Pembayaran' WHEN toh.status = 2 THEN 'Transaksi Kadaluarsa' WHEN toh.status = 3 THEN 'Pembayaran berhasil' WHEN toh.status = 4 THEN 'Pembayaran ditolak' END) as status FROM tr_topup_order_d tod LEFT JOIN tr_topup_order_h toh ON toh.id_topup_order_h = tod.id_topup_order_h LEFT JOIN ms_account_payment mapt ON mapt.id_account_payment = toh.id_account_payment LEFT JOIN ms_bank mb ON mb.id_bank = mapt.id_bank LEFT JOIN ms_lov mlo ON mlo.id_lov = toh.lov_api_key_type LEFT JOIN ms_lov mlov ON mlov.id_lov = mapt.lov_payment_method WHERE toh.topup_order_number = '" + noTrx + "' LIMIT 1")
+		ResultSetMetaData metadata = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while (resultSet.next()) {
+			for (int i = 1 ; i <= columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		listdata
+	}
+
+	@Keyword
+	getRiwayatDetail(Connection conn, String noTrx) {
+
+		String data
+		ArrayList listdata = []
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT ml.description, tod.unit_price, tod.qty, (tod.unit_price * tod.qty) as subtotal FROM tr_topup_order_d tod LEFT JOIN ms_lov ml ON ml.id_lov = tod.lov_balance_type LEFT JOIN tr_topup_order_h toh ON toh.id_topup_order_h = tod.id_topup_order_h WHERE toh.topup_order_number = '" + noTrx + "'")
 		ResultSetMetaData metadata = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()

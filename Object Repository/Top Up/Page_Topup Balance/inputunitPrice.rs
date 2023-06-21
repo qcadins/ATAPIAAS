@@ -6,12 +6,12 @@
    <elementGuidId>f4cba106-c857-48c3-82e4-ad8566db9d29</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
-         <value>#unitPrice</value>
+         <key>XPATH</key>
+         <value>//*[@id=&quot;unitPrice&quot;]</value>
       </entry>
       <entry>
-         <key>XPATH</key>
-         <value>//input[@id='unitPrice']</value>
+         <key>CSS</key>
+         <value>#unitPrice</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +22,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>4f25b90f-35ff-4102-92a0-4df0fe0922fe</webElementGuid>
+      <webElementGuid>2a05ae1c-421b-4e2e-8e14-acd2cb6490da</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +30,7 @@
       <name>type</name>
       <type>Main</type>
       <value>tel</value>
-      <webElementGuid>739b325d-1de8-4d10-8925-50f6a440e44f</webElementGuid>
+      <webElementGuid>19984825-71dc-41d4-8607-862ec9140105</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +38,7 @@
       <name>mask</name>
       <type>Main</type>
       <value>separator.0</value>
-      <webElementGuid>55ea8d1a-2968-49af-913a-bbc0a6cce391</webElementGuid>
+      <webElementGuid>beb2551b-af5b-4b09-9557-a5fd227f300d</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +46,7 @@
       <name>thousandseparator</name>
       <type>Main</type>
       <value>.</value>
-      <webElementGuid>7c107ccb-83ca-411c-880f-b6abfe0d7d23</webElementGuid>
+      <webElementGuid>21de2f23-65bf-48b1-8530-58b7a2fb1a10</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +54,7 @@
       <name>class</name>
       <type>Main</type>
       <value>form-control ng-untouched ng-pristine</value>
-      <webElementGuid>bb8804cf-bd11-466c-8d61-995256046002</webElementGuid>
+      <webElementGuid>fa6c8ec6-207d-475f-9e26-edb645d1f424</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -62,7 +62,7 @@
       <name>ng-reflect-mask-expression</name>
       <type>Main</type>
       <value>separator.0</value>
-      <webElementGuid>d96d3c36-0a99-4634-9e05-b069a32e4327</webElementGuid>
+      <webElementGuid>a1447b9f-e9bb-4c9a-b3e6-9f450cc0e6a6</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -70,7 +70,7 @@
       <name>ng-reflect-thousand-separator</name>
       <type>Main</type>
       <value>.</value>
-      <webElementGuid>a9f95f28-e7fa-43fd-9de3-7e27e4b2954b</webElementGuid>
+      <webElementGuid>07c13489-5abb-4431-a95d-e6c70342a234</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -78,7 +78,7 @@
       <name>ng-reflect-name</name>
       <type>Main</type>
       <value>unitPrice</value>
-      <webElementGuid>e464fa81-5138-42f8-b2f0-e72bf21f58de</webElementGuid>
+      <webElementGuid>224c4ed4-2e53-44f3-bd30-ea93739ee718</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -86,7 +86,7 @@
       <name>id</name>
       <type>Main</type>
       <value>unitPrice</value>
-      <webElementGuid>51801495-c719-4b94-89d2-6404823c7675</webElementGuid>
+      <webElementGuid>f5c5b8d2-a1c6-4bdc-bc43-3d1b6b2dd9ad</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -94,7 +94,7 @@
       <name>placeholder</name>
       <type>Main</type>
       <value>0</value>
-      <webElementGuid>6e1367b6-f73f-406c-b6e9-ad359ed29d8f</webElementGuid>
+      <webElementGuid>1879b7cd-81a8-4b45-a4ec-26540e957f44</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -102,7 +102,7 @@
       <name>ng-reflect-required</name>
       <type>Main</type>
       <value>true</value>
-      <webElementGuid>b396b97b-a813-438c-bced-aba39f194822</webElementGuid>
+      <webElementGuid>c59f6b47-7f10-4e37-9e7a-a96777468d8e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -110,7 +110,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;unitPrice&quot;)</value>
-      <webElementGuid>2069d82e-0f98-4a1c-9199-6eeba3a41346</webElementGuid>
+      <webElementGuid>c830a572-83dd-4469-a965-8f0836791f6d</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -118,7 +118,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//input[@id='unitPrice']</value>
-      <webElementGuid>719d14b6-726a-4a28-9438-9bed067869ac</webElementGuid>
+      <webElementGuid>e82e5bce-3f72-4891-ad79-dccca7a444c9</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -126,7 +126,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[2]/div/app-currency/fieldset/input</value>
-      <webElementGuid>ec30bc1a-6852-435d-b327-979fb259ace7</webElementGuid>
+      <webElementGuid>57bfe71c-e02e-4567-9860-e55ff5215a66</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -134,6 +134,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//input[@type = 'tel' and @id = 'unitPrice' and @placeholder = '0']</value>
-      <webElementGuid>a02bdeee-8053-48e1-b8a9-060d1fa6ad81</webElementGuid>
+      <webElementGuid>9eb63582-4a21-4e64-9853-e679634d2a7e</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

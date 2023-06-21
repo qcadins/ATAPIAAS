@@ -6,6 +6,9 @@
    <elementGuidId>5f268c88-bda8-4a65-a0bc-7d3e8153ded3</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+      </entry>
+      <entry>
          <key>CSS</key>
          <value>#CouponStartDate</value>
       </entry>
@@ -22,15 +25,15 @@
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>93421644-099f-4187-b00c-b3ee70039a1b</webElementGuid>
+      <webElementGuid>a46dafde-f24b-4610-856c-d31d4d6649c8</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>text</value>
-      <webElementGuid>d47ef977-8039-435b-bfce-94690b3aa3bd</webElementGuid>
+      <webElementGuid>56afb0c6-364b-474b-94ac-24d53f4cc0a7</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +41,7 @@
       <name>class</name>
       <type>Main</type>
       <value>form-control ng-untouched ng-pristine ng-invalid</value>
-      <webElementGuid>0ac36034-9648-4380-9224-2e0d39a63404</webElementGuid>
+      <webElementGuid>61216e9d-2e79-428d-bd4c-635da8d1d3f6</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,23 +49,23 @@
       <name>ng-reflect-name</name>
       <type>Main</type>
       <value>CouponStartDate</value>
-      <webElementGuid>9dd3a9da-d55f-4587-91b5-8210b0e24524</webElementGuid>
+      <webElementGuid>f59b2874-19c6-489c-80bd-4038b23370c3</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>
       <value>CouponStartDate</value>
-      <webElementGuid>b74238de-af35-40fc-b7a2-ae2bfeddf634</webElementGuid>
+      <webElementGuid>1ace3aa8-aeff-496e-a752-82d6ca14b409</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>placeholder</name>
       <type>Main</type>
       <value>yyyy-mm-dd</value>
-      <webElementGuid>9833ea4e-e268-43c9-b056-e1665d54aa44</webElementGuid>
+      <webElementGuid>4d849ff1-0a27-4778-9119-66391b19be86</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -70,7 +73,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;CouponStartDate&quot;)</value>
-      <webElementGuid>7fd7116b-b3df-4799-934a-e9f7efd6f914</webElementGuid>
+      <webElementGuid>6df32d05-5f3e-4873-b25d-7780f62fa416</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -78,7 +81,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//input[@id='CouponStartDate']</value>
-      <webElementGuid>e40b658a-8ee4-4510-a98e-dda760191d5d</webElementGuid>
+      <webElementGuid>5744ff7f-94ff-4e38-93bb-b4e18ffed71e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +89,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//app-date/fieldset/div/input</value>
-      <webElementGuid>f61be0c1-f8bb-4d8c-ac7a-a89170c164f6</webElementGuid>
+      <webElementGuid>be244b8e-1adb-4c5c-a341-47ccc5ca7029</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,6 +97,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//input[@type = 'text' and @id = 'CouponStartDate' and @placeholder = 'yyyy-mm-dd']</value>
-      <webElementGuid>7362d044-7730-4938-b7d7-ed48ffc14ba9</webElementGuid>
+      <webElementGuid>5ceeeb0c-892a-4acc-97c8-b090a33cd791</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>
