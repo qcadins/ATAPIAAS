@@ -75,7 +75,7 @@ public class CouponVerif {
 		ArrayList<String> listdata = []
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT tenant_name FROM ms_tenant ")
+		ResultSet resultSet = stm.executeQuery("SELECT tenant_name FROM ms_tenant WHERE is_active = '1'")
 		ResultSetMetaData metadata = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()

@@ -6,12 +6,12 @@
    <elementGuidId>56a8cfc9-a680-49ec-ad93-08d7a30a1995</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
-         <value>#MinimumPayment</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>//input[@id='MinimumPayment']</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>#MinimumPayment</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +22,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>e5103e3e-8877-4eb5-83f6-0a06f5162fff</webElementGuid>
+      <webElementGuid>d05c269c-58f0-48e6-a635-f0f0d3d3c91e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +30,7 @@
       <name>type</name>
       <type>Main</type>
       <value>tel</value>
-      <webElementGuid>a7c76b2f-74fe-4a4f-b321-dae5a1e4238b</webElementGuid>
+      <webElementGuid>8bf28dd2-8d86-4560-91bb-91531e2ac03e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +38,7 @@
       <name>mask</name>
       <type>Main</type>
       <value>separator.0</value>
-      <webElementGuid>cf6e10c3-fe1c-4f76-ab5d-075ef2552bb2</webElementGuid>
+      <webElementGuid>d487f3bc-14af-4e57-b204-ae3337eeb563</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +46,7 @@
       <name>thousandseparator</name>
       <type>Main</type>
       <value>.</value>
-      <webElementGuid>df1f679f-124a-4467-a231-f7b76cd13e47</webElementGuid>
+      <webElementGuid>ae21789c-8cf9-41a1-b7a7-f34726077ef4</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +54,7 @@
       <name>class</name>
       <type>Main</type>
       <value>form-control ng-untouched ng-pristine ng-valid</value>
-      <webElementGuid>2a4b8d18-b296-4b59-9acf-898de9a9782f</webElementGuid>
+      <webElementGuid>c5e0cff6-795f-45d6-b74e-0383c93f10f9</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -62,7 +62,7 @@
       <name>ng-reflect-mask-expression</name>
       <type>Main</type>
       <value>separator.0</value>
-      <webElementGuid>85074d3c-501e-4503-9842-97683f290565</webElementGuid>
+      <webElementGuid>91673dbf-c9db-4bb5-b95f-fc7658313d97</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -70,7 +70,7 @@
       <name>ng-reflect-thousand-separator</name>
       <type>Main</type>
       <value>.</value>
-      <webElementGuid>3f618353-b497-4b58-ab4c-69995da22435</webElementGuid>
+      <webElementGuid>fd08df9e-7b74-42d0-8f1a-b160c38ae5a9</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -78,7 +78,7 @@
       <name>ng-reflect-name</name>
       <type>Main</type>
       <value>MinimumPayment</value>
-      <webElementGuid>3b37a909-91f6-4d22-a18c-e92e0b72f6b6</webElementGuid>
+      <webElementGuid>a1f5be31-b8af-4050-ad74-0d9c413faefb</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -86,7 +86,7 @@
       <name>id</name>
       <type>Main</type>
       <value>MinimumPayment</value>
-      <webElementGuid>61470a18-9e4b-4504-9943-56349cccd4a7</webElementGuid>
+      <webElementGuid>e027f9fb-2fbf-4e73-9776-5367893aaff8</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -94,7 +94,7 @@
       <name>placeholder</name>
       <type>Main</type>
       <value>Ketik minimal pembayaran di sini</value>
-      <webElementGuid>a05aad37-6833-4267-9c09-ff708c1c7032</webElementGuid>
+      <webElementGuid>4e722f1e-035f-4dec-80bb-8237f2b5797a</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -102,7 +102,7 @@
       <name>ng-reflect-required</name>
       <type>Main</type>
       <value>true</value>
-      <webElementGuid>00a7fdfe-c1d1-49b0-8c48-076fad35e7b0</webElementGuid>
+      <webElementGuid>8c63aba5-2342-43f5-8324-d01daa3760dc</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -110,7 +110,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;MinimumPayment&quot;)</value>
-      <webElementGuid>e35d4c23-7ee4-417d-9474-5fc791310084</webElementGuid>
+      <webElementGuid>771426c7-1754-4fd5-8850-61936848f621</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -118,7 +118,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//input[@id='MinimumPayment']</value>
-      <webElementGuid>06fda034-6a9b-4c3c-87bf-433c03a90978</webElementGuid>
+      <webElementGuid>d1dff8c3-505e-4bb3-a98d-907d078394a0</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -126,7 +126,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[9]/div/app-currency/fieldset/input</value>
-      <webElementGuid>fc2bc31d-c2a1-4c4a-a2de-e14db4522aeb</webElementGuid>
+      <webElementGuid>00340b7b-1672-4bd9-9576-0660a94d95bd</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -134,6 +134,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//input[@type = 'tel' and @id = 'MinimumPayment' and @placeholder = 'Ketik minimal pembayaran di sini']</value>
-      <webElementGuid>1adf39b1-ffb6-4cf8-a627-7d70d4dd13b3</webElementGuid>
+      <webElementGuid>eb63e1f3-5bfb-40f6-a2e6-c3c018ef7e5a</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

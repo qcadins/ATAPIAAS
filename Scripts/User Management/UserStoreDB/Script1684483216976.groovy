@@ -13,7 +13,8 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase(
 	
 	'ambil data role dari db'
 	ArrayList<String> resultDB = CustomKeywords.'userManagement.UserVerif.getNewUserData'(conndev, 
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 18))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 18),
+			findTestData(Path).getValue(GlobalVariable.NumOfColumn, 11))
 	
 	'ambil data role dari excel'
 	ArrayList<String> resultExcel = []

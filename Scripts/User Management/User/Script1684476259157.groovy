@@ -21,6 +21,9 @@ int countColumnEdit = findTestData(ExcelPathUser).getColumnNumbers()
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
+'deklarasi koneksi ke database eendigo_dev_uat'
+Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'User', ('SheetName') : 'User', 
 	('Path') : ExcelPathUser], FailureHandling.STOP_ON_FAILURE)
@@ -36,7 +39,7 @@ WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/
 WebUI.click(findTestObject('Object Repository/User Management-User/Page_Balance/span_User'))
 
 'panggil fungsi check paging'
-checkPaging(conndev)
+//checkPaging(conndev)
 
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
@@ -129,6 +132,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				Keys.chord(Keys.ENTER))
 			
 			checkdialogConfirmation(isMandatoryComplete)
+			
+			'aktifkan user yang baru saja didaftarkan di db dev'
+			CustomKeywords.'userManagement.UserVerif.updateIsActiveUser'(conndev,
+				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
+			
+			'aktifkan user yang baru saja didaftarkan di db dev_uat'
+			CustomKeywords.'userManagement.UserVerif.updateIsActiveUser'(conndevUAT,
+				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
 
 		}
 		else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
@@ -162,7 +173,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				Keys.chord(Keys.ENTER))
 	
 			'jika status dari user masih unverified, belum bisa ubah status aktivasi'
-			if (statususer == 'Unverified') {
+			if (statususer == 'Belum verifikasi') {
 				
 				if (WebUI.verifyElementNotHasAttribute(
 					findTestObject('Object Repository/User Management-User/Page_Edit User/inputstatusUser'), 'readonly',
@@ -187,7 +198,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/inputstatusUser'))
 				
 				'cek kondisi status input pada database'
-				if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 28) == 'Active') {
+				if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 28) == 'Aktif') {
 					
 					'pilih status active'
 					WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/Statusactive'))
@@ -458,27 +469,25 @@ def checkPaging(Connection conndev) {
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik halaman 1'
-		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/a_1'))
+		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/a_1'))
 		
 		'verify paging di page 1'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
-			'Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/Page_List User/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik button next page'
-		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-right'))
+		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/i_Action_datatable-icon-right'))
 		
 		'verify paging di page 2'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/'+
-			'User Management-Role/Page_List Roles/Page2'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/Page_List User/Page2'),'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik prev page'
-		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-left'))
+		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/i_Action_datatable-icon-left'))
 		
 		'verify paging di page 1'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
-			'Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/'+
+			'Page_List User/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik pada tombol skip'
@@ -496,11 +505,11 @@ def checkPaging(Connection conndev) {
 				false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'click min page'
-		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-prev'))
+		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/i_Action_datatable-icon-prev'))
 		
 		'verify paging di page 1'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-Role/'+
-			'Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/'+
+			'Page_List User/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 	}
 }

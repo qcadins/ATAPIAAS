@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>tombolX</name>
+   <tag></tag>
+   <elementGuidId>0339eb10-01dc-4936-ac37-25a9854573ce</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/ngb-modal-window/div/div/app-transaction-history-detail/div/div[1]/button/span</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/ngb-modal-window/div/div/app-transaction-history-detail/div/div[1]/button/span</value>
+      <webElementGuid>099587bc-3c2d-4b0f-b3e6-f4dd1bc0ec97</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

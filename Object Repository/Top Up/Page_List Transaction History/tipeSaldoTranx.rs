@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>tipeSaldoTranx</name>
+   <tag></tag>
+   <elementGuidId>b0cd7216-61e8-4e1d-8a2f-e118540b5a43</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value></value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value></value>
+      <webElementGuid>bd6491b2-4475-42ad-bfd4-64c8a0a4358a</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

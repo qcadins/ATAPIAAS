@@ -10,11 +10,11 @@
          <value>//*[(text() = 'Pengguna' or . = 'Pengguna')]</value>
       </entry>
       <entry>
-         <key>CSS</key>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>(.//*[normalize-space(text()) and normalize-space(.)='Roles'])[1]/following::span[1]</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -25,7 +25,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>span</value>
-      <webElementGuid>32fc6880-d9f3-4c26-8984-2f93c9d96a8d</webElementGuid>
+      <webElementGuid>05f8e0b2-080d-4a2f-a7c2-5a71ba857ea7</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -33,7 +33,7 @@
       <name>class</name>
       <type>Main</type>
       <value>menu-title ng-tns-c133-5</value>
-      <webElementGuid>56fc434e-8666-4da7-b8e5-733f51d9bad8</webElementGuid>
+      <webElementGuid>043d30c3-5a7a-4b6b-871a-9f663c90a0cf</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -41,7 +41,7 @@
       <name>text</name>
       <type>Main</type>
       <value>Pengguna</value>
-      <webElementGuid>d25213b4-e679-473b-aeb1-86aad9811382</webElementGuid>
+      <webElementGuid>e8dc0b5e-52ff-4b01-8a27-74de2a35e37c</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -49,7 +49,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-expanded vertical-menu menu-open&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;app-sidebar main-menu menu-fixed menu-native-scroll expanded ng-star-inserted&quot;]/app-sidebar[@class=&quot;ng-tns-c133-5&quot;]/div[@class=&quot;sidebar-content main-menu-content ng-tns-c133-5 ps&quot;]/div[@class=&quot;nav-container ng-tns-c133-5&quot;]/ul[@class=&quot;navigation ng-tns-c133-5&quot;]/li[@class=&quot;ng-tns-c133-5 has-sub ng-star-inserted open sidebar-group-active&quot;]/ul[@class=&quot;menu-content ng-tns-c133-5 ng-star-inserted&quot;]/li[@class=&quot;ng-tns-c133-5 ng-star-inserted&quot;]/a[@class=&quot;ng-tns-c133-5 ng-star-inserted&quot;]/span[@class=&quot;menu-title ng-tns-c133-5&quot;]</value>
-      <webElementGuid>88476a1f-84e3-40c4-9272-68a782cf5703</webElementGuid>
+      <webElementGuid>ba7170d4-fcf1-4503-815e-11ddb7920394</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -57,7 +57,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Roles'])[1]/following::span[1]</value>
-      <webElementGuid>deaccb81-a67b-4d3c-8fa9-88d4715198f2</webElementGuid>
+      <webElementGuid>c11d9b76-0ec0-4efb-bae8-e3230a958c02</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -65,7 +65,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Manage User'])[1]/following::span[2]</value>
-      <webElementGuid>8873eb45-690b-46bb-8674-b22ff82570b8</webElementGuid>
+      <webElementGuid>59ff0c36-0746-4092-a250-9298c58e19a4</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -73,7 +73,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Coupon'])[1]/preceding::span[1]</value>
-      <webElementGuid>59d5c55e-14ee-4cd7-af35-cc04b70660ad</webElementGuid>
+      <webElementGuid>68c8c2e3-ec6d-4983-bf12-f6403a639e52</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -81,7 +81,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='PRODUCTION'])[1]/preceding::span[2]</value>
-      <webElementGuid>9116c6fa-a9c0-4d80-8350-c6c2ea6803c0</webElementGuid>
+      <webElementGuid>656e87b7-f6f6-4b85-bdbc-ed9c11ec5594</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -89,7 +89,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='User']/parent::*</value>
-      <webElementGuid>d239156e-2807-4c89-9aed-bb15d65ca662</webElementGuid>
+      <webElementGuid>c1c98fe6-28e3-4170-982d-0bf8abff12ca</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -97,7 +97,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//li[6]/ul/li[2]/a/span</value>
-      <webElementGuid>9881bf39-554f-411b-bc2f-40937f4c16c7</webElementGuid>
+      <webElementGuid>83e16747-431d-405c-bafa-4456518a47e3</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -105,6 +105,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//span[(text() = 'User' or . = 'User')]</value>
-      <webElementGuid>4c9f06be-ec87-4522-9141-5826ab500617</webElementGuid>
+      <webElementGuid>91f1c6db-d1cb-4a2e-87bd-3db9f33c846f</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

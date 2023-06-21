@@ -6,12 +6,12 @@
    <elementGuidId>896a7297-c2c4-41e3-91a9-6f9cfb22f254</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
-         <value>#CouponEndDate</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>//input[@id='CouponEndDate']</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>#CouponEndDate</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +22,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>64ad11ba-cdd8-43e9-8c9e-301d26dae3e3</webElementGuid>
+      <webElementGuid>a61302f6-c204-4a20-ba24-b3ec53e75c01</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +30,7 @@
       <name>type</name>
       <type>Main</type>
       <value>text</value>
-      <webElementGuid>c65b8bcf-ff42-4484-894b-3770d978b7a3</webElementGuid>
+      <webElementGuid>e7948d1e-25fd-48cb-bd7c-ea4e27b859c0</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +38,7 @@
       <name>class</name>
       <type>Main</type>
       <value>form-control ng-untouched ng-pristine ng-invalid</value>
-      <webElementGuid>222da870-3748-45a4-af76-c55ce3ed575e</webElementGuid>
+      <webElementGuid>06973278-8708-4b4e-a775-13afcb26bec6</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +46,7 @@
       <name>ng-reflect-name</name>
       <type>Main</type>
       <value>CouponEndDate</value>
-      <webElementGuid>077b18fc-a226-42e3-8e12-a3667b5f0f56</webElementGuid>
+      <webElementGuid>44280c2b-61bd-440a-ae55-df04ae65d07d</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -54,7 +54,7 @@
       <name>id</name>
       <type>Main</type>
       <value>CouponEndDate</value>
-      <webElementGuid>6b9bfa67-88bf-4b9e-aee1-e00e27dbc994</webElementGuid>
+      <webElementGuid>b218426d-ae1e-43e0-8329-2b04ed50a838</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -62,7 +62,7 @@
       <name>placeholder</name>
       <type>Main</type>
       <value>yyyy-mm-dd</value>
-      <webElementGuid>8fda62c2-b3d8-40c5-bd5f-1175df42e70d</webElementGuid>
+      <webElementGuid>dc16108b-25e9-4c68-881f-e7cbe1059c52</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -70,7 +70,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;CouponEndDate&quot;)</value>
-      <webElementGuid>a0a1fc0c-2c3a-438b-ad80-c1c2e87b7c80</webElementGuid>
+      <webElementGuid>15f972d1-38fb-4dc4-b709-c31038910047</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -78,7 +78,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//input[@id='CouponEndDate']</value>
-      <webElementGuid>9d19cad5-3372-4fbd-800d-19733671f461</webElementGuid>
+      <webElementGuid>343de81b-51f0-4832-a6bb-a437ce309890</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +86,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[4]/div/app-date/fieldset/div/input</value>
-      <webElementGuid>9d9d1d4a-8ad1-4bfb-8e3a-efd021dc7e5f</webElementGuid>
+      <webElementGuid>c25b7524-f5a8-4e0b-bd7e-69a17c293b10</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,6 +94,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//input[@type = 'text' and @id = 'CouponEndDate' and @placeholder = 'yyyy-mm-dd']</value>
-      <webElementGuid>ac32a955-62c1-4519-a1bf-a7cebf7d0c9e</webElementGuid>
+      <webElementGuid>bad8c122-88b6-4052-a03a-f32018b593c0</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

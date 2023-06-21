@@ -6,23 +6,27 @@
    <elementGuidId>4de7d418-dbca-494f-8bb9-ac559e991f0f</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
-         <value>input[type=&quot;text&quot;]</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>//input[@type='text']</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//input[@type = 'text']</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>input[type=&quot;text&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>c64075ea-8aab-4dac-9da6-a4ca8a5101bc</webElementGuid>
+      <webElementGuid>53a36d74-7de3-4463-b5af-73284a60db3e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -30,7 +34,7 @@
       <name>role</name>
       <type>Main</type>
       <value>combobox</value>
-      <webElementGuid>a7deedad-19a9-4dc1-8569-c7353c8fc75e</webElementGuid>
+      <webElementGuid>449136fe-615c-4378-804e-6830c6fa62a7</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -38,7 +42,7 @@
       <name>type</name>
       <type>Main</type>
       <value>text</value>
-      <webElementGuid>1f568ffb-9918-463b-87a2-089d1da7cf7e</webElementGuid>
+      <webElementGuid>f7cfdfbd-431e-4bd3-82c3-e4727468ec97</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +50,7 @@
       <name>autocorrect</name>
       <type>Main</type>
       <value>off</value>
-      <webElementGuid>395e0663-b94f-4d5d-8074-8648ef12118e</webElementGuid>
+      <webElementGuid>3d62a0d5-0d62-4ad2-9a85-f915fdb1e923</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>autocapitalize</name>
       <type>Main</type>
       <value>off</value>
-      <webElementGuid>fa5afa0b-ef64-4b86-a256-2d7ca403dee0</webElementGuid>
+      <webElementGuid>f9f2be95-0ae9-4764-8844-5148ee825867</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -62,7 +66,7 @@
       <name>autocomplete</name>
       <type>Main</type>
       <value>a910047a1c4e</value>
-      <webElementGuid>57a5eb00-be24-4021-b469-8ec147ff980e</webElementGuid>
+      <webElementGuid>3a647e77-0a69-492b-9812-699022147cf4</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -70,7 +74,7 @@
       <name>aria-expanded</name>
       <type>Main</type>
       <value>false</value>
-      <webElementGuid>a4fcebbf-366c-48d3-ae75-dac58e28e989</webElementGuid>
+      <webElementGuid>b1e10077-afa8-4a66-a17e-af0b1d4f266d</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;LovCouponType&quot;)/div[@class=&quot;ng-select-container ng-has-value&quot;]/div[@class=&quot;ng-value-container&quot;]/div[@class=&quot;ng-input&quot;]/input[1]</value>
-      <webElementGuid>e58d1151-cd70-4318-bba3-d3aa1e37e5d0</webElementGuid>
+      <webElementGuid>803b2a69-1ee0-42d3-897e-6922c89c2376</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -86,7 +90,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//input[@type='text']</value>
-      <webElementGuid>e9ba52f8-bbcf-4135-9662-d9e1820042c5</webElementGuid>
+      <webElementGuid>1b752ee2-4001-4db0-9ee8-1025f606cd28</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +98,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//ng-select[@id='LovCouponType']/div/div/div[3]/input</value>
-      <webElementGuid>9d8fd20d-434f-4136-9eb5-975ea260e025</webElementGuid>
+      <webElementGuid>be32e50b-0791-4075-8600-4450e857fa64</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,7 +106,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//input</value>
-      <webElementGuid>bb6b545b-2d00-4b36-884c-bc9b77224523</webElementGuid>
+      <webElementGuid>57d65a3c-4057-4685-907e-2941c1cb7248</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -110,6 +114,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//input[@type = 'text']</value>
-      <webElementGuid>791486ad-f5dd-457f-8956-08f4ea0e91b3</webElementGuid>
+      <webElementGuid>babde6a2-9e79-44d1-954f-9f1ab488445f</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

@@ -10,6 +10,10 @@
          <value>#CouponAmount</value>
       </entry>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'tel' and @id = 'CouponAmount' and @placeholder = '0']</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>//input[@id='CouponAmount']</value>
       </entry>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>58eb8fb8-5d80-4775-b21a-012a2d1f068a</webElementGuid>
+      <webElementGuid>b2b6f3f1-211e-42fe-aa86-62a4fe00fdf0</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +34,7 @@
       <name>type</name>
       <type>Main</type>
       <value>tel</value>
-      <webElementGuid>5e6f6084-aed5-4b07-81b5-8f6e153c0def</webElementGuid>
+      <webElementGuid>5513d49a-bfda-45db-ab0b-32071720009b</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +42,7 @@
       <name>mask</name>
       <type>Main</type>
       <value>separator.0</value>
-      <webElementGuid>ecc8194c-ac17-46da-8408-aa8a8341ebe5</webElementGuid>
+      <webElementGuid>4433b74f-f20d-4963-aff9-c19f8b7f4abc</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +50,7 @@
       <name>thousandseparator</name>
       <type>Main</type>
       <value>.</value>
-      <webElementGuid>829b67e6-8a54-4e26-bd49-263f51ddc61f</webElementGuid>
+      <webElementGuid>133e4f87-f795-4fad-9ddd-9cd7bd5a5c40</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>class</name>
       <type>Main</type>
       <value>form-control ng-untouched ng-pristine ng-valid</value>
-      <webElementGuid>50d73225-e5aa-4754-915a-dad17f8ad394</webElementGuid>
+      <webElementGuid>33af76ea-f70b-4ee0-aff6-f38a632457a5</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -62,7 +66,7 @@
       <name>ng-reflect-mask-expression</name>
       <type>Main</type>
       <value>separator.0</value>
-      <webElementGuid>f3f119c5-2ab0-45fa-90cc-1cf2a235d67e</webElementGuid>
+      <webElementGuid>3fa66f73-5c6f-4826-8a77-b8e6b3cc15a9</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -70,7 +74,7 @@
       <name>ng-reflect-thousand-separator</name>
       <type>Main</type>
       <value>.</value>
-      <webElementGuid>7b0ed309-0970-49fd-8d77-1f14ce0974b9</webElementGuid>
+      <webElementGuid>26472a5b-25ea-4851-9625-f7209266ae55</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>ng-reflect-name</name>
       <type>Main</type>
       <value>CouponAmount</value>
-      <webElementGuid>f144054b-a3c1-4852-83c4-cc45f4240103</webElementGuid>
+      <webElementGuid>bd7dbb3f-7f81-45ea-a49a-03aaa3e4c82b</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -86,7 +90,7 @@
       <name>id</name>
       <type>Main</type>
       <value>CouponAmount</value>
-      <webElementGuid>68322227-5876-4145-8a3a-8e3bcc5315eb</webElementGuid>
+      <webElementGuid>a9435086-77d5-4752-a528-bd25eebd543c</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -94,7 +98,7 @@
       <name>placeholder</name>
       <type>Main</type>
       <value>0</value>
-      <webElementGuid>201e32ff-58dd-4fbf-a27b-3d382e851862</webElementGuid>
+      <webElementGuid>b47ea1b5-0d75-495a-810c-f5ff7872ffe2</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -102,7 +106,7 @@
       <name>ng-reflect-required</name>
       <type>Main</type>
       <value>true</value>
-      <webElementGuid>6d7564ff-4559-4680-b9c4-4848617aa68b</webElementGuid>
+      <webElementGuid>ea9f8955-8929-4280-8921-6f209442c0b8</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -110,7 +114,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;CouponAmount&quot;)</value>
-      <webElementGuid>e379f98c-44a9-4245-b316-11229f0e86af</webElementGuid>
+      <webElementGuid>147ed4f5-7f08-46b2-bc4a-b297df82d9e9</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -118,7 +122,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//input[@id='CouponAmount']</value>
-      <webElementGuid>79cda89f-bd1f-488e-ace1-0fe4d125de86</webElementGuid>
+      <webElementGuid>f3a9c685-f282-44e2-95ba-9ee61ce60267</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -126,7 +130,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//fieldset/input</value>
-      <webElementGuid>5a4bcdbe-bdab-455a-8ec2-73513c078567</webElementGuid>
+      <webElementGuid>14b0c10a-379b-4538-95eb-569e6cdcd806</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -134,6 +138,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//input[@type = 'tel' and @id = 'CouponAmount' and @placeholder = '0']</value>
-      <webElementGuid>3059afc9-9a90-478f-a0d1-a1248b25fcc0</webElementGuid>
+      <webElementGuid>6a48412b-7ab9-4f64-bcb0-94344ab28bfc</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

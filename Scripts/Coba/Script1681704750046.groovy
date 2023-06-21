@@ -28,8 +28,6 @@ import java.time.format.DateTimeFormatter
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
-int a = 2000
+ArrayList ppnfromDB = CustomKeywords.'topup.TopupVerif.getRiwayatDetail'(conndev, 'EENDIGO/23/06/00139')
 
-int ppnfromDB = Integer.parseInt(CustomKeywords.'topup.TopupVerif.getPPNvalue'(conndev))
-
-println ppnfromDB * a /100
+println ppnfromDB 
