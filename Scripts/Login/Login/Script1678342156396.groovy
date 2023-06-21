@@ -26,7 +26,7 @@ def driver = DriverFactory.getWebDriver()
 'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
 GlobalVariable.FlagFailed = 0
 
-if (TC != 'IsiSaldo' && TC != 'Tenant') {
+if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
 	
 	'buka website APIAAS SIT, data diambil dari TestData Login'
 	WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 2))
@@ -366,6 +366,18 @@ else if (TC == 'ChangePass') {
 		'pilih admin client'
 		WebUI.click(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'))
 	}
+} else if (TC == 'IsiSaldoAuto') {
+	
+	'input data username'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
+		findTestData(ExcelPathLogin).getValue(2, 18))
+	
+	'input password'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputpassword'),
+		findTestData(ExcelPathLogin).getValue(2, 19))
+	
+	'klik tombol masuk'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
 }
 
 //'cek apakah muncul error unknown setelah login'
