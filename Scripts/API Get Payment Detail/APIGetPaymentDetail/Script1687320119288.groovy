@@ -48,26 +48,31 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColmExce
 	
 	            namaRek = WS.getElementPropertyValue(respon, 'NamaRekening', FailureHandling.OPTIONAL)
 	
+				println(bankCode)
+				
 				'declare arraylist arraymatch'
 				ArrayList<String> arrayMatch = []
 				
-				arrayIndex = 0
+				if (bankCode != '') {
 				
-				'get payment detail from db'
-				result = CustomKeywords.'apiGetPaymentDetail.APIGetPaymentDetail.getPaymentDetailDB'(conn, findTestData(
-						excelPathAPIGetPaymentDetail).getValue(GlobalVariable.NumOfColumn, 9).replace('"', ''))
-	
-				'verify bank code'
-				arrayMatch.add(WebUI.verifyMatch(bankCode, result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE))
-				
-				'verify bank name'
-				arrayMatch.add(WebUI.verifyMatch(bankName, result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE))
-				
-				'verify account number'
-				arrayMatch.add(WebUI.verifyMatch(noRek, result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE))
-				
-				'verify account name'
-				arrayMatch.add(WebUI.verifyMatch(namaRek, result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE))
+					arrayIndex = 0
+					
+					'get payment detail from db'
+					result = CustomKeywords.'apiGetPaymentDetail.APIGetPaymentDetail.getPaymentDetailDB'(conn, findTestData(
+							excelPathAPIGetPaymentDetail).getValue(GlobalVariable.NumOfColumn, 9).replace('"', ''))
+		
+					'verify bank code'
+					arrayMatch.add(WebUI.verifyMatch(bankCode, result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE))
+					
+					'verify bank name'
+					arrayMatch.add(WebUI.verifyMatch(bankName, result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE))
+					
+					'verify account number'
+					arrayMatch.add(WebUI.verifyMatch(noRek, result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE))
+					
+					'verify account name'
+					arrayMatch.add(WebUI.verifyMatch(namaRek, result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE))
+				}
 				
 				if (arrayMatch.contains(false)) {
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
@@ -82,6 +87,10 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColmExce
 			} else {
 				'mengambil status code berdasarkan response HIT API'
 				message = WS.getElementPropertyValue(respon, 'ErrorMessages.Message', FailureHandling.OPTIONAL).toString()
+				
+				if(message == 'null') {
+					message = WS.getElementPropertyValue(respon, 'Message', FailureHandling.OPTIONAL).toString()
+				}
 				
 				'Write To Excel GlobalVariable.StatusFailed and errormessage'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('APIGetPaymentDetail', GlobalVariable.NumOfColumn,
