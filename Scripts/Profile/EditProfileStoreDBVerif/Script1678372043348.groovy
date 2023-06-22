@@ -12,21 +12,38 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 String email = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9)
 
 'kumpulan string yang menyimpan hasil data dari DB'
-ArrayList<String> hasildb = CustomKeywords.'profile.CheckProfile.getProfilefromDB'(conn, email)
+ArrayList<String> hasildb = CustomKeywords.'profile.CheckProfile.getProfilefromDB'(conn, email, role)
 
-'kumpulan string dari data yang diambil langsung dari excel'
-ArrayList<String> hasilexcel = []
-
-'mengambil data dari excel'
-for (int i=10; i<=hasilexcel.size; i++){
+if (role == 'Admin Client') {
+	'kumpulan string dari data yang diambil langsung dari excel'
+	ArrayList<String> hasilexcel = []
 	
-	hasilexcel.add(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, i))
-}
-
-'verifikasi data pada db dan excel sama'
-for (int j = 0; j < hasilexcel.size ; j++) {
+	'mengambil data dari excel'
+	for (int i=10; i<=hasilexcel.size; i++){
+		
+		hasilexcel.add(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, i))
+	}
 	
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[j], hasilexcel[j], false, FailureHandling.CONTINUE_ON_FAILURE))
+	'verifikasi data pada db dan excel sama'
+	for (int j = 0; j < hasilexcel.size ; j++) {
+		
+		checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[j], hasilexcel[j], false, FailureHandling.CONTINUE_ON_FAILURE))
+	}
+} else {
+	
+	arrayIndex = 0
+	
+	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 11), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 12), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 15), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 17), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 18), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 19), false, FailureHandling.CONTINUE_ON_FAILURE))
 }
 
 def checkVerifyEqualorMatch(Boolean isMatch) {

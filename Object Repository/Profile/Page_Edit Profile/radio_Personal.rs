@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>radio_Personal</name>
+   <tag></tag>
+   <elementGuidId>93c0d4c6-27e0-4ee1-aaf9-14b2e619121c</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'radio' and @value = 'Personal']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-edit-my-profile/div[2]/div/div/div/div[2]/form/div[7]/div[2]/label/input</value>
+      <webElementGuid>f7913767-b925-49f1-bf48-636e71bc94db</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>radio</value>
+      <webElementGuid>85ce5e8e-f53d-44ba-a5b4-03ef7c0a1bcd</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>value</name>
+      <type>Main</type>
+      <value>Personal</value>
+      <webElementGuid>7eac3bfb-1e7f-4204-b94c-8f365113c8dc</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

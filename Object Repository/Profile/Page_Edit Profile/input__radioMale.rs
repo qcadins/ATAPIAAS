@@ -6,12 +6,16 @@
    <elementGuidId>0d4a2d90-a094-4f84-b87b-e8f4b07ff4c6</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>XPATH</key>
+         <value>//input[@value='M']</value>
+      </entry>
+      <entry>
          <key>CSS</key>
          <value>label > input.ng-untouched.ng-pristine.ng-valid</value>
       </entry>
       <entry>
-         <key>XPATH</key>
-         <value>//input[@value='M']</value>
+         <key>BASIC</key>
+         <value>//*[@type = 'radio']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>8cfb9bf3-2806-4843-b476-ada74aff9d42</webElementGuid>
+      <webElementGuid>38e178f1-8bfe-4736-b2c4-a4ff32ef5163</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +34,7 @@
       <name>type</name>
       <type>Main</type>
       <value>radio</value>
-      <webElementGuid>7214fabd-37fc-40cb-9871-a5d8a9a959a5</webElementGuid>
+      <webElementGuid>aad13395-8e1a-4b7b-ace3-b0b4169e0ee6</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +42,7 @@
       <name>value</name>
       <type>Main</type>
       <value>M</value>
-      <webElementGuid>19814e88-523a-4f59-bfa3-b189b104ca8f</webElementGuid>
+      <webElementGuid>ce9276b4-503a-4d36-b766-c29cc029199b</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +50,7 @@
       <name>formcontrolname</name>
       <type>Main</type>
       <value>gender</value>
-      <webElementGuid>9039d1da-dc65-4759-8ab1-c4522d92c05a</webElementGuid>
+      <webElementGuid>e0e2462b-51cf-4dc5-9fa0-a9a732e18aa8</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>ng-reflect-name</name>
       <type>Main</type>
       <value>gender</value>
-      <webElementGuid>39e6f69c-3d33-4e74-a998-7940887354be</webElementGuid>
+      <webElementGuid>dd9cee25-ba03-44db-b4e7-f7e3b21b573c</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -62,7 +66,7 @@
       <name>ng-reflect-value</name>
       <type>Main</type>
       <value>M</value>
-      <webElementGuid>c388accf-e461-4f11-9c1b-30512d7a30fb</webElementGuid>
+      <webElementGuid>151ad126-0717-4115-8e81-fd9f8ef7e66c</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -70,7 +74,7 @@
       <name>ng-reflect-form-control-name</name>
       <type>Main</type>
       <value>gender</value>
-      <webElementGuid>7f0771b5-bca9-4d04-be9b-63dbf949a366</webElementGuid>
+      <webElementGuid>953b36cd-c6f2-4a6e-9c0d-ff56cc7c767e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>class</name>
       <type>Main</type>
       <value>ng-untouched ng-pristine ng-valid</value>
-      <webElementGuid>c26f83e1-82d1-4a86-af42-f4208a09baba</webElementGuid>
+      <webElementGuid>25a690e0-26ad-4102-bb83-87e82535caba</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -86,7 +90,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout menu-hide navbar-static  pace-done&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[@class=&quot;content-wrapper&quot;]/app-edit-my-profile[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;container-fluid&quot;]/div[@class=&quot;row bg-white rounded&quot;]/div[@class=&quot;col-12&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-12 col-sm-4&quot;]/form[@class=&quot;ng-untouched ng-pristine ng-invalid&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-6 text-in-content&quot;]/label[1]/input[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]</value>
-      <webElementGuid>3f6515cd-6c8e-4fe3-9bc7-7cdac71690bb</webElementGuid>
+      <webElementGuid>19a59ce5-4cfc-4d27-a1c6-d44332b9ed39</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -94,7 +98,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//input[@value='M']</value>
-      <webElementGuid>f7e13611-a584-4c99-b3b6-d6f4697a0476</webElementGuid>
+      <webElementGuid>2ab400f9-6dea-490f-9e27-79680a7f83c3</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,7 +106,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//label/input</value>
-      <webElementGuid>08df3034-28c4-40ec-a1aa-13f897095e35</webElementGuid>
+      <webElementGuid>f47f236d-7e5e-4158-9564-1de08dd601e1</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -110,6 +114,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//input[@type = 'radio']</value>
-      <webElementGuid>ec367ec5-d917-4fa5-8819-2138944d70da</webElementGuid>
+      <webElementGuid>9cd2e5f4-dcc0-43da-8145-5b2a576661b3</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

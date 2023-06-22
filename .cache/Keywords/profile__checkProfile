@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "AFBB61D49AAE55A1B88475CB4C15E775",
+  "keywordFileContentHash": "369E49E150CAAC30A74EF101617D1744",
   "keywordClasses": [
     {
       "name": "profile.CheckProfile",
@@ -32,14 +32,39 @@
                 "genericsTypes": [],
                 "errorOnParsing": false
               }
+            },
+            {
+              "name": "role",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getAttributeValueProfile",
-          "parameters": [],
-          "javadoc": ""
+          "parameters": [
+            {
+              "name": "role",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ]
         },
         {
           "name": "getTenantNamefromDB",
@@ -70,11 +95,41 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
+        },
+        {
+          "name": "getUserRole",
+          "parameters": [
+            {
+              "name": "conn",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "email",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

@@ -13,10 +13,10 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 String email = WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__email'), 'value')
 
 'kumpulan string dari data yang diambil langsung dari database'
-ArrayList<String> hasildb = CustomKeywords.'profile.CheckProfile.getProfilefromDB'(conn, email)
+ArrayList<String> hasildb = CustomKeywords.'profile.CheckProfile.getProfilefromDB'(conn, email, role)
 
 'ambil text dari UI Web APIAAS'
-ArrayList<String> hasilweb = CustomKeywords.'profile.CheckProfile.getAttributeValueProfile'()
+ArrayList<String> hasilweb = CustomKeywords.'profile.CheckProfile.getAttributeValueProfile'(role)
 
 'verifikasi data pada WEB dan DB sama'
 for (int j = 0; j < hasildb.size; j++) {
