@@ -1,6 +1,9 @@
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+
+import org.openqa.selenium.Keys
+
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
@@ -8,17 +11,37 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
-'klik pada tombol garis tiga'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_KEPIN EDGAR_ft-menu font-medium-3'))
+//'klik pada tombol garis tiga'
+//WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_KEPIN EDGAR_ft-menu font-medium-3'))
+//
+//WebUI.delay(1)
+//
+//'klik pada API KEY'
+//WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/span_API Key'))
+//
+//WebUI.delay(2)
 
-WebUI.delay(1)
+'input tipe API'
+WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
+		ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12))
 
-'klik pada API KEY'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/span_API Key'))
+'select tipe API'
+WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(
+		Keys.ENTER))
+
+'input status API'
+WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
+		ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
+
+'select status API'
+WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(
+		Keys.ENTER))
+
+'klik pada button cari'
+WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
 
 'klik pada tombol edit API'
-WebUI.click(
-	findTestObject('Object Repository/API_KEY/Page_Api Key List/em_Aksi_align-middle cursor-pointer font-me_8c8f9d'))
+WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/em_Aksi_align-middle cursor-pointer font-me_8c8f9d'))
 
 'klik pada panah ddl Status API'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/span_Inactive_ng-arrow-wrapper'))
@@ -31,19 +54,14 @@ if (GlobalVariable.KondisiCekDB == 'Yes') {
 
 'input nama API'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'), 
-	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
+	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11))
 
-'cek kondisi status input pada database'
-if(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 14) == 'ACTIVE'){
-	
-	'pilih status active'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/span_Active'))
-}
-else{
-	
-	'pilih status inactive'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/span_Inactive'))
-}
+'pilih status active'
+WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
+
+'select status active'
+WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), Keys.chord(
+		Keys.ENTER))
 
 'klik tombol untuk simpan ubahan'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Lanjut'))

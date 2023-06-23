@@ -26,12 +26,9 @@ public class GetOTPfromDB {
 		columnCount = metadata.getColumnCount()
 
 		while (resultSet.next()) {
-			for (int i =1; i <= columnCount ; i++) {
-				data = resultSet.getObject(i)
-				listdata.add(data)
-			}
+			data = resultSet.getObject(1)
 		}
-		listdata
+		data
 	}
 
 }

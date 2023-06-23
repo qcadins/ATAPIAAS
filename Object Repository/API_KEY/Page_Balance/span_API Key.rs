@@ -6,15 +6,18 @@
    <elementGuidId>38544f32-fe85-4027-a1ef-30c53a2acaa1</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
-         <value></value>
+         <key>BASIC</key>
+         <value>//*[contains(@class, 'ft-lock')]</value>
       </entry>
       <entry>
          <key>XPATH</key>
          <value>(.//*[normalize-space(text()) and normalize-space(.)='Saldo'])[1]/following::span[1]</value>
       </entry>
+      <entry>
+         <key>CSS</key>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,23 +25,23 @@
       <name>tag</name>
       <type>Main</type>
       <value>span</value>
-      <webElementGuid>216c0cf9-04da-41f3-8805-c418a385eb75</webElementGuid>
+      <webElementGuid>351ce742-140b-4693-979a-975263de4411</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>contains</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ft-lock</value>
+      <webElementGuid>96e3c654-72e2-4a0d-b507-d4e211f1bc9c</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>class</name>
-      <type>Main</type>
-      <value>menu-title ng-tns-c133-4</value>
-      <webElementGuid>41f4d0f5-ed83-4b98-b6d6-aac7318a3071</webElementGuid>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value>API Key</value>
-      <webElementGuid>775923f3-33cd-458d-b58e-553af6e8b5f3</webElementGuid>
+      <webElementGuid>41373eac-117b-46c5-b547-7799b96804ef</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +49,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-expanded vertical-menu menu-open&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;app-sidebar main-menu menu-fixed menu-native-scroll expanded ng-star-inserted&quot;]/app-sidebar[@class=&quot;ng-tns-c133-4&quot;]/div[@class=&quot;sidebar-content main-menu-content ng-tns-c133-4 ps&quot;]/div[@class=&quot;nav-container ng-tns-c133-4&quot;]/ul[@class=&quot;navigation ng-tns-c133-4&quot;]/li[@class=&quot;ng-tns-c133-4 ng-star-inserted&quot;]/a[@class=&quot;ng-tns-c133-4 ng-star-inserted&quot;]/span[@class=&quot;menu-title ng-tns-c133-4&quot;]</value>
-      <webElementGuid>1beb6211-a8b7-4551-96b2-3fb3efbf7058</webElementGuid>
+      <webElementGuid>1c2437f2-a141-4040-a799-ad505dcaf61f</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -54,7 +57,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Saldo'])[1]/following::span[1]</value>
-      <webElementGuid>7b74ed1c-02ad-460c-adc0-4105e4ada8ce</webElementGuid>
+      <webElementGuid>ecc36676-38cf-4fda-8822-760efcf8795e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -62,7 +65,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Keluar'])[1]/following::span[2]</value>
-      <webElementGuid>ffdf6740-142c-489d-ac32-8e8104d83580</webElementGuid>
+      <webElementGuid>73641620-1fce-4126-8916-5cb3f7c9d7e0</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +73,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Dokumentasi API'])[1]/preceding::span[1]</value>
-      <webElementGuid>a120443d-14a4-4788-8f31-dc90d0516585</webElementGuid>
+      <webElementGuid>889112fb-5f11-4ffe-ba0e-4488ee31c9df</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +81,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='PRODUCTION'])[1]/preceding::span[2]</value>
-      <webElementGuid>3a0c8fe8-f859-4436-9e57-fefee03dc2a4</webElementGuid>
+      <webElementGuid>e7a6e7c9-fcd3-43ce-a8ae-189e3d186b90</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +89,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='API Key']/parent::*</value>
-      <webElementGuid>2dfe0eba-f917-4771-bb9f-b6a1179b604a</webElementGuid>
+      <webElementGuid>93788264-18d1-4467-9d97-85355e445360</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +97,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//li[2]/a/span</value>
-      <webElementGuid>2b5fc4ff-ed10-4098-8c2f-c8c9680259c9</webElementGuid>
+      <webElementGuid>52dc16b8-a12e-4ad6-b0a7-22084012959b</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,6 +105,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//span[(text() = 'API Key' or . = 'API Key')]</value>
-      <webElementGuid>c5445fce-291b-470e-80d3-60ed98219c42</webElementGuid>
+      <webElementGuid>4a80500b-4704-47f0-82b9-dda36425ffaf</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>label_SyaratdanKetentuan</name>
+   <tag></tag>
+   <elementGuidId>4564492e-8c58-4610-8657-a82fab448118</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@href = '/terms']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;mat-tab-content-0-1&quot;]/div/form/div[6]/div/div/label</value>
+      <webElementGuid>9996c37e-f414-43b9-935d-8491f1754337</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>auth-terms</value>
+      <webElementGuid>92941a55-7641-4a29-b606-000c574fc81a</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>href</name>
+      <type>Main</type>
+      <value>/terms</value>
+      <webElementGuid>a2c66808-0eef-472b-bd67-8376df40b418</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

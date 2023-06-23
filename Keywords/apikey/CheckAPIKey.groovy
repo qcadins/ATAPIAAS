@@ -47,9 +47,12 @@ public class CheckAPIKey {
 
 		String optionLabel
 
-		optionLabel = WebUI.getAttribute(findTestObject('Object Repository/'+
-				'API_KEY/Page_Edit Api Key/input'), 'aria-activedescendant')
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'))
+		
+		optionLabel = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), 'aria-activedescendant')
 
+		println(optionLabel)
+		
 		'kumpulan string yang menyimpan hasil text dari User Interface APIAAS'
 		ArrayList hasilgetText = []
 
