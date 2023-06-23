@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>button_UploadNPWP</name>
+   <tag></tag>
+   <elementGuidId>3f840a12-27f8-4683-a6ed-d7a8a2824be3</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;npwpPhoto&quot;]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;npwpPhoto&quot;]</value>
+      <webElementGuid>b59f429b-119f-4935-b534-368c632e2b32</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

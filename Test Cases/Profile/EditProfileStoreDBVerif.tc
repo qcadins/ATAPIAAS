@@ -11,11 +11,24 @@
       <value></value>
       <variableId>5f7d9f1e-8050-400b-aa51-ccf81cdfd143</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>3246a731-ca2f-48a4-9cc6-4c9a84ca450d</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'APIAAS/DataEditProfile'</defaultValue>
       <description></description>
       <id>5f7d9f1e-8050-400b-aa51-ccf81cdfd143</id>
       <masked>false</masked>
       <name>ExcelPathEditProfile</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>3246a731-ca2f-48a4-9cc6-4c9a84ca450d</id>
+      <masked>false</masked>
+      <name>role</name>
    </variable>
 </TestCaseEntity>

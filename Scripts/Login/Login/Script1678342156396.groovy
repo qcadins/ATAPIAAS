@@ -43,11 +43,11 @@ if (TC == 'EditProf') {
 	
 	'input email'
 	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemail'),
-		findTestData(ExcelPathEditProfile).getValue(2, 9))
+		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputpassword'),
-		findTestData(ExcelPathEditProfile).getValue(2, 10))
+		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 10))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
