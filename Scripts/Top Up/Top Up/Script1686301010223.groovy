@@ -83,6 +83,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.sendKeys(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputtipesaldo'),
 			 Keys.chord(Keys.ENTER))
 		
+		'klik pada luaran form'
+		WebUI.click(findTestObject('Object Repository/Top Up/ClickForm'))
+		
 		'input data metode pembayaran'
 		WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputMetodeBayar'),
 			findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 10))
@@ -207,6 +210,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							';') + GlobalVariable.FailedReasonAddServices)
 			
 					GlobalVariable.FlagFailed = 1
+					
+					continue
 				}
 			}
 		}
@@ -241,63 +246,83 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'klik pada apply'
 			WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/applyKupon'))
 			
-			'cek apakah tipe kupon adalah diskon'
-			if (coupondetail[0].equals('Discount')) {
+			'ambil status setelah apply kupon'
+			String statusUI = WebUI.getAttribute(findTestObject('Object Repository/Top Up/DiskonUI'),
+				'class', FailureHandling.OPTIONAL)
+			
+			'cek apakah kupon tidak sesuai'
+			if (statusUI == 'help-block mt-1 text-success ng-star-inserted') {
 				
-				'cek apakah minimum pembayaran terpenuhi'
-				if (Integer.parseInt(coupondetail[4]) <= totalKatalon) {	
+				'cek apakah tipe kupon adalah diskon'
+				if (coupondetail[0].equals('Discount')) {
 					
-					'lihat jenis nilai kupon'
-					if (coupondetail[1].equals('Percentage')) {
+					'cek apakah minimum pembayaran terpenuhi'
+					if (Integer.parseInt(coupondetail[4]) <= totalKatalon) {
 						
-						'panggil fungsi kupon percentage'
-						couponPercentage(listServices, tempDataPrice, listJumlahisiUlang, coupondetail, ppnfromDB)
-						
+						'lihat jenis nilai kupon'
+						if (coupondetail[1].equals('Percentage')) {
+							
+							'panggil fungsi kupon percentage'
+							couponPercentage(listServices, tempDataPrice, listJumlahisiUlang, coupondetail, ppnfromDB)
+							
+						}
+						else if (coupondetail[1].equals('Nominal')) {
+							
+							'panggil fungsi kupon nominal'
+							couponNominal(listServices, tempDataPrice, listJumlahisiUlang, coupondetail, ppnfromDB)
+						}
 					}
-					else if (coupondetail[1].equals('Nominal')) {
+					else {
 						
-						'panggil fungsi kupon nominal'
-						couponNominal(listServices, tempDataPrice, listJumlahisiUlang, coupondetail, ppnfromDB)
+						GlobalVariable.FlagFailed = 1
+						
+						'tulis error karena minimum payment tidak terpenuhi'
+						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
+							GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+								GlobalVariable.FailedReasonMinimumPayment)
+						
+						continue
+						
 					}
 				}
-				else {
+				else if (coupondetail[0].equals('Cashback')) {
 					
-					GlobalVariable.FlagFailed = 1
-					
-					'tulis error karena minimum payment tidak terpenuhi'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
-						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-							GlobalVariable.FailedReasonMinimumPayment)
-					
+					'cek apakah minimum pembayaran terpenuhi'
+					if (Integer.parseInt(coupondetail[4]) <= totalKatalon) {
+						
+						'lihat jenis nilai kupon'
+						if (coupondetail[1].equals('Percentage')) {
+							
+							'panggil fungsi kupon percentage'
+							couponPercentage(listServices, tempDataPrice, listJumlahisiUlang, coupondetail, ppnfromDB)
+						}
+						else if (coupondetail[1].equals('Nominal')) {
+							
+							'panggil fungsi kupon nominal'
+							couponNominal(listServices, tempDataPrice, listJumlahisiUlang, coupondetail, ppnfromDB)
+						}
+					}
+					else {
+						
+						GlobalVariable.FlagFailed = 1
+						
+						'tulis error karena minimum payment tidak terpenuhi'
+						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
+							GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+								GlobalVariable.FailedReasonMinimumPayment)
+						
+						continue
+					}
 				}
 			}
-			else if (coupondetail[0].equals('Cashback')) {
+			else {
 				
-				'cek apakah minimum pembayaran terpenuhi'
-				if (Integer.parseInt(coupondetail[4]) <= totalKatalon) {
-					
-					'lihat jenis nilai kupon'
-					if (coupondetail[1].equals('Percentage')) {
-						
-						'panggil fungsi kupon percentage'
-						couponPercentage(listServices, tempDataPrice, listJumlahisiUlang, coupondetail, ppnfromDB)
-					}
-					else if (coupondetail[1].equals('Nominal')) {
-						
-						'panggil fungsi kupon nominal'
-						couponNominal(listServices, tempDataPrice, listJumlahisiUlang, coupondetail, ppnfromDB)
-					}
-				}
-				else {
-					
-					GlobalVariable.FlagFailed = 1
-					
-					'tulis error karena minimum payment tidak terpenuhi'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
-						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-							GlobalVariable.FailedReasonMinimumPayment)
-					
-				}
+				'tulis error karena minimum payment tidak terpenuhi'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+						statusUI)
+				
+				continue
 			}
 		}
 		
