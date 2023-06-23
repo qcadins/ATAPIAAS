@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "E86B295032AEFA07E06500FD533F9313",
+  "keywordFileContentHash": "89231A3901AAFEA44C4404D49059C954",
   "keywordClasses": [
     {
       "name": "customizeKeyword.openCloseExcel",
@@ -20,10 +20,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

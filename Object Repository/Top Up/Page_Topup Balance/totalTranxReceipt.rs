@@ -6,16 +6,16 @@
    <elementGuidId>2f4dca62-373d-484e-b7fe-2803cd40bcab</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
-         <value>div.wrapper-1 > div</value>
-      </entry>
-      <entry>
          <key>BASIC</key>
          <value>//*[(text() = 'Rp. 1.665' or . = 'Rp. 1.665')]</value>
       </entry>
       <entry>
+         <key>CSS</key>
+         <value>div.wrapper-1 > div</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
-         <value>/html/body/ngb-modal-window/div/div/app-payment-instruction/div/div[2]/div[1]/div[1</value>
+         <value>/html/body/ngb-modal-window/div/div/app-payment-instruction/div/div[2]/div[1]/div[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -26,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>div</value>
-      <webElementGuid>1f4c9b98-32e5-4ee4-bc6b-9c9bf22eb1b3</webElementGuid>
+      <webElementGuid>a908013e-bac5-4b63-ba95-d736087836ba</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -34,7 +34,7 @@
       <name>text</name>
       <type>Main</type>
       <value>Rp. 1.665</value>
-      <webElementGuid>7dcba352-cc01-4c25-acaa-35133bdd0cc1</webElementGuid>
+      <webElementGuid>db122ff1-85db-4e58-94da-425eea4905e8</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -42,7 +42,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done page-scrolled navbar-scrolled modal-open&quot;]/ngb-modal-window[@class=&quot;d-block modal fade show&quot;]/div[@class=&quot;modal-dialog modal-lg&quot;]/div[@class=&quot;modal-content&quot;]/app-payment-instruction[1]/div[@class=&quot;col-12&quot;]/div[@class=&quot;modal-body&quot;]/div[@class=&quot;wrapper-1&quot;]/div[1]</value>
-      <webElementGuid>b6946f69-0d50-48ed-9d33-ac46f0cc4d13</webElementGuid>
+      <webElementGuid>abd7f3b5-6aeb-4023-8bd1-e277ba0c72c3</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -50,7 +50,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Payment Instruction'])[1]/following::div[3]</value>
-      <webElementGuid>563437c4-5156-4285-9dd4-06aa70e6221b</webElementGuid>
+      <webElementGuid>df2efa9c-c558-4808-8f04-e1942cd2e73a</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -58,7 +58,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='`'])[2]/following::div[16]</value>
-      <webElementGuid>f62dbd04-7576-46b4-9d22-f6bd2dc10f4c</webElementGuid>
+      <webElementGuid>f7ea6d96-8c13-482d-aaca-f58a02b0564b</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -66,7 +66,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='*sudah termasuk PPN 11%'])[1]/preceding::div[1]</value>
-      <webElementGuid>5d9164ec-c8ac-4134-8548-06fa2070d49d</webElementGuid>
+      <webElementGuid>65dff836-9188-4781-88a3-74311b439211</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -74,7 +74,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Nomor Transaksi Anda : EENDIGO/23/06/00055'])[1]/preceding::div[2]</value>
-      <webElementGuid>ad7f0137-a1c6-42c8-a6fd-6636d6a410bb</webElementGuid>
+      <webElementGuid>8dedca87-dc27-40ab-9274-e10c6a114fa2</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -82,7 +82,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='Rp. 1.665']/parent::*</value>
-      <webElementGuid>a4fb0d6b-6476-4bef-a8bf-317c8a5ea990</webElementGuid>
+      <webElementGuid>30994104-7f7c-4d1e-9169-10f43d37d8a8</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -90,7 +90,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//app-payment-instruction/div/div[2]/div/div</value>
-      <webElementGuid>c778f6cf-f777-4aba-81c2-93798f2d5787</webElementGuid>
+      <webElementGuid>6f550ea3-7cfe-4614-a61f-adcdef86c99c</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -98,6 +98,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//div[(text() = 'Rp. 1.665' or . = 'Rp. 1.665')]</value>
-      <webElementGuid>8eb5a8ff-c53b-45df-8e3d-866e2bc0c294</webElementGuid>
+      <webElementGuid>de48f2ee-89c4-4a3f-8c54-235db6b8b0e5</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

@@ -6,15 +6,15 @@
    <elementGuidId>5d442a59-b96a-4f5e-aefc-69b5d9f1f712</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
-      </entry>
-      <entry>
          <key>BASIC</key>
          <value>//*[(text() = '12345678' or . = '12345678')]</value>
       </entry>
       <entry>
+         <key>CSS</key>
+      </entry>
+      <entry>
          <key>XPATH</key>
-         <value>/html/body/ngb-modal-window/div/div/app-payment-instruction/div/div[2]/div[5]/div[2]</value>
+         <value>//*[@class = 'wrapper-5']/div[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -25,7 +25,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>div</value>
-      <webElementGuid>e5172e18-6e74-4326-8f77-415f4000c135</webElementGuid>
+      <webElementGuid>7e82f719-eb0e-4cf3-a8f6-c7818acd3d60</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -33,7 +33,7 @@
       <name>text</name>
       <type>Main</type>
       <value>12345678</value>
-      <webElementGuid>1905d662-f091-4b19-a865-1a77aa49b323</webElementGuid>
+      <webElementGuid>653d088a-15d2-4b48-9e88-f7a3abe4f2ff</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -41,7 +41,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done page-scrolled navbar-scrolled modal-open&quot;]/ngb-modal-window[@class=&quot;d-block modal fade show&quot;]/div[@class=&quot;modal-dialog modal-lg&quot;]/div[@class=&quot;modal-content&quot;]/app-payment-instruction[1]/div[@class=&quot;col-12&quot;]/div[@class=&quot;modal-body&quot;]/div[@class=&quot;wrapper-5&quot;]/div[2]</value>
-      <webElementGuid>0d8283ac-f943-405c-bd81-1be092489a19</webElementGuid>
+      <webElementGuid>9c76d461-c43f-4dc5-9c5c-1bfee0fbfdac</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -49,7 +49,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='ABC'])[1]/following::div[1]</value>
-      <webElementGuid>b3f64b01-1f25-4297-b1cc-8d42ac1fde11</webElementGuid>
+      <webElementGuid>41164276-1672-4be5-a2af-fe586fd0ebed</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -57,7 +57,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Permintaan top up saldo Anda berhasil diproses. Harap segera lakukan melalui transfer ke'])[1]/following::div[3]</value>
-      <webElementGuid>e5c7ad6c-de6a-4a5c-9f97-6d9b1972f160</webElementGuid>
+      <webElementGuid>62b346d0-c056-495c-a124-a2ef63f2d056</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -65,7 +65,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Acc Name ABC'])[1]/preceding::div[1]</value>
-      <webElementGuid>76616587-5f43-4410-a45e-c96c0de50620</webElementGuid>
+      <webElementGuid>a7648560-4df7-46f9-967a-eee34e78bd9e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -73,7 +73,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='12345678']/parent::*</value>
-      <webElementGuid>7463047c-97bf-4d6c-a292-a20abc425bd4</webElementGuid>
+      <webElementGuid>a299b0d7-c6e7-4b6e-bd83-8be68a4abfd2</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -81,7 +81,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[2]/div[4]/div[2]</value>
-      <webElementGuid>7445719d-3fa8-43c9-bfdf-520b3b052908</webElementGuid>
+      <webElementGuid>2c449132-86ab-4bbb-a335-e34b601a4280</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -89,6 +89,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//div[(text() = '12345678' or . = '12345678')]</value>
-      <webElementGuid>bfc67b86-646b-4269-a743-862ba7f443d1</webElementGuid>
+      <webElementGuid>15c89b4f-4f0a-461c-94da-f79de7e74e0c</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

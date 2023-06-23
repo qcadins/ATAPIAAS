@@ -10,6 +10,10 @@
          <value>#grandTotal</value>
       </entry>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'tel' and @id = 'grandTotal' and @placeholder = '0']</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>//input[@id='grandTotal']</value>
       </entry>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>966eb116-c471-4b6b-96f4-1a3f9c314cda</webElementGuid>
+      <webElementGuid>49acadf3-4dc7-409b-b047-d0e03238982c</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +34,7 @@
       <name>type</name>
       <type>Main</type>
       <value>tel</value>
-      <webElementGuid>d84b0be2-bb36-4ea0-bcdd-2b4f501deea2</webElementGuid>
+      <webElementGuid>669f0bb2-73d9-4211-9a37-ebc953b59fd8</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +42,7 @@
       <name>mask</name>
       <type>Main</type>
       <value>separator.0</value>
-      <webElementGuid>c85c2ea9-729f-4470-b34d-a798d580cd53</webElementGuid>
+      <webElementGuid>8bba14eb-2a78-4ceb-bf4f-e92421e9f850</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +50,7 @@
       <name>thousandseparator</name>
       <type>Main</type>
       <value>.</value>
-      <webElementGuid>ae2a403c-d0d7-4c42-bbb7-a4b7595c9170</webElementGuid>
+      <webElementGuid>5c878000-89fd-4f77-9903-07aa0b2f60ab</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>class</name>
       <type>Main</type>
       <value>form-control ng-untouched ng-pristine ng-valid</value>
-      <webElementGuid>5a58506d-8586-48a2-be03-a994f9a364d1</webElementGuid>
+      <webElementGuid>a04837e6-d0b5-4490-a3b7-07d98104d03b</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -62,7 +66,7 @@
       <name>ng-reflect-mask-expression</name>
       <type>Main</type>
       <value>separator.0</value>
-      <webElementGuid>41023273-463b-4d55-b346-1bf7ebf17182</webElementGuid>
+      <webElementGuid>71f2caa7-d6d3-40eb-bb4d-293960bfa43e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -70,7 +74,7 @@
       <name>ng-reflect-thousand-separator</name>
       <type>Main</type>
       <value>.</value>
-      <webElementGuid>ce665550-ee97-4c71-9439-8d7fdea120e1</webElementGuid>
+      <webElementGuid>aaadf3d9-c3a0-4ef9-b1e1-8c485b756898</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>ng-reflect-name</name>
       <type>Main</type>
       <value>grandTotal</value>
-      <webElementGuid>0099ccf7-a1c3-4d65-bc46-90b95b0cf4c2</webElementGuid>
+      <webElementGuid>a47ba6e1-2fc6-4445-acfa-89382f38bb6a</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -86,7 +90,7 @@
       <name>id</name>
       <type>Main</type>
       <value>grandTotal</value>
-      <webElementGuid>064f4e34-be92-40ff-8581-715475f98701</webElementGuid>
+      <webElementGuid>b50e117e-c06e-45c2-956d-da55fe074581</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -94,7 +98,7 @@
       <name>placeholder</name>
       <type>Main</type>
       <value>0</value>
-      <webElementGuid>19f94b40-4c52-495b-8ad8-f1d59b5007f2</webElementGuid>
+      <webElementGuid>6eb6ccb2-fc5f-458b-a49a-686b775aa0f5</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -102,7 +106,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;grandTotal&quot;)</value>
-      <webElementGuid>236924fa-d74b-40fc-9076-bc94a6302ce8</webElementGuid>
+      <webElementGuid>09254cea-7472-41c5-808f-0581b85785aa</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -110,7 +114,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//input[@id='grandTotal']</value>
-      <webElementGuid>0f2c40cd-fb59-4298-8c68-93015b42c675</webElementGuid>
+      <webElementGuid>d51afd00-abd9-4973-86ac-dd0f2bdb3a77</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -118,7 +122,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//form[@id='msxForm']/div[8]/div/app-currency/fieldset/input</value>
-      <webElementGuid>96db8179-3e25-46f8-ad3e-1715072e98f8</webElementGuid>
+      <webElementGuid>7b8bd7c1-07bf-4d20-a298-80069799c3e6</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -126,7 +130,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[8]/div/app-currency/fieldset/input</value>
-      <webElementGuid>a3b830dd-356a-453c-b515-473ba78edcb6</webElementGuid>
+      <webElementGuid>7f28cfdd-80d7-4ee5-83af-294da1e77a41</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -134,6 +138,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//input[@type = 'tel' and @id = 'grandTotal' and @placeholder = '0']</value>
-      <webElementGuid>98962c2d-91d5-49c6-b6fe-9a3482a3e0a1</webElementGuid>
+      <webElementGuid>9be3ea34-ab7b-491f-929f-91e4a5db5d24</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

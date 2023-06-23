@@ -33,7 +33,7 @@ import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webui.exception.WebElementNotFoundException
 
 public class openCloseExcel {
-	
+
 	@Keyword
 	def openCloseFileWithRefreshVal(String FilePath) {
 
