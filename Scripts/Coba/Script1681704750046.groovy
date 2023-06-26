@@ -25,8 +25,11 @@ import java.sql.Connection
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-String noTrxKatalon =  'Nomor Transaksi Anda : EENDIGO/23/06/00184'
+'deklarasi koneksi ke Database adins_apiaas_uat'
+Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
-String extractedText = noTrxKatalon.substring(noTrxKatalon.indexOf('Nomor Transaksi Anda : ') + 'Nomor Transaksi Anda : '.length())
+ArrayList result = CustomKeywords.'topup.TopupVerif.getStoreDBTopup1'(conndev, 'EENDIGO/23/06/00189')
 
-println(extractedText)
+result.addAll(CustomKeywords.'topup.TopupVerif.getStoreDBTopup2'(conndev, 'EENDIGO/23/06/00189'))
+
+println result

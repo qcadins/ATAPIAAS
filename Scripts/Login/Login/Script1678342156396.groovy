@@ -390,6 +390,72 @@ else if (TC == 'IsiSaldoAuto') {
 	'klik tombol masuk'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
 }
+else if (TC == 'TranxHist') {
+	
+	'deklarasi penghitungan role yang dipilih'
+	int isSelected = 0
+	
+	'input data email'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 9))
+	
+	'input password'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 10))
+	
+	'ceklis pada reCaptcha'
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
+		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	
+	'pada delay, lakukan captcha secara manual'
+	WebUI.delay(10)
+	
+	'klik pada button login'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'button_Lanjutkan Perjalanan Anda'))
+	
+	'jika ada pilihan role'
+	if (WebUI.verifyElementPresent(
+		findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'),
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		
+		'cari element dengan nama role'
+		def elementRole = DriverFactory.getWebDriver().findElements(By.cssSelector('body > ngb-modal-window > div > div > app-multi-role > div > div.row > div > table tr'))
+		
+		'lakukan loop untuk cari nama role yang ditentukan'
+		for (int i = 1; i <= elementRole.size() - 1; i++) {
+			
+			'cari nama role yag sesuai di opsi role'
+			def modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[1]", true)
+	
+			'jika nama object sesuai dengan nama role'
+			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 11).equalsIgnoreCase(
+				WebUI.getAttribute(modifyRole, 'value', FailureHandling.STOP_ON_FAILURE))) {
+				
+				'ubah alamat xpath ke role yang dipilih'
+				modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[2]/a", true)
+			
+				'klik role yang dipilih'
+				WebUI.click(findTestObject('Object Repository/Change Password/modifyobject'))
+				
+				'penanda adanya role yang dipilih'
+				isSelected = 1
+				
+				break;
+			}
+		}
+		'tulis error dan lanjut testcase berikutnya'
+		if (isSelected == 0) {
+			
+			'tulis adanya error pada sistem web'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonRoleLogin)
+		}
+	}
+}
 
 //'cek apakah muncul error unknown setelah login'
 //if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), 

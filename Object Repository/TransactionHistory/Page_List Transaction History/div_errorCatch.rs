@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>div_errorCatch</name>
+   <tag></tag>
+   <elementGuidId>7371274c-89cf-43b1-92ef-7527586e5130</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='toast-container']/div</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>div.ng-tns-c95-8.ng-star-inserted.ng-trigger.ng-trigger-flyInOut.ngx-toastr.toast-error</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>div</value>
+      <webElementGuid>fff168aa-a8d5-404f-834e-2ceb4c1e6f69</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ng-tns-c95-8 ng-star-inserted ng-trigger ng-trigger-flyInOut ngx-toastr toast-error</value>
+      <webElementGuid>2df9e403-3337-41bc-ae5d-23185135b3e1</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value> Code: 635  Harus memilih Tenant Code! </value>
+      <webElementGuid>0e89b98f-5c61-48e3-a392-cf151c3cbd7a</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;toast-container&quot;)/div[@class=&quot;ng-tns-c95-8 ng-star-inserted ng-trigger ng-trigger-flyInOut ngx-toastr toast-error&quot;]</value>
+      <webElementGuid>fe23cd32-9e4e-4840-82d9-2b20757ecf51</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='toast-container']/div</value>
+      <webElementGuid>d5dcc418-8296-4b27-b2c8-84b3ad664831</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='`'])[2]/following::div[9]</value>
+      <webElementGuid>de7c6a05-1926-4893-a5e5-edbba46f262a</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Alt'])[2]/following::div[9]</value>
+      <webElementGuid>e043b26a-796c-437d-a6ff-b6c7b2c2fdf1</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div[5]/div/div</value>
+      <webElementGuid>e320c2ad-1ddc-47b3-ac65-1eeb30fb0d51</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//div[(text() = ' Code: 635  Harus memilih Tenant Code! ' or . = ' Code: 635  Harus memilih Tenant Code! ')]</value>
+      <webElementGuid>cb948800-7ec3-4011-8c0b-71be9c4a664b</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

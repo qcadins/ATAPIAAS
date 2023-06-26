@@ -107,25 +107,25 @@ public class WriteExcel {
 
 	@Keyword
 	void emptyCellRange(String filePath, String sheetName, int startRow, int endRow, int column) throws Exception {
-        FileInputStream fis = new FileInputStream(filePath)
-        XSSFWorkbook workbook = new XSSFWorkbook(fis)
-        Sheet sheet = workbook.getSheet(sheetName)
+		FileInputStream fis = new FileInputStream(filePath)
+		XSSFWorkbook workbook = new XSSFWorkbook(fis)
+		Sheet sheet = workbook.getSheet(sheetName)
 
-        for (int row = startRow; row <= endRow; row++) {
-            Row currentRow = sheet.getRow(row)
-            if (currentRow != null) {
-                Cell cell = currentRow.getCell(column)
-                if (cell != null) {
-                    cell.setCellValue('')
-                }
-            }
-        }
+		for (int row = startRow; row <= endRow; row++) {
+			Row currentRow = sheet.getRow(row)
+			if (currentRow != null) {
+				Cell cell = currentRow.getCell(column)
+				if (cell != null) {
+					cell.setCellValue('')
+				}
+			}
+		}
 
-        FileOutputStream fos = new FileOutputStream(filePath)
-        workbook.write(fos)
-        fos.close()
-        workbook.close()
-        fis.close()
-    }
+		FileOutputStream fos = new FileOutputStream(filePath)
+		workbook.write(fos)
+		fos.close()
+		workbook.close()
+		fis.close()
+	}
 }
 
