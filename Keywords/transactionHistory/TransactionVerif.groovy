@@ -91,23 +91,18 @@ public class TransactionVerif {
 	}
 	
 	@Keyword
-	getRoleUser(Connection conn, String email) {
+	getRoleofUser(Connection conn, String email) {
 
 		String data
-		ArrayList listdata = []
+
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT role_name FROM am_memberofrole amf LEFT JOIN am_msrole amr ON amr.id_ms_role = amf.id_ms_role LEFT JOIN am_msuser ams ON ams.id_ms_user = amf.id_ms_user WHERE ams.login_id = '" + email + "'")
-		ResultSetMetaData metadata = resultSet.getMetaData()
-
-		columnCount = metadata.getColumnCount()
+		ResultSet resultSet = stm.executeQuery("SELECT role_name FROM am_memberofrole amf LEFT JOIN am_msrole amr ON amr.id_ms_role = amf.id_ms_role LEFT JOIN am_msuser ams ON ams.id_ms_user = amf.id_ms_user WHERE ams.login_id = '" + email + "' LIMIT 1")
 
 		while (resultSet.next()) {
-			for (int i = 1 ; i <= columnCount ; i++) {
-				data = resultSet.getObject(i)
-				listdata.add(data)
-			}
+
+			data = resultSet.getObject(1);
 		}
-		listdata
+		data
 	}
 }

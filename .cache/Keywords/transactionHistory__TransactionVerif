@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "B08623F225263E13136B4D69F43D8517",
+  "keywordFileContentHash": "E1006A4780BBA730B10AA6BE6ED156EA",
   "keywordClasses": [
     {
       "name": "transactionHistory.TransactionVerif",
@@ -33,7 +33,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getTenantList",
@@ -51,7 +52,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getDDLTipeIsiUlang",
@@ -69,7 +71,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getDDLMetodeTrf",
@@ -87,10 +90,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
-          "name": "getRoleUser",
+          "name": "getRoleofUser",
           "parameters": [
             {
               "name": "conn",
@@ -118,10 +122,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

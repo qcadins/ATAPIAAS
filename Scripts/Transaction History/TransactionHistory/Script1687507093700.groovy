@@ -61,12 +61,52 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	else if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted') ||
 		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Warning')) {
 		
+		'klik pada menu'
+		WebUI.click(
+			findTestObject('Object Repository/TransactionHistory/Page_Balance/span_Menu'))
+		
+		'pilih submenu riwayat transaksi'
+		WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/RiwayatTrxMenu'))
+		
+		'cek apakah tombol menu dalam jangkauan web'
+		if (WebUI.verifyElementVisible(findTestObject(TombolSilang), FailureHandling.OPTIONAL)) {
+			
+			'klik pada tombol silang menu'
+			WebUI.click(findTestObject(TombolSilang))
+		}
+		
 		'ambil role yang digunakan oleh user'
-		ArrayList RoleUser = CustomKeywords.'transactionHistory.TransactionVerif.getRoleUser'(conndev,
+		String RoleUser = CustomKeywords.'transactionHistory.TransactionVerif.getRoleofUser'(conndev,
 			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 9))
 		
 		'cek apakah role adminclient/admineendigo/adminfinance'
-		if(findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 11).equalsIgnoreCase('Admin Client')) {
+		if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 11).equalsIgnoreCase('Admin Client')) {
+			
+			'verify object yang muncul sesuai dengan role admin client'
+			checkVerifyNotPresent(WebUI.verifyElementPresent(
+				findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
+					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Adm.Client-Tenant')
+			
+			'verify object yang muncul sesuai dengan role admin client'
+			checkVerifyNotPresent(WebUI.verifyElementPresent(
+				findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/konfirmasiBayarbutton'),
+					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Adm.Client-Accept Payment')
+			
+			'verify object yang muncul sesuai dengan role admin client'
+			checkVerifyNotPresent(WebUI.verifyElementPresent(
+				findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/rejectBayarButton'),
+					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Adm.Client-Reject Payment')
+			
+			'verify object yang muncul sesuai dengan role admin client'
+			checkVerifyNotPresent(WebUI.verifyElementPresent(
+				findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/konfirmasiBayarbutton'),
+					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Adm.Client-NPWP')
+		}
+		else if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 11).equalsIgnoreCase('Admin Finance Eendigo')) {
+			
+			''
+		}
+		else if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 11).equalsIgnoreCase('Admin Eendigo')) {
 			
 		}
 	}
@@ -545,6 +585,17 @@ def checkVerifyReset(Boolean isMatch) {
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) +
 				';') + GlobalVariable.FailedReasonSetFailed)
+
+		GlobalVariable.FlagFailed = 1
+	}
+}
+
+def checkVerifyNotPresent(Boolean isPresent, String reason) {
+	if (isPresent == true) {
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) +
+				';') + GlobalVariable.FailedReasonRoleFeature + ' ' + reason)
 
 		GlobalVariable.FlagFailed = 1
 	}
