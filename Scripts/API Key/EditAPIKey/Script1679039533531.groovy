@@ -21,6 +21,12 @@ import internal.GlobalVariable as GlobalVariable
 //
 //WebUI.delay(2)
 
+'klik pada tombol edit API'
+WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/em_Aksi_align-middle cursor-pointer font-me_8c8f9d'))
+
+'klik tombol batal'
+WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Batal'))
+
 'input tipe API'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
 		ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12))

@@ -24,7 +24,7 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/span_API Key'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_Baru'))
 
 'klik tombol batal'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Batal'))
+WebUI.click(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Batal'))
 
 'klik tombol +Baru'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_Baru'))
