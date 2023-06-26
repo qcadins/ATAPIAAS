@@ -55,6 +55,9 @@ WebUI.delay(10)
 'klik pada button login'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
+'get base url'
+GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 4)
+
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
 	

@@ -33,6 +33,9 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
+'get base url'
+GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 3)
+
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
 	
