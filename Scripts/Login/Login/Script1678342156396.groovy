@@ -62,6 +62,48 @@ else if (TC == 'Regist') {
 	'klik pada tombol buat akun'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
 	
+	'check apakah mau buka hyperlink atau tidak'
+	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 20) == 'Yes') {
+		'click label syarat dan ketentuan'
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_KebijakanPrivasi'))
+		
+		'verify judul halaman == KEBIJAKAN PRIVASI'
+		if (!WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_KebijakanorSyarat'), FailureHandling.OPTIONAL), 'KEBIJAKAN PRIVASI', false, FailureHandling.CONTINUE_ON_FAILURE)) {
+				GlobalVariable.FlagFailed = 1
+				
+				'tulis gagal resend otp ke excel'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+						'Gagal membuka halama KEBIJAKAN PRIVASI')
+		}
+		
+		'kembali ke halaman login'
+		WebUI.back()
+		
+		'klik pada tombol buat akun'
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
+		
+		'click label syarat dan ketentuan'
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_SyaratdanKetentuan'))
+		
+		'verify judul halaman == SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO'
+		if (!WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_KebijakanorSyarat'), FailureHandling.OPTIONAL), 'SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO', false, FailureHandling.CONTINUE_ON_FAILURE)) {
+			GlobalVariable.FlagFailed = 1
+			
+			'tulis gagal resend otp ke excel'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					'Gagal membuka halama SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO')
+		}
+		
+		'kembali ke halaman login'
+		WebUI.back()
+		
+		'klik pada tombol buat akun'
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
+		
+	}
+	
 	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 19) == 'Yes') {
 		WebElement linkTerm = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >"+
 			" div:nth-child(6) > div > div > label > a:nth-child(1)"))
@@ -112,9 +154,11 @@ else if (TC == 'Regist') {
 		'input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'),
 		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 12))
 	
-	'bypass captcha langsung masuk verifikasi otp'
-	WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
-	js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister);
+	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 21) == 'Yes') {
+		'bypass captcha langsung masuk verifikasi otp'
+		WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
+		js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister);
+	}
 }
 else if (TC == 'Key') {
 	

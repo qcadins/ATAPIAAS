@@ -6,6 +6,10 @@
    <elementGuidId>13403531-c74c-4a90-9045-5ca3fa1ee007</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;status&quot;]/div/div/div[3]/input</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>(.//*[normalize-space(text()) and normalize-space(.)='Inactive'])[1]/following::span[5]</value>
       </entry>
@@ -14,7 +18,7 @@
          <value>span.ng-option-label.ng-star-inserted</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>span</value>
-      <webElementGuid>82488759-eb6a-4280-a675-68b063f2c2d2</webElementGuid>
+      <webElementGuid>3d10db60-648f-4bb3-a256-595b23bd6792</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -30,7 +34,7 @@
       <name>class</name>
       <type>Main</type>
       <value>ng-option-label ng-star-inserted</value>
-      <webElementGuid>a5697f1a-20fd-4205-b978-bf33b855609b</webElementGuid>
+      <webElementGuid>fef43ac3-ce23-4070-9d65-42a5e256b547</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +42,7 @@
       <name>ng-reflect-ng-item-label</name>
       <type>Main</type>
       <value>Active</value>
-      <webElementGuid>e2fc0c11-5030-4ca5-ac90-342fd80a9a43</webElementGuid>
+      <webElementGuid>33d21a63-ff34-48c4-ada5-a199dc9173e6</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,23 +50,23 @@
       <name>ng-reflect-escape</name>
       <type>Main</type>
       <value>true</value>
-      <webElementGuid>192926c6-f74d-4567-bbf4-6847968fd831</webElementGuid>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>text</name>
-      <type>Main</type>
-      <value>Active</value>
-      <webElementGuid>787998ff-c02f-441d-ab69-d568b6586965</webElementGuid>
+      <webElementGuid>ddc77ae6-0c78-4807-9dc0-8e2c2cd3e1db</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Active</value>
+      <webElementGuid>8f9ca2ab-1161-472a-9b2e-ba61e970adc2</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;a82d9d301bfe-0&quot;)/span[@class=&quot;ng-option-label ng-star-inserted&quot;]</value>
-      <webElementGuid>abfa8905-dc37-4301-a945-25f5361878f3</webElementGuid>
+      <value>//*[@id=&quot;status&quot;]/div/div/div[3]/input</value>
+      <webElementGuid>c174fda1-4742-44a3-8742-f920c9714c2d</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -70,7 +74,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//div[@id='a82d9d301bfe-0']/span</value>
-      <webElementGuid>a8b18d9a-441a-4c96-bb12-913fb1bc1fea</webElementGuid>
+      <webElementGuid>3febfc0d-7146-421b-b8b8-649e4a705795</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Inactive'])[1]/following::span[5]</value>
-      <webElementGuid>dff36b0e-3ba5-4eff-a702-7d06ed45a75a</webElementGuid>
+      <webElementGuid>d3d78a73-3712-416a-9579-4e0e556e5279</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +90,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Enter activation status'])[1]/following::span[7]</value>
-      <webElementGuid>fd1550e3-e11f-49ad-aa7f-d8ec3d12de78</webElementGuid>
+      <webElementGuid>5ea7c358-8f12-46c9-a90f-4cc99e675661</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +98,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Inactive'])[2]/preceding::span[1]</value>
-      <webElementGuid>843ab68c-8524-42c7-8910-1e925fc513ed</webElementGuid>
+      <webElementGuid>2d859e25-1b21-480a-99b8-0a8ec97e5b0e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,7 +106,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Batal'])[1]/preceding::span[2]</value>
-      <webElementGuid>6188eaef-1995-4201-804d-16eb4fa1db6f</webElementGuid>
+      <webElementGuid>71f5ba48-3d11-4e93-a22d-9fb558e288d5</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -110,7 +114,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='Active']/parent::*</value>
-      <webElementGuid>a71a4c57-a147-4098-a6b6-2224123fdc69</webElementGuid>
+      <webElementGuid>25300b64-3ec2-46a2-bbaf-5877e4c7e6b5</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -118,7 +122,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[2]/div/span</value>
-      <webElementGuid>230662d5-e19b-4fed-a749-42e84ce22fac</webElementGuid>
+      <webElementGuid>9a954d6b-a6c8-4adb-8a1d-0601b3898748</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -126,6 +130,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//span[(text() = 'Active' or . = 'Active')]</value>
-      <webElementGuid>4597249d-1c1d-4201-8400-cc9a05cc908a</webElementGuid>
+      <webElementGuid>84e39e3e-b872-4e6b-9956-0818f5bab8ae</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

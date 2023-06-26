@@ -6,6 +6,10 @@
    <elementGuidId>653e7a1c-4d33-4fdf-b935-9b3fb783525a</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;status&quot;]/div/div/div[3]/input</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[4]</value>
       </entry>
@@ -14,7 +18,7 @@
          <value>#status > div.ng-select-container.ng-has-value > div.ng-value-container > div.ng-input > input[type=&quot;text&quot;]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>a9ce8770-0b94-49bd-aa73-f39bba54d05b</webElementGuid>
+      <webElementGuid>3d2db03a-5ee2-436d-8467-eeb6b1496c67</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -30,15 +34,15 @@
       <name>role</name>
       <type>Main</type>
       <value>combobox</value>
-      <webElementGuid>a1025581-7409-44a4-9762-11d3d45cbbda</webElementGuid>
+      <webElementGuid>a714ba38-cfee-4116-84ab-eaee3483915a</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>text</value>
-      <webElementGuid>75ad38f2-0dfa-4a8e-81c0-a187da38697d</webElementGuid>
+      <webElementGuid>3a0f76d9-af0e-43eb-b4c0-9a3d30ca5967</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +50,7 @@
       <name>autocorrect</name>
       <type>Main</type>
       <value>off</value>
-      <webElementGuid>285d2367-b8ed-4fe5-bc90-5e6ceb25d711</webElementGuid>
+      <webElementGuid>0a022c53-72fc-4152-b28d-c6235fb07d85</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>autocapitalize</name>
       <type>Main</type>
       <value>off</value>
-      <webElementGuid>eed48d0b-93ba-4a38-928a-41c4f64dff37</webElementGuid>
+      <webElementGuid>9d1de5ab-f0a6-4eaa-9c4c-abe64eaf4e4f</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -62,7 +66,7 @@
       <name>autocomplete</name>
       <type>Main</type>
       <value>a5c625d4972b</value>
-      <webElementGuid>2bad00ad-81d9-43d1-96a2-7ef0229d5001</webElementGuid>
+      <webElementGuid>ced55007-399e-4f05-890f-4bdf2e2e9173</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -70,15 +74,15 @@
       <name>aria-expanded</name>
       <type>Main</type>
       <value>false</value>
-      <webElementGuid>da115534-5feb-47e5-ae04-b9c85b958d17</webElementGuid>
+      <webElementGuid>ab9c044f-e1f8-480d-b4ca-c9a187779a73</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;status&quot;)/div[@class=&quot;ng-select-container ng-has-value&quot;]/div[@class=&quot;ng-value-container&quot;]/div[@class=&quot;ng-input&quot;]/input[1]</value>
-      <webElementGuid>dab36881-a2cb-4377-9515-f245bd3e80e8</webElementGuid>
+      <value>//*[@id=&quot;status&quot;]/div/div/div[3]/input</value>
+      <webElementGuid>46e39baf-2d82-4999-8645-bf761269af2d</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -86,7 +90,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>(//input[@type='text'])[4]</value>
-      <webElementGuid>f13e1b17-0899-4c42-98b7-f4383f2422ff</webElementGuid>
+      <webElementGuid>cab3c748-ed84-43d7-8f88-670feecb8fcd</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +98,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//ng-select[@id='status']/div/div/div[3]/input</value>
-      <webElementGuid>961fb1d7-0bdd-4a24-bce7-1c0855e49de0</webElementGuid>
+      <webElementGuid>1cd37166-0eea-4134-ae62-6e47593e8539</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,7 +106,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[4]/app-question/app-select/div/ng-select/div/div/div[3]/input</value>
-      <webElementGuid>6727c6a1-57bf-4ed6-b6bf-d331b5d68deb</webElementGuid>
+      <webElementGuid>4a75fbec-6440-4e5b-82a6-2fc194982675</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -110,6 +114,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//input[@type = 'text']</value>
-      <webElementGuid>29d038cf-3675-474e-8be7-27ec011c933b</webElementGuid>
+      <webElementGuid>a2f0e4f0-d6b2-4ebb-9714-38f680872c64</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

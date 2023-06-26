@@ -10,7 +10,7 @@ import java.sql.Connection
 Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'ambil email dari testdata, disimpan ke string'
-String namaAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13)
+String namaAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11)
 
 'kumpulan string yang menyimpan hasil data dari DB'
 ArrayList<String> hasildb = CustomKeywords.'apikey.CheckAPIKey.getAPIStatusfromDB'(conn, namaAPI)
@@ -29,7 +29,7 @@ for (int j = 0; j < hasilexcel.size ; j++) {
 	if(checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[j], hasilexcel[j], false, 
 		FailureHandling.OPTIONAL)) == false){
 	
-		break;
+		break
 	}
 }
 def checkVerifyEqualorMatch(Boolean isMatch) {
@@ -40,6 +40,6 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		GlobalVariable.FailedReasonStoreDB)
-		break;
+		
 	}
 }

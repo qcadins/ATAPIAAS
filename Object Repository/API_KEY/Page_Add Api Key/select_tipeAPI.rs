@@ -6,15 +6,19 @@
    <elementGuidId>787eb7fe-ce04-47d7-bc05-add53d0bd3b8</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
-         <value>#apiKeyType</value>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;apiKeyType&quot;]/div/div/div[3]/input</value>
       </entry>
       <entry>
          <key>XPATH</key>
          <value>//select[@id='apiKeyType']</value>
       </entry>
+      <entry>
+         <key>CSS</key>
+         <value>#apiKeyType</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,15 +26,15 @@
       <name>tag</name>
       <type>Main</type>
       <value>select</value>
-      <webElementGuid>16c2838c-f63b-44c5-afac-d271ac9c7488</webElementGuid>
+      <webElementGuid>484d876c-4110-4043-8318-478330a42a3f</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>
       <value>apiKeyType</value>
-      <webElementGuid>63cc2a12-e636-415c-b9ef-6cdf9af62bce</webElementGuid>
+      <webElementGuid>efee536a-5887-48f4-a090-b9123ddc3d1e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,15 +42,15 @@
       <name>formcontrolname</name>
       <type>Main</type>
       <value>apiKeyType</value>
-      <webElementGuid>b236a9e2-86a8-4e5c-a25e-dc52f86e45ee</webElementGuid>
+      <webElementGuid>85b43639-af7f-4476-828d-4be5c9ca6497</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>placeholder</name>
       <type>Main</type>
       <value>Tipe API Key</value>
-      <webElementGuid>30a251a0-777b-4162-a8c5-80ee544cfa99</webElementGuid>
+      <webElementGuid>5901c455-98ea-4b98-b49d-c863ae15e767</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>class</name>
       <type>Main</type>
       <value>form-control mb-2 ng-untouched ng-pristine ng-valid</value>
-      <webElementGuid>99a2a380-7fab-4ee4-a0dd-b0a18e0b3522</webElementGuid>
+      <webElementGuid>0f56d662-448b-49df-be01-caa12a91ac53</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -62,7 +66,7 @@
       <name>ng-reflect-name</name>
       <type>Main</type>
       <value>apiKeyType</value>
-      <webElementGuid>003ccdf7-b080-4595-8d23-de0af070f87c</webElementGuid>
+      <webElementGuid>d40cb482-ad43-47a8-b083-ee424ad8c5a5</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -70,7 +74,7 @@
       <name>ng-reflect-required</name>
       <type>Main</type>
       <value>required</value>
-      <webElementGuid>c45eabeb-7e37-413d-9840-29d22031aae9</webElementGuid>
+      <webElementGuid>c2e63513-6b8d-46b2-a468-dbc36d3346de</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -78,23 +82,23 @@
       <name>ng-reflect-ng-style</name>
       <type>Main</type>
       <value>false</value>
-      <webElementGuid>7f5bbc4e-28e8-443e-b100-a988f2eb0924</webElementGuid>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>text</name>
-      <type>Main</type>
-      <value>Tipe API KeyPRODUCTIONTRIAL</value>
-      <webElementGuid>9c823176-e885-4c75-aad6-f465d7063bbd</webElementGuid>
+      <webElementGuid>ee8a3ba6-e02b-430f-bca8-ea8968b8aa6a</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Tipe API KeyPRODUCTIONTRIAL</value>
+      <webElementGuid>306a8e1a-3bcc-4672-bc36-b80af7149739</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;apiKeyType&quot;)</value>
-      <webElementGuid>d0acfcea-681a-4c74-9d97-f36f7dfd6f46</webElementGuid>
+      <value>//*[@id=&quot;apiKeyType&quot;]/div/div/div[3]/input</value>
+      <webElementGuid>d4eb3622-b683-4344-8283-f0331b67eba2</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -102,7 +106,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//select[@id='apiKeyType']</value>
-      <webElementGuid>3e809822-d082-4ee4-9d84-1bae89f2b7e9</webElementGuid>
+      <webElementGuid>817f6fbf-5b7d-4c81-b168-cedb497787f0</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -110,7 +114,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='*'])[2]/following::select[1]</value>
-      <webElementGuid>35f9687c-52aa-49f3-821a-aa07d11977bb</webElementGuid>
+      <webElementGuid>531883b6-c656-4b89-a65b-76399a48cf24</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -118,7 +122,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Batal'])[1]/preceding::select[1]</value>
-      <webElementGuid>ffee1ff0-8b04-4687-8af5-d6b6962d8d4a</webElementGuid>
+      <webElementGuid>8bed7a29-ecf6-4f8e-972f-8e464bb038bc</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -126,7 +130,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Simpan'])[1]/preceding::select[1]</value>
-      <webElementGuid>0756edc1-fa3f-4940-ad98-01d479a38296</webElementGuid>
+      <webElementGuid>845b1e3b-2c98-4474-8189-2486868916f7</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -134,7 +138,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//select</value>
-      <webElementGuid>c2d654e2-0f88-4f01-83ec-c3f87d5fe620</webElementGuid>
+      <webElementGuid>0d8d3821-5fe1-421a-b811-36ef1c1b5df8</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -142,6 +146,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//select[@id = 'apiKeyType' and @placeholder = 'Tipe API Key' and (text() = 'Tipe API KeyPRODUCTIONTRIAL' or . = 'Tipe API KeyPRODUCTIONTRIAL')]</value>
-      <webElementGuid>47085c3f-f37f-4743-86e7-9a6c5306f105</webElementGuid>
+      <webElementGuid>1cdb796e-e702-42c7-9d90-ccb3c7cca9d9</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

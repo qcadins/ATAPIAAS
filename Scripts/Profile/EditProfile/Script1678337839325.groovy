@@ -190,7 +190,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
         }
         
 		'check if username pada pojok kanan atas tidak match dengan data yang baru di edit'
-		if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('Object Repository/Profile/Page_Edit Profile/label_UserName')), findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 11) + ' ' + findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 12), false)) {
+		if (!WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Profile/Page_Edit Profile/label_UserName')), findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 11) + ' ' + findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 12), false, FailureHandling.CONTINUE_ON_FAILURE)) {
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'

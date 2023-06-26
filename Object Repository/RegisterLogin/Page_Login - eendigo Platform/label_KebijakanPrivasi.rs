@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>label_KebijakanPrivasi</name>
+   <tag></tag>
+   <elementGuidId>2cfb08fb-e868-4f42-893b-9f55ecc40cfc</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@href = '/privacyPolicy']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;mat-tab-content-0-1&quot;]/div/form/div[6]/div/div/label</value>
+      <webElementGuid>be0ce3ad-300c-4634-b2d8-fca0d197f879</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>auth-terms</value>
+      <webElementGuid>e87ff2ab-ac2e-49da-a3fc-886d6c393970</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>href</name>
+      <type>Main</type>
+      <value>/privacyPolicy</value>
+      <webElementGuid>d87283ff-61a9-4c79-93f8-74ae1d842838</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

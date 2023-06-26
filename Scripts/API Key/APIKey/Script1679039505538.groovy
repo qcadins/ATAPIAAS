@@ -27,17 +27,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		String optiontipe, optionstatus
 		
-		'cek apakah perlu tambah API'
-		String wantAddAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18)
-		
-		'cek apakah perlu edit API'
-		String wantEditAPI = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 19)
+		'cek apakah perlu melakukan action'
+		String actionAPIKey = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 15)
 		
 		'cek apakah perlu copy link API'
-		String copyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 20)
+		String copyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 16)
 		
 		'cek apakah perlu fungsi download dokumentasi API'
-		String downloadDocs = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 21)
+		String downloadDocs = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 17)
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 5))
@@ -47,7 +44,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			('Path') : ExcelPathAPIKey], FailureHandling.STOP_ON_FAILURE)
 		
 		'pada delay, lakukan captcha secara manual'
-		WebUI.delay(10)
+		WebUI.delay(15)
 		
 		CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatusbtnClickable'(isMandatoryComplete, 
 			findTestObject(TombolLogin), 
@@ -82,7 +79,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'input tipe API'
 		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
-				ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 15))
+				ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12))
 		
 		'select tipe API'
 		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(
@@ -90,7 +87,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'input status API'
 		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
-				ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 16))
+				ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
 		
 		'select status API'
 		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(
@@ -196,15 +193,12 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'panggil fungsi tambah API'
-		if(wantAddAPI == 'Yes'){
+		if(actionAPIKey == 'Add'){
 			
 			'panggil fungsi Add API KEY'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/AddAPIKey'), 
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
-		}
-		
-		'panggil fungsi edit API'
-		if(wantEditAPI == 'Yes'){
+		} else if(actionAPIKey == 'Edit'){
 			
 			'panggil fungsi Edit API Key'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'), 

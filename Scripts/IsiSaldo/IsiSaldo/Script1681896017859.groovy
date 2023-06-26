@@ -217,7 +217,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			noTrxOtherTenant = CustomKeywords.'apikey.CheckSaldoAPI.getLatestMutationOtherTenant'(conndevUAT, tenantcode)
 			
 			'call test case store db'
-			 WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoStoreDB'), [('tenant') : tenantcode],
+			 WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoStoreDB'), [('ExcelPathSaldoAPI') : 'APIAAS/DataSaldoAPIKEY', ('tenant') : tenantcode, ('autoIsiSaldo') : '', ('tipeSaldo') : ''],
 				 FailureHandling.CONTINUE_ON_FAILURE)
 			
 			'cek apakah transaksi tercatat, memastikan tenant lain tidak memiliki transaksi yang sama'

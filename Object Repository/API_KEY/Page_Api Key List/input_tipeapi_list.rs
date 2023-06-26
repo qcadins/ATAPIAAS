@@ -6,6 +6,10 @@
    <elementGuidId>aa3e571a-cfd9-42b5-9685-d67754947a73</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;type&quot;]/div/div/div[3]/input</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[3]</value>
       </entry>
@@ -14,7 +18,7 @@
          <value>div.ng-input > input[type=&quot;text&quot;]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>131650a2-57fc-40e7-83cd-81bbc2a8708a</webElementGuid>
+      <webElementGuid>f5da976b-d4f5-4cc6-a2f6-36b8e8046016</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -30,15 +34,15 @@
       <name>role</name>
       <type>Main</type>
       <value>combobox</value>
-      <webElementGuid>b2349c6e-5836-4ccc-8c26-d984ad781648</webElementGuid>
+      <webElementGuid>5f9e9fed-1b9b-45a2-a51f-cdedd8df1375</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>text</value>
-      <webElementGuid>26f39d1f-4717-4f13-8457-657ee84cae16</webElementGuid>
+      <webElementGuid>5dc44c6f-4478-4d78-840e-932d0c13651c</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +50,7 @@
       <name>autocorrect</name>
       <type>Main</type>
       <value>off</value>
-      <webElementGuid>29a746ad-df47-4ed8-a5b4-8744b4598c89</webElementGuid>
+      <webElementGuid>d8f720a8-a4c8-43a3-b18e-ca6acd970278</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>autocapitalize</name>
       <type>Main</type>
       <value>off</value>
-      <webElementGuid>902197e2-3e81-4f94-90f8-6a1439fd7bfe</webElementGuid>
+      <webElementGuid>79122017-381e-453d-999f-264a4e611e38</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -62,7 +66,7 @@
       <name>autocomplete</name>
       <type>Main</type>
       <value>a49f603bf539</value>
-      <webElementGuid>24301ea4-59bf-42f3-be56-9e823752d59a</webElementGuid>
+      <webElementGuid>1b7fb5ff-db12-4b50-8fd3-549d3a286232</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -70,15 +74,15 @@
       <name>aria-expanded</name>
       <type>Main</type>
       <value>false</value>
-      <webElementGuid>993dc629-88a6-423d-b7f8-a9c9ed82cf44</webElementGuid>
+      <webElementGuid>97c950bd-bcfd-46d0-983b-494b1790b035</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;type&quot;)/div[@class=&quot;ng-select-container ng-has-value&quot;]/div[@class=&quot;ng-value-container&quot;]/div[@class=&quot;ng-input&quot;]/input[1]</value>
-      <webElementGuid>e3681c29-2c1a-4900-92f9-80713cbeb3d3</webElementGuid>
+      <value>//*[@id=&quot;type&quot;]/div/div/div[3]/input</value>
+      <webElementGuid>8e437b0f-839b-4fdd-ba02-8f55435909d8</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -86,7 +90,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>(//input[@type='text'])[3]</value>
-      <webElementGuid>06c6ee22-3c6f-49af-a36d-857bdd24cf5d</webElementGuid>
+      <webElementGuid>a9bedc91-b85f-434b-ae32-fb4c8a532202</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +98,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//ng-select[@id='type']/div/div/div[3]/input</value>
-      <webElementGuid>d547bd7c-eaea-444e-b17c-44811632c7c7</webElementGuid>
+      <webElementGuid>c9d53f23-21bf-414f-9ba0-7347c708450e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,7 +106,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[3]/input</value>
-      <webElementGuid>80bde4f7-1187-484a-8081-97b1d0f397d3</webElementGuid>
+      <webElementGuid>7cea5be8-61d0-4314-889e-79573cce4a68</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -110,6 +114,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//input[@type = 'text']</value>
-      <webElementGuid>e1941f5e-8b14-4177-96d1-db73c10de91f</webElementGuid>
+      <webElementGuid>cc53076f-74f7-4f1f-8190-7577178a767d</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>
