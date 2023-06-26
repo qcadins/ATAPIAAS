@@ -31,6 +31,9 @@ Connection connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatPr
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR KK', 
 	('Path') : ExcelPathOCRTesting], FailureHandling.STOP_ON_FAILURE)
 
+'get base url'
+GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 5)
+
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
