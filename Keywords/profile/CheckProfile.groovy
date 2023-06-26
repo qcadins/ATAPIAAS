@@ -30,13 +30,13 @@ public class CheckProfile {
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet
-		
-		if (role == 'Admin Client') {			
-			resultSet = stm.executeQuery("SELECT amu.initial_name, amu.last_name, mt.tenant_name, mt.tenant_industry, aupd.gender, mt.tenant_website, amu.hashed_phone, aupd.position, mcc.country_name || ' ' || mcc.country_code from am_msuser amu join am_user_personal_data aupd on amu.id_ms_user = aupd.id_ms_user join ms_useroftenant mut on mut.id_ms_user = amu.id_ms_user join ms_tenant mt on mt.id_ms_tenant = mut.id_ms_tenant join ms_country_code mcc on mcc.id_country_code = amu.id_country_code WHERE amu.login_id = '" + email + "'")
+
+		if (role == 'Admin Client') {
+			resultSet = stm.executeQuery("SELECT amu.initial_name, amu.last_name, mt.tenant_name, mt.tenant_industry, aupd.gender, mt.tenant_website, amu.hashed_phone, aupd.position, mcc.country_name || ' ' || mcc.country_code, npwp_no from am_msuser amu join am_user_personal_data aupd on amu.id_ms_user = aupd.id_ms_user join ms_useroftenant mut on mut.id_ms_user = amu.id_ms_user join ms_tenant mt on mt.id_ms_tenant = mut.id_ms_tenant join ms_country_code mcc on mcc.id_country_code = amu.id_country_code WHERE amu.login_id = '" + email + "'")
 		} else {
 			resultSet = stm.executeQuery("SELECT amu.initial_name, amu.last_name, aupd.gender, amu.hashed_phone, aupd.position, mcc.country_name || ' ' || mcc.country_code from am_msuser amu join am_user_personal_data aupd on amu.id_ms_user = aupd.id_ms_user join ms_useroftenant mut on mut.id_ms_user = amu.id_ms_user join ms_tenant mt on mt.id_ms_tenant = mut.id_ms_tenant join ms_country_code mcc on mcc.id_country_code = amu.id_country_code WHERE amu.login_id = '" + email + "'")
 		}
-		
+
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
@@ -74,10 +74,10 @@ public class CheckProfile {
 		'megambil text dari field nama belakang'
 		hasilgetText.add(WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__lastName'), 'value'))
 
-		if (role == 'Admin Client') {			
+		if (role == 'Admin Client') {
 			'mengambil text dari field nama perusahaan'
 			hasilgetText.add(WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__tenantName'), 'value'))
-	
+
 			'mengambil text dari field industri'
 			hasilgetText.add(WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__industry'), 'value'))
 		}
@@ -94,7 +94,7 @@ public class CheckProfile {
 			'mengambil value dari field website'
 			hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/Profile/Page_Edit Profile/input__website'), 'value'))
 		}
-		
+
 		'mengambil nomor telepon dari field Nomor HP'
 		hasilgetText.add(WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__PhoneNum'), 'value'))
 
@@ -104,9 +104,11 @@ public class CheckProfile {
 		'mengambil text dari field negara'
 		hasilgetText.add(optionLabel)
 
-		//		'mengambil value dari ddl negara'
-		//		hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/Profile/Page_Edit Profile/select__country'), 'text'))
-
+		if (role == 'Admin Client') {
+			'mengambil value dari field website'
+			hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/Profile/Page_Edit Profile/input__NPWP'), 'value'))
+		}
+		
 		'sekelompok data akan dikembalikan dalam bentuk array'
 		hasilgetText
 	}
@@ -126,7 +128,7 @@ public class CheckProfile {
 		}
 		data
 	}
-	
+
 	@Keyword
 	getUserRole(Connection conn, String email) {
 		String data
@@ -134,7 +136,7 @@ public class CheckProfile {
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("SELECT mr.role_name FROM am_msuser am JOIN am_memberofrole amr ON amr.id_ms_user = am.id_ms_user JOIN am_msrole mr ON mr.id_ms_role = amr.id_ms_role WHERE am.login_id = '"+ email +"'")
-		
+
 		while (resultSet.next()) {
 
 			data = resultSet.getObject(1)

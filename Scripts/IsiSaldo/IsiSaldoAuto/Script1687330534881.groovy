@@ -25,8 +25,6 @@ int countColumnEdit = findTestData(ExcelPath).getColumnNumbers()
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
-//'deklarasi koneksi ke Database adins_apiaas_uat'
-//def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
@@ -34,25 +32,23 @@ Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_dev
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'IsiSaldoAuto', ('SheetName') : sheet, ('Path') : ExcelPath], 
     FailureHandling.STOP_ON_FAILURE)
 
-//'angka untuk menghitung data mandatory yang tidak terpenuhi'
-//int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPath).getValue(GlobalVariable.NumOfColumn, 5))
+'declare variable int dan flag apakah topup masuk ke tenant yang benar'
+int Saldobefore, Saldoafter, JumlahTopUp, TopupSaldoCorrectTenant = 1
 
-int Saldobefore
+'delcare variable string'
+String noTrxfromUI, noTrxfromDB, noTrxOtherTenant
 
-int Saldoafter
+'ambil kode tenant di DB'
+String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCR).getValue(2, 28).toUpperCase())
 
-int JumlahTopUp
+'call setting balance type function'
+settingBalanceType()
 
-int TopupSaldoCorrectTenant
+'click menu garis tiga atau burger'
+WebUI.click(findTestObject('Tenant/menu_Burger'))
 
-String noTrxfromUI
-
-String noTrxfromDB
-
-String noTrxOtherTenant
-
-'flag apakah topup masuk ke tenant yang benar'
-TopupSaldoCorrectTenant = 1
+'click menu isi saldo'
+WebUI.click(findTestObject('Tenant/menu_isiSaldo'))
 
 'input nama tenant yang akan digunakan'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'), findTestData(
@@ -111,8 +107,8 @@ if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Pa
     GlobalVariable.FlagFailed = 1
 
     'tulis kondisi gagal'
-    CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-        (findTestData(ExcelPath).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonMandatory)
+    CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
+        (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonMandatory)
 
 } else {
     'klik pada tombol lanjut'
@@ -122,48 +118,99 @@ if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Pa
 'klik pada tombol proses isi ulang  saldo'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Ya, proses'))
 
-'tutup browser'
-//WebUI.closeBrowser()
+'cek apakah muncul error unknown setelah login'
+if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+	GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+	
+	GlobalVariable.FlagFailed = 1
+	
+	'tulis adanya error pada sistem web'
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusWarning, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			GlobalVariable.FailedReasonUnknown)
+}
 
-'cek jumlah tenant di DB dan UI'
+//'ambil jumlah saldo pada menu trial'
+//Saldoafter = getSaldoforTransaction(findTestData(ExcelPath).getValue(GlobalVariable.NumOfColumn, 15))
+//
+//'filter saldo sesuai kebutuhan user'
+//filterSaldo()
+//
+//'scroll ke bawah halaman'
+//WebUI.scrollToElement(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), GlobalVariable.Timeout)
+//
+//'cek apakah button skip enable atau disable'
+//if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)){
+//	
+//	'klik button skip to last page'
+//	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
+//}
+//
+//'ambil nomor transaksi terakhir di tabel'
+//noTrxfromUI = getTrxNumber()
 
-//		for(int i=1; i<=countWeb; i++)
-//		{
-//			'ambil object dari ddl'
-//			def modifyNamaTenant = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/TenantList'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-balance/div[2]/div/div/div/div/form/div[1]/div[1]/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
+'jika perlu cek ke DB'
+if (GlobalVariable.KondisiCekDB == 'Yes') {
+	'ambil nomor transaksi terbaru dari DB'
+	noTrxfromDB = CustomKeywords.'apikey.CheckSaldoAPI.getLatestMutation'(conndevUAT, tenantcode)
+			
+	'ambil nomor transaksi terbaru tenant lain'
+	noTrxOtherTenant = CustomKeywords.'apikey.CheckSaldoAPI.getLatestMutationOtherTenant'(conndevUAT, tenantcode)
+			
+	println(tenantcode)
+	
+	'call test case store db'
+	WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoStoreDB'), [('ExcelPathOCR') : ExcelPathOCR, ('ExcelPathSaldoAPI') : ExcelPath, ('tenant') : tenantcode, ('autoIsiSaldo') : 'Yes', ('tipeSaldo') : tipeSaldo, ('sheet') : sheet],
+					FailureHandling.CONTINUE_ON_FAILURE)
+			
+//	'cek apakah transaksi tercatat, memastikan tenant lain tidak memiliki transaksi yang sama'
+//	if (noTrxfromDB != noTrxfromUI || noTrxfromDB == noTrxOtherTenant) {
 //				
-//			'tambahkan nama tipe saldo ke array'
-//			String data = WebUI.getText(modifyNamaTenant)
-//			namatenantUI.add(data)
+//		'topup dianggap gagal'
+//		TopupSaldoCorrectTenant = 0
+//	} else {
+//		'jika ada konten pada tabel yang tidak sesuai dengan DB'
+//		if (verifyTableContent(conndevUAT, tenantcode) == 0) {
+//			'topup dianggap gagal'
+//			TopupSaldoCorrectTenant = 0
 //		}
-//			
-//		'cek setiap data di UI dengan data di DB sebagai pembanding'
-//		for (String tipe : namatenantDB)
-//		{
-//			'jika ada data yang tidak terdapat pada arraylist yang lain'
-//			if (!namatenantUI.contains(tipe))
-//			{
-//				'ada data yang tidak match'
-//				isTenantMatch = 0;
-//				'berhentikan loop'
-//				break;
-//				}
-//			'kondisi ini bisa ditemui jika data match'
-//			isTenantMatch = 1
-//		}
-'cek jumlah vendor di DB dan UI'
+//	}
+}
 
-'cek jumlah vendor di DB dan UI'
-
-'ambil saldo sesuai testing yang dilakukan'
-
-'fungsi untuk filter saldo berdasarkan input user'
-
-'ambil no. transaksi pada tabel'
-
-'fungsi untuk melakukan pengecekan '
-
-'ambil no. transaksi pada tabel'
+def settingBalanceType() {
+	'click menu garis tiga atau burger'
+	WebUI.click(findTestObject('Tenant/menu_Burger'))
+	
+	'click menu tenant'
+	WebUI.click(findTestObject('Tenant/menu_Tenant'))
+	
+	'click button cari'
+	WebUI.click(findTestObject('Tenant/button_Cari'))
+	
+	'input nama tenant'
+	WebUI.setText(findTestObject('Tenant/input_NamaTenant'),
+		findTestData(ExcelPath).getValue(2, 20))
+	
+	'click button cari'
+	WebUI.click(findTestObject('Tenant/button_Cari'))
+	
+	'click button services balance'
+	WebUI.click(findTestObject('Tenant/button_chargeType'))
+	
+	'ambil object check box'
+	modifyCheckBox = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/VendorList'),
+		'xpath', 'equals', '//*[@id="' + idOCR + '"]', true)
+	
+	'check if balance type quantity'
+	if (findTestData(ExcelPath).getValue(2, 24) == 'Quantity') {
+		WebUI.uncheck(modifyCheckBox, FailureHandling.CONTINUE_ON_FAILURE)
+	} else if (findTestData(ExcelPath).getValue(2, 24) == 'Price') {
+		WebUI.check(modifyCheckBox, FailureHandling.CONTINUE_ON_FAILURE)
+	}
+	
+	'click button simpan'
+	WebUI.click(findTestObject('Tenant/ChargeType/button_Simpan'))
+}
 
 def checkTenantcount(def connection) {
     'ambil list tenant'
@@ -190,8 +237,8 @@ def checkTenantcount(def connection) {
         GlobalVariable.FlagFailed = 1
 
         'Write to excel status failed and reason topup failed'
-        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-            (findTestData(ExcelPath).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
+        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
+            (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
     }
 }
 
@@ -246,8 +293,8 @@ def checkVendorcount(def connection, def tenantcode) {
         GlobalVariable.FlagFailed = 1
 
         'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-            (findTestData(ExcelPath).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
+        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
+            (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
     }
 }
 
@@ -303,8 +350,8 @@ def checkTipeSaldocount(def connection, def tenantcode) {
         GlobalVariable.FlagFailed = 1
 
         'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-            (findTestData(ExcelPath).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
+        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
+            (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
     }
 }
 
@@ -335,8 +382,8 @@ def navigatetoeendigoBeta() {
         GlobalVariable.FlagFailed = 1
 
         'tulis adanya error pada sistem web'
-        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning, 
-            (findTestData(ExcelPath).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonUnknown)
+        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning, 
+            (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonUnknown)
     }
 }
 
@@ -519,8 +566,8 @@ def verifyTableContent(def connection, String tenant) {
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-            (findTestData(ExcelPath).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
+        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
+            (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
 
         GlobalVariable.FlagFailed = 1
     }

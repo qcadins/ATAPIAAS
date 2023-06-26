@@ -129,8 +129,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			messageocr)
 			
 			'call auto isi saldo'
-			WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoAuto'), [('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR KK', ('sheet') : 'OCR KK'],
-				FailureHandling.STOP_ON_FAILURE)
+			WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR KK', ('sheet') : 'OCR KK', ('idOCR') : 'OCR_KK'],
+				FailureHandling.CONTINUE_ON_FAILURE)
 			
 			continue
 		}

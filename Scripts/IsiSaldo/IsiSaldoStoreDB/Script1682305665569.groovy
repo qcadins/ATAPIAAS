@@ -8,6 +8,9 @@ import java.sql.Connection
 //'deklarasi koneksi ke Database adins_apiaas_uat'
 //def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
 
+'get current date'
+def currentDate = new Date().format('yyyy-MM-dd')
+
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
@@ -20,47 +23,79 @@ ArrayList<String> arrayMatch = []
 'declare arrayindex'
 arrayindex = 0
 
-'verify tenant'
-arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 13).toUpperCase(), 
-	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
-
-'verify vendor'
-arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 14).toUpperCase(), 
-	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
-
-'verify tipe saldo'
-arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 15).toUpperCase(), 
-	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
-
-'verify tambah saldo'
-arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 16).toUpperCase(), 
-	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
-
-'verify Nomor tagihan'
-arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 17).toUpperCase(), 
-	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
-
-'verify Catatan'
-arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 18).toUpperCase(), 
-	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
-
-'verify tanggal pembelian'
-arrayMatch.add(WebUI.verifyMatch(
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 19).toUpperCase(), 
-	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+if (autoIsiSaldo == '') {	
+	'verify tenant'
+	arrayMatch.add(WebUI.verifyMatch(
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 13).toUpperCase(), 
+		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'verify vendor'
+	arrayMatch.add(WebUI.verifyMatch(
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 14).toUpperCase(), 
+		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'verify tipe saldo'
+	arrayMatch.add(WebUI.verifyMatch(
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 15).toUpperCase(), 
+		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'verify tambah saldo'
+	arrayMatch.add(WebUI.verifyMatch(
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 16).toUpperCase(), 
+		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'verify Nomor tagihan'
+	arrayMatch.add(WebUI.verifyMatch(
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 17).toUpperCase(), 
+		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'verify Catatan'
+	arrayMatch.add(WebUI.verifyMatch(
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 18).toUpperCase(), 
+		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'verify tanggal pembelian'
+	arrayMatch.add(WebUI.verifyMatch(
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 19).toUpperCase(), 
+		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+} else if (autoIsiSaldo == 'Yes') {
+	'verify tenant'
+	arrayMatch.add(WebUI.verifyMatch(
+		findTestData(ExcelPathSaldoAPI).getValue(2, 20).toUpperCase(),
+		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'verify vendor'
+	arrayMatch.add(WebUI.verifyMatch(
+		findTestData(ExcelPathSaldoAPI).getValue(2, 21).toUpperCase(),
+		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'verify tipe saldo'
+	arrayMatch.add(WebUI.verifyMatch(tipeSaldo.toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'verify tambah saldo'
+	arrayMatch.add(WebUI.verifyMatch(
+		findTestData(ExcelPathSaldoAPI).getValue(2, 22).toUpperCase(),
+		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'verify Nomor tagihan'
+	arrayMatch.add(WebUI.verifyMatch(
+		findTestData(ExcelPathSaldoAPI).getValue(2, 23).toUpperCase(),
+		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'verify Catatan'
+	arrayMatch.add(WebUI.verifyMatch('ISI ULANG ' + tipeSaldo.toUpperCase(),
+		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
+	'verify tanggal pembelian'
+	arrayMatch.add(WebUI.verifyMatch(currentDate, (result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+}
 
 'jika data db tidak sesuai dengan excel'
 if (arrayMatch.contains(false)) {
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, 
-		GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' + 
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
+		GlobalVariable.StatusFailed, findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';' + 
 			GlobalVariable.FailedReasonStoreDB)
 	
 }
