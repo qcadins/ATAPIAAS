@@ -8,9 +8,9 @@ import java.sql.ResultSetMetaData
 import internal.GlobalVariable
 
 public class TransactionVerif {
-	
+
 	int columnCount
-	
+
 	@Keyword
 	getTotalTrx(Connection conn, String email) {
 
@@ -26,7 +26,7 @@ public class TransactionVerif {
 		}
 		data
 	}
-	
+
 	@Keyword
 	getTenantList(Connection conn) {
 
@@ -47,7 +47,7 @@ public class TransactionVerif {
 		}
 		listdata
 	}
-	
+
 	@Keyword
 	getDDLTipeIsiUlang(Connection conn) {
 
@@ -68,7 +68,7 @@ public class TransactionVerif {
 		}
 		listdata
 	}
-	
+
 	@Keyword
 	getDDLMetodeTrf(Connection conn) {
 
@@ -89,7 +89,7 @@ public class TransactionVerif {
 		}
 		listdata
 	}
-	
+
 	@Keyword
 	getRoleofUser(Connection conn, String email) {
 
@@ -104,5 +104,63 @@ public class TransactionVerif {
 			data = resultSet.getObject(1);
 		}
 		data
+	}
+	
+	@Keyword
+	getRiwayatDetail(Connection conn, String noTrx) {
+
+		String data
+		ArrayList listdata = []
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT ml.description, tod.unit_price, tod.qty, (tod.unit_price * tod.qty) as subtotal FROM tr_topup_order_d tod LEFT JOIN ms_lov ml ON ml.id_lov = tod.lov_balance_type LEFT JOIN tr_topup_order_h toh ON toh.id_topup_order_h = tod.id_topup_order_h WHERE toh.topup_order_number = '" + noTrx + "'")
+		ResultSetMetaData metadata = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while (resultSet.next()) {
+			for (int i = 1 ; i <= columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		listdata
+	}
+	
+	@Keyword
+	getNPWPnumUser(Connection conn, String email) {
+
+		String data
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT npwp_no FROM am_msuser amu LEFT JOIN ms_useroftenant mot ON mot.id_ms_user = amu.id_ms_user LEFT JOIN ms_tenant mt ON mot.id_ms_tenant = mt.id_ms_tenant WHERE login_id = '" + email + "'")
+
+		while (resultSet.next()) {
+
+			data = resultSet.getObject(1);
+		}
+		data
+	}
+	
+	@Keyword
+	getServiceCheck(Connection conn, String noTrx) {
+
+		String data
+		ArrayList listdata = []
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM tr_topup_order_d tod LEFT JOIN ms_lov ml ON ml.id_lov = tod.lov_balance_type LEFT JOIN tr_topup_order_h toh ON toh.id_topup_order_h = tod.id_topup_order_h WHERE toh.topup_order_number = '" + noTrx + "'")
+		ResultSetMetaData metadata = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while (resultSet.next()) {
+			for (int i = 1 ; i <= columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		listdata
 	}
 }

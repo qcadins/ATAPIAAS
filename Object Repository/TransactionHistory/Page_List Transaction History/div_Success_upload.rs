@@ -10,6 +10,10 @@
          <value>//div[@id='swal2-content']</value>
       </entry>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@id = 'swal2-content' and (text() = 'Success' or . = 'Success')]</value>
+      </entry>
+      <entry>
          <key>CSS</key>
          <value>#swal2-content</value>
       </entry>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>div</value>
-      <webElementGuid>f943cbf4-eecb-46ee-b89d-063181bd73cf</webElementGuid>
+      <webElementGuid>19890442-d3d9-4d64-b199-d25db3fdf6c3</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +34,7 @@
       <name>id</name>
       <type>Main</type>
       <value>swal2-content</value>
-      <webElementGuid>411d46c7-412f-44e5-8a73-8e5a4ff8ee76</webElementGuid>
+      <webElementGuid>081f3b22-35f0-4416-82a0-920a16986c78</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +42,7 @@
       <name>class</name>
       <type>Main</type>
       <value>swal2-html-container</value>
-      <webElementGuid>85a0a31c-ae0d-4a3f-b6d5-b12290bdaefd</webElementGuid>
+      <webElementGuid>a3b78cae-f894-4630-be55-43cd9f215653</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -46,7 +50,7 @@
       <name>text</name>
       <type>Main</type>
       <value>Success</value>
-      <webElementGuid>aeede232-b61b-4ad4-9d74-bc9a47c56a2f</webElementGuid>
+      <webElementGuid>53f19bd8-f056-4cc0-9386-6a5d4eb06502</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;swal2-content&quot;)</value>
-      <webElementGuid>2cb83819-4329-4449-b717-b31ab552d61b</webElementGuid>
+      <webElementGuid>c9dea545-b4f4-4e72-83e3-ffd82d5bc295</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -62,7 +66,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//div[@id='swal2-content']</value>
-      <webElementGuid>0975e808-1cbe-4b09-94ef-8769154faf5a</webElementGuid>
+      <webElementGuid>61c18fab-ed3b-4f8b-beb2-3c39d4e3391d</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +74,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='×'])[7]/following::div[2]</value>
-      <webElementGuid>9d62cc01-1037-45dd-ae06-5fc4966b73f3</webElementGuid>
+      <webElementGuid>3fa40587-7deb-4ff4-9377-c34353e482a9</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)=concat('id(', '&quot;', 'swal2-content', '&quot;', ')')])[1]/following::div[19]</value>
-      <webElementGuid>79770007-134e-4e6a-ba8d-f97c5a46c6d3</webElementGuid>
+      <webElementGuid>2fb3d5be-acc3-42f7-ab9e-510d8a76683d</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +90,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='OK'])[1]/preceding::div[5]</value>
-      <webElementGuid>bac4936b-3174-4ad2-8646-cefcd6af107a</webElementGuid>
+      <webElementGuid>535506b2-f403-48bd-a03e-2228b55244a5</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +98,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='No'])[1]/preceding::div[5]</value>
-      <webElementGuid>b8c67707-9f0f-493b-b3fa-8316ed8978cd</webElementGuid>
+      <webElementGuid>d765addc-3b98-4239-8542-35e891bcef7b</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,7 +106,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='Success']/parent::*</value>
-      <webElementGuid>2bf0cc6c-034d-49a3-bcff-68485339a120</webElementGuid>
+      <webElementGuid>b662fc27-bcf0-4d5e-a8bc-32a3a0aec992</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -110,7 +114,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[5]/div/div[2]/div</value>
-      <webElementGuid>7ce7e517-c978-4f2c-aff6-2ad0c4e0c145</webElementGuid>
+      <webElementGuid>65c4c373-0d9d-401b-86d3-1c896909633b</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -118,6 +122,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//div[@id = 'swal2-content' and (text() = 'Success' or . = 'Success')]</value>
-      <webElementGuid>85a67939-fac4-457b-9b8f-f36f226d46f6</webElementGuid>
+      <webElementGuid>51cac424-2c9c-4c49-93cd-f521fe1301a1</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

@@ -210,7 +210,7 @@ public class TopupVerif {
 		}
 		listdata
 	}
-	
+
 	@Keyword
 	getStoreDBTopup1(Connection conn, String noTrx) {
 
@@ -231,7 +231,7 @@ public class TopupVerif {
 		}
 		listdata
 	}
-	
+
 	@Keyword
 	getStoreDBTopup2(Connection conn, String noTrx) {
 
