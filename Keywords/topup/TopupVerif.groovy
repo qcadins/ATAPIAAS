@@ -210,4 +210,46 @@ public class TopupVerif {
 		}
 		listdata
 	}
+	
+	@Keyword
+	getStoreDBTopup1(Connection conn, String noTrx) {
+
+		String data
+		ArrayList listdata = []
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT mlo.description, mlov.description, mb.bank_name FROM tr_topup_order_d tod LEFT JOIN tr_topup_order_h toh ON toh.id_topup_order_h = tod.id_topup_order_h LEFT JOIN ms_account_payment mapt ON mapt.id_account_payment = toh.id_account_payment LEFT JOIN ms_bank mb ON mb.id_bank = mapt.id_bank LEFT JOIN ms_lov mlo ON mlo.id_lov = toh.lov_api_key_type LEFT JOIN ms_lov mlov ON mlov.id_lov = mapt.lov_payment_method LEFT JOIN ms_lov mlove ON mlove.id_lov = tod.lov_balance_type WHERE toh.topup_order_number = '" + noTrx + "' LIMIT 1")
+		ResultSetMetaData metadata = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while (resultSet.next()) {
+			for (int i = 1 ; i <= columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		listdata
+	}
+	
+	@Keyword
+	getStoreDBTopup2(Connection conn, String noTrx) {
+
+		String data
+		ArrayList listdata = []
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT array_to_string(array_agg(ml.description),';') AS descriptions, array_to_string(array_agg(tod.qty),';') AS total_qty FROM tr_topup_order_d tod LEFT JOIN ms_lov ml ON ml.id_lov = tod.lov_balance_type LEFT JOIN tr_topup_order_h toh ON toh.id_topup_order_h = tod.id_topup_order_h WHERE toh.topup_order_number = '" + noTrx + "'")
+		ResultSetMetaData metadata = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while (resultSet.next()) {
+			for (int i = 1 ; i <= columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		listdata
+	}
 }

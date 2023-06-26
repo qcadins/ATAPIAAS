@@ -108,7 +108,7 @@ public class CheckProfile {
 			'mengambil value dari field website'
 			hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/Profile/Page_Edit Profile/input__NPWP'), 'value'))
 		}
-		
+
 		'sekelompok data akan dikembalikan dalam bentuk array'
 		hasilgetText
 	}

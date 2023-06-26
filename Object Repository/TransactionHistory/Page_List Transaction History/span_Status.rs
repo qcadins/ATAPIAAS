@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>span_Status</name>
+   <tag></tag>
+   <elementGuidId>ec157877-db11-4e5a-ae43-cdd0b18531ec</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;status&quot;]/div/span[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;status&quot;]/div/span[2]</value>
+      <webElementGuid>9ff0b17c-44f7-4fca-b3df-d949d00519c2</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

@@ -23,6 +23,24 @@
       <value></value>
       <variableId>5a45bc4e-9f0e-462a-9f45-803258c3766f</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>b905ac16-34ea-4d0c-837f-6c6decae0dd3</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>6cbaf5c9-6e56-478e-8d73-89432027f3fc</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>6284bb70-5b02-45d5-a8d6-fb4dc24cf9eb</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'Top Up/DataTestingTopUp'</defaultValue>
       <description></description>
@@ -42,6 +60,27 @@
       <description></description>
       <id>5a45bc4e-9f0e-462a-9f45-803258c3766f</id>
       <masked>false</masked>
-      <name>ExcelPathSimulasi</name>
+      <name>ExcelPathDiscPerc</name>
+   </variable>
+   <variable>
+      <defaultValue>'SimulasiCoupon/CashbackPercentage'</defaultValue>
+      <description></description>
+      <id>b905ac16-34ea-4d0c-837f-6c6decae0dd3</id>
+      <masked>false</masked>
+      <name>ExcelPathCashPerc</name>
+   </variable>
+   <variable>
+      <defaultValue>'SimulasiCoupon/DiscountNominal'</defaultValue>
+      <description></description>
+      <id>6cbaf5c9-6e56-478e-8d73-89432027f3fc</id>
+      <masked>false</masked>
+      <name>ExcelPathDiscNom</name>
+   </variable>
+   <variable>
+      <defaultValue>'SimulasiCoupon/CashbackNominal'</defaultValue>
+      <description></description>
+      <id>6284bb70-5b02-45d5-a8d6-fb4dc24cf9eb</id>
+      <masked>false</masked>
+      <name>ExcelPathCashNom</name>
    </variable>
 </TestCaseEntity>

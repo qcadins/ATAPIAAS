@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>span_Metode</name>
+   <tag></tag>
+   <elementGuidId>50b8965d-6c32-4412-b66e-6c4d2a7243da</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;paymentMethodCode&quot;]/div/span[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;paymentMethodCode&quot;]/div/span[2]</value>
+      <webElementGuid>c6820628-0827-4296-9576-88fda2bb932e</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

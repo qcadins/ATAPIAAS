@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TransactionHistory</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>5358fb29-54e6-413c-b31d-6879ebe8ebc1</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>9a4494dd-dfbf-40e2-9e41-44201bd356f8</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'Transaction History/DataTestingTrxHistory'</defaultValue>
+      <description></description>
+      <id>9a4494dd-dfbf-40e2-9e41-44201bd356f8</id>
+      <masked>false</masked>
+      <name>ExcelPathTranx</name>
+   </variable>
+</TestCaseEntity>
