@@ -10,6 +10,10 @@
          <value>(.//*[normalize-space(text()) and normalize-space(.)='Lihat NPWP'])[1]/following::span[1]</value>
       </entry>
       <entry>
+         <key>BASIC</key>
+         <value>//*[(text() = '×' or . = '×')]</value>
+      </entry>
+      <entry>
          <key>CSS</key>
          <value>button.close > span</value>
       </entry>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>span</value>
-      <webElementGuid>99a7354f-20fb-4571-8d3b-1bbec2743cc2</webElementGuid>
+      <webElementGuid>57e57c63-6547-4825-9921-37185e6a8146</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -30,7 +34,7 @@
       <name>aria-hidden</name>
       <type>Main</type>
       <value>true</value>
-      <webElementGuid>2693402e-d566-4b10-9c30-4dee8f96b0f3</webElementGuid>
+      <webElementGuid>4a8f89aa-3d40-4ae2-8276-8ef8b90973b4</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -38,7 +42,7 @@
       <name>text</name>
       <type>Main</type>
       <value>×</value>
-      <webElementGuid>1e656a17-9465-47f9-99b8-f84caf33c4e5</webElementGuid>
+      <webElementGuid>092da003-d570-4c21-9b83-19bff91f9c13</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +50,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done page-scrolled navbar-scrolled modal-open&quot;]/ngb-modal-window[@class=&quot;d-block modal fade show&quot;]/div[@class=&quot;modal-dialog modal-lg&quot;]/div[@class=&quot;modal-content&quot;]/app-view-npwp[1]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;modal-header&quot;]/button[@class=&quot;close&quot;]/span[1]</value>
-      <webElementGuid>1af9eee0-5048-4e74-8a7c-32b0ac9c043e</webElementGuid>
+      <webElementGuid>4df332af-083b-4dd5-8f22-9b8fb6d1f071</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -54,7 +58,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Lihat NPWP'])[1]/following::span[1]</value>
-      <webElementGuid>1a65108a-ff75-45bd-ac25-1fd80203c5f3</webElementGuid>
+      <webElementGuid>5d3de7a8-fdc1-4991-b6e8-ad2b7c85179f</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -62,7 +66,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='`'])[2]/following::span[1]</value>
-      <webElementGuid>5406f774-1f93-419a-8d26-492fce433b16</webElementGuid>
+      <webElementGuid>95bab65d-517a-4e75-9117-b7616914bd50</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +74,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='No NPWP'])[1]/preceding::span[1]</value>
-      <webElementGuid>91d77084-5494-4df9-b274-cda3abf37955</webElementGuid>
+      <webElementGuid>6dd15cab-d2d1-44a1-a5d4-9140bd39da81</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Foto NPWP'])[1]/preceding::span[1]</value>
-      <webElementGuid>9e2151f2-16f8-4941-961d-2afbdcea5617</webElementGuid>
+      <webElementGuid>dc84fdbd-4219-429f-8c2a-d46570d55a68</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +90,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//button/span</value>
-      <webElementGuid>69cafd10-05a2-4dd6-bca6-b2488b6a454f</webElementGuid>
+      <webElementGuid>acce2c82-59b9-4ed5-8545-d7660400af84</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,6 +98,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//span[(text() = '×' or . = '×')]</value>
-      <webElementGuid>4f133fce-45e5-4f3b-8822-19941ed1313b</webElementGuid>
+      <webElementGuid>7440acdb-ed72-423b-a848-0be2a77803a9</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

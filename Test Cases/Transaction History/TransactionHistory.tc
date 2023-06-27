@@ -11,11 +11,24 @@
       <value></value>
       <variableId>9a4494dd-dfbf-40e2-9e41-44201bd356f8</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>93b037b5-9996-4bfa-b0c7-cc628ce4517e</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'Transaction History/DataTestingTrxHistory'</defaultValue>
       <description></description>
       <id>9a4494dd-dfbf-40e2-9e41-44201bd356f8</id>
       <masked>false</masked>
       <name>ExcelPathTranx</name>
+   </variable>
+   <variable>
+      <defaultValue>'Object Repository/User Management-Role/Page_List Roles/i_Logout_ft-x ng-tns-c133-2'</defaultValue>
+      <description></description>
+      <id>93b037b5-9996-4bfa-b0c7-cc628ce4517e</id>
+      <masked>false</masked>
+      <name>TombolSilang</name>
    </variable>
 </TestCaseEntity>

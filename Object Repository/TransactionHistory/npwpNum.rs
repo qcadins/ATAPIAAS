@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>npwpNum</name>
+   <tag></tag>
+   <elementGuidId>05211363-e2a4-4739-a056-f51c80537451</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/ngb-modal-window/div/div/app-view-npwp/div/div[2]/div[1]/input</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/ngb-modal-window/div/div/app-view-npwp/div/div[2]/div[1]/input</value>
+      <webElementGuid>80ecd2bb-36ce-4e8c-ae68-416e943fd7a9</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

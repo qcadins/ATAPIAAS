@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>viewbukti_X</name>
+   <tag></tag>
+   <elementGuidId>b773e47e-25cd-4017-a15a-330d2326064f</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/ngb-modal-window/div/div/app-view-payment-proof/div/div[1]/button/span</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/ngb-modal-window/div/div/app-view-payment-proof/div/div[1]/button/span</value>
+      <webElementGuid>206f76c8-fb23-482c-b337-8e828e88fe56</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

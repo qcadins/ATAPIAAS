@@ -141,6 +141,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Fitur yang di-bypass'</initValue>
+      <name>FailedReasonRoleFeature</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Gagal pilih role saat login'</initValue>
       <name>FailedReasonRoleLogin</name>
    </GlobalVariableEntity>
