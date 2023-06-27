@@ -1,6 +1,7 @@
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import java.sql.Connection
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
@@ -11,6 +12,9 @@ import org.openqa.selenium.Keys as Keys
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+
+'deklarasi variabel untuk konek ke Database APIAAS'
+Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathAPIKey).getColumnNumbers()
@@ -46,6 +50,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'pada delay, lakukan captcha secara manual'
 		WebUI.delay(15)
 		
+		'dapatkan detail tenant dari user yang login'
+		ArrayList<String> resultTenant = CustomKeywords.'apikey.CheckAPIKey.getTenantCodeName'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
+		
 		CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatusbtnClickable'(isMandatoryComplete, 
 			findTestObject(TombolLogin), 
 			GlobalVariable.NumOfColumn, 'API KEY')
@@ -76,6 +83,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/span_API Key'))
 		
 		WebUI.delay(2)
+		
+		arrayIndex = 0
+		
+		'verify tenant code'
+		checkVerifyEqualorMatch(WebUI.verifyMatch(resultTenant[arrayIndex++], WebUI.getAttribute(findTestObject('API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_TenantCode'), 'value', FailureHandling.OPTIONAL), false, FailureHandling.CONTINUE_ON_FAILURE), ' tenant code') 
+			
+		'verify tenant name'
+		checkVerifyEqualorMatch(WebUI.verifyMatch(resultTenant[arrayIndex++], WebUI.getAttribute(findTestObject('API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_TenantName'), 'value', FailureHandling.OPTIONAL), false, FailureHandling.CONTINUE_ON_FAILURE), ' tenant name')
 		
 		'input tipe API'
 		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
@@ -204,13 +219,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'), 
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
 		}
-		'panggil fungsi download dokumentasi'
-		if(downloadDocs == 'Yes'){
-			
-			'panggil fungsi download dokumentasi API'
-			WebUI.callTestCase(findTestCase('Test Cases/Dokumentasi API/DocumentationAPI'), 
-				[:], FailureHandling.CONTINUE_ON_FAILURE)
-		}
+		
 		'kondisi jika tidak ada error'
 		if(GlobalVariable.FlagFailed == 0){
 			
@@ -244,5 +253,17 @@ def checkVerifyFooter(){
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, 
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') 
 			+ GlobalVariable.FailedReasonPagingError)
+	}
+}
+
+def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
+	if(isMatch == false){
+		GlobalVariable.FlagFailed = 1
+		
+		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
+		
 	}
 }

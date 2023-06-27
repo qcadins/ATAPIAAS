@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "C177FB9B3BFE580AC09CD0F2ECCC7DED",
+  "keywordFileContentHash": "DD73FF0F7B273C25D12041E2FD4C9D21",
   "keywordClasses": [
     {
       "name": "apikey.CheckAPIKey",
@@ -33,13 +33,11 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getAttributeValueAPI",
-          "parameters": [],
-          "javadoc": ""
+          "parameters": []
         },
         {
           "name": "getAPIStatusfromDB",
@@ -70,8 +68,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getTotalAPIKeyfromDB",
@@ -102,11 +99,41 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
+        },
+        {
+          "name": "getTenantCodeName",
+          "parameters": [
+            {
+              "name": "conn",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "email",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            }
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_TenantCode</name>
+   <tag></tag>
+   <elementGuidId>891ba796-9ae1-4f17-bc5e-53aac1a470e5</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;tenantCode&quot;]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;tenantCode&quot;]</value>
+      <webElementGuid>7987d439-d353-4b04-8b52-2d6c92a9964f</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

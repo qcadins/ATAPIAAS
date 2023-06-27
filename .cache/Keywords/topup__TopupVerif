@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "F5DD823A13FF1C2B6F00A37F634E52F5",
+  "keywordFileContentHash": "8B478C8BCA61267A8D5E3B6DE85F812B",
   "keywordClasses": [
     {
       "name": "topup.TopupVerif",
@@ -20,7 +20,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getDDLMetodeTrf",
@@ -38,7 +39,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getDDLBank",
@@ -56,7 +58,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getDDLSaldoactive",
@@ -87,7 +90,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getServicePrice",
@@ -118,7 +122,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getPPNvalue",
@@ -136,7 +141,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getCouponDetail",
@@ -167,7 +173,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getInstructionDetail",
@@ -198,7 +205,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getRiwayatTabelData",
@@ -229,7 +237,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getRiwayatDetail",
@@ -260,7 +269,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getStoreDBTopup1",
@@ -291,7 +301,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getStoreDBTopup2",
@@ -322,10 +333,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }
