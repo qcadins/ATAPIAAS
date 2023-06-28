@@ -32,9 +32,13 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
 	WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 2))
 }
 else {
-	
-	'buka website billing system, untuk isi saldo'
-	WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 3))
+	if (GlobalVariable.SettingEnvi == 'Trial') {		
+		'buka website billing system Trial, untuk isi saldo'
+		WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 3))
+	} else if (GlobalVariable.SettingEnvi == 'Production') {
+		'buka website billing system Production, untuk isi saldo'
+		WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 4))
+	}
 }
 
 def js = (JavascriptExecutor)driver
@@ -177,8 +181,7 @@ else if (TC == 'Key') {
 		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
 	
 }
-else if (TC == 'OCR') {
-	
+else if (TC == 'OCR') {	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
@@ -498,6 +501,36 @@ else if (TC == 'TranxHist') {
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					GlobalVariable.FailedReasonRoleLogin)
 		}
+	}
+}
+else if (TC == 'TenantCekServices') {
+	
+	'input data email'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+		findTestData(Path).getValue(4, 33))
+	
+	'input password'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+		findTestData(Path).getValue(4, 34))
+	
+	'ceklis pada reCaptcha'
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
+		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	
+	'pada delay, lakukan captcha secara manual'
+	WebUI.delay(10)
+	
+	'klik pada button login'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'button_Lanjutkan Perjalanan Anda'))
+}
+
+if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {	
+	if (GlobalVariable.SettingEnvi == 'Production') {
+		'click pada production'
+		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
 	}
 }
 

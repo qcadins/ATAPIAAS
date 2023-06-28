@@ -29,32 +29,6 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
 
-'buka chrome\r\n'
-WebUI.openBrowser('')
-
-'buka website APIAAS SIT, data diambil dari TestData Login'
-WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
-
-'input data email'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-	'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-	findTestData(ExcelPathOCRTesting).getValue(2, 27))
-
-'input password'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-	'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-	findTestData(ExcelPathOCRTesting).getValue(2, 28))
-
-'ceklis pada reCaptcha'
-WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-	'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
-
-'pada delay, lakukan captcha secara manual'
-WebUI.delay(10)
-
-'klik pada button login'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 4)
 
@@ -81,6 +55,37 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		break
 	} 
 	else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+		
+		'buka chrome\r\n'
+		WebUI.openBrowser('')
+		
+		'buka website APIAAS SIT, data diambil dari TestData Login'
+		WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
+		
+		'input data email'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+			'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+			findTestData(ExcelPathOCRTesting).getValue(2, 27))
+		
+		'input password'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+			'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+			findTestData(ExcelPathOCRTesting).getValue(2, 28))
+		
+		'ceklis pada reCaptcha'
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
+			'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+		
+		'pada delay, lakukan captcha secara manual'
+		WebUI.delay(10)
+		
+		'klik pada button login'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+		
+		if (GlobalVariable.SettingEnvi == 'Production') {
+			'click pada production'
+			WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
+		}
 		
 		'deklarasi variable response'
 		ResponseObject response

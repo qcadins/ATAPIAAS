@@ -87,6 +87,11 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		'klik pada button login'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 		
+		if (GlobalVariable.SettingEnvi == 'Production') {
+			'click pada production'
+			WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
+		}
+		
 		'deklarasi variable response'
 		ResponseObject response
 		

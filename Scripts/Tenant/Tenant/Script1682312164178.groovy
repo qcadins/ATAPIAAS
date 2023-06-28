@@ -15,11 +15,15 @@ import org.openqa.selenium.Keys as Keys
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
-//'deklarasi koneksi ke Database adins_apiaas_uat'
-//def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
+Connection conn
 
-'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+if(GlobalVariable.SettingEnvi == 'Production') {
+	'deklarasi koneksi ke Database eendigo_dev'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+} else if(GlobalVariable.SettingEnvi == 'Trial') {
+	'deklarasi koneksi ke Database eendigo_dev_uat'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+}
 
 'mendapat jumlah kolom dari sheet Tenant'
 int countColumnEdit = findTestData(ExcelPathTenant).getColumnNumbers()
@@ -32,7 +36,9 @@ WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Tenant', (
 WebUI.click(findTestObject('Tenant/menu_Tenant'))
 
 'call function check paging'
-checkPaging(conndevUAT)
+checkPaging(conn)
+
+ArrayList<String> arrayServices, arrayVendor
 
 'looping tenant'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
@@ -342,6 +348,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				
 				continue
 			}
+			
+			'call function check saldo setelah setting services'
+			checkSaldo()
 		} 
 		else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 			
@@ -636,7 +645,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			}
 			
 			'fungsi untuk cek apakah tenant yang aktif sesuai dengan tenant yang muncul'
-			checkActiveTenant(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14), conndevUAT)
+			checkActiveTenant(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14), conn)
 			
 //			'penanda apakah service ditagih by price atau quantity'
 //			ArrayList<Integer>isChargedByPrice= new ArrayList<Integer>()
@@ -746,7 +755,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 
 WebUI.closeBrowser()
 
-def checkPaging(Connection connectProd) {
+def checkPaging(Connection conn) {
 	'input nama tenant'
 	WebUI.setText(findTestObject('Tenant/input_NamaTenant'), 'nama tenant')
 
@@ -779,7 +788,7 @@ def checkPaging(Connection connectProd) {
 	int lastPage = elementbutton.size()
 
 	'get data tenant'
-	int resultTotalData = CustomKeywords.'tenant.TenantVerif.getTenantTotal'(connectProd)
+	int resultTotalData = CustomKeywords.'tenant.TenantVerif.getTenantTotal'(conn)
 
 	'get text total data dari ui'
 	Total = WebUI.getText(findTestObject('Tenant/label_TotalData')).split(' ')
@@ -857,10 +866,10 @@ def checkVerifyPaging(Boolean isMatch) {
 	}
 }
 
-def checkActiveTenant(String tenantcode, Connection conndevUAT) {
+def checkActiveTenant(String tenantcode, Connection conn) {
 	
 	'ambil list tenant aktif di DB'
-	ArrayList<String> ActiveTenantfromDB = CustomKeywords.'tenant.TenantVerif.getActiveTenant'(conndevUAT, tenantcode)
+	ArrayList<String> ActiveTenantfromDB = CustomKeywords.'tenant.TenantVerif.getActiveTenant'(conn, tenantcode)
 	
 	'ambil list tenant aktif dari UI'
 	ArrayList<String> ActiveTenantfromUI = []
@@ -904,4 +913,45 @@ def searchTenant() {
 
 	'click button cari'
 	WebUI.click(findTestObject('Tenant/button_Cari'))
+}
+
+def checkSaldo() {
+	'call test case login admin esign'
+	WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'TenantCekServices', ('SheetName') : 'Tenant',
+		('Path') : ExcelPathTenant] , FailureHandling.STOP_ON_FAILURE)
+	
+	'get array service dari excel yang terceklist'
+	ArrayList<String> arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 26).split(';', -1)
+	
+	ArrayList<String> servicesNameActive = [], servicesNameUISaldo = []
+	
+	for (int i = 0 ; i < arrayServices.size ; i++) {
+		
+		println(arrayServices[i])
+		
+		int row = CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, 'Tenant', arrayServices[i])
+		
+		servicesNameActive.add(findTestData(ExcelPathTenant).getValue(2, row))
+	}
+	
+	println(servicesNameActive)
+	
+	'get total tipe saldo'
+	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
+	
+	println(variable.size)
+	
+	for (i = 1 ; i <= variable.size ; i++) {
+		
+		'modify object button services'
+		modifyObjectTipeSaldo = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
+			'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' 
+				+ i) + ']/div/div/div/div/div[1]/span', true)
+		
+		servicesNameUISaldo.add(WebUI.getText(modifyObjectTipeSaldo))
+	}
+	
+	println(servicesNameUISaldo)
+	
+	servicesNameActive.containsAll(servicesNameUISaldo)
 }

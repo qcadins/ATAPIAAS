@@ -58,7 +58,7 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platf
 'check if reason failed tidak present'
 if(WebUI.verifyElementNotPresent(findTestObject('User Management-User/label_TextError'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
 	GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 
 	'Berhasil Login dengan user yang belum aktivasi')
 	
@@ -171,7 +171,7 @@ if(WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgnor
 	if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/User Management-Role/' +
 	'Page_Balance/i_SEDARA MANYURA_ft-menu font-medium-3'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		'gagal login dengan user yang baru terdaftar dan sudah aktivasi')
 
@@ -179,21 +179,9 @@ if(WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgnor
 	}
 } else {
 	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
 	GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 	'gagal mengirimkan ulang email aktivasi')
 	
 	GlobalVariable.FlagFailed = 1
-}
-
-def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
-	if(isMatch == false){
-		GlobalVariable.FlagFailed = 1
-		
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
-		
-	}
 }
