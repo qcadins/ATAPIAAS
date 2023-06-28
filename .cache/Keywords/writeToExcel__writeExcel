@@ -73,7 +73,7 @@
               }
             }
           ],
-          "javadoc": "/**\r\n\t * Write to Excel\r\n\t */"
+          "javadoc": "/**\n\t * Write to Excel\n\t */"
         },
         {
           "name": "writeToExcelNumber",

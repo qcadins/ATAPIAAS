@@ -29,8 +29,7 @@ WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'User', ('S
 	('Path') : ExcelPathUser], FailureHandling.STOP_ON_FAILURE)
 
 'klik pada menu'
-WebUI.click(
-	findTestObject('Object Repository/User Management-Role/Page_Balance/i_SEDARA MANYURA_ft-menu font-medium-3'))
+WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/i_SEDARA MANYURA_ft-menu font-medium-3'))
 
 'pilih submenu manage user'
 WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/a_Manage User'))
@@ -132,14 +131,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				Keys.chord(Keys.ENTER))
 			
 			checkdialogConfirmation(isMandatoryComplete)
-			
-			'aktifkan user yang baru saja didaftarkan di db dev'
-			CustomKeywords.'userManagement.UserVerif.updateIsActiveUser'(conndev,
-				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
-			
-			'aktifkan user yang baru saja didaftarkan di db dev_uat'
-			CustomKeywords.'userManagement.UserVerif.updateIsActiveUser'(conndevUAT,
-				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
 
 		}
 		else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
@@ -363,6 +354,9 @@ def checkdialogConfirmation (int isMandatoryComplete) {
 					WebUI.callTestCase(findTestCase('Test Cases/User Management/UserStoreDB'), [('Path') : ExcelPathUser],
 						 FailureHandling.CONTINUE_ON_FAILURE)
 				}
+				'call testcase user verif'
+				WebUI.callTestCase(findTestCase('User Management/UserVerification'), [('excelPathUser') : 'User Management/DataTestingUser'],
+					FailureHandling.CONTINUE_ON_FAILURE)
 			}
 		}
 		else {

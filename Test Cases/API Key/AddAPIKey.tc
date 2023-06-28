@@ -44,11 +44,11 @@
       <name>TombolYes</name>
    </variable>
    <variable>
-      <defaultValue>findTestObject('API_KEY/Page_Add Api Key/div_Code 1202  Tidak bisa memiliki lebih dari 1 tipe api key yang sama')</defaultValue>
+      <defaultValue>findTestObject('API_KEY/Page_Add Api Key/label_FailedReason')</defaultValue>
       <description></description>
       <id>920090c6-cd2e-466a-bb14-1a8a9c8ed3d1</id>
       <masked>false</masked>
-      <name>ButtonGagalEditTenant</name>
+      <name>FailedReason</name>
    </variable>
    <variable>
       <defaultValue>findTestObject('API_KEY/Page_Add Api Key/button_OK')</defaultValue>

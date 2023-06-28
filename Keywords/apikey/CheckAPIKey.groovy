@@ -48,11 +48,11 @@ public class CheckAPIKey {
 		String optionLabel
 
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'))
-		
+
 		optionLabel = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), 'aria-activedescendant')
 
 		println(optionLabel)
-		
+
 		'kumpulan string yang menyimpan hasil text dari User Interface APIAAS'
 		ArrayList hasilgetText = []
 
@@ -108,6 +108,29 @@ public class CheckAPIKey {
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery("SELECT CONCAT(COUNT(api_key_name), ' total') AS total_count FROM ms_api_key mak LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mak.id_ms_tenant WHERE email_reminder_dest = '" + email + "'")
+		ResultSetMetaData metadata  = resultSet.getMetaData()
+
+		columnCount = metadata.getColumnCount()
+
+		while(resultSet.next()) {
+			for(int i=1; i<=columnCount ; i++) {
+				data = resultSet.getObject(i)
+				listdata.add(data)
+			}
+		}
+		listdata
+	}
+	
+	@Keyword
+	getTenantCodeName(Connection conn, String email) {
+		String data
+
+		ArrayList listdata = []
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("select tenant_code, tenant_name from am_msuser amu join ms_useroftenant muot on amu.id_ms_user = muot.id_ms_user join ms_tenant mt on mt.id_ms_tenant = muot.id_ms_tenant join ms_api_key amk on amk.id_ms_tenant = mt.id_ms_tenant where login_id = '"+ email +"'")
+
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()

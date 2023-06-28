@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>UserVerification</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>c38fe701-d8fa-4ced-9935-b3a37355e94b</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>84c8f0f2-06ce-4759-9fcb-bc43caf216ef</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'User Management/DataTestingUser'</defaultValue>
+      <description></description>
+      <id>84c8f0f2-06ce-4759-9fcb-bc43caf216ef</id>
+      <masked>false</masked>
+      <name>excelPathUser</name>
+   </variable>
+</TestCaseEntity>
