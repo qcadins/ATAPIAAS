@@ -7,14 +7,18 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//a[3]/em</value>
+         <value>//a[4]/em</value>
       </entry>
       <entry>
          <key>CSS</key>
          <value>em.align-middle.cursor-pointer.font-medium-3.ft-file-text</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@class = 'align-middle cursor-pointer font-medium-3 ft-upload']</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,23 +26,23 @@
       <name>tag</name>
       <type>Main</type>
       <value>em</value>
-      <webElementGuid>c7918a08-f1d3-4e30-95c6-ac14adaea83b</webElementGuid>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>class</name>
-      <type>Main</type>
-      <value>align-middle cursor-pointer font-medium-3 ft-file-text</value>
-      <webElementGuid>7eefda82-314f-42f2-a2ec-f8a13a07e301</webElementGuid>
+      <webElementGuid>09b32258-0bd3-4d33-801e-d081e2dc2fba</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>align-middle cursor-pointer font-medium-3 ft-upload</value>
+      <webElementGuid>d29216d9-1f62-4075-996a-ad31d09c338b</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done page-scrolled&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[@class=&quot;content-wrapper&quot;]/app-list-transaction-history[@class=&quot;ng-star-inserted&quot;]/app-msx-paging[1]/app-msx-datatable[@class=&quot;ng-star-inserted&quot;]/section[@class=&quot;msx-datatable&quot;]/ngx-datatable[@class=&quot;ngx-datatable material bootstrap fixed-header virtualized selectable checkbox-selection&quot;]/div[@class=&quot;visible&quot;]/datatable-body[@class=&quot;datatable-body&quot;]/datatable-selection[1]/datatable-scroller[@class=&quot;datatable-scroll ng-star-inserted&quot;]/datatable-row-wrapper[@class=&quot;datatable-row-wrapper ng-star-inserted&quot;]/datatable-body-row[@class=&quot;datatable-body-row datatable-row-even ng-star-inserted&quot;]/div[@class=&quot;datatable-row-center datatable-row-group ng-star-inserted&quot;]/datatable-body-cell[@class=&quot;datatable-body-cell sort-active ng-star-inserted&quot;]/div[@class=&quot;datatable-body-cell-label&quot;]/a[@class=&quot;mr-2 text-primary ng-star-inserted&quot;]/em[@class=&quot;align-middle cursor-pointer font-medium-3 ft-file-text&quot;]</value>
-      <webElementGuid>40bfd316-cd44-4828-bea0-176c15a9d0fd</webElementGuid>
+      <webElementGuid>c29be18f-d43e-43cc-ae5d-a1413582c02c</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -46,6 +50,6 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//a[3]/em</value>
-      <webElementGuid>eedb3e1c-c595-4aa4-82b2-f64a22b8186d</webElementGuid>
+      <webElementGuid>e066edf3-1429-4302-b496-bb37fb29966e</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

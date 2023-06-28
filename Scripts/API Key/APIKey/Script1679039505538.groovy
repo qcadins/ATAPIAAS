@@ -204,13 +204,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'), 
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
 		}
-		'panggil fungsi download dokumentasi'
-		if(downloadDocs == 'Yes'){
-			
-			'panggil fungsi download dokumentasi API'
-			WebUI.callTestCase(findTestCase('Test Cases/Dokumentasi API/DocumentationAPI'), 
-				[:], FailureHandling.CONTINUE_ON_FAILURE)
-		}
 		'kondisi jika tidak ada error'
 		if(GlobalVariable.FlagFailed == 0){
 			
