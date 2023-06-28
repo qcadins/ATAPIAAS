@@ -281,18 +281,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					GlobalVariable.FailedReasonUnknown)
 		}
 			
-	//	}
-	//	//kondisi dibawah jika button tidak clickable
-	//	else
-	//	{
-	//		'penanda ada error, status sukses tidak akan ditulis'
-	//		GlobalVariable.FlagFailed = 1
-	//		
-	//		'tulis status dan reason error ke excel'
-	//		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-	//		(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.StatusFailedReasonSubmitError)
-	//		
-	//	}
+//		}
+//		//kondisi dibawah jika button tidak clickable
+//		else
+//		{
+//			'penanda ada error, status sukses tidak akan ditulis'
+//			GlobalVariable.FlagFailed = 1
+//			
+//			'tulis status dan reason error ke excel'
+//			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+//			(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.StatusFailedReasonSubmitError)
+//			
+//		}
 		if (GlobalVariable.FlagFailed == 0) {
 			
 			'tulis status sukses pada excel'

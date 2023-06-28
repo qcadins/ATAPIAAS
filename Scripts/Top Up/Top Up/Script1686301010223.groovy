@@ -104,6 +104,30 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'klik pada tambah layanan'
 		WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/a_Tambah'))
 		
+		'jika muncul notifikasi'
+		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Top Up/NotifCatch'),
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+			
+			'ambil teks notifikasi'
+			String hasilNotif = WebUI.getText(findTestObject('Object Repository/Top Up/NotifCatch'))
+			
+			'klik tombol ok'
+			WebUI.click(findTestObject('Object Repository/Top Up/button_OK'))
+			
+			'jika hasil notifikasi tidak sama dengan sukses'
+			if (hasilNotif != 'Success') {
+								
+				'tulis error sesuai reason yang ditampilkan oleh error message'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+						hasilNotif)
+				
+				WebUI.refresh()
+				
+				continue
+			}
+		}
+		
 		'cek ddl activesaldo sesuai dengan DB'
 		checkddlActiveSaldo(conndevUAT, findTestData(ExcelPathTopUp).getValue(2, 19))
 		
@@ -277,8 +301,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 							GlobalVariable.FailedReasonMinimumPayment)
 					
-					continue
+					WebUI.refresh()
 					
+					continue
 				}
 			}
 			else {
@@ -286,7 +311,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				'tulis error sesuai reason yang ditampilkan oleh error message'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-						statusUI)
+						WebUI.getText(findTestObject('Object Repository/Top Up/DiskonUI')))
+				
+				WebUI.refresh()
 				
 				continue
 			}
@@ -303,6 +330,42 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 			'klik pada tombol next'
 			WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/button_Next'))
+			
+			'verify ada nya error'
+			if (WebUI.verifyElementPresent(findTestObject('Object Repository/Top Up/ErrorCatch'),
+				GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+			
+				'tulis error sesuai reason yang ditampilkan oleh error message'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+						WebUI.getText(findTestObject('Object Repository/Top Up/ErrorCatch')))
+				
+				WebUI.refresh()
+			
+				continue
+			}
+			else if (WebUI.verifyElementPresent(findTestObject('Object Repository/Top Up/NotifCatch'),
+				GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+				
+				'ambil teks notifikasi'
+				String hasilNotif = WebUI.getText(findTestObject('Object Repository/Top Up/NotifCatch'))
+				
+				'klik tombol ok'
+				WebUI.click(findTestObject('Object Repository/Top Up/button_OK'))
+				
+				'jika hasil notifikasi tidak sama dengan sukses'
+				if (hasilNotif != 'Success') {
+									
+					'tulis error sesuai reason yang ditampilkan oleh error message'
+					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+							hasilNotif)
+					
+					WebUI.refresh()
+					
+					continue
+				}
+			}
 			
 			'ambil data nomor transaksi'
 			String noTrx = WebUI.getText(findTestObject('Object Repository/Top Up/Page_Topup Balance/noTrxReceipt'),

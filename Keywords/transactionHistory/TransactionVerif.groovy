@@ -105,7 +105,7 @@ public class TransactionVerif {
 		}
 		data
 	}
-	
+
 	@Keyword
 	getRiwayatDetail(Connection conn, String noTrx) {
 
@@ -126,15 +126,15 @@ public class TransactionVerif {
 		}
 		listdata
 	}
-	
+
 	@Keyword
-	getNPWPnumUser(Connection conn, String email) {
+	getNPWPnumUser(Connection conn, String tenant) {
 
 		String data
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT npwp_no FROM am_msuser amu LEFT JOIN ms_useroftenant mot ON mot.id_ms_user = amu.id_ms_user LEFT JOIN ms_tenant mt ON mot.id_ms_tenant = mt.id_ms_tenant WHERE login_id = '" + email + "'")
+		ResultSet resultSet = stm.executeQuery("SELECT npwp_no FROM am_msuser amu LEFT JOIN ms_useroftenant mot ON mot.id_ms_user = amu.id_ms_user LEFT JOIN ms_tenant mt ON mot.id_ms_tenant = mt.id_ms_tenant WHERE tenant_name = '" + tenant + "' LIMIT 1")
 
 		while (resultSet.next()) {
 
@@ -142,7 +142,7 @@ public class TransactionVerif {
 		}
 		data
 	}
-	
+
 	@Keyword
 	getServiceCheck(Connection conn, String noTrx) {
 
@@ -162,5 +162,21 @@ public class TransactionVerif {
 			}
 		}
 		listdata
+	}
+	
+	@Keyword
+	getstatusafterConfirmOrReject(Connection conn, String noTrx) {
+
+		String data
+
+		Statement stm = conn.createStatement()
+
+		ResultSet resultSet = stm.executeQuery("SELECT CASE WHEN status = 0 THEN 'Menunggu Pembyaran' WHEN status = 1 THEN 'Menunggu Verifikasi Pembayaran' WHEN status = 2 THEN 'Transaksi Kadaluarsa' WHEN status = 3 THEN 'Pembayaran Berhasil' WHEN status = 4 THEN 'Pembayaran Ditolak' END FROM tr_topup_order_h WHERE topup_order_number = '" + noTrx + "'")
+
+		while (resultSet.next()) {
+
+			data = resultSet.getObject(1);
+		}
+		data
 	}
 }

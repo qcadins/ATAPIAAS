@@ -10,15 +10,15 @@
          <value>//*[@class = 'wrapper-2']/div</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@class = 'wrapper-5']</value>
-      </entry>
-      <entry>
          <key>CSS</key>
          <value>div.wrapper-2 > div</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[(contains(text(), 'Nomor Transaksi Anda : ') or contains(., 'Nomor Transaksi Anda : ')) and @class = 'wrapper-2']</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -26,15 +26,15 @@
       <name>tag</name>
       <type>Main</type>
       <value>div</value>
-      <webElementGuid>0d676004-eac1-4b20-8917-568e7c4be43d</webElementGuid>
+      <webElementGuid>335c5fda-06fc-4926-8d6c-d8296f3af359</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>contains</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value>Nomor Transaksi Anda : </value>
-      <webElementGuid>524ac1eb-be87-416c-9cb4-5df3c4d55a61</webElementGuid>
+      <webElementGuid>ae0e048e-741e-444e-b438-646000908e2e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -42,15 +42,15 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done page-scrolled navbar-scrolled modal-open&quot;]/ngb-modal-window[@class=&quot;d-block modal fade show&quot;]/div[@class=&quot;modal-dialog modal-lg&quot;]/div[@class=&quot;modal-content&quot;]/app-payment-instruction[1]/div[@class=&quot;col-12&quot;]/div[@class=&quot;modal-body&quot;]/div[@class=&quot;wrapper-2&quot;]/div[1]</value>
-      <webElementGuid>8a043bac-fd6e-4aea-8c9d-a2975ecb068d</webElementGuid>
+      <webElementGuid>0fb0f794-f41e-4e0f-8f09-ff2a84de0684</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
-      <value>wrapper-5</value>
-      <webElementGuid>10393907-51bd-48eb-906d-5c0d1f5eb5f5</webElementGuid>
+      <value>wrapper-2</value>
+      <webElementGuid>77fe7e7d-8311-41ba-9e7f-a677f1d3c450</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -58,7 +58,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='*sudah termasuk PPN 11%'])[1]/following::div[2]</value>
-      <webElementGuid>9cbdc882-faf8-47b0-bdf9-20bb737f8377</webElementGuid>
+      <webElementGuid>5aecf40e-69e6-483a-bb2f-291d1cd5b609</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -66,7 +66,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Rp. 1.665'])[1]/following::div[3]</value>
-      <webElementGuid>a0f86ed6-c077-401c-8f53-b21c4f7d9f1f</webElementGuid>
+      <webElementGuid>4b3bd119-afaa-4751-a0a1-3450f4b8580e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -74,7 +74,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Permintaan top up saldo Anda berhasil diproses. Harap segera lakukan melalui transfer ke'])[1]/preceding::div[1]</value>
-      <webElementGuid>beb407b8-bddc-423a-9dd4-5579b8c756df</webElementGuid>
+      <webElementGuid>c2fd81e1-a166-40d5-b43c-f03c7a1cbece</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -82,7 +82,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='ABC'])[1]/preceding::div[3]</value>
-      <webElementGuid>ae0a3a71-bcfd-4b94-a93e-91ddb4742f4c</webElementGuid>
+      <webElementGuid>220598bc-616c-4ea1-8384-c6cb4615822b</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -90,7 +90,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='Nomor Transaksi Anda : EENDIGO/23/06/00055']/parent::*</value>
-      <webElementGuid>37fc5e54-7257-4bc8-9c49-e5d800607106</webElementGuid>
+      <webElementGuid>5e136c9e-b306-4cd3-add0-df2b474c5ef8</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -98,7 +98,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div/div[2]/div[2]/div</value>
-      <webElementGuid>8ecf4af2-2f11-4333-b78d-f350a64e92d4</webElementGuid>
+      <webElementGuid>7307e181-d89e-4544-8f4c-3393b073f33e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -106,6 +106,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//div[(text() = 'Nomor Transaksi Anda : EENDIGO/23/06/00055' or . = 'Nomor Transaksi Anda : EENDIGO/23/06/00055')]</value>
-      <webElementGuid>a729c9f3-9fb6-4610-800b-8067c703c922</webElementGuid>
+      <webElementGuid>6d91b0fa-bf4b-4c5d-be05-e8532bd961d7</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

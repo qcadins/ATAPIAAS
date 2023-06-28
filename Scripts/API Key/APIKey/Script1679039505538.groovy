@@ -1,7 +1,6 @@
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
-import java.sql.Connection
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
@@ -219,6 +218,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'), 
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
 		}
+
 		
 		'kondisi jika tidak ada error'
 		if(GlobalVariable.FlagFailed == 0){

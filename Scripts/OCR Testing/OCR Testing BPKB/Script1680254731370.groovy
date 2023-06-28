@@ -401,7 +401,7 @@ def getTrxNumber() {
 	}
 	
 	'kembalikan nomor transaksi'
-	return no_Trx
+	return noTrx
 }
 
 'fungsi untuk filter saldo berdasarkan input user'

@@ -9,13 +9,13 @@ import java.sql.Connection
 Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
 'ambil data coupon dari db'
-ArrayList<String> resultDB = CustomKeywords.'topup.TopupVerif.getStoreDBTopup1'(conndev, noTrx)
+ArrayList resultDB = CustomKeywords.'topup.TopupVerif.getStoreDBTopup1'(conndev, NoTrx)
 
 'tambah data dari query lain ke arraylist yang sudah ada'
-resultDB.addAll(CustomKeywords.'topup.TopupVerif.getStoreDBTopup2'(conndev, noTrx))
+resultDB.addAll(CustomKeywords.'topup.TopupVerif.getStoreDBTopup2'(conndev, NoTrx))
 	
 'ambil data coupon dari excel'
-ArrayList<String> resultExcel = []
+ArrayList resultExcel = []
 	
 'cek data untuk tiap alamat di array'
 for (int i = 0; i < resultDB.size ; i++) {
@@ -30,7 +30,7 @@ if(!resultExcel.containsAll(resultDB)) {
 	GlobalVariable.FlagFailed = 1
 		
 	'tulis adanya error pada proses storeDB'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			GlobalVariable.FailedReasonStoreDB)
 }
