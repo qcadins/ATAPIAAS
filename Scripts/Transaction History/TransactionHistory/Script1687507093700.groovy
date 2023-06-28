@@ -194,12 +194,32 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				'klik simpan'
 				WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/buttonSimpan_upload'))
 				
-				'verify layanan detail transaksi ui = db'
-				checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/div_Success_upload')), 
-					'Success', false, FailureHandling.CONTINUE_ON_FAILURE), 'Upload Gagal')
+				if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/div_Success_upload'),
+					GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 				
-				'klik ok pada popup'
-				WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/button_OK_upload'))
+					'verify layanan detail transaksi ui = db'
+					checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/div_Success_upload')),
+						'Success', false, FailureHandling.CONTINUE_ON_FAILURE), 'Upload Gagal')
+				
+					'klik ok pada popup'
+					WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/button_OK_upload'))
+					
+				}
+				else if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/ErrorTopRight'),
+					GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+					
+					'ambil error dan get text dari error tersebut'
+					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) +
+							';') + WebUI.getText(findTestObject('Object Repository/TransactionHistory/ErrorTopRight')))
+					
+					'klik batal'
+					WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/buttonBatal_upload'))
+					
+					continue
+	
+				}
 				
 				'cek apakah kondisi cek storeDB aktif'
 				if (GlobalVariable.KondisiCekDB == 'Yes') {
