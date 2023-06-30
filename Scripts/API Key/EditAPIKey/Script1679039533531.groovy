@@ -27,24 +27,8 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/em_Aksi_
 'klik tombol batal'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Batal'))
 
-'input tipe API'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
-		ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12))
-
-'select tipe API'
-WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(
-		Keys.ENTER))
-
-'input status API'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
-		ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
-
-'select status API'
-WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(
-		Keys.ENTER))
-
-'klik pada button cari'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
+'search api yang mau di edit'
+searchAPIKEY(13)
 
 'klik pada tombol edit API'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/em_Aksi_align-middle cursor-pointer font-me_8c8f9d'))
@@ -63,7 +47,7 @@ WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input_
 	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11))
 
 'pilih status active'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
+WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 14))
 
 'select status active'
 WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), Keys.chord(
@@ -111,11 +95,53 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Ed
 		WebUI.callTestCase(findTestCase('Test Cases/API Key/EditKeyStoreDBVerif'), [:],
 			FailureHandling.STOP_ON_FAILURE)
 	}
-}
+	
+	'search api key yang sudah di edit'
+	searchAPIKEY(14)
+	
+	'verify nama api key'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_NamaAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama api key')
+
+	'verify nama tipe api key'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_TipeAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12), false, FailureHandling.CONTINUE_ON_FAILURE), ' tipe api key')
+	
 //kondisi untuk tombol ok jika edit error
-else if(WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_gagal'), 
+}else if(WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_gagal'), 
 			GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)){
 		
 	'klik tombol ok'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_gagal'))
+}
+
+'fungsi untuk melakukan pengecekan '
+def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
+	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+			(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
+
+		GlobalVariable.FlagFailed = 1
+	}
+}
+
+def searchAPIKEY(int row) {
+	'input tipe API'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
+			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12))
+	
+	'select tipe API'
+	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(
+			Keys.ENTER))
+	
+	'input status API'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
+			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, row))
+	
+	'select status API'
+	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(
+			Keys.ENTER))
+	
+	'klik pada button cari'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
 }

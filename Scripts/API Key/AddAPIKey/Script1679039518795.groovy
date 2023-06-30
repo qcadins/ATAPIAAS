@@ -53,6 +53,12 @@ if (WebUI.verifyElementPresent(TombolYes, GlobalVariable.Timeout, FailureHandlin
 'get failed reason'
 reason = WebUI.getText(FailedReason)
 
+'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
+if (WebUI.verifyElementPresent(ButtonOK, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+	'klik tombol ok pada success alert'
+	WebUI.click(ButtonOK)
+}
+
 if (reason == 'Success') {
 	'cek ke DB jika memang diperlukan'
 	if (GlobalVariable.KondisiCekDB == 'Yes') {
@@ -69,6 +75,15 @@ if (reason == 'Success') {
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning,
 			(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonUnknown)
 	}
+	
+	searchAPIKEY()
+	
+	'verify nama api key'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_NamaAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama api key')
+
+	'verify nama tipe api key'
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_TipeAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12), false, FailureHandling.CONTINUE_ON_FAILURE), ' tipe api key')
+
 } else {
 	'get failed reason'
 	reason = WebUI.getText(FailedReason)
@@ -80,15 +95,41 @@ if (reason == 'Success') {
 	GlobalVariable.FlagFailed = 1
 }
 
-//WebUI.delay(GlobalVariable.Timeout)
+//'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
+//if (WebUI.verifyElementPresent(ButtonOK, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+//    'klik tombol ok pada success alert'
+//    WebUI.click(ButtonOK)
+//}
 
-//'jika button ok muncul, tulis ke excel tidak gagal'
-//CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_OK'), 
-//    GlobalVariable.NumOfColumn, 'API KEY')
+'fungsi untuk melakukan pengecekan '
+def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
+	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+			(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 
-'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
-if (WebUI.verifyElementPresent(ButtonOK, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-    'klik tombol ok pada success alert'
-    WebUI.click(ButtonOK)
+		GlobalVariable.FlagFailed = 1
+	}
 }
 
+def searchAPIKEY() {
+	'input tipe API'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
+			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12))
+	
+	'select tipe API'
+	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(
+			Keys.ENTER))
+	
+	'input status API'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
+			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
+	
+	'select status API'
+	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(
+			Keys.ENTER))
+	
+	'klik pada button cari'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
+}

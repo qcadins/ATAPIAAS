@@ -180,8 +180,11 @@ else if (TC == 'Key') {
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
 		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
 	
+	'klik pada button login'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'button_Lanjutkan Perjalanan Anda'))
 }
-else if (TC == 'OCR') {	
+else if (TC == 'OCR') {
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
@@ -307,9 +310,9 @@ else if (TC == 'Role') {
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'button_Lanjutkan Perjalanan Anda'))
 	
-	'klik pada bagian admin client'
-	WebUI.click(findTestObject('Object Repository/User Management-Role/'+
-		'Page_Login - eendigo Platform/i_Admin Client_ft-edit'))
+//	'klik pada bagian admin client'
+//	WebUI.click(findTestObject('Object Repository/User Management-Role/'+
+//		'Page_Login - eendigo Platform/i_Admin Client_ft-edit'))
 }
 else if (TC == 'User') {
 	

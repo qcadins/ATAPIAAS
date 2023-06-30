@@ -120,7 +120,7 @@ public class CheckAPIKey {
 		}
 		listdata
 	}
-	
+
 	@Keyword
 	getTenantCodeName(Connection conn, String email) {
 		String data

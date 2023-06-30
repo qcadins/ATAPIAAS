@@ -7,25 +7,25 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[24]/div/button[1]</value>
+         <value>//*[(text() = 'Batal' or . = 'Batal')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
       <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[24]/div/button[1]</value>
-      <webElementGuid>f61198a8-cb57-426f-b909-b9848f7ecf37</webElementGuid>
+      <webElementGuid>cfcc0f1b-195b-4ce9-9cca-651893c034a0</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
-      <value>Cancel</value>
-      <webElementGuid>3ed44f4f-9f86-48f3-b7e5-89c38a2707e4</webElementGuid>
+      <value>Batal</value>
+      <webElementGuid>3ed803bd-a116-4d30-bdd4-3ddc461465f4</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

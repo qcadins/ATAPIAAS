@@ -7,17 +7,25 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[31]/div/button[1]</value>
+         <value>//*[(text() = 'Batal' or . = 'Batal')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
       <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[31]/div/button[1]</value>
-      <webElementGuid>13900607-e48b-47da-94fd-6adc75b36582</webElementGuid>
+      <webElementGuid>7b8f5d3f-4633-4dbe-a3fd-2cc2511e73fe</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Batal</value>
+      <webElementGuid>a8dc0cd9-cf9a-4b69-b762-90770822248d</webElementGuid>
    </webElementProperties>
 </WebElementEntity>
