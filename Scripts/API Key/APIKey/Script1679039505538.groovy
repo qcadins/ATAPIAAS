@@ -153,13 +153,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.NumOfColumn, 'API KEY')
 		}
 		
-//		'cek ke DB jika memang diperlukan'
-//		if(GlobalVariable.KondisiCekDB == 'Yes'){
-//			
-//			'verifikasi jumlah baris di DB dan di WEB'
-//			WebUI.callTestCase(findTestCase('Test Cases/API Key/VerifyTotalAPIList'), 
-//				[:], FailureHandling.CONTINUE_ON_FAILURE)
-//		}
+		'cek ke DB jika memang diperlukan'
+		if(GlobalVariable.KondisiCekDB == 'Yes'){
+			
+			'verifikasi jumlah baris di DB dan di WEB'
+			WebUI.callTestCase(findTestCase('Test Cases/API Key/VerifyTotalAPIList'), 
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
+		}
 		
 		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Api Key List/'+
 			'isPagingEnabled'), FailureHandling.OPTIONAL)  == true){

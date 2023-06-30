@@ -107,7 +107,7 @@ public class CheckAPIKey {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT CONCAT(COUNT(api_key_name), ' total') AS total_count FROM ms_api_key mak LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mak.id_ms_tenant WHERE email_reminder_dest = '" + email + "'")
+		ResultSet resultSet = stm.executeQuery("SELECT CONCAT(COUNT(api_key_name), ' total') FROM ms_api_key mak LEFT JOIN am_msuser ams ON ams.login_id = mak.usr_crt WHERE login_id = '" + email + "'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
