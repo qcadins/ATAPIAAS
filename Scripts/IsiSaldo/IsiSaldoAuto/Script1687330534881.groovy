@@ -22,11 +22,15 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPa
 'mendapat jumlah kolom dari sheet Isi Saldo'
 int countColumnEdit = findTestData(ExcelPath).getColumnNumbers()
 
-'deklarasi variabel untuk konek ke Database eendigo_dev'
-Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection conn
 
-'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+if(GlobalVariable.SettingEnvi == 'Production') {
+	'deklarasi koneksi ke Database eendigo_dev'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+} else if(GlobalVariable.SettingEnvi == 'Trial') {
+	'deklarasi koneksi ke Database eendigo_dev_uat'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+}
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'IsiSaldoAuto', ('SheetName') : sheet, ('Path') : ExcelPath], 
@@ -152,10 +156,10 @@ if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page
 'jika perlu cek ke DB'
 if (GlobalVariable.KondisiCekDB == 'Yes') {
 	'ambil nomor transaksi terbaru dari DB'
-	noTrxfromDB = CustomKeywords.'apikey.CheckSaldoAPI.getLatestMutation'(conndevUAT, tenantcode)
+	noTrxfromDB = CustomKeywords.'apikey.CheckSaldoAPI.getLatestMutation'(conn, tenantcode)
 			
 	'ambil nomor transaksi terbaru tenant lain'
-	noTrxOtherTenant = CustomKeywords.'apikey.CheckSaldoAPI.getLatestMutationOtherTenant'(conndevUAT, tenantcode)
+	noTrxOtherTenant = CustomKeywords.'apikey.CheckSaldoAPI.getLatestMutationOtherTenant'(conn, tenantcode)
 			
 	println(tenantcode)
 	
@@ -170,7 +174,7 @@ if (GlobalVariable.KondisiCekDB == 'Yes') {
 //		TopupSaldoCorrectTenant = 0
 //	} else {
 //		'jika ada konten pada tabel yang tidak sesuai dengan DB'
-//		if (verifyTableContent(conndevUAT, tenantcode) == 0) {
+//		if (verifyTableContent(conn, tenantcode) == 0) {
 //			'topup dianggap gagal'
 //			TopupSaldoCorrectTenant = 0
 //		}

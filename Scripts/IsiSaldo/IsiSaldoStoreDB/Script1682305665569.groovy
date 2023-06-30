@@ -11,11 +11,18 @@ import java.sql.Connection
 'get current date'
 def currentDate = new Date().format('yyyy-MM-dd')
 
-'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+Connection conn
+
+if(GlobalVariable.SettingEnvi == 'Production') {
+	'deklarasi koneksi ke Database eendigo_dev'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+} else if(GlobalVariable.SettingEnvi == 'Trial') {
+	'deklarasi koneksi ke Database eendigo_dev_uat'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+}
 
 'get data balance mutation dari DB'
-ArrayList<String> result = CustomKeywords.'apikey.CheckSaldoAPI.getIsiSaldoStoreDB'(conndevUAT, tenant)
+ArrayList<String> result = CustomKeywords.'apikey.CheckSaldoAPI.getIsiSaldoStoreDB'(conn, tenant)
 
 'declare arraylist arraymatch'
 ArrayList<String> arrayMatch = []
