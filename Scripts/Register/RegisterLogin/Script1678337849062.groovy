@@ -6,9 +6,15 @@ import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import internal.GlobalVariable as GlobalVariable
-import org.openqa.selenium.Keys as Keys
+import internal.GlobalVariable
+
+import org.openqa.selenium.By
+import org.openqa.selenium.JavascriptExecutor
+import org.openqa.selenium.Keys
+import org.openqa.selenium.WebElement
+
 import java.sql.Connection
 
 'siapkan koneksi ke db eendigo'
@@ -63,162 +69,174 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC'):'Regist', ('SheetName') : 'Register', 
 			('Path') : ExcelPathRegisterLogin], FailureHandling.STOP_ON_FAILURE)
 		
+		if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 21) == 'Yes' && isMandatoryComplete == 0) {
+				def driver = DriverFactory.getWebDriver()
+				def js = (JavascriptExecutor)driver
+				
+				'bypass captcha langsung masuk verifikasi otp'
+				WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
+				js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister)
+		}
+		
 		'cek apakah button register bisa di klik'
 		CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatusbtnClickable'(isMandatoryComplete, 
-			findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-				'button_Buat Akun Anda Sekarang'), GlobalVariable.NumOfColumn, 'Register')
-		
-		'pencet enter'
-		WebUI.sendKeys(findTestObject('Object Repository/RegisterLogin/'+
-			'Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'), Keys.chord(Keys.ENTER))
-		
-		WebUI.delay(5)
-		
-		'mengambil otp dari db, disimpan ke iniotp'
-		ArrayList<String> iniotp = []
-
-		OTP = CustomKeywords.'otp.GetOTPfromDB.getOTPforRegister'(conn, email)
-		
-		iniotp.add(OTP)
-		
-		'cek apakah field untuk input otp muncul'
-		CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, 
-			findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), 
-				GlobalVariable.NumOfColumn, 'Register')
-		
-		if (autofillOTP == 'Yes') {
+				findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'), GlobalVariable.NumOfColumn, 'Register')
 			
-			'input otp dari DB'
-			WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
-				'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), iniotp[0])
-			
-			if (resendotp == 'Yes') {
+		if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+			'pencet enter'
+			WebUI.sendKeys(findTestObject('Object Repository/RegisterLogin/'+
+					'Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'), Keys.chord(Keys.ENTER))
 				
-				for (int i=0; i < countresend; i++) {
-					
-					'tunggu button resend otp'
-					WebUI.delay(116)
-					
-					'klik pada button kirim ulang otp'
-					WebUI.click(findTestObject('Object Repository/RegisterLogin/'+
-						'Page_Login - eendigo Platform/a_Kirim kode lagi'))
-					
-					WebUI.delay(5)
-					
-					OTP = CustomKeywords.'otp.GetOTPfromDB.getOTPforRegister'(conn, email)
-					
-					'mengambil otp dari db, disimpan ke iniotp'
-					iniotp.add(OTP)
-					
-					println(iniotp)
-					
-					if (!WebUI.verifyNotMatch(iniotp[i], iniotp[i+1], false, FailureHandling.CONTINUE_ON_FAILURE)) {
-						
-						GlobalVariable.FlagFailed = 1
-						
-						'tulis gagal resend otp ke excel'
-						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
-							GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-								GlobalVariable.FailedReasonOTP)
-					}
-					
-					'input otp lama dari DB'
-					WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
-						'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), iniotp[i])
-					
-					'klik pada button verifikasi otp'
-					WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Verifikasi'))
-					
-					if(WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/'+
-						'Page_Login - eendigo Platform/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)){
-						
-						'klik ok pada verifikasi alert'
-						WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'))
-						
-						'input otp baru dari DB'
-						WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
-							'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), iniotp[i+1])
-					} else {
-						'verifikasi adanya alert otp'
-						CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
-						findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'),
-							GlobalVariable.NumOfColumn, 'Register')
-					}
-				}
-			}
-			'klik pada button verifikasi otp'
-			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Verifikasi'))
+			WebUI.delay(5)
+		
+			'mengambil otp dari db, disimpan ke iniotp'
+			ArrayList<String> iniotp = []
+	
+			OTP = CustomKeywords.'otp.GetOTPfromDB.getOTPforRegister'(conn, email)
 			
-			WebUI.delay(2)
+			iniotp.add(OTP)
 			
-			'verifikasi adanya sukses isi otp'
+			'cek apakah field untuk input otp muncul'
 			CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, 
-				findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Verifikasi OTP Email berhasil'), 
+				findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), 
 					GlobalVariable.NumOfColumn, 'Register')
-		}
-		else {
 			
-			'input otp dari excel'
-			WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
-				'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), otpmanual[0])
-			
-			if(resendotp == 'Yes')
-				{
-					for(int i=0; i < countresend; i++)
-					{
+			if (autofillOTP == 'Yes') {
+				
+				'input otp dari DB'
+				WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
+					'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), iniotp[0])
+				
+				if (resendotp == 'Yes') {
+					
+					for (int i=0; i < countresend; i++) {
+						
 						'tunggu button resend otp'
 						WebUI.delay(116)
 						
 						'klik pada button kirim ulang otp'
-						WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/a_Kirim kode lagi'))
+						WebUI.click(findTestObject('Object Repository/RegisterLogin/'+
+							'Page_Login - eendigo Platform/a_Kirim kode lagi'))
 						
-						WebUI.delay(2)
+						WebUI.delay(5)
+						
+						OTP = CustomKeywords.'otp.GetOTPfromDB.getOTPforRegister'(conn, email)
 						
 						'mengambil otp dari db, disimpan ke iniotp'
-						iniotp = CustomKeywords.'otp.GetOTPfromDB.getOTPforRegister'(conn, email)
+						iniotp.add(OTP)
 						
-						if (WebUI.verifyMatch(iniotp[i], otpmanual[0], false, FailureHandling.CONTINUE_ON_FAILURE)) {
+						println(iniotp)
+						
+						if (!WebUI.verifyNotMatch(iniotp[i], iniotp[i+1], false, FailureHandling.CONTINUE_ON_FAILURE)) {
 							
 							GlobalVariable.FlagFailed = 1
-								
+							
 							'tulis gagal resend otp ke excel'
 							CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 								GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 									GlobalVariable.FailedReasonOTP)
 						}
 						
-						'input otp dari DB'
+						'input otp lama dari DB'
 						WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
-							'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), otpmanual[0])
+							'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), iniotp[i])
+						
+						'klik pada button verifikasi otp'
+						WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Verifikasi'))
+						
+						if(WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/'+
+							'Page_Login - eendigo Platform/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)){
+							
+							'klik ok pada verifikasi alert'
+							WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'))
+							
+							'input otp baru dari DB'
+							WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
+								'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), iniotp[i+1])
+						} else {
+							'verifikasi adanya alert otp'
+							CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
+							findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'),
+								GlobalVariable.NumOfColumn, 'Register')
+						}
 					}
 				}
-				
 				'klik pada button verifikasi otp'
-				WebUI.click(findTestObject('Object Repository/RegisterLogin/'+
-					'Page_Login - eendigo Platform/button_Verifikasi'))
+				WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Verifikasi'))
 				
 				WebUI.delay(2)
 				
-				if(WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/'+
-					'Page_Login - eendigo Platform/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)){
-				
-					'verifikasi adanya alert otp'
-					CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
-					findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'),
+				'verifikasi adanya sukses isi otp'
+				CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, 
+					findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Verifikasi OTP Email berhasil'), 
 						GlobalVariable.NumOfColumn, 'Register')
-					
-					'klik ok pada verifikasi alert'
-					WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'))
-				}
+			}
+			else {
+				
+				'input otp dari excel'
+				WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
+					'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), otpmanual[0])
+				
+				if(resendotp == 'Yes')
+					{
+						for(int i=0; i < countresend; i++)
+						{
+							'tunggu button resend otp'
+							WebUI.delay(116)
 							
-				'klik tombol x pada verifikasi'
-				WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/span_'))
-	
+							'klik pada button kirim ulang otp'
+							WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/a_Kirim kode lagi'))
+							
+							WebUI.delay(2)
+							
+							OTP = CustomKeywords.'otp.GetOTPfromDB.getOTPforRegister'(conn, email)
+							
+							'mengambil otp dari db, disimpan ke iniotp'
+							iniotp.add(OTP)
+
+							if (!WebUI.verifyNotMatch(iniotp[i], iniotp[i+1], false, FailureHandling.CONTINUE_ON_FAILURE)) {
+							
+								GlobalVariable.FlagFailed = 1
+								
+								'tulis gagal resend otp ke excel'
+								CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+									GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+										GlobalVariable.FailedReasonOTP)
+							}	
+							
+							'input otp dari DB'
+							WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
+								'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), otpmanual[0])
+						}
+					}
+					
+					'klik pada button verifikasi otp'
+					WebUI.click(findTestObject('Object Repository/RegisterLogin/'+
+						'Page_Login - eendigo Platform/button_Verifikasi'))
+					
+					WebUI.delay(2)
+					
+					if(WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/'+
+						'Page_Login - eendigo Platform/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)){
+					
+						'verifikasi adanya alert otp'
+						CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
+						findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'),
+							GlobalVariable.NumOfColumn, 'Register')
+						
+						'klik ok pada verifikasi alert'
+						WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'))
+					}
+								
+					'klik tombol x pada verifikasi'
+					WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/span_'))
+		
+			}
 		}
 		
 		'cek apakah muncul error unknown setelah login'
 		if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
-			GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false && GlobalVariable.FlagFailed == 0) {
 			
 			GlobalVariable.FlagFailed = 1
 			
@@ -271,7 +289,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'cek apakah muncul error unknown setelah login'
 		if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
-			GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false && GlobalVariable.FlagFailed == 0) {
 			
 			GlobalVariable.FlagFailed = 1
 			

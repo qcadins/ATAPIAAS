@@ -75,10 +75,10 @@ else if (TC == 'Regist') {
 		if (!WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_KebijakanorSyarat'), FailureHandling.OPTIONAL), 'KEBIJAKAN PRIVASI', false, FailureHandling.CONTINUE_ON_FAILURE)) {
 				GlobalVariable.FlagFailed = 1
 				
-				'tulis gagal resend otp ke excel'
+				'tulis gagal membuka halaman kebijakan privasi'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-						'Gagal membuka halama KEBIJAKAN PRIVASI')
+						'Gagal membuka halaman KEBIJAKAN PRIVASI')
 		}
 		
 		'kembali ke halaman login'
@@ -94,10 +94,10 @@ else if (TC == 'Regist') {
 		if (!WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_KebijakanorSyarat'), FailureHandling.OPTIONAL), 'SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO', false, FailureHandling.CONTINUE_ON_FAILURE)) {
 			GlobalVariable.FlagFailed = 1
 			
-			'tulis gagal resend otp ke excel'
+			'tulis gagal membuka halaman syarat dan ketentuan'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-					'Gagal membuka halama SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO')
+					'Gagal membuka halaman SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO')
 		}
 		
 		'kembali ke halaman login'
@@ -158,11 +158,11 @@ else if (TC == 'Regist') {
 		'input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'),
 		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 12))
 	
-	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 21) == 'Yes') {
-		'bypass captcha langsung masuk verifikasi otp'
-		WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
-		js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister);
-	}
+//	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 21) == 'Yes') {
+//		'bypass captcha langsung masuk verifikasi otp'
+//		WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
+//		js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister);
+//	}
 }
 else if (TC == 'Key') {
 	
@@ -531,7 +531,7 @@ else if (TC == 'TenantCekServices') {
 }
 
 if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {	
-	if (GlobalVariable.SettingEnvi == 'Production') {
+	if (GlobalVariable.SettingEnvi == 'Production' && WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		'click pada production'
 		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
 	}
