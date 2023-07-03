@@ -33,8 +33,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'user menentukan apakah file yang didownload langsung dihapus atau tidak lewat excel'
 		String flagDelete = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 10)
 		
-		'Wait for Some time so that file gets downloaded and Stored in user defined path'
-		WebUI.delay(5)
+		'tunggu hingga page terload dengan sempurna'
+		WebUI.delay(GlobalVariable.Timeout)
 		
 		'klik pada tombol garis tiga'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_KEPIN EDGAR_ft-menu font-medium-3'))
@@ -81,15 +81,15 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 					GlobalVariable.SuccessReason)
 		}
-		else if (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 11) == 'Yes' &&
-			WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL)) {
+		else if (WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL) &&
+			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 11) == 'Yes') {
 			
 			'tulis kondisi gagal'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dokumentasi API',
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonDownloadProblem + ' Bypass')
 		}
-		else if (isMandatoryComplete != 0) {
+		else if (isMandatoryComplete > 0) {
 			
 			'tulis kondisi gagal'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dokumentasi API',

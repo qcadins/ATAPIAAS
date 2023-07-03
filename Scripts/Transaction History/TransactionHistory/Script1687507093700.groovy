@@ -216,8 +216,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					
 					'klik batal'
 					WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/buttonBatal_upload'))
-					
-					continue
 	
 				}
 				
@@ -477,13 +475,13 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 	
 	searchadminEendigoFinance()
 	
-	'klik pada tombol approve pembayaran'
+	'klik pada tombol approve/reject pembayaran'
 	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/'+ String2 +''))
 	
 	'klik pada tombol batal'
 	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/button_Tidak, batalkan'))
 	
-	'klik pada tombol approve pembayaran'
+	'klik pada tombol approve/reject pembayaran'
 	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/'+ String2 +''))
 	
 	'klik pada tombol ya'

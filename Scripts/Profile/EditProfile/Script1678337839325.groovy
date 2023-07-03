@@ -27,33 +27,16 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'looping kolom dari testdata'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
+	
     'status kosong berhentikan testing, status selain unexecuted akan dilewat'
     if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
         break
-    } else if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+    } 
+	else if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+		
         'memanggil fungsi untuk login'
         WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf', ('SheetName') : 'Edit Profile', ('Path') : ExcelPathEditProfile], 
             FailureHandling.STOP_ON_FAILURE)
-
-        'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
-        WebUI.delay(10)
-
-        'focus pada button login'
-        WebUI.focus(findTestObject('Object Repository/RegisterLogin/' + 'Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-
-        'Klik Login'
-        WebUI.click(findTestObject('Object Repository/RegisterLogin/' + 'Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-
-        'cek apakah muncul error setelah login'
-        if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/' + 'Page_Balance/div_Unknown Error'), 
-            GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-            GlobalVariable.FlagFailed = 1
-
-            'tulis adanya error pada sistem web'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, 
-                GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + 
-                ';') + GlobalVariable.FailedReasonUnknown)
-        }
         
         'angka untuk menghitung data mandatory yang tidak terpenuhi'
         int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 

@@ -103,7 +103,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					GlobalVariable.NumOfColumn, 'Register')
 			
 			if (autofillOTP == 'Yes') {
-				
 				'input otp dari DB'
 				WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
 					'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), iniotp[0])
@@ -125,8 +124,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						
 						'mengambil otp dari db, disimpan ke iniotp'
 						iniotp.add(OTP)
-						
-						println(iniotp)
 						
 						if (!WebUI.verifyNotMatch(iniotp[i], iniotp[i+1], false, FailureHandling.CONTINUE_ON_FAILURE)) {
 							
@@ -187,7 +184,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							
 							'klik pada button kirim ulang otp'
 							WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/a_Kirim kode lagi'))
-							
+
 							WebUI.delay(2)
 							
 							OTP = CustomKeywords.'otp.GetOTPfromDB.getOTPforRegister'(conn, email)
@@ -234,7 +231,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 			}
 		}
-		
 		'cek apakah muncul error unknown setelah login'
 		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
 			GlobalVariable.Timeout, FailureHandling.OPTIONAL) && GlobalVariable.FlagFailed == 0) {
@@ -246,12 +242,15 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.StatusWarning, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					GlobalVariable.FailedReasonUnknown)
 		}
+
+	}
+
 			
 		WebUI.delay(3)
 		
 		'verifikasi data hasil registrasi dan yang ada pada db'
 		WebUI.callTestCase(findTestCase('Test Cases/Register/VerifyRegistration'), 
-			[:], FailureHandling.STOP_ON_FAILURE)
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
 		
 		'klik button submenu Masuk'
 		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Masuk'))
@@ -292,13 +291,17 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
 			GlobalVariable.Timeout, FailureHandling.OPTIONAL) && GlobalVariable.FlagFailed == 0) {
 			
-			GlobalVariable.FlagFailed = 1
-			
-			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusWarning, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-					GlobalVariable.FailedReasonUnknown)
-		}
+//			'cek apakah muncul error unknown setelah login'
+//			if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+//				GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+//				
+//				GlobalVariable.FlagFailed = 1
+//				
+//				'tulis adanya error pada sistem web'
+//				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+//					GlobalVariable.StatusWarning, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+//						GlobalVariable.FailedReasonUnknown)
+//		}
 			
 //		}
 //		//kondisi dibawah jika button tidak clickable

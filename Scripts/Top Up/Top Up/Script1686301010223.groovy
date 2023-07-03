@@ -328,6 +328,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				findTestObject('Object Repository/Top Up/Page_Topup Balance/grandTotal'),
 					'value', FailureHandling.CONTINUE_ON_FAILURE).replaceAll('[^\\d]', ''))
 		
+			//kondisi if disini
+			
 			'klik pada tombol next'
 			WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/button_Next'))
 			
