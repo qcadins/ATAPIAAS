@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "420D39250D883DA0EC4A102DCDD874A5",
+  "keywordFileContentHash": "35BBA64044ADAA5FE4E623FCDE2A3815",
   "keywordClasses": [
     {
       "name": "writeToExcel.WriteExcel",
@@ -73,7 +73,7 @@
               }
             }
           ],
-          "javadoc": "/**\n\t * Write to Excel\n\t */"
+          "javadoc": "/**\r\n\t * Write to Excel\r\n\t */"
         },
         {
           "name": "writeToExcelNumber",

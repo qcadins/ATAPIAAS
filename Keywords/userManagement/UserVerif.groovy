@@ -73,10 +73,10 @@ public class UserVerif {
 	updateIsActiveUser(Connection conn, String email) {
 
 		Statement stm = conn.createStatement()
-		
+
 		int updateCount = stm.executeUpdate("UPDATE am_msuser SET is_active = '1', change_pwd_login = '0', is_verified = '1' WHERE login_id = '" + email + "';")
 	}
-	
+
 	@Keyword
 	getUserStatus(Connection conn, String email) {
 

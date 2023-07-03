@@ -32,10 +32,15 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
 	WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 2))
 }
 else {
-	if (GlobalVariable.SettingEnvi == 'Trial') {		
+	
+	if (GlobalVariable.SettingEnvi == 'Trial') {
+				
 		'buka website billing system Trial, untuk isi saldo'
 		WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 3))
-	} else if (GlobalVariable.SettingEnvi == 'Production') {
+		
+	} 
+	else if (GlobalVariable.SettingEnvi == 'Production') {
+		
 		'buka website billing system Production, untuk isi saldo'
 		WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 4))
 	}
@@ -56,6 +61,26 @@ if (TC == 'EditProf') {
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
 		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	
+	'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
+	WebUI.delay(10)
+
+	'focus pada button login'
+	WebUI.focus(findTestObject('Object Repository/RegisterLogin/' + 'Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+
+	'Klik Login'
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/' + 'Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+
+	'cek apakah muncul error setelah login'
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/' + 'Page_Balance/div_Unknown Error'),
+		GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		GlobalVariable.FlagFailed = 1
+
+		'tulis adanya error pada sistem web'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) +
+			';') + GlobalVariable.FailedReasonUnknown)
+	}
 }
 else if (TC == 'Regist') {
 	
@@ -78,7 +103,7 @@ else if (TC == 'Regist') {
 				'tulis gagal resend otp ke excel'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-						'Gagal membuka halama KEBIJAKAN PRIVASI')
+						'Gagal membuka halaman KEBIJAKAN PRIVASI')
 		}
 		
 		'kembali ke halaman login'
@@ -133,8 +158,8 @@ else if (TC == 'Regist') {
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
 	
 	'ambil teks dari field input email'
-	if (WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control is-invalid ng-_7788b4'), FailureHandling.OPTIONAL) 
+	if (WebUI.getAttribute(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
+		'input_Buat Akun_form-control is-invalid ng-_7788b4'), 'value', FailureHandling.OPTIONAL) 
 			!= findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9)) {
 	
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
@@ -527,7 +552,8 @@ else if (TC == 'TenantCekServices') {
 		'button_Lanjutkan Perjalanan Anda'))
 }
 
-if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {	
+if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Regist') {	
+	
 	if (GlobalVariable.SettingEnvi == 'Production') {
 		'click pada production'
 		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
