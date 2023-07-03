@@ -82,12 +82,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatusbtnClickable'(isMandatoryComplete, 
 				findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'), GlobalVariable.NumOfColumn, 'Register')
 			
+		'pencet enter'
+		WebUI.sendKeys(findTestObject('Object Repository/RegisterLogin/'+
+				'Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'), Keys.chord(Keys.ENTER))
+		
+		WebUI.delay(5)
+		
 		if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-			'pencet enter'
-			WebUI.sendKeys(findTestObject('Object Repository/RegisterLogin/'+
-					'Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'), Keys.chord(Keys.ENTER))
-				
-			WebUI.delay(5)
 		
 			'mengambil otp dari db, disimpan ke iniotp'
 			ArrayList<String> iniotp = []
@@ -235,8 +236,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'cek apakah muncul error unknown setelah login'
-		if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
-			GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false && GlobalVariable.FlagFailed == 0) {
+		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL) && GlobalVariable.FlagFailed == 0) {
 			
 			GlobalVariable.FlagFailed = 1
 			
@@ -288,8 +289,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 		
 		'cek apakah muncul error unknown setelah login'
-		if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
-			GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false && GlobalVariable.FlagFailed == 0) {
+		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL) && GlobalVariable.FlagFailed == 0) {
 			
 			GlobalVariable.FlagFailed = 1
 			
