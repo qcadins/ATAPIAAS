@@ -100,7 +100,7 @@ else if (TC == 'Regist') {
 		if (!WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_KebijakanorSyarat'), FailureHandling.OPTIONAL), 'KEBIJAKAN PRIVASI', false, FailureHandling.CONTINUE_ON_FAILURE)) {
 				GlobalVariable.FlagFailed = 1
 				
-				'tulis gagal resend otp ke excel'
+				'tulis gagal membuka halaman kebijakan privasi'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 						'Gagal membuka halaman KEBIJAKAN PRIVASI')
@@ -119,10 +119,10 @@ else if (TC == 'Regist') {
 		if (!WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_KebijakanorSyarat'), FailureHandling.OPTIONAL), 'SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO', false, FailureHandling.CONTINUE_ON_FAILURE)) {
 			GlobalVariable.FlagFailed = 1
 			
-			'tulis gagal resend otp ke excel'
+			'tulis gagal membuka halaman syarat dan ketentuan'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-					'Gagal membuka halama SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO')
+					'Gagal membuka halaman SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO')
 		}
 		
 		'kembali ke halaman login'
@@ -183,11 +183,11 @@ else if (TC == 'Regist') {
 		'input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'),
 		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 12))
 	
-	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 21) == 'Yes') {
-		'bypass captcha langsung masuk verifikasi otp'
-		WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
-		js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister);
-	}
+//	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 21) == 'Yes') {
+//		'bypass captcha langsung masuk verifikasi otp'
+//		WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
+//		js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister);
+//	}
 }
 else if (TC == 'Key') {
 	
@@ -205,8 +205,11 @@ else if (TC == 'Key') {
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
 		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
 	
+	'klik pada button login'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'button_Lanjutkan Perjalanan Anda'))
 }
-else if (TC == 'OCR') {	
+else if (TC == 'OCR') {
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
@@ -332,9 +335,9 @@ else if (TC == 'Role') {
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'button_Lanjutkan Perjalanan Anda'))
 	
-	'klik pada bagian admin client'
-	WebUI.click(findTestObject('Object Repository/User Management-Role/'+
-		'Page_Login - eendigo Platform/i_Admin Client_ft-edit'))
+//	'klik pada bagian admin client'
+//	WebUI.click(findTestObject('Object Repository/User Management-Role/'+
+//		'Page_Login - eendigo Platform/i_Admin Client_ft-edit'))
 }
 else if (TC == 'User') {
 	
@@ -552,9 +555,8 @@ else if (TC == 'TenantCekServices') {
 		'button_Lanjutkan Perjalanan Anda'))
 }
 
-if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Regist') {	
-	
-	if (GlobalVariable.SettingEnvi == 'Production') {
+if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {	
+	if (GlobalVariable.SettingEnvi == 'Production' && WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		'click pada production'
 		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
 	}

@@ -1,6 +1,9 @@
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+
+import java.sql.Connection
+
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
@@ -12,8 +15,13 @@ import org.openqa.selenium.Keys as Keys
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
-'deklarasi variabel untuk konek ke Database APIAAS'
-Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+if(GlobalVariable.SettingEnvi == 'Production') {
+	'deklarasi koneksi ke Database eendigo_dev'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+} else if(GlobalVariable.SettingEnvi == 'Trial') {
+	'deklarasi koneksi ke Database eendigo_dev_uat'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+}
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathAPIKey).getColumnNumbers()
@@ -31,13 +39,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		String optiontipe, optionstatus
 		
 		'cek apakah perlu melakukan action'
-		String actionAPIKey = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 15)
+		String actionAPIKey = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 16)
 		
 		'cek apakah perlu copy link API'
-		String copyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 16)
+		String copyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 17)
 		
 		'cek apakah perlu fungsi download dokumentasi API'
-		String downloadDocs = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 17)
+		String downloadDocs = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18)
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 5))

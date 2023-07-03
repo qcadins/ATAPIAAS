@@ -131,7 +131,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				Keys.chord(Keys.ENTER))
 			
 			checkdialogConfirmation(isMandatoryComplete)
-
+			
 		}
 		else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 			
@@ -179,8 +179,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					
 				}
 				
-				'panggil fungsi lengkapi konfirmasi dialog'
-				checkdialogConfirmation(isMandatoryComplete)
 			}
 			
 			else {
@@ -200,9 +198,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/Statusinactive'))
 				}
 				
-				'panggil fungsi lengkapi konfirmasi dialog'
-				checkdialogConfirmation(isMandatoryComplete)
 			}
+			
+			'panggil fungsi lengkapi konfirmasi dialog'
+			checkdialogConfirmation(isMandatoryComplete)
 		}
 		'cek apakah perlu resend verif email'
 		if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 30).equalsIgnoreCase('Yes')) {
@@ -354,6 +353,23 @@ def checkdialogConfirmation (int isMandatoryComplete) {
 					WebUI.callTestCase(findTestCase('Test Cases/User Management/UserStoreDB'), [('Path') : ExcelPathUser],
 						 FailureHandling.CONTINUE_ON_FAILURE)
 				}
+							
+				'input email'
+				WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/input_Email_email'),
+						findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
+				
+				'klik pada tombol cari'
+				WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/button_Search'))
+				
+				'verify nama depan'
+				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_NamaDepan')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 19), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama depan')
+				
+				'verify email'
+				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Email')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18), false, FailureHandling.CONTINUE_ON_FAILURE), ' Email')
+				
+				'verify peran'
+				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Peran')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 21), false, FailureHandling.CONTINUE_ON_FAILURE), ' peran')
+				
 				'call testcase user verif'
 				WebUI.callTestCase(findTestCase('User Management/UserVerification'), [('excelPathUser') : 'User Management/DataTestingUser'],
 					FailureHandling.CONTINUE_ON_FAILURE)
@@ -380,6 +396,18 @@ def checkdialogConfirmation (int isMandatoryComplete) {
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					editCondition)
+			
+			'call function search user'
+			searchUser()
+			
+			'verify nama depan'
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_NamaDepan')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 25), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama depan')
+			
+			'verify email'
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Email')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 14), false, FailureHandling.CONTINUE_ON_FAILURE), ' Email')
+			
+			'verify peran'
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Peran')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 27), false, FailureHandling.CONTINUE_ON_FAILURE), ' peran')
 		}
 	}	
 }
@@ -554,6 +582,18 @@ def checkVerifyPaging(Boolean isMatch) {
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 2) +
 				';') + GlobalVariable.FailedReasonPagingError)
+
+		GlobalVariable.FlagFailed = 1
+	}
+}
+
+'fungsi untuk melakukan pengecekan '
+def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
+	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+			(findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 
 		GlobalVariable.FlagFailed = 1
 	}

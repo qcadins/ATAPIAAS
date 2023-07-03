@@ -23,14 +23,15 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPa
 'mendapat jumlah kolom dari sheet Isi Saldo'
 int countColumnEdit = findTestData(ExcelPathSaldoAPI).getColumnNumbers()
 
-'deklarasi variabel untuk konek ke Database eendigo_dev'
-Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection conn
 
-//'deklarasi koneksi ke Database adins_apiaas_uat'
-//def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
-
-'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+if(GlobalVariable.SettingEnvi == 'Production') {
+	'deklarasi koneksi ke Database eendigo_dev'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+} else if(GlobalVariable.SettingEnvi == 'Trial') {
+	'deklarasi koneksi ke Database eendigo_dev_uat'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+}
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'IsiSaldo', ('SheetName') : 'IsiSaldo', 
@@ -90,7 +91,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'))
 		
 		'panggil fungsi check jumlah tenant di DB dan UI'
-		checkTenantcount(conndevUAT)
+		checkTenantcount(conn)
 		
 		'input nama tenant yang akan digunakan'
 		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'), 
@@ -104,7 +105,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'))
 		
 		'check jumlah vendor di DB dan UI'
-		checkVendorcount(conndevUAT, tenantcode)
+		checkVendorcount(conn, tenantcode)
 		
 		'input nama vendor yang akan digunakan'
 		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'), 
@@ -118,7 +119,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'))
 		
 		'panggil fungsi cek banyak tipe saldo yang bisa diisi ulang'
-		checkTipeSaldocount(conndevUAT, tenantcode)
+		checkTipeSaldocount(conn, tenantcode)
 		
 		'input nama saldo yang akan diisi ulang'
 		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'), 
@@ -211,10 +212,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		if (GlobalVariable.KondisiCekDB == 'Yes') {
 			
 			'ambil nomor transaksi terbaru dari DB'
-			noTrxfromDB = CustomKeywords.'apikey.CheckSaldoAPI.getLatestMutation'(conndevUAT, tenantcode)
+			noTrxfromDB = CustomKeywords.'apikey.CheckSaldoAPI.getLatestMutation'(conn, tenantcode)
 			
 			'ambil nomor transaksi terbaru tenant lain'
-			noTrxOtherTenant = CustomKeywords.'apikey.CheckSaldoAPI.getLatestMutationOtherTenant'(conndevUAT, tenantcode)
+			noTrxOtherTenant = CustomKeywords.'apikey.CheckSaldoAPI.getLatestMutationOtherTenant'(conn, tenantcode)
 			
 			'call test case store db'
 			 WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoStoreDB'), [('ExcelPathSaldoAPI') : 'APIAAS/DataSaldoAPIKEY', ('tenant') : tenantcode, ('autoIsiSaldo') : '', ('tipeSaldo') : ''],
@@ -229,7 +230,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			else {
 				
 				'jika ada konten pada tabel yang tidak sesuai dengan DB'
-				if (verifyTableContent(conndevUAT, tenantcode) == 0) {
+				if (verifyTableContent(conn, tenantcode) == 0) {
 					
 					'topup dianggap gagal'
 					TopupSaldoCorrectTenant = 0

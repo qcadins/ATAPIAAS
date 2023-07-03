@@ -82,6 +82,16 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'panggil fungsi cek konfirmasi dialog'
 			checkdialogConfirmation(isMandatoryComplete)
+			
+			'input nama role'
+			WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Role Name_roleName'),
+			findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 20))
+
+			'klik pada tombol cari'
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/button_Search'))	
+			
+			'verify nama depan'
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-Role/label_Role')), findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 20), false, FailureHandling.CONTINUE_ON_FAILURE), ' Nama Role')
 		}
 		else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 			
@@ -109,6 +119,24 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'panggil fungsi cek konfirmasi dialog'
 			checkdialogConfirmation(isMandatoryComplete)
+			
+			'input nama role'
+			WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Role Name_roleName'),
+					findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 17))
+		
+			'input status role'
+			WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Status'),
+				findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 18))
+			
+			'enter pada status'
+			WebUI.sendKeys(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Status'),
+				 Keys.chord(Keys.ENTER))
+			
+			'klik pada tombol cari'
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/button_Search'))
+			
+			'verify nama depan'
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-Role/label_Role')), findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 17), false, FailureHandling.CONTINUE_ON_FAILURE), ' Nama Role')
 		}
 		else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Settings')) {
 			
@@ -474,6 +502,18 @@ def checkVerifyPaging(Boolean isMatch) {
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) +
 				';') + GlobalVariable.FailedReasonPagingError)
+
+		GlobalVariable.FlagFailed = 1
+	}
+}
+
+'fungsi untuk melakukan pengecekan '
+def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
+	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+			(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 
 		GlobalVariable.FlagFailed = 1
 	}

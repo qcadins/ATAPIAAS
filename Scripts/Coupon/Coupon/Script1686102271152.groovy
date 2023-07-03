@@ -75,8 +75,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'cek apa perlu lakukan copy link'
 			copylinkfunction()
-		}
-		else if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
+			
+			'check after add new kupon'
+			verifyAfterAddorEdit()
+			
+		} else if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 			
 			'panggil fungsi search'
 			searchfunction()
@@ -107,6 +110,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'cek apa perlu lakukan copy link'
 			copylinkfunction()
+			
+			'check after edit'
+			verifyAfterAddorEdit()
 		}
 		else if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Detail')) {
 			
@@ -897,6 +903,52 @@ def callStartDate() {
 	String formattedStartDate = startDate.format(dateFormatter)
 	
 	return formattedStartDate
+}
+
+def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
+	if(isMatch == false){
+		GlobalVariable.FlagFailed = 1
+		
+		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
+		
+	}
+}
+
+def verifyAfterAddorEdit() {
+	'cari kupon yang akan dilakukan edit/add'
+	WebUI.setText(findTestObject('Object Repository/Coupon/Page_List Coupon/input_Kode Kupon'),
+			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 21))
+	
+	'klik tombol cari'
+	WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/button_Cari'))
+	
+	'verify tipe kupon'
+	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Coupon/label_TipeKupon')), findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 20), false, FailureHandling.CONTINUE_ON_FAILURE), ' Tipe Kupon')
+	
+	parsedate = CustomKeywords.'customizeKeyword.ParseDate.parseDateFormat'(findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 22), 'yyyy-MM-dd', 'dd-MMM-yyyy').toUpperCase()
+		
+	'verify tanggal mulai berlaku'
+	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Coupon/label_TanggalMulai')).toUpperCase(), parsedate, false, FailureHandling.CONTINUE_ON_FAILURE), ' Tanggal mulai berlaku')
+	
+	parsedate = CustomKeywords.'customizeKeyword.ParseDate.parseDateFormat'(findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 23), 'yyyy-MM-dd', 'dd-MMM-yyyy').toUpperCase()
+	
+	'verify tanggal terakhir berlaku'
+	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Coupon/label_TanggalTerakhir')).toUpperCase(), parsedate, false, FailureHandling.CONTINUE_ON_FAILURE), ' Tanggal terakhir berlaku')
+	
+	'verify kode kupon'
+	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Coupon/label_KodeKupon')), findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 21), false, FailureHandling.CONTINUE_ON_FAILURE), ' Tanggal kode kupon')
+	
+	'verify nilai kupon'
+	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Coupon/label_NilaiKupon')), findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 25), false, FailureHandling.CONTINUE_ON_FAILURE), ' Tanggal nilai kupon')
+	
+	'verify tipe nilai kupon'
+	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Coupon/label_TipeNilai')), findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 24), false, FailureHandling.CONTINUE_ON_FAILURE), ' Tanggal tipe nilai kupon')
+	
+	'verify kuantitas'
+	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Coupon/label_Kuantitas')), findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 26) + '/' + findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 26), false, FailureHandling.CONTINUE_ON_FAILURE), ' Tanggal terakhir kuantitas')
 }
 
 //def callendDate() {

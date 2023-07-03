@@ -7,14 +7,14 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
 
-'deklarasi variabel untuk konek ke Database APIAAS'
-Connection connpublic = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+'deklarasi koneksi ke Database eendigo_dev'
+Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'kumpulan string dari WEB'
 ArrayList totaldata = []
 
 'kumpulan string dari DB'
-ArrayList totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'(connpublic, 
+ArrayList totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'(conn, 
 	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
 
 'masukkan hasil perhitungan jumlah key ke totaldata'

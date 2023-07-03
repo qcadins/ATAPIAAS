@@ -19,14 +19,15 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPa
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathSaldo).getColumnNumbers()
 
-'deklarasi variabel untuk konek ke Database eendigo_dev'
-Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection conn
 
-//'deklarasi koneksi ke Database adins_apiaas_uat'
-//def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
-
-'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+if(GlobalVariable.SettingEnvi == 'Production') {
+	'deklarasi koneksi ke Database eendigo_dev'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+} else if(GlobalVariable.SettingEnvi == 'Trial') {
+	'deklarasi koneksi ke Database eendigo_dev_uat'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+}
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Saldo', ('SheetName') : 'Saldo', 
@@ -58,19 +59,19 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.scrollToElement(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), GlobalVariable.Timeout)
 		
 		'panggil fungsi cek table dan paging'
-		checkTableandPaging(conndevUAT, tenantcode, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
+		checkTableandPaging(conn, tenantcode, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
 		
 		'check dropdownlist dari tipe saldo'
-		checkddlTipeSaldo(conndevUAT, tenantcode)
+		checkddlTipeSaldo(conn, tenantcode)
 		
 		'check dropdownlist dari tipe saldo'
-		checkddlTipeTransaksi(conndevUAT, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
+		checkddlTipeTransaksi(conn, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
 		
 		'check dropdownlist dari office'
-		checkddlOffice(conndevUAT, tenantcode)
+		checkddlOffice(conn, tenantcode)
 		
 		'ambil nama saldo tenant yang aktif di DB'
-		ArrayList<String> activeBalanceDB = CustomKeywords.'saldo.VerifSaldo.getListActiveBalance'(conndevUAT, tenantcode)
+		ArrayList<String> activeBalanceDB = CustomKeywords.'saldo.VerifSaldo.getListActiveBalance'(conn, tenantcode)
 		
 		'ambil nama saldo tenant aktif di UI'
 		ArrayList<String> activeBalanceUI = []

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>button_Simpan</name>
+   <name>label_KodeKupon</name>
    <tag></tag>
-   <elementGuidId>54dbb290-f099-44a5-b110-36755f1258eb</elementGuidId>
+   <elementGuidId>db2fa538-fea7-480a-8fd9-90bc97403500</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[(text() = 'Simpan' or . = 'Simpan')]</value>
+         <value>//*[@class = 'datatable-row-center datatable-row-group ng-star-inserted']/datatable-body-cell[4]/div/p</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -15,17 +15,17 @@
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>xpath</name>
+      <name>class</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[25]/div/button[2]</value>
-      <webElementGuid>d4053667-a51b-4295-9e15-a24b50db6ef7</webElementGuid>
+      <value>datatable-row-center datatable-row-group ng-star-inserted</value>
+      <webElementGuid>dbd124b3-7886-4dab-afb8-3933b039537a</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>text</name>
+      <name>xpath</name>
       <type>Main</type>
-      <value>Simpan</value>
-      <webElementGuid>306ecabb-a219-4e8e-87bb-6808cb9370bd</webElementGuid>
+      <value>//*[@class = 'datatable-row-center datatable-row-group ng-star-inserted']/datatable-body-cell[4]/div/p</value>
+      <webElementGuid>3fc1c82b-4c67-4e60-80fb-d0523cd45a9c</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

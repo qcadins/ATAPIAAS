@@ -5,11 +5,15 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
 
-//'deklarasi koneksi ke Database adins_apiaas_uat'
-//def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
+Connection conn
 
-'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+if(GlobalVariable.SettingEnvi == 'Production') {
+	'deklarasi koneksi ke Database eendigo_dev'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+} else if(GlobalVariable.SettingEnvi == 'Trial') {
+	'deklarasi koneksi ke Database eendigo_dev_uat'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+}
 
 'declare arraylist arraymatch'
 ArrayList<String> arrayMatch = []
@@ -19,11 +23,11 @@ if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equals
 	|| findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 	
 'get data balance mutation dari DB'
-ArrayList<String> result = CustomKeywords.'tenant.TenantVerif.getTenantStoreDB'(conndevUAT,
+ArrayList<String> result = CustomKeywords.'tenant.TenantVerif.getTenantStoreDB'(conn,
 	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 15))
 
 'get data services dari DB'
-ArrayList<String> resultServices = CustomKeywords.'tenant.TenantVerif.getTenantServicesDescription'(conndevUAT,
+ArrayList<String> resultServices = CustomKeywords.'tenant.TenantVerif.getTenantServicesDescription'(conn,
 	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14))
 
 'declare arrayindex'
@@ -93,7 +97,7 @@ for (indexExcel = 0 ; indexExcel < arrayServices.size(); indexExcel++) {
 else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Service')) {
 	
 	'get data balacne mutation dari DB'
-	String result = CustomKeywords.'tenant.TenantVerif.getTenantServices'(conndevUAT, 
+	String result = CustomKeywords.'tenant.TenantVerif.getTenantServices'(conn, 
 		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 10)).replace('{','').replace('}','').replace('"','').replace(':0', '')
 	
 	'split result to array'
@@ -115,11 +119,11 @@ else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).e
 	for (index = 0; index < arrayServices.size(); index++) {
 		
 		'ambil id pembayaran untuk service pertama yang diubah'
-		int IDPaymentType = CustomKeywords.'tenant.TenantVerif.getIDPaymentType'(conndevUAT,
+		int IDPaymentType = CustomKeywords.'tenant.TenantVerif.getIDPaymentType'(conn,
 			findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14), arrayServices[index])
 		
 		'ambil jenis pembayaran untuk service yang terpilih'
-		String PaymentType = CustomKeywords.'tenant.TenantVerif.getPaymentType'(conndevUAT,
+		String PaymentType = CustomKeywords.'tenant.TenantVerif.getPaymentType'(conn,
 			findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14), IDPaymentType)
 		
 		'split result to array'
