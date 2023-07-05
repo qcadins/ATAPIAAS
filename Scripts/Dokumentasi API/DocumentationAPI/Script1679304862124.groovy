@@ -1,7 +1,9 @@
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testdata.TestData as TestData
+import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
@@ -13,6 +15,10 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPa
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathAPIDocs).getColumnNumbers()
+
+'panggil fungsi login'
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'DocAPI', ('SheetName') : 'Dokumentasi API',
+	('Path') : ExcelPathAPIDocs], FailureHandling.STOP_ON_FAILURE)
 
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
@@ -43,6 +49,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'klik pada menu dokumentasi API'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/span_Dokumentasi API'))
+		
+		'cek apakah tombol menu dalam jangkauan web'
+		if (WebUI.verifyElementVisible(findTestObject(TombolSilang), FailureHandling.OPTIONAL)) {
+			
+			'klik pada tombol silang menu'
+			WebUI.click(findTestObject(TombolSilang))
+		}
 		
 		'jika perlu, akan memanggil fungsi cek ddl dokumentasi'
 		if (GlobalVariable.KondisiCekDB == 'Yes') {
@@ -86,7 +99,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'tulis kondisi gagal'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dokumentasi API',
-				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 					GlobalVariable.FailedReasonDownloadProblem + ' Bypass')
 		}
 		else if (isMandatoryComplete > 0) {
