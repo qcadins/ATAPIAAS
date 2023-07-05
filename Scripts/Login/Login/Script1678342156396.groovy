@@ -205,6 +205,32 @@ else if (TC == 'Key') {
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
 		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
 	
+	'pada delay, lakukan captcha secara manual'
+	WebUI.delay(10)
+	
+	'klik pada button login'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'button_Lanjutkan Perjalanan Anda'))
+}
+else if (TC == 'DocAPI') {
+	
+	'input data email'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'
+		+'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+		findTestData(Path).getValue(2, 13))
+	
+	'input password'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+		findTestData(Path).getValue(2, 14))
+	
+	'ceklis pada reCaptcha'
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
+		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	
+	'pada delay, lakukan captcha secara manual'
+	WebUI.delay(10)
+	
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'button_Lanjutkan Perjalanan Anda'))

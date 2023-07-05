@@ -11,11 +11,24 @@
       <value></value>
       <variableId>93302eac-d34d-4b06-b80e-6f82324b7136</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>e45c57ae-ca46-424e-b7ae-3a8620fa8abe</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'DokumentasiAPI/DataDocumentation'</defaultValue>
       <description></description>
       <id>93302eac-d34d-4b06-b80e-6f82324b7136</id>
       <masked>false</masked>
       <name>ExcelPathAPIDocs</name>
+   </variable>
+   <variable>
+      <defaultValue>'Object Repository/User Management-Role/Page_List Roles/i_Logout_ft-x ng-tns-c133-2'</defaultValue>
+      <description></description>
+      <id>e45c57ae-ca46-424e-b7ae-3a8620fa8abe</id>
+      <masked>false</masked>
+      <name>TombolSilang</name>
    </variable>
 </TestCaseEntity>

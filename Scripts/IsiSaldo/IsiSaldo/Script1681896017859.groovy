@@ -49,16 +49,6 @@ JavascriptExecutor js = ((driver) as JavascriptExecutor)
 'buka tab baru'
 js.executeScript('window.open();')
 
-'ganti fokus robot ke tab baru'
-WebUI.switchToWindowIndex(currentTab + 1)
-
-'arahkan tab baru ke url eendigo beta dan lakukan login'
-navigatetoeendigoBeta()
-
-'ambil kode tenant di DB'
-String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, 
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 11))
-
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'set penanda error menjadi 0'
@@ -80,6 +70,16 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'flag apakah topup masuk ke tenant yang benar'
 		TopupSaldoCorrectTenant = 1
+		
+		'ganti fokus robot ke tab baru'
+		WebUI.switchToWindowIndex(currentTab + 1)
+		
+		'arahkan tab baru ke url eendigo beta dan lakukan login'
+		navigatetoeendigoBeta()
+		
+		'ambil kode tenant di DB'
+		String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn,
+			findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 11))
 		
 		'ambil saldo sebelum isi ulang'
 		Saldobefore = getSaldoforTransaction(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 15))
