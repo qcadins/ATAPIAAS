@@ -49,15 +49,7 @@ JavascriptExecutor js = ((driver) as JavascriptExecutor)
 'buka tab baru'
 js.executeScript('window.open();')
 
-'ganti fokus robot ke tab baru'
-WebUI.switchToWindowIndex(currentTab + 1)
 
-'arahkan tab baru ke url eendigo beta dan lakukan login'
-navigatetoeendigoBeta()
-
-'ambil kode tenant di DB'
-String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, 
-	findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 11))
 
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
@@ -78,6 +70,16 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		String noTrxfromUI, noTrxfromDB, noTrxOtherTenant
 		
+		'ganti fokus robot ke tab baru'
+		WebUI.switchToWindowIndex(1)
+		
+		'arahkan tab baru ke url eendigo beta dan lakukan login'
+		navigatetoeendigoBeta()
+		
+		'ambil kode tenant di DB'
+		String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn,
+			findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 11))
+		
 		'flag apakah topup masuk ke tenant yang benar'
 		TopupSaldoCorrectTenant = 1
 		
@@ -85,7 +87,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		Saldobefore = getSaldoforTransaction(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 15))
 		
 		'ubah ke tab billing system'
-		WebUI.switchToWindowIndex(currentTab)
+		WebUI.switchToWindowIndex(0)
 		
 		'klik pada input tenant'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'))
@@ -172,7 +174,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Ya, proses'))
 		
 		'ubah fokus ke tab eendigo beta'
-		WebUI.switchToWindowIndex(currentTab+1)
+		WebUI.switchToWindowIndex(1)
 		
 		'refresh laman web untuk ambil saldo baru'
 		WebUI.refresh()
@@ -218,7 +220,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			noTrxOtherTenant = CustomKeywords.'apikey.CheckSaldoAPI.getLatestMutationOtherTenant'(conn, tenantcode)
 			
 			'call test case store db'
-			 WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoStoreDB'), [('ExcelPathSaldoAPI') : 'APIAAS/DataSaldoAPIKEY', ('tenant') : tenantcode, ('autoIsiSaldo') : '', ('tipeSaldo') : ''],
+			 WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoStoreDB'), [('ExcelPathSaldoAPI') : 'APIAAS/DataSaldoAPIKEY', ('tenant') : tenantcode, ('autoIsiSaldo') : '', ('tipeSaldo') : ''], ('sheet') : 'IsiSaldo',
 				 FailureHandling.CONTINUE_ON_FAILURE)
 			
 			'cek apakah transaksi tercatat, memastikan tenant lain tidak memiliki transaksi yang sama'
@@ -642,11 +644,15 @@ def getTrxNumber() {
 	'banyaknya row table'
 	int lastIndex = variable.size()
 		
+	no_Trx = ''
+	
 	'modifikasi alamat object trxnumber'
 	def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[6]/div/p", true)
 							
-	'simpan nomor transaction number ke string'
-	String no_Trx = WebUI.getText(modifytrxnumber)
+	if(WebUI.verifyElementPresent(modifytrxnumber, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		'simpan nomor transaction number ke string'
+		String no_Trx = WebUI.getText(modifytrxnumber)
+	}
 	
 	'kembalikan nomor transaksi'
 	return no_Trx
