@@ -7,17 +7,25 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;tenantCode&quot;]</value>
+         <value>//*[@id = 'tenantCode']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
       <value>//*[@id=&quot;tenantCode&quot;]</value>
-      <webElementGuid>7987d439-d353-4b04-8b52-2d6c92a9964f</webElementGuid>
+      <webElementGuid>744f3122-d8fb-472f-8f84-e00abd068710</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>id</name>
+      <type>Main</type>
+      <value>tenantCode</value>
+      <webElementGuid>095c177a-f6d0-467a-a692-33c3c895909a</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

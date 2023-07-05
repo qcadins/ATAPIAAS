@@ -22,7 +22,7 @@ public class RoleVerif {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT count(*) FROM am_msrole WHERE usr_crt = '" + email + "' AND role_name != 'AT-ROLEONE'")
+		ResultSet resultSet = stm.executeQuery("SELECT count(amr.role_name) FROM am_msuser amu JOIN ms_useroftenant mot ON amu.id_ms_user = mot.id_ms_user LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mot.id_ms_tenant LEFT JOIN am_msrole amr ON amr.id_ms_tenant = mt.id_ms_tenant WHERE login_id = '" + email + "' AND role_name != 'AT-ROLEONE'")
 
 		while(resultSet.next()) {
 

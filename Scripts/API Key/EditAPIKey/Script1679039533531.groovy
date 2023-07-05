@@ -28,7 +28,7 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/em_Aksi_
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Batal'))
 
 'search api yang mau di edit'
-searchAPIKEY(13)
+searchAPIKEY(16)
 
 'klik pada tombol edit API'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/em_Aksi_align-middle cursor-pointer font-me_8c8f9d'))
@@ -44,12 +44,12 @@ if (GlobalVariable.KondisiCekDB == 'Yes') {
 
 'input nama API'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'), 
-	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11))
+	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
 
-'pilih status active'
+'pilih status'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 14))
 
-'select status active'
+'select status'
 WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), Keys.chord(
 		Keys.ENTER))
 
@@ -128,7 +128,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 def searchAPIKEY(int row) {
 	'input tipe API'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
-			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12))
+			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 15))
 	
 	'select tipe API'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(

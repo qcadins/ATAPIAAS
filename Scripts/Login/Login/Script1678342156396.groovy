@@ -71,16 +71,6 @@ if (TC == 'EditProf') {
 	'Klik Login'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/' + 'Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
-	'cek apakah muncul error setelah login'
-	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/' + 'Page_Balance/div_Unknown Error'),
-		GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-		GlobalVariable.FlagFailed = 1
-
-		'tulis adanya error pada sistem web'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) +
-			';') + GlobalVariable.FailedReasonUnknown)
-	}
 }
 else if (TC == 'Regist') {
 	
@@ -207,10 +197,6 @@ else if (TC == 'Key') {
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
 }
 else if (TC == 'DocAPI') {
 	

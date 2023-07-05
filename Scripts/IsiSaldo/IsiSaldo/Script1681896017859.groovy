@@ -49,7 +49,7 @@ JavascriptExecutor js = ((driver) as JavascriptExecutor)
 'buka tab baru'
 js.executeScript('window.open();')
 
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
+for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'set penanda error menjadi 0'
 	GlobalVariable.FlagFailed = 0

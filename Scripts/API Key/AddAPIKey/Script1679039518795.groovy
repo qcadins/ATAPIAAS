@@ -124,7 +124,7 @@ def searchAPIKEY() {
 	
 	'input status API'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
-			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
+			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 16))
 	
 	'select status API'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(

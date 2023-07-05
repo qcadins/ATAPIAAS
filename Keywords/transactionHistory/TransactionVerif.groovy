@@ -163,7 +163,7 @@ public class TransactionVerif {
 		}
 		listdata
 	}
-	
+
 	@Keyword
 	getstatusafterConfirmOrReject(Connection conn, String noTrx) {
 

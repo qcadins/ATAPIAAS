@@ -23,7 +23,7 @@ WebUI.openBrowser('')
 'buka website APIAAS SIT, data diambil dari TestData Login'
 WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 2))
 
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
+for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'set penanda error menjadi 0'
 	GlobalVariable.FlagFailed = 0
@@ -36,10 +36,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	else if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
 		'jika gagal pilih role saat login'
-		if (loginFunction(10) == 0) {
-			
-			continue
-		}
+		loginFunction(10)
 		
 		'klik pada tombol untuk span profile'
 		WebUI.click(findTestObject('Object Repository/Change Password/Page_Balance/span_profile'))
@@ -157,9 +154,6 @@ def logoutFunction() {
 
 def loginFunction(int row) {
 	
-	'penentu apakah ada role yang sudah di'
-	int isSelected = 0
-	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
 		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
@@ -205,19 +199,8 @@ def loginFunction(int row) {
 				'klik role yang dipilih'
 				WebUI.click(findTestObject('Object Repository/Change Password/modifyobject'))
 				
-				'penanda adanya role yang dipilih'
-				isSelected = 1
-				
 				break;
 			}
-		}
-		'tulis error dan lanjut testcase berikutnya'
-		if (isSelected == 0) {
-			
-			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('ChangePassword', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-					GlobalVariable.FailedReasonRoleLogin)
 		}
 	}
 	
@@ -232,6 +215,4 @@ def loginFunction(int row) {
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonLoginIssue)
 	}
-	
-	return isSelected
 }

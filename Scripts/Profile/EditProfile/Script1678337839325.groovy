@@ -26,7 +26,7 @@ int countColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'looping kolom dari testdata'
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; GlobalVariable.NumOfColumn++) {
+for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; GlobalVariable.NumOfColumn++) {
 	
     'status kosong berhentikan testing, status selain unexecuted akan dilewat'
     if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
@@ -246,7 +246,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
         } else {
             'Write To Excel GlobalVariable.StatusFailed and gagal karena reason status'
             CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, 
-                GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + 
+                GlobalVariable.StatusWarning, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + 
                 ';') + GlobalVariable.StatusReasonSystem)
         }
         

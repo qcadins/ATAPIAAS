@@ -129,7 +129,7 @@ public class CheckAPIKey {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("select tenant_code, tenant_name from am_msuser amu join ms_useroftenant muot on amu.id_ms_user = muot.id_ms_user join ms_tenant mt on mt.id_ms_tenant = muot.id_ms_tenant join ms_api_key amk on amk.id_ms_tenant = mt.id_ms_tenant where login_id = '"+ email +"'")
+		ResultSet resultSet = stm.executeQuery("select tenant_code, tenant_name from am_msuser amu join ms_useroftenant muot on amu.id_ms_user = muot.id_ms_user join ms_tenant mt on mt.id_ms_tenant = muot.id_ms_tenant where login_id = '"+ email +"'")
 
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 

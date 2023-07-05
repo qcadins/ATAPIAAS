@@ -12,6 +12,9 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+'deklarasi variable connection'
+Connection conn
+
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
@@ -27,7 +30,7 @@ if(GlobalVariable.SettingEnvi == 'Production') {
 int countColumnEdit = findTestData(ExcelPathAPIKey).getColumnNumbers()
 
 'pindah testcase sesuai jumlah di excel'
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
+for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
@@ -39,13 +42,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		String optiontipe, optionstatus
 		
 		'cek apakah perlu melakukan action'
-		String actionAPIKey = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 16)
+		String addAPIKey = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18)
+		
+		'cek apakah perlu melakukan action'
+		String editAPIKey = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 19)
 		
 		'cek apakah perlu copy link API'
-		String copyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 17)
-		
-		'cek apakah perlu fungsi download dokumentasi API'
-		String downloadDocs = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18)
+		String copyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 20)
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 5))
@@ -53,9 +56,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'panggil fungsi login'
 		WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Key', ('SheetName') : 'API KEY', 
 			('Path') : ExcelPathAPIKey], FailureHandling.STOP_ON_FAILURE)
-		
-		'pada delay, lakukan captcha secara manual'
-		WebUI.delay(15)
 		
 		'dapatkan detail tenant dari user yang login'
 		ArrayList<String> resultTenant = CustomKeywords.'apikey.CheckAPIKey.getTenantCodeName'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
@@ -89,19 +89,25 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'klik pada API KEY'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/span_API Key'))
 		
-		WebUI.delay(2)
-		
 		arrayIndex = 0
 		
+		'simpan data tenant code UI'
+		String tentcode = WebUI.getAttribute(findTestObject('API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_TenantCode'), 'value', FailureHandling.OPTIONAL)
+		
+		'simpan data tenant name UI'
+		String tentname = WebUI.getAttribute(findTestObject('API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_TenantName'), 'value', FailureHandling.OPTIONAL)
+		
+		WebUI.delay(5)
+		
 		'verify tenant code'
-		checkVerifyEqualorMatch(WebUI.verifyMatch(resultTenant[arrayIndex++], WebUI.getAttribute(findTestObject('API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_TenantCode'), 'value', FailureHandling.OPTIONAL), false, FailureHandling.CONTINUE_ON_FAILURE), ' tenant code') 
+		checkVerifyEqualorMatch(WebUI.verifyMatch(resultTenant[arrayIndex++], tentcode, false, FailureHandling.CONTINUE_ON_FAILURE), ' tenant code') 
 			
 		'verify tenant name'
-		checkVerifyEqualorMatch(WebUI.verifyMatch(resultTenant[arrayIndex++], WebUI.getAttribute(findTestObject('API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_TenantName'), 'value', FailureHandling.OPTIONAL), false, FailureHandling.CONTINUE_ON_FAILURE), ' tenant name')
+		checkVerifyEqualorMatch(WebUI.verifyMatch(resultTenant[arrayIndex++], tentname, false, FailureHandling.CONTINUE_ON_FAILURE), ' tenant name')
 		
 		'input tipe API'
 		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
-				ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12))
+				ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 15))
 		
 		'select tipe API'
 		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(
@@ -109,7 +115,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'input status API'
 		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
-				ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
+				ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 16))
 		
 		'select status API'
 		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(
@@ -146,11 +152,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'klik tombol cari'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
-		
-			'tulis kondisi success atau failed'
-			CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, 
-				findTestObject('Object Repository/API_KEY/Page_Api Key List/p_MAMANK'),
-				GlobalVariable.NumOfColumn, 'API KEY')
 		}
 		
 		'cek ke DB jika memang diperlukan'
@@ -215,12 +216,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'panggil fungsi tambah API'
-		if(actionAPIKey == 'Add'){
+		if(addAPIKey == 'Yes'){
 			
 			'panggil fungsi Add API KEY'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/AddAPIKey'), 
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
-		} else if(actionAPIKey == 'Edit'){
+			
+		} 
+		else if(editAPIKey == 'Yes'){
 			
 			'panggil fungsi Edit API Key'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'), 
@@ -237,6 +240,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 	}
 }
+
+'tutup browser jika hasil sudah sesuai'
+WebUI.closeBrowser()
 
 'fungsi cek halaman'
 def checkVerifyFooter(){

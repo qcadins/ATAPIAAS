@@ -198,6 +198,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 								';') + GlobalVariable.FailedReasonSubTotalCalc)
 				
 						GlobalVariable.FlagFailed = 1
+						
+						WebUI.refresh()
+						
+						continue
 					}
 				}
 				else {
@@ -208,6 +212,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							';') + GlobalVariable.FailedReasonHargaSatuan)
 			
 					GlobalVariable.FlagFailed = 1
+					
+					WebUI.refresh()
+					
+					continue
 				}
 				
 				'cek apakah button save bisa di-klik'
