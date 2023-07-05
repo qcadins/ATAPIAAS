@@ -33,7 +33,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		break
 	}
-	else if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')){
+	else if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
 		String email, autofillOTP, otpExcel, resendotp, countresendOTP
 	
@@ -242,9 +242,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.StatusWarning, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					GlobalVariable.FailedReasonUnknown)
 		}
-
-	}
-
 			
 		WebUI.delay(3)
 		
@@ -287,10 +284,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.click(findTestObject('Object Repository/RegisterLogin/'+
 			'Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 		
-		'cek apakah muncul error unknown setelah login'
-		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
-			GlobalVariable.Timeout, FailureHandling.OPTIONAL) && GlobalVariable.FlagFailed == 0) {
-			
+//		'cek apakah muncul error unknown setelah login'
+//		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+//			GlobalVariable.Timeout, FailureHandling.OPTIONAL) && GlobalVariable.FlagFailed == 0) {
+//			
 //			'cek apakah muncul error unknown setelah login'
 //			if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
 //				GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {

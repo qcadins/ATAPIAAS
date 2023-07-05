@@ -26,7 +26,7 @@ int countColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
 Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'looping kolom dari testdata'
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
+for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; GlobalVariable.NumOfColumn++) {
 	
     'status kosong berhentikan testing, status selain unexecuted akan dilewat'
     if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
