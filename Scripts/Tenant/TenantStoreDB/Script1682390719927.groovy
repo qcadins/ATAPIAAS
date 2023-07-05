@@ -78,7 +78,7 @@ indexServices = 0
 
 for (indexExcel = 0 ; indexExcel < arrayServices.size(); indexExcel++) {
 	
-	String services = resultServices[indexServices++]
+	String services = resultServices[indexServices++].toString()
 	
 	if (services.equalsIgnoreCase(arrayServices[indexExcel])) {
 		

@@ -28,16 +28,6 @@ if(GlobalVariable.SettingEnvi == 'Production') {
 'mendapat jumlah kolom dari sheet Tenant'
 int countColumnEdit = findTestData(ExcelPathTenant).getColumnNumbers()
 
-'call test case login admin esign'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Tenant', ('SheetName') : 'Tenant', 
-	('Path') : ExcelPathTenant] , FailureHandling.STOP_ON_FAILURE)
-
-'click menu tenant'
-WebUI.click(findTestObject('Tenant/menu_Tenant'))
-
-'call function check paging'
-checkPaging(conn)
-
 ArrayList<String> arrayServices, arrayVendor
 
 'looping tenant'
@@ -51,13 +41,21 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		break
 	} 
 	else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+				
+		'call test case login admin esign'
+		WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Tenant', ('SheetName') : 'Tenant',
+			('Path') : ExcelPathTenant] , FailureHandling.STOP_ON_FAILURE)
 		
-	'check if action new/services/edit/balancechargetype'
-		if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) 
-		{
-			'click menu tenant'
-			WebUI.click(findTestObject('Tenant/menu_Tenant'))
-			
+		'click menu tenant'
+		WebUI.click(findTestObject('Tenant/menu_Tenant'))
+		
+		if(GlobalVariable.NumOfColumn == 2) {
+			'call function check paging'
+			checkPaging(conn)
+		}
+		
+		'check if action new/services/edit/balancechargetype'
+		if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {			
 			'click button Baru'
 			WebUI.click(findTestObject('Tenant/Button_Baru'))
 
@@ -150,12 +148,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'get array email reminder dari excel'
 			arrayEmailReminder = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 22).split(';', -1)
-			
-			'ambil ukuran dari array email reminder'
-			int EmailReminderTotal = arrayEmailReminder.size()
 
 			'looping untuk input email reminder'
-			for (index = 1; index <= EmailReminderTotal; index++) {
+			for (index = 1; index <= arrayEmailReminder.size(); index++) {
 				
 				'modify object input email'
 				modifyObjectInputEmail = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'), 'xpath',
@@ -234,10 +229,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			}
 		} 
 		else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Service')) {
-			
-			'click menu tenant'
-			WebUI.click(findTestObject('Tenant/menu_Tenant'))
-			
+			'call function search tenant'
 			searchTenant()
 
 			if(WebUI.verifyElementPresent(findTestObject('Tenant/button_ServiceBalance'), GlobalVariable.Timeout, 
@@ -343,12 +335,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'call function check saldo setelah setting services'
 			checkSaldo()
-		} 
-		else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
-			
-			'click menu tenant'
-			WebUI.click(findTestObject('Tenant/menu_Tenant'))
-			
+		} else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {			
 			'panggil fungsi search'
 			searchTenant()
 
@@ -418,7 +405,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						'div/form/div[' + index) + ']/button', true)
 				
 				'break if index udah lebih dari 34 HARDCODE karena tidak bisa di track objectnya'
-				if (index > 34) {
+				if (index > 19) {
 					
 					break
 				}
@@ -477,9 +464,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'get array email reminder dari excel'
 			arrayEmailReminder = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 22).split(';', -1)
-			
-			'ambil ukuran dari array email reminder'
-			int EmailReminderTotal = arrayEmailReminder.size()
 
 			'looping untuk hapus email reminder yang tidak ada di excel'
 			for (index = 20; index <= variable.size(); index++) {
@@ -527,7 +511,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			for (indexexcel = 1; indexexcel <= arrayEmailReminder.size(); indexexcel++) {
 				
 				'looping untuk input email reminder'
-				for (index = 35; index <= variable.size(); index++) {
+				for (index = 20; index <= variable.size(); index++) {
 					
 					'modify object input email'
 					modifyObjectInputEmail = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
@@ -543,8 +527,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						WebUI.setText(modifyObjectInputEmail, arrayEmailReminder[(indexexcel - 1)])
 
 						break
-					} 
-					else if (WebUI.getAttribute(modifyObjectInputEmail, 'value', FailureHandling.OPTIONAL).equalsIgnoreCase(
+					} else if (WebUI.getAttribute(modifyObjectInputEmail, 'value', FailureHandling.OPTIONAL).equalsIgnoreCase(
 						arrayEmailReminder[(indexexcel - 1)])) {
 					
 						break
@@ -608,12 +591,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				
 				continue
 			}
-		}
-		else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('ChargeType')){
-			
-			'click menu tenant'
-			WebUI.click(findTestObject('Tenant/menu_Tenant'))
-			
+		} else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('ChargeType')){
 			'panggil fungsi search'
 			searchTenant()
 
