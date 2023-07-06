@@ -207,7 +207,7 @@ if(WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgnor
 } else {
 	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
-	GlobalVariable.StatusFailed, (findTestData(	).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+	GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 	'gagal mengirimkan ulang email aktivasi')
 	
 	GlobalVariable.FlagFailed = 1
