@@ -370,9 +370,11 @@ def checkdialogConfirmation (int isMandatoryComplete) {
 				'verify peran'
 				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Peran')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 21), false, FailureHandling.CONTINUE_ON_FAILURE), ' peran')
 				
-				'call testcase user verif'
-				WebUI.callTestCase(findTestCase('User Management/UserVerification'), [('excelPathUser') : 'User Management/DataTestingUser'],
-					FailureHandling.CONTINUE_ON_FAILURE)
+				if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
+					'call testcase user verif'
+					WebUI.callTestCase(findTestCase('User Management/UserVerification'), [('excelPathUser') : 'User Management/DataTestingUser'],
+						FailureHandling.CONTINUE_ON_FAILURE)
+				}
 			}
 		}
 		else {
@@ -396,18 +398,6 @@ def checkdialogConfirmation (int isMandatoryComplete) {
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					editCondition)
-			
-			'call function search user'
-			searchUser()
-			
-			'verify nama depan'
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_NamaDepan')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 25), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama depan')
-			
-			'verify email'
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Email')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 14), false, FailureHandling.CONTINUE_ON_FAILURE), ' Email')
-			
-			'verify peran'
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Peran')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 27), false, FailureHandling.CONTINUE_ON_FAILURE), ' peran')
 		}
 	}	
 }

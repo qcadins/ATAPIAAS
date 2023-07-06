@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "17A3ACEB94C09E9D23FBBB795F2726DD",
+  "keywordFileContentHash": "1D2A45B4D8B73B14DB087B988F87A7E1",
   "keywordClasses": [
     {
       "name": "apikey.CheckAPIKey",
@@ -33,11 +33,13 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getAttributeValueAPI",
-          "parameters": []
+          "parameters": [],
+          "javadoc": ""
         },
         {
           "name": "getAPIStatusfromDB",
@@ -68,7 +70,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getTotalAPIKeyfromDB",
@@ -99,7 +102,8 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         },
         {
           "name": "getTenantCodeName",
@@ -130,10 +134,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

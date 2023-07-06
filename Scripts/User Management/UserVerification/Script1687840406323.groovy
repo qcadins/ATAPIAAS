@@ -59,7 +59,7 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platf
 if(WebUI.verifyElementNotPresent(findTestObject('User Management-User/label_TextError'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
-	GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 
+	GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 
 	'Berhasil Login dengan user yang belum aktivasi')
 	
 	GlobalVariable.FlagFailed = 1
@@ -172,15 +172,42 @@ if(WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgnor
 	'Page_Balance/i_SEDARA MANYURA_ft-menu font-medium-3'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 		'gagal login dengan user yang baru terdaftar dan sudah aktivasi')
 
 		GlobalVariable.FlagFailed = 1
 	}
+	
+	'click profile'
+	WebUI.click(findTestObject('User Management-User/user_Profile'))
+	
+	'click logout'
+	WebUI.click(findTestObject('User Management-User/button_LogOut'))
+	
+	'input data email'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+			'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+			findTestData(excelPathUser).getValue(2, 11))
+	
+	'input password'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+			'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+			findTestData(excelPathUser).getValue(2, 12))
+	
+	'ceklis pada reCaptcha'
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
+			'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	
+	'pada delay, lakukan captcha secara manual'
+	WebUI.delay(10)
+	
+	'klik pada button login'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+			'button_Lanjutkan Perjalanan Anda'))
 } else {
 	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
-	GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+	GlobalVariable.StatusFailed, (findTestData(	).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 	'gagal mengirimkan ulang email aktivasi')
 	
 	GlobalVariable.FlagFailed = 1
