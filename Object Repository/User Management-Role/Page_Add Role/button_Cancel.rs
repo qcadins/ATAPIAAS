@@ -13,8 +13,12 @@
          <key>XPATH</key>
          <value>//button[@type='button']</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'button' and @class = 'btn btn-light mr-2 ng-star-inserted']</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>button</value>
-      <webElementGuid>fb0e0ee1-6902-42a5-9047-10aa37b32e71</webElementGuid>
+      <webElementGuid>0534d005-0dce-400a-9d1c-656be4479767</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,23 +34,23 @@
       <name>type</name>
       <type>Main</type>
       <value>button</value>
-      <webElementGuid>22e278e5-c3ea-42b0-a2bf-9b4fed7264ab</webElementGuid>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>class</name>
-      <type>Main</type>
-      <value>btn btn-light mr-2 ng-star-inserted</value>
-      <webElementGuid>bfc131a8-3509-4d58-b58a-4a0ff3332294</webElementGuid>
+      <webElementGuid>7ce68669-2646-48ea-8162-af442a72a4f9</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>btn btn-light mr-2 ng-star-inserted</value>
+      <webElementGuid>0ec87610-bd8f-47d8-806c-ef39737dfe2d</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> Cancel</value>
-      <webElementGuid>cc110c46-581b-45ba-8317-04eb3a469c88</webElementGuid>
+      <webElementGuid>cbc6197f-5a70-4036-becc-bdc5bc111351</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;msxForm&quot;)/div[@class=&quot;row ng-star-inserted&quot;]/div[@class=&quot;col-12 text-center&quot;]/button[@class=&quot;btn btn-light mr-2 ng-star-inserted&quot;]</value>
-      <webElementGuid>ba92db35-bb94-46c3-b9c5-cf6e61417abb</webElementGuid>
+      <webElementGuid>3408fccc-a1e8-466d-ad33-bb745a396ab1</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -62,7 +66,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//button[@type='button']</value>
-      <webElementGuid>5ccd747e-8a32-411f-8735-c71e477bbb01</webElementGuid>
+      <webElementGuid>ba66ac25-009b-414d-a702-114b61d95ca8</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +74,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//form[@id='msxForm']/div[2]/div/button</value>
-      <webElementGuid>ef8e0e20-4481-4c38-a289-b17f0ea20eeb</webElementGuid>
+      <webElementGuid>4b31bc8c-0439-49fb-90ca-dd269e53415e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='*'])[1]/following::button[1]</value>
-      <webElementGuid>db576abb-c830-4199-a373-7431bda4c182</webElementGuid>
+      <webElementGuid>76a7b2cc-c324-4685-b3af-ddcfe5aa0316</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +90,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Next'])[1]/preceding::button[1]</value>
-      <webElementGuid>2b9ec90b-8d4b-41ca-a457-8907ed95f677</webElementGuid>
+      <webElementGuid>5fe7ad51-8681-4210-ab5d-7371c1280eb4</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,7 +98,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Terms of Service'])[1]/preceding::button[2]</value>
-      <webElementGuid>9229e9f2-6062-4aed-b7ec-c9bbd8c7d266</webElementGuid>
+      <webElementGuid>5007b893-2fef-4508-9f38-a051a8274a8d</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -102,7 +106,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='Cancel']/parent::*</value>
-      <webElementGuid>9b7c7ab7-f353-4f04-a56e-25e01855648c</webElementGuid>
+      <webElementGuid>1b6be4de-9319-409b-91b2-45c0a4892622</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -110,7 +114,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//button</value>
-      <webElementGuid>b36f1b23-27c8-4473-ba3f-d8389991c6ff</webElementGuid>
+      <webElementGuid>c95d2f46-33d6-4288-b5d4-63832dbea2ce</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -118,6 +122,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//button[@type = 'button' and (text() = ' Cancel' or . = ' Cancel')]</value>
-      <webElementGuid>65946470-9484-4dd2-b36e-f175eddcf3b3</webElementGuid>
+      <webElementGuid>5b7d2d62-dc7b-4aff-ae44-6a6965b50db2</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

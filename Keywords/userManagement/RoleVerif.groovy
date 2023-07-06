@@ -74,7 +74,7 @@ public class RoleVerif {
 		ArrayList listdata = []
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT menu_code FROM am_msmenu mn LEFT JOIN am_menuofrole mor ON mor.id_ms_menu = mn.id_ms_menu LEFT JOIN am_msrole msr ON msr.id_ms_role = mor.id_ms_role WHERE msr.role_name = '" + roleName + "' AND msr.usr_crt = '" + email + "'")
+		ResultSet resultSet = stm.executeQuery("SELECT menu_code FROM am_msmenu mn LEFT JOIN am_menuofrole mor ON mor.id_ms_menu = mn.id_ms_menu LEFT JOIN am_msrole msr ON msr.id_ms_role = mor.id_ms_role WHERE msr.role_name = '" + roleName + "' AND msr.usr_crt = '" + email + "' AND menu_code != 'MANAGE_USER'")
 		ResultSetMetaData metadata = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()

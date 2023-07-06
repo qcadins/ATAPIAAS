@@ -81,7 +81,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 20))
 			
 			'panggil fungsi cek konfirmasi dialog'
-			checkdialogConfirmation(isMandatoryComplete)
+			if(checkdialogConfirmation(isMandatoryComplete) == true) {
+				
+				'jika failed mandatory continue testcase'
+				continue
+			}
 			
 			'input nama role'
 			WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Role Name_roleName'),
@@ -118,7 +122,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				Keys.chord(Keys.ENTER))
 			
 			'panggil fungsi cek konfirmasi dialog'
-			checkdialogConfirmation(isMandatoryComplete)
+			if(checkdialogConfirmation(isMandatoryComplete) == true) {
+				
+				'jika failed mandatory continue testcase'
+				continue
+			}
 			
 			'input nama role'
 			WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Role Name_roleName'),
@@ -287,6 +295,8 @@ def searchRole() {
 
 def checkdialogConfirmation(int isMandatoryComplete) {
 	
+	boolean shouldcontinue = false
+	
 	if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_Next'), 
 		'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 			
@@ -294,6 +304,11 @@ def checkdialogConfirmation(int isMandatoryComplete) {
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonMandatory)
+		
+		'klik pada tombol batal'
+		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_Cancel'))
+		
+		shouldcontinue = true
 	}
 	else {
 		
@@ -314,6 +329,8 @@ def checkdialogConfirmation(int isMandatoryComplete) {
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					GlobalVariable.FailedReasonExisted)
+			
+			shouldcontinue = true
 		}
 		else {
 			
@@ -349,6 +366,8 @@ def checkdialogConfirmation(int isMandatoryComplete) {
 			}
 		}
 	}
+	
+	return shouldcontinue
 }
 
 def beforeEditVerif (Connection connUAT) {
