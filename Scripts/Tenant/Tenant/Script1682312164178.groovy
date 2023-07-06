@@ -53,8 +53,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
 	'check if action new/services/edit/balancechargetype'
-		if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) 
-		{
+		if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
 			'click menu tenant'
 			WebUI.click(findTestObject('Tenant/menu_Tenant'))
 			
@@ -212,6 +211,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 								GlobalVariable.FailedReasonUnknown)
 					}
 					else {
+						'call function checkAfterAddorEdit'
+						checkAfterAddorEdit()
 						
 						'write to excel success'
 						CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Tenant', 0,
@@ -591,6 +592,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 								GlobalVariable.FailedReasonUnknown)
 					}
 					else {
+						'call function check afteraddoredit'
+						checkAfterAddorEdit()
 						
 						'write to excel success'
 						CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Tenant', 0,
@@ -954,4 +957,29 @@ def checkSaldo() {
 	println(servicesNameUISaldo)
 	
 	servicesNameActive.containsAll(servicesNameUISaldo)
+}
+
+'fungsi untuk melakukan pengecekan '
+def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
+	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+			(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
+
+		GlobalVariable.FlagFailed = 1
+	}
+}
+
+def checkAfterAddorEdit() {
+	'input nama tenant'
+	WebUI.setText(findTestObject('Tenant/input_NamaTenant'),
+		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13))
+
+	'click button cari'
+	WebUI.click(findTestObject('Tenant/button_Cari'))
+	
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Tenant/label_TenantName')), findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama tenant setelah add')
+	
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Tenant/label_TenantCode')), findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14), false, FailureHandling.CONTINUE_ON_FAILURE), ' kode tenant setelah add')
 }
