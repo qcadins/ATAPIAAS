@@ -38,7 +38,7 @@ WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/
 WebUI.click(findTestObject('Object Repository/User Management-User/Page_Balance/span_User'))
 
 'panggil fungsi check paging'
-//checkPaging(conndev)
+checkPaging(conndev)
 
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	

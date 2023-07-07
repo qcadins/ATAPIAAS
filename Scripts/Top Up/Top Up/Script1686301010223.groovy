@@ -425,12 +425,15 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'klik pada clickable text'
 			WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/LinkReceipt'))
-		
+				
+			WebUI.delay(10)
+			
 			'klik tombol cari'
 			WebUI.click(findTestObject('Object Repository/Top Up/Page_List Transaction History/button_Cari'))
-			
+				
 			'panggil fungsi cek riwayat terakhir'
 			getLastTrx(noTrxKatalon, conndev)
+			
 		}
 		
 		'jika tidak error dan mandatory lengkap'

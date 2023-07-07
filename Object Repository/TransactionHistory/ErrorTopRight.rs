@@ -7,17 +7,17 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@class = 'ng-tns-c95-10 toast-message ng-star-inserted']</value>
+         <value>//*[contains(@class, 'toast-message ng-star-inserted')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
+      <matchCondition>contains</matchCondition>
       <name>class</name>
       <type>Main</type>
-      <value>ng-tns-c95-10 toast-message ng-star-inserted</value>
-      <webElementGuid>95a66a8b-acec-49de-b627-e61826966baa</webElementGuid>
+      <value>toast-message ng-star-inserted</value>
+      <webElementGuid>973b27f2-ee70-4b3c-898b-11b4d9c34be0</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

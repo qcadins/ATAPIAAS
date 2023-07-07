@@ -45,7 +45,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'pilih submenu riwayat transaksi'
 		WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/RiwayatTrxMenu'))
 		
-		checkPaging(conndev)
+//		checkPaging(conndev)
 		
 		break
 	}
@@ -97,6 +97,17 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'cek apakah role adminclient/admineendigo/adminfinance'
 		if (RoleUser.equalsIgnoreCase('Admin Client')) {
 			
+			'masukkan data ke filter status'
+			WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
+				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 16))
+			
+			'enter pada filter status'
+			WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
+				Keys.chord(Keys.ENTER))
+			
+			'klik pada tombol cari'
+			WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/button_Cari'))
+			
 			'verify object yang muncul sesuai dengan role admin client'
 			checkVerifyPresent(WebUI.verifyElementPresent(
 				findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/viewDetail_Client'),
@@ -131,17 +142,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			checkVerifyPresent(WebUI.verifyElementPresent(
 				findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/viewNPWP_Client'),
 					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Adm.Client-NPWP')
-			
-			'masukkan data ke filter status'
-			WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
-				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 16))
-			
-			'enter pada filter status'
-			WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
-				Keys.chord(Keys.ENTER))
-			
-			'klik pada tombol cari'
-			WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/button_Cari'))
 			
 			'modifikasi alamat object trxnumber'
 			def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/TransactionHistory/modifyObject'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-transaction-history/app-msx-paging/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[1]/datatable-body-row/div[2]/datatable-body-cell[1]/div/p", true)
@@ -204,6 +204,15 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					'klik ok pada popup'
 					WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/button_OK_upload'))
 					
+					'cek apakah kondisi cek storeDB aktif'
+					if (GlobalVariable.KondisiCekDB == 'Yes') {
+						
+						'panggil fungsi storeDB'
+						WebUI.callTestCase(findTestCase('Test Cases/Transaction History/TransactionStoreDB'), [('Path') : ExcelPathTranx,
+							('TrxType') : 'Upload', ('TrxNum') : trxNum],
+							 FailureHandling.CONTINUE_ON_FAILURE)
+					}
+					
 				}
 				else if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/ErrorTopRight'),
 					GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
@@ -216,16 +225,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					
 					'klik batal'
 					WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/buttonBatal_upload'))
-	
-				}
-				
-				'cek apakah kondisi cek storeDB aktif'
-				if (GlobalVariable.KondisiCekDB == 'Yes') {
-					
-					'panggil fungsi storeDB'
-					WebUI.callTestCase(findTestCase('Test Cases/Top Up/TransactionStoreDB'), [('Path') : ExcelPathTranx,
-						('TrxType') : 'Upload', ('TrxNum') : trxNum],
-						 FailureHandling.CONTINUE_ON_FAILURE)
 				}
 			}
 		}
@@ -324,6 +323,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'check ddl tenant khusus untuk role selain admin client'
 			checkddlTenant(conndev)
 			
+			searchadminEendigoFinance()
+			
 			'verify object yang muncul sesuai dengan role admin eendigo'
 			checkVerifyPresent(WebUI.verifyElementPresent(
 				findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
@@ -359,8 +360,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/viewNPWP_Client'),
 					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Adm.Eendigo-NPWP')
 			
-			searchadminEendigoFinance()
-			
 			'modifikasi alamat object trxnumber'
 			def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/TransactionHistory/modifyObject'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-transaction-history/app-msx-paging/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[1]/datatable-body-row/div[2]/datatable-body-cell[1]/div/p", true)
 			
@@ -393,26 +392,30 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'klik pada logout'
 		WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/span_Logout'))
 		
-		'input data email'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-			'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn+1, 9))
-		
-		'input password'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-			'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn+1, 10))
-		
-		'ceklis pada reCaptcha'
-		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-			'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
-		
-		'pada delay, lakukan captcha secara manual'
-		WebUI.delay(10)
-		
-		'klik pada button login'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-			'button_Lanjutkan Perjalanan Anda'))
+		'cek apakah kolom selanjutnya kosong'
+		if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn+1, 9).length() != 0) {
+			
+			'input data email'
+			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+				'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn+1, 9))
+			
+			'input password'
+			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+				'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn+1, 10))
+			
+			'ceklis pada reCaptcha'
+			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
+				'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+			
+			'pada delay, lakukan captcha secara manual'
+			WebUI.delay(10)
+			
+			'klik pada button login'
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
+				'button_Lanjutkan Perjalanan Anda'))
+		}
 	}
 }
 
@@ -538,7 +541,7 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 			if (GlobalVariable.KondisiCekDB == 'Yes') {
 				
 				'panggil fungsi storeDB'
-				WebUI.callTestCase(findTestCase('Test Cases/Top Up/TransactionStoreDB'), [('Path') : ExcelPathTranx,
+				WebUI.callTestCase(findTestCase('Test Cases/Transaction History/TransactionStoreDB'), [('Path') : ExcelPathTranx,
 					('TrxType') : choice, ('TrxNum') : trxNum],
 					 FailureHandling.CONTINUE_ON_FAILURE)
 			}

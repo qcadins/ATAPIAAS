@@ -1,18 +1,18 @@
 {
-  "keywordFileContentHash": "8A9EABCFC17C85632CB09B33B1B088FA",
+  "keywordFileContentHash": "34FDC4F508CC7D22620132B11C968A31",
   "keywordClasses": [
     {
-      "name": "customizeKeyword.ParseDate",
+      "name": "forgotPass.ForgotpassVerif",
       "keywordMethods": [
         {
-          "name": "parseDateFormat",
+          "name": "getResetCode",
           "parameters": [
             {
-              "name": "date",
+              "name": "conn",
               "initialExpression": "",
               "type": {
-                "fullClassName": "java.lang.String",
-                "unresolvedClassName": "String",
+                "fullClassName": "java.sql.Connection",
+                "unresolvedClassName": "Connection",
                 "isArray": false,
                 "isGnericsPlaceHolder": false,
                 "hasImmutableClassName": false,
@@ -21,20 +21,7 @@
               }
             },
             {
-              "name": "format1",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.lang.String",
-                "unresolvedClassName": "String",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            },
-            {
-              "name": "format2",
+              "name": "email",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
