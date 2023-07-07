@@ -338,7 +338,7 @@ def getSaldoforTransaction(String NamaOCR) {
 	
 	if(WebUI.verifyElementPresent(findTestObject('Object Repository/OCR Testing/TrxNumber'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {		
 		'cari element dengan nama saldo'
-		def elementNamaSaldo = DriverFactory.webDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
+		def elementNamaSaldo = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
 		
 		'lakukan loop untuk cari nama saldo yang ditentukan'
 		for (int i=1; i<=elementNamaSaldo.size(); i++) {

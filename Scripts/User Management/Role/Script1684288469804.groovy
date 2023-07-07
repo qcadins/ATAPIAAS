@@ -94,7 +94,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'klik pada tombol cari'
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/button_Search'))	
 			
-			'verify nama depan'
+			'verify nama role'
 			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-Role/label_Role')), findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 20), false, FailureHandling.CONTINUE_ON_FAILURE), ' Nama Role')
 		}
 		else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
@@ -143,7 +143,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'klik pada tombol cari'
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/button_Search'))
 			
-			'verify nama depan'
+			'verify nama role'
 			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-Role/label_Role')), findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 17), false, FailureHandling.CONTINUE_ON_FAILURE), ' Nama Role')
 		}
 		else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Settings')) {

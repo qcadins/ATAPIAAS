@@ -6,12 +6,12 @@
    <elementGuidId>c2693ddf-aa22-4672-b8ed-e74f62148f07</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
-         <value>#couponStartDate</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>//input[@id='couponStartDate']</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>#couponStartDate</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +22,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>8513081a-226f-4211-b38c-6aa154449f83</webElementGuid>
+      <webElementGuid>58cda2f8-2811-4700-8718-0c0cf9279a83</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +30,7 @@
       <name>type</name>
       <type>Main</type>
       <value>text</value>
-      <webElementGuid>c26d6944-fe9b-42f9-b933-712876ce758a</webElementGuid>
+      <webElementGuid>c21e7e57-09a1-469b-b458-927548b7102a</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +38,7 @@
       <name>class</name>
       <type>Main</type>
       <value>form-control ng-untouched ng-pristine ng-invalid</value>
-      <webElementGuid>484ab985-c8b9-41c5-83c8-d07d7466a58e</webElementGuid>
+      <webElementGuid>b9f6983a-1d84-4342-984b-ddfc1e60a50f</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +46,7 @@
       <name>ng-reflect-name</name>
       <type>Main</type>
       <value>couponStartDate</value>
-      <webElementGuid>51e2684b-fe0c-4a71-a01d-492ed63d53be</webElementGuid>
+      <webElementGuid>185cb05b-fb1d-4f24-bd67-84b4c05e764b</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -54,7 +54,7 @@
       <name>id</name>
       <type>Main</type>
       <value>couponStartDate</value>
-      <webElementGuid>6c305e82-7bbc-4ead-b97f-39f9674ca7a6</webElementGuid>
+      <webElementGuid>b7028005-6122-4c82-a553-dd76b3da3098</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -62,7 +62,7 @@
       <name>placeholder</name>
       <type>Main</type>
       <value>yyyy-mm-dd</value>
-      <webElementGuid>63f4645f-7e61-42a6-91fd-6210d1037a4d</webElementGuid>
+      <webElementGuid>91aae9d5-0447-4f5a-a51b-8a38f1eb00f7</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -70,7 +70,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;couponStartDate&quot;)</value>
-      <webElementGuid>69b4110d-9c8a-4fca-b59b-a64cde00de1a</webElementGuid>
+      <webElementGuid>621174ab-eb52-4c53-8296-bb53bb6ec324</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -78,7 +78,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//input[@id='couponStartDate']</value>
-      <webElementGuid>b1077217-e263-4ea9-b0a8-2f2a5280989c</webElementGuid>
+      <webElementGuid>a629130f-110d-4e45-9b4e-0a5f46bb49d6</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +86,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//app-date/fieldset/div/input</value>
-      <webElementGuid>a962e82f-460d-4e95-aa63-eb3fd87f14d6</webElementGuid>
+      <webElementGuid>837b4125-7e8c-41e1-961c-0651ebd63e85</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,6 +94,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//input[@type = 'text' and @id = 'couponStartDate' and @placeholder = 'yyyy-mm-dd']</value>
-      <webElementGuid>cdd30206-69d2-4633-a3d8-b04e3e0618f8</webElementGuid>
+      <webElementGuid>0e9e7ad3-f17e-40f4-b8d3-10e2b3772a73</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

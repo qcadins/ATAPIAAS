@@ -60,6 +60,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.click(findTestObject('Object Repository/User Management-Role/' +
 			'Page_Balance/i_SEDARA MANYURA_ft-menu font-medium-3'))
 		
+		if(WebUI.verifyElementNotVisible(findTestObject('Object Repository/User Management-User/Page_Balance/span_User'), FailureHandling.OPTIONAL)) {
+			'pilih submenu manage user'
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/a_Manage User'))
+		}
+		
 		'klik pada user'
 		WebUI.click(findTestObject('Object Repository/User Management-User/Page_Balance/span_User'))
 		
@@ -353,22 +358,38 @@ def checkdialogConfirmation (int isMandatoryComplete) {
 					WebUI.callTestCase(findTestCase('Test Cases/User Management/UserStoreDB'), [('Path') : ExcelPathUser],
 						 FailureHandling.CONTINUE_ON_FAILURE)
 				}
-							
-				'input email'
-				WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/input_Email_email'),
-						findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
+				if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
+					'input email'
+					WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/input_Email_email'),
+							findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
+				} else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
+					'input email'
+					WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/input_Email_email'),
+							findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 14))
+				}
 				
 				'klik pada tombol cari'
 				WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/button_Search'))
 				
-				'verify nama depan'
-				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_NamaDepan')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 19), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama depan')
-				
-				'verify email'
-				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Email')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18), false, FailureHandling.CONTINUE_ON_FAILURE), ' Email')
-				
-				'verify peran'
-				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Peran')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 21), false, FailureHandling.CONTINUE_ON_FAILURE), ' peran')
+				if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
+					'verify nama depan'
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_NamaDepan')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 19), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama depan')
+					
+					'verify email'
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Email')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18), false, FailureHandling.CONTINUE_ON_FAILURE), ' Email')
+					
+					'verify peran'
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Peran')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 21), false, FailureHandling.CONTINUE_ON_FAILURE), ' peran')
+				} else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
+					'verify nama depan'
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_NamaDepan')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 25), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama depan')
+					
+					'verify email'
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Email')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 14), false, FailureHandling.CONTINUE_ON_FAILURE), ' Email')
+					
+					'verify peran'
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Peran')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 27), false, FailureHandling.CONTINUE_ON_FAILURE), ' peran')
+				}
 				
 				if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
 					'call testcase user verif'
