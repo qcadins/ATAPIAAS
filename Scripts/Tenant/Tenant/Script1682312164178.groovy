@@ -979,7 +979,9 @@ def checkAfterAddorEdit() {
 	'click button cari'
 	WebUI.click(findTestObject('Tenant/button_Cari'))
 	
+	'verify tenant name after add or edit'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Tenant/label_TenantName')), findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 13), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama tenant setelah add')
 	
+	'verify tenant code after add or edit'
 	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Tenant/label_TenantCode')), findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14), false, FailureHandling.CONTINUE_ON_FAILURE), ' kode tenant setelah add')
 }
