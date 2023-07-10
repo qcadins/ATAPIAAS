@@ -257,3 +257,5 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 
 WebUI.closeBrowser()
 
+'panggil testcase untuk change password'
+WebUI.callTestCase(findTestCase('Test Cases/Change Password/ChangePassword'), [:], FailureHandling.STOP_ON_FAILURE)

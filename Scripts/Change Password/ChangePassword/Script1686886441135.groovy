@@ -35,7 +35,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	}
 	else if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
-		'jika gagal pilih role saat login'
+		'lakukan proses login dengan password lama'
 		loginFunction(10)
 		
 		'klik pada tombol untuk span profile'
@@ -92,8 +92,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			'panggil fungsi logout'
 			logoutFunction()
 			
-			'jika gagal pilih role saat login'
-			if (loginFunction(10) == 0) {
+			'login menggunakan password yang baru diubah'
+			if (loginFunction(13) == 0) {
 			
 				continue
 			}

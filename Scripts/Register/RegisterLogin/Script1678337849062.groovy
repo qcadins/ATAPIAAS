@@ -312,3 +312,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.closeBrowser()
 	}
 }
+
+'panggil testcase untuk edit profile'
+WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfile'), [:], FailureHandling.STOP_ON_FAILURE)

@@ -24,36 +24,4 @@
          <variableId>b7119612-6230-4996-b220-6c286085236f</variableId>
       </variableLink>
    </testCaseLink>
-   <testCaseLink>
-      <guid>70c89220-4b6e-4c3b-b49f-04d377134c2c</guid>
-      <isReuseDriver>false</isReuseDriver>
-      <isRun>true</isRun>
-      <testCaseId>Test Cases/Profile/EditProfile</testCaseId>
-      <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
-      <variableLink>
-         <testDataLinkId></testDataLinkId>
-         <type>DEFAULT</type>
-         <value></value>
-         <variableId>b06e4a39-ee4c-4dfb-96b4-3bd3ef55216a</variableId>
-      </variableLink>
-   </testCaseLink>
-   <testCaseLink>
-      <guid>7f4ab10c-5351-4fe2-b084-9dbd2e7e9f48</guid>
-      <isReuseDriver>false</isReuseDriver>
-      <isRun>true</isRun>
-      <testCaseId>Test Cases/Change Password/ChangePassword</testCaseId>
-      <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
-      <variableLink>
-         <testDataLinkId></testDataLinkId>
-         <type>DEFAULT</type>
-         <value></value>
-         <variableId>f37e7c58-e322-4ae9-84b3-0d49e90d2705</variableId>
-      </variableLink>
-      <variableLink>
-         <testDataLinkId></testDataLinkId>
-         <type>DEFAULT</type>
-         <value></value>
-         <variableId>a8fb929b-1281-4ff1-a689-bc916bf1d4ab</variableId>
-      </variableLink>
-   </testCaseLink>
 </TestSuiteEntity>

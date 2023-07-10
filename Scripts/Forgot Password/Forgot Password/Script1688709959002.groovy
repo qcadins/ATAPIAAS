@@ -26,7 +26,9 @@ WebUI.openBrowser('')
 'buka website APIAAS SIT, data diambil dari TestData Login'
 WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 2))
 
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
+for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
+	
+	GlobalVariable.FlagFailed = 0
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
@@ -52,6 +54,19 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'klik pada link forgot password'
 		WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Login - eendigo Platform/a_Lupa Kata Sandi'))
 
+		'pastikan field email kosong setelah klik cancel'
+		if (WebUI.getAttribute(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input__email'), 'class',
+			FailureHandling.STOP_ON_FAILURE) != 'form-control ng-untouched ng-pristine ng-invalid') {
+			
+			GlobalVariable.FlagFailed = 1
+		
+			'tulis error ke excel'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Forgot Password', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) +
+					';') + GlobalVariable.FailedReasonEmailFilled)
+		
+		}
+		
 		'input email yang akan dilakukan reset pass'
 		WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input__email'),
 			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 9))
@@ -66,6 +81,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'klik pada tombol periksa lagi'
 			WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/button_Periksa lagi'))
+			
+			'cek apakah inputan nya masih ada'
+			if (WebUI.getAttribute(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input__email'),
+				'value', FailureHandling.CONTINUE_ON_FAILURE) != 
+					findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 9)) {
+					
+				WriteToExcelInputVanished()
+			}
 			
 			'klik pada tombol lanjut'
 			WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/button_Lanjut'))
@@ -103,6 +126,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 						GlobalVariable.FailedReasonMandatory)
 			}
+			
+			'tulis adanya error pada sistem web'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Forgot Password', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.FailedReasonSubmitError)
 			
 			continue
 		}
@@ -162,6 +190,15 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'klik periksa lagi'
 		WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Reset Password/button_Periksa lagi'))
 		
+		'cek apakah inputan nya masih ada'
+		if (WebUI.getAttribute(findTestObject('Object Repository/Forgot Password/Page_Reset Password/input_newPassword'),
+			'value', FailureHandling.CONTINUE_ON_FAILURE) != findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 10)
+			|| WebUI.getAttribute(findTestObject('Object Repository/Forgot Password/Page_Reset Password/input_confirmNewPassword'),
+				'value', FailureHandling.CONTINUE_ON_FAILURE) != findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 11)) {
+				
+			WriteToExcelInputVanished()
+		}
+		
 		'klik button lanjut'
 		WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Reset Password/button_Simpan'))
 		
@@ -220,16 +257,19 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'klik pada tombol logout'
 			WebUI.click(findTestObject('Object Repository/Forgot Password/span_Logout'))
 			
-			'write to excel success'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Forgot Password', 0,
-				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
-		}
-		else if (isMandatoryComplete != 0) {
-			
-			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Forgot Password', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-					GlobalVariable.FailedReasonMandatory)
+			if (GlobalVariable.FlagFailed == 0 && isMandatoryComplete == 0) {
+				
+				'write to excel success'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Forgot Password', 0,
+					GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+			}
+			else {
+				
+				'tulis adanya error pada sistem web'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Forgot Password', GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+						GlobalVariable.FailedReasonMandatory)
+			}
 		}
 		else {
 			
@@ -294,9 +334,28 @@ def resendFunction(Connection conndev, int countResend, ArrayList resetCodefromD
 			resetCodefromDB.add(CustomKeywords.'forgotPass.ForgotpassVerif.getResetCode'(conndev,
 				findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 9)))
 			
+			'cek apakah resend gagal'
+			if (resetCodefromDB[i-1] == resetCodefromDB[i]) {
+				
+				GlobalVariable.FlagFailed = 1
+				
+				'tulis adanya error pada resend'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Forgot Password', GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+						GlobalVariable.FailedReasonOTP)
+			}
+			
 			'input reset code dari DB'
 			WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input_resetCode'),
 				resetCodefromDB[i])
 		}
 	}
+}
+
+def WriteToExcelInputVanished() {
+	
+	'tulis adanya error pada field input'
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Forgot Password', GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			'Input hilang ketika klik periksa lagi')
 }

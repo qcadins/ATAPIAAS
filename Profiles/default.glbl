@@ -76,6 +76,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'Field email tidak kosong'</initValue>
+      <name>FailedReasonEmailFilled</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Data sudah pernah diinput'</initValue>
       <name>FailedReasonExisted</name>
    </GlobalVariableEntity>
