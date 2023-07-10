@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input</name>
+   <name>input_username</name>
    <tag></tag>
-   <elementGuidId>e13d4e23-a8f1-4109-b14a-33af42fd0b9b</elementGuidId>
+   <elementGuidId>e3332013-8d22-452f-bd3e-4d7a8f911ca6</elementGuidId>
    <selectorCollection>
       <entry>
          <key>CSS</key>
-         <value>input[type=&quot;text&quot;]</value>
+         <value>input.form-control.ng-untouched.ng-pristine.ng-invalid</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -22,15 +22,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>d096e414-33fc-4052-8ef4-2e74969a1c02</webElementGuid>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>role</name>
-      <type>Main</type>
-      <value>combobox</value>
-      <webElementGuid>3e0c7415-806c-4898-922f-697f04a73a9d</webElementGuid>
+      <webElementGuid>a5f6dc45-a1ec-4772-ad50-1f36ba37064e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -38,63 +30,71 @@
       <name>type</name>
       <type>Main</type>
       <value>text</value>
-      <webElementGuid>35f6de49-b881-4bea-873b-7e6db090e5b8</webElementGuid>
+      <webElementGuid>bea90cb8-31a1-416b-9c63-1e52ca2b8067</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>autocorrect</name>
+      <name>formcontrolname</name>
       <type>Main</type>
-      <value>off</value>
-      <webElementGuid>66b11a48-d76e-42d1-bc18-b8b89995b50e</webElementGuid>
+      <value>email</value>
+      <webElementGuid>d6012a93-f612-442a-9eb6-459059157a6d</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>autocapitalize</name>
+      <name>size</name>
       <type>Main</type>
-      <value>off</value>
-      <webElementGuid>4f91bcf4-0f17-4e8c-8abd-53f6422c78d2</webElementGuid>
+      <value>36</value>
+      <webElementGuid>2f5c8be4-5cab-4421-b47e-f85a9bb9abcf</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>autocomplete</name>
+      <name>class</name>
       <type>Main</type>
-      <value>aa61777a899e</value>
-      <webElementGuid>955193d7-e6e9-4e90-9ff3-a0574107da51</webElementGuid>
+      <value>form-control ng-untouched ng-pristine ng-invalid</value>
+      <webElementGuid>934131b3-9bcd-4f60-8102-4d72f52cf2fc</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>aria-expanded</name>
+      <name>ng-reflect-name</name>
       <type>Main</type>
-      <value>true</value>
-      <webElementGuid>83d9149c-1fb5-435e-93df-a451630c7beb</webElementGuid>
+      <value>email</value>
+      <webElementGuid>1efde7a0-8873-4253-9e42-7cb706d237d1</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>placeholder</name>
+      <type>Main</type>
+      <value>Email</value>
+      <webElementGuid>0e6f0bc4-120e-481c-a149-a16563fa3be0</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>aria-owns</name>
+      <name>ng-reflect-is-disabled</name>
       <type>Main</type>
-      <value>aa61777a899e</value>
-      <webElementGuid>86b7e6d6-7cd3-41bb-aa2f-79fd587a2cd0</webElementGuid>
+      <value>false</value>
+      <webElementGuid>cd3bc721-dcda-4302-aea2-ff0a46a72cab</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>aria-activedescendant</name>
+      <name>ng-reflect-ng-class</name>
       <type>Main</type>
-      <value>aa61777a899e-0</value>
-      <webElementGuid>829ff675-6173-4987-a810-d0398bc949c1</webElementGuid>
+      <value>[object Object]</value>
+      <webElementGuid>d9def3bd-45df-4b42-9b3e-63b75575a36c</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;lovCouponType&quot;)/div[@class=&quot;ng-select-container ng-has-value&quot;]/div[@class=&quot;ng-value-container&quot;]/div[@class=&quot;ng-input&quot;]/input[1]</value>
-      <webElementGuid>d46cf445-5112-4a25-a709-fdb0a4b7e78b</webElementGuid>
+      <value>id(&quot;mat-tab-content-0-0&quot;)/div[@class=&quot;mat-tab-body-content ng-tns-c240-1 ng-trigger ng-trigger-translateTab&quot;]/form[@class=&quot;ng-untouched ng-pristine ng-invalid ng-star-inserted&quot;]/div[@class=&quot;form-group&quot;]/div[@class=&quot;input&quot;]/input[@class=&quot;form-control ng-untouched ng-pristine ng-invalid&quot;]</value>
+      <webElementGuid>20e26945-fff5-45c3-bfb1-de3597ec2572</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -102,15 +102,15 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//input[@type='text']</value>
-      <webElementGuid>40c29947-01c4-446c-938c-275bc8d57e2e</webElementGuid>
+      <webElementGuid>56e6e0b0-4979-4c9b-b0e9-c9b36cf9b591</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:idRelative</name>
       <type>Main</type>
-      <value>//ng-select[@id='lovCouponType']/div/div/div[3]/input</value>
-      <webElementGuid>7e08352e-3c86-4ea3-8bbf-b155b8a2b4c4</webElementGuid>
+      <value>//mat-tab-body[@id='mat-tab-content-0-0']/div/form/div/div/input</value>
+      <webElementGuid>9e237a34-10e1-470c-abb4-dd4475e0aae2</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -118,14 +118,14 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//input</value>
-      <webElementGuid>e1a0192e-a8a7-49c3-ab72-96203471576a</webElementGuid>
+      <webElementGuid>5208c0cd-d87e-4ae9-aafb-02a5f6db6cc6</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:customAttributes</name>
       <type>Main</type>
-      <value>//input[@type = 'text']</value>
-      <webElementGuid>8b0accfa-e58d-4585-923f-3c77c516abd4</webElementGuid>
+      <value>//input[@type = 'text' and @placeholder = 'Email']</value>
+      <webElementGuid>7e1db961-2782-41ce-a10e-ff363150d3b2</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

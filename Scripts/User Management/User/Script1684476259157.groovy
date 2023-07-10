@@ -311,8 +311,8 @@ def checkdialogConfirmation (int isMandatoryComplete) {
 		WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/button_Ya'))
 		
 		'ambil string dari alert setelah edit'
-		String editCondition = WebUI.getText(findTestObject('Object Repository/User Management-User/'+
-			'Page_Edit User/div_Success'))
+		String editCondition = WebUI.getText(
+			findTestObject('Object Repository/User Management-User/Page_Edit User/div_Success'))
 		
 		'jika muncul error setelah edit'
 		if (editCondition.contains('Success')) {

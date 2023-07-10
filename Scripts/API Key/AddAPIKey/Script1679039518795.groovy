@@ -13,7 +13,7 @@ import org.openqa.selenium.Keys as Keys
 int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 5))
 
 'klik pada tombol garis tiga'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_KEPIN EDGAR_ft-menu font-medium-3'))
+WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/expandMenu'))
 
 WebUI.delay(1)
 

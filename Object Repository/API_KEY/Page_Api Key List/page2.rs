@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>a_2</name>
+   <name>page2</name>
    <tag></tag>
    <elementGuidId>4da0acdd-d3e6-4942-a740-edd136ca5712</elementGuidId>
    <selectorCollection>
       <entry>
          <key>CSS</key>
-         <value></value>
       </entry>
       <entry>
          <key>XPATH</key>

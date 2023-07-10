@@ -58,13 +58,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (WebUI.getAttribute(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input__email'), 'class',
 			FailureHandling.STOP_ON_FAILURE) != 'form-control ng-untouched ng-pristine ng-invalid') {
 			
-			GlobalVariable.FlagFailed = 1
-		
-			'tulis error ke excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Forgot Password', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) +
-					';') + GlobalVariable.FailedReasonEmailFilled)
-		
+			WriteToExcelEmailInputStored()
 		}
 		
 		'input email yang akan dilakukan reset pass'
@@ -126,11 +120,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 						GlobalVariable.FailedReasonMandatory)
 			}
-			
-			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Forgot Password', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-					GlobalVariable.FailedReasonSubmitError)
 			
 			continue
 		}
@@ -354,8 +343,20 @@ def resendFunction(Connection conndev, int countResend, ArrayList resetCodefromD
 
 def WriteToExcelInputVanished() {
 	
+	GlobalVariable.FlagFailed = 1
+	
 	'tulis adanya error pada field input'
 	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Forgot Password', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			'Input hilang ketika klik periksa lagi')
+}
+
+def WriteToExcelEmailInputStored() {
+	
+	GlobalVariable.FlagFailed = 1
+	
+	'tulis adanya error pada field input'
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Forgot Password', GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			'Input email tidak hilang setelah klik cancel')
 }

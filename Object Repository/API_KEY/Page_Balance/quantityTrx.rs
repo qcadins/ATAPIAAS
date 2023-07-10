@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>div_500</name>
+   <name>quantityTrx</name>
    <tag></tag>
    <elementGuidId>c199d12c-3a2b-445e-a75a-da3955801c06</elementGuidId>
    <selectorCollection>

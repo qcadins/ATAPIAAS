@@ -82,7 +82,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		WebUI.delay(GlobalVariable.Timeout)
 		
 		'klik pada tombol garis tiga'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_KEPIN EDGAR_ft-menu font-medium-3'))
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/expandMenu'))
 		
 		WebUI.delay(1)
 		
@@ -128,21 +128,21 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Set Ulang'))
 		
 		'klik pada ddl tipe API KEY'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/span_All_ng-arrow-wrapper'))
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/ddlAPIKEYType'))
 		
 		'simpan pilihan utama dari tipe API KEY'
 		optiontipe = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Api Key List/input tipe'), 
 			'aria-activedescendant')
 		
 		'klik pada ddl Status API KEY'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/span_All_ng-arrow-wrapper_1'))
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/ddlAPIKEYStatus'))
 		
 		'simpan pilihan utama dari status API KEY'
 		optionstatus = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Api Key List/input status'), 
 			'aria-activedescendant')
 		
 		'klik pada ddl Status API KEY'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/span_All_ng-arrow-wrapper_1'))
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/ddlAPIKEYStatus'))
 		
 		'klik pada tombol cari'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
@@ -166,37 +166,37 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			'isPagingEnabled'), FailureHandling.OPTIONAL)  == true){
 			
 			'klik panah ke kanan di footer'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_Aksi_datatable-icon-right'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/next_page'))
 			
 			'verifikasi halaman ada di 2'
 			checkVerifyFooter()
 			
 			'klik panah kiri pada footer'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_Aksi_datatable-icon-left'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/prev_page'))
 			
 			'verifikasi halaman ada di 1'
 			checkVerifyFooter()
 			
 			'klik angka halaman 2'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_2'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/page2'))
 			
 			'verifikasi halaman ada di 2'
 			checkVerifyFooter()
 			
 			'klik angka halaman 1'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_1'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/page1'))
 			
 			'verifikasi halaman ada di 1'
 			checkVerifyFooter()
 			
 			'klik skip page ke paling akhir'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_Aksi_datatable-icon-skip'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/skiptoLast_page'))
 			
 			'verifikasi halaman'
 			checkVerifyFooter()
 			
 			'klik skip page ke paling awal'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_Aksi_datatable-icon-prev'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/goToFirstPage'))
 			
 			'verifikasi halaman'
 			checkVerifyFooter()
@@ -206,12 +206,11 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if(copyAPILink == 'Yes'){
 			
 			'klik tombol COPY LINK'
-			WebUI.click(findTestObject('Object Repository/API_KEY/'+
-				'Page_Api Key List/em_Aksi_align-middle cursor-pointer font-medium-3 ft-copy'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/buttonCopy'))
 				
 			'verifikasi copy berhasil'
 			CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, 
-				findTestObject('Object Repository/API_KEY/Page_Api Key List/div_API Key copied to clipboard'),
+				findTestObject('Object Repository/API_KEY/Page_Api Key List/notif_CopySuccess'),
 					GlobalVariable.NumOfColumn, 'API KEY')
 		}
 		

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>i_Aksi_datatable-icon-skip</name>
+   <name>skiptoLast_page</name>
    <tag></tag>
    <elementGuidId>f17bb7d7-b81f-4c56-bda4-2330fc7a2fe4</elementGuidId>
    <selectorCollection>

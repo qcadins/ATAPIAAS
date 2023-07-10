@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>i_Aksi_datatable-icon-right</name>
+   <name>next_page</name>
    <tag></tag>
    <elementGuidId>1cad6c77-adf1-40a5-b602-b6c3109aac85</elementGuidId>
    <selectorCollection>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input_Buat Akun_form-control ng-untouched n_dd86a2</name>
+   <name>input_password</name>
    <tag></tag>
    <elementGuidId>38c13b83-c3d4-470e-82fc-9d130b504d3a</elementGuidId>
    <selectorCollection>

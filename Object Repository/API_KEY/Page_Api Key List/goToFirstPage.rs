@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>i_Aksi_datatable-icon-prev</name>
+   <name>goToFirstPage</name>
    <tag></tag>
    <elementGuidId>bbcfa623-d581-43d2-a0da-6f46710bfc70</elementGuidId>
    <selectorCollection>

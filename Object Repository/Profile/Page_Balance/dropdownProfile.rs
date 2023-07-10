@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>i_LINA_ft-chevron-down</name>
+   <name>dropdownProfile</name>
    <tag></tag>
    <elementGuidId>a0648640-dffa-444e-9eff-2f96520b6338</elementGuidId>
    <selectorCollection>

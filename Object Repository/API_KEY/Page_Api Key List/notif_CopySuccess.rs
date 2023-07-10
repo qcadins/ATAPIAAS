@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>div_API Key copied to clipboard</name>
+   <name>notif_CopySuccess</name>
    <tag></tag>
    <elementGuidId>4d28dda0-5060-4c04-9fef-f34114898681</elementGuidId>
    <selectorCollection>

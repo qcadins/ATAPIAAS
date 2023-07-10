@@ -18,7 +18,7 @@ ArrayList totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'
 	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
 
 'masukkan hasil perhitungan jumlah key ke totaldata'
-totaldata.add(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Api Key List/Footer')))
+totaldata.add(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Api Key List/TotalDataAPI')))
 
 'cek jumlah data dari DB dan WEB adalah sama'
 for (int j = 0; j < totaldataDB.size; j++) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>a_1</name>
+   <name>page1</name>
    <tag></tag>
    <elementGuidId>28998904-12e9-401d-8f74-6ddbbcf0cf54</elementGuidId>
    <selectorCollection>

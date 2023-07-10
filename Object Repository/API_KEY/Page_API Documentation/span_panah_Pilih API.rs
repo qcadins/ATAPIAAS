@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>span_Pilih API_ng-arrow-wrapper</name>
+   <name>span_panah_Pilih API</name>
    <tag></tag>
    <elementGuidId>93ed3195-1e93-4237-a32d-75f25458c0d2</elementGuidId>
    <selectorCollection>

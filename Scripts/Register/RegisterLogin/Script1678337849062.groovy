@@ -305,7 +305,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'tulis status sukses pada excel'
 			CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, 
-				findTestObject('Object Repository/Profile/Page_Balance/i_LINA_ft-chevron-down'), 
+				findTestObject('Object Repository/Profile/Page_Balance/dropdownProfile'), 
 					GlobalVariable.NumOfColumn, 'Register')
 		}
 		

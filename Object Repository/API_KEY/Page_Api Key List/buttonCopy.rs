@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>em_Aksi_align-middle cursor-pointer font-medium-3 ft-copy</name>
+   <name>buttonCopy</name>
    <tag></tag>
    <elementGuidId>94e90d18-5366-4b6c-b9a0-82d3b7f6d0cf</elementGuidId>
    <selectorCollection>

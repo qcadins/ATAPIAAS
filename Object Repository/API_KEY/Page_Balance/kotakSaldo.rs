@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>h3_4,988</name>
+   <name>kotakSaldo</name>
    <tag></tag>
    <elementGuidId>082c2cac-8cf0-4342-a122-1ea13686003b</elementGuidId>
    <selectorCollection>
+      <entry>
+         <key>CSS</key>
+      </entry>
       <entry>
          <key>BASIC</key>
          <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[1]/div/div/div/div/div[1]/h3</value>
@@ -12,9 +15,6 @@
       <entry>
          <key>XPATH</key>
          <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[1]/div/div/div/div/div[1]/h3</value>
-      </entry>
-      <entry>
-         <key>CSS</key>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

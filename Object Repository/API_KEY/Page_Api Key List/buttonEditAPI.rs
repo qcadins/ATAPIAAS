@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>em_Aksi_align-middle cursor-pointer font-me_8c8f9d</name>
+   <name>buttonEditAPI</name>
    <tag></tag>
    <elementGuidId>ab921b5e-ad1a-48c6-b24b-8beb13d9dc54</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>//a[2]/em</value>
-      </entry>
-      <entry>
          <key>CSS</key>
          <value>em.align-middle.cursor-pointer.font-medium-3.ft-edit</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//a[2]/em</value>
       </entry>
       <entry>
          <key>BASIC</key>

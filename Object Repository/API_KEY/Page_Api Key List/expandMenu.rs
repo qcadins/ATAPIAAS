@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>i_LINA_ft-chevron-down</name>
+   <name>expandMenu</name>
    <tag></tag>
-   <elementGuidId>7a275fc0-b310-4d1b-9ffc-ca563267b797</elementGuidId>
+   <elementGuidId>1b2eee74-b204-47e9-8553-7b950a31e6e9</elementGuidId>
    <selectorCollection>
       <entry>
          <key>CSS</key>
-         <value>i.ft-chevron-down</value>
+         <value>i.ft-menu.font-medium-3</value>
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>//a[@id='dropdownBasic2']/div[2]/i</value>
+         <value>//i</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,38 +22,30 @@
       <name>tag</name>
       <type>Main</type>
       <value>i</value>
-      <webElementGuid>40594681-0a1e-44f0-b9bd-a349cdeb3307</webElementGuid>
+      <webElementGuid>b2658e87-7677-404b-b28b-75d47d845eb3</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
-      <value>ft-chevron-down</value>
-      <webElementGuid>df26626e-3a85-4232-9e0f-bee3ad2cb749</webElementGuid>
+      <value>ft-menu font-medium-3</value>
+      <webElementGuid>8b3f242b-181a-48da-897a-76be8e99a968</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;dropdownBasic2&quot;)/div[2]/i[@class=&quot;ft-chevron-down&quot;]</value>
-      <webElementGuid>77a87499-24cb-48e9-a630-384388ec5ebb</webElementGuid>
+      <value>/html[1]/body[@class=&quot;vertical-layout menu-hide navbar-static pace-done pace-done&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/app-navbar[1]/nav[@class=&quot;navbar navbar-expand-lg header-navbar navbar-static&quot;]/div[@class=&quot;container-fluid navbar-wrapper&quot;]/div[@class=&quot;navbar-header d-flex&quot;]/div[@class=&quot;navbar-toggle menu-toggle d-xl-none d-block float-left align-items-center justify-content-center&quot;]/i[@class=&quot;ft-menu font-medium-3&quot;]</value>
+      <webElementGuid>e64caca3-5655-4772-ba2d-f96e3ef72061</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>xpath:idRelative</name>
-      <type>Main</type>
-      <value>//a[@id='dropdownBasic2']/div[2]/i</value>
-      <webElementGuid>49b2d6f1-6cbd-455d-904b-67bd006d03e3</webElementGuid>
-   </webElementXpaths>
-   <webElementXpaths>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
       <name>xpath:position</name>
       <type>Main</type>
-      <value>//div[2]/i</value>
-      <webElementGuid>3662ea24-4ac7-406b-b25b-fd1dfd736f30</webElementGuid>
+      <value>//i</value>
+      <webElementGuid>7d541ee2-5cf9-4e30-8a62-6d827207beca</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

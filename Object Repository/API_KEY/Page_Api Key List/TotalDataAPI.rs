@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>Footer</name>
+   <name>TotalDataAPI</name>
    <tag></tag>
    <elementGuidId>bd229350-e0b6-46fe-802d-7aac4f93e79e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value></value>
       </entry>
       <entry>
          <key>XPATH</key>

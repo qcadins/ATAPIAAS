@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>span_All_ng-arrow-wrapper_1</name>
+   <name>ddlAPIKEYType</name>
    <tag></tag>
-   <elementGuidId>91fcbd43-d4d9-4cd4-89be-4d3891ca8f12</elementGuidId>
+   <elementGuidId>4b1f2409-b592-49ba-9041-465b32abd242</elementGuidId>
    <selectorCollection>
       <entry>
          <key>CSS</key>
-         <value>#status > div.ng-select-container.ng-has-value > span.ng-arrow-wrapper</value>
+         <value>span.ng-arrow-wrapper</value>
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>//ng-select[@id='status']/div/span[2]</value>
+         <value>//ng-select[@id='type']/div/span[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +22,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>span</value>
-      <webElementGuid>4c2ec7f5-deca-48b4-aa30-cefb1e6e544e</webElementGuid>
+      <webElementGuid>f6859d0e-003b-4c98-95d6-db30c3166db2</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -30,23 +30,23 @@
       <name>class</name>
       <type>Main</type>
       <value>ng-arrow-wrapper</value>
-      <webElementGuid>b0199a17-e3a2-406e-a9a0-7aef7581f8be</webElementGuid>
+      <webElementGuid>e2ab1d9b-815c-4527-97fb-91de1996a11f</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;status&quot;)/div[@class=&quot;ng-select-container ng-has-value&quot;]/span[@class=&quot;ng-arrow-wrapper&quot;]</value>
-      <webElementGuid>a26d31bf-4ab9-4b70-bfcc-b09c66a17ac3</webElementGuid>
+      <value>id(&quot;type&quot;)/div[@class=&quot;ng-select-container ng-has-value&quot;]/span[@class=&quot;ng-arrow-wrapper&quot;]</value>
+      <webElementGuid>c914ef77-b407-4636-88ec-fc5f4f34f486</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:idRelative</name>
       <type>Main</type>
-      <value>//ng-select[@id='status']/div/span[2]</value>
-      <webElementGuid>177d37e4-3a1b-46f0-aa28-ea503eaac36e</webElementGuid>
+      <value>//ng-select[@id='type']/div/span[2]</value>
+      <webElementGuid>e804bc3a-c019-4f61-b7d2-214ede3fa5aa</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -54,15 +54,15 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='All'])[1]/following::span[3]</value>
-      <webElementGuid>aedb5b87-2eae-4f4f-85a9-66c589c311d9</webElementGuid>
+      <webElementGuid>4692eccd-b14f-4ba0-9830-87ddbe7bc1c1</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Pilih Status'])[1]/following::span[5]</value>
-      <webElementGuid>03f7da2c-5908-495c-a6f1-efbca896a20f</webElementGuid>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Pilih Tipe API Key'])[1]/following::span[5]</value>
+      <webElementGuid>0c705e0a-96ae-48d1-a437-630241153e49</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,22 +70,22 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='All'])[2]/preceding::span[2]</value>
-      <webElementGuid>9c574bec-c533-4c9a-a23b-40e5c84ac8e3</webElementGuid>
+      <webElementGuid>1e68901b-f59d-4ccf-b093-59a9e056b4f1</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Active'])[1]/preceding::span[3]</value>
-      <webElementGuid>7da09f15-abac-4103-ba7c-8d314c3156df</webElementGuid>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='PRODUCTION'])[1]/preceding::span[3]</value>
+      <webElementGuid>02361cde-05b5-4de9-9c8c-1fbc17544ea7</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:position</name>
       <type>Main</type>
-      <value>//div[4]/app-question/app-select/div/ng-select/div/span[2]</value>
-      <webElementGuid>aa84151c-f650-4362-85b5-421ede2a257c</webElementGuid>
+      <value>//span[2]</value>
+      <webElementGuid>f777b1a1-3964-4676-880f-beda1ad02c46</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>
