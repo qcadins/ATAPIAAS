@@ -12,7 +12,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
 //'klik pada tombol garis tiga'
-//WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_KEPIN EDGAR_ft-menu font-medium-3'))
+//WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/expandMenu'))
 //
 //WebUI.delay(1)
 //
@@ -22,7 +22,7 @@ import internal.GlobalVariable as GlobalVariable
 //WebUI.delay(2)
 
 'klik pada tombol edit API'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/em_Aksi_align-middle cursor-pointer font-me_8c8f9d'))
+WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/buttonEditAPI'))
 
 'klik tombol batal'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Batal'))
@@ -31,7 +31,7 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_B
 searchAPIKEY(16)
 
 'klik pada tombol edit API'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/em_Aksi_align-middle cursor-pointer font-me_8c8f9d'))
+WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/buttonEditAPI'))
 
 'klik pada panah ddl Status API'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/span_Inactive_ng-arrow-wrapper'))

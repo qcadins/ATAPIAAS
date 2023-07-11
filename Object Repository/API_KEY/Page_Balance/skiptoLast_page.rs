@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>i_Catatan_datatable-icon-skip</name>
+   <name>skiptoLast_page</name>
    <tag></tag>
    <elementGuidId>5cabfc2a-4734-42fe-afa5-531159619d95</elementGuidId>
    <selectorCollection>

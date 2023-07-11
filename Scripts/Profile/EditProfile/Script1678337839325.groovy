@@ -46,7 +46,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
                 9))
 
         'klik garis tiga di kanan atas web'
-        WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/i_LINA_ft-chevron-down'))
+        WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/dropdownProfile'))
 
         'klik profil saya'
         WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/a_Profil Saya'))
@@ -190,7 +190,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         
         if (userRole == 'Admin Client') {
             'klik pada tombol garis tiga'
-            WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_KEPIN EDGAR_ft-menu font-medium-3'))
+            WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/expandMenu'))
 
             'klik pada tombol balance'
             WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/span_Balance'))
@@ -211,7 +211,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         }
         
         'klik pada tombol garis tiga'
-        WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_KEPIN EDGAR_ft-menu font-medium-3'))
+        WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/expandMenu'))
 
         'klik pada tombol API KEY'
         WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/span_API Key'))

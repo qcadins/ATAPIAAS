@@ -43,7 +43,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.delay(GlobalVariable.Timeout)
 		
 		'klik pada tombol garis tiga'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/i_KEPIN EDGAR_ft-menu font-medium-3'))
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/expandMenu'))
 		
 		WebUI.delay(1)
 		
@@ -129,13 +129,13 @@ def VerifyDocumentListAPI(){
 	ArrayList hasildb = CustomKeywords.'documentationAPI.CheckDocumentation.getDocumentationAPIName'(conn)
 	
 	'klik pada panah turun ddl'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/span_Pilih API_ng-arrow-wrapper'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/span_panah_Pilih API'))
 	
 	'ambil text dari UI Web APIAAS'
 	ArrayList hasilweb = CustomKeywords.'documentationAPI.CheckDocumentation.getValueDDLDocumentationAPI'()
 	
 	'klik kembali panah turun ddl'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/span_Pilih API_ng-arrow-wrapper'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/span_panah_Pilih API'))
 	
 	'sortir data pada hasil web'
 	Collections.sort(hasilweb)

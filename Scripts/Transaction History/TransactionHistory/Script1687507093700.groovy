@@ -614,7 +614,7 @@ def getSaldoforTransaction(String NamaSaldo) {
 		if (WebUI.getText(modifyNamaSaldo) == NamaSaldo) {
 			
 			'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
-			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/h3", true)
+			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/kotakSaldo'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/h3", true)
 			
 			'simpan jumlah saldo sekarang di variabel'
 			 saldoNow = Integer.parseInt(WebUI.getText(modifySaldoDipilih).replace(',',''))
@@ -626,7 +626,7 @@ def getSaldoforTransaction(String NamaSaldo) {
 	if (saldoNow == 0) {
 		
 		'simpan jumlah saldo sekarang di variabel'
-		saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988')).replace(',',''))
+		saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/kotakSaldo')).replace(',',''))
 	}
 	'kembalikan nilai saldo sekarang'
 	return saldoNow
@@ -681,7 +681,7 @@ def functionDetail(Connection conndev, String trxNum) {
 	}
 	
 	'klik tombol silang'
-	WebUI.click(findTestObject('Object Repository/Top Up/Page_List Transaction History/tombolX'))
+	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/detail_X'))
 }
 
 def checkPaging(Connection conndev) {
@@ -868,7 +868,7 @@ def checkPaging(Connection conndev) {
 					'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik prev page'
-		WebUI.click(findTestObject('Object Repository/TransactionHistory/i_Action_datatable-icon-prev'))
+		WebUI.click(findTestObject('Object Repository/TransactionHistory/i_Action_datatable-icon-left'))
 		
 		'verify paging di page 1'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
