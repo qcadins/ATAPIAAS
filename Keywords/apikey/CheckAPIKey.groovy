@@ -51,12 +51,14 @@ public class CheckAPIKey {
 
 		optionLabel = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), 'aria-activedescendant')
 
+		println(optionLabel)
+
 		'kumpulan string yang menyimpan hasil text dari User Interface APIAAS'
 		ArrayList hasilgetText = []
 
 		'mengambil text dari field nama api key'
-		hasilgetText.add(WebUI.getAttribute(
-			findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'), 'value'))
+		hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/'+
+				'input__apiKeyName'), 'value'))
 
 		if (optionLabel.contains('-0')) {
 

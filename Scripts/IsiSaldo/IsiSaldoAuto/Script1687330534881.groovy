@@ -141,13 +141,13 @@ if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page
 //filterSaldo()
 //
 //'scroll ke bawah halaman'
-//WebUI.scrollToElement(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), GlobalVariable.Timeout)
+//WebUI.scrollToElement(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), GlobalVariable.Timeout)
 //
 //'cek apakah button skip enable atau disable'
-//if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)){
+//if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)){
 //	
 //	'klik button skip to last page'
-//	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'))
+//	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
 //}
 //
 //'ambil nomor transaksi terakhir di tabel'
@@ -216,181 +216,6 @@ def settingBalanceType() {
 	WebUI.click(findTestObject('Tenant/ChargeType/button_Simpan'))
 }
 
-def checkTenantcount(def connection) {
-    'ambil list tenant'
-    def elementjumlahlisttenant = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-balance/div[2]/div/div/div/div/form/div[1]/div[1]/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div'))
-
-    'ambil hitungan tenant yang ada'
-    int countWeb = elementjumlahlisttenant.size() - 1
-
-    'flag apakah tenant sesuai pada verifikasi'
-    int isTenantMatch = 1
-
-    'ambil nama vendor dari DB'
-    ArrayList<String> namatenantDB = CustomKeywords.'apikey.CheckSaldoAPI.getTenantName'(connection)
-
-    'nama-nama tipe saldo sedang aktif dari UI'
-    ArrayList<String> namatenantUI = []
-
-    'ambil hitungan tenant dari DB'
-    int countDB = namatenantDB.size()
-
-    'jika hitungan di UI dan DB sesuai'
-    if (countWeb == countDB) {
-    } else if ((countWeb != countDB) || (isTenantMatch == 0)) {
-        GlobalVariable.FlagFailed = 1
-
-        'Write to excel status failed and reason topup failed'
-        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-            (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
-    }
-}
-
-def checkVendorcount(def connection, def tenantcode) {
-    'ambil list vendor'
-    def elementjumlahlistvendor = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-balance/div[2]/div/div/div/div/form/div[1]/div[2]/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div'))
-
-    'ambil hitungan vendor yang ada'
-    int countWeb = elementjumlahlistvendor.size() - 1
-
-    'flag vendor sesuai'
-    int isVendorFound = 0
-
-    'ambil nama vendor dari DB'
-    ArrayList<String> namaVendorDB = CustomKeywords.'apikey.CheckSaldoAPI.getVendorName'(connection, tenantcode)
-
-    'nama-nama tipe saldo sedang aktif dari UI'
-    ArrayList<String> namaVendorUI = []
-
-    'hitung banyak data didalam array DB'
-    int countDB = namaVendorDB.size()
-
-    'jika hitungan di UI dan DB sesuai'
-    if (countWeb == countDB) {
-        for (int i = 1; i <= countWeb; i++) {
-            'ambil object dari ddl'
-            def modifyNamaVendor = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/VendorList'), 
-                'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-balance/div[2]/div/div/div/div/form/div[1]/div[2]/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div[' + 
-                (i + 1)) + ']/span', true)
-
-            'tambahkan nama tipe saldo ke array'
-            String data = WebUI.getText(modifyNamaVendor)
-
-            namaVendorUI.add(data)
-        }
-        
-        'cek setiap data di UI dengan data di DB sebagai pembanding'
-        for (String tipe : namaVendorDB) {
-            'jika ada data yang tidak terdapat pada arraylist yang lain'
-            if (!(namaVendorUI.contains(tipe))) {
-                'ada data yang tidak match'
-                isVendorFound = 0
-
-                'berhentikan loop'
-                break
-            }
-            
-            'kondisi ini bisa ditemui jika data match'
-            isVendorFound = 1
-        }
-    } else if ((isVendorFound == 0) || (countWeb != countDB)) {
-        GlobalVariable.FlagFailed = 1
-
-        'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-            (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
-    }
-}
-
-def checkTipeSaldocount(def connection, def tenantcode) {
-    'ambil list tipe saldo'
-    def elementjumlahtipe = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-balance/div[2]/div/div/div/div/form/div[1]/div[3]/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div'))
-
-    'flag data yang match'
-    int isDataMatch = 0
-
-    'ambil hitungan vendor yang ada'
-    int countWeb = elementjumlahtipe.size() - 1
-
-    'nama-nama tipe saldo yang sedang aktif dari DB'
-    ArrayList<String> namaTipefromDB = CustomKeywords.'apikey.CheckSaldoAPI.getNamaTipeSaldo'(connection, tenantcode)
-
-    'nama-nama tipe saldo sedang aktif dari UI'
-    ArrayList<String> namaTipefromUI = []
-
-    'ambil ukuran array dari db'
-    int countDB = namaTipefromDB.size()
-
-    'jika hitungan di UI dan DB sesuai lakukan pengecekan'
-    if (countWeb == countDB) {
-        'loop untuk tambah data ke array from UI'
-        for (int i = 1; i <= countWeb; i++) {
-            'ambil object dari ddl'
-            def modifyNamaTipe = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/TipeSaldoList'), 
-                'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-balance/div[2]/div/div/div/div/form/div[1]/div[3]/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div[' + 
-                (i + 1)) + ']/span', true)
-
-            'tambahkan nama tipe saldo ke array'
-            String data = WebUI.getText(modifyNamaTipe)
-
-            namaTipefromUI.add(data)
-        }
-        
-        'cek setiap data di UI dengan data di DB sebagai pembanding'
-        for (String tipe : namaTipefromDB) {
-            'jika ada data yang tidak terdapat pada arraylist yang lain'
-            if (!(namaTipefromUI.contains(tipe))) {
-                'ada data yang tidak match'
-                isDataMatch = 0
-
-                'berhentikan loop'
-                break
-            }
-            
-            'kondisi ini bisa ditemui jika data match'
-            isDataMatch = 1
-        }
-    } else if ((countWeb != countDB) || (isDataMatch == 0)) {
-        GlobalVariable.FlagFailed = 1
-
-        'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-            (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
-    }
-}
-
-def navigatetoeendigoBeta() {
-    'buka website APIAAS SIT, data diambil dari TestData Login'
-    WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
-
-    'isi username dengan email yang terdaftar'
-    WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'), 
-        findTestData(ExcelPath).getValue(2, 11))
-
-    'isi password yang sesuai'
-    WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'), 
-        findTestData(ExcelPath).getValue(2, 12))
-
-    'ceklis pada reCaptcha'
-    WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-
-    'pada delay, lakukan captcha secara manual'
-    WebUI.delay(10)
-
-    'klik pada button login'
-    WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-
-    'cek apakah muncul error unknown setelah login'
-    if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), GlobalVariable.Timeout, 
-        FailureHandling.OPTIONAL) == false) {
-        GlobalVariable.FlagFailed = 1
-
-        'tulis adanya error pada sistem web'
-        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning, 
-            (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonUnknown)
-    }
-}
-
 def getSaldoforTransaction(String NamaSaldo) {
     'deklarasi jumlah saldo sekarang'
     int saldoNow
@@ -408,7 +233,7 @@ def getSaldoforTransaction(String NamaSaldo) {
         'jika nama object sesuai dengan nama saldo'
         if (WebUI.getText(modifyNamaSaldo) == NamaSaldo) {
             'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
-            def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/kotakSaldo'), 
+            def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988'), 
                 'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + 
                 i) + ']/div/div/div/div/div[1]/h3', true)
 
@@ -422,7 +247,7 @@ def getSaldoforTransaction(String NamaSaldo) {
     'pakai saldo IDR jika lainnya tidak ada'
     if (saldoNow == 0) {
         'simpan jumlah saldo sekarang di variabel'
-        saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/kotakSaldo')).replace(
+        saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988')).replace(
                 ',', ''))
     }
     
@@ -498,7 +323,7 @@ def verifyTableContent(def connection, String tenant) {
         lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[7]/div/p', true)
 
     'modifikasi object quantity transaksi'
-    def modifyqtyTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/quantityTrx'), 'xpath', 
+    def modifyqtyTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/div_500'), 'xpath', 
         'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + 
         lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[8]/div', true)
 

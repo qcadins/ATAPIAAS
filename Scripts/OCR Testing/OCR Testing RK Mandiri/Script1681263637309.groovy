@@ -91,7 +91,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			FailureHandling.OPTIONAL)) {
 		
 			'klik button skip to last page'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
 		}
 		
 		'panggil fungsi ambil transaksi terakhir di tabel'
@@ -188,7 +188,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)) {
 		
 			'klik button skip to last page'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
 		}
 		
 		'variabel yang diharapkan menyimpan number transaksi sesudah hit'
@@ -352,7 +352,7 @@ def getSaldoforTransaction(String NamaOCR) {
 			if (WebUI.getText(modifyNamaSaldo) == NamaOCR) {	
 				
 				'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
-				def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/kotakSaldo'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/h3", true)
+				def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/h3", true)
 				
 				'simpan jumlah saldo sekarang di variabel'
 				 saldoNow = Integer.parseInt(WebUI.getText(modifySaldoDipilih).replace(',',''))
@@ -362,7 +362,7 @@ def getSaldoforTransaction(String NamaOCR) {
 		if (saldoNow == 0) {
 			
 			'simpan jumlah saldo sekarang di variabel'
-			saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/kotakSaldo')).replace(',',''))
+			saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988')).replace(',',''))
 		}
 	}
 	'kembalikan nilai saldo sekarang'

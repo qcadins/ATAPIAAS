@@ -800,7 +800,7 @@ def checkPaging(Connection conn) {
 		findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)){
 	
 		'klik button skip to last page'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'))
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
 	}
 	
 	'modify object last Page'

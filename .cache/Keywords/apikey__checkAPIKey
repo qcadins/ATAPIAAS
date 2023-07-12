@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
+  "keywordFileContentHash": "1D2A45B4D8B73B14DB087B988F87A7E1",
+=======
   "keywordFileContentHash": "7E80833E8F14155DE6BB89AEFF927762",
+>>>>>>> branch 'master' of https://github.com/qcadins/ATAPIAAS
   "keywordClasses": [
     {
       "name": "apikey.CheckAPIKey",

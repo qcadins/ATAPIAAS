@@ -206,13 +206,13 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		filterSaldo()
 		
 		'scroll ke bawah halaman'
-		WebUI.scrollToElement(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), GlobalVariable.Timeout)
+		WebUI.scrollToElement(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), GlobalVariable.Timeout)
 		
 		'cek apakah button skip enable atau disable'
-		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)){
+		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)){
 			
 			'klik button skip to last page'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
 		}
 		
 		'ambil nomor transaksi terakhir di tabel'
@@ -454,11 +454,11 @@ def navigatetoeendigoBeta() {
 	WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
 	
 	'isi username dengan email yang terdaftar'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_ab9ed8'),
 		findTestData(ExcelPathSaldoAPI).getValue(2, 11))
 	
 	'isi password yang sesuai'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_Buat Akun_form-control ng-untouched n_dd86a2'),
 		findTestData(ExcelPathSaldoAPI).getValue(2, 12))
 	
 	'ceklis pada reCaptcha'
@@ -502,7 +502,7 @@ def getSaldoforTransaction(String NamaSaldo) {
 		if (WebUI.getText(modifyNamaSaldo) == NamaSaldo) {
 			
 			'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
-			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/kotakSaldo'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/h3", true)
+			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/h3", true)
 			
 			'simpan jumlah saldo sekarang di variabel'
 			 saldoNow = Integer.parseInt(WebUI.getText(modifySaldoDipilih).replace(',',''))
@@ -514,7 +514,7 @@ def getSaldoforTransaction(String NamaSaldo) {
 	if (saldoNow == 0) {
 		
 		'simpan jumlah saldo sekarang di variabel'
-		saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/kotakSaldo')).replace(',',''))
+		saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988')).replace(',',''))
 	}
 	'kembalikan nilai saldo sekarang'
 	return saldoNow
@@ -576,7 +576,7 @@ def verifyTableContent(connection, String tenant) {
 	def modifyrefTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/refTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[7]/div/p", true)
 
 	'modifikasi object quantity transaksi'
-	def modifyqtyTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/quantityTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[8]/div", true)
+	def modifyqtyTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/div_500'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[8]/div", true)
 
 	'modifikasi object hasil proses transaksi'
 	def modifyprocTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/procTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[10]/div/p", true)

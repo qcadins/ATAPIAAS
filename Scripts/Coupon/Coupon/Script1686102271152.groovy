@@ -362,7 +362,7 @@ def inputparameter(String action) {
 				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 27))
 		
 		'input minimal pembayaran untuk pakai kupon'
-		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/input__minimumPayment'),
+		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/input__minimumpayment'),
 				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 28))
 		
 		'input tenant'

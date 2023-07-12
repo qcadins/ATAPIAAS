@@ -56,7 +56,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		filterSaldo()
 		
 		'scroll ke bawah halaman'
-		WebUI.scrollToElement(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), GlobalVariable.Timeout)
+		WebUI.scrollToElement(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), GlobalVariable.Timeout)
 		
 		'panggil fungsi cek table dan paging'
 		checkTableandPaging(conn, tenantcode, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
@@ -136,7 +136,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 }
 
 'klik garis tiga di kanan atas web'
-WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/dropdownProfile'))
+WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/i_LINA_ft-chevron-down'))
 
 'klik tombol keluar'
 WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/span_Logout'))
