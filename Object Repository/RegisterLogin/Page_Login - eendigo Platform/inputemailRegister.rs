@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input_Buat Akun_form-control is-invalid ng-_7788b4</name>
+   <name>inputemailRegister</name>
    <tag></tag>
    <elementGuidId>1122119b-e8f0-41d5-a2e9-ab4c1e5a9bb3</elementGuidId>
    <selectorCollection>

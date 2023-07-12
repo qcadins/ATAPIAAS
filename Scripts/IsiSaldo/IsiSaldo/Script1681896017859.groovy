@@ -462,7 +462,7 @@ def navigatetoeendigoBeta() {
 		findTestData(ExcelPathSaldoAPI).getValue(2, 12))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
@@ -652,14 +652,14 @@ def getTrxNumber() {
 	'banyaknya row table'
 	int lastIndex = variable.size()
 		
-	no_Trx = ''
+	String no_Trx = ''
 	
 	'modifikasi alamat object trxnumber'
 	def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[6]/div/p", true)
 							
 	if(WebUI.verifyElementPresent(modifytrxnumber, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		'simpan nomor transaction number ke string'
-		String no_Trx = WebUI.getText(modifytrxnumber)
+		no_Trx = WebUI.getText(modifytrxnumber)
 	}
 	
 	'kembalikan nomor transaksi'

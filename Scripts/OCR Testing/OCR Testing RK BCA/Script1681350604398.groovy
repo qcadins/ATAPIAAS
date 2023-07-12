@@ -354,8 +354,7 @@ def getSaldoforTransaction(String NamaOCR) {
 		if (saldoNow == 0) {
 			
 			'simpan jumlah saldo sekarang di variabel'
-			saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/'+
-				'API_KEY/Page_Balance/h3_4,988')).replace(',',''))
+			saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/kotakSaldo')).replace(',',''))
 		}
 	}
 	

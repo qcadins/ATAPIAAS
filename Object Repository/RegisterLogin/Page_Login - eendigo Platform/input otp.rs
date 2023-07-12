@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input_concat(id(, , otp, , ))_otp</name>
+   <name>input otp</name>
    <tag></tag>
    <elementGuidId>9c284616-e8ab-4393-8e94-368e5f8c9292</elementGuidId>
    <selectorCollection>

@@ -86,8 +86,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		filterSaldo()
 		
 		'cek apakah button skip enable atau disable'
-		if (WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/'+
-			'Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementVisible(
+			findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'),
+			FailureHandling.OPTIONAL)) {
 		
 			'klik button skip to last page'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'))
@@ -183,8 +184,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		filterSaldo()
 		
 		'cek apakah button skip enable atau disable'
-		if (WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/'+
-			'Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementVisible(
+			findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)) {
+		
 			'klik button skip to last page'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'))
 		}

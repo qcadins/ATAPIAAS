@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>ListLayananEmpty</name>
+   <tag></tag>
+   <elementGuidId>a355a014-fb47-4ef6-96c8-bc52066c1e52</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;msxForm&quot;]/div[4]/div[3]/table/tr/td/small/text()</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;msxForm&quot;]/div[4]/div[3]/table/tr/td/small/text()</value>
+      <webElementGuid>e57cbdc4-f52e-47da-9f18-e27a4da0d5af</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

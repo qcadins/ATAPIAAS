@@ -142,12 +142,10 @@ WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/dropdownProfi
 WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/span_Logout'))
 
 'verifikasi apakah login dengan google muncul'
-WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/'+
-	'Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'), GlobalVariable.Timeout)
+WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), GlobalVariable.Timeout)
 
 'verifikasi apakah captcha muncul'
-WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/'+
-	'Page_Login - eendigo Platform/span_Lanjutkan dengan Google'), GlobalVariable.Timeout)
+WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/Page_Login - eendigo Platform/span_Lanjutkan dengan Google'), GlobalVariable.Timeout)
 
 'tutup browser'
 WebUI.closeBrowser()
@@ -197,8 +195,9 @@ def filterSaldo() {
 	WebUI.sendKeys(findTestObject('Object Repository/Saldo/Page_Balance/inputtipetransaksi'), Keys.chord(Keys.ENTER))
 	
 	'isi tanggal transaksi awal'
-	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/'+
-		'input_Tanggal Transaksi Dari_transactionDateStart'), findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 11))
+	WebUI.setText(
+		findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Dari_transactionDateStart'),
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 11))
 	
 	'input pengguna dari transaksi'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/input_Pengguna_user'), 
@@ -220,8 +219,8 @@ def filterSaldo() {
 		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 15))
 	
 	'input batas tanggal transaksi terakhir'
-	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/'+
-		'input_Tanggal Transaksi Sampai_transactionDateEnd'), 
+	WebUI.setText(
+		findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Sampai_transactionDateEnd'), 
 			findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 16))
 	
 	'input kantor'
@@ -250,48 +249,57 @@ def filterSaldo() {
 	WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Set Ulang'))
 	
 	'verify field tipe saldo ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/Page_Balance/'+
-		'inputtipesaldo'), 'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
+		findTestObject('Object Repository/Saldo/Page_Balance/inputtipesaldo'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field tipe transaksi ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/'+
-		'Page_Balance/inputtipetransaksi'), 'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
+		findTestObject('Object Repository/Saldo/Page_Balance/inputtipetransaksi'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field tanggal transaksi awal ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/'+
-		'Page_Balance/input_Tanggal Transaksi Dari_transactionDateStart'), 'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
+		findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Dari_transactionDateStart'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field pengguna ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/'+
-		'Page_Balance/input_Pengguna_user'), 'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
+		findTestObject('Object Repository/Saldo/Page_Balance/input_Pengguna_user'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field hasil proses ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/'+
-		'Page_Balance/inputhasilproses'), 'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
+		findTestObject('Object Repository/Saldo/Page_Balance/inputhasilproses'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field ref number ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/'+
-		'Page_Balance/input_Ref Number_referenceNo'), 'value', FailureHandling.CONTINUE_ON_FAILURE),'',
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
+		findTestObject('Object Repository/Saldo/Page_Balance/input_Ref Number_referenceNo'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE),'',
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field nama dokumen ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/'+
-		'Page_Balance/input_Nama Dokumen_documentName'), 'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
+		findTestObject('Object Repository/Saldo/Page_Balance/input_Nama Dokumen_documentName'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field tanggal transaksi akhir ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/'+
-		'Page_Balance/input_Tanggal Transaksi Sampai_transactionDateEnd'), 'value', FailureHandling.CONTINUE_ON_FAILURE), '', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
+		findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Sampai_transactionDateEnd'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE), '', 
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field kantor ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/'+
-		'Page_Balance/inputkantor'), 'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
+		findTestObject('Object Repository/Saldo/Page_Balance/inputkantor'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 
 	'isi field input tipe saldo'
@@ -386,16 +394,18 @@ def checkTableandPaging(Connection connection, String tenantcode, String tipeSal
 		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/page2'))
 		
 		'verify paging di page 2'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/'+
-			'Page_Balance/page2'), 'class', FailureHandling.CONTINUE_ON_FAILURE),
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
+			findTestObject('Object Repository/Saldo/Page_Balance/page2'),
+			'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik button page 1'
 		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/page1'))
 		
 		'verify paging di page 1'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/'+
-			'Page_Balance/page1'), 'class', FailureHandling.CONTINUE_ON_FAILURE),
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
+			findTestObject('Object Repository/Saldo/Page_Balance/page1'),
+			'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'cari button skip di footer'
@@ -446,8 +456,9 @@ def checkTableandPaging(Connection connection, String tenantcode, String tipeSal
 		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/firstPage'))
 		
 		'verify paging di page 1'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/'+
-			'Page_Balance/page1'), 'class', FailureHandling.CONTINUE_ON_FAILURE),
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
+			findTestObject('Object Repository/Saldo/Page_Balance/page1'),
+			'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 	}
 }

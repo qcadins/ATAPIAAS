@@ -171,6 +171,9 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Reset Password/input_confirmNewPassword'),
 			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 11))
 		
+		'lihat password yang sudah diinput'
+		WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Login - eendigo Platform/ToggleLihatPass'))
+		
 		'klik button lanjut'
 		WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Reset Password/button_Simpan'))
 		
@@ -233,15 +236,14 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 10))
 		
 		'ceklis pada reCaptcha'
-		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-			'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 		
 		'pada delay, lakukan captcha secara manual'
 		WebUI.delay(10)
 		
 		'klik pada button login'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-			'button_Lanjutkan Perjalanan Anda'))
+		WebUI.click(
+			findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 		
 		'cek apakah berhasil login'
 		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Forgot Password/span_profile'),

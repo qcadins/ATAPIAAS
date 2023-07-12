@@ -42,8 +42,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 
                 5))
 
-        userRole = CustomKeywords.'profile.CheckProfile.getUserRole'(conn, findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 
-                9))
+        userRole = CustomKeywords.'profile.CheckProfile.getUserRole'(conn,
+			findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
 
         'klik garis tiga di kanan atas web'
         WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/dropdownProfile'))
@@ -155,7 +155,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         WebUI.delay(3)
 
         'cek apakah tombol sukses muncul'
-        if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/' + 'Page_Edit Profile/button_OK'), GlobalVariable.Timeout, 
+        if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Edit Profile/button_OK'), GlobalVariable.Timeout, 
             FailureHandling.OPTIONAL)) {
             'klik pada tombol ok jika muncul'
             WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/button_OK'))

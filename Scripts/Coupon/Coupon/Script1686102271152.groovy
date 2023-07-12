@@ -70,6 +70,79 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'panggil fungsi input data dari excel'
 			inputparameter(findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8))
 			
+			'cek apakah field kosong setelah klik cancel'
+			if (GlobalVariable.NumOfColumn == 2) {
+				
+				'klik pada tombol batal'
+				WebUI.click(findTestObject('Object Repository/Coupon/Page_Add Coupon/button_Batal'))
+				
+				'klik pada tombol tambah kupon kembali'
+				WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/a_Tambah'))
+				
+				'verifikasi field kosong'
+				checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+					findTestObject('Object Repository/Coupon/Page_Add Coupon/inputtipekupon'),
+					'value', FailureHandling.CONTINUE_ON_FAILURE),'',
+						false, FailureHandling.CONTINUE_ON_FAILURE), 'Field tipe kupon tidak kosong')
+				
+				'verifikasi field kosong'
+				checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+					findTestObject('Object Repository/Coupon/Page_Add Coupon/input__couponCode'),
+					'value', FailureHandling.CONTINUE_ON_FAILURE),'',
+						false, FailureHandling.CONTINUE_ON_FAILURE), 'Field kode kupon tidak kosong')
+				
+				'verifikasi field kosong'
+				checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+					findTestObject('Object Repository/Coupon/Page_Add Coupon/input__couponStartDate'),
+					'value', FailureHandling.CONTINUE_ON_FAILURE),'',
+						false, FailureHandling.CONTINUE_ON_FAILURE), 'Field coupon start date tidak kosong')
+				
+				'verifikasi field kosong'
+				checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+					findTestObject('Object Repository/Coupon/Page_Add Coupon/input__couponEndDate'),
+					'value', FailureHandling.CONTINUE_ON_FAILURE),'',
+						false, FailureHandling.CONTINUE_ON_FAILURE), 'Field coupon end date tidak kosong')
+				
+				'verifikasi field kosong'
+				checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+					findTestObject('Object Repository/Coupon/Page_Add Coupon/inputtipenilaikupon'),
+					'value', FailureHandling.CONTINUE_ON_FAILURE),'',
+						false, FailureHandling.CONTINUE_ON_FAILURE), 'Field tipe nilai kupon tidak kosong')
+				
+				'verifikasi field kosong'
+				checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+					findTestObject('Object Repository/Coupon/Page_Add Coupon/input__nilaikupon'),
+					'value', FailureHandling.CONTINUE_ON_FAILURE),'',
+						false, FailureHandling.CONTINUE_ON_FAILURE), 'Field nilai kupon tidak kosong')
+				
+				'verifikasi field kosong'
+				checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+					findTestObject('Object Repository/Coupon/Page_Add Coupon/input__jmlkupon'),
+					'value', FailureHandling.CONTINUE_ON_FAILURE),'',
+						false, FailureHandling.CONTINUE_ON_FAILURE), 'Field jumlah kupon tidak kosong')
+				
+				'verifikasi field kosong'
+				checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+					findTestObject('Object Repository/Coupon/Page_Add Coupon/input__maxredeem'),
+					'value', FailureHandling.CONTINUE_ON_FAILURE),'',
+						false, FailureHandling.CONTINUE_ON_FAILURE), 'Field max redeem tidak kosong')
+				
+				'verifikasi field kosong'
+				checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+					findTestObject('Object Repository/Coupon/Page_Add Coupon/input__minimumPayment'),
+					'value', FailureHandling.CONTINUE_ON_FAILURE),'',
+						false, FailureHandling.CONTINUE_ON_FAILURE), 'Field minimum payment tidak kosong')
+				
+				'verifikasi field kosong'
+				checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+					findTestObject('Object Repository/Coupon/Page_Add Coupon/tenantinput'),
+					'value', FailureHandling.CONTINUE_ON_FAILURE),'',
+						false, FailureHandling.CONTINUE_ON_FAILURE), 'Field tenant tidak kosong')
+				
+				'panggil fungsi input data dari excel'
+				inputparameter(findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8))
+			}
+			
 			'panggil fungsi menjalankan konfirmasi dialog'
 			checkdialogConfirmation(isMandatoryComplete)
 			
@@ -502,8 +575,9 @@ def checkPaging(Connection conndev) {
 	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'cek apakah hlm  tersedia'
-	if(WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-User/'+
-		'Page_List User/i_Action_datatable-icon-skip'),FailureHandling.OPTIONAL) == true) {
+	if(WebUI.verifyElementVisible(
+		findTestObject('Object Repository/User Management-User/Page_List User/gotoLast_page'),
+		FailureHandling.OPTIONAL) == true) {
 		
 		'klik halaman 2'
 		WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/paging/Page2'))
@@ -524,7 +598,7 @@ def checkPaging(Connection conndev) {
 					'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik button next page'
-		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-right'))
+		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/next_page'))
 		
 		'verify paging di page 2'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
@@ -533,7 +607,7 @@ def checkPaging(Connection conndev) {
 					'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik prev page'
-		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-left'))
+		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/prev_page'))
 		
 		'verify paging di page 1'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
@@ -542,7 +616,7 @@ def checkPaging(Connection conndev) {
 					'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik pada tombol skip'
-		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/i_Action_datatable-icon-skip'))
+		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/gotoLast_page'))
 		
 		'modify object laman terakhir'
 		def modifyObjectmaxPage = WebUI.modifyObjectProperty(
@@ -557,7 +631,7 @@ def checkPaging(Connection conndev) {
 				false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'click min page'
-		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Action_datatable-icon-prev'))
+		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/gotoFirst_page'))
 		
 		'verify paging di page 1'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(

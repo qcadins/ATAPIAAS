@@ -23,9 +23,6 @@ for (int i = 0; i < resultDB.size ; i++) {
 	'tambahkan data dari excel'
 	resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, 9+i))
 }
-	
-println resultExcel
-println resultDB
 
 'jika hasil excel tidak sesuai db'
 if(!resultExcel.containsAll(resultDB)) {

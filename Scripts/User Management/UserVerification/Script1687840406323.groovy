@@ -35,25 +35,21 @@ WebUI.click(findTestObject('User Management-User/user_Profile'))
 WebUI.click(findTestObject('User Management-User/button_LogOut'))
 
 'login dengan user yang baru di tambahkan'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
 
 'input password'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 22))
 
 'ceklis pada reCaptcha'
-WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 
 'pada delay, lakukan captcha secara manual'
 WebUI.delay(10)
 
 'klik pada button login'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
+WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
 'check if reason failed tidak present'
 if(WebUI.verifyElementNotPresent(findTestObject('User Management-User/label_TextError'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
@@ -66,24 +62,22 @@ if(WebUI.verifyElementNotPresent(findTestObject('User Management-User/label_Text
 }
 
 'input data email'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(excelPathUser).getValue(2, 11))
 
 'input password'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(excelPathUser).getValue(2, 12))
 
 'delay alert'
 WebUI.delay(5)
 
 'klik pada button login'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
+WebUI.click(
+	findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
 'klik pada menu'
-WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/i_SEDARA MANYURA_ft-menu font-medium-3'))
+WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/span_Menu'))
 
 'pilih submenu manage user'
 WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/a_Manage User'))
@@ -92,10 +86,10 @@ WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/
 WebUI.click(findTestObject('Object Repository/User Management-User/Page_Balance/span_User'))
 
 'cek apakah tombol menu dalam jangkauan web'
-if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Logout_ft-x ng-tns-c133-2'), FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
 	
 	'klik pada tombol silang menu'
-	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/i_Logout_ft-x ng-tns-c133-2'))
+	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
 }
 
 'input email'
@@ -147,25 +141,21 @@ if(WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgnor
 	WebUI.click(findTestObject('User Management-User/button_LogOut'))
 	
 	'login dengan user yang baru di tambahkan'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-			'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 			findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-			'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 			findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 22))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-			'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
 	
 	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-			'button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
 	'check if berhasil login'
 	if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/User Management-Role/' +
@@ -185,25 +175,21 @@ if(WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgnor
 	WebUI.click(findTestObject('User Management-User/button_LogOut'))
 	
 	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-			'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
-			findTestData(excelPathUser).getValue(2, 11))
-	
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
+		findTestData(excelPathUser).getValue(2, 11))
+
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-			'input_Buat Akun_form-control ng-untouched n_dd86a2'),
-			findTestData(excelPathUser).getValue(2, 12))
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
+		findTestData(excelPathUser).getValue(2, 12))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-			'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
 	
 	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-			'button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 } else {
 	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,

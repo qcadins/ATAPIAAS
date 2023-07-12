@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3</name>
+   <name>inputNamaRegister</name>
    <tag></tag>
-   <elementGuidId>ab233abb-b343-4215-90bb-f821f768e023</elementGuidId>
+   <elementGuidId>eccb5b24-d934-4c42-968d-02ff80e68f6a</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//input[@type='password'])[2]</value>
+         <value>(//input[@type='text'])[2]</value>
       </entry>
       <entry>
          <key>CSS</key>
@@ -22,15 +22,23 @@
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>ecd0cdf7-2bad-49df-bcec-9e36c812d22c</webElementGuid>
+      <webElementGuid>6fbc8515-6c72-4e3f-9de9-9963cfe6db47</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>text</value>
+      <webElementGuid>52c84390-18fe-45c8-98ff-ad9361938988</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>formcontrolname</name>
       <type>Main</type>
-      <value>confirmPassword</value>
-      <webElementGuid>005cbe00-a077-47c0-96f4-3bcfa88013e0</webElementGuid>
+      <value>username</value>
+      <webElementGuid>b0508ebd-0529-46b7-ba1c-785c7627a073</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +46,7 @@
       <name>size</name>
       <type>Main</type>
       <value>36</value>
-      <webElementGuid>4c0d4c99-8c35-463f-b74c-98e10176ad9d</webElementGuid>
+      <webElementGuid>29d478e5-0b9b-478a-a4dd-035ad98444a9</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,31 +54,23 @@
       <name>class</name>
       <type>Main</type>
       <value>form-control is-invalid ng-untouched ng-pristine ng-invalid</value>
-      <webElementGuid>dcd2d5a8-9870-412f-b579-4f000acda270</webElementGuid>
+      <webElementGuid>d55814a3-47f0-4aed-923d-a12d0578be7a</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>ng-reflect-name</name>
       <type>Main</type>
-      <value>confirmPassword</value>
-      <webElementGuid>dfaefb19-8725-422d-a74b-fd09d11d14e2</webElementGuid>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>type</name>
-      <type>Main</type>
-      <value>password</value>
-      <webElementGuid>e54f4687-c9f0-44a0-8269-45aec2f55c00</webElementGuid>
+      <value>username</value>
+      <webElementGuid>7d9d8679-c386-4e1d-b234-d48f6d87ab91</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>placeholder</name>
       <type>Main</type>
-      <value>Ketik Ulang Kata Sandi</value>
-      <webElementGuid>5b372642-3759-450f-b1b9-7814da7230ec</webElementGuid>
+      <value>Nama Pengguna</value>
+      <webElementGuid>4dded59d-857a-41f1-989c-7afc9ad827b0</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -78,7 +78,7 @@
       <name>ng-reflect-is-disabled</name>
       <type>Main</type>
       <value>false</value>
-      <webElementGuid>ea698d43-434e-4f2a-a701-f80b72758144</webElementGuid>
+      <webElementGuid>a8b8e962-f018-4636-bcef-06ecdd4e5ff5</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -86,46 +86,46 @@
       <name>ng-reflect-ng-class</name>
       <type>Main</type>
       <value>[object Object]</value>
-      <webElementGuid>3bfdf205-4d47-40fc-9612-bcc3d7b89ee2</webElementGuid>
+      <webElementGuid>50ec7739-5814-4f8b-abb9-f44c2141382d</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;mat-tab-content-0-1&quot;)/div[@class=&quot;mat-tab-body-content ng-tns-c240-2 ng-trigger ng-trigger-translateTab&quot;]/form[@class=&quot;ng-star-inserted ng-touched ng-dirty ng-invalid&quot;]/div[@class=&quot;form-group&quot;]/div[@class=&quot;input&quot;]/input[@class=&quot;form-control is-invalid ng-untouched ng-pristine ng-invalid&quot;]</value>
-      <webElementGuid>3c958171-f1b0-43ca-8978-35ad010258be</webElementGuid>
+      <value>id(&quot;mat-tab-content-0-1&quot;)/div[@class=&quot;mat-tab-body-content ng-tns-c240-2 ng-trigger ng-trigger-translateTab&quot;]/form[@class=&quot;ng-star-inserted ng-touched ng-dirty ng-pending&quot;]/div[@class=&quot;form-group&quot;]/div[@class=&quot;input&quot;]/input[@class=&quot;form-control is-invalid ng-untouched ng-pristine ng-invalid&quot;]</value>
+      <webElementGuid>02eab079-0579-4596-a5c7-e853c60f5263</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:attributes</name>
       <type>Main</type>
-      <value>(//input[@type='password'])[2]</value>
-      <webElementGuid>ab172fe5-5e5c-41f7-a201-9015aa771d8d</webElementGuid>
+      <value>(//input[@type='text'])[2]</value>
+      <webElementGuid>af9684b4-c1d0-4c3b-94bd-f9bec6da9396</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:idRelative</name>
       <type>Main</type>
-      <value>//mat-tab-body[@id='mat-tab-content-0-1']/div/form/div[4]/div/input</value>
-      <webElementGuid>a9ad28b3-0681-48bd-8f1f-c9b7021b3f15</webElementGuid>
+      <value>//mat-tab-body[@id='mat-tab-content-0-1']/div/form/div[2]/div/input</value>
+      <webElementGuid>26b98f7e-bcc1-43dd-943d-fbf4931e6415</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:position</name>
       <type>Main</type>
-      <value>//div[4]/div/input</value>
-      <webElementGuid>15959c4d-7f55-4619-b157-41b3ddfc2ed7</webElementGuid>
+      <value>//div[2]/div/input</value>
+      <webElementGuid>d7fcafa0-c138-431e-a79e-2076eb21058b</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:customAttributes</name>
       <type>Main</type>
-      <value>//input[@type = 'password' and @placeholder = 'Ketik Ulang Kata Sandi']</value>
-      <webElementGuid>14f6af5f-c518-44dc-8612-fe5518284e5c</webElementGuid>
+      <value>//input[@type = 'text' and @placeholder = 'Nama Pengguna']</value>
+      <webElementGuid>32fbb65d-9f76-4738-b44e-a29188462041</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

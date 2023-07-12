@@ -372,7 +372,7 @@ def navigatetoeendigoBeta() {
         findTestData(ExcelPath).getValue(2, 12))
 
     'ceklis pada reCaptcha'
-    WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+    WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 
     'pada delay, lakukan captcha secara manual'
     WebUI.delay(10)

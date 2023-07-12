@@ -59,6 +59,87 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.click(findTestObject(TombolSilang))
 		}
 		
+		'pengecekan untuk awal loop'
+		if (GlobalVariable.NumOfColumn == 2) {
+			
+			'input data tipe saldo yang diinginkan'
+			WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputtipesaldo'),
+				findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 9))
+			
+			'enter pada ddl tipe saldo'
+			WebUI.sendKeys(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputtipesaldo'),
+				Keys.chord(Keys.ENTER))
+			
+			'klik pada tambah layanan'
+			WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/a_Tambah'))
+			
+			'input data saldo yang dipilih'
+			WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputJenisSaldo'),
+				'OCR BPKB')
+			
+			'enter pada ddl saldo yang dipilih'
+			WebUI.sendKeys(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputJenisSaldo'),
+				 Keys.chord(Keys.ENTER))
+			
+			'input data jumlah isi ulang yang dipilih'
+			WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputamount'),
+				'5')
+			
+			'klik pada objek untuk save'
+			WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/button_Save'))
+			
+			'klik pada batal'
+			WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/button_Batal'))
+			
+			'cek apakah field yang baru diisi adalah kosong'
+			checkVerifyEqualorMatch(WebUI.verifyElementNotHasAttribute(
+				findTestObject('Object Repository/Top Up/Page_Topup Balance/inputtipesaldo'),
+				'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'DDL tipe saldo tidak bisa di-klik')
+			
+			'cek apakah field yang baru diisi adalah kosong'
+			checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+				findTestObject('Object Repository/Top Up/Page_Topup Balance/inputMetodeBayar'),
+				'value', FailureHandling.OPTIONAL),'',
+					false, FailureHandling.OPTIONAL), 'DDL Metode bayar tidak kosong')
+			
+			'cek apakah field yang baru diisi adalah kosong'
+			checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+				findTestObject('Object Repository/Top Up/Page_Topup Balance/inputBank'),
+				'value', FailureHandling.OPTIONAL),'',
+					false, FailureHandling.OPTIONAL), 'DDL Bank tidak kosong')
+			
+			'cek apakah field yang baru diisi adalah kosong'
+			checkVerifyEqualorMatch(WebUI.verifyElementPresent(
+				findTestObject('Object Repository/Top Up/ListLayananEmpty'),
+					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Layanan tidak kosong')
+			
+			'cek apakah field yang baru diisi adalah kosong'
+			checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+				findTestObject('Object Repository/Top Up/Page_Topup Balance/totalprice'),
+				'value', FailureHandling.OPTIONAL),'',
+					false, FailureHandling.OPTIONAL), 'Field subtotal tidak kosong')
+
+			'cek apakah field yang baru diisi adalah kosong'
+			checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+				findTestObject('Object Repository/Top Up/Page_Topup Balance/input_Kupon_kupon'),
+				'value', FailureHandling.OPTIONAL),'',
+					false, FailureHandling.OPTIONAL), 'Field kode kupon tidak kosong')
+			
+			'cek apakah field yang baru diisi adalah kosong'
+			checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+				findTestObject('Object Repository/Top Up/Page_Topup Balance/PPN11'),
+				'value', FailureHandling.OPTIONAL),'',
+					false, FailureHandling.OPTIONAL), 'Field PPN tidak kosong')
+			
+			'cek apakah field yang baru diisi adalah kosong'
+			checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
+				findTestObject('Object Repository/Top Up/Page_Topup Balance/grandTotal'),
+				'value', FailureHandling.OPTIONAL),'',
+					false, FailureHandling.OPTIONAL), 'Field grand total tidak kosong')
+			
+			WebUI.refresh()
+		}
+		
 		'deklarasi integer yang akan dipakai'
 		int totalKatalon, modifyint, totalafter, ppnafter, grandTotalafter, cashbacknominal, cashbackbagian, hargasatuanUI, hargasatuanDB
 		
@@ -1037,6 +1118,6 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		GlobalVariable.FlagFailed = 1
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-				GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
+				GlobalVariable.FailedReasonVerifyEqualorMatch + ' ' + reason)
 	}
 }

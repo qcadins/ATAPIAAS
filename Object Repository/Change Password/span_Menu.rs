@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>span_Menu</name>
+   <tag></tag>
+   <elementGuidId>f1c52541-1150-456e-8655-2fdd93dc975c</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>i.ft-menu.font-medium-3</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//i</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-hide&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/app-navbar[1]/nav[@class=&quot;navbar navbar-expand-lg header-navbar navbar-static&quot;]/div[@class=&quot;container-fluid navbar-wrapper&quot;]/div[@class=&quot;navbar-header d-flex&quot;]/div[@class=&quot;navbar-toggle menu-toggle d-xl-none d-block float-left align-items-center justify-content-center&quot;]/i[@class=&quot;ft-menu font-medium-3&quot;]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>i</value>
+      <webElementGuid>1e2a8adf-ff05-46e6-a4c2-c7856b901c00</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ft-menu font-medium-3</value>
+      <webElementGuid>62286243-b489-4271-9f96-9b8ddd4c6acc</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-hide&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/app-navbar[1]/nav[@class=&quot;navbar navbar-expand-lg header-navbar navbar-static&quot;]/div[@class=&quot;container-fluid navbar-wrapper&quot;]/div[@class=&quot;navbar-header d-flex&quot;]/div[@class=&quot;navbar-toggle menu-toggle d-xl-none d-block float-left align-items-center justify-content-center&quot;]/i[@class=&quot;ft-menu font-medium-3&quot;]</value>
+      <webElementGuid>1f9e619d-3e19-4681-b8f2-bdad578bae8a</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//i</value>
+      <webElementGuid>b5ac9471-91a3-4a89-860c-9cf8b737c573</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

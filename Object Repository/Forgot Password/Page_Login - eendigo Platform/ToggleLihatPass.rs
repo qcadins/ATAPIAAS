@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>i_Buat Akun_ft-eye-off</name>
+   <name>ToggleLihatPass</name>
    <tag></tag>
    <elementGuidId>0d22f163-c982-4e5b-84a9-f135234de79f</elementGuidId>
    <selectorCollection>

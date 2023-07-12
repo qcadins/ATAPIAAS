@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>i_Action_datatable-icon-left</name>
+   <name>prev_page</name>
    <tag></tag>
    <elementGuidId>18035a26-e086-41e2-b73a-a3d67e66552f</elementGuidId>
    <selectorCollection>

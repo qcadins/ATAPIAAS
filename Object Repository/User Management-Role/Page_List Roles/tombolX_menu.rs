@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>i_Logout_ft-x ng-tns-c133-2</name>
+   <name>tombolX_menu</name>
    <tag></tag>
    <elementGuidId>00feb0da-6313-47e0-93c7-b4ef4e850dfa</elementGuidId>
    <selectorCollection>

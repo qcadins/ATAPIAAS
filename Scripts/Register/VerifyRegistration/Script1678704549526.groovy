@@ -36,7 +36,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonStoreDB)
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				GlobalVariable.FailedReasonStoreDB)
 	}
 }

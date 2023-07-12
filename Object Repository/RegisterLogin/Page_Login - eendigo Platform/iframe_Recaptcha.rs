@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>iframe_Lupa Kata Sandi_a-5xnevitnmm8n</name>
+   <name>iframe_Recaptcha</name>
    <tag></tag>
    <elementGuidId>ac06a7df-fe12-4b7f-b30e-e3320f597b01</elementGuidId>
    <selectorCollection>

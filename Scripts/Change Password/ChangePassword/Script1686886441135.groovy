@@ -44,6 +44,53 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		'pilih ubah password'
 		WebUI.click(findTestObject('Object Repository/Change Password/Page_Balance/changepass'))
 		
+		if (GlobalVariable.NumOfColumn == 2) {
+			
+//			'klik pada button batal'
+//			WebUI.click(findTestObject('Object Repository/Change Password/Page_Change Password/button_Batal'))
+//			
+//			'input data email'
+//			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
+//				findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 9))
+//			
+//			'input password'
+//			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
+//				findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 10))
+//			
+//			'ceklis pada reCaptcha'
+//			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
+//			
+//			'pada delay, lakukan captcha secara manual'
+//			WebUI.delay(10)
+//			
+//			'klik pada button login'
+//			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+			
+			'klik pada bagian menu'
+			WebUI.click(findTestObject('Object Repository/Change Password/span_Menu'))
+			
+			'pilih saldo'
+			WebUI.click(findTestObject('Object Repository/Change Password/menu_Balance'))
+			
+			'klik pada tombol untuk span profile'
+			WebUI.click(findTestObject('Object Repository/Change Password/Page_Balance/span_profile'))
+			
+			'pilih ubah password'
+			WebUI.click(findTestObject('Object Repository/Change Password/Page_Balance/changepass'))
+			
+			'periksa field kosong'
+			checkVerifyEqualorMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/Change Password/Page_Change Password/input__currentPass'),
+				'class', 'form-control ng-untouched ng-pristine ng-invalid', GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field current pass tidak kosong')
+			
+			'periksa field kosong'
+			checkVerifyEqualorMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/Change Password/Page_Change Password/input__newPass'),
+				'class', 'form-control ng-untouched ng-pristine ng-invalid', GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field New pass tidak kosong')
+			
+			'periksa field kosong'
+			checkVerifyEqualorMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/Change Password/Page_Change Password/input__confirmnewPass'),
+				'class', 'form-control ng-untouched ng-pristine ng-invalid', GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field confirm new pass tidak kosong')
+		}
+		
 		'input password lama'
 		WebUI.setText(findTestObject('Object Repository/Change Password/Page_Change Password/input__currentPass'),
 			findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 12))
@@ -143,37 +190,31 @@ def logoutFunction() {
 	'lakukan logout'
 	WebUI.click(findTestObject('Object Repository/Change Password/Page_Balance/span_Logout'))
 	
-	'verifikasi apakah login dengan google muncul'
-	WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/'+
-		'Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'), GlobalVariable.Timeout)
-	
 	'verifikasi apakah captcha muncul'
-	WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/'+
-		'Page_Login - eendigo Platform/span_Lanjutkan dengan Google'), GlobalVariable.Timeout)
+	WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), GlobalVariable.Timeout)
+	
+	'verifikasi apakah login dengan google muncul'
+	WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/Page_Login - eendigo Platform/span_Lanjutkan dengan Google'), GlobalVariable.Timeout)
 }
 
 def loginFunction(int row) {
 	
 	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, row))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
 	
 	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
 	'jika ada pilihan role'
 	if (WebUI.verifyElementPresent(
@@ -214,5 +255,18 @@ def loginFunction(int row) {
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('ChangePassword', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonLoginIssue)
+	}
+}
+
+def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
+	if (isMatch == false) {
+		
+		GlobalVariable.FlagFailed = 1
+		
+		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+		GlobalVariable.FlagFailed = 1
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('ChangePassword', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 	}
 }

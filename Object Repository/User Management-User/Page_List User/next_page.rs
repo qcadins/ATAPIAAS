@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>i_Action_datatable-icon-right</name>
+   <name>next_page</name>
    <tag></tag>
    <elementGuidId>4e20d3e8-f05c-4994-83cb-e800be0c672f</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@class = 'datatable-icon-right']</value>
-      </entry>
       <entry>
          <key>XPATH</key>
          <value>//datatable-pager/ul/li[5]/a/i</value>
@@ -16,6 +12,10 @@
       <entry>
          <key>CSS</key>
          <value>i.datatable-icon-right</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@class = 'datatable-icon-right']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

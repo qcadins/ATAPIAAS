@@ -81,14 +81,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'cek apakah button register bisa di klik'
 		CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatusbtnClickable'(isMandatoryComplete, 
 				findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'), GlobalVariable.NumOfColumn, 'Register')
-			
+		
 		'pencet enter'
-		WebUI.sendKeys(findTestObject('Object Repository/RegisterLogin/'+
-				'Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'), Keys.chord(Keys.ENTER))
+		WebUI.sendKeys(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_confirmPassRegist'),
+			Keys.chord(Keys.ENTER))
 		
 		WebUI.delay(5)
 		
-		if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		
 			'mengambil otp dari db, disimpan ke iniotp'
 			ArrayList<String> iniotp = []
@@ -99,13 +99,12 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'cek apakah field untuk input otp muncul'
 			CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, 
-				findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), 
+				findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), 
 					GlobalVariable.NumOfColumn, 'Register')
 			
 			if (autofillOTP == 'Yes') {
 				'input otp dari DB'
-				WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
-					'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), iniotp[0])
+				WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), iniotp[0])
 				
 				if (resendotp == 'Yes') {
 					
@@ -115,8 +114,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						WebUI.delay(116)
 						
 						'klik pada button kirim ulang otp'
-						WebUI.click(findTestObject('Object Repository/RegisterLogin/'+
-							'Page_Login - eendigo Platform/a_Kirim kode lagi'))
+						WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/a_Kirim kode lagi'))
 						
 						WebUI.delay(5)
 						
@@ -136,21 +134,20 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						}
 						
 						'input otp lama dari DB'
-						WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
-							'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), iniotp[i])
+						WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), iniotp[i])
 						
 						'klik pada button verifikasi otp'
 						WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Verifikasi'))
 						
-						if(WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/'+
-							'Page_Login - eendigo Platform/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)){
+						if(WebUI.verifyElementPresent(
+							findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'), 
+							GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) {
 							
 							'klik ok pada verifikasi alert'
 							WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'))
 							
 							'input otp baru dari DB'
-							WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
-								'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), iniotp[i+1])
+							WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), iniotp[i+1])
 						} else {
 							'verifikasi adanya alert otp'
 							CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
@@ -172,8 +169,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			else {
 				
 				'input otp dari excel'
-				WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
-					'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), otpmanual[0])
+				WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), otpmanual[0])
 				
 				if(resendotp == 'Yes')
 					{
@@ -203,19 +199,17 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							}	
 							
 							'input otp dari DB'
-							WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
-								'Page_Login - eendigo Platform/input_concat(id(, , otp, , ))_otp'), otpmanual[0])
+							WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), otpmanual[0])
 						}
 					}
 					
 					'klik pada button verifikasi otp'
-					WebUI.click(findTestObject('Object Repository/RegisterLogin/'+
-						'Page_Login - eendigo Platform/button_Verifikasi'))
+					WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Verifikasi'))
 					
 					WebUI.delay(2)
 					
-					if(WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/'+
-						'Page_Login - eendigo Platform/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)){
+					if(WebUI.verifyElementPresent(
+						findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)){
 					
 						'verifikasi adanya alert otp'
 						CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
@@ -242,18 +236,15 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Masuk'))
 		
 		'input email yang sudah diregist pada field'
-		WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
-			'Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4'),
+		WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemailRegister'),
 				findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9))
 		
 		'input password yang sudah diregist ke field'
-		WebUI.setText(findTestObject('Object Repository/RegisterLogin/'+
-			'Page_Login - eendigo Platform/input_Buat Akun_form-control is-invalid ng-_7788b4_1_2'),
+		WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_passRegister'),
 				findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 11))
 		
 		'klik pada tombol captcha'
-		WebUI.click(findTestObject('Object Repository/RegisterLogin/'+
-			'Page_Login - eendigo Platform/div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 		
 		'selama delay bisa fill captcha secara manual'
 		WebUI.delay(10)
@@ -270,8 +261,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	//	if (WebUI.verifyElementClickable(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'), FailureHandling.OPTIONAL))
 	//	{	
 		'klik pada button login'
-		WebUI.click(findTestObject('Object Repository/RegisterLogin/'+
-			'Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 		
 //		'cek apakah muncul error unknown setelah login'
 //		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),

@@ -20,14 +20,36 @@ WebUI.delay(1)
 'klik pada API KEY'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/span_API Key'))
 
-'klik tombol +Baru'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_Baru'))
+'cek apakah tombol menu dalam jangkauan web'
+if (WebUI.verifyElementVisible(
+	findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
+	
+	'klik pada tombol silang menu'
+	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
+}
 
-'klik tombol batal'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Batal'))
-
-'klik tombol +Baru'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_Baru'))
+'jika merupakan case awal'
+if (GlobalVariable.NumOfColumn == 2) {
+	
+	'klik tombol +Baru'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_Baru'))
+	
+	'klik tombol batal'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Batal'))
+	
+	'klik tombol +Baru'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_Baru'))
+	
+	'verify element field kosong'
+	checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/API_KEY/Page_Add Api Key/input__apiKeyName'),
+		'class', 'form-control ng-untouched ng-pristine ng-invalid',
+		GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field add tidak kosong setelah klik cancel')
+}
+else {
+	
+	'klik tombol +Baru'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_Baru'))
+}
 
 'input data API KEY name'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Add Api Key/input__apiKeyName'), findTestData(ExcelPathAPIKey).getValue(

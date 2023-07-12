@@ -20,10 +20,10 @@ import internal.GlobalVariable as GlobalVariable
 //WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/span_API Key'))
 //
 //WebUI.delay(2)
-
+	
 'klik pada tombol edit API'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/buttonEditAPI'))
-
+	
 'klik tombol batal'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Batal'))
 

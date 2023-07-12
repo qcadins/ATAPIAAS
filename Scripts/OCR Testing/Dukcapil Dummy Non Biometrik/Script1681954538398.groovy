@@ -68,18 +68,15 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
 		
 		'input data email'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-			'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 			findTestData(ExcelPathOCRTesting).getValue(2, 28))
 		
 		'input password'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-			'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 			findTestData(ExcelPathOCRTesting).getValue(2, 29))
 		
 		'ceklis pada reCaptcha'
-		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-			'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check-Recaptcha'))
 		
 		'pada delay, lakukan captcha secara manual'
 		WebUI.delay(10)

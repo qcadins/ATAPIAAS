@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>i_SEDARA MANYURA_ft-menu font-medium-3</name>
+   <name>span_Menu</name>
    <tag></tag>
    <elementGuidId>256b31de-8654-4e94-8f19-ca650e517613</elementGuidId>
    <selectorCollection>

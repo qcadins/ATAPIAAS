@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>i_Action_datatable-icon-prev</name>
+   <name>gotoFirst_page</name>
    <tag></tag>
    <elementGuidId>bfba617e-6500-4d9f-9f24-522e0678549d</elementGuidId>
    <selectorCollection>
-      <entry>
-         <key>BASIC</key>
-         <value>//*[@class = 'datatable-icon-prev']</value>
-      </entry>
       <entry>
          <key>CSS</key>
          <value>i.datatable-icon-prev</value>
@@ -16,6 +12,10 @@
       <entry>
          <key>XPATH</key>
          <value>//datatable-pager/ul/li/a/i</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@class = 'datatable-icon-prev']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

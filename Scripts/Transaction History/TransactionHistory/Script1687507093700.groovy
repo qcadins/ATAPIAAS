@@ -396,25 +396,21 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn+1, 9).length() != 0) {
 			
 			'input data email'
-			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-				'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn+1, 9))
 			
 			'input password'
-			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-				'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn+1, 10))
 			
 			'ceklis pada reCaptcha'
-			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-				'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 			
 			'pada delay, lakukan captcha secara manual'
 			WebUI.delay(10)
 			
 			'klik pada button login'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-				'button_Lanjutkan Perjalanan Anda'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 		}
 	}
 }
@@ -837,7 +833,7 @@ def checkPaging(Connection conndev) {
 	
 	'cek apakah hlm  tersedia'
 	if(WebUI.verifyElementVisible(
-		findTestObject('Object Repository/TransactionHistory/i_Action_datatable-icon-skip'),
+		findTestObject('Object Repository/TransactionHistory/skiptoLast_page'),
 		FailureHandling.OPTIONAL) == true) {
 	
 		'klik halaman 2'
@@ -859,7 +855,7 @@ def checkPaging(Connection conndev) {
 					'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik button next page'
-		WebUI.click(findTestObject('Object Repository/TransactionHistory/i_Action_datatable-icon-right'))
+		WebUI.click(findTestObject('Object Repository/TransactionHistory/next_page'))
 		
 		'verify paging di page 2'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
@@ -868,7 +864,7 @@ def checkPaging(Connection conndev) {
 					'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik prev page'
-		WebUI.click(findTestObject('Object Repository/TransactionHistory/i_Action_datatable-icon-left'))
+		WebUI.click(findTestObject('Object Repository/TransactionHistory/prev_page'))
 		
 		'verify paging di page 1'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
@@ -877,7 +873,7 @@ def checkPaging(Connection conndev) {
 					'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik pada tombol skip'
-		WebUI.click(findTestObject('Object Repository/TransactionHistory/i_Action_datatable-icon-skip'))
+		WebUI.click(findTestObject('Object Repository/TransactionHistory/skiptoLast_page'))
 		
 		'modify object laman terakhir'
 		def modifyObjectmaxPage = WebUI.modifyObjectProperty(
@@ -892,7 +888,7 @@ def checkPaging(Connection conndev) {
 				false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'click min page'
-		WebUI.click(findTestObject('Object Repository/TransactionHistory/i_Action_datatable-icon-prev'))
+		WebUI.click(findTestObject('Object Repository/TransactionHistory/gotoFirst_page'))
 		
 		'verify paging di page 1'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(

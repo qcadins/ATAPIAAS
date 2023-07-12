@@ -162,8 +162,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
 		}
 		
-		if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Api Key List/'+
-			'isPagingEnabled'), FailureHandling.OPTIONAL)  == true){
+		if(WebUI.verifyElementVisible(
+			findTestObject('Object Repository/API_KEY/Page_Api Key List/isPagingEnabled'), FailureHandling.OPTIONAL)  == true){
 			
 			'klik panah ke kanan di footer'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/next_page'))

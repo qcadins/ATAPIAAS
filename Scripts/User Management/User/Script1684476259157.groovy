@@ -29,7 +29,7 @@ WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'User', ('S
 	('Path') : ExcelPathUser], FailureHandling.STOP_ON_FAILURE)
 
 'klik pada menu'
-WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/i_SEDARA MANYURA_ft-menu font-medium-3'))
+WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/span_Menu'))
 
 'pilih submenu manage user'
 WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/a_Manage User'))
@@ -57,8 +57,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 5))
 		
 		'klik pada menu'
-		WebUI.click(findTestObject('Object Repository/User Management-Role/' +
-			'Page_Balance/i_SEDARA MANYURA_ft-menu font-medium-3'))
+		WebUI.click(
+			findTestObject('Object Repository/User Management-Role/Page_Balance/span_Menu'))
 		
 		if(WebUI.verifyElementNotVisible(findTestObject('Object Repository/User Management-User/Page_Balance/span_User'), FailureHandling.OPTIONAL)) {
 			'pilih submenu manage user'
@@ -80,6 +80,75 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'klik pada tombol New'
 			WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/a_New'))
+			
+			'loop untuk pengecekan awal testcase'
+			if (GlobalVariable.NumOfColumn == 2) {
+				
+				'input email baru yang akan ditambahkan'
+				WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__email'),
+					findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
+				
+				'input nama depan'
+				WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__firstName'),
+					findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 19))
+				
+				'input nama belakang'
+				WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__lastName'),
+					findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 20))
+				
+				'input pass'
+				WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__pass'),
+					findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 22))
+				
+				'input konfirmasi pass'
+				WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__confirmpass'),
+					findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 23))
+				
+				'input peran'
+				WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
+					findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 21))
+				
+				'klik enter pada peran'
+				WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
+					Keys.chord(Keys.ENTER))
+				
+				'klik pada tombol batal'
+				WebUI.click(findTestObject('Object Repository/User Management-User/Page_Add User/button_Batal'))
+				
+				'klik pada tombol New'
+				WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/a_New'))
+				
+				'verify element field kosong'
+				checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__email'),
+					'class', 'form-control ng-untouched ng-pristine ng-invalid',
+					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field input email tidak kosong')
+				
+				'verify element field kosong'
+				checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__firstName'),
+					'class', 'form-control mb-2 ng-untouched ng-pristine ng-invalid',
+					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field nama depan tidak kosong')
+				
+				'verify element field kosong'
+				checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__lastName'),
+					'class', 'form-control mb-2 ng-untouched ng-pristine ng-invalid',
+					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field nama belakang tidak kosong')
+				
+				'verify element field kosong'
+				checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__pass'),
+					'class', 'form-control ng-untouched ng-pristine ng-invalid',
+					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field password tidak kosong')
+
+				'verify element field kosong'
+				checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__confirmpass'),
+					'class', 'form-control ng-untouched ng-pristine ng-invalid',
+					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field konfirmasi pass tidak kosong')
+				
+				'verify element field kosong'
+				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getAttribute(
+					findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
+					'value', FailureHandling.OPTIONAL), '',
+						false, FailureHandling.OPTIONAL), 'Field role tidak kosong')
+			}
 			
 			'input email baru yang akan ditambahkan'
 			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__email'),
@@ -489,7 +558,7 @@ def checkPaging(Connection conndev) {
 	
 	'cek apakah hlm  tersedia'
 	if (WebUI.verifyElementVisible(
-		findTestObject('Object Repository/User Management-User/Page_List User/i_Action_datatable-icon-skip'),
+		findTestObject('Object Repository/User Management-User/Page_List User/gotoLast_page'),
 			FailureHandling.OPTIONAL) == true) {
 		
 		'klik halaman 2'
@@ -509,22 +578,21 @@ def checkPaging(Connection conndev) {
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik button next page'
-		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/i_Action_datatable-icon-right'))
+		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/next_page'))
 		
 		'verify paging di page 2'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/Page_List User/Page2'),'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik prev page'
-		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/i_Action_datatable-icon-left'))
+		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/prev_page'))
 		
 		'verify paging di page 1'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/'+
-			'Page_List User/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/Page_List User/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik pada tombol skip'
-		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/i_Action_datatable-icon-skip'))
+		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/gotoLast_page'))
 		
 		'modify object laman terakhir'
 		def modifyObjectmaxPage = WebUI.modifyObjectProperty(
@@ -538,11 +606,10 @@ def checkPaging(Connection conndev) {
 				false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'click min page'
-		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/i_Action_datatable-icon-prev'))
+		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/gotoFirst_page'))
 		
 		'verify paging di page 1'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/'+
-			'Page_List User/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/Page_List User/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 	}
 }

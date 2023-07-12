@@ -59,17 +59,16 @@ if (TC == 'EditProf') {
 		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 10))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
 	WebUI.delay(10)
 
 	'focus pada button login'
-	WebUI.focus(findTestObject('Object Repository/RegisterLogin/' + 'Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+	WebUI.focus(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
 	'Klik Login'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/' + 'Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
 }
 else if (TC == 'Regist') {
@@ -137,9 +136,9 @@ else if (TC == 'Regist') {
 	}
 	
 	'input pada field email'
-	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control is-invalid ng-_7788b4'),
-		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9))
+	WebUI.setText(
+		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemailRegister'),
+			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'ubah ke laman login'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Masuk'))
@@ -148,8 +147,8 @@ else if (TC == 'Regist') {
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
 	
 	'ambil teks dari field input email'
-	if (WebUI.getAttribute(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control is-invalid ng-_7788b4'), 'value', FailureHandling.OPTIONAL) 
+	if (WebUI.getAttribute(
+		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemailRegister'), 'value', FailureHandling.OPTIONAL) 
 			!= findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9)) {
 	
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
@@ -159,19 +158,19 @@ else if (TC == 'Regist') {
 	}
 	
 	'input pada field nama pengguna'
-	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control is-invalid ng-_7788b4_1'),
-		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 10))
+	WebUI.setText(
+		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputNamaRegister'),
+			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 10))
 	
 	'input pada field kata sandi'
-	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control is-invalid ng-_7788b4_1_2'),
-		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 11))
+	WebUI.setText(
+		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_passRegister'),
+			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 11))
 	
 	'input pada field ketik ulang kata sandi'
-	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control is-invalid ng-_7788b4_1_2_3'),
-		findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 12))
+	WebUI.setText(
+		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_confirmPassRegist'),
+			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 12))
 	
 //	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 21) == 'Yes') {
 //		'bypass captcha langsung masuk verifikasi otp'
@@ -182,18 +181,15 @@ else if (TC == 'Regist') {
 else if (TC == 'Key') {
 	
 	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'
-		+'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData('API_KEY/DataAPIKEY').getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData('API_KEY/DataAPIKEY').getValue(GlobalVariable.NumOfColumn, 10))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
@@ -201,47 +197,39 @@ else if (TC == 'Key') {
 else if (TC == 'DocAPI') {
 	
 	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'
-		+'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(2, 13))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(2, 14))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
 	
 	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 }
 else if (TC == 'OCR') {
 	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(2, 26))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(2, 27))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
 	
 	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
 }
 
@@ -280,72 +268,60 @@ else if (TC == 'Tenant') {
 else if (TC == 'Saldo') {
 	
 	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(ExcelPathSaldo).getValue(2, 25))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(ExcelPathSaldo).getValue(2, 26))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
 	
 	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 }
 else if (TC == 'Layanan') {
 	
 	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(ExcelPathLayanan).getValue(2, 9))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(ExcelPathLayanan).getValue(2, 10))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
 	
 	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 }
 
 else if (TC == 'Role') {
 	
 	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(ExcelPathRole).getValue(2, 11))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(ExcelPathRole).getValue(2, 12))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
 	
 	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
 //	'klik pada bagian admin client'
 //	WebUI.click(findTestObject('Object Repository/User Management-Role/'+
@@ -354,73 +330,61 @@ else if (TC == 'Role') {
 else if (TC == 'User') {
 	
 	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(2, 11))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(2, 12))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
 	
 	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 }
 
 else if (TC == 'Coupon') {
 	
 	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(2, 33))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(2, 34))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
 	
 	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 }
 
 else if (TC == 'TopUp') {
 	
 	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(2, 19))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(2, 20))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
 	
 	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
 	'jika ada pilihan role'
 	if (WebUI.verifyElementPresent(
@@ -434,25 +398,22 @@ else if (TC == 'TopUp') {
 else if (TC == 'ChangePass') {
 	
 	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 10))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
 	
 	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(
+		findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
 	'jika ada pilihan role'
 	if (WebUI.verifyElementPresent(
@@ -483,25 +444,21 @@ else if (TC == 'TranxHist') {
 	int isSelected = 0
 	
 	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 10))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
 	
 	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
 //	'jika ada pilihan role'
 //	if (WebUI.verifyElementPresent(
@@ -546,25 +503,21 @@ else if (TC == 'TranxHist') {
 else if (TC == 'TenantCekServices') {
 	
 	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_ab9ed8'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(4, 33))
 	
 	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'input_Buat Akun_form-control ng-untouched n_dd86a2'),
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(4, 34))
 	
 	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/'+
-		'div_reCAPTCHA_recaptcha-checkbox-border (4)'))
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
 	
 	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/'+
-		'button_Lanjutkan Perjalanan Anda'))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 }
 
 if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {	
