@@ -1,11 +1,11 @@
 {
-  "keywordFileContentHash": "6A8CEAFC0A5416D7A6E46CBB5CB2CBAE",
+  "keywordFileContentHash": "1D2A45B4D8B73B14DB087B988F87A7E1",
   "keywordClasses": [
     {
-      "name": "coupon.CouponVeri",
+      "name": "apikey.CheckAPIKey",
       "keywordMethods": [
         {
-          "name": "getCouponTotal",
+          "name": "getAPINamefromDB",
           "parameters": [
             {
               "name": "conn",
@@ -21,20 +21,7 @@
               }
             },
             {
-              "name": "startDate",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.lang.String",
-                "unresolvedClassName": "String",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            },
-            {
-              "name": "endDate",
+              "name": "apiname",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -50,7 +37,12 @@
           "javadoc": ""
         },
         {
-          "name": "getDetailCoupon",
+          "name": "getAttributeValueAPI",
+          "parameters": [],
+          "javadoc": ""
+        },
+        {
+          "name": "getAPIStatusfromDB",
           "parameters": [
             {
               "name": "conn",
@@ -66,7 +58,7 @@
               }
             },
             {
-              "name": "kodekupon",
+              "name": "apiname",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -82,45 +74,7 @@
           "javadoc": ""
         },
         {
-          "name": "getTipeNilaiKuponList",
-          "parameters": [
-            {
-              "name": "conn",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.sql.Connection",
-                "unresolvedClassName": "Connection",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            }
-          ],
-          "javadoc": ""
-        },
-        {
-          "name": "getTenantList",
-          "parameters": [
-            {
-              "name": "conn",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.sql.Connection",
-                "unresolvedClassName": "Connection",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            }
-          ],
-          "javadoc": ""
-        },
-        {
-          "name": "getAddEditCoupon",
+          "name": "getTotalAPIKeyfromDB",
           "parameters": [
             {
               "name": "conn",
@@ -136,7 +90,7 @@
               }
             },
             {
-              "name": "kodekupon",
+              "name": "email",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -152,7 +106,7 @@
           "javadoc": ""
         },
         {
-          "name": "getTipeKuponList",
+          "name": "getTenantCodeName",
           "parameters": [
             {
               "name": "conn",
@@ -160,6 +114,19 @@
               "type": {
                 "fullClassName": "java.sql.Connection",
                 "unresolvedClassName": "Connection",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "email",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
                 "isArray": false,
                 "isGnericsPlaceHolder": false,
                 "hasImmutableClassName": false,
