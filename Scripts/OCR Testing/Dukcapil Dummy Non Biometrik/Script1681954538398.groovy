@@ -36,15 +36,43 @@ Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_dev
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 3)
 
+'buka chrome\r\n'
+WebUI.openBrowser('')
+
+'buka website APIAAS SIT, data diambil dari TestData Login'
+WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
+
+'input data email'
+WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
+	findTestData(ExcelPathOCRTesting).getValue(2, 28))
+
+'input password'
+WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
+	findTestData(ExcelPathOCRTesting).getValue(2, 29))
+
+'ceklis pada reCaptcha'
+WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
+
+'pada delay, lakukan captcha secara manual'
+WebUI.delay(10)
+
+'klik pada button login'
+WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+
+if (GlobalVariable.SettingEnvi == 'Production') {
+	'click pada production'
+	WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
+}
+
 'pindah testcase sesuai jumlah di excel'
-for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
+for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
 	
 	'ambil kode tenant di DB'
 	String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, 
 		findTestData(ExcelPathOCRTesting).getValue(2, 28))
 	
 	'ambil key trial yang aktif dari DB'
-	String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
+	String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode, GlobalVariable.SettingEnvi)
 	
 	'deklarasi id untuk harga pembayaran OCR'
 	int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(conndevUAT, 
@@ -53,41 +81,13 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 	'ambil jenis penagihan transaksi (by qty/price)'
 	String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(conndevUAT, 
 		tenantcode, idPayment)
-	
+
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
 	} 
 	else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
-		
-		'buka chrome\r\n'
-		WebUI.openBrowser('')
-		
-		'buka website APIAAS SIT, data diambil dari TestData Login'
-		WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
-		
-		'input data email'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-			findTestData(ExcelPathOCRTesting).getValue(2, 28))
-		
-		'input password'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-			findTestData(ExcelPathOCRTesting).getValue(2, 29))
-		
-		'ceklis pada reCaptcha'
-		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check-Recaptcha'))
-		
-		'pada delay, lakukan captcha secara manual'
-		WebUI.delay(10)
-		
-		'klik pada button login'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-		
-		if (GlobalVariable.SettingEnvi == 'Production') {
-			'click pada production'
-			WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
-		}
 		
 		'deklarasi variable response'
 		ResponseObject response
@@ -166,9 +166,22 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			message_ocr)
 			
-			'call auto isi saldo'
-			WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'Verifikasi Identitas Dukcapil', ('sheet') : 'Dukcapil(NonBiom)', ('idOCR') : 'DUKCAPIL_VIDA'],
-				FailureHandling.CONTINUE_ON_FAILURE)
+			if(GlobalVariable.SettingTopup.equals('IsiSaldo')) {
+				
+				'call auto isi saldo'
+				WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'Verifikasi Identitas Dukcapil', ('sheet') : 'Dukcapil(NonBiom)', ('idOCR') : 'DUKCAPIL_VIDA'],
+					FailureHandling.CONTINUE_ON_FAILURE)
+			}
+			else if (GlobalVariable.SettingTopup.equals('SelfTopUp')) {
+				
+				'call isi saldo secara mandiri di Admin Client'
+				WebUI.callTestCase(findTestCase('Top Up/Top Up'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'Verifikasi Identitas Dukcapil', ('sheet') : 'Dukcapil(NonBiom)', ('idOCR') : 'DUKCAPIL_VIDA'],
+					FailureHandling.CONTINUE_ON_FAILURE)
+				
+				'lakukan approval di transaction history'
+				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistory'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'Verifikasi Identitas Dukcapil', ('sheet') : 'Dukcapil(NonBiom)', ('idOCR') : 'DUKCAPIL_VIDA'],
+					FailureHandling.CONTINUE_ON_FAILURE)
+			}
 			
 			continue
 			

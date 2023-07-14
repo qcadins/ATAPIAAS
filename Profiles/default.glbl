@@ -256,6 +256,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>findTestData('Login/Login').getValue(5, 4)</initValue>
+      <name>SettingTopup</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Failed'</initValue>
       <name>StatusFailed</name>
    </GlobalVariableEntity>

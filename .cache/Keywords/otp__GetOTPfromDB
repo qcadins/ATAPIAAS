@@ -1,11 +1,11 @@
 {
-  "keywordFileContentHash": "CCCB58879B13A2015AAA951B24E22BC2",
+  "keywordFileContentHash": "0FD4C1C5AF9FDC38C67EF4F9D9499C16",
   "keywordClasses": [
     {
-      "name": "apikey.checkAddKey",
+      "name": "otp.GetOTPfromDB",
       "keywordMethods": [
         {
-          "name": "getAPINamefromDB",
+          "name": "getOTPforRegister",
           "parameters": [
             {
               "name": "conn",
@@ -21,7 +21,7 @@
               }
             },
             {
-              "name": "apiname",
+              "name": "email",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -33,10 +33,11 @@
                 "errorOnParsing": false
               }
             }
-          ]
+          ],
+          "javadoc": ""
         }
       ]
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }
