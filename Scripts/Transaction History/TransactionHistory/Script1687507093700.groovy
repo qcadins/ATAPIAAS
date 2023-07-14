@@ -24,7 +24,7 @@ Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'
 'deklarasi koneksi ke database eendigo_dev_uat'
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
+for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
@@ -96,6 +96,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'cek apakah role adminclient/admineendigo/adminfinance'
 		if (RoleUser.equalsIgnoreCase('Admin Client')) {
+			
+			'input batas awal transaksi'
+			WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/input_startDate'),
+					findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 13))
+			
+			'input batas akhir transaksi'
+			WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/input_endDate'),
+					findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 14))
 			
 			'masukkan data ke filter status'
 			WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
@@ -271,10 +279,12 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Adm.Finance-NPWP')
 			
 			'modifikasi alamat object trxnumber'
-			def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/TransactionHistory/modifyObject'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-transaction-history/app-msx-paging/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[1]/datatable-body-row/div[2]/datatable-body-cell[1]/div/p", true)
+			def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/TransactionHistory/modifyObject'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-transaction-history/app-msx-paging/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[1]/datatable-body-row/div[2]/datatable-body-cell[2]/div/p", true)
 			
 			'ambil trx num'
 			String trxNum = WebUI.getText(modifytrxnumber)
+			
+			println trxNum
 			
 			'cek apakah perlu reject pembayaran'
 			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 27) == 'Yes') {
@@ -522,14 +532,14 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 				if (choice == 'Approve') {
 					
 					'verify notifikasi sukses atau tidak'
-					checkVerifyEqualorMatch(WebUI.verifyMatch(serviceSaldobefore[i],
-						serviceSaldoafter[i], false, FailureHandling.CONTINUE_ON_FAILURE), 'Saldo tidak Berubah')
+					checkVerifyEqualorMatch(WebUI.verifyEqual(serviceSaldobefore[i],
+						serviceSaldoafter[i], FailureHandling.CONTINUE_ON_FAILURE), 'Saldo tidak Berubah')
 				}
 				else {
 					
 					'verify notifikasi sukses atau tidak'
-					checkVerifyNotEqualorMatch(WebUI.verifyMatch(serviceSaldobefore[i],
-						serviceSaldoafter[i], false, FailureHandling.CONTINUE_ON_FAILURE), 'Saldo Berubah')
+					checkVerifyNotEqualorMatch(WebUI.verifyNotEqual(serviceSaldobefore[i],
+						serviceSaldoafter[i], FailureHandling.CONTINUE_ON_FAILURE), 'Saldo Berubah')
 				}
 			}
 			
@@ -570,6 +580,14 @@ def searchadminEendigoFinance() {
 		'klik pada tombol silang menu'
 		WebUI.click(findTestObject(TombolSilang))
 	}
+	
+	'input batas awal transaksi'
+	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/input_startDate'),
+			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 13))
+	
+	'input batas akhir transaksi'
+	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/input_endDate'),
+			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 14))
 	
 	'masukkan data ke filter status'
 	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),

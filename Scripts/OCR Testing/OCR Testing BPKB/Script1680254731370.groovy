@@ -359,7 +359,7 @@ def getSaldoforTransaction(String NamaOCR) {
 			if(WebUI.getText(modifyNamaSaldo) == NamaOCR){
 				
 				'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
-				def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/h3", true)
+				def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/kotakSaldo'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/h3", true)
 				
 				'simpan jumlah saldo sekarang di variabel'
 				 saldoNow = Integer.parseInt(WebUI.getText(modifySaldoDipilih).replace(',',''))

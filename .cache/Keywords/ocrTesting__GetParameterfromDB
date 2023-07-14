@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "BB2618092FA8CCD96A11D25383C77EA8",
+  "keywordFileContentHash": "32270C32FDAB7DD71DA5B876639BE516",
   "keywordClasses": [
     {
       "name": "ocrTesting.GetParameterfromDB",
@@ -112,6 +112,19 @@
             },
             {
               "name": "tenantCode",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "envi",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
