@@ -19,7 +19,7 @@ ArrayList<String> hasildb = CustomKeywords.'apikey.CheckAPIKey.getAPIStatusfromD
 ArrayList<String> hasilexcel = []
 
 'mengambil data dari excel'
-for (int i=12; i<=hasilexcel.size; i++){
+for (int i=12; i<=hasildb.size; i++){
 	
 	hasilexcel.add(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, i))
 }
@@ -39,7 +39,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonStoreDB)
+		GlobalVariable.FailedReasonStoreDB + ' After Edit Key')
 		
 	}
 }

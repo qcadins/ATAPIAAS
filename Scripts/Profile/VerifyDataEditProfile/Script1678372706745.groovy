@@ -29,7 +29,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 		GlobalVariable.FlagFailed = 1
         CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, 
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + 
-				';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
+				';') + GlobalVariable.FailedReasonVerifyEqualorMatch + ' Data sebelum edit tidak sesuai')
     }
 }
 

@@ -132,9 +132,22 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			messageocr)
 			
-			'call auto isi saldo'
-			WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR NPWP', ('sheet') : 'OCR NPWP', ('idOCR') : 'OCR_NPWP'],
-				FailureHandling.CONTINUE_ON_FAILURE)
+			if(GlobalVariable.SettingTopup.equals('IsiSaldo')) {
+				
+				'call auto isi saldo'
+				WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR NPWP', ('sheet') : 'OCR NPWP', ('idOCR') : 'OCR_NPWP'],
+					FailureHandling.CONTINUE_ON_FAILURE)
+			}
+			else if (GlobalVariable.SettingTopup.equals('SelfTopUp')) {
+				
+				'call isi saldo secara mandiri di Admin Client'
+				WebUI.callTestCase(findTestCase('Top Up/Top Up'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR NPWP', ('sheet') : 'OCR NPWP', ('idOCR') : 'OCR_NPWP'],
+					FailureHandling.CONTINUE_ON_FAILURE)
+				
+				'lakukan approval di transaction history'
+				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistory'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR NPWP', ('sheet') : 'OCR NPWP', ('idOCR') : 'OCR_NPWP'],
+					FailureHandling.CONTINUE_ON_FAILURE)
+			}
 			
 			continue
 		}
