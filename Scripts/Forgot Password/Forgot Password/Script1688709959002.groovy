@@ -171,9 +171,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Reset Password/input_confirmNewPassword'),
 			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 11))
 		
-		'lihat password yang sudah diinput'
-		WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Login - eendigo Platform/ToggleLihatPass'))
-		
 		'klik button lanjut'
 		WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Reset Password/button_Simpan'))
 		

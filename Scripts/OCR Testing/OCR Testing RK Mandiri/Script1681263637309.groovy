@@ -139,9 +139,22 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			message_ocr)
 			
-			'call auto isi saldo'
-			WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR REK. KORAN MANDIRI', ('sheet') : 'OCR RK Mandiri', ('idOCR') : 'OCR_REKKORAN_MANDIRI'],
-				FailureHandling.CONTINUE_ON_FAILURE)
+			if(GlobalVariable.SettingTopup.equals('IsiSaldo')) {
+				
+				'call auto isi saldo'
+				WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Rek. Koran Mandiri', ('sheet') : 'OCR RK Mandiri', ('idOCR') : 'OCR_REKKORAN_MANDIRI'],
+					FailureHandling.CONTINUE_ON_FAILURE)
+			}
+			else if (GlobalVariable.SettingTopup.equals('SelfTopUp')) {
+				
+				'call isi saldo secara mandiri di Admin Client'
+				WebUI.callTestCase(findTestCase('Top Up/Top Up'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Rek. Koran Mandiri', ('sheet') : 'OCR RK Mandiri', ('idOCR') : 'OCR_REKKORAN_MANDIRI'],
+					FailureHandling.CONTINUE_ON_FAILURE)
+				
+				'lakukan approval di transaction history'
+				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistory'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Rek. Koran Mandiri', ('sheet') : 'OCR RK Mandiri', ('idOCR') : 'OCR_REKKORAN_MANDIRI'],
+					FailureHandling.CONTINUE_ON_FAILURE)
+			}
 			
 			continue
 		}
