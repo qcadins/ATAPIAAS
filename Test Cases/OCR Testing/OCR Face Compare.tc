@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>OCR Face Compare</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>a09f1553-6b67-4db1-982e-604349d70373</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>15c129ae-8264-4657-bd68-6e6ac86f7934</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'OCR Testing/DataOCRTestingFaceComp'</defaultValue>
+      <description></description>
+      <id>15c129ae-8264-4657-bd68-6e6ac86f7934</id>
+      <masked>false</masked>
+      <name>ExcelPathOCRTesting</name>
+   </variable>
+</TestCaseEntity>
