@@ -99,10 +99,10 @@ for (indexExcel = 0 ; indexExcel < arrayServices.size(); indexExcel++) {
 		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 10)).replace('{','').replace('}','').replace('"','').replace(':0', '')
 	
 	'split result to array'
-	ArrayList<String> resultarray = result.split(':0')
+	ArrayList resultarray = result.split(':0')
 	
 	'get array Services dari excel'
-	ArrayList<String> arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 26).split(';', -1)
+	ArrayList arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 26).split(';', -1)
 	
 	'verify services'
 	arrayMatch.add(arrayServices.containsAll(resultarray))

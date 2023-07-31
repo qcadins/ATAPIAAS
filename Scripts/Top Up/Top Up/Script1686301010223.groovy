@@ -135,7 +135,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				'tulis error sesuai reason yang ditampilkan oleh error message'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-						hasilNotif)
+						'<' + hasilNotif + '>')
 				
 				WebUI.refresh()
 				
@@ -381,7 +381,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					'tulis error sesuai reason yang ditampilkan oleh error message'
 					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-							hasilNotif)
+							'<' + hasilNotif + '>')
 					
 					WebUI.refresh()
 					

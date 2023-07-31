@@ -69,10 +69,10 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		WebUI.click(findTestObject('Object Repository/User Management-User/Page_Balance/span_User'))
 		
 		'cek apakah tombol menu dalam jangkauan web'
-		if (WebUI.verifyElementVisible(findTestObject(TombolSilang), FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
 			
 			'klik pada tombol silang menu'
-			WebUI.click(findTestObject(TombolSilang))
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
 		}
 		
 		'check if action new/edit'
@@ -314,7 +314,9 @@ def checkdialogConfirmation (int isMandatoryComplete) {
 					'input email'
 					WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/input_Email_email'),
 							findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
+					
 				} else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
+					
 					'input email'
 					WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/input_Email_email'),
 							findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 14))
@@ -370,7 +372,7 @@ def checkdialogConfirmation (int isMandatoryComplete) {
 			'tulis adanya error saat edit'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-					editCondition)
+					'<' + editCondition + '>')
 		}
 	}	
 }

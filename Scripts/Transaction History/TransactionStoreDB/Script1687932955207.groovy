@@ -12,21 +12,24 @@ Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'
 String resultDB = CustomKeywords.'transactionHistory.TransactionVerif.getstatusafterConfirmOrReject'(
 	conndev, TrxNum)
 
+'deklarasi string result dari excel'
+String resultExcel
+
 'check if action new/edit'
 if (TrxType == 'Approve') {
 	
 	'ambil data role dari excel'
-	String resultExcel = findTestData(Path).getValue(1, 33)
+	resultExcel = 'Pembayaran Berhasil'
 	
 } else if(TrxType == 'Reject') {
 	
 	'ambil data role dari excel'
-	String resultExcel = findTestData(Path).getValue(1, 34)
+	resultExcel = 'Pembayaran Ditolak'
 
 } else if(TrxType == 'Upload') {
 	
 	'ambil data role dari excel'
-	String resultExcel = findTestData(Path).getValue(1, 31)
+	resultExcel = 'Menunggu Verifikasi Pembayaran'
 }
 
 checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB, resultExcel, false,
@@ -37,7 +40,7 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(Sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonStoreDB + ' ' + reason)
 	}

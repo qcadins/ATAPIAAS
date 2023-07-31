@@ -36,6 +36,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
+		
 	} else if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted') ||
 		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Warning')) {
 		
@@ -70,10 +71,10 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/RiwayatTrxMenu'))
 		
 		'cek apakah tombol menu dalam jangkauan web'
-		if (WebUI.verifyElementVisible(findTestObject(TombolSilang), FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
 			
 			'klik pada tombol silang menu'
-			WebUI.click(findTestObject(TombolSilang))
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
 		}
 		
 		checkddlTipeIsiUlang(conndev)
@@ -196,13 +197,12 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					if (GlobalVariable.KondisiCekDB == 'Yes') {
 						
 						'panggil fungsi storeDB'
-						WebUI.callTestCase(findTestCase('Test Cases/Transaction History/TransactionAutoStoreDB'), [('Path') : ExcelPathTranx,
-							('TrxType') : 'Upload', ('TrxNum') : trxNum],
+						WebUI.callTestCase(findTestCase('Test Cases/Transaction History/TransactionStoreDB'), [('Path') : ExcelPathTranx,
+							('TrxType') : 'Upload', ('TrxNum') : trxNum, ('Sheet') : 'RiwayatTransaksiAuto'],
 							 FailureHandling.CONTINUE_ON_FAILURE)
 					}
 					
-				}
-				else if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/ErrorTopRight'),
+				} else if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/ErrorTopRight'),
 					GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 					
 					'ambil error dan get text dari error tersebut'
@@ -406,8 +406,8 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 			if (GlobalVariable.KondisiCekDB == 'Yes') {
 				
 				'panggil fungsi storeDB'
-				WebUI.callTestCase(findTestCase('Test Cases/Transaction History/TransactionAutoStoreDB'), [('Path') : ExcelPathTranx,
-					('TrxType') : choice, ('TrxNum') : trxNum],
+				WebUI.callTestCase(findTestCase('Test Cases/Transaction History/TransactionStoreDB'), [('Path') : ExcelPathTranx,
+					('TrxType') : choice, ('TrxNum') : trxNum, ('Sheet') : 'RiwayatTransaksiAuto'],
 					 FailureHandling.CONTINUE_ON_FAILURE)
 			}
 		}
@@ -434,10 +434,10 @@ def searchadminEendigoFinance() {
 	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/RiwayatTrxMenu'))
 	
 	'cek apakah tombol menu dalam jangkauan web'
-	if (WebUI.verifyElementVisible(findTestObject(TombolSilang), FailureHandling.OPTIONAL)) {
+	if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
 		
 		'klik pada tombol silang menu'
-		WebUI.click(findTestObject(TombolSilang))
+		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
 	}
 	
 	'input batas awal transaksi'

@@ -153,7 +153,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/Top Up/NotifCat
 		'tulis error sesuai reason yang ditampilkan oleh error message'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-				hasilNotif)
+				'<' + hasilNotif + '>')
 	}
 }
 
@@ -326,7 +326,7 @@ if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Top Up/
 			'tulis error sesuai reason yang ditampilkan oleh error message'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-					hasilNotif)
+					'<' + hasilNotif + '>')
 		}
 	}
 	
