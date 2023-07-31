@@ -213,11 +213,11 @@ if (TC == 'EditProf') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(Path).getValue(2, 26))
+		findTestData(Path).getValue(2, Row))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(2, 27))
+		findTestData(Path).getValue(2, Row+1))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))

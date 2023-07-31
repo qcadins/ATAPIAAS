@@ -33,7 +33,12 @@ GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 6)
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR KTP',
-	('Path') : ExcelPathOCRTesting], FailureHandling.STOP_ON_FAILURE)
+	('Path') : ExcelPathOCRTesting, ('Row') : 26], FailureHandling.STOP_ON_FAILURE)
+
+if (GlobalVariable.SettingEnvi == 'Production') {
+	'click pada production'
+	WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
+}
 
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
@@ -92,7 +97,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		String noTrxbefore = getTrxNumber()
 		
 		'variabel yang menyimpan saldo sebelum adanya transaksi'
-		saldobefore = getSaldoforTransaction('OCR KTP')
+		saldobefore = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 10))
 		
 		if (useCorrectKey != 'Yes') {
 			
@@ -139,16 +144,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			} else if (GlobalVariable.SettingTopup.equals('SelfTopUp')) {
 				
 				'call isi saldo secara mandiri di Admin Client'
-				WebUI.callTestCase(findTestCase('Top Up/Top Up'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR KTP', ('sheet') : 'OCR KTP', ('idOCR') : 'OCR_KTP'],
+				WebUI.callTestCase(findTestCase('Top Up/TopUpAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR KTP', ('sheet') : 'OCR KTP', ('idOCR') : 'OCR_KTP'],
 					FailureHandling.CONTINUE_ON_FAILURE)
 				
 				'lakukan approval di transaction history'
-				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistory'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR KTP', ('sheet') : 'OCR KTP', ('idOCR') : 'OCR_KTP'],
+				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistoryAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR KTP', ('sheet') : 'OCR KTP', ('idOCR') : 'OCR_KTP'],
 					FailureHandling.CONTINUE_ON_FAILURE)
 			}
 			
-			loginfunction()
-			
+			'panggil fungsi login'
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR KTP',
+				('Path') : ExcelPathOCRTesting, ('Row') : 26], FailureHandling.STOP_ON_FAILURE)
+						
 			continue
 			
 		}
@@ -239,7 +246,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'simpan saldo setelah di HIT'
-		uiSaldoafter = getSaldoforTransaction('OCR KTP')
+		uiSaldoafter = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 10))
 		
 		'jika saldoafter match'
 		if (katalonSaldoafter == uiSaldoafter) {
@@ -328,31 +335,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 
 'tutup browser jika loop sudah selesai'
 WebUI.closeBrowser()
-
-def loginfunction() {
-	'buka website APIAAS SIT, data diambil dari TestData Login'
-	WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
-	
-	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(ExcelPathOCRTesting).getValue(2, 26))
-	
-	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(ExcelPathOCRTesting).getValue(2, 27))
-	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-	
-	'ubah number of column menjadi 2'
-	GlobalVariable.NumOfColumn = 2
-}
 
 'ambil saldo sesuai testing yang dilakukan'
 def getSaldoforTransaction(String NamaOCR) {

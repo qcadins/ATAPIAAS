@@ -33,10 +33,9 @@ Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_dev
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 11)
 
-'buka chrome\r\n'
-WebUI.openBrowser('')
-
-loginfunction()
+'panggil fungsi login'
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR Liveness',
+	('Path') : ExcelPathOCRTesting, ('Row') : 26], FailureHandling.STOP_ON_FAILURE)
 
 if (GlobalVariable.SettingEnvi == 'Production') {
 	'click pada production'
@@ -159,7 +158,9 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 					FailureHandling.CONTINUE_ON_FAILURE)
 			}
 			
-			loginfunction()
+			'panggil fungsi login'
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR Liveness',
+				('Path') : ExcelPathOCRTesting, ('Row') : 26], FailureHandling.STOP_ON_FAILURE)
 			
 			continue
 			
@@ -222,7 +223,7 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 			}
 		}
 		
-		'simpan harga Dukcapil(NonBiom) ke dalam integer'
+		'simpan harga Liveness ke dalam integer'
 		int serviceprice = CustomKeywords.'ocrTesting.GetParameterfromDB.getServicePricefromDB'(conndevUAT, idPayment)
 		
 		'jika HIT API successful'
@@ -331,31 +332,6 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 
 'tutup browser jika loop sudah selesai'
 WebUI.closeBrowser()
-
-def loginfunction() {
-	'buka website APIAAS SIT, data diambil dari TestData Login'
-	WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
-	
-	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(ExcelPathOCRTesting).getValue(2, 26))
-	
-	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(ExcelPathOCRTesting).getValue(2, 27))
-	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-	
-	'ubah number of column menjadi 2'
-	GlobalVariable.NumOfColumn = 2
-}
 
 'ambil saldo sesuai testing yang dilakukan'
 def getSaldoforTransaction(String NamaOCR) {
