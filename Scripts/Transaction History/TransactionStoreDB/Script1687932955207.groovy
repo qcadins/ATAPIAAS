@@ -8,43 +8,29 @@ import java.sql.Connection
 'deklarasi koneksi ke DB eendigo_dev'
 Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
+'ambil data role dari db'
+String resultDB = CustomKeywords.'transactionHistory.TransactionVerif.getstatusafterConfirmOrReject'(
+	conndev, TrxNum)
+
 'check if action new/edit'
 if (TrxType == 'Approve') {
-	
-	'ambil data role dari db'
-	String resultDB = CustomKeywords.'transactionHistory.TransactionVerif.getstatusafterConfirmOrReject'(
-		conndev, TrxNum)
 	
 	'ambil data role dari excel'
 	String resultExcel = findTestData(Path).getValue(1, 33)
 	
-	checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB, resultExcel, false,
-		FailureHandling.CONTINUE_ON_FAILURE), TrxType)
-}
-else if(TrxType == 'Reject') {
-	
-	'ambil data role dari db'
-	String resultDB = CustomKeywords.'transactionHistory.TransactionVerif.getstatusafterConfirmOrReject'(
-		conndev, TrxNum)
+} else if(TrxType == 'Reject') {
 	
 	'ambil data role dari excel'
 	String resultExcel = findTestData(Path).getValue(1, 34)
-	
-	checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB, resultExcel, false,
-		FailureHandling.CONTINUE_ON_FAILURE), TrxType)
-}
-else if(TrxType == 'Upload') {
-	
-	'ambil data role dari db'
-	String resultDB = CustomKeywords.'transactionHistory.TransactionVerif.getstatusafterConfirmOrReject'(
-		conndev, TrxNum)
+
+} else if(TrxType == 'Upload') {
 	
 	'ambil data role dari excel'
 	String resultExcel = findTestData(Path).getValue(1, 31)
-	
-	checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB, resultExcel, false,
-		FailureHandling.CONTINUE_ON_FAILURE), TrxType)
 }
+
+checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB, resultExcel, false,
+	FailureHandling.CONTINUE_ON_FAILURE), TrxType)
 
 def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 	if (isMatch == false) {

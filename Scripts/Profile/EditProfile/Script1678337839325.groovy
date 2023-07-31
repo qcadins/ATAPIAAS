@@ -20,7 +20,7 @@ import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathEditProfile).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathEditProfile).columnNumbers
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
@@ -30,6 +30,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	
     'status kosong berhentikan testing, status selain unexecuted akan dilewat'
     if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
+		
         break
     } 
 	else if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
@@ -39,8 +40,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
             FailureHandling.STOP_ON_FAILURE)
         
         'angka untuk menghitung data mandatory yang tidak terpenuhi'
-        int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 
-                5))
+        int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 5))
 
         userRole = CustomKeywords.'profile.CheckProfile.getUserRole'(conn,
 			findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
@@ -69,9 +69,9 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 
         'panggil fungsi verifikasi jika checkdatabase = yes'
         if (GlobalVariable.KondisiCekDB == 'Yes') {
+			
             'verifikasi data yang ada di web dengan di database sebelum diEdit'
-            WebUI.callTestCase(findTestCase('Profile/VerifyDataEditProfile'), [('ExcelPathEditProfile') : 'APIAAS/DataEditProfile', ('role') : userRole], 
-				FailureHandling.CONTINUE_ON_FAILURE)
+			verifyDataEdit(conn, userRole)
         }
         
         'input nama depan pengguna'
@@ -87,8 +87,10 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 
         'pilih jenis kelamin'
         if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 15) == 'M') {
+			
             WebUI.check(findTestObject('Object Repository/Profile/Page_Edit Profile/input__radioMale'))
         } else {
+			
             WebUI.check(findTestObject('Object Repository/Profile/Page_Edit Profile/input__radioFemale'))
         }
         
@@ -106,15 +108,19 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 
         'pilih tipe akun'
         if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 22) == 'Perusahaan') {
+			
             'check radio button perusahaan'
             WebUI.check(findTestObject('Object Repository/Profile/Page_Edit Profile/radio_Perusahaan'))
+			
         } else if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 22) == 'Personal') {
+			
             'check radio button personal'
             WebUI.check(findTestObject('Object Repository/Profile/Page_Edit Profile/radio_Personal'))
         }
         
         'check if user role == admin client'
         if (userRole == 'Admin Client') {
+			
             'input data nama perusahaan'
             WebUI.setText(findTestObject('Object Repository/Profile/Page_Edit Profile/input__tenantName'), findTestData(
                     ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 13))
@@ -132,6 +138,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
                     GlobalVariable.NumOfColumn, 20))
 
             if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 21).length() > 0) {
+				
                 'upload file NPWP'
                 WebUI.uploadFile(findTestObject('Object Repository/Profile/Page_Edit Profile/button_UploadNPWP'), findTestData(
                         ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 21), FailureHandling.CONTINUE_ON_FAILURE)
@@ -144,6 +151,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         'cek apakah muncul error unknown setelah login'
         if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), GlobalVariable.Timeout, 
             FailureHandling.OPTIONAL) == false) {
+		
             GlobalVariable.FlagFailed = 1
 
             'tulis adanya error pada sistem web'
@@ -184,6 +192,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
         'panggil fungsi verifikasi jika checkdatabase = yes'
         if (GlobalVariable.KondisiCekDB == 'Yes') {
+			
             'verifikasi data yang ada di excel dengan di database sesudah diEdit'
             WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfileStoreDBVerif'), [('role') : userRole], FailureHandling.CONTINUE_ON_FAILURE)
         }
@@ -235,15 +244,20 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         
         'kondisi jika tidak ada failed pada bagian lain testcase'
         if (isMandatoryComplete != 0) {
+			
             'Write To Excel GlobalVariable.StatusFailed and gagal karena reason status'
             CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, 
                 GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + 
                 ';') + GlobalVariable.FailedReasonMandatory)
+			
         } else if (GlobalVariable.FlagFailed == 0) {
+			
             'write to excel success'
             CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Edit Profile', 0, GlobalVariable.NumOfColumn - 
                 1, GlobalVariable.StatusSuccess)
+			
         } else {
+			
             'Write To Excel GlobalVariable.StatusFailed and gagal karena reason status'
             CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, 
                 GlobalVariable.StatusWarning, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + 
@@ -259,3 +273,29 @@ WebUI.closeBrowser()
 
 'panggil testcase untuk change password'
 WebUI.callTestCase(findTestCase('Test Cases/Change Password/ChangePassword'), [:], FailureHandling.STOP_ON_FAILURE)
+
+def verifyDataEdit(Connection conn, String role) {
+	'ambil email dari testdata, disimpan ke string'
+	String email = WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__email'), 'value')
+	
+	'kumpulan string dari data yang diambil langsung dari database'
+	ArrayList hasildb = CustomKeywords.'profile.CheckProfile.getProfilefromDB'(conn, email, role)
+	
+	'ambil text dari UI Web APIAAS'
+	ArrayList hasilweb = CustomKeywords.'profile.CheckProfile.getAttributeValueProfile'(role)
+	
+	'verifikasi data pada WEB dan DB sama'
+	for (int j = 0; j < hasildb.size; j++) {
+		checkVerifyEqualorMatch(WebUI.verifyMatch(hasilweb[j], hasildb[j], false, FailureHandling.CONTINUE_ON_FAILURE))
+	}
+}
+
+def checkVerifyEqualorMatch(Boolean isMatch) {
+	if (isMatch == false) {
+		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+		GlobalVariable.FlagFailed = 1
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) +
+				';') + GlobalVariable.FailedReasonVerifyEqualorMatch + ' Data sebelum edit tidak sesuai')
+	}
+}

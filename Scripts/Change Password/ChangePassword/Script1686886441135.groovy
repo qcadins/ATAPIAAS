@@ -15,7 +15,7 @@ import org.openqa.selenium.By
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathChangePass).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathChangePass).columnNumbers
 
 'buka chrome'
 WebUI.openBrowser('')
@@ -32,8 +32,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
-	}
-	else if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+		
+	} else if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
 		'lakukan proses login dengan password lama'
 		loginFunction(10)
@@ -165,8 +165,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'ChangePassword', 0,
 					GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 			}
-		}
-		else {
+		} else {
 			
 			'tulis ada error '
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('ChangePassword', GlobalVariable.NumOfColumn,
@@ -240,7 +239,7 @@ def loginFunction(int row) {
 				'klik role yang dipilih'
 				WebUI.click(findTestObject('Object Repository/Change Password/modifyobject'))
 				
-				break;
+				break
 			}
 		}
 	}
@@ -260,7 +259,6 @@ def loginFunction(int row) {
 
 def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 	if (isMatch == false) {
-		
 		GlobalVariable.FlagFailed = 1
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'

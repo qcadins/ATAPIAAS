@@ -21,49 +21,33 @@ import java.sql.Connection
 Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathRegisterLogin).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathRegisterLogin).columnNumbers
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; GlobalVariable.NumOfColumn++){
+for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; GlobalVariable.NumOfColumn++) {
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 1).length() == 0){
+	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
-	}
-	else if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+	} else if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
-		String email, autofillOTP, otpExcel, resendotp, countresendOTP
+		String email, otpExcel, resendotp
 	
 		'simpan data email dari testdata'
 		email = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9)
 		
-		'kondisi jika perlu isi OTP langsung dari DB'
-		autofillOTP = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 14)
-		
-		'simpan data OTP dari excel'
-		otpExcel = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 15)
-		
 		'status resend otp bila diperlukan'
 		resendotp = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 16)
-		
-		'berapa kali resend diperlukan'
-		countresendOTP = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 17)
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathRegisterLogin).getValue(
 			GlobalVariable.NumOfColumn, 5))
 		
-		'angka untuk mendapat otp salah dari excel'
-		List<Integer> otpmanual = []
-		
-		'tambahkan data ke dalam list otp manual'
-		otpmanual.add(otpExcel)
-		
 		'banyaknya resend otp yang akan dilakukan'
-		int countresend = Integer.parseInt(countresendOTP)
+		int countresend = Integer.parseInt(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 17))
 		
 		'memanggil fungsi untuk login'
 		WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC'):'Regist', ('SheetName') : 'Register', 
@@ -102,7 +86,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), 
 					GlobalVariable.NumOfColumn, 'Register')
 			
-			if (autofillOTP == 'Yes') {
+			'fungsi yang menyesuaikan keperluan ambil otp dari DB'
+			if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 14) == 'Yes') {
+				
 				'input otp dari DB'
 				WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), iniotp[0])
 				
@@ -165,14 +151,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, 
 					findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Verifikasi OTP Email berhasil'), 
 						GlobalVariable.NumOfColumn, 'Register')
-			}
-			else {
+			} else {
 				
 				'input otp dari excel'
-				WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), otpmanual[0])
+				WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 15))
 				
 				if(resendotp == 'Yes')
-					{
+				{
 						for(int i=0; i < countresend; i++)
 						{
 							'tunggu button resend otp'
@@ -199,7 +184,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							}	
 							
 							'input otp dari DB'
-							WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), otpmanual[0])
+							WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 15))
 						}
 					}
 					
@@ -229,8 +214,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.delay(3)
 		
 		'verifikasi data hasil registrasi dan yang ada pada db'
-		WebUI.callTestCase(findTestCase('Test Cases/Register/VerifyRegistration'), 
-			[:], FailureHandling.CONTINUE_ON_FAILURE)
+		verifyregistration(conn, email)
 		
 		'klik button submenu Masuk'
 		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Masuk'))
@@ -248,49 +232,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'selama delay bisa fill captcha secara manual'
 		WebUI.delay(10)
-		
-	//	'kondisi jika data yang required tidak dipenuhi'
-	//	if(isMandatoryComplete > 0)
-	//	{
-	//		'write status failed karena data mandatory tidak valid'
-	//		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-	//			(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.StatusFailedReasonMandatory)
-	//	}
-		
-	//	'kondisi jika button login clickable'
-	//	if (WebUI.verifyElementClickable(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'), FailureHandling.OPTIONAL))
-	//	{	
+	
 		'klik pada button login'
 		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 		
-//		'cek apakah muncul error unknown setelah login'
-//		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
-//			GlobalVariable.Timeout, FailureHandling.OPTIONAL) && GlobalVariable.FlagFailed == 0) {
-//			
-//			'cek apakah muncul error unknown setelah login'
-//			if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
-//				GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
-//				
-//				GlobalVariable.FlagFailed = 1
-//				
-//				'tulis adanya error pada sistem web'
-//				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
-//					GlobalVariable.StatusWarning, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-//						GlobalVariable.FailedReasonUnknown)
-//		}
-			
-//		}
-//		//kondisi dibawah jika button tidak clickable
-//		else
-//		{
-//			'penanda ada error, status sukses tidak akan ditulis'
-//			GlobalVariable.FlagFailed = 1
-//			
-//			'tulis status dan reason error ke excel'
-//			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-//			(findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.StatusFailedReasonSubmitError)
-//			
-//		}
 		if (GlobalVariable.FlagFailed == 0) {
 			
 			'tulis status sukses pada excel'
@@ -305,3 +250,29 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 
 'panggil testcase untuk edit profile'
 WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfile'), [:], FailureHandling.STOP_ON_FAILURE)
+
+def verifyregistration(Connection conn, String email) {
+	
+	'deklarasi arrayindex untuk traversing array'
+	int arrayIndex = 0
+	
+	'simpan data yang diambil dari database'
+	ArrayList credential = CustomKeywords.'profile.CheckRegisterProfile.checkDBafterRegister'(conn, email)
+	
+	'verifikasi data pada WEB dan excel sama'	
+	checkVerifyEqualorMatch(WebUI.verifyMatch(credential[arrayIndex++], findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9), false, FailureHandling.CONTINUE_ON_FAILURE), 'Email tidak sesuai')
+	
+	'verifikasi data pada WEB dan excel sama'
+	checkVerifyEqualorMatch(WebUI.verifyMatch(credential[arrayIndex++], findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 10), false, FailureHandling.CONTINUE_ON_FAILURE), 'Nama Pengguna tidak sesuai')
+}
+
+def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
+	if(isMatch == false){
+		
+		GlobalVariable.FlagFailed = 1
+		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				GlobalVariable.FailedReasonStoreDB + ' ' + reason)
+	}
+}

@@ -47,9 +47,6 @@ String noTrxfromUI, noTrxfromDB, noTrxOtherTenant
 'call setting balance type function'
 settingBalanceType()
 
-'tutup browser'
-WebUI.closeBrowser()
-
 'buka chrome\r\n'
 WebUI.openBrowser('')
 
@@ -171,6 +168,10 @@ if (findTestData(ExcelPath).getValue(2, 33) == 'Yes') {
 	
 	'ambil data services dari excel'
 	listServices = []
+	
+	if (findTestData(ExcelPath).getValue(2, 34) == 'Price') {
+		tipeSaldo = 'IDR'
+	}
 	
 	listServices.add(tipeSaldo)
 		

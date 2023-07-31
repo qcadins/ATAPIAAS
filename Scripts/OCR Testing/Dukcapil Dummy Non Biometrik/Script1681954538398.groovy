@@ -272,6 +272,13 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 			isTrxIncreased = 0
 		}
 		
+		println isSaldoBerkurang
+		println saldobefore
+		println uiSaldoafter
+		println katalonSaldoafter
+		println isTrxIncreased
+		println HitAPITrx
+		
 		'jika tidak ada message error dan kondisi lain terpenuhi'
 		if (message_ocr == 'ID has been checked.' && state_ocr == 0 && verifState_ocr == true && isTrxIncreased == 1 
 			&& isSaldoBerkurang == 1 && HitAPITrx == 1) {

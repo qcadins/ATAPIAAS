@@ -18,16 +18,16 @@ Connection conn
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
-if(GlobalVariable.SettingEnvi == 'Production') {
+if (GlobalVariable.SettingEnvi == 'Production') {
 	'deklarasi koneksi ke Database eendigo_dev'
 	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
-} else if(GlobalVariable.SettingEnvi == 'Trial') {
+} else if (GlobalVariable.SettingEnvi == 'Trial') {
 	'deklarasi koneksi ke Database eendigo_dev_uat'
 	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 }
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathAPIKey).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathAPIKey).columnNumbers
 
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
@@ -36,19 +36,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
-	}
-	else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
-		
-		String optiontipe, optionstatus
-		
-		'cek apakah perlu melakukan action'
-		String addAPIKey = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18)
-		
-		'cek apakah perlu melakukan action'
-		String editAPIKey = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 19)
-		
-		'cek apakah perlu copy link API'
-		String copyAPILink = findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 20)
+	} else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 5))
@@ -57,15 +45,12 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Key', ('SheetName') : 'API KEY', 
 			('Path') : ExcelPathAPIKey], FailureHandling.STOP_ON_FAILURE)
 		
-		'dapatkan detail tenant dari user yang login'
-		ArrayList<String> resultTenant = CustomKeywords.'apikey.CheckAPIKey.getTenantCodeName'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
-		
 		CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatusbtnClickable'(isMandatoryComplete, 
-			findTestObject(TombolLogin), 
-			GlobalVariable.NumOfColumn, 'API KEY')
+			findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'), 
+				GlobalVariable.NumOfColumn, 'API KEY')
 			
 		'klik pada button login'
-		WebUI.click(findTestObject(TombolLogin))
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 			
 		'cek apakah muncul error unknown setelah login'
 		if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
@@ -89,121 +74,10 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		'klik pada API KEY'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/span_API Key'))
 		
-		arrayIndex = 0
-		
-		'simpan data tenant code UI'
-		String tentcode = WebUI.getAttribute(findTestObject('API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_TenantCode'), 'value', FailureHandling.OPTIONAL)
-		
-		'simpan data tenant name UI'
-		String tentname = WebUI.getAttribute(findTestObject('API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_TenantName'), 'value', FailureHandling.OPTIONAL)
-		
-		WebUI.delay(5)
-		
-		'verify tenant code'
-		checkVerifyEqualorMatch(WebUI.verifyMatch(resultTenant[arrayIndex++], tentcode, false, FailureHandling.CONTINUE_ON_FAILURE), ' tenant code') 
-			
-		'verify tenant name'
-		checkVerifyEqualorMatch(WebUI.verifyMatch(resultTenant[arrayIndex++], tentname, false, FailureHandling.CONTINUE_ON_FAILURE), ' tenant name')
-		
-		'input tipe API'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
-				ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 15))
-		
-		'select tipe API'
-		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(
-				Keys.ENTER))
-		
-		'input status API'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
-				ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 16))
-		
-		'select status API'
-		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(
-				Keys.ENTER))
-		
-		'klik pada button cari'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
-		
-		'klik tombol set ulang'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Set Ulang'))
-		
-		'klik pada ddl tipe API KEY'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/ddlAPIKEYType'))
-		
-		'simpan pilihan utama dari tipe API KEY'
-		optiontipe = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Api Key List/input tipe'), 
-			'aria-activedescendant')
-		
-		'klik pada ddl Status API KEY'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/ddlAPIKEYStatus'))
-		
-		'simpan pilihan utama dari status API KEY'
-		optionstatus = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Api Key List/input status'), 
-			'aria-activedescendant')
-		
-		'klik pada ddl Status API KEY'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/ddlAPIKEYStatus'))
-		
-		'klik pada tombol cari'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
-		
-		'jika semua pilihan ddl kembali ke "ALL"'
-		if (optiontipe.contains('-0') && optionstatus.contains('-0')) {
-			
-			'klik tombol cari'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
-		}
-		
-		'cek ke DB jika memang diperlukan'
-		if(GlobalVariable.KondisiCekDB == 'Yes'){
-			
-			'verifikasi jumlah baris di DB dan di WEB'
-			WebUI.callTestCase(findTestCase('Test Cases/API Key/VerifyTotalAPIList'), 
-				[:], FailureHandling.CONTINUE_ON_FAILURE)
-		}
-		
-		if(WebUI.verifyElementVisible(
-			findTestObject('Object Repository/API_KEY/Page_Api Key List/isPagingEnabled'), FailureHandling.OPTIONAL)  == true){
-			
-			'klik panah ke kanan di footer'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/next_page'))
-			
-			'verifikasi halaman ada di 2'
-			checkVerifyFooter()
-			
-			'klik panah kiri pada footer'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/prev_page'))
-			
-			'verifikasi halaman ada di 1'
-			checkVerifyFooter()
-			
-			'klik angka halaman 2'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/page2'))
-			
-			'verifikasi halaman ada di 2'
-			checkVerifyFooter()
-			
-			'klik angka halaman 1'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/page1'))
-			
-			'verifikasi halaman ada di 1'
-			checkVerifyFooter()
-			
-			'klik skip page ke paling akhir'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/skiptoLast_page'))
-			
-			'verifikasi halaman'
-			checkVerifyFooter()
-			
-			'klik skip page ke paling awal'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/goToFirstPage'))
-			
-			'verifikasi halaman'
-			checkVerifyFooter()
-		}
+		checkpaging(conn)
 		
 		'panggil fungsi copy link'
-		if(copyAPILink == 'Yes'){
+		if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 20) == 'Yes') {
 			
 			'klik tombol COPY LINK'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/buttonCopy'))
@@ -214,24 +88,24 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					GlobalVariable.NumOfColumn, 'API KEY')
 		}
 		
-		'panggil fungsi tambah API'
-		if(addAPIKey == 'Yes'){
+		'cek perlu nya pemanggilan fungsi add atau edit'
+		if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18) == 'Yes') {
 			
 			'panggil fungsi Add API KEY'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/AddAPIKey'), 
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
 			
 		} 
-		else if(editAPIKey == 'Yes'){
+		else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 19) == 'Yes') {
 			
 			'panggil fungsi Edit API Key'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'), 
-				[:], FailureHandling.CONTINUE_ON_FAILURE)
+				[('conn'): conn], FailureHandling.CONTINUE_ON_FAILURE)
 		}
 
 		
 		'kondisi jika tidak ada error'
-		if(GlobalVariable.FlagFailed == 0){
+		if (GlobalVariable.FlagFailed == 0) {
 			
 			'tulis status sukses pada excel'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', 
@@ -242,6 +116,122 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 
 'tutup browser jika hasil sudah sesuai'
 WebUI.closeBrowser()
+
+def checkpaging(Connection conn) {
+	
+	String optiontipe, optionstatus
+	
+	int arrayIndex = 0
+	
+	WebUI.delay(5)
+	
+	'dapatkan detail tenant dari user yang login'
+	ArrayList resultTenant = CustomKeywords.'apikey.CheckAPIKey.getTenantCodeName'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
+	
+	'verify tenant code'
+	checkVerifyEqualorMatch(WebUI.verifyMatch(resultTenant[arrayIndex++],
+		WebUI.getAttribute(findTestObject('API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_TenantCode'),
+			'value', FailureHandling.OPTIONAL), false, FailureHandling.CONTINUE_ON_FAILURE), ' tenant code')
+		
+	'verify tenant name'
+	checkVerifyEqualorMatch(WebUI.verifyMatch(resultTenant[arrayIndex++],
+		WebUI.getAttribute(findTestObject('API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_TenantName'),
+			'value', FailureHandling.OPTIONAL), false, FailureHandling.CONTINUE_ON_FAILURE), ' tenant name')
+	
+	'input tipe API'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
+			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 15))
+	
+	'select tipe API'
+	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(
+			Keys.ENTER))
+	
+	'input status API'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
+			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 16))
+	
+	'select status API'
+	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(
+			Keys.ENTER))
+	
+	'klik pada button cari'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
+	
+	'klik tombol set ulang'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Set Ulang'))
+	
+	'klik pada ddl tipe API KEY'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/ddlAPIKEYType'))
+	
+	'simpan pilihan utama dari tipe API KEY'
+	optiontipe = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Api Key List/input tipe'),
+		'aria-activedescendant')
+	
+	'klik pada ddl Status API KEY'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/ddlAPIKEYStatus'))
+	
+	'simpan pilihan utama dari status API KEY'
+	optionstatus = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Api Key List/input status'),
+		'aria-activedescendant')
+	
+	'klik pada ddl Status API KEY'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/ddlAPIKEYStatus'))
+	
+	'klik pada tombol cari'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
+	
+	'jika semua pilihan ddl kembali ke "ALL"'
+	if (optiontipe.contains('-0') && optionstatus.contains('-0')) {
+		
+		'klik tombol cari'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
+	}
+	
+	'kumpulan string dari DB'
+	String totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'(conn,
+		findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
+	
+	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Api Key List/Footer')), totaldataDB, false, FailureHandling.CONTINUE_ON_FAILURE), 'Total data tabel tidak sesuai DB')
+	
+	if (WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Api Key List/isPagingEnabled'), FailureHandling.OPTIONAL)) {
+		
+		'klik panah ke kanan di footer'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/next_page'))
+		
+		'verifikasi halaman ada di 2'
+		checkVerifyFooter()
+		
+		'klik panah kiri pada footer'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/prev_page'))
+		
+		'verifikasi halaman ada di 1'
+		checkVerifyFooter()
+		
+		'klik angka halaman 2'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/page2'))
+		
+		'verifikasi halaman ada di 2'
+		checkVerifyFooter()
+		
+		'klik angka halaman 1'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/page1'))
+		
+		'verifikasi halaman ada di 1'
+		checkVerifyFooter()
+		
+		'klik skip page ke paling akhir'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/skiptoLast_page'))
+		
+		'verifikasi halaman'
+		checkVerifyFooter()
+		
+		'klik skip page ke paling awal'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/goToFirstPage'))
+		
+		'verifikasi halaman'
+		checkVerifyFooter()
+	}
+}
 
 'fungsi cek halaman'
 def checkVerifyFooter(){

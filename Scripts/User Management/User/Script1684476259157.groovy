@@ -16,7 +16,7 @@ import org.openqa.selenium.By as By
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet User'
-int countColumnEdit = findTestData(ExcelPathUser).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathUser).columnNumbers
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
@@ -81,133 +81,16 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			'klik pada tombol New'
 			WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/a_New'))
 			
-			'loop untuk pengecekan awal testcase'
-			if (GlobalVariable.NumOfColumn == 2) {
-				
-				'input email baru yang akan ditambahkan'
-				WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__email'),
-					findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
-				
-				'input nama depan'
-				WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__firstName'),
-					findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 19))
-				
-				'input nama belakang'
-				WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__lastName'),
-					findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 20))
-				
-				'input pass'
-				WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__pass'),
-					findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 22))
-				
-				'input konfirmasi pass'
-				WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__confirmpass'),
-					findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 23))
-				
-				'input peran'
-				WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
-					findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 21))
-				
-				'klik enter pada peran'
-				WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
-					Keys.chord(Keys.ENTER))
-				
-				'klik pada tombol batal'
-				WebUI.click(findTestObject('Object Repository/User Management-User/Page_Add User/button_Batal'))
-				
-				'klik pada tombol New'
-				WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/a_New'))
-				
-				'verify element field kosong'
-				checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__email'),
-					'class', 'form-control ng-untouched ng-pristine ng-invalid',
-					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field input email tidak kosong')
-				
-				'verify element field kosong'
-				checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__firstName'),
-					'class', 'form-control mb-2 ng-untouched ng-pristine ng-invalid',
-					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field nama depan tidak kosong')
-				
-				'verify element field kosong'
-				checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__lastName'),
-					'class', 'form-control mb-2 ng-untouched ng-pristine ng-invalid',
-					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field nama belakang tidak kosong')
-				
-				'verify element field kosong'
-				checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__pass'),
-					'class', 'form-control ng-untouched ng-pristine ng-invalid',
-					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field password tidak kosong')
-
-				'verify element field kosong'
-				checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__confirmpass'),
-					'class', 'form-control ng-untouched ng-pristine ng-invalid',
-					GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field konfirmasi pass tidak kosong')
-				
-				'verify element field kosong'
-				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getAttribute(
-					findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
-					'value', FailureHandling.OPTIONAL), '',
-						false, FailureHandling.OPTIONAL), 'Field role tidak kosong')
-			}
+			'inputcancel check untuk awal testcase'
+			inputCancelCheck()
 			
-			'input email baru yang akan ditambahkan'
-			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__email'),
-				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
+			'panggil fungsi menambahkan user'
+			inputNewUser()
 			
-			'input nama depan'
-			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__firstName'),
-				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 19))
-			
-			'input nama belakang'
-			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__lastName'),
-				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 20))
-			
-			'input pass'
-			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__pass'),
-				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 22))
-			
-			'input konfirmasi pass'
-			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__confirmpass'),
-				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 23))
-			
-			'klik pada eyeicon untuk melihat password yang diinput'
-			WebUI.click(findTestObject('Object Repository/User Management-User/Page_Add User/eyeicon_1'))
-			
-			'ambil string pass'
-			String textpass = WebUI.getAttribute(
-				findTestObject('Object Repository/User Management-User/Page_Add User/input__pass'), 'value')
-			
-			'ambil string konfirmasi pass'
-			String textconf = WebUI.getAttribute(
-				findTestObject('Object Repository/User Management-User/Page_Add User/input__confirmpass'), 'value')
-			
-			'cek apakah pass yang diinput sudah sesuai dengan excel'
-			if (textpass != findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 22) ||
-					textconf != findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 23)) {
-						
-				GlobalVariable.FlagFailed = 1		
-						
-				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
-					GlobalVariable.StatusFailed, (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 2) +
-						';') + GlobalVariable.FailedReasonPassNotMatch)
-			}
-			
-			'klik pada eyeicon untuk melihat password yang diinput'
-			WebUI.click(findTestObject('Object Repository/User Management-User/Page_Add User/eyeicon_1'))
-			
-			'input peran'
-			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
-				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 21))
-			
-			'klik enter pada peran'
-			WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
-				Keys.chord(Keys.ENTER))
-			
+			'panggil fungsi cek dialog'
 			checkdialogConfirmation(isMandatoryComplete)
 			
-		}
-		else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
+		} else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 			
 			'panggil fungsi cari user'
 			searchUser()
@@ -490,6 +373,109 @@ def checkdialogConfirmation (int isMandatoryComplete) {
 					editCondition)
 		}
 	}	
+}
+
+def inputNewUser() {
+	
+	'input email baru yang akan ditambahkan'
+	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__email'),
+		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
+	
+	'input nama depan'
+	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__firstName'),
+		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 19))
+	
+	'input nama belakang'
+	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__lastName'),
+		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 20))
+	
+	'input pass'
+	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__pass'),
+		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 22))
+	
+	'input konfirmasi pass'
+	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/input__confirmpass'),
+		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 23))
+	
+	'klik pada eyeicon untuk melihat password yang diinput'
+	WebUI.click(findTestObject('Object Repository/User Management-User/Page_Add User/eyeicon_1'))
+	
+	'ambil string pass'
+	String textpass = WebUI.getAttribute(
+		findTestObject('Object Repository/User Management-User/Page_Add User/input__pass'), 'value')
+	
+	'ambil string konfirmasi pass'
+	String textconf = WebUI.getAttribute(
+		findTestObject('Object Repository/User Management-User/Page_Add User/input__confirmpass'), 'value')
+	
+	'cek apakah pass yang diinput sudah sesuai dengan excel'
+	if (textpass != findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 22) ||
+			textconf != findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 23)) {
+				
+		GlobalVariable.FlagFailed = 1
+				
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 2) +
+				';') + GlobalVariable.FailedReasonPassNotMatch)
+	}
+	
+	'klik pada eyeicon untuk melihat password yang diinput'
+	WebUI.click(findTestObject('Object Repository/User Management-User/Page_Add User/eyeicon_1'))
+	
+	'input peran'
+	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
+		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, 21))
+	
+	'klik enter pada peran'
+	WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
+		Keys.chord(Keys.ENTER))
+}
+
+def inputCancelCheck() {
+	
+	'loop untuk pengecekan awal testcase'
+	if (GlobalVariable.NumOfColumn == 2) {
+		
+		inputNewUser()
+		
+		'klik pada tombol batal'
+		WebUI.click(findTestObject('Object Repository/User Management-User/Page_Add User/button_Batal'))
+		
+		'klik pada tombol New'
+		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/a_New'))
+		
+		'verify element field kosong'
+		checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__email'),
+			'class', 'form-control ng-untouched ng-pristine ng-invalid',
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field input email tidak kosong')
+		
+		'verify element field kosong'
+		checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__firstName'),
+			'class', 'form-control mb-2 ng-untouched ng-pristine ng-invalid',
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field nama depan tidak kosong')
+		
+		'verify element field kosong'
+		checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__lastName'),
+			'class', 'form-control mb-2 ng-untouched ng-pristine ng-invalid',
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field nama belakang tidak kosong')
+		
+		'verify element field kosong'
+		checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__pass'),
+			'class', 'form-control ng-untouched ng-pristine ng-invalid',
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field password tidak kosong')
+
+		'verify element field kosong'
+		checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/User Management-User/Page_Add User/input__confirmpass'),
+			'class', 'form-control ng-untouched ng-pristine ng-invalid',
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field konfirmasi pass tidak kosong')
+		
+		'verify element field kosong'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getAttribute(
+			findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
+			'value', FailureHandling.OPTIONAL), '',
+				false, FailureHandling.OPTIONAL), 'Field role tidak kosong')
+	}
 }
 
 def checkPaging(Connection conndev) {

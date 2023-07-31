@@ -32,6 +32,11 @@ Connection connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatPr
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 4)
 
+'buka chrome\r\n'
+WebUI.openBrowser('')
+
+loginfunction()
+
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
 	
@@ -40,7 +45,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		findTestData(ExcelPathOCRTesting).getValue(2, 27))
 	
 	'ambil key trial yang aktif dari DB'
-	String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
+	String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode, GlobalVariable.SettingEnvi)
 	
 	'deklarasi id untuk harga pembayaran OCR'
 	int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(connProd, tenantcode, 'OCR BPKB')
@@ -55,35 +60,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		break
 	} 
 	else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
-		
-		'buka chrome\r\n'
-		WebUI.openBrowser('')
-		
-		'buka website APIAAS SIT, data diambil dari TestData Login'
-		WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
-		
-		'input data email'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-			findTestData(ExcelPathOCRTesting).getValue(2, 27))
-		
-		'input password'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-			findTestData(ExcelPathOCRTesting).getValue(2, 28))
-		
-		'ceklis pada reCaptcha'
-		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-		
-		'pada delay, lakukan captcha secara manual'
-		WebUI.delay(10)
-		
-		'klik pada button login'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-		
-		if (GlobalVariable.SettingEnvi == 'Production') {
-			'click pada production'
-			WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
-		}
-		
+				
 		'deklarasi variable response'
 		ResponseObject response
 		
@@ -174,6 +151,8 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistory'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR BPKB', ('sheet') : 'OCR BPKB', ('idOCR') : 'OCR_BPKB'],
 					FailureHandling.CONTINUE_ON_FAILURE)
 			}
+			
+			loginfunction()
 			
 			continue
 		}
@@ -351,6 +330,31 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 
 'tutup browser jika loop sudah selesai'
 WebUI.closeBrowser()
+
+def loginfunction() {
+	'buka website APIAAS SIT, data diambil dari TestData Login'
+	WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
+	
+	'input data email'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
+		findTestData(ExcelPathOCRTesting).getValue(2, 27))
+	
+	'input password'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
+		findTestData(ExcelPathOCRTesting).getValue(2, 28))
+	
+	'ceklis pada reCaptcha'
+	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
+	
+	'pada delay, lakukan captcha secara manual'
+	WebUI.delay(10)
+	
+	'klik pada button login'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+	
+	'ubah number of column menjadi 2'
+	GlobalVariable.NumOfColumn = 2
+}
 
 'ambil saldo sesuai testing yang dilakukan'
 def getSaldoforTransaction(String NamaOCR) {

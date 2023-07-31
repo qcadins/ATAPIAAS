@@ -16,18 +16,18 @@ if(GlobalVariable.SettingEnvi == 'Production') {
 }
 
 'declare arraylist arraymatch'
-ArrayList<String> arrayMatch = []
+ArrayList arrayMatch = []
 
 'check if action new/services'
 if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New') 
 	|| findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 	
 'get data balance mutation dari DB'
-ArrayList<String> result = CustomKeywords.'tenant.TenantVerif.getTenantStoreDB'(conn,
+ArrayList result = CustomKeywords.'tenant.TenantVerif.getTenantStoreDB'(conn,
 	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 15))
 
 'get data services dari DB'
-ArrayList<String> resultServices = CustomKeywords.'tenant.TenantVerif.getTenantServicesDescription'(conn,
+ArrayList resultServices = CustomKeywords.'tenant.TenantVerif.getTenantServicesDescription'(conn,
 	findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14))
 
 'declare arrayindex'
@@ -44,8 +44,7 @@ if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equals
 	arrayMatch.add(WebUI.verifyMatch(
 		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14).toUpperCase(),
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
-}
-else {
+} else {
 	
 	'skip'
 	arrayindex++
@@ -67,10 +66,10 @@ arrayMatch.add(WebUI.verifyMatch(
 	(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 
 'deklarasi array services'
-ArrayList<String> arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 19).split(';',-1)
+ArrayList arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 19).split(';',-1)
 
 'deklarasi batas saldo tiap service'
-ArrayList<String> arrayServicesBatasSaldo = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn,
+ArrayList arrayServicesBatasSaldo = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn,
 	20).split(';',-1)
 
 'looping untuk verif services dan batas saldo'
@@ -93,8 +92,7 @@ for (indexExcel = 0 ; indexExcel < arrayServices.size(); indexExcel++) {
 
 }
 
-}
-else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Service')) {
+} else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Service')) {
 	
 	'get data balacne mutation dari DB'
 	String result = CustomKeywords.'tenant.TenantVerif.getTenantServices'(conn, 
@@ -108,9 +106,8 @@ else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).e
 	
 	'verify services'
 	arrayMatch.add(arrayServices.containsAll(resultarray))
-}
-
-else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('ChargeType')) {
+	
+} else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('ChargeType')) {
 	
 	'get array Services dari excel'
 	arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 30).split(';', -1)
@@ -131,8 +128,8 @@ else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).e
 			
 			'verify services'
 			arrayMatch.add(true)
-		}
-		else {
+			
+		} else {
 			
 			'verify services'
 			arrayMatch.add(false)

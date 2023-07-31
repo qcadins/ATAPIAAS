@@ -8,29 +8,42 @@ import java.sql.Connection
 'deklarasi koneksi ke DB eendigo_dev'
 Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
+'deklarasi array index untuk traversing'
+int arrayIndex = 0
+
 'ambil data coupon dari db'
 ArrayList resultDB = CustomKeywords.'topup.TopupVerif.getStoreDBTopup1'(conndev, NoTrx)
 
 'tambah data dari query lain ke arraylist yang sudah ada'
 resultDB.addAll(CustomKeywords.'topup.TopupVerif.getStoreDBTopup2'(conndev, NoTrx))
-	
-'ambil data coupon dari excel'
-ArrayList resultExcel = []
-	
-'cek data untuk tiap alamat di array'
-for (int i = 0; i < resultDB.size ; i++) {
-		
-	'tambahkan data dari excel'
-	resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, 9+i))
-}
 
-'jika hasil excel tidak sesuai db'
-if(!resultExcel.containsAll(resultDB)) {
+'cek hasil db dan excel'
+checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB[arrayIndex++], findTestData(Path).getValue(
+	GlobalVariable.NumOfColumn, 9), false, FailureHandling.CONTINUE_ON_FAILURE), 'Tipe Saldo tidak sesuai')
+
+'cek hasil db dan excel'
+checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB[arrayIndex++], findTestData(Path).getValue(
+	GlobalVariable.NumOfColumn, 10), false, FailureHandling.CONTINUE_ON_FAILURE), 'Metode Pembayaran tidak sesuai')
+
+'cek hasil db dan excel'
+checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB[arrayIndex++], findTestData(Path).getValue(
+	GlobalVariable.NumOfColumn, 11), false, FailureHandling.CONTINUE_ON_FAILURE), 'Bank destinasi tidak sesuai')
+
+'cek hasil db dan excel'
+checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB[arrayIndex++], findTestData(Path).getValue(
+	GlobalVariable.NumOfColumn, 12), false, FailureHandling.CONTINUE_ON_FAILURE), 'Saldo yang dipilih tidak sesuai')
+
+'cek hasil db dan excel'
+checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB[arrayIndex++], findTestData(Path).getValue(
+	GlobalVariable.NumOfColumn, 13), false, FailureHandling.CONTINUE_ON_FAILURE), 'Jumlah isi ulang tidak sesuai')
+
+def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
+	if(isMatch == false){
 		
-	GlobalVariable.FlagFailed = 1
-		
-	'tulis adanya error pada proses storeDB'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			GlobalVariable.FailedReasonStoreDB)
+		GlobalVariable.FlagFailed = 1
+		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				GlobalVariable.FailedReasonStoreDB + ' ' + reason)
+	}
 }

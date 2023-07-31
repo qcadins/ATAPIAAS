@@ -52,7 +52,7 @@ WebUI.delay(10)
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
 'check if reason failed tidak present'
-if(WebUI.verifyElementNotPresent(findTestObject('User Management-User/label_TextError'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementNotPresent(findTestObject('User Management-User/label_TextError'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
 	GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 
@@ -122,7 +122,8 @@ WebUI.click(findTestObject('User Management-User/button_ResendLink'))
 WebUI.click(findTestObject('User Management-User/button_Confirm'))
 
 'check if success'
-if(WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgnoreCase('Success')) {
+if (WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgnoreCase('Success')) {
+	
 	'klik pada tombol ya Proses'
 	WebUI.click(findTestObject('User Management-User/button_Confirm'))
 	
@@ -190,6 +191,7 @@ if(WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgnor
 	
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+	
 } else {
 	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,

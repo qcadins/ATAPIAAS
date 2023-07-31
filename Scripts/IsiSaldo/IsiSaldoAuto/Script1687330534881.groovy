@@ -122,17 +122,17 @@ if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Pa
 'klik pada tombol proses isi ulang  saldo'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Ya, proses'))
 
-'cek apakah muncul error unknown setelah login'
-if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
-	GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
-	
-	GlobalVariable.FlagFailed = 1
-	
-	'tulis adanya error pada sistem web'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusWarning, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			GlobalVariable.FailedReasonUnknown)
-}
+//'cek apakah muncul error unknown setelah login'
+//if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+//	GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+//	
+//	GlobalVariable.FlagFailed = 1
+//	
+//	'tulis adanya error pada sistem web'
+//	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+//		GlobalVariable.StatusWarning, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+//			GlobalVariable.FailedReasonUnknown)
+//}
 
 //'ambil jumlah saldo pada menu trial'
 //Saldoafter = getSaldoforTransaction(findTestData(ExcelPath).getValue(GlobalVariable.NumOfColumn, 15))

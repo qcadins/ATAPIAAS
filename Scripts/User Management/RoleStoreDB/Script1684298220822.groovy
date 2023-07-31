@@ -22,15 +22,15 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIg
 	String resultExcel = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 20)
 	
 	'jika hasil db tidak sesuai excel'
-	if(resultDB != resultExcel) {
+	if (resultDB != resultExcel) {
 		
 		'tulis adanya error pada sistem web'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonStoreDB)
 	}
-}
-else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
+	
+} else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 	
 	'ambil data role dan status dari DB'
 	ArrayList<String> resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleEdit'(conndevUAT, 
@@ -45,7 +45,7 @@ else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equa
 		'ambil data dari excel'
 		resultExcel.add(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, (17+i)))
 		
-		if(resultExcel[i] != resultDB[i]) {
+		if (resultExcel[i] != resultDB[i]) {
 			
 			'tulis adanya error pada sistem web'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
@@ -53,8 +53,8 @@ else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equa
 					GlobalVariable.FailedReasonStoreDB)
 		}
 	}
-}
-else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Settings')) {
+	
+} else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Settings')) {
 	
 	'ambil data result dari DB'
 	ArrayList<String> resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleMenu'(conndev, 
@@ -65,7 +65,7 @@ else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equa
 	ArrayList<String> resultExcel = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 22).split(';', -1)
 	
 	'jika hasil kedua sumber tidak sesuai'
-	if(resultDB != resultExcel) {
+	if (resultDB != resultExcel) {
 		
 		'tulis adanya error pada sistem web'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,

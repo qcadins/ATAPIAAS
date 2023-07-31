@@ -103,24 +103,17 @@ public class CheckAPIKey {
 	getTotalAPIKeyfromDB(Connection conn, String email) {
 		String data
 
-		ArrayList listdata = []
-
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT CONCAT(COUNT(api_key_name), ' total') FROM ms_api_key mak LEFT JOIN am_msuser ams ON ams.login_id = mak.usr_crt WHERE login_id = '" + email + "'")
-		ResultSetMetaData metadata  = resultSet.getMetaData()
+		ResultSet resultSet = stm.executeQuery("SELECT CONCAT(COUNT(api_key_name), ' total') FROM ms_api_key mak LEFT JOIN ms_useroftenant mot ON mot.id_ms_tenant = mak.id_ms_tenant LEFT JOIN am_msuser amu ON amu.id_ms_user = mot.id_ms_user WHERE amu.login_id = '"+ email +"'")
 
-		columnCount = metadata.getColumnCount()
+		while (resultSet.next()) {
 
-		while(resultSet.next()) {
-			for(int i=1; i<=columnCount ; i++) {
-				data = resultSet.getObject(i)
-				listdata.add(data)
-			}
+			data = resultSet.getObject(1);
 		}
-		listdata
+		data
 	}
-
+	
 	@Keyword
 	getTenantCodeName(Connection conn, String email) {
 		String data
