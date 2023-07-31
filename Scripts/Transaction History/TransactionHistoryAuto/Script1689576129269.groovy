@@ -64,8 +64,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 5))
 		
 		'klik pada menu'
-		WebUI.click(
-			findTestObject('Object Repository/TransactionHistory/Page_Balance/span_Menu'))
+		WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/span_Menu'))
 		
 		'pilih submenu riwayat transaksi'
 		WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/RiwayatTrxMenu'))
@@ -209,7 +208,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
 					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksiAuto', GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) +
-							';') + WebUI.getText(findTestObject('Object Repository/TransactionHistory/ErrorTopRight')))
+							';') + '<' +  WebUI.getText(findTestObject('Object Repository/TransactionHistory/ErrorTopRight')) + '>')
 					
 					'klik batal'
 					WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/buttonBatal_upload'))
@@ -419,8 +418,7 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 		'tulis adanya error saat melakukan approval'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksiAuto', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-				WebUI.getText(
-					findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/div_errorCatch')).toString())
+				'<' + WebUI.getText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/div_errorCatch')).toString()) + '>'
 	}
 }
 

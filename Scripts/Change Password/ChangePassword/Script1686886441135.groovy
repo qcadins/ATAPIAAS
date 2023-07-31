@@ -122,7 +122,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				'tulis ada error '
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('ChangePassword', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 2) +
-						';') + notifMsg)
+						';') + '<' + notifMsg + '>')
 				
 				'klik pada tombol OK'
 				WebUI.click(findTestObject('Object Repository/Change Password/Page_Balance/button_OK'))

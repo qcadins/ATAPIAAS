@@ -94,7 +94,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				'ambil error dan get text dari error tersebut'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Forgot Password', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) +
-						';') + WebUI.getText(findTestObject('Object Repository/Forgot Password/Page_Reset Password/div_NotifPop')))
+						';') + '<' + WebUI.getText(findTestObject('Object Repository/Forgot Password/Page_Reset Password/div_NotifPop')) + '>')
 				
 				'klik pada tombol OK'
 				WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Reset Password/button_OK_notif'))
@@ -204,7 +204,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			'ambil error dan get text dari error tersebut'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Forgot Password', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) +
-					';') + WebUI.getText(findTestObject('Object Repository/Forgot Password/Page_Reset Password/div_NotifPop')))
+					';') + '<' + WebUI.getText(findTestObject('Object Repository/Forgot Password/Page_Reset Password/div_NotifPop')) + '>')
 			
 			'klik pada tombol OK'
 			WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Reset Password/button_OK_notif'))
@@ -285,7 +285,7 @@ def verifConfirmation() {
 		'ambil error dan get text dari error tersebut'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Forgot Password', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, 2) +
-				';') + WebUI.getText(findTestObject('Object Repository/Forgot Password/Page_Reset Password/div_NotifPop')))
+				';') + '<' + WebUI.getText(findTestObject('Object Repository/Forgot Password/Page_Reset Password/div_NotifPop')) + '>')
 		
 		'klik pada tombol OK'
 		WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Reset Password/button_OK_notif'))

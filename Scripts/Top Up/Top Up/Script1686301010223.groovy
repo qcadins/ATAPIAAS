@@ -332,7 +332,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				'tulis error sesuai reason yang ditampilkan oleh error message'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-						WebUI.getText(findTestObject('Object Repository/Top Up/DiskonUI')))
+						'<' + WebUI.getText(findTestObject('Object Repository/Top Up/DiskonUI')) + '>')
 				
 				WebUI.refresh()
 				
@@ -361,11 +361,12 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				'tulis error sesuai reason yang ditampilkan oleh error message'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-						WebUI.getText(findTestObject('Object Repository/Top Up/ErrorCatch')))
+						'<' + WebUI.getText(findTestObject('Object Repository/Top Up/ErrorCatch')) + '>')
 				
 				WebUI.refresh()
 			
 				continue
+				
 			} else if (WebUI.verifyElementPresent(findTestObject('Object Repository/Top Up/NotifCatch'),
 				GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 				

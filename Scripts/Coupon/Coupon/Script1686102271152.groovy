@@ -680,7 +680,7 @@ def checkdialogConfirmation(isMandatoryComplete) {
 				'tulis adanya error saat edit'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-						resultcheck)
+						'<' + resultcheck  + '>')
 			}
 		} else {
 			

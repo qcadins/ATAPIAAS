@@ -46,6 +46,8 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
 
 def js = (JavascriptExecutor)driver
 
+WebUI.maximizeWindow()
+
 if (TC == 'EditProf') {
 	
 	'input email'
@@ -69,8 +71,6 @@ if (TC == 'EditProf') {
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
 } else if (TC == 'Regist') {
-	
-	WebUI.maximizeWindow()
 	
 	WebUI.delay(GlobalVariable.Timeout)
 	
