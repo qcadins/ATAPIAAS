@@ -30,16 +30,14 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
 	
 	'buka website APIAAS SIT, data diambil dari TestData Login'
 	WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 2))
-}
-else {
+} else {
 	
 	if (GlobalVariable.SettingEnvi == 'Trial') {
 				
 		'buka website billing system Trial, untuk isi saldo'
 		WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 3))
 		
-	} 
-	else if (GlobalVariable.SettingEnvi == 'Production') {
+	} else if (GlobalVariable.SettingEnvi == 'Production') {
 		
 		'buka website billing system Production, untuk isi saldo'
 		WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 4))
@@ -47,6 +45,8 @@ else {
 }
 
 def js = (JavascriptExecutor)driver
+
+WebUI.maximizeWindow()
 
 if (TC == 'EditProf') {
 	
@@ -70,10 +70,7 @@ if (TC == 'EditProf') {
 	'Klik Login'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
-}
-else if (TC == 'Regist') {
-	
-	WebUI.maximizeWindow()
+} else if (TC == 'Regist') {
 	
 	WebUI.delay(GlobalVariable.Timeout)
 	
@@ -177,8 +174,7 @@ else if (TC == 'Regist') {
 //		WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
 //		js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister);
 //	}
-}
-else if (TC == 'Key') {
+} else if (TC == 'Key') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
@@ -193,8 +189,8 @@ else if (TC == 'Key') {
 	
 	'pada delay, lakukan captcha secara manual'
 	WebUI.delay(10)
-}
-else if (TC == 'DocAPI') {
+	
+} else if (TC == 'DocAPI') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
@@ -212,15 +208,16 @@ else if (TC == 'DocAPI') {
 	
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-}
-else if (TC == 'OCR') {
+	
+} else if (TC == 'OCR') {
+	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(Path).getValue(2, 26))
+		findTestData(Path).getValue(2, Row))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(2, 27))
+		findTestData(Path).getValue(2, Row+1))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
@@ -231,9 +228,7 @@ else if (TC == 'OCR') {
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
-}
-
-else if (TC == 'IsiSaldo') {
+} else if (TC == 'IsiSaldo') {
 	
 	'input data username'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
@@ -245,9 +240,8 @@ else if (TC == 'IsiSaldo') {
 	
 	'klik tombol masuk'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
-}
-
-else if (TC == 'Tenant') {
+	
+} else if (TC == 'Tenant') {
 	
 	WebUI.maximizeWindow()
 	
@@ -264,8 +258,8 @@ else if (TC == 'Tenant') {
 		
 	'klik tombol masuk'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
-}
-else if (TC == 'Saldo') {
+	
+} else if (TC == 'Saldo') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
@@ -283,8 +277,8 @@ else if (TC == 'Saldo') {
 	
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-}
-else if (TC == 'Layanan') {
+	
+} else if (TC == 'Layanan') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
@@ -302,9 +296,8 @@ else if (TC == 'Layanan') {
 	
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-}
-
-else if (TC == 'Role') {
+	
+} else if (TC == 'Role') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
@@ -323,11 +316,7 @@ else if (TC == 'Role') {
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
-//	'klik pada bagian admin client'
-//	WebUI.click(findTestObject('Object Repository/User Management-Role/'+
-//		'Page_Login - eendigo Platform/i_Admin Client_ft-edit'))
-}
-else if (TC == 'User') {
+} else if (TC == 'User') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
@@ -345,9 +334,8 @@ else if (TC == 'User') {
 	
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-}
-
-else if (TC == 'Coupon') {
+	
+} else if (TC == 'Coupon') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
@@ -365,9 +353,8 @@ else if (TC == 'Coupon') {
 	
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-}
-
-else if (TC == 'TopUp') {
+	
+} else if (TC == 'TopUp') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
@@ -394,8 +381,8 @@ else if (TC == 'TopUp') {
 		'pilih admin client'
 		WebUI.click(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'))
 	}
-}
-else if (TC == 'ChangePass') {
+	
+} else if (TC == 'ChangePass') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
@@ -423,9 +410,8 @@ else if (TC == 'ChangePass') {
 		'pilih admin client'
 		WebUI.click(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'))
 	}
-} 
-
-else if (TC == 'IsiSaldoAuto') {
+	
+} else if (TC == 'IsiSaldoAuto') {
 	
 	'input data username'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
@@ -437,8 +423,8 @@ else if (TC == 'IsiSaldoAuto') {
 	
 	'klik tombol masuk'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
-}
-else if (TC == 'TranxHist') {
+	
+} else if (TC == 'TranxHist') {
 	
 	'deklarasi penghitungan role yang dipilih'
 	int isSelected = 0
@@ -499,8 +485,8 @@ else if (TC == 'TranxHist') {
 //					GlobalVariable.FailedReasonRoleLogin)
 //		}
 //	}
-}
-else if (TC == 'TenantCekServices') {
+	
+} else if (TC == 'TenantCekServices') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
@@ -527,16 +513,7 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
 	}
 }
 
-//'cek apakah muncul error unknown setelah login'
-//if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), 
-//	GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
-//	
-//	'tulis adanya error pada sistem web'
-//	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
-//		GlobalVariable.StatusWarning, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-//			GlobalVariable.FailedReasonUnknown)
-//}
-//
+
 //'cek apakah muncul error gagal login'
 //if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/ErrorMsg')
 //	,GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {

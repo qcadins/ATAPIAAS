@@ -5,9 +5,6 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
 
-//'deklarasi koneksi ke Database adins_apiaas_uat'
-//def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
-
 'get current date'
 def currentDate = new Date().format('yyyy-MM-dd')
 
@@ -16,16 +13,18 @@ Connection conn
 if(GlobalVariable.SettingEnvi == 'Production') {
 	'deklarasi koneksi ke Database eendigo_dev'
 	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+	
 } else if(GlobalVariable.SettingEnvi == 'Trial') {
 	'deklarasi koneksi ke Database eendigo_dev_uat'
 	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+	
 }
 
 'get data balance mutation dari DB'
-ArrayList<String> result = CustomKeywords.'apikey.CheckSaldoAPI.getIsiSaldoStoreDB'(conn, tenant)
+ArrayList result = CustomKeywords.'apikey.CheckSaldoAPI.getIsiSaldoStoreDB'(conn, tenant)
 
 'declare arraylist arraymatch'
-ArrayList<String> arrayMatch = []
+ArrayList arrayMatch = []
 
 'declare arrayindex'
 arrayindex = 0
@@ -65,6 +64,7 @@ if (autoIsiSaldo == '') {
 	arrayMatch.add(WebUI.verifyMatch(
 		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 19).toUpperCase(), 
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	
 } else if (autoIsiSaldo == 'Yes') {
 	'verify tenant'
 	arrayMatch.add(WebUI.verifyMatch(

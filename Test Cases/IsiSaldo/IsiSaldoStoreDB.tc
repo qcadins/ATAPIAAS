@@ -23,6 +23,12 @@
       <value></value>
       <variableId>6fc03fa8-8d1d-4460-9a90-e2ca86d423a5</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>4042b422-6e13-4a2c-9bdf-17c31f891981</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>''</defaultValue>
       <description></description>
@@ -43,5 +49,12 @@
       <id>6fc03fa8-8d1d-4460-9a90-e2ca86d423a5</id>
       <masked>false</masked>
       <name>tipeSaldo</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>4042b422-6e13-4a2c-9bdf-17c31f891981</id>
+      <masked>false</masked>
+      <name>variable</name>
    </variable>
 </TestCaseEntity>

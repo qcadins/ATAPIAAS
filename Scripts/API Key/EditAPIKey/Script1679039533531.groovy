@@ -11,16 +11,6 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
-//'klik pada tombol garis tiga'
-//WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/expandMenu'))
-//
-//WebUI.delay(1)
-//
-//'klik pada API KEY'
-//WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/span_API Key'))
-//
-//WebUI.delay(2)
-	
 'klik pada tombol edit API'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/buttonEditAPI'))
 	
@@ -38,8 +28,18 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/span_Ina
 
 if (GlobalVariable.KondisiCekDB == 'Yes') {
 	
-	'verifikasi data ke DB sebelum diedit'
-	WebUI.callTestCase(findTestCase('Test Cases/API Key/VerifyDataAPIKey'), [:], FailureHandling.STOP_ON_FAILURE)
+	'kumpulan string dari data yang diambil langsung dari database'
+	ArrayList hasildb = CustomKeywords.'apikey.CheckAPIKey.getAPIStatusfromDB'(conn,
+		WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'), 'value'))
+
+	'ambil text dari UI Web APIAAS'
+	ArrayList hasilweb = CustomKeywords.'apikey.CheckAPIKey.getAttributeValueAPI'()
+
+	'verifikasi data pada WEB dan DB sama'
+	for (int j = 0; j < hasildb.size; j++) {
+	
+	    checkVerifyEqualOrMatch(WebUI.verifyMatch(hasilweb[j], hasildb[j], false, FailureHandling.CONTINUE_ON_FAILURE), 'Data sebelum Edit tidak sesuai DB')
+	}
 }
 
 'input nama API'
@@ -92,7 +92,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Ed
 	if (GlobalVariable.KondisiCekDB == 'Yes') {
 		
 		'verifikasi data ke db setelah di edit'
-		WebUI.callTestCase(findTestCase('Test Cases/API Key/EditKeyStoreDBVerif'), [:],
+		WebUI.callTestCase(findTestCase('Test Cases/API Key/APIKeyStoreDB'), [('Case'): 'Edit'],
 			FailureHandling.STOP_ON_FAILURE)
 	}
 	
@@ -100,14 +100,16 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Ed
 	searchAPIKEY(14)
 	
 	'verify nama api key'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_NamaAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama api key')
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_NamaAPIKey')),
+		findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama api key')
 
 	'verify nama tipe api key'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_TipeAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12), false, FailureHandling.CONTINUE_ON_FAILURE), ' tipe api key')
+	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_TipeAPIKey')),
+		findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12), false, FailureHandling.CONTINUE_ON_FAILURE), ' tipe api key')
 	
 //kondisi untuk tombol ok jika edit error
-}else if(WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_gagal'), 
-			GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)){
+} else if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_gagal'), 
+			GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) {
 		
 	'klik tombol ok'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_gagal'))

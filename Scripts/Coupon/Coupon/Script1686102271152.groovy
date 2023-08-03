@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathCoupon).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathCoupon).columnNumbers
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
@@ -33,7 +33,7 @@ WebUI.click(findTestObject('Object Repository/Coupon/Page_Balance/Spanmenu'))
 'klik pada tombol coupon'
 WebUI.click(findTestObject('Object Repository/Coupon/Page_Balance/span_Coupon'))
 
-//checkPaging(conndev)
+checkPaging(conndev)
 
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
@@ -44,8 +44,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
-	}
-	else if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+	
+	} else if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
 		'declare isMmandatory Complete'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 5))
@@ -149,7 +149,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			'cek apa perlu lakukan copy link'
 			copylinkfunction()
 			
-			if(GlobalVariable.FlagFailed == 0) {
+			if (GlobalVariable.FlagFailed == 0) {
 				'check after add new kupon'
 				verifyAfterAddorEdit()
 			}
@@ -197,7 +197,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			searchfunction()
 			
 			'cek apakah hasil search gagal'
-			if(WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_List Coupon/searchResult')
+			if (WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_List Coupon/searchResult')
 				, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 				
 				GlobalVariable.FlagFailed = 1
@@ -214,10 +214,10 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/detailbutton'))
 			
 			'inisialisasi array detail dari web'
-			ArrayList<String> detailresultWeb = []
+			ArrayList detailresultWeb = []
 			
 			'inisialisasi array detail dari DB'
-			ArrayList<String> detailresultDB = CustomKeywords.'coupon.CouponVerif.getDetailCoupon'(conndev, 
+			ArrayList detailresultDB = CustomKeywords.'coupon.CouponVerif.getDetailCoupon'(conndev, 
 				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 15))
 			
 			'tambahkan data tenant ke array'
@@ -233,7 +233,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			for (int i = 0 ; i < detailresultDB.size; i++) {
 				
 				'jika ada data yang tidak sesuai'
-				if(detailresultWeb[i] != detailresultDB[i]) {
+				if (detailresultWeb[i] != detailresultDB[i]) {
 
 					GlobalVariable.FlagFailed = 1
 					
@@ -243,9 +243,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 							GlobalVariable.FailedReasonDetailNotMatch)
 					
 					break
-				}
-				else
-				{
+				} else {
 					'write to excel success'
 					CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Coupon', 0,
 						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
@@ -303,7 +301,7 @@ def copylinkfunction() {
 		WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/copybutton'))
 		
 		'jika tidak ada notifikasi sukses'
-		if(!WebUI.getText(findTestObject('Object Repository/Coupon/Page_List Coupon/copySuccessnotif'))==
+		if (!WebUI.getText(findTestObject('Object Repository/Coupon/Page_List Coupon/copySuccessnotif')) ==
 			' Kode Kupon berhasil disalin ') {
 			
 			GlobalVariable.FlagFailed = 1
@@ -467,7 +465,7 @@ def checkPaging(Connection conndev) {
 	WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/button_Cari'))
 	
 	'cek apakah hasil search gagal'
-	if(WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_List Coupon/searchResult')
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_List Coupon/searchResult')
 		, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		
 		GlobalVariable.FlagFailed = 1
@@ -542,7 +540,7 @@ def checkPaging(Connection conndev) {
 	WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/button_Cari'))
 	
 	'cek apakah hasil search gagal'
-	if(WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_List Coupon/searchResult')
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_List Coupon/searchResult')
 		, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		
 		GlobalVariable.FlagFailed = 1
@@ -575,7 +573,7 @@ def checkPaging(Connection conndev) {
 	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'cek apakah hlm  tersedia'
-	if(WebUI.verifyElementVisible(
+	if (WebUI.verifyElementVisible(
 		findTestObject('Object Repository/User Management-User/Page_List User/gotoLast_page'),
 		FailureHandling.OPTIONAL) == true) {
 		
@@ -675,18 +673,16 @@ def checkdialogConfirmation(isMandatoryComplete) {
 					WebUI.callTestCase(findTestCase('Test Cases/Coupon/CouponStoreDB'), [('Path') : ExcelPathCoupon],
 						 FailureHandling.CONTINUE_ON_FAILURE)
 				}
-			}
-			else {
+			} else {
 				
 				GlobalVariable.FlagFailed = 1
 				
 				'tulis adanya error saat edit'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-						resultcheck)
+						'<' + resultcheck  + '>')
 			}
-		}
-		else {
+		} else {
 			
 			GlobalVariable.FlagFailed = 1
 			
@@ -756,7 +752,7 @@ def checkDBbeforeEdit(Connection conndev) {
 	for (int i = 0; i < editDB.size(); i++) {
 		
 		'jika ada data yang tidak sesuai tulis error'
-		if(editUI[i] != editDB[i]) {
+		if (editUI[i] != editDB[i]) {
 			
 			GlobalVariable.FlagFailed = 1
 			
@@ -792,7 +788,7 @@ def checkddlTipekupon(Connection conndev) {
 	int countDB = namaCouponTypeDB.size()
 	
 	'jika hitungan di UI dan DB sesuai'
-	if(countWeb == countDB){
+	if (countWeb == countDB) {
 		
 		for(int i=1; i<=countWeb; i++) {
 			
@@ -805,10 +801,10 @@ def checkddlTipekupon(Connection conndev) {
 		}
 		
 		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaCouponTypeDB){
+		for (String tipe : namaCouponTypeDB) {
 			
 			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaCouponTypeUI.contains(tipe)){
+			if (!namaCouponTypeUI.contains(tipe)) {
 				
 				'ada data yang tidak match'
 				isCouponTypeFound = 0;
@@ -819,8 +815,7 @@ def checkddlTipekupon(Connection conndev) {
 			isCouponTypeFound = 1
 		}
 			
-	}
-	else if(isCouponTypeFound == 0 || countWeb != countDB){
+	} else if(isCouponTypeFound == 0 || countWeb != countDB) {
 		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
@@ -873,7 +868,7 @@ def checkddlTipeNilaikupon(Connection conndev) {
 		for (String tipe : namaTipeNilaiKuponDB) {
 			
 			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaTipeNilaiKuponUI.contains(tipe)){
+			if (!namaTipeNilaiKuponUI.contains(tipe)) {
 				
 				'ada data yang tidak match'
 				isTipeNilaiKuponFound = 0;
@@ -884,8 +879,7 @@ def checkddlTipeNilaikupon(Connection conndev) {
 			isTipeNilaiKuponFound = 1
 		}
 			
-	}
-	else if (isTipeNilaiKuponFound == 0 || countWeb != countDB) {
+	} else if (isTipeNilaiKuponFound == 0 || countWeb != countDB) {
 		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
@@ -913,43 +907,14 @@ def checkddlTenant(Connection conndev) {
 	int isTenantFound = 0
 	
 	'ambil nama Tenant dari DB'
-	ArrayList<String> namaTenantDB = CustomKeywords.'coupon.CouponVerif.getTenantList'(conndev)
+	ArrayList namaTenantDB = CustomKeywords.'coupon.CouponVerif.getTenantList'(conndev)
 	
 	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList<String> namaTenantUI = []
+	ArrayList namaTenantUI = []
 	
 	'hitung banyak data didalam array DB'
 	int countDB = namaTenantDB.size()
 	
-	'jika hitungan di UI dan DB sesuai'
-//	if (countWeb == countDB) {
-		
-//		for (int i=1; i<=countWeb; i++) {
-//			
-//			'ambil object dari ddl'
-//			def modifyNamaTenant = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/modifyObject'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-coupon/div[2]/div/div/div/div/form/div[5]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
-//			
-//			'tambahkan nama tipe saldo ke array'
-//			String data = WebUI.getText(modifyNamaTenant)
-//			namaTenantUI.add(data)
-//		}
-//		
-//		'cek setiap data di UI dengan data di DB sebagai pembanding'
-//		for (String tipe : namaTenantDB) {
-//			
-//			'jika ada data yang tidak terdapat pada arraylist yang lain'
-//			if (!namaTenantUI.contains(tipe)){
-//				
-//				'ada data yang tidak match'
-//				isTenantFound = 0;
-//				'berhentikan loop'
-//				break;
-//			}
-//			'kondisi ini bisa ditemui jika data match'
-//			isTenantFound = 1
-//		}
-			
-//	}
 	if (countWeb != countDB) {
 		
 		GlobalVariable.FlagFailed = 1
@@ -1051,16 +1016,3 @@ def verifyAfterAddorEdit() {
 	'verify kuantitas'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Coupon/label_Kuantitas')), findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 26) + '/' + findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 26), false, FailureHandling.CONTINUE_ON_FAILURE), ' Tanggal terakhir kuantitas')
 }
-
-//def callendDate() {
-//	
-//	LocalDate currentDate = LocalDate.now()
-//	
-//	LocalDate endDate = currentDate
-//	
-//	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-//	
-//	String formattedEndDate = endDate.format(dateFormatter)
-//	
-//	return formattedEndDate
-//}

@@ -82,7 +82,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColmExce
 				
 				'Write To Excel GlobalVariable.StatusFailed and errormessage'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('APIGetPaymentDetail', GlobalVariable.NumOfColumn,
-					GlobalVariable.StatusFailed, message)
+					GlobalVariable.StatusFailed, '<' + message + '>')
 			}
         } else {
             'mengambil status code berdasarkan response HIT API'
@@ -90,7 +90,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColmExce
 			
             'Write To Excel GlobalVariable.StatusFailed and errormessage'
             CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('APIGetPaymentDetail', GlobalVariable.NumOfColumn, 
-                GlobalVariable.StatusFailed, message)
+                GlobalVariable.StatusFailed, '<' + message + '>')
         }
     }
 }

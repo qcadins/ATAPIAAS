@@ -8,50 +8,39 @@ import java.sql.Connection
 'deklarasi koneksi ke DB eendigo_dev'
 Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
 
+'ambil data role dari db'
+String resultDB = CustomKeywords.'transactionHistory.TransactionVerif.getstatusafterConfirmOrReject'(
+	conndev, TrxNum)
+
+'deklarasi string result dari excel'
+String resultExcel
+
 'check if action new/edit'
 if (TrxType == 'Approve') {
 	
-	'ambil data role dari db'
-	String resultDB = CustomKeywords.'transactionHistory.TransactionVerif.getstatusafterConfirmOrReject'(
-		conndev, TrxNum)
+	'ambil data role dari excel'
+	resultExcel = 'Pembayaran Berhasil'
+	
+} else if(TrxType == 'Reject') {
 	
 	'ambil data role dari excel'
-	String resultExcel = findTestData(Path).getValue(1, 33)
-	
-	checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB, resultExcel, false,
-		FailureHandling.CONTINUE_ON_FAILURE), TrxType)
-}
-else if(TrxType == 'Reject') {
-	
-	'ambil data role dari db'
-	String resultDB = CustomKeywords.'transactionHistory.TransactionVerif.getstatusafterConfirmOrReject'(
-		conndev, TrxNum)
+	resultExcel = 'Pembayaran Ditolak'
+
+} else if(TrxType == 'Upload') {
 	
 	'ambil data role dari excel'
-	String resultExcel = findTestData(Path).getValue(1, 34)
-	
-	checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB, resultExcel, false,
-		FailureHandling.CONTINUE_ON_FAILURE), TrxType)
+	resultExcel = 'Menunggu Verifikasi Pembayaran'
 }
-else if(TrxType == 'Upload') {
-	
-	'ambil data role dari db'
-	String resultDB = CustomKeywords.'transactionHistory.TransactionVerif.getstatusafterConfirmOrReject'(
-		conndev, TrxNum)
-	
-	'ambil data role dari excel'
-	String resultExcel = findTestData(Path).getValue(1, 31)
-	
-	checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB, resultExcel, false,
-		FailureHandling.CONTINUE_ON_FAILURE), TrxType)
-}
+
+checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB, resultExcel, false,
+	FailureHandling.CONTINUE_ON_FAILURE), TrxType)
 
 def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 	if (isMatch == false) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(Sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonStoreDB + ' ' + reason)
 	}

@@ -17,7 +17,7 @@ import org.openqa.selenium.By as By
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathRole).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathRole).columnNumbers
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
@@ -47,8 +47,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
-	}
-	else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+	} else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
 		'declare isMmandatory Complete'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 5))
@@ -107,8 +106,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'verify nama role'
 			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-Role/label_Role')), findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 20), false, FailureHandling.CONTINUE_ON_FAILURE), ' Nama Role')
-		}
-		else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
+			
+		} else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
 			
 			'panggil fungsi cari role'
 			searchRole()
@@ -155,8 +154,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'verify nama role'
 			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-Role/label_Role')), findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 17), false, FailureHandling.CONTINUE_ON_FAILURE), ' Nama Role')
-		}
-		else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Settings')) {
+			
+		} else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Settings')) {
 			
 			'panggil fungsi cari role'
 			searchRole()
@@ -164,43 +163,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'klik pada setting role'
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/setting_Rolebutton'))
 			
-			'get array Services dari excel'
-			arrayServices = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 22).split(';', -1)
+			'fungsi uncheck service'
+			checkorUncheckservices(22)
 			
-			'looping untuk input services check'
-			for (index = 0; index < arrayServices.size(); index++){
-				
-				'modify object checkbox'
-				modifyObjectCheckbox = WebUI.modifyObjectProperty(
-					findTestObject('Object Repository/User Management-Role/modifyObject'), 'xpath', 'equals',
-				 		('//*[@id="'+ arrayServices[index] +'"]'), true)
-			
-				'check if check box is unchecked'
-				if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, GlobalVariable.Timeout, FailureHandling.OPTIONAL)){
-					
-					'click checkbox'
-					WebUI.click(modifyObjectCheckbox)
-				}
-			}
-			
-			'get array Services uncheck dari excel'
-			arrayServices = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 23).split(';', -1)
-
-			'looping untuk input services uncheck'
-			for (index = 0; index < arrayServices.size(); index++){
-				
-				'modify object checkbox'
-				modifyObjectCheckbox = WebUI.modifyObjectProperty(
-					findTestObject('Object Repository/User Management-Role/modifyObject'), 'xpath', 'equals',
-				 		('//*[@id="'+ arrayServices[index] +'"]'), true)
-				
-				'check if check box is checked'
-				if (WebUI.verifyElementChecked(modifyObjectCheckbox, GlobalVariable.Timeout, FailureHandling.OPTIONAL)){
-					
-					'click checkbox'
-					WebUI.click(modifyObjectCheckbox)
-				}
-			}
+			'fungsi untuk check services'
+			checkorUncheckservices(23)
 			
 			'klik pada button save services'
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Setting Menu/button_Save'))
@@ -236,8 +203,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						'panggil fungsi storeDB'
 						WebUI.callTestCase(findTestCase('Test Cases/User Management/RoleStoreDB'), [:], FailureHandling.STOP_ON_FAILURE)
 					}
-				}
-				else {
+					
+				} else {
 					
 					'klik pada tombol OK'
 					WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Setting Menu/button_OK'))
@@ -259,26 +226,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 								GlobalVariable.FailedReasonUnknown)
 					}
 				}
-			}
-			else {
+				
+			} else {
 				'tulis adanya error saat setting access menu role'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 						GlobalVariable.FailedReasonMenuRole)
 			}
 		}
-		
-//		WebUI.refresh()
-//		
-//		'cek apakah muncul error setelah login'
-//		if(WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/'+
-//			'Page_Balance/div_Unknown Error'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-//			
-//			'tulis adanya error pada sistem web'
-//			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-//				GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-//					GlobalVariable.FailedReasonUnknown)
-//		}
 	}
 }
 
@@ -301,6 +256,40 @@ def searchRole() {
 	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/button_Search'))
 }
 
+def checkorUncheckservices(int row) {
+	
+	'get array Services dari excel'
+	ArrayList arrayServices = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, row).split(';', -1)
+	
+	'looping untuk input services check'
+	for (index = 0; index < arrayServices.size(); index++){
+		
+		'modify object checkbox'
+		modifyObjectCheckbox = WebUI.modifyObjectProperty(
+			findTestObject('Object Repository/User Management-Role/modifyObject'), 'xpath', 'equals',
+				 ('//*[@id="'+ arrayServices[index] +'"]'), true)
+	
+		if (row == 22) {
+			
+			'check if check box is unchecked'
+			if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, GlobalVariable.Timeout, FailureHandling.OPTIONAL)){
+				
+				'click checkbox'
+				WebUI.click(modifyObjectCheckbox)
+			}
+			
+		} else if (row == 23) {
+			
+			'check if check box is checked'
+			if (WebUI.verifyElementChecked(modifyObjectCheckbox, GlobalVariable.Timeout, FailureHandling.OPTIONAL)){
+				
+				'click checkbox'
+				WebUI.click(modifyObjectCheckbox)
+			}
+		}
+	}
+}
+
 def checkdialogConfirmation(int isMandatoryComplete) {
 	
 	boolean shouldcontinue = false
@@ -317,8 +306,8 @@ def checkdialogConfirmation(int isMandatoryComplete) {
 		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_Cancel'))
 		
 		shouldcontinue = true
-	}
-	else {
+		
+	} else {
 		
 		'klik pada tombol lanjut'
 		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_Next'))
@@ -338,8 +327,8 @@ def checkdialogConfirmation(int isMandatoryComplete) {
 					GlobalVariable.FailedReasonExisted)
 			
 			shouldcontinue = true
-		}
-		else {
+			
+		} else {
 			
 			'klik tombol OK'
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_OK'))

@@ -16,7 +16,7 @@ import org.openqa.selenium.By as By
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet User'
-int countColumnEdit = findTestData(ExcelPathTranx).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathTranx).columnNumbers, flagLoginUsed
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
@@ -25,33 +25,6 @@ Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
-	
-	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
-		
-		break
-	}
-	else if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted') ||
-		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Warning')) {
-		
-		'panggil fungsi login'
-		WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'TranxHist', ('SheetName') : 'RiwayatTransaksi',
-				('Path') : ExcelPathTranx], FailureHandling.STOP_ON_FAILURE)
-		
-		'klik pada menu'
-		WebUI.click(
-			findTestObject('Object Repository/TransactionHistory/Page_Balance/span_Menu'))
-		
-		'pilih submenu riwayat transaksi'
-		WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/RiwayatTrxMenu'))
-		
-//		checkPaging(conndev)
-		
-		break
-	}
-}
-
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'deklarasi variable integer'
 	int arrayIndex = 0
@@ -67,6 +40,26 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	else if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted') ||
 		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Warning')) {
 		
+		if (flagLoginUsed == 0) {
+			
+			'panggil fungsi login'
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'TranxHist', ('SheetName') : 'RiwayatTransaksi',
+					('Path') : ExcelPathTranx], FailureHandling.STOP_ON_FAILURE)
+			
+			'klik pada menu'
+			WebUI.click(
+				findTestObject('Object Repository/TransactionHistory/Page_Balance/span_Menu'))
+			
+			'pilih submenu riwayat transaksi'
+			WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/RiwayatTrxMenu'))
+			
+			'lakukan check paging'
+			checkPaging(conndev)
+			
+			'ubah flag login sudah terpakai = 1'
+			flagLoginUsed = 1
+		}
+		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 5))
 		
@@ -78,17 +71,36 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/RiwayatTrxMenu'))
 		
 		'cek apakah tombol menu dalam jangkauan web'
-		if (WebUI.verifyElementVisible(findTestObject(TombolSilang), FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
 			
 			'klik pada tombol silang menu'
-			WebUI.click(findTestObject(TombolSilang))
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
 		}
 		
-		checkddlTipeIsiUlang(conndev)
+		'ambil nama TipeIsiUlang dari DB'
+		ArrayList namaTipeIsiUlangDB = CustomKeywords.'transactionHistory.TransactionVerif.getDDLTipeIsiUlang'(conndev)
+	
+		'ambil nama Status dari DB'
+		ArrayList namaStatusExcel = []
 		
-		checkddlStatus(conndev)
+		'ambil data status dari excel, karena tidak disimpan ke DB'
+		for (int i = 0; i < 5; i++) {
+			
+			'tambah data ke array excel'
+			namaStatusExcel.add(findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, (30+i)))
+		}
 		
-		checkddlMetodeTrf(conndev)
+		'ambil nama metodeBayar dari DB'
+		ArrayList namametodeBayarDB = CustomKeywords.'transactionHistory.TransactionVerif.getDDLMetodeTrf'(conndev)
+
+		'panggil fungsi check ddl di DB dan UI'
+		checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_TipeIsiUlang'), namaTipeIsiUlangDB, 'DDL Tipe isi Ulang')
+		
+		'panggil fungsi check ddl di DB dan UI'
+		checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_Status'), namaStatusExcel, 'DDL Status')
+
+		'panggil fungsi check ddl di DB dan UI'
+		checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_Metode'), namametodeBayarDB, 'DDL Metode bayar')
 		
 		'ambil role yang digunakan oleh user'
 		String RoleUser = CustomKeywords.'transactionHistory.TransactionVerif.getRoleofUser'(conndev,
@@ -217,7 +229,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						
 						'panggil fungsi storeDB'
 						WebUI.callTestCase(findTestCase('Test Cases/Transaction History/TransactionStoreDB'), [('Path') : ExcelPathTranx,
-							('TrxType') : 'Upload', ('TrxNum') : trxNum],
+							('TrxType') : 'Upload', ('TrxNum') : trxNum, ('Sheet') : 'RiwayatTransaksi'],
 							 FailureHandling.CONTINUE_ON_FAILURE)
 					}
 					
@@ -229,7 +241,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
 					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) +
-							';') + WebUI.getText(findTestObject('Object Repository/TransactionHistory/ErrorTopRight')))
+							';') + '<' + WebUI.getText(findTestObject('Object Repository/TransactionHistory/ErrorTopRight')) + '>')
 					
 					'klik batal'
 					WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/buttonBatal_upload'))
@@ -238,8 +250,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		else if (RoleUser.equalsIgnoreCase('Admin Finance Eendigo')) {
 			
-			'check ddl tenant khusus untuk role selain admin client'
-			checkddlTenant(conndev)
+			'ambil nama Tenant dari DB'
+			ArrayList namaTenantDB = CustomKeywords.'transactionHistory.TransactionVerif.getTenantList'(conndev)
+			
+			'panggil fungsi check ddl di DB dan UI'
+			checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_Tenant'), namaTenantDB, 'DDL Tenant')
 			
 			searchadminEendigoFinance()
 			
@@ -328,8 +343,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		else if (RoleUser.equalsIgnoreCase('Admin Eendigo')) {
 			
-			'check ddl tenant khusus untuk role selain admin client'
-			checkddlTenant(conndev)
+			'ambil nama Tenant dari DB'
+			ArrayList namaTenantDB = CustomKeywords.'transactionHistory.TransactionVerif.getTenantList'(conndev)
+			
+			'panggil fungsi check ddl di DB dan UI'
+			checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_Tenant'), namaTenantDB, 'DDL Tenant')
 			
 			searchadminEendigoFinance()
 			
@@ -388,7 +406,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'jika tidak ada error tulis sukses'
-		if(GlobalVariable.FlagFailed == 0 && isMandatoryComplete == 0) {
+		if (GlobalVariable.FlagFailed == 0 && isMandatoryComplete == 0) {
 			'write to excel success'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'RiwayatTransaksi', 0,
 				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
@@ -546,7 +564,7 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 				
 				'panggil fungsi storeDB'
 				WebUI.callTestCase(findTestCase('Test Cases/Transaction History/TransactionStoreDB'), [('Path') : ExcelPathTranx,
-					('TrxType') : choice, ('TrxNum') : trxNum],
+					('TrxType') : choice, ('TrxNum') : trxNum, ('Sheet') : 'RiwayatTransaksi'],
 					 FailureHandling.CONTINUE_ON_FAILURE)
 			}
 		}
@@ -558,8 +576,7 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 		'tulis adanya error saat melakukan approval'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-				WebUI.getText(
-					findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/div_errorCatch')).toString())
+				'<' + WebUI.getText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/div_errorCatch')).toString()) + '>'
 	}
 }
 
@@ -573,10 +590,10 @@ def searchadminEendigoFinance() {
 	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/RiwayatTrxMenu'))
 	
 	'cek apakah tombol menu dalam jangkauan web'
-	if (WebUI.verifyElementVisible(findTestObject(TombolSilang), FailureHandling.OPTIONAL)) {
+	if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
 		
 		'klik pada tombol silang menu'
-		WebUI.click(findTestObject(TombolSilang))
+		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
 	}
 	
 	'input batas awal transaksi'
@@ -914,242 +931,38 @@ def checkPaging(Connection conndev) {
 	}
 }
 
-def checkddlTipeIsiUlang(Connection conndev) {
+def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
 	
-	'klik pada ddl tipe isi ulang'
-	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_TipeIsiUlang'))
-	
-	'ambil list tipe isi ulang'
-	def elementtipeisiulang = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-transaction-history/app-msx-paging/app-search-filter/div/div/div/div/div/form/div[1]/div[3]/app-question/app-select/div/div[2]/ng-select/ng-dropdown-panel/div/div[2]/div'))
-	
-	'ambil hitungan TipeIsiUlang yang ada'
-	int countWeb = (elementtipeisiulang.size()) - 1
-	
-	'flag TipeIsiUlang sesuai'
-	int isTipeIsiUlangFound = 0
-	
-	'ambil nama TipeIsiUlang dari DB'
-	ArrayList namaTipeIsiUlangDB = CustomKeywords.'transactionHistory.TransactionVerif.getDDLTipeIsiUlang'(conndev)
-	
-	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList namaTipeIsiUlangUI = []
-	
-	'hitung banyak data didalam array DB'
-	int countDB = namaTipeIsiUlangDB.size()
-	
-	'jika hitungan di UI dan DB sesuai'
-	if(countWeb == countDB){
-		
-		for (int i=1; i<=countWeb; i++) {
-			
-			'ambil object dari ddl'
-			def modifyNamaTipeIsiUlang = WebUI.modifyObjectProperty(findTestObject('Object Repository/TransactionHistory/modifyObject'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-transaction-history/app-msx-paging/app-search-filter/div/div/div/div/div/form/div[1]/div[3]/app-question/app-select/div/div[2]/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
-			
-			'tambahkan nama tipe saldo ke array'
-			String data = WebUI.getText(modifyNamaTipeIsiUlang)
-			namaTipeIsiUlangUI.add(data)
-		}
-		
-		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaTipeIsiUlangDB) {
-			
-			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaTipeIsiUlangUI.contains(tipe)) {
-				
-				'ada data yang tidak match'
-				isTipeIsiUlangFound = 0;
-				'berhentikan loop'
-				break;
-			}
-			'kondisi ini bisa ditemui jika data match'
-			isTipeIsiUlangFound = 1
-		}
-			
-	}
-	else if (isTipeIsiUlangFound == 0 || countWeb != countDB) {
-		
-		GlobalVariable.FlagFailed = 1
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonDDL)
-	}
-	
-	'klik pada ddl tipe isi ulang'
-	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_TipeIsiUlang'))
-}
+	'declare array untuk menampung ddl'
+	ArrayList list = []
 
-def checkddlStatus(Connection conndev) {
+	'click untuk memunculkan ddl'
+	WebUI.click(objectDDL)
 	
-	'klik pada ddl status'
-	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_Status'))
+	'get id ddl'
+	id = WebUI.getAttribute(findTestObject('Object Repository/Top Up/ddlClass'), 'id', FailureHandling.CONTINUE_ON_FAILURE)
 	
-	'ambil list status'
-	def elementstatusddl = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-transaction-history/app-msx-paging/app-search-filter/div/div/div/div/div/form/div[1]/div[5]/app-question/app-select/div/div[2]/ng-select/ng-dropdown-panel/div/div[2]/div'))
+	'get row'
+	variable = DriverFactory.webDriver.findElements(By.cssSelector(('#' + id) + '> div > div:nth-child(2) div'))
 	
-	'ambil hitungan Status yang ada'
-	int countWeb = (elementstatusddl.size()) - 1
-	
-	'flag Status sesuai'
-	int isStatusFound = 0
-	
-	'ambil nama Status dari DB'
-	ArrayList<String> namaStatusExcel = []
-	
-	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList<String> namaStatusUI = []
-	
-	'ambil data status dari excel, karena tidak disimpan ke DB'
-	for (int i = 0; i < 5; i++) {
-		
-		'tambah data ke array excel'
-		namaStatusExcel.add(findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, (30+i)))
-	}
-	
-	'hitung banyak data didalam array DB'
-	int countExcel = namaStatusExcel.size()
-	
-	for (int i = 1; i<=countExcel; i++) {
-		
-		'ambil object dari ddl'
-		def modifyNamaStatus = WebUI.modifyObjectProperty(findTestObject('Object Repository/TransactionHistory/modifyObject'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-transaction-history/app-msx-paging/app-search-filter/div/div/div/div/div/form/div[1]/div[5]/app-question/app-select/div/div[2]/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
-		
-		'tambahkan nama tipe saldo ke array'
-		String data = WebUI.getText(modifyNamaStatus)
-		namaStatusUI.add(data)
-	}
-	
-	'jika hitungan di UI dan DB sesuai'
-	if(countExcel == countWeb){
-		
-		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaStatusExcel) {
-			
-			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaStatusUI.contains(tipe)) {
-				
-				'ada data yang tidak match'
-				isStatusFound = 0;
-				'berhentikan loop'
-				break;
-			}
-			'kondisi ini bisa ditemui jika data match'
-			isStatusFound = 1
-		}
-			
-	}
-	else if (isStatusFound == 0 || countWeb != countExcel) {
-		
-		GlobalVariable.FlagFailed = 1
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonDDL)
-	}
-	
-	'klik pada ddl status'
-	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_Status'))
-}
+	'looping untuk get ddl kedalam array'
+	for (i = 1; i < variable.size(); i++) {
+		'modify object DDL'
+		modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/TransactionHistory/modifyObject'), 'xpath', 'equals', ((('//*[@id=\'' +
+			id) + '-') + i) + '\']', true)
 
-def checkddlMetodeTrf(Connection conndev) {
-	
-	'klik pada ddl metode bayar'
-	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_Metode'))
-	
-	'ambil list metode bayar'
-	def elementmetodeBayar = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-transaction-history/app-msx-paging/app-search-filter/div/div/div/div/div/form/div[1]/div[4]/app-question/app-select/div/div[2]/ng-select/ng-dropdown-panel/div/div[2]/div'))
-	
-	'ambil hitungan metodeBayar yang ada'
-	int countWeb = (elementmetodeBayar.size()) - 1
-	
-	'flag metodeBayar sesuai'
-	int ismetodeBayarFound = 0
-	
-	'ambil nama metodeBayar dari DB'
-	ArrayList namametodeBayarDB = CustomKeywords.'transactionHistory.TransactionVerif.getDDLMetodeTrf'(conndev)
-	
-	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList namametodeBayarUI = []
-	
-	'hitung banyak data didalam array DB'
-	int countDB = namametodeBayarDB.size()
-	
-	'jika hitungan di UI dan DB sesuai'
-	if (countWeb == countDB) {
-		
-		for (int i=1; i<=countWeb; i++) {
-			
-			'ambil object dari ddl'
-			def modifyNamametodeBayar = WebUI.modifyObjectProperty(findTestObject('Object Repository/TransactionHistory/modifyObject'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-transaction-history/app-msx-paging/app-search-filter/div/div/div/div/div/form/div[1]/div[4]/app-question/app-select/div/div[2]/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
-			
-			'tambahkan nama tipe saldo ke array'
-			String data = WebUI.getText(modifyNamametodeBayar)
-			namametodeBayarUI.add(data)
-		}
-		
-		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namametodeBayarDB) {
-			
-			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namametodeBayarUI.contains(tipe)) {
-				
-				'ada data yang tidak match'
-				ismetodeBayarFound = 0;
-				'berhentikan loop'
-				break;
-			}
-			'kondisi ini bisa ditemui jika data match'
-			ismetodeBayarFound = 1
-		}
-			
-	}
-	else if (ismetodeBayarFound == 0 || countWeb != countDB) {
-		
-		GlobalVariable.FlagFailed = 1
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonDDL)
+		'add ddl ke array'
+		list.add(WebUI.getText(modifyObjectDDL))
 	}
 	
-	'klik pada ddl metode bayar'
-	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_Metode'))
-}
+	'verify ddl ui = db'
+	checkVerifyEqualorMatch(listDB.containsAll(list), reason)
 
-def checkddlTenant(Connection conndev) {
+	'verify jumlah ddl ui = db'
+	checkVerifyEqualorMatch(WebUI.verifyEqual(list.size(), listDB.size(), FailureHandling.CONTINUE_ON_FAILURE), ' Jumlah ' + reason)
 	
-	'klik pada dropdownlist tenant'
-	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_Tenant'))
-	
-	'ambil list tenant'
-	def elementTenant = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-transaction-history/app-msx-paging/app-search-filter/div/div/div/div/div/form/div[1]/div[6]/app-question/app-select/div/div[2]/ng-select/ng-dropdown-panel/div/div[2]/div'))
-	
-	'ambil hitungan Tenant yang ada'
-	int countWeb = (elementTenant.size()) - 1
-	
-	'flag Tenant sesuai'
-	int isTenantFound = 0
-	
-	'ambil nama Tenant dari DB'
-	ArrayList namaTenantDB = CustomKeywords.'transactionHistory.TransactionVerif.getTenantList'(conndev)
-	
-	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList namaTenantUI = []
-	
-	'hitung banyak data didalam array DB'
-	int countDB = namaTenantDB.size()
-	
-	if (countWeb != countDB) {
-		
-		GlobalVariable.FlagFailed = 1
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonDDL)
-	}
-	
-	'klik pada dropdownlist tenant'
-	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_Tenant'))
+	'Input enter untuk tutup ddl'
+	WebUI.sendKeys(objectDDL, Keys.chord(Keys.ENTER))
 }
 
 def checkVerifyPaging(Boolean isMatch) {

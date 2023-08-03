@@ -16,7 +16,7 @@ import org.openqa.selenium.By as By
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet User'
-int countColumnEdit = findTestData(ExcelPathTranx).getColumnNumbers(), flagLoginUsed
+int countColumnEdit = findTestData(ExcelPathTranx).columnNumbers, flagLoginUsed
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
@@ -36,8 +36,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
-	}
-	else if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted') ||
+		
+	} else if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted') ||
 		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Warning')) {
 		
 		if (flagLoginUsed == 0) {
@@ -64,17 +64,16 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 5))
 		
 		'klik pada menu'
-		WebUI.click(
-			findTestObject('Object Repository/TransactionHistory/Page_Balance/span_Menu'))
+		WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/span_Menu'))
 		
 		'pilih submenu riwayat transaksi'
 		WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/RiwayatTrxMenu'))
 		
 		'cek apakah tombol menu dalam jangkauan web'
-		if (WebUI.verifyElementVisible(findTestObject(TombolSilang), FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
 			
 			'klik pada tombol silang menu'
-			WebUI.click(findTestObject(TombolSilang))
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
 		}
 		
 		checkddlTipeIsiUlang(conndev)
@@ -197,20 +196,19 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					if (GlobalVariable.KondisiCekDB == 'Yes') {
 						
 						'panggil fungsi storeDB'
-						WebUI.callTestCase(findTestCase('Test Cases/Transaction History/TransactionAutoStoreDB'), [('Path') : ExcelPathTranx,
-							('TrxType') : 'Upload', ('TrxNum') : trxNum],
+						WebUI.callTestCase(findTestCase('Test Cases/Transaction History/TransactionStoreDB'), [('Path') : ExcelPathTranx,
+							('TrxType') : 'Upload', ('TrxNum') : trxNum, ('Sheet') : 'RiwayatTransaksiAuto'],
 							 FailureHandling.CONTINUE_ON_FAILURE)
 					}
 					
-				}
-				else if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/ErrorTopRight'),
+				} else if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/ErrorTopRight'),
 					GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 					
 					'ambil error dan get text dari error tersebut'
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
 					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksiAuto', GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) +
-							';') + WebUI.getText(findTestObject('Object Repository/TransactionHistory/ErrorTopRight')))
+							';') + '<' +  WebUI.getText(findTestObject('Object Repository/TransactionHistory/ErrorTopRight')) + '>')
 					
 					'klik batal'
 					WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/buttonBatal_upload'))
@@ -407,8 +405,8 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 			if (GlobalVariable.KondisiCekDB == 'Yes') {
 				
 				'panggil fungsi storeDB'
-				WebUI.callTestCase(findTestCase('Test Cases/Transaction History/TransactionAutoStoreDB'), [('Path') : ExcelPathTranx,
-					('TrxType') : choice, ('TrxNum') : trxNum],
+				WebUI.callTestCase(findTestCase('Test Cases/Transaction History/TransactionStoreDB'), [('Path') : ExcelPathTranx,
+					('TrxType') : choice, ('TrxNum') : trxNum, ('Sheet') : 'RiwayatTransaksiAuto'],
 					 FailureHandling.CONTINUE_ON_FAILURE)
 			}
 		}
@@ -420,8 +418,7 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 		'tulis adanya error saat melakukan approval'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksiAuto', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-				WebUI.getText(
-					findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/div_errorCatch')).toString())
+				'<' + WebUI.getText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/div_errorCatch')).toString()) + '>'
 	}
 }
 
@@ -435,10 +432,10 @@ def searchadminEendigoFinance() {
 	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/RiwayatTrxMenu'))
 	
 	'cek apakah tombol menu dalam jangkauan web'
-	if (WebUI.verifyElementVisible(findTestObject(TombolSilang), FailureHandling.OPTIONAL)) {
+	if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
 		
 		'klik pada tombol silang menu'
-		WebUI.click(findTestObject(TombolSilang))
+		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
 	}
 	
 	'input batas awal transaksi'

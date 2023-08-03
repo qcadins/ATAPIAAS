@@ -21,7 +21,7 @@ import org.openqa.selenium.WebDriver
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathOCRTesting).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
@@ -32,57 +32,39 @@ Connection connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatPr
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 4)
 
+'panggil fungsi login'
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR BPKB',
+	('Path') : ExcelPathOCRTesting, ('Row') : 27], FailureHandling.STOP_ON_FAILURE)
+
+if (GlobalVariable.SettingEnvi == 'Production') {
+	
+	'click pada production'
+	WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
+}
+
 'pindah testcase sesuai jumlah di excel'
-for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
-	
-	'ambil kode tenant di DB'
-	String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, 
-		findTestData(ExcelPathOCRTesting).getValue(2, 27))
-	
-	'ambil key trial yang aktif dari DB'
-	String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
-	
-	'deklarasi id untuk harga pembayaran OCR'
-	int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(connProd, tenantcode, 'OCR BPKB')
-	
-	'ambil jenis penagihan transaksi (by qty/price)'
-	String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(connProd, 
-		tenantcode, idPayment)
+for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
-	} 
-	else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
-		'buka chrome\r\n'
-		WebUI.openBrowser('')
+	} else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {		
 		
-		'buka website APIAAS SIT, data diambil dari TestData Login'
-		WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
-		
-		'input data email'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
+		'ambil kode tenant di DB'
+		String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn,
 			findTestData(ExcelPathOCRTesting).getValue(2, 27))
 		
-		'input password'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-			findTestData(ExcelPathOCRTesting).getValue(2, 28))
+		'ambil key trial yang aktif dari DB'
+		String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode, GlobalVariable.SettingEnvi)
 		
-		'ceklis pada reCaptcha'
-		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
+		'deklarasi id untuk harga pembayaran OCR'
+		int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(connProd, tenantcode, 'OCR BPKB')
 		
-		'pada delay, lakukan captcha secara manual'
-		WebUI.delay(10)
-		
-		'klik pada button login'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-		
-		if (GlobalVariable.SettingEnvi == 'Production') {
-			'click pada production'
-			WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
-		}
+		'ambil jenis penagihan transaksi (by qty/price)'
+		String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(connProd,
+			tenantcode, idPayment)
 		
 		'deklarasi variable response'
 		ResponseObject response
@@ -110,14 +92,14 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)){
 		
 			'klik button skip to last page'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'))
 		}
 		
 		'panggil fungsi ambil transaksi terakhir di tabel'
 		String no_Trx_before = getTrxNumber()
 		
 		'variabel yang menyimpan saldo sebelum adanya transaksi'
-		saldobefore = getSaldoforTransaction('OCR BPKB')
+		saldobefore = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 11))
 		
 		if(useCorrectKey != 'Yes'){
 			
@@ -156,7 +138,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR BPKB', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			message_ocr)
+			 '<' + message_ocr + '>')
 			
 			if(GlobalVariable.SettingTopup.equals('IsiSaldo')) {
 				
@@ -167,13 +149,17 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			else if (GlobalVariable.SettingTopup.equals('SelfTopUp')) {
 				
 				'call isi saldo secara mandiri di Admin Client'
-				WebUI.callTestCase(findTestCase('Top Up/Top Up'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR BPKB', ('sheet') : 'OCR BPKB', ('idOCR') : 'OCR_BPKB'],
+				WebUI.callTestCase(findTestCase('Top Up/TopUpAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR BPKB', ('sheet') : 'OCR BPKB', ('idOCR') : 'OCR_BPKB'],
 					FailureHandling.CONTINUE_ON_FAILURE)
 				
 				'lakukan approval di transaction history'
-				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistory'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR BPKB', ('sheet') : 'OCR BPKB', ('idOCR') : 'OCR_BPKB'],
+				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistoryAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR BPKB', ('sheet') : 'OCR BPKB', ('idOCR') : 'OCR_BPKB'],
 					FailureHandling.CONTINUE_ON_FAILURE)
 			}
+			
+			'panggil fungsi login'
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR BPKB',
+				('Path') : ExcelPathOCRTesting, ('Row') : 27], FailureHandling.STOP_ON_FAILURE)
 			
 			continue
 		}
@@ -194,7 +180,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR BPKB', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			message_ocr)
+			'<' + message_ocr + '>')
 			continue;
 		}
 		
@@ -221,7 +207,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)){
 			
 			'klik button skip to last page'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'))
 		}
 		
 		'variabel yang diharapkan menyimpan number transaksi sesudah hit'
@@ -248,15 +234,15 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		int serviceprice = CustomKeywords.'ocrTesting.GetParameterfromDB.getServicePricefromDB'(connProd, idPayment)
 		
 		'jika HIT API successful'
-		if(hitAPITrx == 1){
+		if (hitAPITrx == 1) {
 			
 			'cek apakah jenis penagihan berdasarkan harga'
-			if(balanceChargeType == 'Price'){
+			if (balanceChargeType == 'Price') {
 				
 				'input saldo setelah penagihan'
 				katalonSaldoafter = saldobefore - serviceprice
-			}
-			else{
+				
+			} else {
 				
 				'input saldo setelah penagihan dikurangi qty'
 				katalonSaldoafter = saldobefore - 1
@@ -264,10 +250,10 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 		}
 		
 		'simpan saldo setelah di HIT'
-		uisaldoafter = getSaldoforTransaction('OCR BPKB')
+		uisaldoafter = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 11))
 	
 		'jika saldoafter match'
-		if(katalonSaldoafter == uisaldoafter){
+		if (katalonSaldoafter == uisaldoafter) {
 			
 			isSaldoBerkurang = 1
 		}
@@ -330,7 +316,7 @@ for(GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR BPKB', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			message_ocr)
+			 '<' + message_ocr + '>')
 		}
 		'refresh laman web sesudah kondisi write to excel'
 		WebUI.refresh()

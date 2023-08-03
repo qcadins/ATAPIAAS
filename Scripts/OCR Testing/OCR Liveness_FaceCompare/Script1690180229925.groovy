@@ -22,13 +22,10 @@ import org.openqa.selenium.WebDriver
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathOCRTesting).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
-
-//'deklarasi koneksi ke Database adins_apiaas_uat'
-//def connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
@@ -36,10 +33,9 @@ Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_dev
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 13)
 
-'buka chrome\r\n'
-WebUI.openBrowser('')
-
-loginfunction()
+'panggil fungsi login'
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR Liveness + FaceCompare',
+	('Path') : ExcelPathOCRTesting, ('Row') : 27], FailureHandling.STOP_ON_FAILURE)
 
 if (GlobalVariable.SettingEnvi == 'Production') {
 	'click pada production'
@@ -48,21 +44,6 @@ if (GlobalVariable.SettingEnvi == 'Production') {
 
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
-	
-	'ambil kode tenant di DB'
-	String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn,
-		findTestData(ExcelPathOCRTesting).getValue(2, 27))
-	
-	'ambil key trial yang aktif dari DB'
-	String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode, GlobalVariable.SettingEnvi)
-	
-	'deklarasi id untuk harga pembayaran OCR'
-	int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(conndevUAT,
-		tenantcode, findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
-	
-	'ambil jenis penagihan transaksi (by qty/price)'
-	String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(conndevUAT,
-		tenantcode, idPayment)
 
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
@@ -70,6 +51,21 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 		break
 	}
 	else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+		
+		'ambil kode tenant di DB'
+		String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn,
+			findTestData(ExcelPathOCRTesting).getValue(2, 27))
+		
+		'ambil key trial yang aktif dari DB'
+		String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode, GlobalVariable.SettingEnvi)
+		
+		'deklarasi id untuk harga pembayaran OCR'
+		int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(conndevUAT,
+			tenantcode, findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 13))
+		
+		'ambil jenis penagihan transaksi (by qty/price)'
+		String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(conndevUAT,
+			tenantcode, idPayment)
 		
 		'deklarasi variable response'
 		ResponseObject response
@@ -145,7 +141,7 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR Liveness + FaceCompare', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			message_ocr)
+			'<' + message_ocr +'>')
 			
 			if(GlobalVariable.SettingTopup.equals('IsiSaldo')) {
 				
@@ -164,7 +160,9 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 					FailureHandling.CONTINUE_ON_FAILURE)
 			}
 			
-			loginfunction()
+			'panggil fungsi login'
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR Liveness + FaceCompare',
+				('Path') : ExcelPathOCRTesting, ('Row') : 26], FailureHandling.STOP_ON_FAILURE)
 			
 			continue
 			
@@ -227,7 +225,7 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 			}
 		}
 		
-		'simpan harga Dukcapil(NonBiom) ke dalam integer'
+		'simpan harga Liveness + Face Compare ke dalam integer'
 		int serviceprice = CustomKeywords.'ocrTesting.GetParameterfromDB.getServicePricefromDB'(conndevUAT, idPayment)
 		
 		'jika HIT API successful'
@@ -314,7 +312,7 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR Liveness + FaceCompare', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			message_ocr)
+			 '<' + message_ocr + '>')
 		}
 		
 		'refresh halaman web'
@@ -336,31 +334,6 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 
 'tutup browser jika loop sudah selesai'
 WebUI.closeBrowser()
-
-def loginfunction() {
-	'buka website APIAAS SIT, data diambil dari TestData Login'
-	WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
-	
-	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(ExcelPathOCRTesting).getValue(2, 27))
-	
-	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(ExcelPathOCRTesting).getValue(2, 28))
-	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-	
-	'ubah number of column menjadi 2'
-	GlobalVariable.NumOfColumn = 2
-}
 
 'ambil saldo sesuai testing yang dilakukan'
 def getSaldoforTransaction(String NamaOCR) {

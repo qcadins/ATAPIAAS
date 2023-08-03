@@ -14,30 +14,23 @@ import groovy.sql.Sql as Sql
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathAPIDocs).getColumnNumbers()
+int countColumnEdit = findTestData(ExcelPathAPIDocs).columnNumbers
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'DocAPI', ('SheetName') : 'Dokumentasi API',
 	('Path') : ExcelPathAPIDocs], FailureHandling.STOP_ON_FAILURE)
 
 'pindah testcase sesuai jumlah di excel'
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
+for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
-	}
-	else if (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+	} else if (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 5))
-		
-		'nama dokumen yang akan diambil'
-		String namadokumentasi = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 9)
-		
-		'user menentukan apakah file yang didownload langsung dihapus atau tidak lewat excel'
-		String flagDelete = findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 10)
 		
 		'tunggu hingga page terload dengan sempurna'
 		WebUI.delay(GlobalVariable.Timeout)
@@ -51,10 +44,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/span_Dokumentasi API'))
 		
 		'cek apakah tombol menu dalam jangkauan web'
-		if (WebUI.verifyElementVisible(findTestObject(TombolSilang), FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
 			
 			'klik pada tombol silang menu'
-			WebUI.click(findTestObject(TombolSilang))
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
 		}
 		
 		'jika perlu, akan memanggil fungsi cek ddl dokumentasi'
@@ -65,7 +58,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'input jenis dokumentasi yang akan didownload'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_API Documentation/input'), namadokumentasi)
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_API Documentation/input'),
+			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 9))
 		
 		'select status API'
 		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_API Documentation/input'), Keys.chord(Keys.ENTER))
@@ -83,7 +77,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.delay(GlobalVariable.Timeout)
 		
 		'pengecekan file yang sudah didownload'
-		boolean isDownloaded = CustomKeywords.'documentationAPI.CheckDocumentation.isFileDownloaded'(flagDelete)
+		boolean isDownloaded = CustomKeywords.'documentationAPI.CheckDocumentation.isFileDownloaded'(
+			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 10))
 		
 		'jika file tidak terunduh, tulis gagal'
 		if (WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL) && isMandatoryComplete == 0 &&

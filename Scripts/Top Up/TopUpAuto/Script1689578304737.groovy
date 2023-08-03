@@ -20,13 +20,13 @@ int countColumnEdit = findTestData(ExcelPath).getColumnNumbers()
 
 Connection conn
 
-//if(GlobalVariable.SettingEnvi == 'Production') {
-//	'deklarasi koneksi ke Database eendigo_dev'
-//	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
-//} else if(GlobalVariable.SettingEnvi == 'Trial') {
-//	'deklarasi koneksi ke Database eendigo_dev_uat'
-//	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
-//}
+if(GlobalVariable.SettingEnvi == 'Production') {
+	'deklarasi koneksi ke Database eendigo_dev'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+} else if(GlobalVariable.SettingEnvi == 'Trial') {
+	'deklarasi koneksi ke Database eendigo_dev_uat'
+	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+}
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
@@ -46,9 +46,6 @@ String noTrxfromUI, noTrxfromDB, noTrxOtherTenant
 
 'call setting balance type function'
 settingBalanceType()
-
-'tutup browser'
-WebUI.closeBrowser()
 
 'buka chrome\r\n'
 WebUI.openBrowser('')
@@ -89,10 +86,10 @@ WebUI.click(findTestObject('Object Repository/Top Up/Page_Balance/spanMenu'))
 WebUI.click(findTestObject('Object Repository/Top Up/Page_Balance/span_Isi Saldo'))
 
 'cek apakah tombol menu dalam jangkauan web'
-if (WebUI.verifyElementVisible(findTestObject(TombolSilang), FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
 	
 	'klik pada tombol silang menu'
-	WebUI.click(findTestObject(TombolSilang))
+	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
 }
 
 'deklarasi integer yang akan dipakai'
@@ -156,7 +153,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/Top Up/NotifCat
 		'tulis error sesuai reason yang ditampilkan oleh error message'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-				hasilNotif)
+				'<' + hasilNotif + '>')
 	}
 }
 
@@ -171,6 +168,10 @@ if (findTestData(ExcelPath).getValue(2, 33) == 'Yes') {
 	
 	'ambil data services dari excel'
 	listServices = []
+	
+	if (findTestData(ExcelPath).getValue(2, 34) == 'Price') {
+		tipeSaldo = 'IDR'
+	}
 	
 	listServices.add(tipeSaldo)
 		
@@ -307,7 +308,7 @@ if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Top Up/
 		'tulis error sesuai reason yang ditampilkan oleh error message'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-				WebUI.getText(findTestObject('Object Repository/Top Up/ErrorCatch')))
+				'<' + WebUI.getText(findTestObject('Object Repository/Top Up/ErrorCatch'))  + '>')
 
 	}
 	else if (WebUI.verifyElementPresent(findTestObject('Object Repository/Top Up/NotifCatch'),
@@ -325,7 +326,7 @@ if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Top Up/
 			'tulis error sesuai reason yang ditampilkan oleh error message'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-					hasilNotif)
+					'<' + hasilNotif + '>')
 		}
 	}
 	

@@ -60,7 +60,7 @@ public class TopupVerif {
 		ArrayList listdata = []
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT description FROM ms_lov WHERE lov_group = 'PAYMENT_METHOD'")
+		ResultSet resultSet = stm.executeQuery("SELECT bank_name from ms_account_payment maap LEFT JOIN ms_bank mb ON mb.id_bank = maap.id_bank WHERE maap.is_active = '1'")
 		ResultSetMetaData metadata = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()

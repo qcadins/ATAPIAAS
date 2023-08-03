@@ -34,23 +34,17 @@ Connection connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatPr
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 8)
 
+'panggil fungsi login'
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR RK BCA',
+	('Path') : ExcelPathOCRTesting, ('Row') : 26], FailureHandling.STOP_ON_FAILURE)
+
+if (GlobalVariable.SettingEnvi == 'Production') {
+	'click pada production'
+	WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
+}
+
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
-	
-	'ambil kode tenant di DB'
-	String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, 
-		findTestData(ExcelPathOCRTesting).getValue(2, 26))
-	
-	'ambil key trial yang aktif dari DB'
-	String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode)
-	
-	'deklarasi id untuk harga pembayaran OCR'
-	int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(connProd,
-		tenantcode, 'OCR Rek. Koran BCA')
-	
-	'ambil jenis penagihan transaksi (by qty/price)'
-	String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(connProd,
-		tenantcode, idPayment)
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
@@ -59,9 +53,20 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	} 
 	else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
-		'panggil fungsi login'
-		WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR RK BCA',
-			('Path') : ExcelPathOCRTesting], FailureHandling.STOP_ON_FAILURE)
+		'ambil kode tenant di DB'
+		String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn,
+			findTestData(ExcelPathOCRTesting).getValue(2, 26))
+		
+		'ambil key trial yang aktif dari DB'
+		String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode, GlobalVariable.SettingEnvi)
+		
+		'deklarasi id untuk harga pembayaran OCR'
+		int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(connProd,
+			tenantcode, 'OCR Rek. Koran BCA')
+		
+		'ambil jenis penagihan transaksi (by qty/price)'
+		String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(connProd,
+			tenantcode, idPayment)
 		
 		'deklarasi variable response'
 		ResponseObject response
@@ -89,17 +94,17 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'cek apakah button skip enable atau disable'
 		if (WebUI.verifyElementVisible(
-			findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)) {
+			findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)) {
 			
 			'klik button skip to last page'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'))
 		}
 		
 		'panggil fungsi ambil transaksi terakhir di tabel'
 		String noTrxbefore = getTrxNumber()
 		
 		'variabel yang menyimpan saldo sebelum adanya transaksi'
-		saldobefore = getSaldoforTransaction('OCR RK BCA')
+		saldobefore = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 10))
 			
 		'cek apa perlu penggunaan key dan tenant yang benar'
 		if(useCorrectKey != 'Yes') {
@@ -138,7 +143,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR RK BCA', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			message_ocr)
+			 '<' + message_ocr + '>')
 			
 			if(GlobalVariable.SettingTopup.equals('IsiSaldo')) {
 				
@@ -149,13 +154,17 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			else if (GlobalVariable.SettingTopup.equals('SelfTopUp')) {
 				
 				'call isi saldo secara mandiri di Admin Client'
-				WebUI.callTestCase(findTestCase('Top Up/Top Up'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Rek. Koran BCA', ('sheet') : 'OCR RK BCA', ('idOCR') : 'OCR_REKKORAN_BCA'],
+				WebUI.callTestCase(findTestCase('Top Up/TopUpAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Rek. Koran BCA', ('sheet') : 'OCR RK BCA', ('idOCR') : 'OCR_REKKORAN_BCA'],
 					FailureHandling.CONTINUE_ON_FAILURE)
 				
 				'lakukan approval di transaction history'
-				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistory'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Rek. Koran BCA', ('sheet') : 'OCR RK BCA', ('idOCR') : 'OCR_REKKORAN_BCA'],
+				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistoryAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Rek. Koran BCA', ('sheet') : 'OCR RK BCA', ('idOCR') : 'OCR_REKKORAN_BCA'],
 					FailureHandling.CONTINUE_ON_FAILURE)
 			}
+			
+			'panggil fungsi login'
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR RK BCA',
+				('Path') : ExcelPathOCRTesting, ('Row') : 26], FailureHandling.STOP_ON_FAILURE)
 			
 			continue
 			
@@ -177,7 +186,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR RK BCA', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			message_ocr)
+			 '<' + message_ocr + '>')
 			continue;
 		}
 		
@@ -201,10 +210,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'cek apakah button skip enable atau disable'
 		if(WebUI.verifyElementVisible(
-			findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)) {
+			findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)) {
 		
 			'klik button skip to last page'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'))
 		}
 		
 		'variabel yang diharapkan menyimpan number transaksi sesudah hit'
@@ -250,14 +259,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'simpan saldo setelah di HIT'
-		uiSaldoAfter = getSaldoforTransaction('OCR RK BCA')
+		uiSaldoAfter = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 10))
 	
 		'jika saldoafter match'
 		if (katalonsaldoAfter == uiSaldoAfter) {
 			
 			isSaldoBerkurang = 1
-		}
-		else {
+		} else {
 			
 			isSaldoBerkurang = 0
 		}
@@ -267,8 +275,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'web mencatat transaksi terbaru'
 			isTrxIncreased = 1
-		}
-		else {
+		} else {
 			
 			'web tidak mencatat transaksi terbaru'
 			isTrxIncreased = 0
@@ -313,7 +320,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR RK BCA', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			message_ocr)
+			'<' + message_ocr + '>')
 		}
 		
 		'refresh laman web sesudah kondisi write to excel'

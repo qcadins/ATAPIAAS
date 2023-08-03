@@ -11,24 +11,11 @@
       <value></value>
       <variableId>2ef243d0-54f6-4d83-9ead-6e4382b4c281</variableId>
    </variableLinks>
-   <variableLinks>
-      <testDataLinkId></testDataLinkId>
-      <type>DEFAULT</type>
-      <value></value>
-      <variableId>00c654bc-1b7e-4400-a3ab-e8c89648ed4e</variableId>
-   </variableLinks>
    <variable>
       <defaultValue>'API_KEY/DataAPIKEY'</defaultValue>
       <description></description>
       <id>2ef243d0-54f6-4d83-9ead-6e4382b4c281</id>
       <masked>false</masked>
       <name>ExcelPathAPIKey</name>
-   </variable>
-   <variable>
-      <defaultValue>'Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'</defaultValue>
-      <description></description>
-      <id>00c654bc-1b7e-4400-a3ab-e8c89648ed4e</id>
-      <masked>false</masked>
-      <name>TombolLogin</name>
    </variable>
 </TestCaseEntity>

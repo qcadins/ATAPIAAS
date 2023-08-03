@@ -39,8 +39,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
-	} 
-	else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+		
+	} else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 				
 		'call test case login admin esign'
 		WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Tenant', ('SheetName') : 'Tenant',
@@ -102,12 +102,12 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						if (WebUI.verifyElementNotPresent(modifyObjectButtonServices, GlobalVariable.Timeout, FailureHandling.OPTIONAL)){
 							
 							continue
-						}
-						else if (!(WebUI.getText(modifyObjectButtonServices).contains('OTP'))){
+							
+						} else if (!(WebUI.getText(modifyObjectButtonServices).contains('OTP'))){
 							
 							continue
-						}
-						else if (WebUI.getText(modifyObjectButtonServices).contains('OTP')){
+							
+						} else if (WebUI.getText(modifyObjectButtonServices).contains('OTP')){
 							
 							'click button add services'
 							WebUI.click(modifyObjectButtonServices)
@@ -194,8 +194,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				'input API Key'
 				WebUI.setText(findTestObject('Tenant/TenantBaru/input_APIKEY'), 
 					findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 17))
-			} 
-			else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 16) == 'Yes') {
+				
+			} else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 16) == 'Yes') {
 				
 				'click button generate api key'
 				WebUI.click(findTestObject('Tenant/TenantBaru/button_GenerateAPIKEY'))
@@ -216,7 +216,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			arrayServicesBatasSaldo = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 20).split(';', -1)
 			
 			'looping untuk input batas saldo'
-			for (index = 5; index < variable.size(); index++){
+			for (index = 5; index < variable.size(); index++) {
 				
 				'modify object button services'
 				modifyObjectButtonServices = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
@@ -224,9 +224,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						'div/div/div/form/div[' + index) + ']/button', true)
 				
 				'looping untuk array service excel'
-				for (indexExcel = 0; indexExcel < arrayServices.size(); indexExcel++){
+				for (indexExcel = 0; indexExcel < arrayServices.size(); indexExcel++) {
 					
-					if(index > 34){
+					if (index > 34) {
 						
 						break
 					}
@@ -235,12 +235,12 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					if (WebUI.verifyElementNotPresent(modifyObjectButtonServices, GlobalVariable.Timeout, FailureHandling.OPTIONAL)){
 						
 						continue
-					}
-					else if (!(WebUI.getText(modifyObjectButtonServices).contains(arrayServices[indexExcel]))){
+						
+					} else if (!(WebUI.getText(modifyObjectButtonServices).contains(arrayServices[indexExcel]))) {
 						
 						continue
-					}
-					else if (WebUI.getText(modifyObjectButtonServices).contains(arrayServices[indexExcel])){
+						
+					} else if (WebUI.getText(modifyObjectButtonServices).contains(arrayServices[indexExcel])) {
 						
 						'click button add services'
 						WebUI.click(modifyObjectButtonServices)
@@ -326,8 +326,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					
 					continue
 				}
-			} 
-			else if (isMandatoryComplete > 0) {
+				
+			} else if (isMandatoryComplete > 0) {
 				
 				'click button Batal'
 				WebUI.click(findTestObject('Tenant/TenantBaru/button_Batal'))
@@ -339,8 +339,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				
 				continue
 			}
-		} 
-		else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Service')) {
+			
+		} else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Service')) {
 			'call function search tenant'
 			searchTenant()
 
@@ -349,8 +349,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			{
 				'click button services balance'
 				WebUI.click(findTestObject('Tenant/button_ServiceBalance'))
-			}
-			else{
+				
+			} else {
 				
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn,
@@ -423,16 +423,16 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn,
 							GlobalVariable.StatusWarning, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 								GlobalVariable.FailedReasonUnknown)
-					}
-					else {
+						
+					} else {
 						
 						'write to excel success'
 						CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Tenant', 0,
 							GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 					}
 				}
-			} 
-			else if (isMandatoryComplete > 0) {
+				
+			} else if (isMandatoryComplete > 0) {
 				
 				'click button Batal'
 				WebUI.click(findTestObject('Tenant/Services/button_Batal'))
@@ -447,6 +447,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'call function check saldo setelah setting services'
 			checkSaldo()
+			
 		} else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {			
 			'panggil fungsi search'
 			searchTenant()
@@ -472,8 +473,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				'input API Key'
 				WebUI.setText(findTestObject('Tenant/TenantBaru/input_APIKEY'), 
 					findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 17))
-			} 
-			else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 16) == 'Yes') {
+				
+			} else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 16) == 'Yes') {
 				
 				'click button generate api key'
 				WebUI.click(findTestObject('Tenant/TenantBaru/button_GenerateAPIKEY'))
@@ -541,8 +542,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							WebUI.setText(modifyObjectInputServices, arrayServicesBatasSaldo[indexExcel])
 
 							break
-						} 
-						else if (!(WebUI.getText(modifyObjectLabelServices).equalsIgnoreCase(arrayServices[indexExcel]))) {
+							
+						} else if (!(WebUI.getText(modifyObjectLabelServices).equalsIgnoreCase(arrayServices[indexExcel]))) {
 							
 							if ((indexExcel + 1) == arrayServices.size()) {
 								
@@ -552,8 +553,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 								break
 							}
 						}
-					} 
-					else if (WebUI.verifyElementPresent(modifyObjectButtonServices, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+						
+					} else if (WebUI.verifyElementPresent(modifyObjectButtonServices, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 						
 						if (WebUI.getText(modifyObjectButtonServices).contains(arrayServices[indexExcel])) {
 							
@@ -600,8 +601,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							arrayEmailReminder[(indexexcel - 1)])) {
 						
 							break
-						} 
-						else {
+							
+						} else {
 							
 							if (indexexcel == arrayEmailReminder.size()) {
 								
@@ -612,8 +613,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							}
 						}
 					}
-				} 
-				else {
+					
+				} else {
 					
 					break
 				}
@@ -639,6 +640,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						WebUI.setText(modifyObjectInputEmail, arrayEmailReminder[(indexexcel - 1)])
 
 						break
+						
 					} else if (WebUI.getAttribute(modifyObjectInputEmail, 'value', FailureHandling.OPTIONAL).equalsIgnoreCase(
 						arrayEmailReminder[(indexexcel - 1)])) {
 					
@@ -670,8 +672,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn,
 							GlobalVariable.StatusWarning, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 								GlobalVariable.FailedReasonUnknown)
-					}
-					else {
+						
+					} else {
 						
 						'call function check afteraddoredit'
 						checkAfterAddorEdit()
@@ -680,8 +682,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Tenant', 0,
 							GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 					}
-				}
-				else{
+					
+				} else {
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
 					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn,
@@ -690,8 +692,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					
 					continue
 				}
-			} 
-			else if (isMandatoryComplete > 0) {
+				
+			} else if (isMandatoryComplete > 0) {
 				
 				'click button Batal'
 				WebUI.click(findTestObject('Tenant/TenantBaru/button_Batal'))
@@ -703,17 +705,17 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				
 				continue
 			}
+			
 		} else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('ChargeType')){
 			'panggil fungsi search'
 			searchTenant()
 
-			if(WebUI.verifyElementPresent(findTestObject('Tenant/button_chargeType'), GlobalVariable.Timeout, 
-				FailureHandling.OPTIONAL)){
+			if (WebUI.verifyElementPresent(findTestObject('Tenant/button_chargeType'), GlobalVariable.Timeout, 
+				FailureHandling.OPTIONAL)) {
 			
 				'click button services balance'
 				WebUI.click(findTestObject('Tenant/button_chargeType'))
-			}
-			else{
+			} else {
 				
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn,
@@ -745,26 +747,21 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					'click checkbox'
 					WebUI.click(modifyObjectCheckbox)
 					
-//					isChargedByPrice.add(1)
 				}
-//				else
-//				{
-//					isChargedByPrice.add(0)
-//				}
 			}
 			
 			'get array Services uncheck dari excel'
 			arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 31).split(';', -1)
 
 			'looping untuk input services uncheck'
-			for (index = 0; index < arrayServices.size(); index++){
+			for (index = 0; index < arrayServices.size(); index++) {
 				
 				'modify object checkbox'
 				modifyObjectCheckbox = WebUI.modifyObjectProperty(findTestObject('Tenant/Services/modifyObject'), 'xpath',
 					'equals', ('//*[@id="'+ arrayServices[index] +'"]'), true)
 				
 				'check if check box is checked'
-				if (WebUI.verifyElementChecked(modifyObjectCheckbox, GlobalVariable.Timeout, FailureHandling.OPTIONAL)){
+				if (WebUI.verifyElementChecked(modifyObjectCheckbox, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 					
 					'click checkbox'
 					WebUI.click(modifyObjectCheckbox)
@@ -773,20 +770,19 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 			'check if mandatory complete dan button simpan clickable'
 			if ((isMandatoryComplete == 0) && !(WebUI.verifyElementHasAttribute(findTestObject('Tenant/ChargeType/button_Simpan'),
-				'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL))){
+				'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL))) {
 			
 				'click button simpan'
 				WebUI.click(findTestObject('Tenant/ChargeType/button_Simpan'))
 
 				'check if alert berhasil muncul'
 				if (WebUI.getAttribute(findTestObject('Tenant/errorLog'), 'aria-label', FailureHandling.OPTIONAL).contains(
-					'berhasil')){
+					'berhasil')) {
 				
 					'write to excel success'
 					CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Tenant', 0,
 						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
-				}
-				else{
+				} else {
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
 					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn,
@@ -807,8 +803,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						GlobalVariable.StatusWarning, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 							GlobalVariable.FailedReasonUnknown)
 				}
-			}
-			else if (isMandatoryComplete > 0){
+				
+			} else if (isMandatoryComplete > 0) {
 				
 				'click button Batal'
 				WebUI.click(findTestObject('Tenant/ChargeType/button_Batal'))
@@ -908,8 +904,8 @@ def checkPaging(Connection conn) {
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 
 	'cek apakah button skip enable atau disable'
-	if(WebUI.verifyElementVisible(
-		findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)){
+	if (WebUI.verifyElementVisible(
+		findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)) {
 	
 		'klik button skip to last page'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
@@ -1029,8 +1025,6 @@ def checkSaldo() {
 		
 		servicesNameUISaldo.add(WebUI.getText(modifyObjectTipeSaldo))
 	}
-	
-	println(servicesNameUISaldo)
 	
 	servicesNameActive.containsAll(servicesNameUISaldo)
 }
