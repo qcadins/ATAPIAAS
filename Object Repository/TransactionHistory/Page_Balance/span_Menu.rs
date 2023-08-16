@@ -6,19 +6,19 @@
    <elementGuidId>adda7d57-60c3-4011-9ed8-3fb4f54f06dc</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>XPATH</key>
+         <value>/html/body/app-root/app-full-layout/app-navbar/nav/div/div[1]/div[1]/i</value>
+      </entry>
+      <entry>
          <key>BASIC</key>
-         <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-hide&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/app-navbar[1]/nav[@class=&quot;navbar navbar-expand-lg header-navbar navbar-static&quot;]/div[@class=&quot;container-fluid navbar-wrapper&quot;]/div[@class=&quot;navbar-header d-flex&quot;]/div[@class=&quot;navbar-toggle menu-toggle d-xl-none d-block float-left align-items-center justify-content-center&quot;]/i[@class=&quot;ft-menu font-medium-3&quot;]</value>
+         <value>//*[@class = 'ft-menu font-medium-3']</value>
       </entry>
       <entry>
          <key>CSS</key>
          <value>i.ft-menu.font-medium-3</value>
       </entry>
-      <entry>
-         <key>XPATH</key>
-         <value>//i</value>
-      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -26,23 +26,23 @@
       <name>tag</name>
       <type>Main</type>
       <value>i</value>
-      <webElementGuid>9f5e2070-aede-4cfb-a242-b12ef95c2f35</webElementGuid>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>class</name>
-      <type>Main</type>
-      <value>ft-menu font-medium-3</value>
-      <webElementGuid>4b3e93af-f6f3-49ae-9a63-4ef2d4369487</webElementGuid>
+      <webElementGuid>d3401722-a74a-42ac-b11e-29a5f864650b</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ft-menu font-medium-3</value>
+      <webElementGuid>4eac78fc-4e49-4b5f-abc1-1ec3200a362a</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-hide&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/app-navbar[1]/nav[@class=&quot;navbar navbar-expand-lg header-navbar navbar-static&quot;]/div[@class=&quot;container-fluid navbar-wrapper&quot;]/div[@class=&quot;navbar-header d-flex&quot;]/div[@class=&quot;navbar-toggle menu-toggle d-xl-none d-block float-left align-items-center justify-content-center&quot;]/i[@class=&quot;ft-menu font-medium-3&quot;]</value>
-      <webElementGuid>dc832611-30f9-4ec8-82a1-bf6078fd1eb3</webElementGuid>
+      <webElementGuid>7c243a6a-239d-413a-ad94-530646845550</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -50,6 +50,6 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//i</value>
-      <webElementGuid>2f8da83a-b229-427f-b36b-84d304b8e9fc</webElementGuid>
+      <webElementGuid>5784c4bb-a965-461d-907b-b0606fd40d82</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

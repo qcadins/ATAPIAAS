@@ -348,8 +348,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			grandTotalafter = Integer.parseInt(WebUI.getAttribute(
 				findTestObject('Object Repository/Top Up/Page_Topup Balance/grandTotal'),
 					'value', FailureHandling.CONTINUE_ON_FAILURE).replaceAll('[^\\d]', ''))
-		
-			//kondisi if disini
 			
 			'klik pada tombol next'
 			WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/button_Next'))

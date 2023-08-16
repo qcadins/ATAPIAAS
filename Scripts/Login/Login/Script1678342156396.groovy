@@ -11,17 +11,40 @@ import groovy.sql.Sql as Sql
 import org.openqa.selenium.By as By
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.WebElement
+import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.chrome.ChromeOptions
+import org.openqa.selenium.remote.DesiredCapabilities
+import com.kms.katalon.core.webui.driver.DriverFactory
+import org.openqa.selenium.WebDriver
 
-def chromePrefs = [:] as HashMap<String, ArrayList>
+WebDriver driver
 
-chromePrefs.put('download.default_directory', System.getProperty('user.dir') + '\\Download')
-
-RunConfiguration.setWebDriverPreferencesProperty('prefs', chromePrefs)
-
-'buka chrome\r\n'
-WebUI.openBrowser('')
-
-def driver = DriverFactory.getWebDriver()
+if (GlobalVariable.SettingBrowser == 0) {
+	
+	System.setProperty("webdriver.chrome.driver", "Extras/chromedriver.exe")
+	
+	ChromeOptions options = new ChromeOptions()
+	
+	options.addExtensions(new File("Extras/nocaptchaai_chrome_1.7.6.crx"))
+	
+	DesiredCapabilities caps = new DesiredCapabilities()
+	
+	caps.setCapability(ChromeOptions.CAPABILITY, options)
+	
+	def chromePrefs = [:] as HashMap<String, ArrayList>
+	
+	chromePrefs.put('download.default_directory', System.getProperty('user.dir') + '\\Download')
+	
+	RunConfiguration.setWebDriverPreferencesProperty('prefs', chromePrefs)
+	
+	driver = new ChromeDriver(caps)
+	
+	DriverFactory.changeWebDriver(driver)
+	
+	WebUI.navigateToUrl('https://config.nocaptchaai.com/?apikey=kvnedgar9286-35bde35f-e305-699a-0af2-d6fb983c8c4a')
+	
+	GlobalVariable.SettingBrowser = 1
+}
 
 'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
 GlobalVariable.FlagFailed = 0
@@ -46,8 +69,6 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
 
 def js = (JavascriptExecutor)driver
 
-WebUI.maximizeWindow()
-
 if (TC == 'EditProf') {
 	
 	'input email'
@@ -57,20 +78,10 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputpassword'),
 		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 10))
-	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
-	WebUI.delay(10)
-
-	'focus pada button login'
-	WebUI.focus(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-
-	'Klik Login'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
 } else if (TC == 'Regist') {
+	
+	WebUI.maximizeWindow()
 	
 	WebUI.delay(GlobalVariable.Timeout)
 	
@@ -184,12 +195,6 @@ if (TC == 'EditProf') {
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData('API_KEY/DataAPIKEY').getValue(GlobalVariable.NumOfColumn, 10))
 	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
 } else if (TC == 'DocAPI') {
 	
 	'input data email'
@@ -200,15 +205,6 @@ if (TC == 'EditProf') {
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(2, 14))
 	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-	
 } else if (TC == 'OCR') {
 	
 	'input data email'
@@ -218,15 +214,6 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(2, Row+1))
-	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
 } else if (TC == 'IsiSaldo') {
 	
@@ -244,9 +231,6 @@ if (TC == 'EditProf') {
 } else if (TC == 'Tenant') {
 	
 	WebUI.maximizeWindow()
-	
-	'klik tombol masuk'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
 	
 	'input data username'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
@@ -269,15 +253,6 @@ if (TC == 'EditProf') {
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(ExcelPathSaldo).getValue(2, 26))
 	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-	
 } else if (TC == 'Layanan') {
 	
 	'input data email'
@@ -287,15 +262,6 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(ExcelPathLayanan).getValue(2, 10))
-	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
 } else if (TC == 'Role') {
 	
@@ -307,15 +273,6 @@ if (TC == 'EditProf') {
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(ExcelPathRole).getValue(2, 12))
 	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-	
 } else if (TC == 'User') {
 	
 	'input data email'
@@ -325,15 +282,6 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(2, 12))
-	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
 } else if (TC == 'Coupon') {
 	
@@ -345,15 +293,6 @@ if (TC == 'EditProf') {
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(2, 34))
 	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-	
 } else if (TC == 'TopUp') {
 	
 	'input data email'
@@ -364,24 +303,6 @@ if (TC == 'EditProf') {
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(2, 20))
 	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-	
-	'jika ada pilihan role'
-	if (WebUI.verifyElementPresent(
-		findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'),
-			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-	
-		'pilih admin client'
-		WebUI.click(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'))
-	}
-	
 } else if (TC == 'ChangePass') {
 	
 	'input data email'
@@ -391,25 +312,6 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 10))
-	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(
-		findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-	
-	'jika ada pilihan role'
-	if (WebUI.verifyElementPresent(
-		findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'), 
-			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-	
-		'pilih admin client'
-		WebUI.click(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'))
-	}
 	
 } else if (TC == 'IsiSaldoAuto') {
 	
@@ -436,15 +338,6 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 10))
-	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
 //	'jika ada pilihan role'
 //	if (WebUI.verifyElementPresent(
@@ -495,15 +388,17 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(4, 34))
+}
+
+if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Register') {
 	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
+	'tunggu tombol tidak di disable lagi'
+	if (WebUI.waitForElementNotHasAttribute(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'),
+		'disabled', 100, FailureHandling.OPTIONAL)) {
 	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+		'klik pada button login'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+	}
 }
 
 if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {	

@@ -6,15 +6,15 @@
    <elementGuidId>d15965ea-3f89-4365-8d21-3160bbe77874</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>XPATH</key>
+         <value>(.//*[normalize-space(text()) and normalize-space(.)='Coupon'])[1]/following::span[1]</value>
+      </entry>
+      <entry>
          <key>BASIC</key>
-         <value>//*[@ng-reflect-parent = 'Transaction History']</value>
+         <value>//*[@href = '/transaction-history']</value>
       </entry>
       <entry>
          <key>CSS</key>
-      </entry>
-      <entry>
-         <key>XPATH</key>
-         <value>(.//*[normalize-space(text()) and normalize-space(.)='Coupon'])[1]/following::span[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -25,7 +25,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>span</value>
-      <webElementGuid>b2a10867-fe1c-4a64-97b2-62ffa6f03d52</webElementGuid>
+      <webElementGuid>96e43880-65af-4a4a-8c6c-4cdc80dadd8e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -33,7 +33,7 @@
       <name>class</name>
       <type>Main</type>
       <value>menu-title ng-tns-c133-4</value>
-      <webElementGuid>2427f64f-1b9f-4fcc-8263-c3a04838b7c5</webElementGuid>
+      <webElementGuid>ff40b6ac-5fb2-4b3e-a6e4-9360a6fe086a</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -41,7 +41,7 @@
       <name>text</name>
       <type>Main</type>
       <value>Riwayat Transaksi</value>
-      <webElementGuid>00405204-f168-405d-87bb-6854c5f01a54</webElementGuid>
+      <webElementGuid>a721efaa-6b51-4583-b29f-38569d2339d4</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -49,15 +49,23 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-expanded vertical-menu menu-open&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;app-sidebar main-menu menu-fixed menu-native-scroll expanded ng-star-inserted&quot;]/app-sidebar[@class=&quot;ng-tns-c133-4&quot;]/div[@class=&quot;sidebar-content main-menu-content ng-tns-c133-4 ps&quot;]/div[@class=&quot;nav-container ng-tns-c133-4&quot;]/ul[@class=&quot;navigation ng-tns-c133-4&quot;]/li[@class=&quot;ng-tns-c133-4 ng-star-inserted&quot;]/a[@class=&quot;ng-tns-c133-4 ng-star-inserted&quot;]/span[@class=&quot;menu-title ng-tns-c133-4&quot;]</value>
-      <webElementGuid>2612b136-1168-40d6-8b52-aa78c8c6e30b</webElementGuid>
+      <webElementGuid>16648116-b756-4a40-9515-65a68269adff</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>ng-reflect-parent</name>
       <type>Main</type>
       <value>Transaction History</value>
-      <webElementGuid>3b0a8e15-4b2b-4348-94ed-e74e75cc1b2f</webElementGuid>
+      <webElementGuid>16e727b7-2166-482b-a375-16ef23450f62</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>href</name>
+      <type>Main</type>
+      <value>/transaction-history</value>
+      <webElementGuid>10e81645-4522-4b6d-8aff-c1cd89ec1074</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -65,7 +73,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Coupon'])[1]/following::span[1]</value>
-      <webElementGuid>4e7b4d79-06db-48f2-a3bc-67f7e752415a</webElementGuid>
+      <webElementGuid>6750e2fe-bcba-42b4-89aa-7a84fdc1eb37</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -73,7 +81,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Pengguna'])[1]/following::span[2]</value>
-      <webElementGuid>6f4d4d8c-6cde-43db-b885-fe56fa13e6d2</webElementGuid>
+      <webElementGuid>89be9a65-2510-4013-9286-622dfc1b0195</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -81,7 +89,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='PRODUCTION'])[1]/preceding::span[1]</value>
-      <webElementGuid>03a0974a-fc8a-44f2-8d78-365446b9ba5b</webElementGuid>
+      <webElementGuid>cb5daabc-079b-4e64-9309-70bc5802997e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -89,7 +97,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='TRIAL'])[1]/preceding::span[1]</value>
-      <webElementGuid>79be7b7a-d539-4e9d-a8d9-6e1ec80587a2</webElementGuid>
+      <webElementGuid>bbdf7a4a-542b-479d-8b18-cc945f416aac</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -97,7 +105,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='Riwayat Transaksi']/parent::*</value>
-      <webElementGuid>151f6378-5779-4564-8d23-70e44800fab2</webElementGuid>
+      <webElementGuid>b519cc57-cabd-4c91-8c43-0e500b48de54</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -105,7 +113,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//li[7]/a/span</value>
-      <webElementGuid>8e8676f4-14e9-4e61-9e63-0c7ba0fc7b81</webElementGuid>
+      <webElementGuid>668c4d68-fc02-43e1-b594-28a1ece12a1c</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -113,6 +121,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//span[(text() = 'Riwayat Transaksi' or . = 'Riwayat Transaksi')]</value>
-      <webElementGuid>38d71e01-ab8b-4919-be82-686fce459224</webElementGuid>
+      <webElementGuid>dcd0f0b8-b832-440b-acc0-4084aea5a626</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

@@ -7,17 +7,33 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[1]/app-sidebar/div[2]/div[1]/ul/li[2]/a/span</value>
+         <value>//*[@href = '/tenant']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
       <value>/html/body/app-root/app-full-layout/div/div[1]/app-sidebar/div[2]/div[1]/ul/li[2]/a/span</value>
-      <webElementGuid>3d019094-bdea-4a15-87d9-5db668b0193e</webElementGuid>
+      <webElementGuid>dd60801c-8cf2-4785-89f9-a43889783f21</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ng-tns-c99-6 ft-clipboard</value>
+      <webElementGuid>8d159af9-f92d-4593-93a4-cece7575494c</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>href</name>
+      <type>Main</type>
+      <value>/tenant</value>
+      <webElementGuid>9c6f407f-5047-4afd-9cbd-a3e360cb636a</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

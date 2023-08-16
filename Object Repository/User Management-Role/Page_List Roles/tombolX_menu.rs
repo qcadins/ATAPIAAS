@@ -6,15 +6,19 @@
    <elementGuidId>00feb0da-6313-47e0-93c7-b4ef4e850dfa</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>XPATH</key>
+         <value>//a[@id='sidebarClose']/i</value>
+      </entry>
+      <entry>
          <key>CSS</key>
          <value>i.ft-x.ng-tns-c133-2</value>
       </entry>
       <entry>
-         <key>XPATH</key>
-         <value>//a[@id='sidebarClose']/i</value>
+         <key>BASIC</key>
+         <value>id(&quot;sidebarClose&quot;)/i[@class=&quot;ft-x ng-tns-c133-2&quot;]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,15 +26,15 @@
       <name>tag</name>
       <type>Main</type>
       <value>i</value>
-      <webElementGuid>4da11d34-ee84-4309-8849-6ba8da01c17d</webElementGuid>
+      <webElementGuid>186c6c05-2445-40b7-8562-73e2dd3230c5</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
-      <value>ft-x ng-tns-c133-2</value>
-      <webElementGuid>6c42df78-c122-454a-b903-64e1d6814286</webElementGuid>
+      <value>nav-close d-block d-lg-block d-xl-none ng-tns-c133-4</value>
+      <webElementGuid>d23517f5-7fdf-45ad-b4f4-77fb8eae94cb</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -38,7 +42,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;sidebarClose&quot;)/i[@class=&quot;ft-x ng-tns-c133-2&quot;]</value>
-      <webElementGuid>a485e94c-3875-46f3-b139-046817d6e6d4</webElementGuid>
+      <webElementGuid>40828bfa-22db-44a3-a031-3a2065ce6272</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -46,7 +50,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//a[@id='sidebarClose']/i</value>
-      <webElementGuid>2980e25b-aef9-4982-8532-647123117355</webElementGuid>
+      <webElementGuid>65887e52-4bbd-485a-8871-7b0394e90bae</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -54,6 +58,6 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//a[3]/i</value>
-      <webElementGuid>73e51ab3-ba39-4d81-96f9-940972ee8b0d</webElementGuid>
+      <webElementGuid>00d0f2e6-119f-494a-9c1e-a80c0248660f</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

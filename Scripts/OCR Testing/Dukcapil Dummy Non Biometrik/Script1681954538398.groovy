@@ -33,9 +33,6 @@ Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_dev
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 3)
 
-'buka chrome\r\n'
-WebUI.openBrowser('')
-
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'Dukcapil(NonBiom)',
 	('Path') : ExcelPathOCRTesting, ('Row') : 28], FailureHandling.STOP_ON_FAILURE)

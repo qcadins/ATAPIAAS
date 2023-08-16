@@ -58,14 +58,23 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			'klik pada tombol tambah coupon'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/a_Tambah'))
 			
-			'panggil fungsi cek ddl tipe kupon'
-			checkddlTipekupon(conndev)
+			'ambil nama CouponType dari DB'
+			ArrayList namaCouponTypeDB = CustomKeywords.'coupon.CouponVerif.getTipeKuponList'(conndev)
 			
-			'panggil fungsi cek ddl nilai kupon'
-			checkddlTipeNilaikupon(conndev)
+			'ambil nama TipeNilaiKupon dari DB'
+			ArrayList namaTipeNilaiKuponDB = CustomKeywords.'coupon.CouponVerif.getTipeNilaiKuponList'(conndev)
 			
-			'panggil fungsi cek ddl tenant'
-			checkddlTenant(conndev)
+			'ambil nama Tenant dari DB'
+			ArrayList namaTenantDB = CustomKeywords.'coupon.CouponVerif.getTenantList'(conndev)
+			
+			'panggil fungsi check ddl di DB dan UI'
+			checkDDL(findTestObject('Object Repository/Coupon/Page_Add Coupon/inputtipekupon'), namaCouponTypeDB, 'DDL Tipe Kupon')
+			
+			'panggil fungsi check ddl di DB dan UI'
+			checkDDL(findTestObject('Object Repository/Coupon/Page_Add Coupon/inputtipenilaikupon'), namaTipeNilaiKuponDB, 'DDL Tipe Nilai Kupon')
+			
+			'panggil fungsi check ddl di DB dan UI'
+			checkDDL(findTestObject('Object Repository/Coupon/Page_Add Coupon/tenantinput'), namaTenantDB, 'DDL Tenant')
 			
 			'panggil fungsi input data dari excel'
 			inputparameter(findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 8))
@@ -764,168 +773,38 @@ def checkDBbeforeEdit(Connection conndev) {
 	}
 }
 
-def checkddlTipekupon(Connection conndev) {
+def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
 	
-	'klik pada tipe kupon'
-	WebUI.click(findTestObject('Object Repository/Coupon/Page_Add Coupon/span_tipekupon'))
-	
-	'ambil list tipekupon'
-	def elementCouponType = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-coupon/div[2]/div/div/div/div/form/div[1]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div'))
-	
-	'ambil hitungan CouponType yang ada'
-	int countWeb = (elementCouponType.size()) - 1
-	
-	'flag CouponType sesuai'
-	int isCouponTypeFound = 0
-	
-	'ambil nama CouponType dari DB'
-	ArrayList<String> namaCouponTypeDB = CustomKeywords.'coupon.CouponVerif.getTipeKuponList'(conndev)
-	
-	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList<String> namaCouponTypeUI = []
-	
-	'hitung banyak data didalam array DB'
-	int countDB = namaCouponTypeDB.size()
-	
-	'jika hitungan di UI dan DB sesuai'
-	if (countWeb == countDB) {
-		
-		for(int i=1; i<=countWeb; i++) {
-			
-			'ambil object dari ddl'
-			def modifyNamaCouponType = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/modifyObject'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-coupon/div[2]/div/div/div/div/form/div[1]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
-			
-			'tambahkan nama tipe saldo ke array'
-			String data = WebUI.getText(modifyNamaCouponType)
-			namaCouponTypeUI.add(data)
-		}
-		
-		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaCouponTypeDB) {
-			
-			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaCouponTypeUI.contains(tipe)) {
-				
-				'ada data yang tidak match'
-				isCouponTypeFound = 0;
-				'berhentikan loop'
-				break;
-			}
-			'kondisi ini bisa ditemui jika data match'
-			isCouponTypeFound = 1
-		}
-			
-	} else if(isCouponTypeFound == 0 || countWeb != countDB) {
-		
-		GlobalVariable.FlagFailed = 1
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonDDL)
-	}
-	
-	'klik pada tipe kupon'
-	WebUI.click(findTestObject('Object Repository/Coupon/Page_Add Coupon/span_tipekupon'))
-}
+	'declare array untuk menampung ddl'
+	ArrayList list = []
 
-def checkddlTipeNilaikupon(Connection conndev) {
+	'click untuk memunculkan ddl'
+	WebUI.click(objectDDL)
 	
-	'klik pada ddl tipenilai kupon'
-	WebUI.click(findTestObject('Object Repository/Coupon/Page_Add Coupon/span_tipenilaikupon'))
+	'get id ddl'
+	id = WebUI.getAttribute(findTestObject('Object Repository/Top Up/ddlClass'), 'id', FailureHandling.CONTINUE_ON_FAILURE)
 	
-	'ambil list tipeNilaikupon'
-	def elementTipeNilaiKupon = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-coupon/div[2]/div/div/div/div/form/div[5]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div'))
+	'get row'
+	variable = DriverFactory.webDriver.findElements(By.cssSelector(('#' + id) + '> div > div:nth-child(2) div'))
 	
-	'ambil hitungan TipeNilaiKupon yang ada'
-	int countWeb = (elementTipeNilaiKupon.size()) - 1
-	
-	'flag TipeNilaiKupon sesuai'
-	int isTipeNilaiKuponFound = 0
-	
-	'ambil nama TipeNilaiKupon dari DB'
-	ArrayList<String> namaTipeNilaiKuponDB = CustomKeywords.'coupon.CouponVerif.getTipeNilaiKuponList'(conndev)
-	
-	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList<String> namaTipeNilaiKuponUI = []
-	
-	'hitung banyak data didalam array DB'
-	int countDB = namaTipeNilaiKuponDB.size()
-	
-	'jika hitungan di UI dan DB sesuai'
-	if (countWeb == countDB) {
-		
-		for (int i=1; i<=countWeb; i++) {
-			
-			'ambil object dari ddl'
-			def modifyNamaTipeNilaiKupon = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/modifyObject'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-coupon/div[2]/div/div/div/div/form/div[5]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
-			
-			'tambahkan nama tipe saldo ke array'
-			String data = WebUI.getText(modifyNamaTipeNilaiKupon)
-			namaTipeNilaiKuponUI.add(data)
-		}
-		
-		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaTipeNilaiKuponDB) {
-			
-			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaTipeNilaiKuponUI.contains(tipe)) {
-				
-				'ada data yang tidak match'
-				isTipeNilaiKuponFound = 0;
-				'berhentikan loop'
-				break;
-			}
-			'kondisi ini bisa ditemui jika data match'
-			isTipeNilaiKuponFound = 1
-		}
-			
-	} else if (isTipeNilaiKuponFound == 0 || countWeb != countDB) {
-		
-		GlobalVariable.FlagFailed = 1
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonDDL)
-	}
-	
-	'klik pada ddl tipenilai kupon'
-	WebUI.click(findTestObject('Object Repository/Coupon/Page_Add Coupon/span_tipenilaikupon'))
-}
+	'looping untuk get ddl kedalam array'
+	for (i = 1; i < variable.size(); i++) {
+		'modify object DDL'
+		modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/Coupon/modifyObject'), 'xpath', 'equals', ((('//*[@id=\'' +
+			id) + '-') + i) + '\']', true)
 
-def checkddlTenant(Connection conndev) {
-	
-	'klik pada dropdownlist tenant'
-	WebUI.click(findTestObject('Object Repository/Coupon/Page_Add Coupon/span_tenant'))
-	
-	'ambil list tenant'
-	def elementTenant = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-coupon/div[2]/div/div/div/div/form/div[10]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div'))
-	
-	'ambil hitungan Tenant yang ada'
-	int countWeb = (elementTenant.size()) - 1
-	
-	'flag Tenant sesuai'
-	int isTenantFound = 0
-	
-	'ambil nama Tenant dari DB'
-	ArrayList namaTenantDB = CustomKeywords.'coupon.CouponVerif.getTenantList'(conndev)
-	
-	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList namaTenantUI = []
-	
-	'hitung banyak data didalam array DB'
-	int countDB = namaTenantDB.size()
-	
-	if (countWeb != countDB) {
-		
-		GlobalVariable.FlagFailed = 1
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Coupon', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonDDL)
+		'add ddl ke array'
+		list.add(WebUI.getText(modifyObjectDDL))
 	}
 	
-	'klik pada dropdownlist tenant'
-	WebUI.click(findTestObject('Object Repository/Coupon/Page_Add Coupon/span_tenant'))
+	'verify ddl ui = db'
+	checkVerifyEqualorMatch(listDB.containsAll(list), reason)
+
+	'verify jumlah ddl ui = db'
+	checkVerifyEqualorMatch(WebUI.verifyEqual(list.size(), listDB.size(), FailureHandling.CONTINUE_ON_FAILURE), ' Jumlah ' + reason)
+	
+	'Input enter untuk tutup ddl'
+	WebUI.sendKeys(objectDDL, Keys.chord(Keys.ENTER))
 }
 
 def checkVerifyPaging(Boolean isMatch) {

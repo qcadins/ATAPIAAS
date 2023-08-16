@@ -47,9 +47,6 @@ String noTrxfromUI, noTrxfromDB, noTrxOtherTenant
 'call setting balance type function'
 settingBalanceType()
 
-'buka chrome\r\n'
-WebUI.openBrowser('')
-
 'arahkan ke web SIT APIAAS'
 WebUI.navigateToUrl(findTestData(ExcelPath).getValue(1, 2))
 
@@ -61,14 +58,13 @@ WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Pla
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 	findTestData(ExcelPath).getValue(2, 28))
 
-'ceklis pada reCaptcha'
-WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
+'tunggu tombol tidak di disable lagi'
+if (WebUI.waitForElementNotHasAttribute(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'),
+	'disabled', 100, FailureHandling.OPTIONAL)) {
 
-'pada delay, lakukan captcha secara manual'
-WebUI.delay(10)
-
-'klik pada button login'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+	'klik pada button login'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+}
 
 'jika ada pilihan role'
 if (WebUI.verifyElementPresent(
@@ -86,7 +82,7 @@ WebUI.click(findTestObject('Object Repository/Top Up/Page_Balance/spanMenu'))
 WebUI.click(findTestObject('Object Repository/Top Up/Page_Balance/span_Isi Saldo'))
 
 'cek apakah tombol menu dalam jangkauan web'
-if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementPresent(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 	
 	'klik pada tombol silang menu'
 	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
@@ -98,14 +94,23 @@ int totalKatalon, modifyint, totalafter, ppnafter, grandTotalafter, cashbacknomi
 'deklarasi array untuk simpan data subtotal'
 ArrayList allsubtotal = [], tempDataPrice = [], dataDBInstruction = [], listServices = [], listJumlahisiUlang = []
 
+'ambil nama TipeSaldo dari DB'
+ArrayList<String> namaTipeSaldoDB = CustomKeywords.'topup.TopupVerif.getDDLTipeSaldo'(conndev)
+
+'ambil nama TrfMethod dari DB'
+ArrayList<String> namaTrfMethodDB = CustomKeywords.'topup.TopupVerif.getDDLMetodeTrf'(conndev)
+
+'ambil nama BankDest dari DB'
+ArrayList<String> namaBankDestDB = CustomKeywords.'topup.TopupVerif.getDDLBank'(conndev)
+
 'cek ddl tipesaldo apakah sesuai dengan db'
-checkddlTipeSaldo(conndev)
-
-'cek ddl metode transfer sesuai dengan db'
-checkddlMetodeTransfer(conndev)
-
-'cek ddl bank sesuai dengan db'
-checkddlBankDestination(conndev)
+checkDDL(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputtipesaldo'), namaTipeSaldoDB, 'DDL Tipe Saldo')
+		
+'cek ddl metode transfer apakah sesuai dengan db'
+checkDDL(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputMetodeBayar'), namaTrfMethodDB, 'DDL Metode transfer')
+		
+'cek ddl bank apakah sesuai dengan db'
+checkDDL(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputBank'), namaBankDestDB, 'DDL Bank Destination')
 
 'input data tipe saldo yang diinginkan'
 WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputtipesaldo'),
@@ -157,8 +162,11 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/Top Up/NotifCat
 	}
 }
 
+'ambil nama ActiveSaldo dari DB'
+ArrayList<String> namaActiveSaldoDB = CustomKeywords.'topup.TopupVerif.getDDLSaldoactive'(conndevUAT, findTestData(ExcelPath).getValue(2, 27))
+
 'cek ddl activesaldo sesuai dengan DB'
-checkddlActiveSaldo(conndevUAT, findTestData(ExcelPath).getValue(2, 27))
+checkDDL(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputJenisSaldo'), namaActiveSaldoDB, 'DDL Layanan')
 
 'klik tombol cancel'
 WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/button_Cancel'))
@@ -295,8 +303,6 @@ if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Top Up/
 	grandTotalafter = Integer.parseInt(WebUI.getAttribute(
 		findTestObject('Object Repository/Top Up/Page_Topup Balance/grandTotal'),
 			'value', FailureHandling.CONTINUE_ON_FAILURE).replaceAll('[^\\d]', ''))
-
-	//kondisi if disini
 	
 	'klik pada tombol next'
 	WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/button_Next'))
@@ -339,14 +345,6 @@ if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Top Up/
 	
 	'ambil data instruction dari DB'
 	dataDBInstruction =  CustomKeywords.'topup.TopupVerif.getInstructionDetail'(conndev, noTrxKatalon)
-	
-	'cek apakah kondisi cek storeDB aktif'
-	if (GlobalVariable.KondisiCekDB == 'Yes') {
-		
-		'panggil fungsi storeDB'
-		WebUI.callTestCase(findTestCase('Test Cases/Top Up/TopupStoreDB'), [('Path') : ExcelPath,  ('NoTrx') : noTrxKatalon],
-			 FailureHandling.CONTINUE_ON_FAILURE)
-	}
 
 	'cek apakah total transaksi sesuai'
 	checkVerifyEqualorMatch(WebUI.verifyEqual(grandTotalafter,
@@ -426,266 +424,38 @@ def settingBalanceType() {
 	WebUI.click(findTestObject('Tenant/ChargeType/button_Simpan'))
 }
 
-def checkddlTipeSaldo(Connection conn) {
+def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
+	'declare array untuk menampung ddl'
+	ArrayList<String> list = []
+
+	'click untuk memunculkan ddl'
+	WebUI.click(objectDDL)
 	
-	'klik pada ddl tipe saldo'
-	WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/span_tipesaldo'))
+	'get id ddl'
+	id = WebUI.getAttribute(findTestObject('Object Repository/Top Up/ddlClass'), 'id', FailureHandling.CONTINUE_ON_FAILURE)
 	
-	'ambil list tipe saldo'
-	def elementtipesaldo = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-eendigo/div[2]/div/div/div/div/div/form/div[1]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div'))
+	'get row'
+	variable = DriverFactory.webDriver.findElements(By.cssSelector(('#' + id) + '> div > div:nth-child(2) div'))
 	
-	'ambil hitungan TipeSaldo yang ada'
-	int countWeb = (elementtipesaldo.size()) - 1
-	
-	'flag TipeSaldo sesuai'
-	int isTipeSaldoFound = 0
-	
-	'ambil nama TipeSaldo dari DB'
-	ArrayList<String> namaTipeSaldoDB = CustomKeywords.'topup.TopupVerif.getDDLTipeSaldo'(conn)
-	
-	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList<String> namaTipeSaldoUI = []
-	
-	'hitung banyak data didalam array DB'
-	int countDB = namaTipeSaldoDB.size()
-	
-	'jika hitungan di UI dan DB sesuai'
-	if(countWeb == countDB){
-		
-		for (int i=1; i<=countWeb; i++) {
-			
-			'ambil object dari ddl'
-			def modifyNamaTipeSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/modifyObject'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-eendigo/div[2]/div/div/div/div/div/form/div[1]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
-			
-			'tambahkan nama tipe saldo ke array'
-			String data = WebUI.getText(modifyNamaTipeSaldo)
-			namaTipeSaldoUI.add(data)
-		}
-		
-		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaTipeSaldoDB) {
-			
-			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaTipeSaldoUI.contains(tipe)) {
-				
-				'ada data yang tidak match'
-				isTipeSaldoFound = 0;
-				'berhentikan loop'
-				break;
-			}
-			'kondisi ini bisa ditemui jika data match'
-			isTipeSaldoFound = 1
-		}
-			
-	}
-	else if (isTipeSaldoFound == 0 || countWeb != countDB) {
-		
-		GlobalVariable.FlagFailed = 1
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonDDL)
+	'looping untuk get ddl kedalam array'
+	for (i = 1; i < variable.size(); i++) {
+		'modify object DDL'
+		modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/modifyObject'), 'xpath', 'equals', ((('//*[@id=\'' +
+			id) + '-') + i) + '\']', true)
+
+		'add ddl ke array'
+		list.add(WebUI.getText(modifyObjectDDL))
 	}
 	
-	'klik pada ddl tipe saldo'
-	WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/span_tipesaldo'))
+	'verify ddl ui = db'
+	checkVerifyEqualorMatch(listDB.containsAll(list), reason)
+
+	'verify jumlah ddl ui = db'
+	checkVerifyEqualorMatch(WebUI.verifyEqual(list.size(), listDB.size(), FailureHandling.CONTINUE_ON_FAILURE), ' Jumlah ' + reason)
+	
+	'Input enter untuk tutup ddl'
+	WebUI.sendKeys(objectDDL, Keys.chord(Keys.ENTER))
 }
-
-def checkddlMetodeTransfer(Connection conn) {
-	
-	'klik pada ddl metodetransfer'
-	WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/span_paymentmethod'))
-	
-	'ambil list metode transfer'
-	def elementTrfMethod = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-eendigo/div[2]/div/div/div/div/div/form/div[2]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div'))
-	
-	'ambil hitungan TrfMethod yang ada'
-	int countWeb = (elementTrfMethod.size()) - 1
-	
-	'flag TrfMethod sesuai'
-	int isTrfMethodFound = 0
-	
-	'ambil nama TrfMethod dari DB'
-	ArrayList<String> namaTrfMethodDB = CustomKeywords.'topup.TopupVerif.getDDLMetodeTrf'(conn)
-	
-	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList<String> namaTrfMethodUI = []
-	
-	'hitung banyak data didalam array DB'
-	int countDB = namaTrfMethodDB.size()
-	
-	'jika hitungan di UI dan DB sesuai'
-	if (countWeb == countDB) {
-		
-		for (int i=1; i<=countWeb; i++) {
-			
-			'ambil object dari ddl'
-			def modifyNamaTrfMethod = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/modifyObject'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-eendigo/div[2]/div/div/div/div/div/form/div[2]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
-			
-			'tambahkan nama tipe saldo ke array'
-			String data = WebUI.getText(modifyNamaTrfMethod)
-			namaTrfMethodUI.add(data)
-		}
-		
-		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaTrfMethodDB) {
-			
-			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaTrfMethodUI.contains(tipe)) {
-				
-				'ada data yang tidak match'
-				isTrfMethodFound = 0;
-				'berhentikan loop'
-				break;
-			}
-			'kondisi ini bisa ditemui jika data match'
-			isTrfMethodFound = 1
-		}
-			
-	}
-	else if (isTrfMethodFound == 0 || countWeb != countDB) {
-		
-		GlobalVariable.FlagFailed = 1
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonDDL)
-	}
-	
-	'klik pada ddl metodetransfer'
-	WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/span_paymentmethod'))
-}
-
-def checkddlBankDestination(Connection conn) {
-	
-	'klik pada ddl bank destination'
-	WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/span_bankdestination'))
-	
-	'ambil list bank destination'
-	def elementBankDest = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-eendigo/div[2]/div/div/div/div/div/form/div[3]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div'))
-	
-	'ambil hitungan BankDest yang ada'
-	int countWeb = (elementBankDest.size()) - 1
-	
-	'flag BankDest sesuai'
-	int isBankDestFound = 0
-	
-	'ambil nama BankDest dari DB'
-	ArrayList<String> namaBankDestDB = CustomKeywords.'topup.TopupVerif.getDDLBank'(conn)
-	
-	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList<String> namaBankDestUI = []
-	
-	'hitung banyak data didalam array DB'
-	int countDB = namaBankDestDB.size()
-	
-	'jika hitungan di UI dan DB sesuai'
-	if (countWeb == countDB) {
-		
-		for (int i=1; i<=countWeb; i++) {
-			
-			'ambil object dari ddl'
-			def modifyNamaBankDest = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/modifyObject'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-topup-eendigo/div[2]/div/div/div/div/div/form/div[3]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
-			
-			'tambahkan nama tipe saldo ke array'
-			String data = WebUI.getText(modifyNamaBankDest)
-			namaBankDestUI.add(data)
-		}
-		
-		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaBankDestDB) {
-			
-			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaBankDestUI.contains(tipe)) {
-				
-				'ada data yang tidak match'
-				isBankDestFound = 0;
-				'berhentikan loop'
-				break;
-			}
-			'kondisi ini bisa ditemui jika data match'
-			isBankDestFound = 1
-		}
-			
-	}
-	else if (isBankDestFound == 0 || countWeb != countDB) {
-		
-		GlobalVariable.FlagFailed = 1
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonDDL)
-	}
-	
-	'klik pada ddl bank destination'
-	WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/span_bankdestination'))
-}
-
-def checkddlActiveSaldo(Connection connUAT, String email) {
-	
-	'klik pada ddl saldo pada layanan'
-	WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/span_saldodipilih'))
-	
-	'ambil list saldo yang aktif'
-	def elementActiveSaldo = DriverFactory.getWebDriver().findElements(By.xpath('/html/body/ngb-modal-window/div/div/app-modal-add-service/form/div[2]/div[1]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div'))
-	
-	'ambil hitungan ActiveSaldo yang ada'
-	int countWeb = (elementActiveSaldo.size()) - 1
-	
-	'flag ActiveSaldo sesuai'
-	int isActiveSaldoFound = 0
-	
-	'ambil nama ActiveSaldo dari DB'
-	ArrayList<String> namaActiveSaldoDB = CustomKeywords.'topup.TopupVerif.getDDLSaldoactive'(connUAT, email)
-	
-	'nama-nama tipe saldo sedang aktif dari UI'
-	ArrayList<String> namaActiveSaldoUI = []
-	
-	'hitung banyak data didalam array DB'
-	int countDB = namaActiveSaldoDB.size()
-
-	'jika hitungan di UI dan DB sesuai'
-	if (countWeb == countDB) {
-		
-		for (int i = 1; i<countWeb; i++) {
-			
-			'ambil object dari ddl'
-			def modifyNamaActiveSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/modifyObject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-modal-add-service/form/div[2]/div[1]/div/app-select/div/ng-select/ng-dropdown-panel/div/div[2]/div["+(i+1)+"]/span", true)
-			
-			'tambahkan nama tipe saldo ke array'
-			String data = WebUI.getText(modifyNamaActiveSaldo)
-			namaActiveSaldoUI.add(data)
-		}
-		
-		'cek setiap data di UI dengan data di DB sebagai pembanding'
-		for (String tipe : namaActiveSaldoDB) {
-			
-			'jika ada data yang tidak terdapat pada arraylist yang lain'
-			if (!namaActiveSaldoUI.contains(tipe)) {
-				
-				'ada data yang tidak match'
-				isActiveSaldoFound = 0;
-				'berhentikan loop'
-				break;
-			}
-			'kondisi ini bisa ditemui jika data match'
-			isActiveSaldoFound = 1
-		}
-			
-	}
-	else if (isActiveSaldoFound == 0 || countWeb != countDB) {
-		
-		GlobalVariable.FlagFailed = 1
-		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-		GlobalVariable.FailedReasonDDL)
-	}
-	
-	'klik pada ddl saldo pada layanan'
-	WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/span_saldodipilih'))
-}
-
 
 'ambil no. transaksi pada tabel'
 def getLastTrx(String noTrxKatalon, Connection conn) {

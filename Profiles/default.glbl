@@ -251,6 +251,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>0</initValue>
+      <name>SettingBrowser</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>findTestData('Login/Login').getValue(5, 2)</initValue>
       <name>SettingEnvi</name>
    </GlobalVariableEntity>

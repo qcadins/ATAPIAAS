@@ -36,8 +36,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
-	}
-	else if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted') ||
+	} else if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted') ||
 		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Warning')) {
 		
 		if (flagLoginUsed == 0) {
@@ -94,13 +93,13 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		ArrayList namametodeBayarDB = CustomKeywords.'transactionHistory.TransactionVerif.getDDLMetodeTrf'(conndev)
 
 		'panggil fungsi check ddl di DB dan UI'
-		checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_TipeIsiUlang'), namaTipeIsiUlangDB, 'DDL Tipe isi Ulang')
+		checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTipeIsiUlang'), namaTipeIsiUlangDB, 'DDL Tipe isi Ulang')
 		
 		'panggil fungsi check ddl di DB dan UI'
-		checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_Status'), namaStatusExcel, 'DDL Status')
+		checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'), namaStatusExcel, 'DDL Status')
 
 		'panggil fungsi check ddl di DB dan UI'
-		checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_Metode'), namametodeBayarDB, 'DDL Metode bayar')
+		checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputMetodeBayar'), namametodeBayarDB, 'DDL Metode bayar')
 		
 		'ambil role yang digunakan oleh user'
 		String RoleUser = CustomKeywords.'transactionHistory.TransactionVerif.getRoleofUser'(conndev,
@@ -233,8 +232,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 							 FailureHandling.CONTINUE_ON_FAILURE)
 					}
 					
-				}
-				else if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/ErrorTopRight'),
+				} else if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/ErrorTopRight'),
 					GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 					
 					'ambil error dan get text dari error tersebut'
@@ -247,14 +245,13 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/buttonBatal_upload'))
 				}
 			}
-		}
-		else if (RoleUser.equalsIgnoreCase('Admin Finance Eendigo')) {
+		} else if (RoleUser.equalsIgnoreCase('Admin Finance Eendigo')) {
 			
 			'ambil nama Tenant dari DB'
 			ArrayList namaTenantDB = CustomKeywords.'transactionHistory.TransactionVerif.getTenantList'(conndev)
 			
 			'panggil fungsi check ddl di DB dan UI'
-			checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_Tenant'), namaTenantDB, 'DDL Tenant')
+			checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'), namaTenantDB, 'DDL Tenant')
 			
 			searchadminEendigoFinance()
 			
@@ -340,14 +337,13 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				
 				confRejectPayment('Approve', conndev, trxNum)
 			}
-		}
-		else if (RoleUser.equalsIgnoreCase('Admin Eendigo')) {
+		} else if (RoleUser.equalsIgnoreCase('Admin Eendigo')) {
 			
 			'ambil nama Tenant dari DB'
 			ArrayList namaTenantDB = CustomKeywords.'transactionHistory.TransactionVerif.getTenantList'(conndev)
 			
 			'panggil fungsi check ddl di DB dan UI'
-			checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/span_Tenant'), namaTenantDB, 'DDL Tenant')
+			checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'), namaTenantDB, 'DDL Tenant')
 			
 			searchadminEendigoFinance()
 			
