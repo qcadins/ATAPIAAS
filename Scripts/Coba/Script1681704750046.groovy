@@ -90,11 +90,11 @@ import internal.GlobalVariable
 
 /*Coba untuk extension otomatis Recaptcha*/
 
-System.setProperty("webdriver.chrome.driver", "Extras/chromedriver.exe")
+System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe")
 
 ChromeOptions options = new ChromeOptions()
 
-options.addExtensions(new File("Extras/nocaptchaai_chrome_1.7.6.crx"))
+options.addExtensions(new File("Drivers/nocaptchaai_chrome_1.7.6.crx"))
 
 DesiredCapabilities caps = new DesiredCapabilities()
 
@@ -105,6 +105,26 @@ WebDriver driver = new ChromeDriver(caps)
 DriverFactory.changeWebDriver(driver)
 
 WebUI.navigateToUrl('https://config.nocaptchaai.com/?apikey=kvnedgar9286-35bde35f-e305-699a-0af2-d6fb983c8c4a')
+
+'buka website APIAAS SIT, data diambil dari TestData Login'
+WebUI.navigateToUrl(findTestData(ExcelPath).getValue(1, 2))
+
+'input email'
+WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemail'),
+	'JONAUDRIS23@MAILSAC.COM')
+
+'input password'
+WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputpassword'),
+	'P@ssw0rd123')
+
+'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
+WebUI.delay(3)
+
+WebUI.closeBrowser()
+
+driver = new ChromeDriver(caps)
+
+DriverFactory.changeWebDriver(driver)
 
 'buka website APIAAS SIT, data diambil dari TestData Login'
 WebUI.navigateToUrl(findTestData(ExcelPath).getValue(1, 2))

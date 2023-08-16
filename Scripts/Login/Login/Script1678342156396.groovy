@@ -18,32 +18,31 @@ import com.kms.katalon.core.webui.driver.DriverFactory
 import org.openqa.selenium.WebDriver
 
 WebDriver driver
+	
+System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe")
 
-if (GlobalVariable.SettingBrowser == 0) {
+ChromeOptions options = new ChromeOptions()
+
+options.addExtensions(new File("Drivers/nocaptchaai_chrome_1.7.6.crx"))
+
+DesiredCapabilities caps = new DesiredCapabilities()
+
+caps.setCapability(ChromeOptions.CAPABILITY, options)
+
+def chromePrefs = [:] as HashMap<String, ArrayList>
+
+chromePrefs.put('download.default_directory', System.getProperty('user.dir') + '\\Download')
+
+RunConfiguration.setWebDriverPreferencesProperty('prefs', chromePrefs)
+
+driver = new ChromeDriver(caps)
+
+DriverFactory.changeWebDriver(driver)
+
+if (TC != 'Regist') {
 	
-	System.setProperty("webdriver.chrome.driver", "Extras/chromedriver.exe")
-	
-	ChromeOptions options = new ChromeOptions()
-	
-	options.addExtensions(new File("Extras/nocaptchaai_chrome_1.7.6.crx"))
-	
-	DesiredCapabilities caps = new DesiredCapabilities()
-	
-	caps.setCapability(ChromeOptions.CAPABILITY, options)
-	
-	def chromePrefs = [:] as HashMap<String, ArrayList>
-	
-	chromePrefs.put('download.default_directory', System.getProperty('user.dir') + '\\Download')
-	
-	RunConfiguration.setWebDriverPreferencesProperty('prefs', chromePrefs)
-	
-	driver = new ChromeDriver(caps)
-	
-	DriverFactory.changeWebDriver(driver)
-	
+	'aktifkan nocaptcha by link'
 	WebUI.navigateToUrl('https://config.nocaptchaai.com/?apikey=kvnedgar9286-35bde35f-e305-699a-0af2-d6fb983c8c4a')
-	
-	GlobalVariable.SettingBrowser = 1
 }
 
 'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
@@ -390,7 +389,7 @@ if (TC == 'EditProf') {
 		findTestData(Path).getValue(4, 34))
 }
 
-if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Register') {
+if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Regist') {
 	
 	'tunggu tombol tidak di disable lagi'
 	if (WebUI.waitForElementNotHasAttribute(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'),

@@ -156,10 +156,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				'input otp dari excel'
 				WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 15))
 				
-				if(resendotp == 'Yes')
-				{
-						for(int i=0; i < countresend; i++)
-						{
+				if (resendotp == 'Yes') {
+					
+						for (int i=0; i < countresend; i++) {
 							'tunggu button resend otp'
 							WebUI.delay(116)
 							
@@ -207,14 +206,17 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 								
 					'klik tombol x pada verifikasi'
 					WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/span_'))
-		
 			}
-		}
 			
-		WebUI.delay(3)
+			'jalankan verifikasi atas proses registrasi yang berhasil'
+			verifyregistration(conn, findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9))
+		}
 		
-		'verifikasi data hasil registrasi dan yang ada pada db'
-		verifyregistration(conn, email)
+		'aktifkan nocaptcha by link'
+		WebUI.navigateToUrl('https://config.nocaptchaai.com/?apikey=kvnedgar9286-35bde35f-e305-699a-0af2-d6fb983c8c4a')
+		
+		'buka website APIAAS SIT, data diambil dari TestData Login'
+		WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 2))
 		
 		'klik button submenu Masuk'
 		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Masuk'))
@@ -226,9 +228,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'input password yang sudah diregist ke field'
 		WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_passRegister'),
 				findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 11))
-		
-		'klik pada tombol captcha'
-		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
 		
 		'selama delay bisa fill captcha secara manual'
 		WebUI.delay(10)
