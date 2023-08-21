@@ -6,15 +6,19 @@
    <elementGuidId>eac81229-b4e2-4c8b-9a61-90449c9d5d51</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>XPATH</key>
+         <value>//a[@id='dropdownBasic2']/div[2]/i</value>
+      </entry>
+      <entry>
          <key>CSS</key>
          <value>i.ft-chevron-down</value>
       </entry>
       <entry>
-         <key>XPATH</key>
-         <value>//a[@id='dropdownBasic2']/div[2]/i</value>
+         <key>BASIC</key>
+         <value>//*[@class = 'ft-chevron-down']</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,23 +26,23 @@
       <name>tag</name>
       <type>Main</type>
       <value>i</value>
-      <webElementGuid>42db1cd2-7287-47bd-a77e-9e795d15e117</webElementGuid>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>class</name>
-      <type>Main</type>
-      <value>ft-chevron-down</value>
-      <webElementGuid>a6b4e47e-e446-4aeb-873b-865de3da91d1</webElementGuid>
+      <webElementGuid>ec7f3774-3960-4f20-8d26-9c70c1d38326</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ft-chevron-down</value>
+      <webElementGuid>a84f3b66-b754-456a-ae4e-546b32c804ee</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;dropdownBasic2&quot;)/div[2]/i[@class=&quot;ft-chevron-down&quot;]</value>
-      <webElementGuid>37c50be1-0a78-4a9e-9005-a7af31d704a8</webElementGuid>
+      <webElementGuid>3584a387-9871-4e50-a12a-f46e28df37f6</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -46,7 +50,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//a[@id='dropdownBasic2']/div[2]/i</value>
-      <webElementGuid>42399698-b617-4e91-9b98-103fd2f73300</webElementGuid>
+      <webElementGuid>fa844623-08c4-46ee-84da-a677710394f9</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -54,6 +58,6 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[2]/i</value>
-      <webElementGuid>57a64e9f-9588-4699-9b1d-14968fdaa175</webElementGuid>
+      <webElementGuid>d7079626-63ac-44c5-8563-ea25a98b3f29</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

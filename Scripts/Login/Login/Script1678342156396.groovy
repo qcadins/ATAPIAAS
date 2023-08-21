@@ -153,6 +153,8 @@ if (TC == 'EditProf') {
 	'klik pada tombol buat akun'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
 	
+	WebUI.delay(1)
+	
 	'ambil teks dari field input email'
 	if (WebUI.getAttribute(
 		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemailRegister'), 'value', FailureHandling.OPTIONAL) 

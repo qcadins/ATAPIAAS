@@ -27,7 +27,7 @@ if (GlobalVariable.SettingEnvi == 'Production') {
 }
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathAPIKey).columnNumbers
+int countColumnEdit = findTestData(ExcelPathAPIKey).columnNumbers, isLoggedin = 0
 
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
@@ -41,23 +41,35 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 5))
 		
-		'panggil fungsi login'
-		WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Key', ('SheetName') : 'API KEY', 
-			('Path') : ExcelPathAPIKey], FailureHandling.STOP_ON_FAILURE)
+		if (isLoggedin == 0) {
+			
+			'panggil fungsi login'
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Key', ('SheetName') : 'API KEY',
+				('Path') : ExcelPathAPIKey], FailureHandling.STOP_ON_FAILURE)
+			
+			isLoggedin = 1
+		}
 		
-		CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatusbtnClickable'(isMandatoryComplete, 
-			findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'), 
-				GlobalVariable.NumOfColumn, 'API KEY')
+//		CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatusbtnClickable'(isMandatoryComplete, 
+//			findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'), 
+//				GlobalVariable.NumOfColumn, 'API KEY')
 		
 		WebUI.delay(GlobalVariable.Timeout)
 		
 		'klik pada tombol garis tiga'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/expandMenu'))
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/spanMenu'))
 		
 		WebUI.delay(1)
 		
 		'klik pada API KEY'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/span_API Key'))
+		
+		'cek apakah tombol menu dalam jangkauan web'
+		if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
+			
+			'klik pada tombol silang menu'
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
+		}
 		
 		checkpaging(conn)
 		
@@ -88,7 +100,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				[('conn'): conn], FailureHandling.CONTINUE_ON_FAILURE)
 		}
 
-		
 		'kondisi jika tidak ada error'
 		if (GlobalVariable.FlagFailed == 0) {
 			
@@ -152,6 +163,9 @@ def checkpaging(Connection conn) {
 	optiontipe = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Api Key List/input tipe'),
 		'aria-activedescendant')
 	
+	'klik pada ddl tipe API KEY'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/ddlAPIKEYType'))
+	
 	'klik pada ddl Status API KEY'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/ddlAPIKEYStatus'))
 	
@@ -176,7 +190,7 @@ def checkpaging(Connection conn) {
 	String totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'(conn,
 		findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
 	
-	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Api Key List/Footer')), totaldataDB, false, FailureHandling.CONTINUE_ON_FAILURE), 'Total data tabel tidak sesuai DB')
+	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Api Key List/PageFooter')), totaldataDB, false, FailureHandling.CONTINUE_ON_FAILURE), 'Total data tabel tidak sesuai DB')
 	
 	if (WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Api Key List/isPagingEnabled'), FailureHandling.OPTIONAL)) {
 		

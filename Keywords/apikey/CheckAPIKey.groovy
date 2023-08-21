@@ -113,7 +113,7 @@ public class CheckAPIKey {
 		}
 		data
 	}
-	
+
 	@Keyword
 	getTenantCodeName(Connection conn, String email) {
 		String data

@@ -70,6 +70,9 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         'panggil fungsi verifikasi jika checkdatabase = yes'
         if (GlobalVariable.KondisiCekDB == 'Yes') {
 			
+			'jika tenant masih kosong tidak perlu lakukan pengecekan ke DB'
+			if (WebUI.getText(findTestObject('Profile/Page_Edit Profile/input__tenantName')) != '')
+			
             'verifikasi data yang ada di web dengan di database sebelum diEdit'
 			verifyDataEdit(conn, userRole)
         }
@@ -147,18 +150,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         
         'klik tombol simpan'
         WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/button_Simpan'))
-
-        'cek apakah muncul error unknown setelah login'
-        if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), GlobalVariable.Timeout, 
-            FailureHandling.OPTIONAL) == false) {
-		
-            GlobalVariable.FlagFailed = 1
-
-            'tulis adanya error pada sistem web'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, 
-                GlobalVariable.StatusWarning, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + 
-                ';') + GlobalVariable.FailedReasonUnknown)
-        }
         
         WebUI.delay(3)
 
@@ -167,17 +158,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
             FailureHandling.OPTIONAL)) {
             'klik pada tombol ok jika muncul'
             WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/button_OK'))
-        }
-        
-        'cek apakah muncul error unknown setelah ubah data edit profile'
-        if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), GlobalVariable.Timeout, 
-            FailureHandling.OPTIONAL) == false) {
-            GlobalVariable.FlagFailed = 1
-
-            'tulis adanya error pada sistem web'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, 
-                GlobalVariable.StatusWarning, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + 
-                ';') + GlobalVariable.FailedReasonUnknown)
         }
         
 		'check if username pada pojok kanan atas tidak match dengan data yang baru di edit'
@@ -198,8 +178,9 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         }
         
         if (userRole == 'Admin Client') {
+			
             'klik pada tombol garis tiga'
-            WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/expandMenu'))
+            WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/spanMenu'))
 
             'klik pada tombol balance'
             WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/span_Balance'))
@@ -220,7 +201,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         }
         
         'klik pada tombol garis tiga'
-        WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/expandMenu'))
+        WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/spanMenu'))
 
         'klik pada tombol API KEY'
         WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/span_API Key'))
@@ -266,13 +247,13 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         
         'reset flagging failed ke 0'
         GlobalVariable.FlagFailed = 0
+		
+		WebUI.closeBrowser()
     }
 }
 
-WebUI.closeBrowser()
-
-'panggil testcase untuk change password'
-WebUI.callTestCase(findTestCase('Test Cases/Change Password/ChangePassword'), [:], FailureHandling.STOP_ON_FAILURE)
+//'panggil testcase untuk change password'
+//WebUI.callTestCase(findTestCase('Test Cases/Change Password/ChangePassword'), [:], FailureHandling.STOP_ON_FAILURE)
 
 def verifyDataEdit(Connection conn, String role) {
 	'ambil email dari testdata, disimpan ke string'

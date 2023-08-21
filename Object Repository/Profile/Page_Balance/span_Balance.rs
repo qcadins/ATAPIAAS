@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>//*[@class = 'ng-tns-c133-4 icon-wallet']</value>
+         <value>//*[@ng-reflect-path = '/balance']</value>
       </entry>
       <entry>
          <key>CSS</key>
@@ -26,15 +26,15 @@
       <name>tag</name>
       <type>Main</type>
       <value>span</value>
-      <webElementGuid>2387b29d-ec69-4f7d-ad0e-7872379bccfe</webElementGuid>
+      <webElementGuid>7517b0ce-9888-466b-8148-22cffe24df27</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
       <value>ng-tns-c133-4 icon-wallet</value>
-      <webElementGuid>d3ffb724-8a7d-4aab-86f7-61dc9b03dfe7</webElementGuid>
+      <webElementGuid>901f25fc-4edd-4703-8288-49112fc8bb09</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -42,7 +42,7 @@
       <name>text</name>
       <type>Main</type>
       <value>Balance</value>
-      <webElementGuid>470b3604-d9e8-4dc7-ac5c-c659e168f191</webElementGuid>
+      <webElementGuid>df777629-a743-40da-adda-0b780a745968</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -50,7 +50,15 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-expanded vertical-menu menu-open&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;app-sidebar main-menu menu-fixed menu-native-scroll expanded ng-star-inserted&quot;]/app-sidebar[@class=&quot;ng-tns-c133-5&quot;]/div[@class=&quot;sidebar-content main-menu-content ng-tns-c133-5 ps&quot;]/div[@class=&quot;nav-container ng-tns-c133-5&quot;]/ul[@class=&quot;navigation ng-tns-c133-5&quot;]/li[@class=&quot;ng-tns-c133-5 ng-star-inserted active&quot;]/a[@class=&quot;ng-tns-c133-5 ng-star-inserted&quot;]/span[@class=&quot;menu-title ng-tns-c133-5&quot;]</value>
-      <webElementGuid>dc6cddf5-b4de-4c13-882f-ddf24cb23de6</webElementGuid>
+      <webElementGuid>74b7d920-5f82-4034-a764-53fad8339564</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ng-reflect-path</name>
+      <type>Main</type>
+      <value>/balance</value>
+      <webElementGuid>f1e60b03-f348-4c51-9365-22ab6dd74a6e</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -58,7 +66,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Logout'])[1]/following::span[1]</value>
-      <webElementGuid>ae79f8e3-a368-4440-bbeb-8d24f9c3397b</webElementGuid>
+      <webElementGuid>f668a445-0ba2-44b7-b3a6-76c53e9f4279</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -66,7 +74,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='List Service'])[1]/following::span[2]</value>
-      <webElementGuid>d5bfd645-5825-4d7b-9223-9a0037a6fc4d</webElementGuid>
+      <webElementGuid>7213939b-5fea-413d-8387-9667b2058bc9</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -74,7 +82,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='API Key'])[1]/preceding::span[1]</value>
-      <webElementGuid>ba6a31a3-f4f4-423b-b26d-a65829f74d50</webElementGuid>
+      <webElementGuid>eac3a0cf-3a7f-4f22-be05-03099b6e73d5</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -82,7 +90,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='API Documentation'])[1]/preceding::span[2]</value>
-      <webElementGuid>fcc6a3e0-eb48-44c7-985d-c6e311cd4912</webElementGuid>
+      <webElementGuid>6d8d759c-1d54-41df-95cd-1f09ab27f31b</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -90,7 +98,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//a/span</value>
-      <webElementGuid>df52e31b-5e7c-42e2-af11-075c6d285966</webElementGuid>
+      <webElementGuid>53d8c283-768d-42fc-a693-19abec4e146a</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -98,6 +106,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//span[(text() = 'Balance' or . = 'Balance')]</value>
-      <webElementGuid>c4090768-c804-4f02-9b6a-e814b7222580</webElementGuid>
+      <webElementGuid>35994f58-f977-416c-b14a-b48e63638795</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

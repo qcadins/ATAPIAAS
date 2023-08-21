@@ -10,6 +10,13 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.By
+import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.chrome.ChromeOptions
+import org.openqa.selenium.remote.DesiredCapabilities
+import org.openqa.selenium.WebDriver
+import org.openqa.selenium.JavascriptExecutor
+import org.openqa.selenium.WebElement
+import com.kms.katalon.core.configuration.RunConfiguration
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
@@ -17,8 +24,30 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPa
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathChangePass).columnNumbers
 
-'buka chrome'
-WebUI.openBrowser('')
+WebDriver driver
+
+System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe")
+
+ChromeOptions options = new ChromeOptions()
+
+options.addExtensions(new File("Drivers/nocaptchaai_chrome_1.7.6.crx"))
+
+DesiredCapabilities caps = new DesiredCapabilities()
+
+caps.setCapability(ChromeOptions.CAPABILITY, options)
+
+def chromePrefs = [:] as HashMap<String, ArrayList>
+
+chromePrefs.put('download.default_directory', System.getProperty('user.dir') + '\\Download')
+
+RunConfiguration.setWebDriverPreferencesProperty('prefs', chromePrefs)
+
+driver = new ChromeDriver(caps)
+
+DriverFactory.changeWebDriver(driver)
+
+'aktifkan nocaptcha by link'
+WebUI.navigateToUrl('https://config.nocaptchaai.com/?apikey=kvnedgar9286-35bde35f-e305-699a-0af2-d6fb983c8c4a')
 
 'buka website APIAAS SIT, data diambil dari TestData Login'
 WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 2))
@@ -183,6 +212,8 @@ WebUI.closeBrowser()
 
 def logoutFunction() {
 	
+	WebUI.delay(1)
+	
 	'klik pada tombol untuk span profile'
 	WebUI.click(findTestObject('Object Repository/Change Password/Page_Balance/span_profile'))
 	
@@ -206,14 +237,13 @@ def loginFunction(int row) {
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, row))
 	
-	'ceklis pada reCaptcha'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
+	'tunggu tombol tidak di disable lagi'
+	if (WebUI.waitForElementNotHasAttribute(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'),
+		'disabled', 100, FailureHandling.OPTIONAL)) {
 	
-	'pada delay, lakukan captcha secara manual'
-	WebUI.delay(10)
-	
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+		'klik pada button login'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+	}
 	
 	'jika ada pilihan role'
 	if (WebUI.verifyElementPresent(

@@ -15,7 +15,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>id(&quot;sidebarClose&quot;)/i[@class=&quot;ft-x ng-tns-c133-2&quot;]</value>
+         <value>//*[@id = 'sidebarClose']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -26,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>i</value>
-      <webElementGuid>186c6c05-2445-40b7-8562-73e2dd3230c5</webElementGuid>
+      <webElementGuid>73f241f6-e4d7-47be-a347-5a0be9a51684</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -34,15 +34,23 @@
       <name>class</name>
       <type>Main</type>
       <value>nav-close d-block d-lg-block d-xl-none ng-tns-c133-4</value>
-      <webElementGuid>d23517f5-7fdf-45ad-b4f4-77fb8eae94cb</webElementGuid>
+      <webElementGuid>90117900-48e3-403d-b146-a48838b25383</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;sidebarClose&quot;)/i[@class=&quot;ft-x ng-tns-c133-2&quot;]</value>
-      <webElementGuid>40828bfa-22db-44a3-a031-3a2065ce6272</webElementGuid>
+      <webElementGuid>f19c05f0-ccf1-471e-9d35-c486e4962231</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>id</name>
+      <type>Main</type>
+      <value>sidebarClose</value>
+      <webElementGuid>681e5e8a-f6f9-4cc7-9d6f-88778dd4e5bf</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -50,7 +58,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//a[@id='sidebarClose']/i</value>
-      <webElementGuid>65887e52-4bbd-485a-8871-7b0394e90bae</webElementGuid>
+      <webElementGuid>dee706dd-8b00-4840-8be1-d23649849a0d</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -58,6 +66,6 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//a[3]/i</value>
-      <webElementGuid>00d0f2e6-119f-494a-9c1e-a80c0248660f</webElementGuid>
+      <webElementGuid>4ffc0433-f92a-4b8d-bb69-fa84f6182e5b</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>
