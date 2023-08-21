@@ -15,7 +15,7 @@
       <guid>115160c4-07ec-4f6c-9aa2-5b8da9c8a24c</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/API Key/APIKey</testCaseId>
+      <testCaseId>Test Cases/API Key/MAIN_APIKey</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
       <variableLink>
          <testDataLinkId></testDataLinkId>

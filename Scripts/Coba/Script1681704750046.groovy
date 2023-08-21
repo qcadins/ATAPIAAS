@@ -96,6 +96,8 @@ ChromeOptions options = new ChromeOptions()
 
 options.addExtensions(new File("Drivers/nocaptchaai_chrome_1.7.6.crx"))
 
+options.addExtensions(new File("Drivers/Smart_Wait.crx"))
+
 DesiredCapabilities caps = new DesiredCapabilities()
 
 caps.setCapability(ChromeOptions.CAPABILITY, options)

@@ -6,6 +6,11 @@
    <defaultProfile>true</defaultProfile>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>findTestData('Login/Login').getValue(6, 2)</initValue>
+      <name>APIKEYCaptcha</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>''</initValue>
       <name>BaseUrl</name>
    </GlobalVariableEntity>

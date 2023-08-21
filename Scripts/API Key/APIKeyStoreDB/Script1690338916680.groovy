@@ -16,7 +16,7 @@ String reason
 int arrayIndex = 0
 
 'kumpulan string yang menyimpan hasil data dari DB'
-ArrayList hasildb = []
+ArrayList hasilDB = []
 
 if (Case == 'Add') {
 	
@@ -24,15 +24,15 @@ if (Case == 'Add') {
 	reason = 'Add API KEY'
 	
 	'ambil data dari DB sesudah tambah API baru'
-	ArrayList hasildb = CustomKeywords.'apikey.CheckAPIKey.getAPINamefromDB'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11))
+	hasilDB = CustomKeywords.'apikey.CheckAPIKey.getAPINamefromDB'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11))
 	
 	'cek hasil db dan excel'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11),
-		hasildb[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE), reason)
+		hasilDB[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE), reason)
 	
 	'cek hasil db dan excel'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12),
-		hasildb[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE), reason)
+		hasilDB[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE), reason)
 	
 } else if (Case == 'Edit') {
 	
@@ -40,15 +40,15 @@ if (Case == 'Add') {
 	reason = 'Edit API KEY'
 	
 	'kumpulan string yang menyimpan hasil data dari DB'
-	ArrayList hasildb = CustomKeywords.'apikey.CheckAPIKey.getAPIStatusfromDB'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
+	hasilDB = CustomKeywords.'apikey.CheckAPIKey.getAPIStatusfromDB'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
 	
 	'cek hasil db dan excel'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13),
-		hasildb[arrayIndex++], false,FailureHandling.OPTIONAL), reason)
+		hasilDB[arrayIndex++], false,FailureHandling.OPTIONAL), reason)
 	
 	'cek hasil db dan excel'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 14),
-		hasildb[arrayIndex++], false,FailureHandling.OPTIONAL), reason)
+		hasilDB[arrayIndex++], false,FailureHandling.OPTIONAL), reason)
 }
 
 def checkVerifyEqualorMatch(Boolean isMatch, String reason) {

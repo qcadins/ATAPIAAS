@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MAIN_OCR Liveness_FaceCompare</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>5a1a0fd2-b56a-47af-9039-8e635475e870</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>42fdabd8-a023-411a-adb4-f9306d088d69</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'OCR Testing/DataOCRTestingLivenessFaceComp'</defaultValue>
+      <description></description>
+      <id>42fdabd8-a023-411a-adb4-f9306d088d69</id>
+      <masked>false</masked>
+      <name>ExcelPathOCRTesting</name>
+   </variable>
+</TestCaseEntity>

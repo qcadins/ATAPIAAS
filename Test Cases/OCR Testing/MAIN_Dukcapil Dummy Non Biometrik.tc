@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MAIN_Dukcapil Dummy Non Biometrik</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>2d8e873a-564c-4a15-a0c4-5632d9676091</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>f7b0ed4a-0763-4fc5-b875-3f096f596e10</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'OCR Testing/DataOCRTestingDukcapilNonBiom'</defaultValue>
+      <description></description>
+      <id>f7b0ed4a-0763-4fc5-b875-3f096f596e10</id>
+      <masked>false</masked>
+      <name>ExcelPathOCRTesting</name>
+   </variable>
+</TestCaseEntity>

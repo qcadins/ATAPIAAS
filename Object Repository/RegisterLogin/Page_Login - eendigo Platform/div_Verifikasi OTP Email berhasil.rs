@@ -13,6 +13,10 @@
          <key>CSS</key>
          <value>div.ng-tns-c95-3.ng-star-inserted.ng-trigger.ng-trigger-flyInOut.ngx-toastr.toast-success</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[(text() = ' Verifikasi OTP Email berhasil ' or . = ' Verifikasi OTP Email berhasil ')]</value>
+      </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>div</value>
-      <webElementGuid>2140e314-adb9-4cb1-870e-3257229f9063</webElementGuid>
+      <webElementGuid>4b0b86d3-98fd-4692-9b1b-d076834047e9</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -30,7 +34,7 @@
       <name>class</name>
       <type>Main</type>
       <value>ng-tns-c95-3 ng-star-inserted ng-trigger ng-trigger-flyInOut ngx-toastr toast-success</value>
-      <webElementGuid>5d4aee3a-e91b-463d-8f9c-a8dfaeeaf23d</webElementGuid>
+      <webElementGuid>b09797a2-6d0a-4e2d-a471-1a33f047745e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -38,7 +42,7 @@
       <name>text</name>
       <type>Main</type>
       <value> Verifikasi OTP Email berhasil </value>
-      <webElementGuid>7390d122-6d18-4c84-ac09-e06500c85966</webElementGuid>
+      <webElementGuid>053ac0c7-3e58-438c-9e36-bef3b30b6055</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +50,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;toast-container&quot;)/div[@class=&quot;ng-tns-c95-3 ng-star-inserted ng-trigger ng-trigger-flyInOut ngx-toastr toast-success&quot;]</value>
-      <webElementGuid>3150d639-6f39-488e-8f87-d7811d7b25bc</webElementGuid>
+      <webElementGuid>1fdf4ec3-e5fc-4030-8fae-d86d81d4806a</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -54,7 +58,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//div[@id='toast-container']/div</value>
-      <webElementGuid>99d12c66-fec6-463c-a160-db19b4229f5d</webElementGuid>
+      <webElementGuid>5661702f-099c-45cf-83b2-62dd237f8b59</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -62,7 +66,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='`'])[2]/following::div[14]</value>
-      <webElementGuid>41f813bb-981f-4476-a754-8da36d0c935c</webElementGuid>
+      <webElementGuid>aa7a9a44-dc50-46f2-aed4-efed05783842</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +74,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Alt'])[2]/following::div[14]</value>
-      <webElementGuid>8be8a83e-e97c-4365-8c21-97c996b7794e</webElementGuid>
+      <webElementGuid>d02feb30-dfd5-4a5c-aec6-59c9d040356f</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[6]/div/div</value>
-      <webElementGuid>5019684a-ee2b-44c7-b6be-e954b93ca3b6</webElementGuid>
+      <webElementGuid>1a635882-5d82-412b-8237-0114bf7d4438</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,6 +90,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//div[(text() = ' Verifikasi OTP Email berhasil ' or . = ' Verifikasi OTP Email berhasil ')]</value>
-      <webElementGuid>99de6db2-51a1-4b1a-9c0a-a7aa56b70fff</webElementGuid>
+      <webElementGuid>ae96a992-0723-4382-bf46-b6705f0503c3</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

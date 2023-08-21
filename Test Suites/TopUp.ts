@@ -15,7 +15,7 @@
       <guid>eafb516e-b4b1-4b4e-be9d-fd4e8848e4aa</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/Top Up/Top Up</testCaseId>
+      <testCaseId>Test Cases/Top Up/MAIN_Top Up</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
       <variableLink>
          <testDataLinkId></testDataLinkId>

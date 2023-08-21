@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MAIN_Tenant</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>292679b2-e5ce-4507-ab4a-fde5d3eacdda</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>bd331c0e-00c5-4c02-9c4a-f4480dc49098</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'Tenant/DataTestingTenant'</defaultValue>
+      <description></description>
+      <id>bd331c0e-00c5-4c02-9c4a-f4480dc49098</id>
+      <masked>false</masked>
+      <name>ExcelPathTenant</name>
+   </variable>
+</TestCaseEntity>

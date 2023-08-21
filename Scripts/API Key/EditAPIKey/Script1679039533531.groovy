@@ -42,77 +42,109 @@ if (GlobalVariable.KondisiCekDB == 'Yes') {
 	}
 }
 
-'input nama API'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'), 
-	findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
-
-'pilih status'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 14))
-
-'select status'
-WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), Keys.chord(
-		Keys.ENTER))
-
-'klik tombol untuk simpan ubahan'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Lanjut'))
-
-'cek jika adanya tombol "YA" pada popup'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Ya'), 
-		GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) {
-	
-	'klik pada tombol ya'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Ya'))
-}
-
-'cek apakah muncul error setelah edit api key'
-if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
-	GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 14).equalsIgnoreCase('')) {
 	
 	GlobalVariable.FlagFailed = 1
 	
 	'tulis adanya error pada sistem web'
 	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusWarning, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			GlobalVariable.FailedReasonUnknown)
-}
-
-WebUI.delay(2)
-
-'periksa status edit dan tulis ke excel'
-CustomKeywords.'writeToExcel.CheckSaveProcess.checkAlert'(GlobalVariable.NumOfColumn, 'API KEY')
-
-'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_success'), 
-		GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+			GlobalVariable.FailedReasonMandatory)
+} else {
 	
-	'klik tombol ok'
-    WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_success'))
+	'klik pada panah ddl Status API'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/span_Inactive_ng-arrow-wrapper'))
 	
-	'cek ke DB jika memang diperlukan'
-	if (GlobalVariable.KondisiCekDB == 'Yes') {
+	'input nama API'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'),
+		findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
+	
+	'klik pada panah ddl Status API'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/span_Inactive_ng-arrow-wrapper'))
+	
+	'get id ddl'
+	id = WebUI.getAttribute(findTestObject('Object Repository/Top Up/ddlClass'), 'id', FailureHandling.CONTINUE_ON_FAILURE)
+	
+	def modifyObjectDDL
+	
+	'jika status yang diingkan adalah aktif/inaktif'
+	if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 14) == 'Active') {
 		
-		'verifikasi data ke db setelah di edit'
-		WebUI.callTestCase(findTestCase('Test Cases/API Key/APIKeyStoreDB'), [('Case'): 'Edit'],
-			FailureHandling.STOP_ON_FAILURE)
+		'modify object DDL'
+		modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'),
+		'xpath', 'equals', '//*[@id="' + (id) + '-0"]', true)
+		
+	} else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 14) == 'Inactive') {
+		
+		'modify object DDL'
+		modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'),
+		'xpath', 'equals', '//*[@id="' + id + '-1"]', true)
 	}
 	
-	'search api key yang sudah di edit'
-	searchAPIKEY(14)
+	'klik status yang dipilih'
+	WebUI.click(modifyObjectDDL)
 	
-	'verify nama api key'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_NamaAPIKey')),
-		findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama api key')
-
-	'verify nama tipe api key'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_TipeAPIKey')),
-		findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12), false, FailureHandling.CONTINUE_ON_FAILURE), ' tipe api key')
+	'klik tombol untuk simpan ubahan'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Lanjut'))
 	
-//kondisi untuk tombol ok jika edit error
-} else if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_gagal'), 
+	'cek jika adanya tombol "YA" pada popup'
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Ya'),
 			GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) {
 		
-	'klik tombol ok'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_gagal'))
+		'klik pada tombol ya'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_Ya'))
+	}
+	
+	'cek apakah muncul error setelah edit api key'
+	if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
+		GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+		
+		GlobalVariable.FlagFailed = 1
+		
+		'tulis adanya error pada sistem web'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusWarning, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				GlobalVariable.FailedReasonUnknown)
+	}
+	
+	WebUI.delay(2)
+	
+	'periksa status edit dan tulis ke excel'
+	CustomKeywords.'writeToExcel.CheckSaveProcess.checkAlert'(GlobalVariable.NumOfColumn, 'API KEY')
+	
+	'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_success'),
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		
+		'klik tombol ok'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_success'))
+		
+		'cek ke DB jika memang diperlukan'
+		if (GlobalVariable.KondisiCekDB == 'Yes') {
+			
+			'verifikasi data ke db setelah di edit'
+			WebUI.callTestCase(findTestCase('Test Cases/API Key/APIKeyStoreDB'), [('Case'): 'Edit'],
+				FailureHandling.STOP_ON_FAILURE)
+		}
+		
+		'search api key yang sudah di edit'
+		searchAPIKEY(14)
+		
+		'verify nama api key'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_NamaAPIKey')),
+			findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama api key')
+	
+		'verify nama tipe api key'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_TipeAPIKey')),
+			findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 15), false, FailureHandling.CONTINUE_ON_FAILURE), ' tipe api key')
+		
+	//kondisi untuk tombol ok jika edit error
+	} else if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_gagal'),
+				GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) {
+			
+		'klik tombol ok'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_gagal'))
+	}
 }
 
 'fungsi untuk melakukan pengecekan '

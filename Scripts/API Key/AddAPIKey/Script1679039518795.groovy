@@ -61,58 +61,72 @@ WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Add Api Key/select_
 
 WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Add Api Key/select_tipeAPI'), Keys.chord(Keys.ENTER), FailureHandling.OPTIONAL)
 
-'klik pada tombol simpan'
-WebUI.click(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Simpan'))
-
-WebUI.delay(3)
-
-'verifikasi tombol "YA" terdapat di layar'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Ya'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-	'klik pada button YA jika muncul pop-up'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Ya'))
-}
-
-'get failed reason'
-reason = WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Add Api Key/label_FailedReason'))
-
-'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
-if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_OK'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-	'klik tombol ok pada success alert'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_OK'))
-}
-
-if (reason == 'Success') {
-	'cek ke DB jika memang diperlukan'
-	if (GlobalVariable.KondisiCekDB == 'Yes') {
-		'verifikasi ke database untuk data yang ditambahkan'
-		WebUI.callTestCase(findTestCase('Test Cases/API Key/APIKeyStoreDB'), [('Case'): 'Add'], FailureHandling.STOP_ON_FAILURE)
-	}
+'jika tombol simpan di disabled'
+if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Simpan'), 'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 	
-	'cek apakah muncul error setelah add api key'
-	if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), GlobalVariable.Timeout,
-		FailureHandling.OPTIONAL) == false) {
-		GlobalVariable.FlagFailed = 1
-	
-		'tulis adanya error pada sistem web'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning,
-			(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonUnknown)
-	}
-	
-	searchAPIKEY()
-	
-	'verify nama api key'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_NamaAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama api key')
-
-	'verify nama tipe api key'
-	checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_TipeAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12), false, FailureHandling.CONTINUE_ON_FAILURE), ' tipe api key')
-
-} else {
-	
-	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+	'Write to excel status failed mandatory'
 	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
-	GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + '<' + reason + '>')
+	GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonMandatory)
 	
 	GlobalVariable.FlagFailed = 1
+	
+} else {
+	
+	'klik pada tombol simpan'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Simpan'))
+	
+	WebUI.delay(3)
+	
+	'verifikasi tombol "YA" terdapat di layar'
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Ya'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		'klik pada button YA jika muncul pop-up'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Ya'))
+	}
+	
+	String reason
+	
+	'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_OK'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		'get failed reason'
+		reason = WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Add Api Key/label_FailedReason'))
+		
+		'klik tombol ok pada success alert'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_OK'))
+	}
+	
+	if (reason == 'Success') {
+		'cek ke DB jika memang diperlukan'
+		if (GlobalVariable.KondisiCekDB == 'Yes') {
+			'verifikasi ke database untuk data yang ditambahkan'
+			WebUI.callTestCase(findTestCase('Test Cases/API Key/APIKeyStoreDB'), [('Case'): 'Add'], FailureHandling.STOP_ON_FAILURE)
+		}
+		
+		'cek apakah muncul error setelah add api key'
+		if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), GlobalVariable.Timeout,
+			FailureHandling.OPTIONAL) == false) {
+			GlobalVariable.FlagFailed = 1
+		
+			'tulis adanya error pada sistem web'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning,
+				(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonUnknown)
+		}
+		
+		searchAPIKEY()
+		
+		'verify nama api key'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_NamaAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama api key')
+	
+		'verify nama tipe api key'
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_TipeAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12), false, FailureHandling.CONTINUE_ON_FAILURE), ' tipe api key')
+	
+	} else {
+		
+		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + '<' + reason + '>')
+		
+		GlobalVariable.FlagFailed = 1
+	}
 }
 
 'fungsi untuk melakukan pengecekan '

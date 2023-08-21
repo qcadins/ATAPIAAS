@@ -25,6 +25,8 @@ ChromeOptions options = new ChromeOptions()
 
 options.addExtensions(new File("Drivers/nocaptchaai_chrome_1.7.6.crx"))
 
+options.addExtensions(new File("Drivers/Smart_Wait.crx"))
+
 DesiredCapabilities caps = new DesiredCapabilities()
 
 caps.setCapability(ChromeOptions.CAPABILITY, options)
@@ -42,7 +44,7 @@ DriverFactory.changeWebDriver(driver)
 if (TC != 'Regist') {
 	
 	'aktifkan nocaptcha by link'
-	WebUI.navigateToUrl('https://config.nocaptchaai.com/?apikey=kvnedgar9286-35bde35f-e305-699a-0af2-d6fb983c8c4a')
+	WebUI.navigateToUrl('https://config.nocaptchaai.com/?apikey=' + GlobalVariable.APIKEYCaptcha + '')
 }
 
 'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
@@ -157,7 +159,7 @@ if (TC == 'EditProf') {
 	
 	'ambil teks dari field input email'
 	if (WebUI.getAttribute(
-		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemailRegister'), 'value', FailureHandling.OPTIONAL) 
+		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemailRegister'), 'value', FailureHandling.OPTIONAL)
 			!= findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9)) {
 	
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
@@ -344,35 +346,35 @@ if (TC == 'EditProf') {
 //	if (WebUI.verifyElementPresent(
 //		findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'),
 //			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-//		
+//
 //		'cari element dengan nama role'
 //		def elementRole = DriverFactory.getWebDriver().findElements(By.cssSelector('body > ngb-modal-window > div > div > app-multi-role > div > div.row > div > table tr'))
-//		
+//
 //		'lakukan loop untuk cari nama role yang ditentukan'
 //		for (int i = 1; i <= elementRole.size() - 1; i++) {
-//			
+//
 //			'cari nama role yag sesuai di opsi role'
 //			def modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[1]", true)
-//	
+//
 //			'jika nama object sesuai dengan nama role'
 //			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 11).equalsIgnoreCase(
 //				WebUI.getAttribute(modifyRole, 'value', FailureHandling.STOP_ON_FAILURE))) {
-//				
+//
 //				'ubah alamat xpath ke role yang dipilih'
 //				modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[2]/a", true)
-//			
+//
 //				'klik role yang dipilih'
 //				WebUI.click(findTestObject('Object Repository/Change Password/modifyobject'))
-//				
+//
 //				'penanda adanya role yang dipilih'
 //				isSelected = 1
-//				
+//
 //				break;
 //			}
 //		}
 //		'tulis error dan lanjut testcase berikutnya'
 //		if (isSelected == 0) {
-//			
+//
 //			'tulis adanya error pada sistem web'
 //			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
 //				GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +

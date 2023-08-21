@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MAIN_OCR Testing RK Mandiri</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>e1fe5e1d-4c9b-49e0-82a5-eab9a62514ef</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>35c601af-efe2-4e24-8447-5a6dacb19966</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'OCR Testing/DataOCRTestingRKMandiri'</defaultValue>
+      <description></description>
+      <id>35c601af-efe2-4e24-8447-5a6dacb19966</id>
+      <masked>false</masked>
+      <name>ExcelPathOCRTesting</name>
+   </variable>
+</TestCaseEntity>

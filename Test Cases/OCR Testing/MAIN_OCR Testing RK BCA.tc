@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MAIN_OCR Testing RK BCA</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>b6c8a786-a118-433a-9901-6c5cfe94e30e</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>a348b07f-5b6f-4ab6-bfa4-f83f53984018</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'OCR Testing/DataOCRTestingRKBCA'</defaultValue>
+      <description></description>
+      <id>a348b07f-5b6f-4ab6-bfa4-f83f53984018</id>
+      <masked>false</masked>
+      <name>ExcelPathOCRTesting</name>
+   </variable>
+</TestCaseEntity>

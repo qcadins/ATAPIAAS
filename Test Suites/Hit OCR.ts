@@ -15,7 +15,7 @@
       <guid>32686c6e-8836-40c2-a6ec-be6affbf55e9</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/OCR Testing/Dukcapil Dummy Non Biometrik</testCaseId>
+      <testCaseId>Test Cases/OCR Testing/MAIN_Dukcapil Dummy Non Biometrik</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
       <variableLink>
          <testDataLinkId></testDataLinkId>
