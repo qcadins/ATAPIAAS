@@ -21,21 +21,23 @@ WebDriver driver
 	
 System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe")
 
+def chromePrefs = [:] as HashMap<String, ArrayList>
+
+chromePrefs.put('download.default_directory', System.getProperty('user.dir') + '\\Download')
+
 ChromeOptions options = new ChromeOptions()
 
 options.addExtensions(new File("Drivers/nocaptchaai_chrome_1.7.6.crx"))
 
 options.addExtensions(new File("Drivers/Smart_Wait.crx"))
 
+options.setExperimentalOption('prefs', chromePrefs)
+
 DesiredCapabilities caps = new DesiredCapabilities()
 
 caps.setCapability(ChromeOptions.CAPABILITY, options)
 
-def chromePrefs = [:] as HashMap<String, ArrayList>
-
-chromePrefs.put('download.default_directory', System.getProperty('user.dir') + '\\Download')
-
-RunConfiguration.setWebDriverPreferencesProperty('prefs', chromePrefs)
+//RunConfiguration.setWebDriverPreferencesProperty('prefs', chromePrefs)
 
 driver = new ChromeDriver(caps)
 

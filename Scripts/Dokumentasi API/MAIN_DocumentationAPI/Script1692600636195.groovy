@@ -36,7 +36,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		WebUI.delay(GlobalVariable.Timeout)
 		
 		'klik pada tombol garis tiga'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/expandMenu'))
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/spanMenu'))
 		
 		WebUI.delay(1)
 		
