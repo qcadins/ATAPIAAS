@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MAIN_STNK Only</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>7f86ceb5-5f15-493d-87d1-296a4832bc30</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>7c02a436-222f-4bca-abe0-8a233f73b753</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>7d4c8a67-9ab8-4082-acfd-62e4569b75d1</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'OCR Testing/DataOCRTestingSTNK'</defaultValue>
+      <description></description>
+      <id>7c02a436-222f-4bca-abe0-8a233f73b753</id>
+      <masked>false</masked>
+      <name>ExcelPathOCRTesting</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR STNK'</defaultValue>
+      <description></description>
+      <id>7d4c8a67-9ab8-4082-acfd-62e4569b75d1</id>
+      <masked>false</masked>
+      <name>sheet</name>
+   </variable>
+</TestCaseEntity>

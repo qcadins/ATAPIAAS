@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MAIN_RK Mandiri Only</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>00e38b6d-b1f8-4dc1-921b-7d82020844e9</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>f3e5db2d-7158-4668-b705-148232297158</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>afe28376-d57c-42e3-9a7e-adf52b767dd5</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'OCR Testing/DataOCRTestingRKMandiri'</defaultValue>
+      <description></description>
+      <id>f3e5db2d-7158-4668-b705-148232297158</id>
+      <masked>false</masked>
+      <name>ExcelPathOCRTesting</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR RK Mandiri'</defaultValue>
+      <description></description>
+      <id>afe28376-d57c-42e3-9a7e-adf52b767dd5</id>
+      <masked>false</masked>
+      <name>sheet</name>
+   </variable>
+</TestCaseEntity>

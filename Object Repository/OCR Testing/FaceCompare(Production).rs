@@ -104,7 +104,7 @@
    <socketTimeout>-1</socketTimeout>
    <useServiceInfoFromWsdl>true</useServiceInfoFromWsdl>
    <variables>
-      <defaultValue>GlobalVariable.null</defaultValue>
+      <defaultValue>GlobalVariable.BaseUrl</defaultValue>
       <description></description>
       <id>4d8db988-85ba-48f5-b979-d00588e427de</id>
       <masked>false</masked>

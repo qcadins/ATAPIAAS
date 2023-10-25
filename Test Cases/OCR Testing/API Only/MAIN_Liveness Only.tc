@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>MAIN_Liveness Only</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>e85233f5-7113-4fd2-87c5-33956826ba65</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>c26f1d67-3bef-470d-83ee-e2de0cfa1cc0</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>0b4301db-af40-4586-a06c-14b5e271b65c</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'OCR Testing/DataOCRTestingLiveness'</defaultValue>
+      <description></description>
+      <id>c26f1d67-3bef-470d-83ee-e2de0cfa1cc0</id>
+      <masked>false</masked>
+      <name>ExcelPathOCRTesting</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR Liveness'</defaultValue>
+      <description></description>
+      <id>0b4301db-af40-4586-a06c-14b5e271b65c</id>
+      <masked>false</masked>
+      <name>sheet</name>
+   </variable>
+</TestCaseEntity>
