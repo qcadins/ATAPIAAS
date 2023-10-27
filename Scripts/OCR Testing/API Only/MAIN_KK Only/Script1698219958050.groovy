@@ -27,6 +27,9 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 5)
 
+'deklarasi string'
+String message_ocr, state_ocr, date_ocr, read_ocr, readconfidence_ocr
+
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
@@ -57,55 +60,69 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			thekey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Wrong Key'))
 		}
-		else if(useCorrectTenant != 'Yes') {
+		if(useCorrectTenant != 'Yes') {
 			
 			tenantcode = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Wrong TenantCode'))
 		}
 			
 		'lakukan proses HIT api dengan parameter image, key, dan juga tenant'
-		response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/OCR KK',
+		response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/New API/KK',
 		[
 			('img'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('$IMG')),
 			('key'):thekey,
-			('tenant'):tenantcode,
-			('custno'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('custNo')),
-			('loginId'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('loginId')),
-			('refNum'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('referenceNumber')),
-			('off_code'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('officeCode')),
-			('off_name'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('officeName')),
-			('question'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('question')),
-			('source'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Source(MOBILE/WEB)'))
+			('tenant'):tenantcode
 		]))
 				
 		'ambil message respon dari HIT tersebut'
 		message_ocr = WS.getElementPropertyValue(response, 'message')
-			
+					
 		'ambil status dari respon HIT tersebut'
 		state_ocr = WS.getElementPropertyValue(response, 'status')
 		
+		'ambil ocr date dari respon tersebut'
+		date_ocr = WS.getElementPropertyValue(response, 'ocr_date')
+		
+		'ambil hasil bacaan ocr'
+		read_ocr = WS.getElementPropertyValue(response, 'read')
+		
+		'ambil tingkat confidence hasil bacaan ocr'
+		readconfidence_ocr = WS.getElementPropertyValue(response, 'read_confidence')
+			
 		'Jika status HIT API 200 OK'
 		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) {
 			
-			if (state_ocr == '0' && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
+			'write to excel status'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
+				1, state_ocr)
+			
+			'write to excel message'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Message') - 1, GlobalVariable.NumOfColumn -
+				1, message_ocr)
+			
+			'write to excel date ocr'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Date') - 1, GlobalVariable.NumOfColumn -
+				1, date_ocr)
+			
+			'write to excel read dari ocr'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Read Result') - 1, GlobalVariable.NumOfColumn -
+				1, read_ocr)
+			
+			'write to excel read confidence ocr'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Read Confidence') - 1, GlobalVariable.NumOfColumn -
+				1, readconfidence_ocr)
+			
+			if (state_ocr.equalsIgnoreCase('Success') && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
 				'write to excel status failed dan reason'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				GlobalVariable.FailedReasonKeyTenantBypass)
-					
-				continue;
 				
-			} else if (message_ocr == '' && state_ocr == 'SUCCESS') {
-				'tulis status sukses pada excel'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
-					GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
-						'<' + message_ocr + '>')
-			
 			} else {
 				GlobalVariable.FlagFailed = 1
 				'write to excel status failed dan reason'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
-				'<' + message_ocr + '>')
+				'<' + state_ocr + '>')
 			}
 		} else {
 			'Write To Excel GlobalVariable.StatusFailed and errormessage'

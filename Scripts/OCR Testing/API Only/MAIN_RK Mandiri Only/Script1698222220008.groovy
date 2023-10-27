@@ -31,6 +31,10 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 9)
 
+'deklarasi string'
+String message, state, date, numofpages, readIdentity, readTransactionHistory, 
+	readTransactionSummary, readConfidenceIdentity, readConfidenceTransactionSummary
+
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
@@ -61,59 +65,104 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		if (useCorrectKey != 'Yes') {
 			thekey = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Wrong Key'))
 		}
-		else if (useCorrectTenant != 'Yes') {
+		if (useCorrectTenant != 'Yes') {
 			tenantcode = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Wrong TenantCode'))
 		}
 					
 		'lakukan proses HIT api dengan parameter image, key, dan juga tenant'
-		response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/OCR RK Mandiri',
+		response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/New API/Statement Mandiri',
 		[
 			('img'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('$IMG')),
 			('key'):thekey,
-			('tenant'):tenantcode,
-			('custno'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('custNo')),
-			('loginId'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('loginId')),
-			('refNum'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('referenceNumber')),
-			('off_code'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('officeCode')),
-			('off_name'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('officeName')),
-			('question'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('question')),
-			('source'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Source(MOBILE/WEB)'))
+			('tenant'):tenantcode		
 		]))
 						
 		'ambil message respon dari HIT tersebut'
-		message_ocr = WS.getElementPropertyValue(response, 'message')
+		message = WS.getElementPropertyValue(response, 'message')
 					
 		'ambil status dari respon HIT tersebut'
-		state_ocr = WS.getElementPropertyValue(response, 'status')
+		state = WS.getElementPropertyValue(response, 'status')
 		
+		'ambil num of pages dari respons tersebut'
+		numofpages = WS.getElementPropertyValue(response, 'num_of_pages')
+		
+		'ambil ocr date dari respon tersebut'
+		date = WS.getElementPropertyValue(response, 'ocr_date')
+		
+		'ambil hasil bacaan ocr'
+		readIdentity = WS.getElementPropertyValue(response, 'read.Identity')
+		
+		'ambil hasil bacaan ocr'
+		readTransactionHistory = WS.getElementPropertyValue(response, 'read.TransactionHistory')
+		
+		'ambil hasil bacaan ocr'
+		readTransactionSummary = WS.getElementPropertyValue(response, 'read.TransactionSummary')
+		
+		'ambil tingkat confidence jika hit sukses saja, karena param tidak muncul jika failed'
+		if (state.equalsIgnoreCase('Success')) {
+			'ambil tingkat confidence hasil bacaan ocr'
+			readConfidenceIdentity = WS.getElementPropertyValue(response, 'read_confidence.Identity')
+			
+			'ambil tingkat confidence hasil bacaan ocr'
+			readConfidenceTransactionSummary = WS.getElementPropertyValue(response, 'read_confidence.TransactionSummary')
+		}
+			
 		'Jika status HIT API 200 OK'
 		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) {
 			
-			if (state_ocr == '0' && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
+			'write to excel status'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
+				1, state)
+			
+			'write to excel message'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Message') - 1, GlobalVariable.NumOfColumn -
+				1, message)
+			
+			'write to excel num of pages'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('NumOfPages') - 1, GlobalVariable.NumOfColumn -
+				1, numofpages)
+			
+			'write to excel date ocr'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Date') - 1, GlobalVariable.NumOfColumn -
+				1, date)
+			
+			'write to excel read identity dari ocr'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Read Identity') - 1, GlobalVariable.NumOfColumn -
+				1, readIdentity)
+			
+			'write to excel hasil transaction history dari ocr'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Read Transaction History') - 1, GlobalVariable.NumOfColumn -
+				1, readTransactionHistory)
+			
+			'write to excel hasil transaction summary dari ocr'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Read Transaction Summary') - 1, GlobalVariable.NumOfColumn -
+				1, readTransactionSummary)
+			
+			'write to excel hasil confidence pembacaan identity dari ocr'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Read Confidence Identity') - 1, GlobalVariable.NumOfColumn -
+				1, readConfidenceIdentity)
+			
+			'write to excel hasil confidence pembacaan transaction summary dari ocr'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Read Confidence Transaction Summary') - 1, GlobalVariable.NumOfColumn -
+				1, readConfidenceTransactionSummary)
+			
+			if (state.equalsIgnoreCase('Success') && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
 				'write to excel status failed dan reason'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				GlobalVariable.FailedReasonKeyTenantBypass)
-					
-				continue;
 				
-			} else if (message_ocr == '' && state_ocr == 'SUCCESS') {
-				'tulis status sukses pada excel'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
-					GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
-						'<' + message_ocr + '>')
-			
 			} else {
 				GlobalVariable.FlagFailed = 1
 				'write to excel status failed dan reason'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
-				'<' + message_ocr + '>')
+				'<' + state + '>')
 			}
 		} else {
 			'Write To Excel GlobalVariable.StatusFailed and errormessage'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, '<' + message_ocr + '>')
+				GlobalVariable.StatusFailed, '<' + message + '>')
 		}
 	}
 }
