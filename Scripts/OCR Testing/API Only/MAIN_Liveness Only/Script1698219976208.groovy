@@ -30,6 +30,9 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 11)
 
+'deklarasi string hasil respons'
+String message_ocr, state_ocr, error_ocr, isLive_ocr, scoreLiveness_ocr
+
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
@@ -80,16 +83,45 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 		]))
 			
 		'ambil message respon dari HIT tersebut'
-		String error_ocr = WS.getElementPropertyValue(response, 'error')
+		error_ocr = WS.getElementPropertyValue(response, 'error')
 		
 		'ambil status dari respon HIT tersebut'
-		String state_ocr = WS.getElementPropertyValue(response, 'status')
-		
+		state_ocr = WS.getElementPropertyValue(response, 'status')
+
 		'ambil verifStatus dari respon HIT'
-		String message_ocr = WS.getElementPropertyValue(response, 'message')
+		message_ocr = WS.getElementPropertyValue(response, 'message')
 		
+		if (WS.getElementPropertyValue(response, 'result') != null) {
+			'ambil result face compare dari respon HIT'
+			isLive_ocr = WS.getElementPropertyValue(response, 'result[0].face_liveness.live')
+			
+			'ambil result face compare dari respon HIT'
+			scoreLiveness_ocr = WS.getElementPropertyValue(response, 'result[0].face_liveness.score')
+		}
+	
 		'Jika status HIT API 200 OK'
 		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) {
+			
+			'write to excel status'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
+				1, state_ocr)
+			
+			'write to excel message'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Message') - 1, GlobalVariable.NumOfColumn -
+				1, message_ocr)
+			
+			'write to excel error'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Error') - 1, GlobalVariable.NumOfColumn -
+				1, error_ocr)
+			
+			'write to excel error'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Liveness detection') - 1, GlobalVariable.NumOfColumn -
+				1, isLive_ocr)
+			
+			'write to excel error'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Score Liveness') - 1, GlobalVariable.NumOfColumn -
+				1, scoreLiveness_ocr)
+			
 			if (state_ocr.equalsIgnoreCase('Success') && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
 				'write to excel status failed karena key dan tenant salah tapi HIT berhasil'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,

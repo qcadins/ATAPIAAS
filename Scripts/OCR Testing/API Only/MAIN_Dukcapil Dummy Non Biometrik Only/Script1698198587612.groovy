@@ -27,11 +27,11 @@ int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
-'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
-
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2,3)
+
+'deklarasi string hasil respons'
+String message_ocr, state_ocr, verifState_ocr
 
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
@@ -46,14 +46,6 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 		
 		'ambil key trial yang aktif dari DB'
 		String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode, GlobalVariable.SettingEnvi)
-		
-		'deklarasi id untuk harga pembayaran OCR'
-		int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(conndevUAT,
-			tenantcode, findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('$SearchTipeSaldo')))
-		
-		'ambil jenis penagihan transaksi (by qty/price)'
-		String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(conndevUAT,
-			tenantcode, idPayment)
 		
 		'deklarasi variable response'
 		ResponseObject response
@@ -103,6 +95,18 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 		
 		'Jika status HIT API 200 OK'
 		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) {
+			
+			'write to excel status'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
+				1, state_ocr)
+			
+			'write to excel message'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Message') - 1, GlobalVariable.NumOfColumn -
+				1, message_ocr)
+			
+			'write to excel num of pages'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Verification State') - 1, GlobalVariable.NumOfColumn -
+				1, verifState_ocr)
 			
 			if (state_ocr == '0' && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
 				'write to excel status failed dan reason'
