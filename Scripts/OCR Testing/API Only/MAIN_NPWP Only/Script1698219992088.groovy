@@ -115,17 +115,26 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				GlobalVariable.FailedReasonKeyTenantBypass)
 				
-			} else {
+			} else if (state_ocr.equalsIgnoreCase('Failed')) {
 				GlobalVariable.FlagFailed = 1
 				'write to excel status failed dan reason'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
-				'<' + state_ocr + '>')
+				'<' + message_ocr + '>')
 			}
 		} else {
+			'jika param message null'
+			if (message_ocr == null) {
+				'pindahkan value di status ke message'
+				message_ocr = state_ocr
+				
+				'hardcode status yang kosong'
+				state_ocr = 'FAILED'
+			}
+			
 			'Write To Excel GlobalVariable.StatusFailed and errormessage'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, '<' + message_ocr + '>')
+				state_ocr, '<' + message_ocr + '>')
 		}
 	}
 }

@@ -89,22 +89,26 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'ambil ocr date dari respon tersebut'
 		date = WS.getElementPropertyValue(response, 'ocr_date')
 		
-		'ambil hasil bacaan ocr'
-		readIdentity = WS.getElementPropertyValue(response, 'read.Identity')
-		
-		'ambil hasil bacaan ocr'
-		readTransactionHistory = WS.getElementPropertyValue(response, 'read.TransactionHistory')
-		
-		'ambil hasil bacaan ocr'
-		readTransactionSummary = WS.getElementPropertyValue(response, 'read.TransactionSummary')
-		
-		'ambil tingkat confidence jika hit sukses saja, karena param tidak muncul jika failed'
-		if (state.equalsIgnoreCase('Success')) {
-			'ambil tingkat confidence hasil bacaan ocr'
-			readConfidenceIdentity = WS.getElementPropertyValue(response, 'read_confidence.Identity')
+		'jika hasil bacaan tidak null'
+		if (WS.getElementPropertyValue(response, 'read') != null) {
 			
-			'ambil tingkat confidence hasil bacaan ocr'
-			readConfidenceTransactionSummary = WS.getElementPropertyValue(response, 'read_confidence.TransactionSummary')
+			'ambil hasil bacaan ocr'
+			readIdentity = WS.getElementPropertyValue(response, 'read.Identity')
+			
+			'ambil hasil bacaan ocr'
+			readTransactionHistory = WS.getElementPropertyValue(response, 'read.TransactionHistory')
+			
+			'ambil hasil bacaan ocr'
+			readTransactionSummary = WS.getElementPropertyValue(response, 'read.TransactionSummary')
+	
+			'ambil tingkat confidence jika hit sukses saja, karena param tidak muncul jika failed'
+			if (state.equalsIgnoreCase('Success')) {
+				'ambil tingkat confidence hasil bacaan ocr'
+				readConfidenceIdentity = WS.getElementPropertyValue(response, 'read_confidence.Identity')
+				
+				'ambil tingkat confidence hasil bacaan ocr'
+				readConfidenceTransactionSummary = WS.getElementPropertyValue(response, 'read_confidence.TransactionSummary')
+			}
 		}
 			
 		'Jika status HIT API 200 OK'
@@ -152,17 +156,26 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				GlobalVariable.FailedReasonKeyTenantBypass)
 				
-			} else {
+			} else if (state.equalsIgnoreCase('Failed')) {
 				GlobalVariable.FlagFailed = 1
 				'write to excel status failed dan reason'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
-				'<' + state + '>')
+				'<' + message + '>')
 			}
 		} else {
+			'jika param message null'
+			if (message == null) {
+				'pindahkan value di status ke message'
+				message = state
+				
+				'hardcode status yang kosong'
+				state = 'FAILED'
+			}
+			
 			'Write To Excel GlobalVariable.StatusFailed and errormessage'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, '<' + message + '>')
+				state, '<' + message + '>')
 		}
 	}
 }
