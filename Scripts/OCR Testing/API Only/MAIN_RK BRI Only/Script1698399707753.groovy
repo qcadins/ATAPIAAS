@@ -32,8 +32,7 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 15)
 
 'deklarasi string'
-String message, state, date, numofpages, readIdentity, readTransactionHistory,
-	readTransactionSummary, readConfidenceIdentity, readConfidenceTransactionSummary
+String responseBody, beautifyResult, message, state
 
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
@@ -76,81 +75,30 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			('key'):thekey,
 			('tenant'):tenantcode
 		]))
-						
+		
 		'ambil message respon dari HIT tersebut'
 		message = WS.getElementPropertyValue(response, 'message')
 					
 		'ambil status dari respon HIT tersebut'
 		state = WS.getElementPropertyValue(response, 'status')
-		
-		'ambil num of pages dari respons tersebut'
-		numofpages = WS.getElementPropertyValue(response, 'num_of_pages')
-		
-		'ambil ocr date dari respon tersebut'
-		date = WS.getElementPropertyValue(response, 'ocr_date')
-		
-		'jika hasil bacaan tidak null'
-		if (WS.getElementPropertyValue(response, 'read') != null) {
-			
-			'ambil hasil bacaan ocr'
-			readIdentity = WS.getElementPropertyValue(response, 'read.Identity')
-			
-			'ambil hasil bacaan ocr'
-			readTransactionHistory = WS.getElementPropertyValue(response, 'read.TransactionHistory')
-			
-			'ambil hasil bacaan ocr'
-			readTransactionSummary = WS.getElementPropertyValue(response, 'read.TransactionSummary')
-	
-			'ambil tingkat confidence jika hit sukses saja, karena param tidak muncul jika failed'
-			if (state.equalsIgnoreCase('Success')) {
-				'ambil tingkat confidence hasil bacaan ocr'
-				readConfidenceIdentity = WS.getElementPropertyValue(response, 'read_confidence.Identity')
-				
-				'ambil tingkat confidence hasil bacaan ocr'
-				readConfidenceTransactionSummary = WS.getElementPropertyValue(response, 'read_confidence.TransactionSummary')
-			}
-		}
 			
 		'Jika status HIT API 200 OK'
 		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) {
+			
+			'ambil body dari hasil respons'
+			responseBody = response.getResponseBodyContent()
 			
 			'write to excel status'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
 				1, state)
 			
 			'write to excel message'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Message') - 1, GlobalVariable.NumOfColumn -
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Reason failed') - 1, GlobalVariable.NumOfColumn -
 				1, message)
 			
-			'write to excel num of pages'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('NumOfPages') - 1, GlobalVariable.NumOfColumn -
-				1, numofpages)
-			
-			'write to excel date ocr'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Date') - 1, GlobalVariable.NumOfColumn -
-				1, date)
-			
-			'jika hasil bacaan tidak null'
-			if (WS.getElementPropertyValue(response, 'read') != null) {
-				
-				'ambil hasil bacaan ocr'
-				readIdentity = WS.getElementPropertyValue(response, 'read.Identity')
-				
-				'ambil hasil bacaan ocr'
-				readTransactionHistory = WS.getElementPropertyValue(response, 'read.TransactionHistory')
-				
-				'ambil hasil bacaan ocr'
-				readTransactionSummary = WS.getElementPropertyValue(response, 'read.TransactionSummary')
-		
-				'ambil tingkat confidence jika hit sukses saja, karena param tidak muncul jika failed'
-				if (state.equalsIgnoreCase('Success')) {
-					'ambil tingkat confidence hasil bacaan ocr'
-					readConfidenceIdentity = WS.getElementPropertyValue(response, 'read_confidence.Identity')
-					
-					'ambil tingkat confidence hasil bacaan ocr'
-					readConfidenceTransactionSummary = WS.getElementPropertyValue(response, 'read_confidence.TransactionSummary')
-				}
-			}
+			'panggil keyword untuk proses beautify dari respon json yang didapat'
+			CustomKeywords.'parseJson.BeautifyJson.process'(responseBody, sheet, rowExcel('Respons') - 1,
+				findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Scenario')))
 			
 			if (state.equalsIgnoreCase('Success') && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
 				'write to excel status failed dan reason'

@@ -12,6 +12,12 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable
 
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.testobject.RequestObject
+import com.kms.katalon.core.testobject.ResponseObject
+
+
 //'mencari directory excel'
 //GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 //
@@ -90,57 +96,104 @@ import internal.GlobalVariable
 
 /*Coba untuk extension otomatis Recaptcha*/
 
-System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe")
+//System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe")
+//
+//ChromeOptions options = new ChromeOptions()
+//
+//options.addExtensions(new File("Drivers/nocaptchaai_chrome_1.7.6.crx"))
+//
+//options.addExtensions(new File("Drivers/Smart_Wait.crx"))
+//
+//DesiredCapabilities caps = new DesiredCapabilities()
+//
+//caps.setCapability(ChromeOptions.CAPABILITY, options)
+//
+//WebDriver driver = new ChromeDriver(caps)
+//
+//DriverFactory.changeWebDriver(driver)
+//
+//WebUI.navigateToUrl('https://config.nocaptchaai.com/?apikey=kvnedgar9286-35bde35f-e305-699a-0af2-d6fb983c8c4a')
+//
+//'buka website APIAAS SIT, data diambil dari TestData Login'
+//WebUI.navigateToUrl(findTestData(ExcelPath).getValue(1, 2))
+//
+//'input email'
+//WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemail'),
+//	'JONAUDRIS23@MAILSAC.COM')
+//
+//'input password'
+//WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputpassword'),
+//	'P@ssw0rd123')
+//
+//'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
+//WebUI.delay(3)
+//
+//WebUI.closeBrowser()
+//
+//driver = new ChromeDriver(caps)
+//
+//DriverFactory.changeWebDriver(driver)
+//
+//'buka website APIAAS SIT, data diambil dari TestData Login'
+//WebUI.navigateToUrl(findTestData(ExcelPath).getValue(1, 2))
+//
+//'input email'
+//WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemail'),
+//	'JONAUDRIS23@MAILSAC.COM')
+//
+//'input password'
+//WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputpassword'),
+//	'P@ssw0rd123')
+//
+//'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
+//WebUI.delay(10)
+//
+//'Klik Login'
+//WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 
-ChromeOptions options = new ChromeOptions()
+//=====================================================================================================
 
-options.addExtensions(new File("Drivers/nocaptchaai_chrome_1.7.6.crx"))
+/*Coba untuk ambil response dan lakukan beautify secara otomatis ke dalam notepad*/
 
-options.addExtensions(new File("Drivers/Smart_Wait.crx"))
+'mencari directory excel\r\n'
+GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
-DesiredCapabilities caps = new DesiredCapabilities()
+'get base url'
+GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 14)
 
-caps.setCapability(ChromeOptions.CAPABILITY, options)
+'lakukan proses HIT api dengan parameter image, key, dan juga tenant'
+response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/New API/Passport',
+[
+	('img'): findTestData(ExcelPathOCRTesting).getValue(2, 9),
+	('key'): '123',
+	('tenant'):'abc'
+]))
 
-WebDriver driver = new ChromeDriver(caps)
+// Check if the request was successful
+if (response.getStatusCode() == 200) {
+	String responseBody = response.getResponseBodyContent()
+	
+	try {
+		// Parse the original JSON string
+		def slurper = new groovy.json.JsonSlurper()
+		def json = slurper.parseText(responseBody)
+	
+		// Beautify the JSON
+		def builder = new groovy.json.JsonBuilder(json)
+		def beautifiedJson = builder.toPrettyString()
+	
+		// Define the path for the beautified JSON file
+		String beautifiedJsonPath = System.getProperty('user.dir') + '\\Download\\beautified_response.json'
+	
+		// Save the beautified JSON to a file
+		new File(beautifiedJsonPath).text = beautifiedJson
+		
+		'write to excel status'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'OCR Passport', 28, 1, beautifiedJson)
+		
+//		'\n\n File Location : ' + beautifiedJsonPath
+	} catch (Exception e) {
+		println("Failed to beautify the JSON: ${e.getMessage()}")
+	}
+}
 
-DriverFactory.changeWebDriver(driver)
-
-WebUI.navigateToUrl('https://config.nocaptchaai.com/?apikey=kvnedgar9286-35bde35f-e305-699a-0af2-d6fb983c8c4a')
-
-'buka website APIAAS SIT, data diambil dari TestData Login'
-WebUI.navigateToUrl(findTestData(ExcelPath).getValue(1, 2))
-
-'input email'
-WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemail'),
-	'JONAUDRIS23@MAILSAC.COM')
-
-'input password'
-WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputpassword'),
-	'P@ssw0rd123')
-
-'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
-WebUI.delay(3)
-
-WebUI.closeBrowser()
-
-driver = new ChromeDriver(caps)
-
-DriverFactory.changeWebDriver(driver)
-
-'buka website APIAAS SIT, data diambil dari TestData Login'
-WebUI.navigateToUrl(findTestData(ExcelPath).getValue(1, 2))
-
-'input email'
-WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemail'),
-	'JONAUDRIS23@MAILSAC.COM')
-
-'input password'
-WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputpassword'),
-	'P@ssw0rd123')
-
-'pada jeda waktu ini, isi captcha secara manual, automation testing dianggap sebagai robot oleh google'
-WebUI.delay(10)
-
-'Klik Login'
-WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))

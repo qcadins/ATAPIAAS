@@ -23,6 +23,12 @@
       <value></value>
       <variableId>5bf0d3f2-36ba-4c2c-bed3-8b25cdb21576</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>ff132508-e78f-4d13-8ae0-d467d5aab44f</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'APIAAS/DataSaldoAPIKEY'</defaultValue>
       <description></description>
@@ -43,5 +49,12 @@
       <id>5bf0d3f2-36ba-4c2c-bed3-8b25cdb21576</id>
       <masked>false</masked>
       <name>ExcelPathTopUp</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR Testing/Passport'</defaultValue>
+      <description></description>
+      <id>ff132508-e78f-4d13-8ae0-d467d5aab44f</id>
+      <masked>false</masked>
+      <name>ExcelPathOCRTesting</name>
    </variable>
 </TestCaseEntity>

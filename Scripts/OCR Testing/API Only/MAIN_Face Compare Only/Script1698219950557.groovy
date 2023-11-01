@@ -31,7 +31,7 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 12)
 
 'deklarasi string hasil respons'
-String message_ocr, state_ocr, error_ocr, compare, similarity, threshold
+String responseBody, message_ocr, state_ocr, error_ocr
 
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
@@ -91,44 +91,27 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 		'ambil verifStatus dari respon HIT'
 		error_ocr = WS.getElementPropertyValue(response, 'error')
 		
-		if (WS.getElementPropertyValue(response, 'result') != null) {
-			
-			'ambil detail face compare dari respon HIT'
-			compare = WS.getElementPropertyValue(response, 'result[0].face_compare.compare')
-			
-			'ambil detail face compare dari respon HIT'
-			similarity = WS.getElementPropertyValue(response, 'result[0].face_compare.similarity')
-			
-			'ambil detail face compare dari respon HIT'
-			threshold = WS.getElementPropertyValue(response, 'result[0].face_compare.threshold')
-		}
-		
 		'Jika status HIT API 200 OK'
 		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) {
+			
+			'ambil body dari hasil respons'
+			responseBody = response.getResponseBodyContent()
 			
 			'write to excel status'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
 				1, state_ocr)
 			
 			'write to excel message'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Message') - 1, GlobalVariable.NumOfColumn -
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Reason failed') - 1, GlobalVariable.NumOfColumn -
 				1, message_ocr)
 			
 			'write to excel num of pages'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Error') - 1, GlobalVariable.NumOfColumn -
 				1, error_ocr)
 			
-			'write to excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Compare') - 1, GlobalVariable.NumOfColumn -
-				1, compare)
-			
-			'write to excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Similarity') - 1, GlobalVariable.NumOfColumn -
-				1, similarity)
-			
-			'write to excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Threshold') - 1, GlobalVariable.NumOfColumn -
-				1, threshold)
+			'panggil keyword untuk proses beautify dari respon json yang didapat'
+			CustomKeywords.'parseJson.BeautifyJson.process'(responseBody, sheet, rowExcel('Respons') - 1,
+				findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Scenario')))
 			
 			if (state_ocr.equalsIgnoreCase('Success') && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
 				'write to excel status failed karena key dan tenant salah tapi HIT berhasil'

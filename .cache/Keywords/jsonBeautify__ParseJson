@@ -1,0 +1,10 @@
+{
+  "keywordFileContentHash": "045F7EF928DCC2F1EE48976C86E9A82E",
+  "keywordClasses": [
+    {
+      "name": "jsonBeautify.ParseJson",
+      "keywordMethods": []
+    }
+  ],
+  "javadocParsed": true
+}

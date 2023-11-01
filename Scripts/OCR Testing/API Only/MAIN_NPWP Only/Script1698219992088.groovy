@@ -28,7 +28,7 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 7)
 
-String message_ocr, state_ocr, date_ocr, read_ocr, readconfidence_ocr
+String responseBody, beautifyResult, message_ocr, state_ocr
 
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
@@ -70,57 +70,43 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			('key'):thekey,
 			('tenant'):tenantcode
 		]))
-						
+		
 		'ambil message respon dari HIT tersebut'
 		message_ocr = WS.getElementPropertyValue(response, 'message')
 					
 		'ambil status dari respon HIT tersebut'
 		state_ocr = WS.getElementPropertyValue(response, 'status')
-		
-		'ambil ocr date dari respon tersebut'
-		date_ocr = WS.getElementPropertyValue(response, 'ocr_date')
-		
-		'ambil hasil bacaan ocr'
-		read_ocr = WS.getElementPropertyValue(response, 'read')
-		
-		'ambil tingkat confidence hasil bacaan ocr'
-		readconfidence_ocr = WS.getElementPropertyValue(response, 'read_confidence')
 			
 		'Jika status HIT API 200 OK'
 		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) {
+			
+			'ambil body dari hasil respons'
+			responseBody = response.getResponseBodyContent()
 			
 			'write to excel status'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
 				1, state_ocr)
 			
 			'write to excel message'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Message') - 1, GlobalVariable.NumOfColumn -
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Reason failed') - 1, GlobalVariable.NumOfColumn -
 				1, message_ocr)
 			
-			'write to excel date ocr'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Date') - 1, GlobalVariable.NumOfColumn -
-				1, date_ocr)
-			
-			'write to excel read dari ocr'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Read Result') - 1, GlobalVariable.NumOfColumn -
-				1, read_ocr)
-			
-			'write to excel read confidence ocr'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Read Confidence') - 1, GlobalVariable.NumOfColumn -
-				1, readconfidence_ocr)
+			'panggil keyword untuk proses beautify dari respon json yang didapat'
+			CustomKeywords.'parseJson.BeautifyJson.process'(responseBody, sheet, rowExcel('Respons') - 1,
+				findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Scenario')))
 			
 			if (state_ocr.equalsIgnoreCase('Success') && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
 				'write to excel status failed dan reason'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
-				GlobalVariable.FailedReasonKeyTenantBypass)
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
+						GlobalVariable.FailedReasonKeyTenantBypass)
 				
 			} else if (state_ocr.equalsIgnoreCase('Failed')) {
 				GlobalVariable.FlagFailed = 1
 				'write to excel status failed dan reason'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
-				'<' + message_ocr + '>')
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
+						'<' + message_ocr + '>')
 			}
 		} else {
 			'jika param message null'

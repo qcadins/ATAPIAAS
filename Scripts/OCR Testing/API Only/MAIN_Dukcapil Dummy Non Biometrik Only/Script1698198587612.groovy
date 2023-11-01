@@ -31,7 +31,7 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2,3)
 
 'deklarasi string hasil respons'
-String message_ocr, state_ocr, verifState_ocr
+String responseBody, message_ocr, state_ocr
 
 'pindah testcase sesuai jumlah di excel'
 for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
@@ -90,23 +90,23 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 		'ambil status dari respon HIT tersebut'
 		state_ocr = WS.getElementPropertyValue(response, 'status')
 		
-		'ambil verifStatus dari respon HIT'
-		verifState_ocr = WS.getElementPropertyValue(response, 'verifStatus')
-		
 		'Jika status HIT API 200 OK'
 		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) {
+			
+			'ambil body dari hasil respons'
+			responseBody = response.getResponseBodyContent()
 			
 			'write to excel status'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
 				1, state_ocr)
 			
 			'write to excel message'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Message') - 1, GlobalVariable.NumOfColumn -
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Reason failed') - 1, GlobalVariable.NumOfColumn -
 				1, message_ocr)
 			
-			'write to excel num of pages'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Verification State') - 1, GlobalVariable.NumOfColumn -
-				1, verifState_ocr)
+			'panggil keyword untuk proses beautify dari respon json yang didapat'
+			CustomKeywords.'parseJson.BeautifyJson.process'(responseBody, sheet, rowExcel('Respons') - 1,
+				findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Scenario')))
 			
 			if (state_ocr == '0' && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
 				'write to excel status failed dan reason'
