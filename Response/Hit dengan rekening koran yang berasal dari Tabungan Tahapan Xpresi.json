@@ -1,0 +1,1032 @@
+{
+    "message": "",
+    "num_of_pages": 11,
+    "ocr_date": "2023-11-03T16:52:53+07:00",
+    "read": {
+        "Identity": {
+            "AccountNumber": "7180288141",
+            "AlternateIncome1": 0,
+            "AlternateIncome2": 4154.06,
+            "AlternateIncome3": 51151487.74,
+            "AlternateIncome4": 16879990.95,
+            "AlternateIncomeFinal": 4154.06,
+            "BankOffice": "KCP PEJ ATEN",
+            "CreditTransactionsLast3Months": 153454463.20999998,
+            "DebitTransactionsLast3Months": 71232733.9,
+            "EndingBalance": 223948121.49,
+            "Name": "BASIAH",
+            "TotalTransactionsCreditLast3Months": 47.0,
+            "TotalTransactionsDebitLast3Months": 87.0,
+            "TotalTransactionsLast3Months": 134.0,
+            "WarningMutasi1": true,
+            "WarningMutasi1Description": "Ada selisih antara saldo akhir dengan saldo awal, total debit dan total kredit dari seluruh transaksi."
+        },
+        "TransactionHistory": [
+            {
+                "Amount": 55500.0,
+                "Date": "2022-12-01",
+                "Description": "BYR VIA E-BANKING 01/12  WSID9503133 0865 PLN PREPAID 32127997933 HENDI INDRAWAN",
+                "EndingBalance": 134194505.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 650000.0,
+                "Date": "2022-12-01",
+                "Description": "TRSF E-BANKING CR 0108/FTSCY/WS95051 650000.00 dari flip.id 70571676 BUANA MEGA TEKNOL",
+                "EndingBalance": 134844505.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 5000000.0,
+                "Date": "2022-12-02",
+                "Description": "BI-FAST CR BIF TRANSFER DR 008 KURNIA",
+                "EndingBalance": 139844505.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1750000.0,
+                "Date": "2022-12-02",
+                "Description": "BI-FAST CR BIF TRANSFER DR 008 HENDRA GS",
+                "EndingBalance": 141594505.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 750000.0,
+                "Date": "2022-12-02",
+                "Description": "BI-FAST DB BIF TRANSFER KE 008 YUNITA M-BCA",
+                "EndingBalance": 140844505.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500.0,
+                "Date": "2022-12-02",
+                "Description": "BI-FAST DB BIF BIAYA TXN KE 008 LEILA M-BCA",
+                "EndingBalance": 140842005.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1600000.0,
+                "Date": "2022-12-03",
+                "Description": "TRSF E-BANKING CR 03/12 /95031/00000 KOSAN BU OCOH WILLIAM LIONG",
+                "EndingBalance": 142442005.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 5000000.0,
+                "Date": "2022-12-03",
+                "Description": "TRSF E-BANKING CR 0312/FTSCY/WS95051 5000000.00 kost agustus 2022 kost agustus 2022 BUANA MEGA TEKNOL",
+                "EndingBalance": 147442005.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 150000.0,
+                "Date": "2022-12-04",
+                "Description": "TRSF E-BANKING CR 0412/FTSCY/WS95051 150000.00 dari flip.id 70912456 BUANA MEGA TEKNOL",
+                "EndingBalance": 147592005.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 250500.0,
+                "Date": "2022-12-04",
+                "Description": "TRSF E-BANKING DB 0412/FTFVA/WS95031 12208/SHOPEEPAY - - 1317209345",
+                "EndingBalance": 147341505.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1550000.0,
+                "Date": "2022-12-05",
+                "Description": "TRSF E-BANKING CR 05/12 /95031/00000 BYR KONTRKAN AGS 2 2 DENDY",
+                "EndingBalance": 148891505.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 427520.0,
+                "Date": "2022-12-05",
+                "Description": "KARTU DEBIT SUPERINDO MPG 6019005016924090",
+                "EndingBalance": 148463985.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 202500.0,
+                "Date": "2022-12-08",
+                "Description": "BYR VIA E-BANKING 08/12  WSID9503100 0865 PLN PREPAID 321279978907 KREHSNA",
+                "EndingBalance": 148261485.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 450000.0,
+                "Date": "2022-12-08",
+                "Description": "TRSF E-BANKING DB 08/12 /952354/00000 ARISAN FERA INDIRA S",
+                "EndingBalance": 147811485.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 250000.0,
+                "Date": "2022-12-08",
+                "Description": "TRSF E-BANKING DB 08/12 /95031/00000 YAY BANGUN KECERDA",
+                "EndingBalance": 147561485.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 3000000.0,
+                "Date": "2022-12-08",
+                "Description": "TRSF E-BANKING CR 08/12 /ZP9K1/00000 DERA TARI",
+                "EndingBalance": 150561485.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 500000.0,
+                "Date": "2022-12-09",
+                "Description": "TRSF E-BANKING CR 0912/FTSCY/WS950245 500000.00 2022080974052121 TRFDN-NUR CAYADI ESPAY DEBIT INDONE",
+                "EndingBalance": 151061485.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 130500.0,
+                "Date": "2022-12-10",
+                "Description": "TRSF E-BANKING DB 1012/FTFVA/WS95031 12208/SHOPEEPAY - - 129970456",
+                "EndingBalance": 150930985.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 120900.0,
+                "Date": "2022-12-15",
+                "Description": "KARTU DEBIT JASPER SKIN CILAND 6019005016966090",
+                "EndingBalance": 150810085.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 4000000.0,
+                "Date": "2022-12-15",
+                "Description": "SWITCHING CR TRANSFERDR 103 SDRI JERRY  NO / INDOMARET K",
+                "EndingBalance": 154810085.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 2000000.0,
+                "Date": "2022-12-16",
+                "Description": "TRSF E-BANKING CR 1612/FTSCY/WS95051 2000000.00 kost BU OCO agustus kost BU OCO agustus BUANA MEGA TEKNOL",
+                "EndingBalance": 156810085.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 225000.0,
+                "Date": "2022-12-18",
+                "Description": "TRSF E-BANKING CR 18/12 /95031/00000 MEIDIA AS",
+                "EndingBalance": 157035085.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 400000.0,
+                "Date": "2022-12-19",
+                "Description": "TRSF E-BANKING CR 1908/FTSCY/WS95051 400000.00 2022081921686543 TRFDN-BERRY ESPAY DEBIT INDONE",
+                "EndingBalance": 157435085.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 7500.0,
+                "Date": "2022-12-19",
+                "Description": "BIAYA ADM",
+                "EndingBalance": 157427585.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500000.0,
+                "Date": "2022-12-22",
+                "Description": "BI-FAST CR BIF TRANSFER DR 008 MEIDIA NURUL TAM",
+                "EndingBalance": 159927585.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 75000.0,
+                "Date": "2022-12-23",
+                "Description": "BIAYA KARTU ATM BIAYA KARTU ATM",
+                "EndingBalance": 159852585.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1700000.0,
+                "Date": "2022-12-25",
+                "Description": "TRSF E-BANKING CR 25/12 /95031/00000 KOS BU OCOH SURYA",
+                "EndingBalance": 161552585.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1250000.0,
+                "Date": "2022-12-25",
+                "Description": "TARIKAN ATM 25/12",
+                "EndingBalance": 160302585.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 135200.0,
+                "Date": "2022-12-25",
+                "Description": "TRSF E-BANKING DB 2512/FTFVA/WS95341 70070/ABDI - -1546903116644",
+                "EndingBalance": 160167385.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 52500.0,
+                "Date": "2022-12-25",
+                "Description": "BYR VIA E-BANKING 25/12  WSID9503100 0865 PLN PREPAID 5471020376798 SHERLYANA",
+                "EndingBalance": 160114885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 550000.0,
+                "Date": "2022-12-26",
+                "Description": "BI-FAST DB BIF TRANSFER KE 009 AYI INDRAWAN M-BCA",
+                "EndingBalance": 159564885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500.0,
+                "Date": "2022-12-26",
+                "Description": "BI-FAST DB BIF BIAYA TXN KE 009 ELYROSA M-BCA",
+                "EndingBalance": 159562385.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 152870.0,
+                "Date": "2022-12-29",
+                "Description": "KARTU DEBIT SUPERINDO MPG 6019005037505987",
+                "EndingBalance": 159409515.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 45500.0,
+                "Date": "2022-12-29",
+                "Description": "TRSF E-BANKING DB 2912/FTFVA/WS95031 12208/SHOPEEPAY - - 129970538",
+                "EndingBalance": 159364015.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 15000000.0,
+                "Date": "2022-12-29",
+                "Description": "BI-FAST DB BIF TRANSFER KE 008 JUMAIDI M-BCA",
+                "EndingBalance": 144364015.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500.0,
+                "Date": "2022-12-29",
+                "Description": "BI-FAST DB BIF BIAYA TXN KE 008 VERFA S M-BCA",
+                "EndingBalance": 144361515.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 25000000.0,
+                "Date": "2022-12-29",
+                "Description": "BI-FAST CR BIF TRANSFER DR 002 CUPITA S",
+                "EndingBalance": 169361515.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1525000.0,
+                "Date": "2022-12-31",
+                "Description": "TRSF E-BANKING CR 31/12 /95031/00000 AULIA H",
+                "EndingBalance": 170886515.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0.13,
+                "Date": "2022-12-31",
+                "Description": "DR KOREKSI BUNGA",
+                "EndingBalance": 170886514.87,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 3584.91,
+                "Date": "2022-12-31",
+                "Description": "BUNGA",
+                "EndingBalance": 170890099.78,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 716.96,
+                "Date": "2022-12-31",
+                "Description": "PAJAK BUNGA DO AWAL : ASI CR : ASI DB : DO AKHIR : 1",
+                "EndingBalance": 170889385.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 25000000.0,
+                "Date": "2023-01-01",
+                "Description": "BI-FAST CR BIF TRANSFER DR 008 VALEN CHRISTIE",
+                "EndingBalance": 195889385.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 550000.0,
+                "Date": "2023-01-01",
+                "Description": "KR OTOMATIS BCA22096801454 AURELIA SASMIT AutoCr-PL",
+                "EndingBalance": 196439385.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1750000.0,
+                "Date": "2023-01-02",
+                "Description": "BI-FAST CR BIF TRANSFER DR 008 HERU G H",
+                "EndingBalance": 198189385.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 350000.0,
+                "Date": "2023-01-05",
+                "Description": "TRSF E-BANKING DB 03/12 /95031/00000 DIAN ZAENAL",
+                "EndingBalance": 197839385.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500000.0,
+                "Date": "2023-01-05",
+                "Description": "TRSF E-BANKING CR 03/09 /95031/00000 UANG KOS HENDY",
+                "EndingBalance": 200339385.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 75000.0,
+                "Date": "2023-01-05",
+                "Description": "TRSF E-BANKING DB 0409/FTFVA/WS95023 12208/SHOPEEPAY - - 129970538",
+                "EndingBalance": 200264385.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 77500.0,
+                "Date": "2023-01-05",
+                "Description": "BYR VIA E-BANKING 04/12  WSID9503100 0865 PLN PREPAID 32127997789 KINANTI S",
+                "EndingBalance": 200186885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1600000.0,
+                "Date": "2023-01-05",
+                "Description": "TRSF E-BANKING CR 05/12 /95031/00000 BAYAR KONTRKN SEP 22 IWAN",
+                "EndingBalance": 201786885.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 251000.0,
+                "Date": "2023-01-06",
+                "Description": "TRSF E-BANKING DB 0509/FTFVA/WS95031 12208/SHOPEEPAY - - 129945338",
+                "EndingBalance": 201535885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 15000000.0,
+                "Date": "2023-01-08",
+                "Description": "BI-FAST CR BIF TRANSFER DR 002 AHM. DRS. AJI",
+                "EndingBalance": 216535885.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 750000.0,
+                "Date": "2023-01-09",
+                "Description": "BI-FAST DB BIF TRANSFER KE 008 AHM. DRS. AJI M-BCA",
+                "EndingBalance": 215785885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500.0,
+                "Date": "2023-01-09",
+                "Description": "BI-FAST DB BIF BIAYA TXN KE 008 AHM. DRS. AJI M-BCA",
+                "EndingBalance": 215783385.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1525000.0,
+                "Date": "2023-01-09",
+                "Description": "BI-FAST DB BIF TRANSFER KE 008 AHM. DRS. AJI M-BCA",
+                "EndingBalance": 214258385.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500.0,
+                "Date": "2023-01-09",
+                "Description": "BI-FAST DB BIF BIAYA TXN KE 008 AHM.DRS. AJI M-BCA",
+                "EndingBalance": 214255885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 165000.0,
+                "Date": "2023-01-12",
+                "Description": "TRSF E-BANKING DB 1009/FTFVA/WS95341 12208/SHOPEEPAY - - 129970456",
+                "EndingBalance": 214090885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 152500.0,
+                "Date": "2023-01-14",
+                "Description": "BYR VIA E-BANKING 14/12  WSID9503100 0865 PLN PAID 32127997889 SHOPIA R",
+                "EndingBalance": 213938885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 75000.0,
+                "Date": "2023-01-15",
+                "Description": "TRSF E-BANKING DB 1509/FTFVA/WS95031 12208/SHOPEEPAY - - 129970557",
+                "EndingBalance": 213863885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2000000.0,
+                "Date": "2023-01-15",
+                "Description": "KR OTOMATIS BCA22098148272 DINAR ANJELI Kost sept dinar AutoCr-PL",
+                "EndingBalance": 215863385.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 166000.0,
+                "Date": "2023-01-16",
+                "Description": "TRSF E-BANKING DB 1609/FTFVA/WS95031 12208/SHOPEEPAY - - 129970432",
+                "EndingBalance": 215697385.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 7500.0,
+                "Date": "2023-01-16",
+                "Description": "BIAYA ADM",
+                "EndingBalance": 215689885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 250000.0,
+                "Date": "2023-01-19",
+                "Description": "TRSF E-BANKING CR 18/12 /95031/00000 GUSNANDAR",
+                "EndingBalance": 215939885.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 2201000.0,
+                "Date": "2023-01-20",
+                "Description": "TRSF E-BANKING DB 2009/FTFVA/WS95031 12208/SHOPEEPAY - - 5782532880",
+                "EndingBalance": 213738885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 703000.0,
+                "Date": "2023-01-22",
+                "Description": "TRSF E-BANKING DB 2109/FTFVA/WS95031 12208/SHOPEEPAY - - 129970098",
+                "EndingBalance": 213035885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 800000.0,
+                "Date": "2023-01-22",
+                "Description": "BI-FAST DB BIF TRANSFER KE 022 KRISNA A M-BCA",
+                "EndingBalance": 212235885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500.0,
+                "Date": "2023-01-22",
+                "Description": "BI-FAST DB BIF BIAYA TXN KE 022 KRISNA A M-BCA",
+                "EndingBalance": 212223385.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 450000.0,
+                "Date": "2023-01-22",
+                "Description": "TRSF E-BANKING DB 2209/FTCLS/WS95035 Q0812XXXXXX13 dp KULKAS EKO",
+                "EndingBalance": 211773385.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 3150000.0,
+                "Date": "2023-01-22",
+                "Description": "TRSF E-BANKING CR 2209/FTSCY/WS95051 3150000.00 2022092292001643 TRFDN-DRS. KURNIA ESPAY DEBIT INDONE",
+                "EndingBalance": 214923385.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 2750000.0,
+                "Date": "2023-01-22",
+                "Description": "TRSF E-BANKING DB 2209/FTCLS/WS95031 Q0812XXXXXX13 pelunasan KULKAS EKO",
+                "EndingBalance": 212173385.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1700000.0,
+                "Date": "2023-01-23",
+                "Description": "TRSF E-BANKING CR 23/12 /95051/00000 KOS BU OCOH HENDY S",
+                "EndingBalance": 213873385.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1750000.0,
+                "Date": "2023-01-26",
+                "Description": "TRSF E-BANKING DB 24/12 /95051/00000 EKO",
+                "EndingBalance": 212123385.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 301000.0,
+                "Date": "2023-01-26",
+                "Description": "TRSF E-BANKING DB 2409/FTFVA/WS95051 12208/SHOPEEPAY - - 1317209634",
+                "EndingBalance": 211822385.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 152500.0,
+                "Date": "2023-01-26",
+                "Description": "BYR VIA E-BANKING 25/12  WSID9503100 0865 PLN PREPAID 32127997748 SEPTHRIA",
+                "EndingBalance": 211669885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 143000.0,
+                "Date": "2023-01-26",
+                "Description": "TRSF E-BANKING DB 2609/FTFVA/WS95031 12208/SHOPEEPAY - - 1299702345",
+                "EndingBalance": 211526885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 800000.0,
+                "Date": "2023-01-26",
+                "Description": "TRSF E-BANKING DB 26/12 /95031/00000 UTARI FIA",
+                "EndingBalance": 210726885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 356000.0,
+                "Date": "2023-01-27",
+                "Description": "TRSF E-BANKING DB 2709/FTFVA/WS95031 12208/SHOPEEPAY - - 1299705908",
+                "EndingBalance": 210370885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1900000.0,
+                "Date": "2023-01-28",
+                "Description": "SWITCHING CR TRANSFER  DR 009 SDRI DERA UTARI NO /INDOMARET K",
+                "EndingBalance": 212270885.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 5000000.0,
+                "Date": "2023-01-28",
+                "Description": "BI-FAST CR BIF TRANSFER DR 008 CHRISTIAN TAM",
+                "EndingBalance": 217270885.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 67000.0,
+                "Date": "2023-01-29",
+                "Description": "TRSF E-BANKING DB 2809/FTFVA/WS95031 12208/SHOPEEPAY - -5782532754",
+                "EndingBalance": 217203885.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 6705698.0,
+                "Date": "2023-01-29",
+                "Description": "TRSF E-BANKING DB 2909/FTFVA/WS95031 12208/SHOPEEPAY - - 129970689",
+                "EndingBalance": 210498196.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2050000.0,
+                "Date": "2023-01-29",
+                "Description": "BI-FAST CR BIF TRANSFER DR 002 RAHMAT HIDAYAT",
+                "EndingBalance": 212548196.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 4500000.0,
+                "Date": "2023-01-29",
+                "Description": "TRSF E-BANKING DB 29/12 /95031/00000 MOH HABIBI",
+                "EndingBalance": 208048196.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 265000.0,
+                "Date": "2023-01-29",
+                "Description": "TRSF E-BANKING DB 2909/FTFVA/WS95031 12208/SHOPEEPAY - - 129970853",
+                "EndingBalance": 207783196.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 268000.0,
+                "Date": "2023-01-30",
+                "Description": "TRSF E-BANKING DB 3009/FTFVA/WS95031 12208/SHOPEEPAY - - 1299702354",
+                "EndingBalance": 207515196.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 600000.0,
+                "Date": "2023-01-30",
+                "Description": "BI-FAST DB BIF TRANSFER KE 008 AHM. DRS. AJI M-BCA",
+                "EndingBalance": 206915196.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500.0,
+                "Date": "2023-01-30",
+                "Description": "BI-FAST DB BIF BIAYA TXN KE 008 AHMD. DRS. AJI M-BCA",
+                "EndingBalance": 206912696.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1200000.0,
+                "Date": "2023-01-30",
+                "Description": "SWITCHING CR TRANSFERDR 111 TIARA S /KEL PEJATEN",
+                "EndingBalance": 208112696.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 4289.24,
+                "Date": "2023-01-30",
+                "Description": "BUNGA",
+                "EndingBalance": 208116985.24,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 857.0,
+                "Date": "2023-01-30",
+                "Description": "PAJAK BUNGA DO AWAL : 1 ASI CR : ASI DB : DO AKHIR : 2",
+                "EndingBalance": 208116128.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 3743188.0,
+                "Date": "2023-02-02",
+                "Description": "BI-FAST DB BIF TRANSFER DR 535 NAOMI DIFANA",
+                "EndingBalance": 211859316.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2354000.0,
+                "Date": "2023-02-02",
+                "Description": "TRSF E-BANKING DB 0101/FTFVA/WS95031 12208/SHOPEEPAY - - 129970235",
+                "EndingBalance": 209505316.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2750000.0,
+                "Date": "2023-02-02",
+                "Description": "BI-FAST CR BIF TRANSFER DR 008 SEPHTRIA",
+                "EndingBalance": 212255316.24,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 2553000.0,
+                "Date": "2023-02-03",
+                "Description": "TRSF E-BANKING CR 0301/FTSCY/WS95031 2553000.00 uang kos dan wifi HENDY",
+                "EndingBalance": 214808316.24,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1030000.0,
+                "Date": "2023-02-03",
+                "Description": "TRSF E-BANKING CR 0301/FTSCY/WS95031 1030000.00 RISKA INDRIANI",
+                "EndingBalance": 215838316.24,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 5650000.0,
+                "Date": "2023-02-04",
+                "Description": "KARTU DEBIT P STORE BIG-HO 60190050375053478",
+                "EndingBalance": 210188316.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 152500.0,
+                "Date": "2023-02-06",
+                "Description": "BYR VIA E-BANKING 06/01  WSID9503100 0865 PLN PREPAID 32127997532 DENDY SETIA",
+                "EndingBalance": 210035816.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 432000.0,
+                "Date": "2023-02-07",
+                "Description": "TRSF E-BANKING DB 0701/FTFVA/WS95031 12208/SHOPEEPAY - - FKARISMA",
+                "EndingBalance": 209603816.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500000.0,
+                "Date": "2023-02-07",
+                "Description": "SWITCHING CR TRANSFERDR 111 MUDIAH /RSUD JATI P",
+                "EndingBalance": 212103816.24,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 450000.0,
+                "Date": "2023-02-07",
+                "Description": "TRSF E-BANKING DB 0701/FTSCY/WS95031 450000.00 MUDIAH",
+                "EndingBalance": 211653816.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 5050000.0,
+                "Date": "2023-02-10",
+                "Description": "TRSF E-BANKING CR 10/01 /ZP9K1/00000 CICI SERLINA",
+                "EndingBalance": 216703816.24,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 700000.0,
+                "Date": "2023-02-11",
+                "Description": "TRSF E-BANKING CR 1101/FTSCY/WS95031 700000.00 bayar kosan bulan Februari HENDY",
+                "EndingBalance": 217403816.24,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 3000000.0,
+                "Date": "2023-02-14",
+                "Description": "BI-FAST DB BIF TRANSFER KE 008 HANA TINA M-BCA",
+                "EndingBalance": 214403816.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500.0,
+                "Date": "2023-02-14",
+                "Description": "BI-FAST DB BIF BIAYA TXN KE",
+                "EndingBalance": 214401316.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 450000.0,
+                "Date": "2023-02-14",
+                "Description": "BI-FAST DB BIF TRANSFER KE 008 AHM. DRS. AJI M-BCA",
+                "EndingBalance": 213951316.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500.0,
+                "Date": "2023-02-14",
+                "Description": "BI-FAST DB BIF BIAYA TXN KE 008 AHM. DRS. AJI M-BCA",
+                "EndingBalance": 213948816.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 67154.0,
+                "Date": "2023-02-14",
+                "Description": "TRSF E-BANKING DB 1401/FTSCY/WS95031 67154.00 TRINUSA TRAVELINDO",
+                "EndingBalance": 213881662.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 86057.0,
+                "Date": "2023-02-14",
+                "Description": "TRSF E-BANKING DB 1401/FTSCY/WS95031 85057.22 TRINUSA TRAVELINDO",
+                "EndingBalance": 213795605.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 842000.0,
+                "Date": "2023-02-14",
+                "Description": "TRANSAKSI DEBIT TGL: 14/01 QR 912 00000.00SPBU Kunin",
+                "EndingBalance": 212953605.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2830000.0,
+                "Date": "2023-02-15",
+                "Description": "TRSF E-BANKING CR 1501/FTSCY/WS95031 2830000.00 KURNIADI januari ANJI KURNIADI",
+                "EndingBalance": 215783605.24,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 653420.0,
+                "Date": "2023-02-15",
+                "Description": "KARTU DEBIT SUPERINDO MPG 6019005037505457",
+                "EndingBalance": 215130185.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2442000.0,
+                "Date": "2023-02-16",
+                "Description": "BI-FAST CR BIF TRANSFER DR 008 LUSIA SYAFRIAN TAM",
+                "EndingBalance": 217572185.24,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 201500.0,
+                "Date": "2023-02-16",
+                "Description": "BYR VIA E-BANKING 16/01  WSID9503100 0865 PLN PREPAID 32127997958 MEDIA NURUL H",
+                "EndingBalance": 217370685.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 800000.0,
+                "Date": "2023-02-17",
+                "Description": "SWITCHING WITHDRAWAL DI 111 KEL PEJATEN TIMUR",
+                "EndingBalance": 216570685.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 7500.0,
+                "Date": "2023-02-17",
+                "Description": "SWITCHING BIAYA TXN  DI 111 KEL PEJATEN TIMUR",
+                "EndingBalance": 216563185.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 320000.0,
+                "Date": "2023-02-19",
+                "Description": "TRSF E-BANKING DB 1901/FTFVA/WS95031 12208/SHOPEEPAY - - 1299703456",
+                "EndingBalance": 216243185.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 235335.0,
+                "Date": "2023-02-19",
+                "Description": "TRSF E-BANKING DB 1901/FTFVA/WS95031 70070/KINGKONG - -1584558085894",
+                "EndingBalance": 216007850.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 3000000.0,
+                "Date": "2023-02-20",
+                "Description": "SWITCHING DB TRANSFERKE 002 AHM. DRS. AJI /M-BCA",
+                "EndingBalance": 213007850.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 6500.0,
+                "Date": "2023-02-20",
+                "Description": "SWITCHING DB TRANSFERKE 002",
+                "EndingBalance": 213001350.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 152500.0,
+                "Date": "2023-02-20",
+                "Description": "KARTU DEBIT JASPER SKIN TIARA 6019005037505748",
+                "EndingBalance": 212848850.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 7500.0,
+                "Date": "2023-02-20",
+                "Description": "BIAYA ADM",
+                "EndingBalance": 212841350.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 352400.0,
+                "Date": "2023-02-22",
+                "Description": "TRSF E-BANKING DB 2201/FTFVA/WS95031 12208/SHOPEEPAY - - 12997058752",
+                "EndingBalance": 212488950.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 252000.0,
+                "Date": "2023-02-23",
+                "Description": "KARTU DEBIT KFC TEBET 0316 6019005037505547",
+                "EndingBalance": 212236950.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 900000.0,
+                "Date": "2023-02-23",
+                "Description": "KARTU DEBIT SPBU 34.12701,WR.J 6019005037505783",
+                "EndingBalance": 211336950.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 211000.0,
+                "Date": "2023-02-24",
+                "Description": "TRSF E-BANKING DB 2401/FTFVA/WS95031 12208/SHOPEEPAY - - 13172093254",
+                "EndingBalance": 211125950.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 860000.0,
+                "Date": "2023-02-28",
+                "Description": "TRSF E-BANKING CR 2501/FTSCY/WS95031 860000.00 kos dan wifi OCOH HENDY",
+                "EndingBalance": 211985950.24,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 55500.0,
+                "Date": "2023-02-28",
+                "Description": "BYR VIA E-BANKING 28/01  WSID9503100 0865 PLN PREPAID 32127997244 TIARA SAFT",
+                "EndingBalance": 211930450.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 4630000.0,
+                "Date": "2023-02-28",
+                "Description": "BI-FAST CR BIF TRANSFER DR 002 RAHMITA SARI",
+                "EndingBalance": 216560450.24,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 163000.0,
+                "Date": "2023-02-28",
+                "Description": "TRSF E-BANKING DB 3001/FTFVA/WS95031 12208/SHOPEEPAY - - 1299701234",
+                "EndingBalance": 216397450.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 897000.0,
+                "Date": "2023-02-28",
+                "Description": "BI-FAST CR BIF TRANSFER DR 535 OPI KRISNA",
+                "EndingBalance": 217294450.24,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 350000.0,
+                "Date": "2023-02-28",
+                "Description": "KARTU DEBIT DUI TEBET 6019005037552647",
+                "EndingBalance": 216944450.24,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 7000000.0,
+                "Date": "2023-02-28",
+                "Description": "SWITCHING CR TRANSFERDR 111 JELITA DEWI /KCP KEC TEB",
+                "EndingBalance": 223944450.24,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1.02,
+                "Date": "2023-02-28",
+                "Description": "CR KOREKSI BUNGA",
+                "EndingBalance": 223944451.26000002,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 4588.04,
+                "Date": "2023-02-28",
+                "Description": "BUNGA",
+                "EndingBalance": 223949039.3,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 917.81,
+                "Date": "2023-02-28",
+                "Description": "PAJAK BUNGA DO AWAL : 2 ASI CR : ASI DB : DO AKHIR : 2",
+                "EndingBalance": 223948121.49,
+                "Type": "DEBIT"
+            }
+        ],
+        "TransactionSummary": [
+            {
+                "BeginningBalance": 134250005.0,
+                "Credit": 56553584.91,
+                "CreditFreq": 18.0,
+                "Debit": 19914207.09,
+                "DebitFreq": 23.0,
+                "EndingBalance": 170889382.82,
+                "Period": "2022-12-01",
+                "WarningMutasi2": true,
+                "WarningMutasi2Description": "Ada selisih antara saldo akhir dengan saldo awal, total debit dan total kredit dari transaksi di periode 2022-12-01."
+            },
+            {
+                "BeginningBalance": 170889385.0,
+                "Credit": 63654289.24,
+                "CreditFreq": 15.0,
+                "Debit": 26417555.0,
+                "DebitFreq": 33.0,
+                "EndingBalance": 208126119.24,
+                "Period": "2023-01-01",
+                "WarningMutasi2": true,
+                "WarningMutasi2Description": "Ada selisih antara saldo akhir dengan saldo awal, total debit dan total kredit dari transaksi di periode 2023-01-01."
+            },
+            {
+                "BeginningBalance": 208116128.24,
+                "Credit": 33246589.06,
+                "CreditFreq": 14.0,
+                "Debit": 24900971.81,
+                "DebitFreq": 31.0,
+                "EndingBalance": 216461745.49,
+                "Period": "2023-02-01",
+                "WarningMutasi2": true,
+                "WarningMutasi2Description": "Ada selisih antara saldo akhir dengan saldo awal, total debit dan total kredit dari transaksi di periode 2023-02-01."
+            }
+        ]
+    },
+    "read_confidence": {
+        "Identity": {
+            "AccountNumber": 0.98396,
+            "BankOffice": 0.93647,
+            "EndingBalance": 0.6821,
+            "Name": 0.92483
+        },
+        "TransactionSummary": [
+            {
+                "BeginningBalance": 0.637,
+                "Credit": 0.637,
+                "Debit": 0.637,
+                "EndingBalance": 0.637,
+                "Period_date": "2022-12-01"
+            },
+            {
+                "BeginningBalance": 0.637,
+                "Credit": 0.637,
+                "Debit": 0.637,
+                "EndingBalance": 0.637,
+                "Period_date": "2023-01-01"
+            },
+            {
+                "BeginningBalance": 0.637,
+                "Credit": 0.637,
+                "Debit": 0.637,
+                "EndingBalance": 0.637,
+                "Period_date": "2023-02-01"
+            }
+        ]
+    },
+    "status": "SUCCESS"
+}
