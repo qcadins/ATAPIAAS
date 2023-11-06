@@ -25,7 +25,7 @@
       <name>ExcelPathOCRTesting</name>
    </variable>
    <variable>
-      <defaultValue>'OCR Liveness + FaceCompare'</defaultValue>
+      <defaultValue>''</defaultValue>
       <description></description>
       <id>3c11fc26-3b42-4ea7-b2f7-0f3f8c340483</id>
       <masked>false</masked>

@@ -16,16 +16,23 @@ import org.openqa.selenium.WebDriver
 import java.sql.Connection
 
 'mencari directory excel\r\n'
+GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/1. Login.xlsm')
+
+sheet = 'Link Base Url'
+
+'get base url'
+GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, rowExcel('OCR KK'))
+
+'mencari directory excel utama'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+
+sheet = 'OCR KK'
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
-
-'get base url'
-GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 5)
 
 'dekalrasi string yang akan digunakan berulang'
 String responseBody, beautifyResult, message_ocr, state_ocr
@@ -39,7 +46,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'ambil kode tenant di DB'
 		String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn,
-			findTestData(ExcelPathOCRTesting).getValue(2, rowExcel('UsernameLogin')))
+			findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('UsernameLogin')))
 		
 		'ambil key trial yang aktif dari DB'
 		String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode,  GlobalVariable.SettingEnvi)

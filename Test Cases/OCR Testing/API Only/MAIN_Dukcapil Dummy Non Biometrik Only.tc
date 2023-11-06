@@ -25,7 +25,7 @@
       <name>ExcelPathOCRTesting</name>
    </variable>
    <variable>
-      <defaultValue>'Dukcapil(NonBiom)'</defaultValue>
+      <defaultValue>''</defaultValue>
       <description></description>
       <id>4436cc00-743d-485e-a1bf-93203fffb093</id>
       <masked>false</masked>

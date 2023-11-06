@@ -25,7 +25,7 @@
       <name>ExcelPathOCRTesting</name>
    </variable>
    <variable>
-      <defaultValue>'OCR Passport'</defaultValue>
+      <defaultValue>''</defaultValue>
       <description></description>
       <id>90132161-6d55-4a0b-8ccb-1f989ed72db2</id>
       <masked>false</masked>

@@ -17,16 +17,23 @@ import org.openqa.selenium.Keys
 import org.openqa.selenium.WebDriver
 
 'mencari directory excel\r\n'
+GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/1. Login.xlsm')
+
+sheet = 'Link Base Url'
+
+'get base url'
+GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, rowExcel('OCR NPWP'))
+
+'mencari directory excel utama'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+
+sheet = 'OCR NPWP'
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
-
-'get base url'
-GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 7)
 
 String responseBody, beautifyResult, message_ocr, state_ocr
 

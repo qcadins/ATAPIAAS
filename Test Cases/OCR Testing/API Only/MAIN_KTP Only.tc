@@ -25,7 +25,7 @@
       <name>ExcelPathOCRTesting</name>
    </variable>
    <variable>
-      <defaultValue>'OCR KTP'</defaultValue>
+      <defaultValue>''</defaultValue>
       <description></description>
       <id>0c31d039-f48c-4008-a68a-c806d37a4d67</id>
       <masked>false</masked>

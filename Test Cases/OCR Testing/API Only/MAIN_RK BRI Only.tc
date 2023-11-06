@@ -25,7 +25,7 @@
       <name>ExcelPathOCRTesting</name>
    </variable>
    <variable>
-      <defaultValue>'OCR RK BRI'</defaultValue>
+      <defaultValue>''</defaultValue>
       <description></description>
       <id>a40dee0a-e38a-436d-b993-61f5502ec410</id>
       <masked>false</masked>

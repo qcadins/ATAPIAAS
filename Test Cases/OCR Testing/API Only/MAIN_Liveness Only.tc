@@ -25,7 +25,7 @@
       <name>ExcelPathOCRTesting</name>
    </variable>
    <variable>
-      <defaultValue>'OCR Liveness'</defaultValue>
+      <defaultValue>''</defaultValue>
       <description></description>
       <id>0b4301db-af40-4586-a06c-14b5e271b65c</id>
       <masked>false</masked>
