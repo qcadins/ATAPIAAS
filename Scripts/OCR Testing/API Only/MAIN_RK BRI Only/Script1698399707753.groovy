@@ -77,13 +77,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		]))
 		
 		'ambil message respon dari HIT tersebut'
-		message = WS.getElementPropertyValue(response, 'message')
+		message = WS.getElementPropertyValue(response, 'message', FailureHandling.CONTINUE_ON_FAILURE)
 					
 		'ambil status dari respon HIT tersebut'
-		state = WS.getElementPropertyValue(response, 'status')
+		state = WS.getElementPropertyValue(response, 'status', FailureHandling.CONTINUE_ON_FAILURE)
 			
 		'Jika status HIT API 200 OK'
-		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) {
+		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true && message != null && state != null) {
 			
 			'ambil body dari hasil respons'
 			responseBody = response.getResponseBodyContent()

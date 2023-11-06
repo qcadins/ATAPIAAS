@@ -72,13 +72,13 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			('img'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('$IMG')),
 			('key'):thekey,
 			('tenant'):tenantcode
-		]))
+		]), FailureHandling.CONTINUE_ON_FAILURE)
 		
 		'ambil message respon dari HIT tersebut'
-		message_ocr = WS.getElementPropertyValue(response, 'message')
+		message_ocr = WS.getElementPropertyValue(response, 'message', FailureHandling.CONTINUE_ON_FAILURE)
 					
 		'ambil status dari respon HIT tersebut'
-		state_ocr = WS.getElementPropertyValue(response, 'status')
+		state_ocr = WS.getElementPropertyValue(response, 'status', FailureHandling.CONTINUE_ON_FAILURE)
 			
 		'Jika status HIT API 200 OK'
 		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) {

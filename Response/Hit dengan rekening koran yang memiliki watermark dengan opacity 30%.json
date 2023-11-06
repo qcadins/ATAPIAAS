@@ -1,0 +1,1685 @@
+{
+    "message": "",
+    "num_of_pages": 9,
+    "ocr_date": "2023-11-03T17:02:42+07:00",
+    "read": {
+        "Identity": {
+            "AccountNumber": "1090017873696",
+            "Address": "",
+            "AlternateIncome1": 0.0,
+            "AlternateIncome2": 8435809.0,
+            "AlternateIncome3": 5878004.13,
+            "AlternateIncome4": 1939741.36,
+            "AlternateIncomeFinal": 8435809.0,
+            "Branch": "Palm Spring",
+            "CardNumber": "",
+            "CreditTransactionsLast3Months": 487874343.13,
+            "Currency": "Indonesia Supiah",
+            "DebitTransactionsLast3Months": 440163324.17,
+            "EndingBalance": 49574165.37,
+            "NPWP": "",
+            "Name": "RT.005 RW.003",
+            "ProductName": "TAB MANDIRI",
+            "TotalTransactionsCreditLast3Months": 83,
+            "TotalTransactionsDebitLast3Months": 114,
+            "TotalTransactionsLast3Months": 197,
+            "WarningMutasi1": true,
+            "WarningMutasi1Description": "Ada selisih antara saldo akhir dengan saldo awal, total debit dan total kredit dari seluruh transaksi."
+        },
+        "TransactionHistory": [
+            {
+                "Amount": 1500000.0,
+                "Date": "2019-06-04",
+                "Description": "Tarik ATM SPAWECTH 76772872655 / ATM - CB",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 7964850.0,
+                "Date": "2019-06-05",
+                "Description": "Transfer SMS OFF9196697 / 0000255896 / VAP",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2100000.0,
+                "Date": "2019-06-08",
+                "Description": "Tarik ATM $ 3VNABHW / 2265202717 / ATM - IM",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1250000.0,
+                "Date": "2019-06-10",
+                "Description": "S1AWK38U / 5156850580 / ATM",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1700000.0,
+                "Date": "2019-06-14",
+                "Description": "VWPS S1AWK38U / 3761852077AM - LANGGU",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2200000.0,
+                "Date": "2019-06-16",
+                "Description": "$ 1AW1386 / 5156540753 / ATM - BTM TUNAS",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 3500.0,
+                "Date": "2019-06-19",
+                "Description": "UVP70656520507FFFFFF430870207688",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 119950.0,
+                "Date": "2019-06-19",
+                "Description": "UVP70656520507FFFFFF430870207688",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 3500.0,
+                "Date": "2019-06-19",
+                "Description": "RE227030501FFFFFF520570767234",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 300750.0,
+                "Date": "2019-06-19",
+                "Description": "UBP40227030501FFFFFF520570767234",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 17164600.0,
+                "Date": "2019-06-21",
+                "Description": "KE DONY W NAINGGOLAN Transfer",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-06-23",
+                "Description": "S MONHTLY CARD CHARGE",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 8095000.0,
+                "Date": "2019-06-26",
+                "Description": "Transfer ATM - DARI GUNAWAN BUDI UGROHO",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 300000.0,
+                "Date": "2019-06-27",
+                "Description": "STANAC80 / 6756489595 / ATM - ARTHAMAS",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 43890000.0,
+                "Date": "2019-06-29",
+                "Description": "DARI BERTRAND SANUSI Transfer ATM",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 12500.0,
+                "Date": "2019-06-30",
+                "Description": "Biaya Adm",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 8473.47,
+                "Date": "2019-06-30",
+                "Description": "Bunga",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1694.69,
+                "Date": "2019-06-30",
+                "Description": "Pajak Office",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 3725.25,
+                "Date": "2019-07-01",
+                "Description": "Transfed2S 69196696 / 0000161990 / VAPPS",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 5800.0,
+                "Date": "2019-07-02",
+                "Description": "FRA CR Transf - 1380014134931",
+                "EndingBalance": 231376329.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 384600.0,
+                "Date": "2019-07-06",
+                "Description": "PRMA DR Transf - S1AW13H4 / 5172522792 / PRM - BAHTERA",
+                "EndingBalance": 229876329.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 6500.0,
+                "Date": "2019-07-06",
+                "Description": "PRMA DR Transf",
+                "EndingBalance": 221911479.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 3500.0,
+                "Date": "2019-07-06",
+                "Description": "UBP60113030501FFFFFF520570238876",
+                "EndingBalance": 219811479.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 334050.0,
+                "Date": "2019-07-06",
+                "Description": "OHP60113030501FFFFFF520570238876",
+                "EndingBalance": 218561479.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 3500.0,
+                "Date": "2019-07-06",
+                "Description": "UBP60113030501FFFFFF52057020547",
+                "EndingBalance": 216861479.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 200350.0,
+                "Date": "2019-07-06",
+                "Description": "UBP60113030501FFFFFF520570205477 WPS",
+                "EndingBalance": 214661479.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 12019000.0,
+                "Date": "2019-07-09",
+                "Description": "FATM S1AW13H4 / 5172522795PRM - BAHTERA",
+                "EndingBalance": 214657979.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 850000.0,
+                "Date": "2019-07-11",
+                "Description": "PRMA CR Transf - 21700227680121",
+                "EndingBalance": 214538029.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 37468300.0,
+                "Date": "2019-07-13",
+                "Description": "Transfer ATM PRIMA NAULIDA",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 28229450.0,
+                "Date": "2019-07-14",
+                "Description": "Transfer SMS OFF698 / 0000998201 / VAP",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1250000.0,
+                "Date": "2019-07-16",
+                "Description": "Tarik S1AWK38Q / 5156816471 / ATM - AMIRA",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500000.0,
+                "Date": "2019-07-16",
+                "Description": "S1AWK380 / 5156816473 / ATM - AMIRA CKR",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 2.7,
+                "Date": "2019-07-21",
+                "Description": "Transfer ATM ES - KE SETIAWAN KONDLY CARD CHARGE",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-07-23",
+                "Description": "",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 34825000.0,
+                "Date": "2019-07-25",
+                "Description": "Transfer ATM - DARI NURI FEBRIANA",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 800000.0,
+                "Date": "2019-07-28",
+                "Description": "KE RIZKY H FIRMAN",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 44436900.0,
+                "Date": "2019-07-30",
+                "Description": "WIDYA MASKURI",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 2500000.0,
+                "Date": "2019-07-30",
+                "Description": "Tarik ATM QR S1AD1CRK / 6782750424 / ATM - CB",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 12500.0,
+                "Date": "2019-07-31",
+                "Description": "Biaya Ad",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 7481.29,
+                "Date": "2019-07-31",
+                "Description": "Bunga WPS",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1496.25,
+                "Date": "2019-07-31",
+                "Description": "Pajak",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 3500.0,
+                "Date": "2019-08-03",
+                "Description": "UBP60113030501FFFFFF520570205477",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 9517500.0,
+                "Date": "2019-08-03",
+                "Description": "UBP60113030501FFFFFF520570205477",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 3500.0,
+                "Date": "2019-08-09",
+                "Description": "UBP60113030501FFFFFF520570238876",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 21131850.0,
+                "Date": "2019-08-09",
+                "Description": "FUBP60113030501FFFFFF520570238876",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1700000.0,
+                "Date": "2019-08-14",
+                "Description": "$ 1AW13H4 / 5172522747 / ATM - BKS",
+                "EndingBalance": 275362558.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 27000000.0,
+                "Date": "2019-08-15",
+                "Description": "Setor Juna",
+                "EndingBalance": 312830858.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 39270000.0,
+                "Date": "2019-08-15",
+                "Description": "DARI EDGAR W LAMOSE Transfer ATM 17",
+                "EndingBalance": 284601408.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 4500.0,
+                "Date": "2019-08-23",
+                "Description": "KE HAFIF MAULANA",
+                "EndingBalance": 283351408.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 15200000.0,
+                "Date": "2019-08-18",
+                "Description": "$ 1AW13H4 PRMA DR Transf / 5172522797 / PRM - BAHTERA",
+                "EndingBalance": 280851408.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 6500.0,
+                "Date": "2019-08-18",
+                "Description": "",
+                "EndingBalance": 259064408.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 41291600.0,
+                "Date": "2019-08-19",
+                "Description": "Tran60028801984 PRMA CR Transf",
+                "EndingBalance": 259059908.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 4560000.0,
+                "Date": "2019-08-19",
+                "Description": "2870027644201",
+                "EndingBalance": 293884908.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 36276400.0,
+                "Date": "2019-08-20",
+                "Description": "PRMA DR S2BW22H8 / 2776352521 / PRM - CB PENUIN",
+                "EndingBalance": 293084908.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-08-20",
+                "Description": "",
+                "EndingBalance": 337521808.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 24712300.0,
+                "Date": "2019-08-20",
+                "Description": "PRMA DR Transf / 5156811481 / PRM - RAWA",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 6500.0,
+                "Date": "2019-08-20",
+                "Description": "",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 14350000.0,
+                "Date": "2019-08-21",
+                "Description": "PRMA DR WIESOFFDOACHM $ 3ROSGWE / 2709265433 / PRM - BTM",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 6500.0,
+                "Date": "2019-08-21",
+                "Description": "",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 20000000.0,
+                "Date": "2019-08-21",
+                "Description": "Tarik Tunai",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 2500000.0,
+                "Date": "2019-08-21",
+                "Description": "Tarik ATM $ 1ANAC80 16756489587fice",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1150000.0,
+                "Date": "2019-08-21",
+                "Description": "$ 1ANAC80 16756489589 / ATM - ARTHAMAS 1517250118",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 14400000.0,
+                "Date": "2019-08-22",
+                "Description": "Transfer SMS 69196335 / 0000991046 / VAP",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 4500.0,
+                "Date": "2019-08-23",
+                "Description": "MONHTLY CARD CHARGE",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500000.0,
+                "Date": "2019-08-24",
+                "Description": "Transfer ATM KE IMANUEL D SANJAYA 2GW17H4",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 4800000.0,
+                "Date": "2019-08-24",
+                "Description": "Setor Kas ATM $",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 2650000.0,
+                "Date": "2019-08-24",
+                "Description": "S2GW17H4 / 5172522912 / ATM - BKS TMR",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 7215700.0,
+                "Date": "2019-08-24",
+                "Description": "WW UBP60113030501FFFFFF520570201272",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 26500000.0,
+                "Date": "2019-08-25",
+                "Description": "PRMA DR Transi- S2BW22H8 / 2776352527 / PRM - CB PENUIN",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 6500.0,
+                "Date": "2019-08-25",
+                "Description": "",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 13456200.0,
+                "Date": "2019-08-25",
+                "Description": "PRMA DR Transf 15172522789 / PRM - BAHTERA",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 6500.0,
+                "Date": "2019-08-25",
+                "Description": "OFFIC3H4",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 7400000.0,
+                "Date": "2019-08-26",
+                "Description": "Transfer DARI MADE FRANS WIGUNA",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 11000000.0,
+                "Date": "2019-08-26",
+                "Description": "A DR Transf - $ 28W22H8 12776352531 / PRMS PRMA PENUIN",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 6500.0,
+                "Date": "2019-08-26",
+                "Description": "W",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-08-27",
+                "Description": "Setor Tunai",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 23608000.0,
+                "Date": "2019-08-27",
+                "Description": "Transfer ATM - KE ROZIEQ MANURUNG",
+                "EndingBalance": 363286643.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 3500.0,
+                "Date": "2019-08-27",
+                "Description": "UBP60113030501FFFFFF520570201515",
+                "EndingBalance": 338574343.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 17000000.0,
+                "Date": "2019-08-27",
+                "Description": "QF0BP60113030501FFFFFF520570201515",
+                "EndingBalance": 338567843.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1500000.0,
+                "Date": "2019-08-27",
+                "Description": "$ 1AW1386 Tarik ATM",
+                "EndingBalance": 324217843.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 8300000.0,
+                "Date": "2019-08-28",
+                "Description": "DARI HENDRIK PRAMANA Transfer",
+                "EndingBalance": 324211343.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-08-28",
+                "Description": "",
+                "EndingBalance": 344211343.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0.0,
+                "Date": "2019-08-28",
+                "Description": "UBP60113030501FFFFFF520570216523",
+                "EndingBalance": 341711343.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 3500.0,
+                "Date": "2019-08-29",
+                "Description": "UBP60113030501FFFFFF520570205358",
+                "EndingBalance": 340561343.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2653700.0,
+                "Date": "2019-08-29",
+                "Description": "UBP60113030501FFFFFF520570205358",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500000.0,
+                "Date": "2019-08-29",
+                "Description": "Tarik ATM OFSTAD1CRK 16782750424 / ATM - LBK B KEPPA",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2200000.0,
+                "Date": "2019-08-29",
+                "Description": "$ 5ABJ58U / 3155650177 / ATM",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1200000.0,
+                "Date": "2019-08-29",
+                "Description": "$ 5ABJ58U / 3155650177 / ATM - KEPRI ML",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 5700000.0,
+                "Date": "2019-08-30",
+                "Description": "TWPS Transfer ATM DARI SITI ROHMIATUN",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 850000.0,
+                "Date": "2019-08-30",
+                "Description": "KE KETUT DWI SANCAKA",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 20000000.0,
+                "Date": "2019-08-30",
+                "Description": "PRMA CR Transf- 3240027809365",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1300000.0,
+                "Date": "2019-08-30",
+                "Description": "Transfer ATM KE NINDYA BAGASWARI",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 12500.0,
+                "Date": "2019-08-31",
+                "Description": "Biaya Adm",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 8295.86,
+                "Date": "2019-08-31",
+                "Description": "Bunga Office",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1659.17,
+                "Date": "2019-08-31",
+                "Description": "Pajak",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 41700000.0,
+                "Date": "2019-09-02",
+                "Description": "PRMAPS Transf5710022760947",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 12000000.0,
+                "Date": "2019-09-02",
+                "Description": "Setor Tunai W",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 36300000.0,
+                "Date": "2019-09-02",
+                "Description": "Transfer ATM - KE IRA W MANUELA",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 3500.0,
+                "Date": "2019-09-03",
+                "Description": "UBP60113030501FFFFFF520570238876",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 17120000.0,
+                "Date": "2019-09-03",
+                "Description": "UBP60113030501FFFFFF520570238876",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 11578200.0,
+                "Date": "2019-09-05",
+                "Description": "PRMA DR TransfSZBW22H8 / 2776352556 / PRM - CB OFF",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 6500.0,
+                "Date": "2019-09-05",
+                "Description": "",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 42636700.0,
+                "Date": "2019-09-09",
+                "Description": "PRMA CR Transi- 7210029047652",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 9500000.0,
+                "Date": "2019-09-09",
+                "Description": "Transfer ATM KE AHMALIA DEWI SIREGAR",
+                "EndingBalance": 248946943.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1300000.0,
+                "Date": "2019-09-09",
+                "Description": "Tarik ATM $ 1AWK38Q / 5156816541 / ATM - KK PALM",
+                "EndingBalance": 246293243.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500000.0,
+                "Date": "2019-09-10",
+                "Description": "$ 1AWK380 15156816545 / ATM - KK PALM",
+                "EndingBalance": 243793243.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 18000000.0,
+                "Date": "2019-09-11",
+                "Description": "Setor Tunai OFV380014134931",
+                "EndingBalance": 241593243.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 3500.0,
+                "Date": "2019-09-11",
+                "Description": "UBP60113030501FFFFFF520570309822",
+                "EndingBalance": 240393243.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 24700000.0,
+                "Date": "2019-09-11",
+                "Description": "TransWPS UBP60113030501FFFFFF520570309822",
+                "EndingBalance": 246093243.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 7150000.0,
+                "Date": "2019-09-12",
+                "Description": "SMS 69192344 / 0000377630 / VAP",
+                "EndingBalance": 245243243.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 8600000.0,
+                "Date": "2019-09-13",
+                "Description": "35222782 / 0000893620 / VAP",
+                "EndingBalance": 265243243.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 11780000.0,
+                "Date": "2019-09-13",
+                "Description": "PRMA CR Transf- 8910022420281",
+                "EndingBalance": 263943243.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-13",
+                "Description": "Transfer ATM -KE MURIA B WIDHI",
+                "EndingBalance": 263142379.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-13",
+                "Description": "Tarik ATM of $ 1AWK38G / 5156816477 / ATM - AMIRA",
+                "EndingBalance": 261142379.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-14",
+                "Description": "Setor S2GW17H4 / 5172522912 / ATM - BKS KS THR",
+                "EndingBalance": 266042379.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-14",
+                "Description": "KE ISA MADE TARUNA Transfer ATM",
+                "EndingBalance": 265292379.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-16",
+                "Description": "PRMA CR Transf - 5420077011765 22791 / PRM",
+                "EndingBalance": 309562379.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-16",
+                "Description": "PRMA DR Transf- $ 1AW13H4 / 5172522791 / PRM - BAHTERA",
+                "EndingBalance": 281212379.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-16",
+                "Description": "",
+                "EndingBalance": 281205879.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-17",
+                "Description": "Tarik ATM $ 1ANAC80 / 6756489587 / ATM - ARTHAMAS",
+                "EndingBalance": 278805879.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-18",
+                "Description": "6782750424 / ATM - CB",
+                "EndingBalance": 277605879.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-19",
+                "Description": "Transfer SMS QFPIAD1CRK 37878232 / 0000786720 / VAP",
+                "EndingBalance": 253905879.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-19",
+                "Description": "32128709 / 0000142310 / VAP",
+                "EndingBalance": 246505879.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-20",
+                "Description": "Setor Tunai WPS",
+                "EndingBalance": 271505879.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-21",
+                "Description": "Transfer ATM KE DIRGA SILITONGA WWPS",
+                "EndingBalance": 254005879.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-21",
+                "Description": "KE MUHAMMAD SYAHMAWI",
+                "EndingBalance": 247610579.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-22",
+                "Description": "Tarik ATM S1AD1CRK / 6782750424 / ATM - CB",
+                "EndingBalance": 246110579.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-22",
+                "Description": "PRMA CR Transf- 2410035022763",
+                "EndingBalance": 277786479.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-22",
+                "Description": "5720088029872",
+                "EndingBalance": 294786479.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-22",
+                "Description": "Transfer KE LIDYA SITUMORANG",
+                "EndingBalance": 271333779.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 500.0,
+                "Date": "2019-06-26",
+                "Description": "Tarik ATM $ 2CK30XH / 1762450778 / BAJA 2",
+                "EndingBalance": 11955129.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1000000.0,
+                "Date": "2019-06-26",
+                "Description": "$ 50M40MN / 3760810886 / ATM - BD HANG",
+                "EndingBalance": 10955129.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 300000.0,
+                "Date": "2019-06-27",
+                "Description": "STAW1JSE / 7483693743 / ATM - MUSTAFA",
+                "EndingBalance": 10655129.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 8185809.0,
+                "Date": "2019-06-28",
+                "Description": "Transfer ATM DARI BERLIANA TAMPUBOLON",
+                "EndingBalance": 18840938.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1500000.0,
+                "Date": "2019-06-29",
+                "Description": "Tarik ATM / 8473718763 / ATM - BTM",
+                "EndingBalance": 17340938.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2000000.0,
+                "Date": "2019-06-29",
+                "Description": "$ 5AD2TKQ / 8473718763 / ATM - BTM ML",
+                "EndingBalance": 15340938.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-06-30",
+                "Description": "Biaya",
+                "EndingBalance": 15328938.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-06-30",
+                "Description": "8onge VORS",
+                "EndingBalance": 15335654.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1343.25,
+                "Date": "2019-06-30",
+                "Description": "Pajak WWPS",
+                "EndingBalance": 15334311.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 676800.0,
+                "Date": "2019-07-03",
+                "Description": "Transfer ATM - KE BUDIMAN PRAYOGO",
+                "EndingBalance": 14657511.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 450000.0,
+                "Date": "2019-07-05",
+                "Description": "PRMA CR Transf - 3060002875011",
+                "EndingBalance": 15107511.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 630000.0,
+                "Date": "2019-07-07",
+                "Description": "7030001176043",
+                "EndingBalance": 15737511.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1300000.0,
+                "Date": "2019-07-08",
+                "Description": "3090007623098",
+                "EndingBalance": 17037511.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 2500.0,
+                "Date": "2019-07-09",
+                "Description": "MONTHLY CARD CHARGE",
+                "EndingBalance": 17035011.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 874600.0,
+                "Date": "2019-07-13",
+                "Description": "PRMA DR Transt- $ 1AW13H4 / 5172522797 / PRM - RS TIARA 125",
+                "EndingBalance": 16160411.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 6300.0,
+                "Date": "2019-07-13",
+                "Description": "PRMA DR Transf",
+                "EndingBalance": 16153911.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 850000.0,
+                "Date": "2019-07-16",
+                "Description": "PRMA CR Transf - 5030003367094",
+                "EndingBalance": 17003911.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 2000000.0,
+                "Date": "2019-07-19",
+                "Description": "Tarik ATM S1AW1JSE / 7483693743 / ATM - MUSTAFA",
+                "EndingBalance": 15003911.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1250000.0,
+                "Date": "2019-07-23",
+                "Description": "STAW1JSE / 7483693752 / ATM - MUSTAFA",
+                "EndingBalance": 13753911.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 8385809.0,
+                "Date": "2019-07-26",
+                "Description": "Transfer ATM BERLIANA TAMPUBOLON",
+                "EndingBalance": 22139720.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 2139700.0,
+                "Date": "2019-07-27",
+                "Description": "KE NADYA LORIQ QANI",
+                "EndingBalance": 20000020.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1000000.0,
+                "Date": "2019-07-28",
+                "Description": "Tarik APS S7NBZFRQ / 2278118763 / ATM - BTH REPRI",
+                "EndingBalance": 19000020.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 5000000.0,
+                "Date": "2019-07-29",
+                "Description": "Tarik Tunai",
+                "EndingBalance": 14000020.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 600000.0,
+                "Date": "2019-07-30",
+                "Description": "Tarik ATM - STAWU44A / 3245480921 / ATM - KOPO",
+                "EndingBalance": 13400020.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 500000.0,
+                "Date": "2019-07-31",
+                "Description": "STAWU44A / 3245480921 / ATM - KOPO",
+                "EndingBalance": 12900020.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 12000.0,
+                "Date": "2019-07-31",
+                "Description": "Biaya Adm",
+                "EndingBalance": 12888020.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 5376.12,
+                "Date": "2019-07-31",
+                "Description": "Bunga",
+                "EndingBalance": 12893396.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1075.22,
+                "Date": "2019-07-31",
+                "Description": "Pajak Office",
+                "EndingBalance": 12892321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 400000.0,
+                "Date": "2019-08-02",
+                "Description": "Tarik , S5AD2TKQ / 8422712875 / ATM - BTML",
+                "EndingBalance": 12492321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2400.0,
+                "Date": "2019-08-03",
+                "Description": "PRMA CR Transi- 2070002876478 302276ce",
+                "EndingBalance": 14892321.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 200000.0,
+                "Date": "2019-08-04",
+                "Description": "Tarik ATM $ 3ADF531",
+                "EndingBalance": 14692321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 300000.0,
+                "Date": "2019-08-05",
+                "Description": "S7CF3TMH / 2276389014 / ATM - TERM",
+                "EndingBalance": 14392321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 500000.0,
+                "Date": "2019-08-07",
+                "Description": "S6AS5HWR / 2267487159 / ATM - BTM KABIL",
+                "EndingBalance": 13892321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 200000.0,
+                "Date": "2019-08-08",
+                "Description": "TSH 18483774939 / ATM - ID PT POS MONTHLY",
+                "EndingBalance": 13692321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2500.0,
+                "Date": "2019-08-09",
+                "Description": "CHARGE",
+                "EndingBalance": 13689821.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 4000000.0,
+                "Date": "2019-08-12",
+                "Description": "Setor Tun",
+                "EndingBalance": 17689821.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1330000.0,
+                "Date": "2019-08-12",
+                "Description": "PRMA CR Transf - 4060002784761",
+                "EndingBalance": 19019821.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 3136000.0,
+                "Date": "2019-08-12",
+                "Description": "Transfer ATM - DARI AHMAD BAHRAJZAL",
+                "EndingBalance": 22155821.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 500000.0,
+                "Date": "2019-08-13",
+                "Description": "Tarik ATM $ 3A61567 / 2987309240 / ATM - RAWA",
+                "EndingBalance": 21655821.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 200000.0,
+                "Date": "2019-08-14",
+                "Description": "S8ADG265 / 3730376536 / ATM - MAYOR",
+                "EndingBalance": 21455821.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 500000.0,
+                "Date": "2019-08-15",
+                "Description": "$ 2AD3TIH / 2267180926 / ATM - ML BTC - I",
+                "EndingBalance": 20955821.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 300000.0,
+                "Date": "2019-08-16",
+                "Description": "SPAR4WUJ 12768930263 / ATM - CB",
+                "EndingBalance": 20655821.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 431500.0,
+                "Date": "2019-08-17",
+                "Description": "Transfer ATM KE IGOR DAFAIS",
+                "EndingBalance": 20224321.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 200000.0,
+                "Date": "2019-08-18",
+                "Description": "Tarik ATM S1AD1T16 / 8473717594 / ATM - BTM DIAMOND",
+                "EndingBalance": 20024321.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 700000.0,
+                "Date": "2019-08-18",
+                "Description": "S1AD1TIG / 8473717594 / ATM - BTM",
+                "EndingBalance": 19324321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 800000.0,
+                "Date": "2019-08-19",
+                "Description": "S1AD1TIG / 8473717594 / ATM - BTM",
+                "EndingBalance": 18524321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 750000.0,
+                "Date": "2019-08-20",
+                "Description": "PRMA CR Transf - 1090006488357",
+                "EndingBalance": 19274321.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 600000.0,
+                "Date": "2019-08-20",
+                "Description": "Tarik ATM 15250668829 / ATM - DELTA",
+                "EndingBalance": 18674321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 850000.0,
+                "Date": "2019-08-22",
+                "Description": "2709166342 / ATM - RW LUMBU",
+                "EndingBalance": 17824321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 900000.0,
+                "Date": "2019-08-24",
+                "Description": "2783542891 / ATM - AMIRA KR S4RT3SDE",
+                "EndingBalance": 16924321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 400000.0,
+                "Date": "2019-08-25",
+                "Description": "S2AF4WYU / 7680165232 / ATM - BM",
+                "EndingBalance": 16524321.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 750000.0,
+                "Date": "2019-08-25",
+                "Description": "S2AF4WYU / 7680165242 / ATM - BTM",
+                "EndingBalance": 15774321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 800000.0,
+                "Date": "2019-08-27",
+                "Description": "S9AD7QWR / 2017635241 / ATM - PASTEUR",
+                "EndingBalance": 14974321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1700000.0,
+                "Date": "2019-08-28",
+                "Description": "S1DKAJS7 / 7483554619 / ATM - 8TM LBK",
+                "EndingBalance": 13274321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 500000.0,
+                "Date": "2019-08-29",
+                "Description": "$ 38WE521 / 2709166347 / ATM - RW LUMBU",
+                "EndingBalance": 12774321.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 8485809.0,
+                "Date": "2019-08-30",
+                "Description": "Transfer ATM - BERLIANA TAMPUBOLON",
+                "EndingBalance": 21260130.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1250000.0,
+                "Date": "2019-08-30",
+                "Description": "Tarik ATM / ATM - KEPRI MALL",
+                "EndingBalance": 20010130.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 200000.0,
+                "Date": "2019-08-30",
+                "Description": "S1AD1TIG / 8473717589 / ATM - BTM",
+                "EndingBalance": 19810130.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-08-30",
+                "Description": "Transfer ATM - KE CIU ZCE LIANG",
+                "EndingBalance": 18462330.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 892300.0,
+                "Date": "2019-08-30",
+                "Description": "KE FIRMAN BUKIT MARINDI ARWPS",
+                "EndingBalance": 17570030.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 700000.0,
+                "Date": "2019-08-30",
+                "Description": "Tarik ATM 184 S1AD1TIG / 8473717589 / ATM - BTM",
+                "EndingBalance": 16870030.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 356600.0,
+                "Date": "2019-08-30",
+                "Description": "Transfer ATM - KE",
+                "EndingBalance": 16513430.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 12000.0,
+                "Date": "2019-08-31",
+                "Description": "Biaya Adm",
+                "EndingBalance": 16501430.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 989.54,
+                "Date": "2019-08-31",
+                "Description": "Bunga OfficeINDA",
+                "EndingBalance": 16506419.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 997.9,
+                "Date": "2019-08-31",
+                "Description": "Pajak",
+                "EndingBalance": 16505422.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 3500.0,
+                "Date": "2019-09-01",
+                "Description": "UBG70276040107FFFFFF290170289745",
+                "EndingBalance": 16501922.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 257600.0,
+                "Date": "2019-09-01",
+                "Description": "WWPS - UBG70276040107FFFFFF290170289745",
+                "EndingBalance": 16244322.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 3500.0,
+                "Date": "2019-09-03",
+                "Description": "UBL30225040208FFFFFF520340376432",
+                "EndingBalance": 16240822.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 563300.0,
+                "Date": "2019-09-03",
+                "Description": "OBL30225040208FFFFFF520340376432",
+                "EndingBalance": 15677522.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1750000.0,
+                "Date": "2019-09-05",
+                "Description": "PRMA CR Transf4060002784761",
+                "EndingBalance": 17427522.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 300000.0,
+                "Date": "2019-09-05",
+                "Description": "Tarik ATM / 8473718767 / ATM - BTM",
+                "EndingBalance": 17127522.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 2550000.0,
+                "Date": "2019-09-08",
+                "Description": "Setor Kas , $ 1ANAN4Z / 7852902947 / ATM - CB IN",
+                "EndingBalance": 19677522.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 2500.0,
+                "Date": "2019-09-09",
+                "Description": "MONTHLY CARD CHARGE",
+                "EndingBalance": 19675022.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 200000.0,
+                "Date": "2019-09-09",
+                "Description": "Tarik ATM Z S7NB2FRA / 2278118763 / ATM - BTM KEPRI",
+                "EndingBalance": 19475022.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 400000.0,
+                "Date": "2019-09-11",
+                "Description": "S7NB2FRQ / 2278118771 / ATM - BTM KEPRI",
+                "EndingBalance": 19075022.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1150000.0,
+                "Date": "2019-09-12",
+                "Description": "S1AWAJS3 / 7483514120 / ATM - CB",
+                "EndingBalance": 17925022.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1670000.0,
+                "Date": "2019-09-13",
+                "Description": "Transfer ATM DARI MIRWAN SINAGA",
+                "EndingBalance": 19595022.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 4200000.0,
+                "Date": "2019-09-16",
+                "Description": "Setor Tunai",
+                "EndingBalance": 23795022.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1767700.0,
+                "Date": "2019-09-16",
+                "Description": "Transfer ATM Office KE OKTORA FIRMAN LUBIS",
+                "EndingBalance": 22027322.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 1215650.0,
+                "Date": "2019-09-17",
+                "Description": "KE FERBIANKA HUTAGALUNG",
+                "EndingBalance": 20811672.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1250000.0,
+                "Date": "2019-09-17",
+                "Description": "Tarik WPS $ 5AD2TKQ / 8473718763 / ATMPS ML",
+                "EndingBalance": 19561672.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-18",
+                "Description": "$ 5AD2TKQ / 8473719165 / ATM - BTM ML",
+                "EndingBalance": 17261672.0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 850000.0,
+                "Date": "2019-09-19",
+                "Description": "$ 1AW1JSE / 7483693741 / ATM - MUSTAFA",
+                "EndingBalance": 16411672.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 450000.0,
+                "Date": "2019-09-19",
+                "Description": "$ 1AW1JSE / 7483693741 / ATM - MUSTAFA",
+                "EndingBalance": 15961672.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 783700.0,
+                "Date": "2019-09-19",
+                "Description": "PRMA DR Transf / 5172522797 / PRM - RS TIARA",
+                "EndingBalance": 15177972.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 6500.0,
+                "Date": "2019-09-19",
+                "Description": "PRMA DR TransFPAN13H4",
+                "EndingBalance": 15171472.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 300000.0,
+                "Date": "2019-09-20",
+                "Description": "Tarik S7AG1JWS / 8473718763 / ATM - 8TM",
+                "EndingBalance": 14871472.0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 200.0,
+                "Date": "2019-09-20",
+                "Description": "Tarik ATM -S1AD1TIG / 8473717594 / ATM - DELT",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 1780000.0,
+                "Date": "2019-09-21",
+                "Description": "PRMA CR Transf- 3090002667927",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 750000.0,
+                "Date": "2019-09-21",
+                "Description": "Tarik ATM S5DM40MN / 3760810792 / ATM - BD HANG",
+                "EndingBalance": 0.11,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 250000.0,
+                "Date": "2019-09-22",
+                "Description": "S5AD2TKQ / 8473718271 / ATM - BTM ML",
+                "EndingBalance": 0,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 200000.0,
+                "Date": "2019-09-22",
+                "Description": "8473718271 / ATM - BTM ML",
+                "EndingBalance": 84737175.94,
+                "Type": "DEBIT"
+            },
+            {
+                "Amount": 650000.0,
+                "Date": "2019-09-23",
+                "Description": "Tra ATM DARI NICHOLAS DIN",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            },
+            {
+                "Amount": 0,
+                "Date": "2019-09-23",
+                "Description": "S2AD3TIH / 22671880",
+                "EndingBalance": 0,
+                "Type": "CREDIT"
+            }
+        ],
+        "TransactionSummary": [
+            {
+                "BeginningBalance": 1500000.0,
+                "Credit": 78595577.16,
+                "CreditFreq": 10,
+                "Debit": 21006893.25,
+                "DebitFreq": 17,
+                "EndingBalance": 15334311.0,
+                "Period": "2019-06-30",
+                "WarningMutasi2": true,
+                "WarningMutasi2Description": "Ada selisih antara saldo akhir dengan saldo awal, total debit dan total kredit dari transaksi di periode 2019-06-30."
+            },
+            {
+                "BeginningBalance": -3725.25,
+                "Credit": 135257691.66,
+                "CreditFreq": 19,
+                "Debit": 56268624.17,
+                "DebitFreq": 23,
+                "EndingBalance": 12892321.0,
+                "Period": "2019-07-31",
+                "WarningMutasi2": true,
+                "WarningMutasi2Description": "Ada selisih antara saldo akhir dengan saldo awal, total debit dan total kredit dari transaksi di periode 2019-07-31."
+            },
+            {
+                "BeginningBalance": 3500.0,
+                "Credit": 202625751.47,
+                "CreditFreq": 30,
+                "Debit": 265703050.0,
+                "DebitFreq": 61,
+                "EndingBalance": 16505422.0,
+                "Period": "2019-08-31",
+                "WarningMutasi2": true,
+                "WarningMutasi2Description": "Ada selisih antara saldo akhir dengan saldo awal, total debit dan total kredit dari transaksi di periode 2019-08-31."
+            },
+            {
+                "BeginningBalance": -41700000.0,
+                "Credit": 149990900.0,
+                "CreditFreq": 34,
+                "Debit": 118191650.0,
+                "DebitFreq": 30,
+                "EndingBalance": 0.0,
+                "Period": "2019-09-30",
+                "WarningMutasi2": true,
+                "WarningMutasi2Description": "Ada selisih antara saldo akhir dengan saldo awal, total debit dan total kredit dari transaksi di periode 2019-09-30."
+            }
+        ]
+    },
+    "read_confidence": {
+        "Identity": {
+            "AccountNumber": 0,
+            "Branch": 0,
+            "Currency": 0,
+            "Name": 0
+        },
+        "TransactionSummary": [
+            {
+                "BeginningBalance": 0,
+                "Credit": 0,
+                "Debit": 0,
+                "EndingBalance": 0,
+                "Period": "2019-06-30"
+            },
+            {
+                "BeginningBalance": 0,
+                "Credit": 0,
+                "Debit": 0,
+                "EndingBalance": 0,
+                "Period": "2019-07-31"
+            },
+            {
+                "BeginningBalance": 0,
+                "Credit": 0,
+                "Debit": 0,
+                "EndingBalance": 0,
+                "Period": "2019-08-31"
+            },
+            {
+                "BeginningBalance": 0,
+                "Credit": 0,
+                "Debit": 0,
+                "EndingBalance": 0,
+                "Period": "2019-09-30"
+            }
+        ]
+    },
+    "status": "SUCCESS"
+}
