@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>topResultFinal</name>
+   <tag></tag>
+   <elementGuidId>594f6fcc-ccb2-471a-acf6-2f9dda9336ec</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//*[@id=&quot;_0rif_cfc-table-caption-0-row-0&quot;]/td[2]/div/span[1]/a</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;_0rif_cfc-table-caption-0-row-0&quot;]/td[2]/div/span[1]/a</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;_0rif_cfc-table-caption-0-row-0&quot;]/td[2]/div/span[1]/a</value>
+      <webElementGuid>ff359438-5244-4719-aa4e-4473a6ed0f72</webElementGuid>
+   </webElementProperties>
+</WebElementEntity>

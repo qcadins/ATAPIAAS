@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>OpenBrowserMultiTab</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>b67cf0c3-00b6-4ed8-a30c-83dcd53aefc4</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>084a28c4-2f46-4c60-a9d6-a155cb315633</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'Login/Login'</defaultValue>
+      <description></description>
+      <id>084a28c4-2f46-4c60-a9d6-a155cb315633</id>
+      <masked>false</masked>
+      <name>ExcelPathLogin</name>
+   </variable>
+</TestCaseEntity>

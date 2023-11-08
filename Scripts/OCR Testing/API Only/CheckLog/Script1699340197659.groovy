@@ -1,0 +1,128 @@
+import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
+import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import com.kms.katalon.core.model.FailureHandling as FailureHandling
+import com.kms.katalon.core.testdata.TestData as TestData
+import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.webui.keyword.builtin.VerifyAlertNotPresentKeyword
+import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import internal.GlobalVariable as GlobalVariable
+import org.openqa.selenium.Keys as Keys
+import org.openqa.selenium.JavascriptExecutor
+
+'lakukan check log bucket standard'
+checkProcedure('Standard')
+
+'ganti fokus robot ke tab baru'
+WebUI.switchToWindowIndex(1)
+
+'lakukan check log bucket coldline'
+checkProcedure('Coldline')
+
+'navigasi ke url bucket coldline'
+WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(8, 8))
+
+'ganti fokus robot ke tab standard'
+WebUI.switchToWindowIndex(0)
+
+'navigasi ke url bucket coldline'
+WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(8, 7))
+
+def checkProcedure(String bucketType) {
+	'input filter OCR'
+	WebUI.setText(findTestObject('OCR Testing/checkLog/inputSearchFilter'),
+		findTestData(ExcelPathLogin).getValue(8, 11))
+	
+	WebUI.delay(1)
+	
+	'klik pada objek paling atas'
+	WebUI.click(findTestObject('OCR Testing/checkLog/topResult'))
+	
+	'input filter OCR'
+	WebUI.setText(findTestObject('OCR Testing/checkLog/inputSearchFilter'),
+		TenantCode)
+	
+	WebUI.delay(1)
+	
+	'klik pada objek paling atas'
+	WebUI.click(findTestObject('OCR Testing/checkLog/topResult'))
+	
+	'input filter OCR'
+	WebUI.setText(findTestObject('OCR Testing/checkLog/inputSearchFilter'),
+		OCRType)
+	
+	WebUI.delay(1)
+	
+	'klik pada objek paling atas'
+	WebUI.click(findTestObject('OCR Testing/checkLog/topResult'))
+	
+	'input filter OCR'
+	WebUI.setText(findTestObject('OCR Testing/checkLog/inputSearchFilter'),
+		'ListCustomer')
+	
+	WebUI.delay(1)
+	
+	'klik pada objek paling atas'
+	WebUI.click(findTestObject('OCR Testing/checkLog/topResult'))
+	
+	'input filter OCR'
+	WebUI.setText(findTestObject('OCR Testing/checkLog/inputSearchFilter'),
+		Tanggal)
+	
+	WebUI.delay(1)
+	
+	'klik pada objek paling atas'
+	WebUI.click(findTestObject('OCR Testing/checkLog/topResult'))
+	
+	if (OCRType == 'BPKBExtractor' && bucketType == 'Coldline') {
+		
+		for (i = 2; i <= 3; i++) {
+			'input filter OCR'
+			WebUI.setText(findTestObject('OCR Testing/checkLog/inputSearchFilter'),
+				'hal' + (i))
+			
+			WebUI.delay(1)
+			
+			'klik pada objek paling atas'
+			WebUI.click(findTestObject('OCR Testing/checkLog/topResult'))
+			
+			'input filter OCR'
+			WebUI.setText(findTestObject('OCR Testing/checkLog/inputSearchFilter'),
+				TimeOCR)
+			
+			WebUI.delay(1)
+			
+			verifyObjectPresent(bucketType, 'Halaman ' + (i.toString()))
+			
+			'klik tombol kembali'
+			WebUI.click(findTestObject('OCR Testing/checkLog/backButton'))
+		}
+		
+	} else {
+		'input filter OCR'
+		WebUI.setText(findTestObject('OCR Testing/checkLog/inputSearchFilter'),
+			TimeOCR)
+		
+		WebUI.delay(1)
+		
+		verifyObjectPresent(bucketType, OCRType)
+	}
+}
+
+def verifyObjectPresent(String bucketType, String inc) {
+	if (WebUI.verifyElementPresent(findTestObject('OCR Testing/checkLog/topResultFinal'), 1, FailureHandling.OPTIONAL)) {
+		'kalau result null'
+		if (!WebUI.getText(findTestObject('OCR Testing/checkLog/topResultFinal'), FailureHandling.OPTIONAL).contains(TimeOCR)) {
+			'tulis kondisi gagal'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
+				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+					(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 'Nama Log tidak sesuai pada ' + (inc) + ' di Bucket ' + bucketType)
+		}
+	} else {
+		'tulis kondisi gagal'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
+			GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+				(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 'Log Not Found di bucket ' + bucketType)
+	
+	}
+}

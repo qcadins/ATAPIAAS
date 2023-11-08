@@ -16,6 +16,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>findTestData('Login/Login').getValue(4, 14)</initValue>
+      <name>checkLog</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>''</initValue>
       <name>DataFilePath</name>
    </GlobalVariableEntity>

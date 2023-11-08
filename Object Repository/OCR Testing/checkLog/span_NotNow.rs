@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>span_NotNow</name>
+   <tag></tag>
+   <elementGuidId>b432e967-ad50-42c0-b4a8-1620918c9cdf</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='yDmH0d']/c-wiz/div/div/div/div[2]/div[4]/div/button/span</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>span.VfPpkd-vQzf8d</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>span</value>
+      <webElementGuid>00cf2c6e-1b5f-4d56-a9d8-f1b6b6526eaa</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>jsname</name>
+      <type>Main</type>
+      <value>V67aGc</value>
+      <webElementGuid>2baba5fe-1048-4873-b56e-b56eae1ab50c</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>VfPpkd-vQzf8d</value>
+      <webElementGuid>83cd9ee2-e198-444f-8065-feec2f905cbf</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Jangan sekarang</value>
+      <webElementGuid>f8f9dcd6-8837-47f9-a01a-7049f6943785</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;yDmH0d&quot;)/c-wiz[@class=&quot;SSPGKf&quot;]/div[@class=&quot;T4LgNb eejsDc&quot;]/div[@class=&quot;kFwPee&quot;]/div[@class=&quot;NJ5Hjb&quot;]/div[@class=&quot;L5MEH Bokche ypEC4c&quot;]/div[@class=&quot;lq3Znf&quot;]/div[@class=&quot;VfPpkd-dgl2Hf-ppHlrf-sM5MNb&quot;]/button[@class=&quot;VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-dgl2Hf ksBjEc lKxP2d LQeN7 k97fxb yu6jOd&quot;]/span[@class=&quot;VfPpkd-vQzf8d&quot;]</value>
+      <webElementGuid>bd5e823c-7fa3-4fae-8d0c-1f364be3594b</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='yDmH0d']/c-wiz/div/div/div/div[2]/div[4]/div/button/span</value>
+      <webElementGuid>f97a9b43-ec25-42d9-8cbb-17d6c5d1bb37</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Akun Google'])[1]/following::span[1]</value>
+      <webElementGuid>8abadcaf-75d5-4743-ab07-5ed374905fc3</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Selesai'])[1]/preceding::span[1]</value>
+      <webElementGuid>1eab5a03-ca95-4ed7-9541-142f1f8e5dfb</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Capture object:'])[1]/preceding::span[2]</value>
+      <webElementGuid>355d6e3f-e0e4-435d-bbb9-8d01f229b7a7</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>//*/text()[normalize-space(.)='Jangan sekarang']/parent::*</value>
+      <webElementGuid>64c36de8-3d3f-47bb-b190-8bad553d67e8</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//button/span</value>
+      <webElementGuid>41238eb9-c54e-4418-b27c-29f930027607</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//span[(text() = 'Jangan sekarang' or . = 'Jangan sekarang')]</value>
+      <webElementGuid>c195f2b4-5198-440f-bc66-2c4276276e20</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

@@ -15,6 +15,8 @@ import internal.GlobalVariable
 import org.openqa.selenium.By
 import org.openqa.selenium.Keys
 import org.openqa.selenium.WebDriver
+import java.text.SimpleDateFormat
+import java.util.Date
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/1. Login.xlsm')
@@ -35,7 +37,11 @@ int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
-String responseBody, message_ocr, state_ocr
+String tanggal = todayDate()
+
+String responseBody, message_ocr, state_ocr, ocr_date, timeOcrhit
+
+int firstRun = 0
 
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
@@ -78,14 +84,29 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			('tenant'):tenantcode
 		]))
 		
+		'ambil lama waktu yang diperlukan hingga request menerima balikan'
+		def elapsedTime = (response.getElapsedTime()) / 1000 + ' second'
+		
 		'ambil message respon dari HIT tersebut'
 		message_ocr = WS.getElementPropertyValue(response, 'message')
 					
 		'ambil status dari respon HIT tersebut'
 		state_ocr = WS.getElementPropertyValue(response, 'status')
 		
-		'Jika status HIT API 200 OK'
-		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) {
+		'ambil status dari respon HIT tersebut'
+		ocr_date = WS.getElementPropertyValue(response, 'ocr_date')
+		
+		'write to excel response elapsed time'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Process Time') - 1, GlobalVariable.NumOfColumn -
+			1, elapsedTime.toString())
+		
+		'Jika status HIT API 200 atau 500 dan tidak menggunakan key atau tenant invalid'
+		if (!state_ocr.equalsIgnoreCase('key or tenant invalid') &&
+			((WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) ||
+				(WS.verifyResponseStatusCode(response, 500, FailureHandling.OPTIONAL) == true))) {
+			
+			'ambil waktu hit untuk sebagai acuan nama file log'
+			timeOcrhit = processHourOnly(ocr_date)
 			
 			'ambil body dari hasil respons'
 			responseBody = response.getResponseBodyContent()
@@ -93,10 +114,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'write to excel status'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
 				1, state_ocr)
-			
-			'write to excel message'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Reason failed') - 1, GlobalVariable.NumOfColumn -
-				1, message_ocr)
 			
 			'panggil keyword untuk proses beautify dari respon json yang didapat'
 			CustomKeywords.'parseJson.BeautifyJson.process'(responseBody, sheet, rowExcel('Respons') - 1,
@@ -115,6 +132,22 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				'<' + message_ocr + '>')
 			}
+			
+			'jika perlu cek log dijalankan'
+			if (GlobalVariable.checkLog == 'Yes') {
+				
+				'jika browser belum pernah dibuka'
+				if (firstRun == 0) {
+					'panggil testcase open browser'
+					WebUI.callTestCase(findTestCase('OCR Testing/API Only/OpenBrowserMultiTab'),[:])
+					
+					firstRun = 1
+				}
+				'panggil testcase open browser'
+				WebUI.callTestCase(findTestCase('OCR Testing/API Only/CheckLog'),[('OCRType') : 'KTPExtractor',
+					('Tanggal') : tanggal, ('TenantCode') : tenantcode, ('TimeOCR') : timeOcrhit, ('sheet') : sheet,
+					('ExcelPathOCRTesting') : ExcelPathOCRTesting])
+			}
 		} else {
 			'jika param message null'
 			if (message_ocr == null) {
@@ -131,6 +164,32 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	}
 }
 
+WebUI.closeBrowser()
+
 def rowExcel(String cellValue) {
 	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }
+
+def todayDate() {
+	 'ambil tanggal hari ini'
+	 Date currentDate = new Date()
+	 
+	 'buat format menjadi yyyyMMDD'
+	 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd")
+	 
+	 'ambil hasil format tadi menjadi string'
+	 String formattedDate = dateFormat.format(currentDate)
+	 
+	 'return hasil format tadi'
+	 return formattedDate
+ }
+ 
+ def processHourOnly(String time) {
+	 
+	 parts = time.split('T')
+	 String timePart = parts[1]
+	 
+	 String result = timePart.replaceAll("[:+]", "").replace('0700','');
+	 
+	 return result
+ }
