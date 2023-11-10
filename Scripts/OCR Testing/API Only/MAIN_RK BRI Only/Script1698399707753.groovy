@@ -47,7 +47,7 @@ String responseBody, message, state, ocr_date, timeOcrhit
 int firstRun = 0
 
 'pindah testcase sesuai jumlah di excel'
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
+for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
 		break
@@ -92,17 +92,27 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		def elapsedTime = (response.getElapsedTime()) / 1000 + ' second'
 		
 		'ambil message respon dari HIT tersebut'
-		message = WS.getElementPropertyValue(response, 'message')
+		message = WS.getElementPropertyValue(response, 'message', FailureHandling.CONTINUE_ON_FAILURE)
 					
 		'ambil status dari respon HIT tersebut'
-		state = WS.getElementPropertyValue(response, 'status')
+		state = WS.getElementPropertyValue(response, 'status', FailureHandling.CONTINUE_ON_FAILURE)
 		
 		'ambil status dari respon HIT tersebut'
-		ocr_date = WS.getElementPropertyValue(response, 'ocr_date')
+		ocr_date = WS.getElementPropertyValue(response, 'ocr_date', FailureHandling.CONTINUE_ON_FAILURE)
 		
 		'write to excel response elapsed time'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Process Time') - 1, GlobalVariable.NumOfColumn -
 			1, elapsedTime.toString())
+			
+		if (state == null || state == '') {
+			
+			'write to excel status failed dan reason'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
+					'Terdapat unidentified "Nan", tidak bisa tulis respons ke excel')
+			
+			continue
+		}
 			
 		'Jika status HIT API 200 atau 500 dan tidak menggunakan key atau tenant invalid'
 		if (!state.equalsIgnoreCase('key or tenant invalid') &&
