@@ -71,8 +71,20 @@ def checkProcedure(String bucketType) {
 	
 	WebUI.delay(1)
 	
-	'klik pada objek paling atas'
-	WebUI.click(findTestObject('OCR Testing/checkLog/topResult'))
+	'cek apakah log by date berhasil masuk'
+	if (WebUI.waitForElementPresent(findTestObject('OCR Testing/checkLog/topResult'), 5, FailureHandling.OPTIONAL)) {
+		
+		'klik pada objek paling atas'
+		WebUI.click(findTestObject('OCR Testing/checkLog/topResult'))
+	} else {
+		
+		'tulis kondisi gagal'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
+			GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+				(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 'Log Not Found di bucket ' + bucketType)
+		
+		return
+	}
 	
 	if (OCRType == 'BPKBExtractor' && bucketType == 'Coldline') {
 		
@@ -110,13 +122,13 @@ def checkProcedure(String bucketType) {
 }
 
 def verifyObjectPresent(String bucketType, String inc) {
-	if (WebUI.verifyElementPresent(findTestObject('OCR Testing/checkLog/topResultFinal'), 1, FailureHandling.OPTIONAL)) {
+	if (WebUI.waitForElementPresent(findTestObject('OCR Testing/checkLog/topResultFinal'), 5, FailureHandling.OPTIONAL)) {
 		'kalau result null'
 		if (!WebUI.getText(findTestObject('OCR Testing/checkLog/topResultFinal'), FailureHandling.OPTIONAL).contains(TimeOCR)) {
 			'tulis kondisi gagal'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-					(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 'Nama Log tidak sesuai pada ' + (inc) + ' di Bucket ' + bucketType)
+					(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 'Nama Log tidak sesuai pada folder halaman' + (inc) + ' di Bucket ' + bucketType)
 		}
 	} else {
 		'tulis kondisi gagal'
@@ -125,4 +137,6 @@ def verifyObjectPresent(String bucketType, String inc) {
 				(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 'Log Not Found di bucket ' + bucketType)
 	
 	}
+	
+//	WebUI.verifyElementPresent(findTestObject('OCR Testing/checkLog/topResultFinal'), 1, FailureHandling.OPTIONAL)
 }

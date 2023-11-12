@@ -17,7 +17,6 @@ import org.openqa.selenium.remote.DesiredCapabilities
 import com.kms.katalon.core.webui.driver.DriverFactory
 import org.openqa.selenium.WebDriver
 
-
 //inisialisasi webdriver
 WebDriver driver
 

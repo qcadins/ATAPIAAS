@@ -163,4 +163,23 @@
          <variableId>7d4c8a67-9ab8-4082-acfd-62e4569b75d1</variableId>
       </variableLink>
    </testCaseLink>
+   <testCaseLink>
+      <guid>7d8cc142-70ca-4015-be41-e308156c8d88</guid>
+      <isReuseDriver>false</isReuseDriver>
+      <isRun>true</isRun>
+      <testCaseId>Test Cases/OCR Testing/API Only/MAIN_RK BRI Only</testCaseId>
+      <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>e1992526-011e-4d31-aea9-503784efd183</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>a40dee0a-e38a-436d-b993-61f5502ec410</variableId>
+      </variableLink>
+   </testCaseLink>
 </TestSuiteEntity>
