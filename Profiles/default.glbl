@@ -304,4 +304,9 @@
       <initValue>2</initValue>
       <name>Timeout</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>0</initValue>
+      <name>onlyFirstRun</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
