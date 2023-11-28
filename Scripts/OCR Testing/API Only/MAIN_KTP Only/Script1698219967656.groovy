@@ -164,6 +164,14 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					('Tanggal') : tanggal, ('TenantCode') : tenantcode, ('TimeOCR') : timeOcrhit, ('sheet') : sheet,
 					('ExcelPathOCRTesting') : ExcelPathOCRTesting])
 			}
+			
+			'jika expected response tidak sesuai response'
+			if (GlobalVariable.FlagFailed != 0) {
+				'write to excel status failed'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
+					1, GlobalVariable.StatusFailed)
+				
+			}
 		} else {
 			'jika param message null'
 			if (message_ocr == null) {

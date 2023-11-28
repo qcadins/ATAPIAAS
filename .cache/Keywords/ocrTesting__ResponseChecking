@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "C6B557713C5CD3C224A0A3062D82254F",
+  "keywordFileContentHash": "EA098027372BFDA708BCADE6A1DDCAF8",
   "keywordClasses": [
     {
       "name": "ocrTesting.ResponseChecking",
@@ -59,11 +59,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

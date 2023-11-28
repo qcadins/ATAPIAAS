@@ -124,13 +124,19 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			'ambil waktu hit untuk sebagai acuan nama file log'
 			timeOcrhit = processHourOnly(ocr_date)
 			
+			'write to excel status'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
+				1, state_ocr)
+			
 			'panggil keyword untuk proses beautify dari respon json yang didapat'
 			CustomKeywords.'parseJson.BeautifyJson.process'(responseBody, sheet, rowExcel('Respons') - 1,
 				findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Scenario')))
 			
-			'write to excel status'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
-				1, state_ocr)
+			'pengecekan value expected dan respons dari OCR'
+			CustomKeywords.'ocrTesting.ResponseChecking.verifyValueDifference'(
+				findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Expected Response')),
+					findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Respons')),
+						sheet, rowExcel('Difference Checking') - 1)
 			
 			if (state_ocr.equalsIgnoreCase('Success') && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
 				'write to excel status failed dan reason'
@@ -160,6 +166,14 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				WebUI.callTestCase(findTestCase('OCR Testing/API Only/CheckLog'),[('OCRType') : 'KKExtractor',
 					('Tanggal') : tanggal, ('TenantCode') : tenantcode, ('TimeOCR') : timeOcrhit, ('sheet') : sheet,
 					('ExcelPathOCRTesting') : ExcelPathOCRTesting])
+			}
+			
+			'jika expected response tidak sesuai response'
+			if (GlobalVariable.FlagFailed != 0) {
+				'write to excel status failed'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
+					1, GlobalVariable.StatusFailed)
+				
 			}
 		} else {
 			'jika param message null'

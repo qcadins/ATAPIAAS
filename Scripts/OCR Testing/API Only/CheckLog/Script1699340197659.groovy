@@ -92,9 +92,9 @@ def checkProcedure(String bucketType) {
 		Tanggal)
 	
 	WebUI.delay(1)
-	
+
 	'cek apakah log by date berhasil masuk'
-	if (WebUI.waitForElementPresent(findTestObject('OCR Testing/checkLog/topResult'), 5, FailureHandling.OPTIONAL)) {
+	if (WebUI.waitForElementClickable(findTestObject('OCR Testing/checkLog/topResult'), 5, FailureHandling.OPTIONAL)) {
 		
 		'klik pada objek paling atas'
 		WebUI.click(findTestObject('OCR Testing/checkLog/topResult'))
