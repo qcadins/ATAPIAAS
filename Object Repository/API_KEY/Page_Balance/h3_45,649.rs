@@ -6,19 +6,19 @@
    <elementGuidId>2759ae3d-8486-48ce-8510-b6393eaca71b</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>//*[(text() = '45,649' or . = '45,649')]</value>
-      </entry>
-      <entry>
          <key>CSS</key>
          <value>h3.mb-1.warning</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value></value>
       </entry>
       <entry>
          <key>XPATH</key>
          <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div/div/div/div/div/div[1]/h3</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -26,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>h3</value>
-      <webElementGuid>24f9c1ad-288a-4658-8c89-71e5d237ba98</webElementGuid>
+      <webElementGuid>92886150-d365-4586-8733-2f5684db184d</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -34,23 +34,23 @@
       <name>class</name>
       <type>Main</type>
       <value>mb-1 warning</value>
-      <webElementGuid>d93565dc-a400-4285-b634-6e0b38394f27</webElementGuid>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>text</name>
-      <type>Main</type>
-      <value>45,649</value>
-      <webElementGuid>594e612e-e957-4cde-8993-a385b8b9ce76</webElementGuid>
+      <webElementGuid>a32b9dbe-21a4-495b-a5c8-b34017abd3f5</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>45,649</value>
+      <webElementGuid>bf31ffcc-ff49-4c60-b5e0-32c4643dd962</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html[1]/body[@class=&quot;vertical-layout navbar-static menu-hide pace-done menu-expanded&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[@class=&quot;content-wrapper&quot;]/app-balance-prod[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;row match-height&quot;]/div[@class=&quot;col-12&quot;]/lib-balance-summary[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-xl-3 col-lg-6 col-12 ng-star-inserted&quot;]/div[@class=&quot;card&quot;]/div[@class=&quot;card-content&quot;]/div[@class=&quot;card-body&quot;]/div[@class=&quot;media&quot;]/div[@class=&quot;media-body text-left&quot;]/h3[@class=&quot;mb-1 warning&quot;]</value>
-      <webElementGuid>3b635ed8-7336-44d5-b3b7-9acd6c9b592f</webElementGuid>
+      <value></value>
+      <webElementGuid>f7888685-cb8d-4a97-8c4e-e51eddf7284d</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -58,7 +58,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='TRIAL'])[1]/following::h3[1]</value>
-      <webElementGuid>5297f391-ed8b-4d25-ac7d-4eb7eab97765</webElementGuid>
+      <webElementGuid>f858044f-958d-44c2-a802-c56019557bad</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -66,7 +66,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='PRODUCTION'])[1]/following::h3[1]</value>
-      <webElementGuid>1da7f198-16ca-48ca-b0b0-a17f04eb82bb</webElementGuid>
+      <webElementGuid>9ede0808-84d7-485a-9780-dbd718a83825</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -74,7 +74,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='IDR'])[1]/preceding::h3[1]</value>
-      <webElementGuid>d2363506-fecb-41d3-b974-9651954b3c28</webElementGuid>
+      <webElementGuid>da5b0cf3-e0db-4085-8312-36b046073d49</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -82,7 +82,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Mutasi Saldo'])[1]/preceding::h3[1]</value>
-      <webElementGuid>89c4c3e3-8634-4c72-ab7e-a71c6b903afa</webElementGuid>
+      <webElementGuid>10938b0e-18fb-4b12-ae7b-d03315505c24</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -90,7 +90,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='45,649']/parent::*</value>
-      <webElementGuid>2d0852b7-6316-40aa-aeb9-122cb8ec1045</webElementGuid>
+      <webElementGuid>3375c902-fc59-49c0-a7e0-af5c522de402</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -98,7 +98,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//h3</value>
-      <webElementGuid>e1c8d9ad-a270-4fd3-8f68-2d0253b71d68</webElementGuid>
+      <webElementGuid>4178a8b1-db62-47f4-89f7-43dc4d663f4e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -106,6 +106,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//h3[(text() = '45,649' or . = '45,649')]</value>
-      <webElementGuid>51dcf57f-e3c7-47d9-b19f-cc62d122fd0d</webElementGuid>
+      <webElementGuid>611787d8-5920-4f77-95e1-d4f566bb80be</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

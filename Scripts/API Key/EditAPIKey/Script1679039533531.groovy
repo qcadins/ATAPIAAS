@@ -30,7 +30,8 @@ if (GlobalVariable.KondisiCekDB == 'Yes') {
 	
 	'kumpulan string dari data yang diambil langsung dari database'
 	ArrayList hasildb = CustomKeywords.'apikey.CheckAPIKey.getAPIStatusfromDB'(conn,
-		WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'), 'value'))
+		WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input__apiKeyName'), 'value'),
+			findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
 
 	'ambil text dari UI Web APIAAS'
 	ArrayList hasilweb = CustomKeywords.'apikey.CheckAPIKey.getAttributeValueAPI'()
@@ -99,8 +100,6 @@ if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 14).equal
 	if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
 		GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
 		
-		GlobalVariable.FlagFailed = 1
-		
 		'tulis adanya error pada sistem web'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusWarning, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
@@ -127,6 +126,13 @@ if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 14).equal
 				FailureHandling.STOP_ON_FAILURE)
 		}
 		
+		if (WebUI.verifyElementPresent(findTestObject('API_KEY/Page_Edit Api Key/button_Batal'),
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+			
+			'klik pada tombol batal terlebih dahulu'
+			WebUI.click(findTestObject('API_KEY/Page_Edit Api Key/button_Batal'))
+		}
+		
 		'search api key yang sudah di edit'
 		searchAPIKEY(14)
 		
@@ -149,7 +155,7 @@ if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 14).equal
 
 'fungsi untuk melakukan pengecekan '
 def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
-	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
+	if ((isMatch == false)) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,

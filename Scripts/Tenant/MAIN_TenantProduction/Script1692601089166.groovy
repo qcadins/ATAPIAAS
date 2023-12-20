@@ -30,21 +30,21 @@ int countColumnEdit = findTestData(ExcelPathTenant).getColumnNumbers()
 
 ArrayList<String> arrayServices, arrayVendor
 
+'call test case login admin esign'
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Tenant', ('SheetName') : 'Tenant',
+	('Path') : ExcelPathTenant] , FailureHandling.STOP_ON_FAILURE)
+
 'looping tenant'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
-	
-	'declare isMmandatory Complete'
-	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 5))
 	
 	if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
 		
 	} else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
-				
-		'call test case login admin esign'
-		WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Tenant', ('SheetName') : 'Tenant',
-			('Path') : ExcelPathTenant] , FailureHandling.STOP_ON_FAILURE)
+		
+		'declare isMmandatory Complete'
+		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 5))
 		
 		'click menu tenant'
 		WebUI.click(findTestObject('Tenant/menu_Tenant'))
@@ -518,7 +518,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						'div/form/div[' + index) + ']/button', true)
 				
 				'break if index udah lebih dari 34 HARDCODE karena tidak bisa di track objectnya'
-				if (index > 19) {
+				if (index > 24) {
 					
 					break
 				}
@@ -579,7 +579,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			arrayEmailReminder = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 22).split(';', -1)
 
 			'looping untuk hapus email reminder yang tidak ada di excel'
-			for (index = 20; index <= variable.size(); index++) {
+			for (index = 25; index <= variable.size(); index++) {
 				
 				'modify object input email'
 				modifyObjectInputEmail = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'), 'xpath',
@@ -624,7 +624,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			for (indexexcel = 1; indexexcel <= arrayEmailReminder.size(); indexexcel++) {
 				
 				'looping untuk input email reminder'
-				for (index = 20; index <= variable.size(); index++) {
+				for (index = 25; index <= variable.size(); index++) {
 					
 					'modify object input email'
 					modifyObjectInputEmail = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
@@ -905,10 +905,10 @@ def checkPaging(Connection conn) {
 
 	'cek apakah button skip enable atau disable'
 	if (WebUI.verifyElementVisible(
-		findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)) {
+		findTestObject('API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)) {
 	
 		'klik button skip to last page'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
+		WebUI.click(findTestObject('API_KEY/Page_Balance/skiptoLast_page'))
 	}
 	
 	'modify object last Page'
@@ -1002,19 +1002,13 @@ def checkSaldo() {
 	
 	for (int i = 0 ; i < arrayServices.size ; i++) {
 		
-		println(arrayServices[i])
-		
 		int row = CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, 'Tenant', arrayServices[i])
 		
 		servicesNameActive.add(findTestData(ExcelPathTenant).getValue(2, row))
 	}
 	
-	println(servicesNameActive)
-	
 	'get total tipe saldo'
 	variable = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
-	
-	println(variable.size)
 	
 	for (i = 1 ; i <= variable.size ; i++) {
 		
@@ -1027,6 +1021,8 @@ def checkSaldo() {
 	}
 	
 	servicesNameActive.containsAll(servicesNameUISaldo)
+	
+	WebUI.closeBrowser()
 }
 
 'fungsi untuk melakukan pengecekan '

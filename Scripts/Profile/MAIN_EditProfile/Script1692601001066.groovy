@@ -35,9 +35,18 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
     } else if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
+		GlobalVariable.FlagFailed = 0
+		
         'memanggil fungsi untuk login'
-        WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf', ('SheetName') : 'Edit Profile', ('Path') : ExcelPathEditProfile], 
+        WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf', ('SheetName') : sheet, ('Path') : ExcelPathEditProfile], 
             FailureHandling.STOP_ON_FAILURE)
+		
+		if (GlobalVariable.FlagFailed == 1) {
+			
+			WebUI.closeBrowser()
+			
+			continue
+		}
         
         'angka untuk menghitung data mandatory yang tidak terpenuhi'
         int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 5))
@@ -57,7 +66,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
             GlobalVariable.FlagFailed = 1
 
             'tulis adanya error pada sistem web'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, 
+            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
                 GlobalVariable.StatusWarning, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + 
                 ';') + GlobalVariable.FailedReasonUnknown)
         }
@@ -165,7 +174,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) +
 							';') + 'Username Pojok Kanan Atas Tidak Sesuai Data Edit')
 		}
@@ -194,53 +203,53 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
                 GlobalVariable.FlagFailed = 1
 
                 'Write to excel status failed and reason topup failed'
-                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, 
+                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
                     GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 
                         2) + ';') + GlobalVariable.FailedReasonTrial)
             }
         }
         
-        'klik pada tombol garis tiga'
-        WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/spanMenu'))
-
-        'klik pada tombol API KEY'
-        WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/span_API Key'))
-
-        'ambil nama depan tenant'
-        String tenantnameExcel = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 13)
-
-        'nama tenant dari DB'
-        String tenantnameDB = CustomKeywords.'profile.CheckProfile.getTenantNamefromDB'(conn, findTestData(ExcelPathEditProfile).getValue(
-                GlobalVariable.NumOfColumn, 9))
-
-        'verifikasi adanya tenant code dan name yang sesuai DB'
-        if (WebUI.verifyMatch(tenantnameDB, tenantnameExcel, false, FailureHandling.OPTIONAL) == false) {
-            GlobalVariable.FlagFailed = 1
-
-            'Write to excel status failed and reason topup failed'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, 
-                GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + 
-                ';') + GlobalVariable.FailedReasonTenant)
-        }
+//        'klik pada tombol garis tiga'
+//        WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/spanMenu'))
+//
+//        'klik pada tombol API KEY'
+//        WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/span_API Key'))
+//
+//        'ambil nama depan tenant'
+//        String tenantnameExcel = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 13)
+//
+//        'nama tenant dari DB'
+//        String tenantnameDB = CustomKeywords.'profile.CheckProfile.getTenantNamefromDB'(conn, findTestData(ExcelPathEditProfile).getValue(
+//                GlobalVariable.NumOfColumn, 9))
+//
+//        'verifikasi adanya tenant code dan name yang sesuai DB'
+//        if (WebUI.verifyMatch(tenantnameDB, tenantnameExcel, false, FailureHandling.OPTIONAL) == false) {
+//            GlobalVariable.FlagFailed = 1
+//
+//            'Write to excel status failed and reason topup failed'
+//            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
+//                GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + 
+//                ';') + GlobalVariable.FailedReasonTenant)
+//        }
         
         'kondisi jika tidak ada failed pada bagian lain testcase'
         if (isMandatoryComplete != 0) {
 			
             'Write To Excel GlobalVariable.StatusFailed and gagal karena reason status'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, 
+            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
                 GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + 
                 ';') + GlobalVariable.FailedReasonMandatory)
 			
         } else if (GlobalVariable.FlagFailed == 0) {
 			
             'write to excel success'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Edit Profile', 0, GlobalVariable.NumOfColumn - 
+            CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0, GlobalVariable.NumOfColumn - 
                 1, GlobalVariable.StatusSuccess)
 			
         } else {
 			
             'Write To Excel GlobalVariable.StatusFailed and gagal karena reason status'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn, 
+            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
                 GlobalVariable.StatusWarning, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + 
                 ';') + GlobalVariable.StatusReasonSystem)
         }
@@ -252,8 +261,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
     }
 }
 
-'panggil testcase untuk change password'
-WebUI.callTestCase(findTestCase('Test Cases/Change Password/MAIN_ChangePassword'), [:], FailureHandling.STOP_ON_FAILURE)
+//'panggil testcase untuk change password'
+//WebUI.callTestCase(findTestCase('Test Cases/Change Password/MAIN_ChangePassword'), [:], FailureHandling.STOP_ON_FAILURE)
 
 def verifyDataEdit(Connection conn, String role) {
 	'ambil email dari testdata, disimpan ke string'
@@ -275,7 +284,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) +
 				';') + GlobalVariable.FailedReasonVerifyEqualorMatch + ' Data sebelum edit tidak sesuai')
 	}

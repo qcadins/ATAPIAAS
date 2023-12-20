@@ -18,7 +18,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[24]/div/button[1]</value>
-      <webElementGuid>cfcc0f1b-195b-4ce9-9cca-651893c034a0</webElementGuid>
+      <webElementGuid>331d028d-8835-428f-8b1a-25c9ea7e3591</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -26,6 +26,14 @@
       <name>text</name>
       <type>Main</type>
       <value>Batal</value>
-      <webElementGuid>3ed803bd-a116-4d30-bdd4-3ddc461465f4</webElementGuid>
+      <webElementGuid>15731397-4a42-494a-bd68-747ec9b881b0</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>btn btn-light mr-2</value>
+      <webElementGuid>6d29d057-fd63-493d-b929-5d881d57dcfd</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

@@ -27,7 +27,11 @@ chromePrefs.put('download.default_directory', System.getProperty('user.dir') + '
 
 ChromeOptions options = new ChromeOptions()
 
-options.addExtensions(new File("Drivers/nocaptchaai_chrome_1.7.6.crx"))
+if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == 'Yes' ||
+	findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == '') {
+	
+	options.addExtensions(new File("Drivers/nocaptchaai_chrome_1.7.6.crx"))
+}
 
 options.addExtensions(new File("Drivers/Smart_Wait.crx"))
 
@@ -68,6 +72,15 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
 		'buka website billing system Production, untuk isi saldo'
 		WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 4))
 	}
+}
+
+if ((findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == 'Yes' ||
+	findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == '') && 
+	TC != 'Tenant' && TC != 'IsiSaldo') {
+	
+	WebUI.waitForElementAttributeValue(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'aria-checked', 'true', 60, FailureHandling.OPTIONAL)
+
+	WebUI.delay(1)
 }
 
 def js = (JavascriptExecutor)driver
@@ -204,11 +217,11 @@ if (TC == 'EditProf') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(Path).getValue(2, 13))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 13))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(2, 14))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 14))
 	
 } else if (TC == 'OCR') {
 	
@@ -224,11 +237,11 @@ if (TC == 'EditProf') {
 	
 	'input data username'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
-		findTestData(ExcelPathSaldoAPI).getValue(2, 9))
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputpassword'),
-		findTestData(ExcelPathSaldoAPI).getValue(2, 10))
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 10))
 	
 	'klik tombol masuk'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
@@ -252,11 +265,11 @@ if (TC == 'EditProf') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(ExcelPathSaldo).getValue(2, 25))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 25))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(ExcelPathSaldo).getValue(2, 26))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 26))
 	
 } else if (TC == 'Layanan') {
 	
@@ -388,21 +401,51 @@ if (TC == 'EditProf') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(Path).getValue(4, 33))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 34))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(4, 34))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 35))
 }
 
 if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Regist') {
 	
-	'tunggu tombol tidak di disable lagi'
-	if (WebUI.waitForElementNotHasAttribute(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'),
-		'disabled', 100, FailureHandling.OPTIONAL)) {
+//	'tunggu tombol tidak di disable lagi'
+//	if (WebUI.waitForElementNotHasAttribute(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'),
+//		'disabled', 60, FailureHandling.OPTIONAL)) {
+//	
+//		'klik pada button login'
+//		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+//	} 
 	
-		'klik pada button login'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+	'klik pada button login'
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+	
+	'cek apakah berhasil login'
+	for (int i = 1; i <= 10; i++) {
+		'cek apakah berhasil login'
+		if (WebUI.verifyElementPresent(findTestObject('RegisterLogin/Page_Login - eendigo Platform/textSmallError'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+			'write to excel reason failed error login'
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					WebUI.getText(findTestObject('RegisterLogin/Page_Login - eendigo Platform/textSmallError')))
+			
+			GlobalVariable.FlagFailed = 1
+			break
+			
+		} else if (WebUI.verifyElementPresent(findTestObject('Profile/Page_Balance/dropdownProfile'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+			
+			break
+		} else {
+			if (i == 10) {
+				'write to excel reason failed error login'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+						GlobalVariable.FailedReasonLoginIssue)
+				
+				GlobalVariable.FlagFailed = 1
+			}
+		}
 	}
 }
 
@@ -425,3 +468,7 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
 //		GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 //			GlobalVariable.FailedReasonLoginIssue)
 //}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, SheetName, cellValue)
+}

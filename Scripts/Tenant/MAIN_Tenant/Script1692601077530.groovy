@@ -45,18 +45,18 @@ ArrayList<String> arrayServices, arrayVendor
 
 'looping tenant'
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
-	
-	'declare isMmandatory Complete'
-	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 5))
-	
+		
 	if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
 	} else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
+	'declare isMmandatory Complete'
+	int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 5))
+		
 	'check if action new/services/edit/balancechargetype'
 		if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
-			
+						
 			'click menu tenant'
 			WebUI.click(findTestObject('Tenant/menu_Tenant'))
 			
@@ -360,12 +360,54 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.click(findTestObject('Tenant/menu_Tenant'))
 			
 			searchTenant()
+			
+			if (WebUI.verifyElementPresent(findTestObject('Tenant/button_ServiceBalance'), GlobalVariable.Timeout,
+				FailureHandling.OPTIONAL)) {
+			
+				'click button services balance'
+				WebUI.click(findTestObject('Tenant/button_ServiceBalance'))
+			} else {
+				
+				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 2) +
+					';') + GlobalVariable.FailedReasonSearchFailed)
+				
+				continue
+			}
+			
+			'modify object checkbox'
+			modifyObjectCheckbox = WebUI.modifyObjectProperty(findTestObject('Tenant/Services/modifyObject'), 'xpath',
+				'equals', '//*[@id="CREDIT_SCORING@ESG"]', true)
+
+			'check if check box is unchecked'
+			if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+				
+				'click checkbox'
+				WebUI.click(modifyObjectCheckbox)
+			}
+			
+			'click button Batal'
+			WebUI.click(findTestObject('Tenant/Services/button_Batal'))
+			
+			searchTenant()
 
 			if (WebUI.verifyElementPresent(findTestObject('Tenant/button_ServiceBalance'), GlobalVariable.Timeout, 
 				FailureHandling.OPTIONAL)) {
 			
 				'click button services balance'
 				WebUI.click(findTestObject('Tenant/button_ServiceBalance'))
+				
+				if (WebUI.verifyElementChecked(findTestObject('Tenant/Services/modifyObject'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+					
+					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
+					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 2) +
+						';') + "Field Credit Scoring masih tercentang")
+					
+					'click checkbox'
+					WebUI.click(findTestObject('Tenant/Services/modifyObject'))
+				}
 			} else {
 				
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
@@ -534,7 +576,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						'div/form/div[' + index) + ']/button', true)
 				
 				'break if index udah lebih dari 34 HARDCODE karena tidak bisa di track objectnya'
-				if (index > 34) {
+				if (index > 37) {
 					
 					break
 				}
@@ -600,15 +642,15 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'ubah lokasi xpath dari button simpan'
 			modifyobjectbuttonSimpan = WebUI.modifyObjectProperty(findTestObject('Tenant/Edit/button_Simpan'), 'xpath',
 					'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					(35 + EmailReminderTotal).toString()) + ']/div/button[2]', true)
+					(37 + EmailReminderTotal).toString()) + ']/div/button[2]', true)
 			
 			'ubah lokasi xpath dari button simpan'
 			modifyobjectbuttonBatal = WebUI.modifyObjectProperty(findTestObject('Tenant/Edit/button_Batal'), 'xpath',
 					'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					(35 + EmailReminderTotal).toString()) + ']/div/button[1]', true)
+					(37 + EmailReminderTotal).toString()) + ']/div/button[1]', true)
 
 			'looping untuk hapus email reminder yang tidak ada di excel'
-			for (index = 35; index <= variable.size(); index++) {
+			for (index = 38; index <= variable.size(); index++) {
 				
 				'modify object input email'
 				modifyObjectInputEmail = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'), 'xpath',
@@ -653,7 +695,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			for (indexexcel = 1; indexexcel <= arrayEmailReminder.size(); indexexcel++) {
 				
 				'looping untuk input email reminder'
-				for (index = 35; index <= variable.size(); index++) {
+				for (index = 38; index <= variable.size(); index++) {
 					
 					'modify object input email'
 					modifyObjectInputEmail = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
@@ -682,7 +724,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL))) {
 			
 				'click button simpan'
-				WebUI.click(modifyobjectbuttonSimpan)
+				WebUI.click(findTestObject('Tenant/Edit/button_Simpan'))
 
 				'verify pop up message berhasil'
 				if (WebUI.verifyElementPresent(findTestObject('Tenant/popUpMsg'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
@@ -723,7 +765,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			} else if (isMandatoryComplete > 0) {
 				
 				'click button Batal'
-				WebUI.click(modifyobjectbuttonBatal)
+				WebUI.click(findTestObject('Tenant/Edit/button_Batal'))
 
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Tenant', GlobalVariable.NumOfColumn,
@@ -934,11 +976,9 @@ def checkPaging(Connection conn) {
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 
 	'cek apakah button skip enable atau disable'
-	if(WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/'+
-		'Page_Balance/i_Catatan_datatable-icon-skip'), FailureHandling.OPTIONAL)){
-	
+	if(WebUI.verifyElementVisible(findTestObject('API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)){
 		'klik button skip to last page'
-		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'))
+		WebUI.click(findTestObject('API_KEY/Page_Balance/skiptoLast_page'))
 	}
 	
 	'modify object last Page'
@@ -1059,6 +1099,8 @@ def checkSaldo() {
 	println(servicesNameUISaldo)
 	
 	servicesNameActive.containsAll(servicesNameUISaldo)
+	
+	WebUI.closeBrowser()
 }
 
 'fungsi untuk melakukan pengecekan '

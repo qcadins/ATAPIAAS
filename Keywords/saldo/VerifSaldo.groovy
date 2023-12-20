@@ -18,7 +18,7 @@ public class VerifSaldo {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT tenant_code FROM ms_tenant WHERE email_reminder_dest = '" + email + "'")
+		ResultSet resultSet = stm.executeQuery("SELECT tenant_code FROM ms_tenant mt LEFT JOIN ms_useroftenant mot ON mot.id_ms_tenant = mt.id_ms_tenant LEFT JOIN am_msuser amu ON amu.id_ms_user = mot.id_ms_user WHERE login_id = '" + email + "'")
 
 		while (resultSet.next()) {
 			data = resultSet.getObject(1)

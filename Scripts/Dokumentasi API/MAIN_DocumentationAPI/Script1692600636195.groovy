@@ -14,11 +14,7 @@ import groovy.sql.Sql as Sql
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathAPIDocs).columnNumbers
-
-'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'DocAPI', ('SheetName') : 'Dokumentasi API',
-	('Path') : ExcelPathAPIDocs], FailureHandling.STOP_ON_FAILURE)
+int countColumnEdit = findTestData(ExcelPathAPIDocs).columnNumbers, isLoggedin = 0
 
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
@@ -31,6 +27,15 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 5))
+		
+		if (isLoggedin == 0) {
+			
+			'panggil fungsi login'
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'DocAPI', ('SheetName') : 'Dokumentasi API',
+				('Path') : ExcelPathAPIDocs], FailureHandling.STOP_ON_FAILURE)
+						
+			isLoggedin = 1
+		}
 		
 		'tunggu hingga page terload dengan sempurna'
 		WebUI.delay(GlobalVariable.Timeout)

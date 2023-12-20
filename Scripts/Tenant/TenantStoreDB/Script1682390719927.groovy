@@ -96,7 +96,7 @@ for (indexExcel = 0 ; indexExcel < arrayServices.size(); indexExcel++) {
 	
 	'get data balacne mutation dari DB'
 	String result = CustomKeywords.'tenant.TenantVerif.getTenantServices'(conn, 
-		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 10)).replace('{','').replace('}','').replace('"','').replace(':0', '')
+		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 10)).replace('{','').replace('}','').replace('"','').replace(',','')
 	
 	'split result to array'
 	ArrayList resultarray = result.split(':0')
@@ -105,34 +105,37 @@ for (indexExcel = 0 ; indexExcel < arrayServices.size(); indexExcel++) {
 	ArrayList arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 26).split(';', -1)
 	
 	'verify services'
-	arrayMatch.add(arrayServices.containsAll(resultarray))
+	arrayMatch.add(resultarray.containsAll(arrayServices))
 	
 } else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('ChargeType')) {
 	
-	'get array Services dari excel'
-	arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 30).split(';', -1)
-	
-	'looping untuk input services check'
-	for (index = 0; index < arrayServices.size(); index++) {
+	if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 30) != '') {
 		
-		'ambil id pembayaran untuk service pertama yang diubah'
-		int IDPaymentType = CustomKeywords.'tenant.TenantVerif.getIDPaymentType'(conn,
-			findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14), arrayServices[index])
+		'get array Services dari excel'
+		arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 30).split(';', -1)
 		
-		'ambil jenis pembayaran untuk service yang terpilih'
-		String PaymentType = CustomKeywords.'tenant.TenantVerif.getPaymentType'(conn,
-			findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14), IDPaymentType)
-		
-		'split result to array'
-		if (PaymentType == 'Price') {
+		'looping untuk input services check'
+		for (index = 0; index < arrayServices.size(); index++) {
 			
-			'verify services'
-			arrayMatch.add(true)
+			'ambil id pembayaran untuk service pertama yang diubah'
+			int IDPaymentType = CustomKeywords.'tenant.TenantVerif.getIDPaymentType'(conn,
+				findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14), arrayServices[index])
 			
-		} else {
+			'ambil jenis pembayaran untuk service yang terpilih'
+			String PaymentType = CustomKeywords.'tenant.TenantVerif.getPaymentType'(conn,
+				findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, 14), IDPaymentType)
 			
-			'verify services'
-			arrayMatch.add(false)
+			'split result to array'
+			if (PaymentType == 'Price') {
+				
+				'verify services'
+				arrayMatch.add(true)
+				
+			} else {
+				
+				'verify services'
+				arrayMatch.add(false)
+			}
 		}
 	}
 }

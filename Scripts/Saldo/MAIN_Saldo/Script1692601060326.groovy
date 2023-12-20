@@ -17,7 +17,7 @@ import org.openqa.selenium.By as By
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathSaldo).columnNumbers
+int countColumnEdit = findTestData(ExcelPathSaldo).columnNumbers, firstRun
 
 Connection conn
 
@@ -31,14 +31,6 @@ if (GlobalVariable.SettingEnvi == 'Production') {
 	'deklarasi koneksi ke Database eendigo_dev_uat'
 	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 }
-
-'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Saldo', ('SheetName') : 'Saldo', 
-	('Path') : ExcelPathSaldo], FailureHandling.STOP_ON_FAILURE)
-
-'ambil kode tenant di DB'
-String tenantcode = CustomKeywords.'saldo.VerifSaldo.getTenantCodefromDB'(conn, 
-	findTestData(ExcelPathSaldo).getValue(2,25))
 
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
@@ -54,11 +46,25 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 5))
 		
+		if (firstRun == 0) {
+			'panggil fungsi login'
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Saldo', ('SheetName') : 'Saldo',
+				('Path') : ExcelPathSaldo], FailureHandling.STOP_ON_FAILURE)
+			
+			firstRun = 1
+		}
+		
+		'ambil kode tenant di DB'
+		String tenantcode = CustomKeywords.'saldo.VerifSaldo.getTenantCodefromDB'(conn,
+			findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 25))
+		
+		WebUI.refresh()
+		
 		'panggil fungsi cek filter saldo'
 		filterSaldo()
 		
 		'scroll ke bawah halaman'
-		WebUI.scrollToElement(findTestObject('Object Repository/API_KEY/Page_Balance/i_Catatan_datatable-icon-skip'), GlobalVariable.Timeout)
+		WebUI.scrollToElement(findTestObject('API_KEY/Page_Api Key List/skiptoLast_page'), GlobalVariable.Timeout)
 		
 		'panggil fungsi cek table dan paging'
 		checkTableandPaging(conn, tenantcode, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
@@ -121,6 +127,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'write to excel success'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Saldo', 0,
 				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+			
 		} else if (isMandatoryComplete > 0) {
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
@@ -146,7 +153,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 }
 
 'klik garis tiga di kanan atas web'
-WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/i_LINA_ft-chevron-down'))
+WebUI.click(findTestObject('API_KEY/Page_Api Key List/p_MAMANK'))
 
 'klik tombol keluar'
 WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/span_Logout'))
@@ -386,15 +393,7 @@ def checkTableandPaging(Connection connection, String tenantcode, String tipeSal
 	Total = WebUI.getText(findTestObject('Object Repository/Saldo/Page_Balance/totalDataTable')).split(' ')
 	
 	'verify total data tenant'
-	if (WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE) == false) {
-		
-		GlobalVariable.FlagFailed = 1
-		
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
-				';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
-	}
+	checkVerifyEqualOrMatch(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE), 'Total page tidak sama')
 	
 	'cek apakah button enable atau disable'
 	if (WebUI.verifyElementVisible(findTestObject('Object Repository/Saldo/Page_Balance/lastPage'), 
@@ -495,6 +494,9 @@ def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
 		'add ddl ke array'
 		list.add(WebUI.getText(modifyObjectDDL))
 	}
+	
+	println listDB
+	println list
 	
 	'verify ddl ui = db'
 	checkVerifyEqualOrMatch(listDB.containsAll(list), reason)

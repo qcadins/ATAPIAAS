@@ -12,7 +12,7 @@
       <variableId>39087f00-b587-4d5f-8364-7efc757f499c</variableId>
    </variableLinks>
    <variable>
-      <defaultValue>'OCR Testing/DataOCRTestingKTP'</defaultValue>
+      <defaultValue>'OCR Testing/Invoice'</defaultValue>
       <description></description>
       <id>39087f00-b587-4d5f-8364-7efc757f499c</id>
       <masked>false</masked>

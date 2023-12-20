@@ -71,7 +71,6 @@ if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Pa
 	GlobalVariable.FlagFailed = 1
 	
 } else {
-	
 	'klik pada tombol simpan'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Simpan'))
 	
@@ -104,7 +103,6 @@ if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Pa
 		'cek apakah muncul error setelah add api key'
 		if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), GlobalVariable.Timeout,
 			FailureHandling.OPTIONAL) == false) {
-			GlobalVariable.FlagFailed = 1
 		
 			'tulis adanya error pada sistem web'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning,

@@ -40,7 +40,8 @@ if (Case == 'Add') {
 	reason = 'Edit API KEY'
 	
 	'kumpulan string yang menyimpan hasil data dari DB'
-	hasilDB = CustomKeywords.'apikey.CheckAPIKey.getAPIStatusfromDB'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13))
+	hasilDB = CustomKeywords.'apikey.CheckAPIKey.getAPIStatusfromDB'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13),
+		findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
 	
 	'cek hasil db dan excel'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13),

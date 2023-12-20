@@ -33,7 +33,7 @@ GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 6)
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR Invoice',
-	('Path') : ExcelPathOCRTesting, ('Row') : 26], FailureHandling.STOP_ON_FAILURE)
+	('Path') : ExcelPathOCRTesting, ('Row') : 19], FailureHandling.STOP_ON_FAILURE)
 
 if (GlobalVariable.SettingEnvi == 'Production') {
 	'click pada production'
@@ -52,7 +52,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'ambil kode tenant di DB'
 		String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn,
-			findTestData(ExcelPathOCRTesting).getValue(2, 26))
+			findTestData(ExcelPathOCRTesting).getValue(2, 19))
 		
 		'ambil key trial yang aktif dari DB'
 		String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode,  GlobalVariable.SettingEnvi)
@@ -112,14 +112,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/New API/Invoice', 
 		[('img'): findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 9),
 		('key'):thekey, 
-		('tenant'):tenantcode,
-		('nik'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 18),
-		('loginId'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 19),
-		('refNum'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 20),
-		('off_code'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 21),
-		('off_name'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 22),
-		('question'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 23),
-		('source'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 24)]))
+		('tenant'):tenantcode]))
 			
 		'ambil message respon dari HIT tersebut'
 		messageocr = WS.getElementPropertyValue(response, 'message')
@@ -135,29 +128,29 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			 '<' + messageocr + '>')
 			
-			if(GlobalVariable.SettingTopup.equals('IsiSaldo')) {
-				
-				'call auto isi saldo'
-				WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Invoice', ('sheet') : 'OCR Invoice', ('idOCR') : 'OCR_KTP'],
-					FailureHandling.CONTINUE_ON_FAILURE)
-				
-			} else if (GlobalVariable.SettingTopup.equals('SelfTopUp')) {
-				
-				'call isi saldo secara mandiri di Admin Client'
-				WebUI.callTestCase(findTestCase('Top Up/TopUpAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Invoice', ('sheet') : 'OCR Invoice', ('idOCR') : 'OCR_KTP'],
-					FailureHandling.CONTINUE_ON_FAILURE)
-				
-				'lakukan approval di transaction history'
-				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistoryAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Invoice', ('sheet') : 'OCR Invoice', ('idOCR') : 'OCR_KTP'],
-					FailureHandling.CONTINUE_ON_FAILURE)
-			}
-			
-			'panggil fungsi login'
-			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR Invoice',
-				('Path') : ExcelPathOCRTesting, ('Row') : 26], FailureHandling.STOP_ON_FAILURE)
-						
-			continue
-			
+//			if(GlobalVariable.SettingTopup.equals('IsiSaldo')) {
+//				
+//				'call auto isi saldo'
+//				WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Invoice', ('sheet') : 'OCR Invoice', ('idOCR') : 'OCR_KTP'],
+//					FailureHandling.CONTINUE_ON_FAILURE)
+//				
+//			} else if (GlobalVariable.SettingTopup.equals('SelfTopUp')) {
+//				
+//				'call isi saldo secara mandiri di Admin Client'
+//				WebUI.callTestCase(findTestCase('Top Up/TopUpAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Invoice', ('sheet') : 'OCR Invoice', ('idOCR') : 'OCR_KTP'],
+//					FailureHandling.CONTINUE_ON_FAILURE)
+//				
+//				'lakukan approval di transaction history'
+//				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistoryAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Invoice', ('sheet') : 'OCR Invoice', ('idOCR') : 'OCR_KTP'],
+//					FailureHandling.CONTINUE_ON_FAILURE)
+//			}
+//			
+//			'panggil fungsi login'
+//			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR Invoice',
+//				('Path') : ExcelPathOCRTesting, ('Row') : 19], FailureHandling.STOP_ON_FAILURE)
+//						
+//			continue
+//			
 		}
 		//jika status sukses dengan key dan kode tenant yang salah, anggap sebagai bug dan lanjutkan ke tc berikutnya
 		else if (stateocr == 'SUCCESS' && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
@@ -170,7 +163,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			continue;
 		}
 		//jika mandatory tidak terpenuhi atau ada error
-		else if (messageocr == 'KTP NOT FOUND' || messageocr == 'Unexpected Error'
+		else if (messageocr == 'File is empty' || messageocr == 'Unexpected Error'
 			|| messageocr == 'Invalid API key or tenant code') {
 			
 			'write to excel status failed dan reason'
@@ -233,7 +226,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		if (hitAPITrx == 1) {
 			
 			'cek apakah jenis penagihan berdasarkan harga'
-			if (BalanceChargeType == 'Price') {
+			if (balanceChargeType == 'Price') {
 				
 				'input saldo setelah penagihan'
 				katalonSaldoafter = saldobefore - serviceprice

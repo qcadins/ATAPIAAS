@@ -102,7 +102,7 @@ if (arrayMatch.contains(false)) {
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
 	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
-		GlobalVariable.StatusFailed, findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';' + 
+		GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 2) + ';' + 
 			GlobalVariable.FailedReasonStoreDB)
 	
 }

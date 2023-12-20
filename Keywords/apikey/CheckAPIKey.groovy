@@ -76,14 +76,14 @@ public class CheckAPIKey {
 
 	//fungsi untuk mengambil data APIKEY dari database
 	@Keyword
-	getAPIStatusfromDB(Connection conn, String apiname) {
+	getAPIStatusfromDB(Connection conn, String apiname, String email) {
 		String data
 
 		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT api_key_name, (CASE WHEN is_active = '1' THEN 'Active' WHEN is_active = '0' THEN 'Inactive' END) AS is_active FROM ms_api_key WHERE api_key_name = '"+apiname+"'")
+		ResultSet resultSet = stm.executeQuery("SELECT api_key_name,(CASE WHEN mak.is_active = '1' THEN 'Active' WHEN mak.is_active = '0' THEN 'Inactive' END) AS is_active FROM ms_api_key mak LEFT JOIN ms_useroftenant mot ON mot.id_ms_tenant = mak.id_ms_tenant LEFT JOin am_msuser amu ON amu.id_ms_user = mot.id_ms_user WHERE api_key_name = '"+apiname+"' AND login_id = '"+email+"'")
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
