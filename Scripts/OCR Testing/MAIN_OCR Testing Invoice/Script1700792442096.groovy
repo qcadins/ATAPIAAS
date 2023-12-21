@@ -20,24 +20,26 @@ import org.openqa.selenium.WebDriver
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
+int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers, firstRun
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
 Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
-'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
-
-'get base url'
-GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 6)
-
-'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR Invoice',
-	('Path') : ExcelPathOCRTesting, ('Row') : 19], FailureHandling.STOP_ON_FAILURE)
+Connection connProd
 
 if (GlobalVariable.SettingEnvi == 'Production') {
-	'click pada production'
-	WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
+	'deklarasi koneksi ke Database eendigo_dev'
+	connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+	
+	'get base url'
+	GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 16)
+	
+} else if (GlobalVariable.SettingEnvi == 'Trial') {
+	'deklarasi koneksi ke Database adins_apiaas_uat'
+	connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+	
+	'get base url'
+	GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 17)
 }
 
 'pindah testcase sesuai jumlah di excel'
@@ -50,15 +52,30 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 	} else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
+		if (firstRun == 0) {
+			'panggil fungsi login'
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : sheet,
+				('Path') : ExcelPathOCRTesting, ('Row') : 19], FailureHandling.STOP_ON_FAILURE)
+			
+			if (GlobalVariable.SettingEnvi == 'Production') {
+				'click pada production'
+				WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))
+			}
+			
+			firstRun = 1
+		}
+		
+		WebUI.refresh()
+
 		'ambil kode tenant di DB'
 		String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn,
-			findTestData(ExcelPathOCRTesting).getValue(2, 19))
+			findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 19))
 		
 		'ambil key trial yang aktif dari DB'
 		String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode,  GlobalVariable.SettingEnvi)
 		
 		'deklarasi id untuk harga pembayaran OCR'
-		int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(connProd, tenantcode, 'OCR Invoice')
+		int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(connProd, tenantcode, sheet)
 		
 		'ambil jenis penagihan transaksi (by qty/price)'
 		String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(connProd,
@@ -114,39 +131,59 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		('key'):thekey, 
 		('tenant'):tenantcode]))
 			
+		'ambil lama waktu yang diperlukan hingga request menerima balikan'
+		def elapsedTime = (response.getElapsedTime()) / 1000 + ' second'
+		
 		'ambil message respon dari HIT tersebut'
 		messageocr = WS.getElementPropertyValue(response, 'message')
 		
 		'ambil status dari respon HIT tersebut'
 		stateocr = WS.getElementPropertyValue(response, 'status')
+		
+		'write to excel response elapsed time'
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Process Time') - 1, GlobalVariable.NumOfColumn -
+			1, elapsedTime.toString())
 			
+		'ambil body dari hasil respons'
+		responseBody = response.getResponseBodyContent()
+		
+		'panggil keyword untuk proses beautify dari respon json yang didapat'
+		CustomKeywords.'parseJson.BeautifyJson.process'(responseBody, sheet, rowExcel('Respons') - 1,
+			findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Scenario')))
+		
+		'pengecekan value expected dan respons dari OCR'
+		CustomKeywords.'ocrTesting.ResponseChecking.verifyValueDifference'(
+			findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Expected Response')),
+				findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Respons')),
+					sheet, rowExcel('Difference Checking') - 1)
+		
 		'jika kurang saldo hentikan proses testing'
 		if (stateocr == 'FAILED' && messageocr == 'Insufficient balance') {
 			
 			'write to excel status failed dan reason'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR Invoice', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			 '<' + messageocr + '>')
 			
 //			if(GlobalVariable.SettingTopup.equals('IsiSaldo')) {
 //				
 //				'call auto isi saldo'
-//				WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Invoice', ('sheet') : 'OCR Invoice', ('idOCR') : 'OCR_KTP'],
+//				WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : sheet, ('sheet') : sheet, ('idOCR') : 'OCR_KTP'],
 //					FailureHandling.CONTINUE_ON_FAILURE)
 //				
 //			} else if (GlobalVariable.SettingTopup.equals('SelfTopUp')) {
 //				
 //				'call isi saldo secara mandiri di Admin Client'
-//				WebUI.callTestCase(findTestCase('Top Up/TopUpAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Invoice', ('sheet') : 'OCR Invoice', ('idOCR') : 'OCR_KTP'],
+//				WebUI.callTestCase(findTestCase('Top Up/TopUpAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : sheet, ('sheet') : sheet, ('idOCR') : 'OCR_KTP'],
 //					FailureHandling.CONTINUE_ON_FAILURE)
 //				
 //				'lakukan approval di transaction history'
-//				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistoryAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Invoice', ('sheet') : 'OCR Invoice', ('idOCR') : 'OCR_KTP'],
+//				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistoryAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : sheet, ('sheet') : sheet, ('idOCR') : 'OCR_KTP'],
 //					FailureHandling.CONTINUE_ON_FAILURE)
 //			}
 //			
 //			'panggil fungsi login'
-//			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : 'OCR Invoice',
+//			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : sheet,
 //				('Path') : ExcelPathOCRTesting, ('Row') : 19], FailureHandling.STOP_ON_FAILURE)
 //						
 //			continue
@@ -156,7 +193,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		else if (stateocr == 'SUCCESS' && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
 			
 			'write to excel status failed dan reason'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR Invoice', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			GlobalVariable.FailedReasonKeyTenantBypass)
 				
@@ -167,7 +204,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			|| messageocr == 'Invalid API key or tenant code') {
 			
 			'write to excel status failed dan reason'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR Invoice', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			 '<' + messageocr + '>')
 			continue;
@@ -183,7 +220,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR Invoice', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusWarning, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					GlobalVariable.FailedReasonUnknown)
 		}
@@ -217,6 +254,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				'anggap HIT Api gagal'
 				hitAPITrx = 0
 			}
+			
+			println latestOtherTenantMutation
+			println latestMutation
 		}
 		
 		'simpan harga OCR Invoice ke dalam integer'
@@ -240,6 +280,12 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'simpan saldo setelah di HIT'
 		uiSaldoafter = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 10))
+		
+		println noTrxafter
+		println saldobefore
+		println uiSaldoafter
+		println katalonSaldoafter
+		println serviceprice
 		
 		'jika saldoafter match'
 		if (katalonSaldoafter == uiSaldoafter) {
@@ -268,7 +314,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			&& isSaldoBerkurang == 1 && hitAPITrx == 1) {
 			
 			'tulis status sukses pada excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR Invoice', 
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 					GlobalVariable.SuccessReason)
 		
@@ -278,7 +324,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR Invoice', 
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonTrxNotinDB)
 		}
@@ -287,7 +333,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR Invoice', 
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonBalanceNotChange)
 		}
@@ -296,7 +342,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR Invoice', 
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonSaldoBocor)
 		}
@@ -304,13 +350,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			GlobalVariable.FlagFailed = 1
 			'write to excel status failed dan reason'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR Invoice', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			 '<' + messageocr + '>')
 		}
-		
-		'refresh halaman web'
-		WebUI.refresh()
 		
 		'cek apakah muncul error unknown setelah login'
 		if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
@@ -319,7 +362,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR Invoice', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusWarning, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					GlobalVariable.FailedReasonUnknown)
 		}
@@ -413,4 +456,8 @@ def filterSaldo() {
 		
 	'klik pada button cari'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/button_Cari'))
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }
