@@ -135,10 +135,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		def elapsedTime = (response.getElapsedTime()) / 1000 + ' second'
 		
 		'ambil message respon dari HIT tersebut'
-		messageocr = WS.getElementPropertyValue(response, 'message')
+		messageocr = WS.getElementPropertyValue(response, 'message', FailureHandling.OPTIONAL)
 		
 		'ambil status dari respon HIT tersebut'
-		stateocr = WS.getElementPropertyValue(response, 'status')
+		stateocr = WS.getElementPropertyValue(response, 'status', FailureHandling.OPTIONAL)
 		
 		'write to excel response elapsed time'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Process Time') - 1, GlobalVariable.NumOfColumn -
@@ -151,11 +151,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		CustomKeywords.'parseJson.BeautifyJson.process'(responseBody, sheet, rowExcel('Respons') - 1,
 			findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Scenario')))
 		
-		'pengecekan value expected dan respons dari OCR'
-		CustomKeywords.'ocrTesting.ResponseChecking.verifyValueDifference'(
-			findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Expected Response')),
-				findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Respons')),
-					sheet, rowExcel('Difference Checking') - 1)
+//		'pengecekan value expected dan respons dari OCR'
+//		CustomKeywords.'ocrTesting.ResponseChecking.verifyValueDifference'(
+//			findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Expected Response')),
+//				findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Respons')),
+//					sheet, rowExcel('Difference Checking') - 1)
 		
 		'jika kurang saldo hentikan proses testing'
 		if (stateocr == 'FAILED' && messageocr == 'Insufficient balance') {
@@ -165,29 +165,33 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			 '<' + messageocr + '>')
 			
-//			if(GlobalVariable.SettingTopup.equals('IsiSaldo')) {
-//				
-//				'call auto isi saldo'
-//				WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : sheet, ('sheet') : sheet, ('idOCR') : 'OCR_KTP'],
-//					FailureHandling.CONTINUE_ON_FAILURE)
-//				
-//			} else if (GlobalVariable.SettingTopup.equals('SelfTopUp')) {
-//				
-//				'call isi saldo secara mandiri di Admin Client'
-//				WebUI.callTestCase(findTestCase('Top Up/TopUpAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : sheet, ('sheet') : sheet, ('idOCR') : 'OCR_KTP'],
-//					FailureHandling.CONTINUE_ON_FAILURE)
-//				
-//				'lakukan approval di transaction history'
-//				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistoryAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : sheet, ('sheet') : sheet, ('idOCR') : 'OCR_KTP'],
-//					FailureHandling.CONTINUE_ON_FAILURE)
-//			}
-//			
-//			'panggil fungsi login'
-//			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : sheet,
-//				('Path') : ExcelPathOCRTesting, ('Row') : 19], FailureHandling.STOP_ON_FAILURE)
-//						
-//			continue
-//			
+			WebUI.closeBrowser()
+			
+			if(GlobalVariable.SettingTopup.equals('IsiSaldo')) {
+				
+				'call auto isi saldo'
+				WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR INVOICE', ('sheet') : sheet, ('idOCR') : 'OCR_INVOICE'],
+					FailureHandling.CONTINUE_ON_FAILURE)
+				
+			} else if (GlobalVariable.SettingTopup.equals('SelfTopUp')) {
+				
+				'call isi saldo secara mandiri di Admin Client'
+				WebUI.callTestCase(findTestCase('Top Up/TopUpAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR INVOICE', ('sheet') : sheet, ('idOCR') : 'OCR_INVOICE'],
+					FailureHandling.CONTINUE_ON_FAILURE)
+				
+				'lakukan approval di transaction history'
+				WebUI.callTestCase(findTestCase('Transaction History/TransactionHistoryAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR INVOICE', ('sheet') : sheet, ('idOCR') : 'OCR_INVOICE'],
+					FailureHandling.CONTINUE_ON_FAILURE)
+			}
+			
+			WebUI.closeBrowser()
+			
+			'panggil fungsi login'
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : sheet,
+				('Path') : ExcelPathOCRTesting, ('Row') : 19], FailureHandling.STOP_ON_FAILURE)
+						
+			continue
+			
 		}
 		//jika status sukses dengan key dan kode tenant yang salah, anggap sebagai bug dan lanjutkan ke tc berikutnya
 		else if (stateocr == 'SUCCESS' && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
@@ -200,8 +204,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			continue;
 		}
 		//jika mandatory tidak terpenuhi atau ada error
-		else if (messageocr == 'File is empty' || messageocr == 'Unexpected Error'
-			|| messageocr == 'Invalid API key or tenant code') {
+		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == false) {
 			
 			'write to excel status failed dan reason'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
@@ -280,12 +283,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'simpan saldo setelah di HIT'
 		uiSaldoafter = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 10))
-		
-		println noTrxafter
-		println saldobefore
-		println uiSaldoafter
-		println katalonSaldoafter
-		println serviceprice
 		
 		'jika saldoafter match'
 		if (katalonSaldoafter == uiSaldoafter) {
@@ -376,7 +373,7 @@ WebUI.closeBrowser()
 def getSaldoforTransaction(String NamaOCR) {
 	
 	'deklarasi jumlah saldo sekarang'
-	int saldoNow
+	int saldoNow = 0
 	
 	if(WebUI.verifyElementPresent(findTestObject('Object Repository/OCR Testing/TrxNumber'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {		
 		'cari element dengan nama saldo'

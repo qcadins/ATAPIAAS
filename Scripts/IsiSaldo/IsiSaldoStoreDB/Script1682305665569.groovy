@@ -71,22 +71,28 @@ if (autoIsiSaldo == '') {
 		findTestData(ExcelPathSaldoAPI).getValue(2, 20).toUpperCase(),
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
-	'verify vendor'
-	arrayMatch.add(WebUI.verifyMatch(
-		findTestData(ExcelPathSaldoAPI).getValue(2, 21).toUpperCase(),
-		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	if (GlobalVariable.SettingEnvi == 'Production') {
+		'verify vendor'
+		arrayMatch.add(WebUI.verifyMatch('ESIGN/ADINS',
+				(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+		
+	} else if (GlobalVariable.SettingEnvi == 'Trial') {
+		'verify vendor'
+		arrayMatch.add(WebUI.verifyMatch('ADINS',
+			(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+	}
 	
 	'verify tipe saldo'
 	arrayMatch.add(WebUI.verifyMatch(tipeSaldo.toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify tambah saldo'
 	arrayMatch.add(WebUI.verifyMatch(
-		findTestData(ExcelPathSaldoAPI).getValue(2, 22).toUpperCase(),
+		findTestData(ExcelPathSaldoAPI).getValue(2, 21).toUpperCase(),
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify Nomor tagihan'
 	arrayMatch.add(WebUI.verifyMatch(
-		findTestData(ExcelPathSaldoAPI).getValue(2, 23).toUpperCase(),
+		findTestData(ExcelPathSaldoAPI).getValue(2, 22).toUpperCase(),
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify Catatan'

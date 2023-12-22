@@ -19,9 +19,6 @@ import org.openqa.selenium.Keys as Keys
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
-'mendapat jumlah kolom dari sheet Isi Saldo'
-int countColumnEdit = findTestData(ExcelPath).getColumnNumbers()
-
 Connection conn
 
 if(GlobalVariable.SettingEnvi == 'Production') {
@@ -43,7 +40,7 @@ int Saldobefore, Saldoafter, JumlahTopUp, TopupSaldoCorrectTenant = 1
 String noTrxfromUI, noTrxfromDB, noTrxOtherTenant
 
 'ambil kode tenant di DB'
-String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCR).getValue(2, 28).toUpperCase())
+String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, rowExcel('UsernameLogin')).toUpperCase())
 
 'call setting balance type function'
 settingBalanceType()
@@ -65,9 +62,14 @@ WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipt
 'klik pada input vendor'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'))
 
-'input nama vendor yang akan digunakan'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'), findTestData(
-        ExcelPath).getValue(2, 21))
+if (GlobalVariable.SettingEnvi == 'Production') {
+	'input nama vendor yang akan digunakan'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'), 'ESIGN/ADINS')
+	
+} else if (GlobalVariable.SettingEnvi == 'Trial') {
+	'input nama vendor yang akan digunakan'
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'), 'ADINS')
+}
 
 'pencet enter pada textbox'
 WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'), Keys.chord(
@@ -85,11 +87,11 @@ WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipt
 
 'input jumlah saldo yang akan ditambahkan'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Tambah Saldo_qty'), 
-    findTestData(ExcelPath).getValue(2, 22))
+    findTestData(ExcelPath).getValue(2, 21))
 
 'input nomor tagihan untuk proses isi ulang saldo'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Nomor Tagihan_refNo'), 
-    findTestData(ExcelPath).getValue(2, 23))
+    findTestData(ExcelPath).getValue(2, 22))
 
 'input notes/catatan untuk proses isi ulang saldo'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Catatan_notes'), 
@@ -112,7 +114,7 @@ if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Pa
 
     'tulis kondisi gagal'
     CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-        (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonMandatory)
+        (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonMandatory)
 
 } else {
     'klik pada tombol lanjut'
@@ -206,9 +208,9 @@ def settingBalanceType() {
 		'xpath', 'equals', '//*[@id="' + idOCR + '"]', true)
 	
 	'check if balance type quantity'
-	if (findTestData(ExcelPath).getValue(2, 24) == 'Quantity') {
+	if (findTestData(ExcelPath).getValue(2, 23) == 'Quantity') {
 		WebUI.uncheck(modifyCheckBox, FailureHandling.CONTINUE_ON_FAILURE)
-	} else if (findTestData(ExcelPath).getValue(2, 24) == 'Price') {
+	} else if (findTestData(ExcelPath).getValue(2, 23) == 'Price') {
 		WebUI.check(modifyCheckBox, FailureHandling.CONTINUE_ON_FAILURE)
 	}
 	
@@ -260,7 +262,7 @@ def filterSaldo() {
     WebUI.delay(4)
 
     'isi field input tipe saldo'
-    WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), findTestData(ExcelPath).getValue(
+    WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), findTestData(ExcelPathOCR).getValue(
             GlobalVariable.NumOfColumn, 21))
 
     'pencet enter'
@@ -396,7 +398,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
         CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-            (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
+            (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -421,3 +423,6 @@ def getTrxNumber() {
     return no_Trx
 }
 
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+}
