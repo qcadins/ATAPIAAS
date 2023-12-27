@@ -24,6 +24,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPa
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathChangePass).columnNumbers
 
+'untuk line 27 hingga 51 adalah setting untuk chromedriver dan plugin/extension no catpcha'
 WebDriver driver
 
 System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe")
@@ -47,7 +48,7 @@ driver = new ChromeDriver(caps)
 DriverFactory.changeWebDriver(driver)
 
 'aktifkan nocaptcha by link'
-WebUI.navigateToUrl('https://config.nocaptchaai.com/?apikey=kvnedgar9286-35bde35f-e305-699a-0af2-d6fb983c8c4a')
+WebUI.navigateToUrl('https://config.nocaptchaai.com/?apikey=' + GlobalVariable.APIKEYCaptcha + '')
 
 'buka website APIAAS SIT, data diambil dari TestData Login'
 WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 2))
@@ -58,14 +59,14 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	GlobalVariable.FlagFailed = 0
 		
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
+	if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
 		
 		break
 		
-	} else if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+	} else if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
 		
 		'lakukan proses login dengan password lama'
-		loginFunction(10)
+		loginFunction(rowExcel('Password Login'))
 		
 		'klik pada tombol untuk span profile'
 		WebUI.click(findTestObject('Object Repository/Change Password/Page_Balance/span_profile'))
@@ -74,27 +75,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		WebUI.click(findTestObject('Object Repository/Change Password/Page_Balance/changepass'))
 		
 		if (GlobalVariable.NumOfColumn == 2) {
-			
-//			'klik pada button batal'
-//			WebUI.click(findTestObject('Object Repository/Change Password/Page_Change Password/button_Batal'))
-//			
-//			'input data email'
-//			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-//				findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 9))
-//			
-//			'input password'
-//			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-//				findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 10))
-//			
-//			'ceklis pada reCaptcha'
-//			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
-//			
-//			'pada delay, lakukan captcha secara manual'
-//			WebUI.delay(10)
-//			
-//			'klik pada button login'
-//			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-			
+						
 			'klik pada bagian menu'
 			WebUI.click(findTestObject('Object Repository/Change Password/span_Menu'))
 			
@@ -122,15 +103,15 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'input password lama'
 		WebUI.setText(findTestObject('Object Repository/Change Password/Page_Change Password/input__currentPass'),
-			findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 12))
+			findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Password Lama')))
 		
 		'input password baru'
 		WebUI.setText(findTestObject('Object Repository/Change Password/Page_Change Password/input__newPass'),
-			findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 13))
+			findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Password Baru')))
 		
 		'input password baru confirm'
 		WebUI.setText(findTestObject('Object Repository/Change Password/Page_Change Password/input__confirmnewPass'),
-			findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 14))
+			findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('$PasswordBaruConfirm')))
 		
 		'pastikan tombol lanjut tidak disabled'
 		if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Change Password/Page_Change Password/button_Lanjut'),
@@ -149,8 +130,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			if (notifMsg != 'Kode Akses anda berhasil diganti.') {
 				
 				'tulis ada error '
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('ChangePassword', GlobalVariable.NumOfColumn,
-					GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 2) +
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 						';') + '<' + notifMsg + '>')
 				
 				'klik pada tombol OK'
@@ -169,7 +150,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			logoutFunction()
 			
 			'login menggunakan password yang baru diubah'
-			if (loginFunction(13) == 0) {
+			if (loginFunction(rowExcel('$Password Baru')) == 0) {
 			
 				continue
 			}
@@ -181,8 +162,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				GlobalVariable.FlagFailed = 1
 			
 				'tulis adanya error pada sistem web'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('ChangePassword', GlobalVariable.NumOfColumn,
-					GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 						GlobalVariable.FailedReasonLoginIssue)
 			}
 			
@@ -191,14 +172,14 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				GlobalVariable.Timeout) && GlobalVariable.FlagFailed == 0) {
 			
 				'write to excel success'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'ChangePassword', 0,
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
 					GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 			}
 		} else {
 			
 			'tulis ada error '
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('ChangePassword', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 2) +
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 					';') + GlobalVariable.FailedReasonMandatory)
 			
 			'panggil fungsi logout'
@@ -231,7 +212,7 @@ def loginFunction(int row) {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
@@ -260,7 +241,7 @@ def loginFunction(int row) {
 			def modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[1]", true)
 	
 			'jika nama object sesuai dengan nama role'
-			if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 11).equalsIgnoreCase(
+			if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Pilih Role')).equalsIgnoreCase(
 				WebUI.getAttribute(modifyRole, 'value', FailureHandling.STOP_ON_FAILURE))) {
 				
 				'ubah alamat xpath ke role yang dipilih'
@@ -281,8 +262,8 @@ def loginFunction(int row) {
 		GlobalVariable.FlagFailed = 1
 	
 		'tulis adanya error pada sistem web'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('ChangePassword', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				GlobalVariable.FailedReasonLoginIssue)
 	}
 }
@@ -293,8 +274,12 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('ChangePassword', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 	}
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

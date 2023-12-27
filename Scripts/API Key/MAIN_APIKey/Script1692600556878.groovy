@@ -35,29 +35,25 @@ int countColumnEdit = findTestData(ExcelPathAPIKey).columnNumbers, isLoggedin = 
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
+	if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
 		
 		break
-	} else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+	} else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
 		
 		'reset failed dari 0'
 		GlobalVariable.FlagFailed = 0
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
-		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 5))
+		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Mandatory Complete')))
 		
 		if (isLoggedin == 0) {
 			
 			'panggil fungsi login'
-			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Key', ('SheetName') : 'API KEY',
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Key', ('SheetName') : sheet,
 				('Path') : ExcelPathAPIKey], FailureHandling.STOP_ON_FAILURE)
 			
 			isLoggedin = 1
 		}
-		
-//		CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatusbtnClickable'(isMandatoryComplete, 
-//			findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'), 
-//				GlobalVariable.NumOfColumn, 'API KEY')
 		
 		WebUI.delay(GlobalVariable.Timeout)
 		
@@ -82,7 +78,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		}
 		
 		'panggil fungsi copy link'
-		if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 20) == 'Yes') {
+		if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Copy API Link?(Yes/No)')) == 'Yes') {
 			
 			'klik tombol COPY LINK'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/buttonCopy'))
@@ -90,18 +86,18 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			'verifikasi copy berhasil'
 			CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, 
 				findTestObject('Object Repository/API_KEY/Page_Api Key List/notif_CopySuccess'),
-					GlobalVariable.NumOfColumn, 'API KEY')
+					GlobalVariable.NumOfColumn, sheet)
 		}
 		
 		'cek perlu nya pemanggilan fungsi add atau edit'
-		if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 18) == 'Yes') {
+		if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Add API KEY?(Yes/No)')) == 'Yes') {
 			
 			'panggil fungsi Add API KEY'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/AddAPIKey'), 
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
 			
 		} 
-		else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 19) == 'Yes') {
+		else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Edit API KEY?(Yes/No)')) == 'Yes') {
 			
 			'panggil fungsi Edit API Key'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'), 
@@ -112,7 +108,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (GlobalVariable.FlagFailed == 0) {
 			
 			'tulis status sukses pada excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', 
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess, GlobalVariable.SuccessReason)
 		}
 	}
@@ -130,7 +126,7 @@ def checkpaging(Connection conn) {
 	WebUI.delay(5)
 	
 	'dapatkan detail tenant dari user yang login'
-	ArrayList resultTenant = CustomKeywords.'apikey.CheckAPIKey.getTenantCodeName'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
+	ArrayList resultTenant = CustomKeywords.'apikey.CheckAPIKey.getTenantCodeName'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
 	
 	'verify tenant code'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(resultTenant[arrayIndex++],
@@ -144,7 +140,7 @@ def checkpaging(Connection conn) {
 	
 	'input tipe API'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
-			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 15))
+			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('SearchTipeAPI')))
 	
 	'select tipe API'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(
@@ -152,7 +148,7 @@ def checkpaging(Connection conn) {
 	
 	'input status API'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
-			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 16))
+			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('SearchStatusAPI')))
 	
 	'select status API'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(
@@ -196,7 +192,7 @@ def checkpaging(Connection conn) {
 	
 	'kumpulan string dari DB'
 	String totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'(conn,
-		findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
 	
 	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Api Key List/PageFooter')), totaldataDB, false, FailureHandling.CONTINUE_ON_FAILURE), 'Total data tabel tidak sesuai DB')
 	
@@ -260,8 +256,8 @@ def checkVerifyFooter(){
 	else{
 		
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, 
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') 
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') 
 			+ GlobalVariable.FailedReasonPagingError)
 	}
 }
@@ -271,9 +267,13 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 		GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 		
 	}
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

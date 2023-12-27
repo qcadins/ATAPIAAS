@@ -20,18 +20,18 @@ int countColumnEdit = findTestData(ExcelPathAPIDocs).columnNumbers, isLoggedin =
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
+	if (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
 		
 		break
-	} else if (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+	} else if (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
-		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 5))
+		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('Mandatory Complete')))
 		
 		if (isLoggedin == 0) {
 			
 			'panggil fungsi login'
-			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'DocAPI', ('SheetName') : 'Dokumentasi API',
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'DocAPI', ('SheetName') : sheet,
 				('Path') : ExcelPathAPIDocs], FailureHandling.STOP_ON_FAILURE)
 						
 			isLoggedin = 1
@@ -64,13 +64,13 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'input jenis dokumentasi yang akan didownload'
 		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_API Documentation/input'),
-			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 9))
+			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('$Download File')))
 		
 		'select status API'
 		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_API Documentation/input'), Keys.chord(Keys.ENTER))
 		
 		'cek apakah perlu kembalikan ddl ke default'
-		if (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 11) == 'Yes') {
+		if (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('ClearDDL ? (Yes/No)')) == 'Yes') {
 			
 			'klik pada tombol silang di ddl'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/CrossDDL'))
@@ -83,35 +83,35 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'pengecekan file yang sudah didownload'
 		boolean isDownloaded = CustomKeywords.'documentationAPI.CheckDocumentation.isFileDownloaded'(
-			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 10))
+			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('Delete File ?(Yes/No)')))
 		
 		'jika file tidak terunduh, tulis gagal'
 		if (WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL) && isMandatoryComplete == 0 &&
-			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 11) == 'No') {
+			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('ClearDDL ? (Yes/No)')) == 'No') {
 			
 			'tulis status sukses pada excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dokumentasi API',
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 					GlobalVariable.SuccessReason)
 		}
 		else if (WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL) &&
-			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 11) == 'Yes') {
+			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('ClearDDL ? (Yes/No)')) == 'Yes') {
 			
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dokumentasi API',
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 					GlobalVariable.FailedReasonDownloadProblem + ' Bypass')
 		}
 		else if (isMandatoryComplete > 0) {
 			
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dokumentasi API',
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonMandatory)
 		}
 		else {
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dokumentasi API',
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonDownloadProblem)
 		}
@@ -155,8 +155,12 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Dokumentasi API', 
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, 
 			GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-			(findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonDDL)
+			(findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonDDL)
 	}
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

@@ -11,11 +11,24 @@
       <value></value>
       <variableId>0c4456a9-caf7-44b2-85a1-1725ac4a88cf</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>26c96815-ad4f-46e7-8c9a-b125154b9ec0</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'API_KEY/DataAPIKEY'</defaultValue>
       <description></description>
       <id>0c4456a9-caf7-44b2-85a1-1725ac4a88cf</id>
       <masked>false</masked>
       <name>ExcelPathAPIKey</name>
+   </variable>
+   <variable>
+      <defaultValue>'API KEY'</defaultValue>
+      <description></description>
+      <id>26c96815-ad4f-46e7-8c9a-b125154b9ec0</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

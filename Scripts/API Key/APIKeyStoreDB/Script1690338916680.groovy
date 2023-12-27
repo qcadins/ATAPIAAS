@@ -24,14 +24,14 @@ if (Case == 'Add') {
 	reason = 'Add API KEY'
 	
 	'ambil data dari DB sesudah tambah API baru'
-	hasilDB = CustomKeywords.'apikey.CheckAPIKey.getAPINamefromDB'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11))
+	hasilDB = CustomKeywords.'apikey.CheckAPIKey.getAPINamefromDB'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama API KEY')))
 	
 	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11),
+	checkVerifyEqualorMatch(WebUI.verifyMatch(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama API KEY')),
 		hasilDB[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE), reason)
 	
 	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12),
+	checkVerifyEqualorMatch(WebUI.verifyMatch(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe API KEY')),
 		hasilDB[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE), reason)
 	
 } else if (Case == 'Edit') {
@@ -40,15 +40,15 @@ if (Case == 'Add') {
 	reason = 'Edit API KEY'
 	
 	'kumpulan string yang menyimpan hasil data dari DB'
-	hasilDB = CustomKeywords.'apikey.CheckAPIKey.getAPIStatusfromDB'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13),
-		findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 9))
+	hasilDB = CustomKeywords.'apikey.CheckAPIKey.getAPIStatusfromDB'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Edit Nama API')),
+		findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
 	
 	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 13),
+	checkVerifyEqualorMatch(WebUI.verifyMatch(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Edit Nama API')),
 		hasilDB[arrayIndex++], false,FailureHandling.OPTIONAL), reason)
 	
 	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 14),
+	checkVerifyEqualorMatch(WebUI.verifyMatch(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Edit Status API')),
 		hasilDB[arrayIndex++], false,FailureHandling.OPTIONAL), reason)
 }
 
@@ -57,9 +57,13 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Edit Profile', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 		GlobalVariable.FailedReasonStoreDB + ' ' + reason)
 		
 	}
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

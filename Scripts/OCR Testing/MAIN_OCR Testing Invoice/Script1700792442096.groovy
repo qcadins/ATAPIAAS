@@ -140,6 +140,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'ambil status dari respon HIT tersebut'
 		stateocr = WS.getElementPropertyValue(response, 'status', FailureHandling.OPTIONAL)
 		
+		'ambil status dari respon HIT tersebut'
+		totalPages = WS.getElementPropertyValue(response, 'read.num_of_pages', FailureHandling.OPTIONAL)
+		
 		'write to excel response elapsed time'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Process Time') - 1, GlobalVariable.NumOfColumn -
 			1, elapsedTime.toString())
@@ -257,9 +260,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				'anggap HIT Api gagal'
 				hitAPITrx = 0
 			}
-			
-			println latestOtherTenantMutation
-			println latestMutation
 		}
 		
 		'simpan harga OCR Invoice ke dalam integer'
@@ -272,17 +272,22 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			if (balanceChargeType == 'Price') {
 				
 				'input saldo setelah penagihan'
-				katalonSaldoafter = saldobefore - serviceprice
+				katalonSaldoafter = saldobefore - (serviceprice * totalPages)
 			}
 			else {
 				
 				'input saldo setelah penagihan dikurangi qty'
-				katalonSaldoafter = saldobefore - 1
+				katalonSaldoafter = saldobefore - totalPages
 			}
 		}
 		
 		'simpan saldo setelah di HIT'
 		uiSaldoafter = getSaldoforTransaction(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 10))
+		
+		println uiSaldoafter
+		println katalonSaldoafter
+		println totalPages
+		println saldobefore
 		
 		'jika saldoafter match'
 		if (katalonSaldoafter == uiSaldoafter) {

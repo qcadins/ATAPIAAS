@@ -10,7 +10,7 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 'angka untuk menghitung data mandatory yang tidak terpenuhi'
-int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 5))
+int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Mandatory Complete')))
 
 'klik pada tombol garis tiga'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/spanMenu'))
@@ -36,28 +36,23 @@ if (GlobalVariable.NumOfColumn == 2) {
 	
 	'klik tombol batal'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Batal'))
-	
-	'klik tombol +Baru'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_Baru'))
-	
-	'verify element field kosong'
-	checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/API_KEY/Page_Add Api Key/input__apiKeyName'),
-		'class', 'form-control ng-untouched ng-pristine ng-invalid',
-		GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field add tidak kosong setelah klik cancel')
 }
-else {
-	
-	'klik tombol +Baru'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_Baru'))
-}
+
+'klik tombol +Baru'
+WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/a_Baru'))
+
+'verify element field kosong'
+checkVerifyEqualOrMatch(WebUI.verifyElementAttributeValue(findTestObject('Object Repository/API_KEY/Page_Add Api Key/input__apiKeyName'),
+	'class', 'form-control ng-untouched ng-pristine ng-invalid',
+	GlobalVariable.Timeout, FailureHandling.OPTIONAL), 'Field add tidak kosong setelah klik cancel')
 
 'input data API KEY name'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Add Api Key/input__apiKeyName'), findTestData(ExcelPathAPIKey).getValue(
-        GlobalVariable.NumOfColumn, 11))
+        GlobalVariable.NumOfColumn, rowExcel('$Nama API KEY')))
 
 'pilih jenis API KEY'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Add Api Key/select_tipeAPI'), findTestData(ExcelPathAPIKey).getValue(
-        GlobalVariable.NumOfColumn, 12))
+        GlobalVariable.NumOfColumn, rowExcel('$Tipe API KEY')))
 
 WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Add Api Key/select_tipeAPI'), Keys.chord(Keys.ENTER), FailureHandling.OPTIONAL)
 
@@ -65,8 +60,8 @@ WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Add Api Key/select
 if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Simpan'), 'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 	
 	'Write to excel status failed mandatory'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
-	GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonMandatory)
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+	GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonMandatory)
 	
 	GlobalVariable.FlagFailed = 1
 	
@@ -105,23 +100,23 @@ if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Pa
 			FailureHandling.OPTIONAL) == false) {
 		
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning,
-				(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonUnknown)
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning,
+				(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonUnknown)
 		}
 		
 		searchAPIKEY()
 		
 		'verify nama api key'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_NamaAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 11), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama api key')
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_NamaAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama API KEY')), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama api key')
 	
 		'verify nama tipe api key'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_TipeAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12), false, FailureHandling.CONTINUE_ON_FAILURE), ' tipe api key')
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_TipeAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe API KEY')), false, FailureHandling.CONTINUE_ON_FAILURE), ' tipe api key')
 	
 	} else {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + '<' + reason + '>')
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + '<' + reason + '>')
 		
 		GlobalVariable.FlagFailed = 1
 	}
@@ -132,8 +127,8 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 	if ((isMatch == false)) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('API KEY', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-			(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch + + '<' + reason + '>')
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+			(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch + + '<' + reason + '>')
 
 		GlobalVariable.FlagFailed = 1
 	}
@@ -142,7 +137,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 def searchAPIKEY() {
 	'input tipe API'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
-			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 12))
+			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe API KEY')))
 	
 	'select tipe API'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(
@@ -150,7 +145,7 @@ def searchAPIKEY() {
 	
 	'input status API'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
-			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, 16))
+			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('SearchStatusAPI')))
 	
 	'select status API'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(
@@ -158,4 +153,8 @@ def searchAPIKEY() {
 	
 	'klik pada button cari'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

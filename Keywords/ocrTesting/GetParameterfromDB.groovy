@@ -116,7 +116,7 @@ public class GetParameterfromDB {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT msp.service_price FROM esign.ms_service_price msp WHERE lov_balance_type = " + idPayment + " AND effective_date >= '2023-03-25'")
+		ResultSet resultSet = stm.executeQuery("SELECT msp.service_price FROM esign.ms_service_price msp WHERE lov_balance_type = " + idPayment + "")
 
 		while (resultSet.next()){
 

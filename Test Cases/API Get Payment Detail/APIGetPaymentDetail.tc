@@ -11,11 +11,24 @@
       <value></value>
       <variableId>d9537f5f-3aef-474e-825f-108655aec5d2</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>3e2c5503-5ab7-4029-a6fa-e449d41a4a90</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'API Get Payment Detail/APIGetPaymentDetail'</defaultValue>
       <description></description>
       <id>d9537f5f-3aef-474e-825f-108655aec5d2</id>
       <masked>false</masked>
       <name>excelPathAPIGetPaymentDetail</name>
+   </variable>
+   <variable>
+      <defaultValue>'APIGetPaymentDetail'</defaultValue>
+      <description></description>
+      <id>3e2c5503-5ab7-4029-a6fa-e449d41a4a90</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>
