@@ -17,6 +17,12 @@
       <value></value>
       <variableId>3246a731-ca2f-48a4-9cc6-4c9a84ca450d</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>281a3d42-8e68-48b7-92ee-e3cbceb587ea</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'APIAAS/DataEditProfile'</defaultValue>
       <description></description>
@@ -30,5 +36,12 @@
       <id>3246a731-ca2f-48a4-9cc6-4c9a84ca450d</id>
       <masked>false</masked>
       <name>role</name>
+   </variable>
+   <variable>
+      <defaultValue>'Edit Profile'</defaultValue>
+      <description></description>
+      <id>281a3d42-8e68-48b7-92ee-e3cbceb587ea</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

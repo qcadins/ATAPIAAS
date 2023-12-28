@@ -11,11 +11,24 @@
       <value></value>
       <variableId>402df6a4-4b29-4cf4-ab03-6a498a8a5ef1</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>3c6da716-b902-4c54-83e8-ef4b2c0ef5d0</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'Coupon/DataTestingCoupon'</defaultValue>
       <description></description>
       <id>402df6a4-4b29-4cf4-ab03-6a498a8a5ef1</id>
       <masked>false</masked>
       <name>ExcelPathCoupon</name>
+   </variable>
+   <variable>
+      <defaultValue>'Coupon'</defaultValue>
+      <description></description>
+      <id>3c6da716-b902-4c54-83e8-ef4b2c0ef5d0</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

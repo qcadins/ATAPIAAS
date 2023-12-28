@@ -5,4 +5,17 @@
    <tag></tag>
    <comment></comment>
    <testCaseGuid>1b1508e4-6582-4dc0-b290-a58fcca108cf</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>5a48b342-409f-4600-9ee3-58f842b73bfd</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'Coupon'</defaultValue>
+      <description></description>
+      <id>5a48b342-409f-4600-9ee3-58f842b73bfd</id>
+      <masked>false</masked>
+      <name>sheet</name>
+   </variable>
 </TestCaseEntity>
