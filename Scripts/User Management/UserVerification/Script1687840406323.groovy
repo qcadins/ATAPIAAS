@@ -36,11 +36,11 @@ WebUI.click(findTestObject('User Management-User/button_LogOut'))
 
 'login dengan user yang baru di tambahkan'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
+		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email')))
 
 'input password'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 22))
+		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Password')))
 
 'ceklis pada reCaptcha'
 WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
@@ -53,9 +53,10 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platf
 
 'check if reason failed tidak present'
 if (WebUI.verifyElementNotPresent(findTestObject('User Management-User/label_TextError'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+	
 	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
-	GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+	GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') + 
 	'Berhasil Login dengan user yang belum aktivasi')
 	
 	GlobalVariable.FlagFailed = 1
@@ -63,11 +64,11 @@ if (WebUI.verifyElementNotPresent(findTestObject('User Management-User/label_Tex
 
 'input data email'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(excelPathUser).getValue(2, 11))
+		findTestData(excelPathUser).getValue(2, rowExcel('Username Login')))
 
 'input password'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(excelPathUser).getValue(2, 12))
+		findTestData(excelPathUser).getValue(2, rowExcel('Password Login')))
 
 'delay alert'
 WebUI.delay(5)
@@ -94,7 +95,7 @@ if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management
 
 'input email'
 WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/input_Email_email'),
-		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
+		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email')))
 
 'input status user'
 WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/inputstatus'),
@@ -106,7 +107,7 @@ WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_List 
 
 'input peran user'
 WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/inputrole'),
-	findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 21))
+	findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Role')))
 
 'enter pada peran user'
 WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_List User/inputrole'),
@@ -129,11 +130,11 @@ if (WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgno
 	
 	'aktifkan user yang baru saja didaftarkan di db dev'
 	CustomKeywords.'userManagement.UserVerif.updateIsActiveUser'(conndev,
-		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
+		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email')))
 
 	'aktifkan user yang baru saja didaftarkan di db dev_uat'
 	CustomKeywords.'userManagement.UserVerif.updateIsActiveUser'(conndevUAT,
-		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
+		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email')))
 	
 	'click profile'
 	WebUI.click(findTestObject('User Management-User/user_Profile'))
@@ -143,11 +144,11 @@ if (WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgno
 	
 	'login dengan user yang baru di tambahkan'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-			findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 18))
+			findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email')))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-			findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 22))
+			findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Password')))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
@@ -161,9 +162,10 @@ if (WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgno
 	'check if berhasil login'
 	if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/User Management-Role/' +
 	'Page_Balance/i_SEDARA MANYURA_ft-menu font-medium-3'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 		'gagal login dengan user yang baru terdaftar dan sudah aktivasi')
 
 		GlobalVariable.FlagFailed = 1
@@ -177,11 +179,11 @@ if (WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgno
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(excelPathUser).getValue(2, 11))
+		findTestData(excelPathUser).getValue(2, rowExcel('Username Login')))
 
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(excelPathUser).getValue(2, 12))
+		findTestData(excelPathUser).getValue(2, rowExcel('Password Login')))
 	
 	'ceklis pada reCaptcha'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
@@ -194,9 +196,13 @@ if (WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgno
 	
 } else {
 	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
-	GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+	GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 	'gagal mengirimkan ulang email aktivasi')
 	
 	GlobalVariable.FlagFailed = 1
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

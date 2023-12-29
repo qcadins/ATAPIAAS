@@ -5,4 +5,17 @@
    <tag></tag>
    <comment></comment>
    <testCaseGuid>db08cd5e-3c3b-440f-9e39-2fb401d2b967</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>e069704a-4a95-47c0-b6ea-d61854ce09f8</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'Top Up'</defaultValue>
+      <description></description>
+      <id>e069704a-4a95-47c0-b6ea-d61854ce09f8</id>
+      <masked>false</masked>
+      <name>sheet</name>
+   </variable>
 </TestCaseEntity>

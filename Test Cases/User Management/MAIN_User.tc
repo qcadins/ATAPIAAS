@@ -17,6 +17,12 @@
       <value></value>
       <variableId>13e8e476-4296-437d-afb4-a77d7394af68</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>cfca106b-2e97-4d1a-9914-4fb7fe823a42</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'User Management/DataTestingUser'</defaultValue>
       <description></description>
@@ -30,5 +36,12 @@
       <id>13e8e476-4296-437d-afb4-a77d7394af68</id>
       <masked>false</masked>
       <name>TombolSilang</name>
+   </variable>
+   <variable>
+      <defaultValue>'User'</defaultValue>
+      <description></description>
+      <id>cfca106b-2e97-4d1a-9914-4fb7fe823a42</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

@@ -11,11 +11,24 @@
       <value></value>
       <variableId>d04a5526-ec41-4e56-8b38-cc10fc9cda67</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>3d1363e2-8173-4c94-820d-0e8a564b6a1e</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'Tenant/DataTestingTenant'</defaultValue>
       <description></description>
       <id>d04a5526-ec41-4e56-8b38-cc10fc9cda67</id>
       <masked>false</masked>
       <name>ExcelPathTenant</name>
+   </variable>
+   <variable>
+      <defaultValue>'Tenant'</defaultValue>
+      <description></description>
+      <id>3d1363e2-8173-4c94-820d-0e8a564b6a1e</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

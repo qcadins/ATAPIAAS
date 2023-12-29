@@ -154,6 +154,8 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/Top Up/NotifCat
 	
 	'jika hasil notifikasi tidak sama dengan sukses'
 	if (hasilNotif != 'Success') {
+		
+		GlobalVariable.FlagFailed = 1
 						
 		'tulis error sesuai reason yang ditampilkan oleh error message'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
@@ -311,6 +313,8 @@ if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Top Up/
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Top Up/ErrorCatch'),
 		GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 	
+		GlobalVariable.FlagFailed = 1
+	
 		'tulis error sesuai reason yang ditampilkan oleh error message'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
@@ -328,6 +332,8 @@ if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Top Up/
 		
 		'jika hasil notifikasi tidak sama dengan sukses'
 		if (hasilNotif != 'Success') {
+			
+			GlobalVariable.FlagFailed = 1
 							
 			'tulis error sesuai reason yang ditampilkan oleh error message'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,

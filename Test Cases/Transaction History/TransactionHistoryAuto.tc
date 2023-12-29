@@ -11,11 +11,24 @@
       <value></value>
       <variableId>cc4223b5-0b9c-4fa4-9d93-54369c48ad58</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>1ea1a7bd-a3a5-4629-935d-c12781ee4e99</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'Transaction History/DataTestingTrxHistoryAuto'</defaultValue>
       <description></description>
       <id>cc4223b5-0b9c-4fa4-9d93-54369c48ad58</id>
       <masked>false</masked>
       <name>ExcelPathTranx</name>
+   </variable>
+   <variable>
+      <defaultValue>'RiwayatTransaksiAuto'</defaultValue>
+      <description></description>
+      <id>1ea1a7bd-a3a5-4629-935d-c12781ee4e99</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

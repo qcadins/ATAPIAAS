@@ -41,7 +41,11 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(Sheet, GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				GlobalVariable.FailedReasonStoreDB + ' ' + reason)
 	}
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, Sheet, cellValue)
 }

@@ -11,11 +11,24 @@
       <value></value>
       <variableId>0cc8d8f3-bf65-4f5b-bbff-fdb6d2ffa519</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>c8b08551-7567-4526-8818-77b0401b5d60</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'User Management/DataTestingRole'</defaultValue>
       <description></description>
       <id>0cc8d8f3-bf65-4f5b-bbff-fdb6d2ffa519</id>
       <masked>false</masked>
       <name>ExcelPathRole</name>
+   </variable>
+   <variable>
+      <defaultValue>'Role'</defaultValue>
+      <description></description>
+      <id>c8b08551-7567-4526-8818-77b0401b5d60</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

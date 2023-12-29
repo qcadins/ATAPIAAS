@@ -5,4 +5,17 @@
    <tag></tag>
    <comment></comment>
    <testCaseGuid>d3316d08-a586-4375-b435-2dea94e3cf90</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>ac270367-6573-4efa-9fab-68cd7b9a3759</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'User'</defaultValue>
+      <description></description>
+      <id>ac270367-6573-4efa-9fab-68cd7b9a3759</id>
+      <masked>false</masked>
+      <name>sheet</name>
+   </variable>
 </TestCaseEntity>

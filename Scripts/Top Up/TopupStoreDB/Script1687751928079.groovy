@@ -19,31 +19,35 @@ resultDB.addAll(CustomKeywords.'topup.TopupVerif.getStoreDBTopup2'(conndev, NoTr
 
 'cek hasil db dan excel'
 checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB[arrayIndex++], findTestData(Path).getValue(
-	GlobalVariable.NumOfColumn, 9), false, FailureHandling.CONTINUE_ON_FAILURE), 'Tipe Saldo tidak sesuai')
+	GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Tipe Saldo tidak sesuai')
 
 'cek hasil db dan excel'
 checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB[arrayIndex++], findTestData(Path).getValue(
-	GlobalVariable.NumOfColumn, 10), false, FailureHandling.CONTINUE_ON_FAILURE), 'Metode Pembayaran tidak sesuai')
+	GlobalVariable.NumOfColumn, rowExcel('$Metode Pembayaran')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Metode Pembayaran tidak sesuai')
 
 'cek hasil db dan excel'
 checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB[arrayIndex++], findTestData(Path).getValue(
-	GlobalVariable.NumOfColumn, 11), false, FailureHandling.CONTINUE_ON_FAILURE), 'Bank destinasi tidak sesuai')
+	GlobalVariable.NumOfColumn, rowExcel('$Bank Destinasi')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Bank destinasi tidak sesuai')
 
 'cek hasil db dan excel'
 checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB[arrayIndex++], findTestData(Path).getValue(
-	GlobalVariable.NumOfColumn, 12), false, FailureHandling.CONTINUE_ON_FAILURE), 'Saldo yang dipilih tidak sesuai')
+	GlobalVariable.NumOfColumn, rowExcel('$SaldoYangDipilih')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Saldo yang dipilih tidak sesuai')
 
 'cek hasil db dan excel'
 checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB[arrayIndex++], findTestData(Path).getValue(
-	GlobalVariable.NumOfColumn, 13), false, FailureHandling.CONTINUE_ON_FAILURE), 'Jumlah isi ulang tidak sesuai')
+	GlobalVariable.NumOfColumn, rowExcel('$JumlahisiUlang(quantity)')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Jumlah isi ulang tidak sesuai')
 
 def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 	if(isMatch == false){
 		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				GlobalVariable.FailedReasonStoreDB + ' ' + reason)
 	}
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

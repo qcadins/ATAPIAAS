@@ -17,6 +17,7 @@ import org.openqa.selenium.remote.DesiredCapabilities
 import com.kms.katalon.core.webui.driver.DriverFactory
 import org.openqa.selenium.WebDriver
 
+'untuk line 20-50 dibawah ini adalah setting untuk chromedrive dan extension Captcha Solver serta Katalon Smart Wait'
 WebDriver driver
 	
 System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe")
@@ -27,6 +28,7 @@ chromePrefs.put('download.default_directory', System.getProperty('user.dir') + '
 
 ChromeOptions options = new ChromeOptions()
 
+'jika captcha perlu diaktifkan, maka extension akan ter-load secara otomatis'
 if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == 'Yes' ||
 	findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == '') {
 	
@@ -50,7 +52,7 @@ DriverFactory.changeWebDriver(driver)
 if (TC != 'Regist') {
 	
 	'aktifkan nocaptcha by link'
-	WebUI.navigateToUrl('https://config.nocaptchaai.com/?apikey=' + GlobalVariable.APIKEYCaptcha + '')
+	WebUI.navigateToUrl('https://config.noCaptchaai.com/?apikey=' + GlobalVariable.APIKEYCaptcha + '')
 }
 
 'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
@@ -74,6 +76,7 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
 	}
 }
 
+'cek perlukah tunggu agar recaptcha selesai solving'
 if ((findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == 'Yes' ||
 	findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == '') && 
 	TC != 'Tenant' && TC != 'IsiSaldo' && TC != 'IsiSaldoAuto') {
@@ -89,11 +92,11 @@ if (TC == 'EditProf') {
 	
 	'input email'
 	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemail'),
-		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputpassword'),
-		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 10))
+		findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('$Password Login')))
 
 } else if (TC == 'Regist') {
 	
@@ -105,7 +108,7 @@ if (TC == 'EditProf') {
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
 	
 	'check apakah mau buka hyperlink atau tidak'
-	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 20) == 'Yes') {
+	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Open Hyperlink?')) == 'Yes') {
 		'click label syarat dan ketentuan'
 		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_KebijakanPrivasi'))
 		
@@ -115,7 +118,7 @@ if (TC == 'EditProf') {
 				
 				'tulis gagal membuka halaman kebijakan privasi'
 				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
-					GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 						'Gagal membuka halaman KEBIJAKAN PRIVASI')
 		}
 		
@@ -134,7 +137,7 @@ if (TC == 'EditProf') {
 			
 			'tulis gagal membuka halaman syarat dan ketentuan'
 			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 					'Gagal membuka halaman SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO')
 		}
 		
@@ -146,7 +149,7 @@ if (TC == 'EditProf') {
 		
 	}
 	
-	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 19) == 'Yes') {
+	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Checklist T&C?')) == 'Yes') {
 		WebElement linkTerm = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >"+
 			" div:nth-child(6) > div > div > label > a:nth-child(1)"))
 		WebElement linkPrivacy = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >"+
@@ -162,7 +165,7 @@ if (TC == 'EditProf') {
 	'input pada field email'
 	WebUI.setText(
 		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemailRegister'),
-			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9))
+			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email registrasi')))
 	
 	'ubah ke laman login'
 	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Masuk'))
@@ -175,28 +178,28 @@ if (TC == 'EditProf') {
 	'ambil teks dari field input email'
 	if (WebUI.getAttribute(
 		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemailRegister'), 'value', FailureHandling.OPTIONAL)
-			!= findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 9)) {
+			!= findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email registrasi'))) {
 	
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
 		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 2) +
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 			';') + GlobalVariable.FailedReasonEmailField)
 	}
 	
 	'input pada field nama pengguna'
 	WebUI.setText(
 		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputNamaRegister'),
-			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 10))
+			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username registrasi')))
 	
 	'input pada field kata sandi'
 	WebUI.setText(
 		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_passRegister'),
-			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 11))
+			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Pass registrasi')))
 	
 	'input pada field ketik ulang kata sandi'
 	WebUI.setText(
 		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_confirmPassRegist'),
-			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 12))
+			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$KetikUlang Pass')))
 	
 //	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 21) == 'Yes') {
 //		'bypass captcha langsung masuk verifikasi otp'
@@ -207,21 +210,21 @@ if (TC == 'EditProf') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData('API_KEY/DataAPIKEY').getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData('API_KEY/DataAPIKEY').getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData('API_KEY/DataAPIKEY').getValue(GlobalVariable.NumOfColumn, 10))
+		findTestData('API_KEY/DataAPIKEY').getValue(GlobalVariable.NumOfColumn, rowExcel('$Password Login')))
 	
 } else if (TC == 'DocAPI') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 13))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Username')))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 14))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Password')))
 	
 } else if (TC == 'OCR') {
 	
@@ -237,11 +240,11 @@ if (TC == 'EditProf') {
 	
 	'input data username'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Billing')))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputpassword'),
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, 10))
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Password Billing')))
 	
 	'klik tombol masuk'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
@@ -265,71 +268,71 @@ if (TC == 'EditProf') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 25))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Username')))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 26))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Password')))
 	
 } else if (TC == 'Layanan') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(ExcelPathLayanan).getValue(2, 9))
+		findTestData(ExcelPathLayanan).getValue(2, rowExcel('$Username Login')))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(ExcelPathLayanan).getValue(2, 10))
+		findTestData(ExcelPathLayanan).getValue(2, rowExcel('$Password Login')))
 	
 } else if (TC == 'Role') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(ExcelPathRole).getValue(2, 11))
+		findTestData(ExcelPathRole).getValue(2, rowExcel('Username Login')))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(ExcelPathRole).getValue(2, 12))
+		findTestData(ExcelPathRole).getValue(2, rowExcel('Password Login')))
 	
 } else if (TC == 'User') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(Path).getValue(2, 11))
+		findTestData(Path).getValue(2, rowExcel('Username Login')))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(2, 12))
+		findTestData(Path).getValue(2, rowExcel('Password Login')))
 	
 } else if (TC == 'Coupon') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(Path).getValue(2, 33))
+		findTestData(Path).getValue(2, rowExcel('Username Login')))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(2, 34))
+		findTestData(Path).getValue(2, rowExcel('Password Login')))
 	
 } else if (TC == 'TopUp') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(Path).getValue(2, 19))
+		findTestData(Path).getValue(2, rowExcel('Username Login')))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(2, 20))
+		findTestData(Path).getValue(2, rowExcel('Password Login')))
 	
 } else if (TC == 'ChangePass') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 10))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Password Login')))
 	
 } else if (TC == 'IsiSaldoAuto') {
 	
@@ -351,11 +354,11 @@ if (TC == 'EditProf') {
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 10))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Password Login')))
 	
 //	'jika ada pilihan role'
 //	if (WebUI.verifyElementPresent(
@@ -409,15 +412,7 @@ if (TC == 'EditProf') {
 }
 
 if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Regist') {
-	
-//	'tunggu tombol tidak di disable lagi'
-//	if (WebUI.waitForElementNotHasAttribute(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'),
-//		'disabled', 60, FailureHandling.OPTIONAL)) {
-//	
-//		'klik pada button login'
-//		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-//	} 
-	
+
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	

@@ -38,17 +38,17 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	GlobalVariable.FlagFailed = 0
 		
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
+	if (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
 		
 		break
-	} else if (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+	} else if (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
-		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 5))
+		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Mandatory Complete')))
 		
 		if (firstRun == 0) {
 			'panggil fungsi login'
-			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Saldo', ('SheetName') : 'Saldo',
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : sheet, ('SheetName') : sheet,
 				('Path') : ExcelPathSaldo], FailureHandling.STOP_ON_FAILURE)
 			
 			firstRun = 1
@@ -56,7 +56,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'ambil kode tenant di DB'
 		String tenantcode = CustomKeywords.'saldo.VerifSaldo.getTenantCodefromDB'(conn,
-			findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 25))
+			findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Username')))
 		
 		WebUI.refresh()
 		
@@ -67,13 +67,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.scrollToElement(findTestObject('API_KEY/Page_Api Key List/skiptoLast_page'), GlobalVariable.Timeout)
 		
 		'panggil fungsi cek table dan paging'
-		checkTableandPaging(conn, tenantcode, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
+		checkTableandPaging(conn, tenantcode, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
 		
 		'ambil nama balance dari DB'
 		ArrayList namatipesaldoDB = CustomKeywords.'saldo.VerifSaldo.getListTipeSaldo'(conn, tenantcode)
 		
 		'ambil nama balance dari DB'
-		ArrayList namatipetransaksiDB = CustomKeywords.'saldo.VerifSaldo.getListTipeTransaksi'(conn, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
+		ArrayList namatipetransaksiDB = CustomKeywords.'saldo.VerifSaldo.getListTipeTransaksi'(conn, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
 		
 		'ambil nama kantor dari DB'
 		ArrayList namaKantorDB = CustomKeywords.'saldo.VerifSaldo.getListKantor'(conn, tenantcode)
@@ -91,7 +91,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		ArrayList activeBalanceDB = CustomKeywords.'saldo.VerifSaldo.getListActiveBalance'(conn, tenantcode)
 		
 		'ambil nama saldo tenant aktif di UI'
-		ArrayList activeBalanceUI = []
+		ArrayList activeBalanceUI = [], arrayMatch = []
 		
 		'cari element dengan nama saldo'
 		def elementNamaSaldo = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout >'+
@@ -110,14 +110,23 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			activeBalanceUI.add(WebUI.getText(modifyNamaSaldo))
 		}
 		
+		'lakukan sort ascending pada kedua array'
+		activeBalanceUI.sort()
+		activeBalanceDB.sort()
+	
+		'loop dan verifikasi datanya satu per satu'
+		for (int i = 0; i <= activeBalanceDB.size(); i++) {
+			'verify livenessFacecompareServicesStatus'
+			arrayMatch.add(WebUI.verifyMatch(activeBalanceUI[i], activeBalanceDB[i], FailureHandling.CONTINUE_ON_FAILURE))
+		}
+		
 		'jika hasil UI dan DB tidak sama'
-		if (!activeBalanceUI.containsAll(activeBalanceDB)) {
-			
+		if (arrayMatch.contains(false)) {
 			GlobalVariable.FlagFailed = 1
-			
+
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonBalanceUI'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 			';') + GlobalVariable.FailedReasonBalanceUI)
 		}
 		
@@ -125,14 +134,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		if ((isMandatoryComplete == 0) && GlobalVariable.FlagFailed == 0) {
 			
 			'write to excel success'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Saldo', 0,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0,
 				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 			
 		} else if (isMandatoryComplete > 0) {
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 				';') + GlobalVariable.FailedReasonMandatory)
 		}
 		
@@ -145,8 +154,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusWarning, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusWarning, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 					GlobalVariable.FailedReasonUnknown)
 		}
 	}
@@ -175,7 +184,7 @@ def filterSaldo() {
 	
 	'isi field input tipe saldo'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
@@ -191,22 +200,22 @@ def filterSaldo() {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
 	}
 	
 	
 	'isi field input tipe saldo'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/inputtipesaldo'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/Saldo/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
 	
 	'isi field tipe transaksi'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/inputtipetransaksi'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 10))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Transaksi')))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/Saldo/Page_Balance/inputtipetransaksi'), Keys.chord(Keys.ENTER))
@@ -214,35 +223,35 @@ def filterSaldo() {
 	'isi tanggal transaksi awal'
 	WebUI.setText(
 		findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Dari_transactionDateStart'),
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 11))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Tanggal Transaksi Dari')))
 	
 	'input pengguna dari transaksi'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/input_Pengguna_user'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 12))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Pengguna')))
 	
 	'input hasil proses berdasarkan ddl di excel'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/inputhasilproses'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 13))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Hasil Proses')))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/Saldo/Page_Balance/inputhasilproses'), Keys.chord(Keys.ENTER))
 	
 	'input reference number transaksi'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/input_Ref Number_referenceNo'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 14))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Ref Number')))
 	
 	'input nama dokumen'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/input_Nama Dokumen_documentName'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 15))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Nama Dokumen')))
 	
 	'input batas tanggal transaksi terakhir'
 	WebUI.setText(
 		findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Sampai_transactionDateEnd'), 
-			findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 16))
+			findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Tanggal Transaksi hingga')))
 	
 	'input kantor'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/inputkantor'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 17))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Kantor')))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/Saldo/Page_Balance/inputkantor'), Keys.chord(Keys.ENTER))
@@ -257,8 +266,8 @@ def filterSaldo() {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
 	}
 	
@@ -321,14 +330,14 @@ def filterSaldo() {
 
 	'isi field input tipe saldo'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
 	
 	'isi field tipe transaksi'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), 
-		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 10))
+		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Transaksi')))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), Keys.chord(Keys.ENTER))
@@ -343,16 +352,16 @@ def filterSaldo() {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 				';') + GlobalVariable.FailedReasonSearchFailed)
 	}
 	
 	'user menentukan apakah file yang didownload langsung dihapus atau tidak lewat excel'
-	String downloadFile = findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 20)
+	String downloadFile = findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Download File'))
 	
 	'user menentukan apakah file yang didownload langsung dihapus atau tidak lewat excel'
-	String flagDelete = findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 21)
+	String flagDelete = findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Delete File ?(Yes/No)'))
 	
 	'mengambil alamat dari project katalon ini'
 	String userDir = System.getProperty('user.dir')
@@ -376,8 +385,8 @@ def filterSaldo() {
 			GlobalVariable.FlagFailed = 1
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) +
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 					';') + GlobalVariable.FailedReasonDownloadProblem)
 		}
 	}
@@ -495,9 +504,6 @@ def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
 		list.add(WebUI.getText(modifyObjectDDL))
 	}
 	
-	println listDB
-	println list
-	
 	'verify ddl ui = db'
 	checkVerifyEqualOrMatch(listDB.containsAll(list), reason)
 
@@ -511,8 +517,8 @@ def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
 def checkVerifyReset(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn, 
-			GlobalVariable.StatusFailed,(findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) + 
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
+			GlobalVariable.StatusFailed,(findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
 				';') + GlobalVariable.FailedReasonSetFailed)
 
 		GlobalVariable.FlagFailed = 1
@@ -522,8 +528,8 @@ def checkVerifyReset(Boolean isMatch) {
 def checkVerifyPaging(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo', GlobalVariable.NumOfColumn, 
-			GlobalVariable.StatusFailed,(findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) + 
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
+			GlobalVariable.StatusFailed,(findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
 				';') + GlobalVariable.FailedReasonPagingError)
 
 		GlobalVariable.FlagFailed = 1
@@ -534,10 +540,14 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 	if (isMatch == false) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Saldo',
-			GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
+			GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				GlobalVariable.FailedReasonVerifyEqualorMatch + ' ' + reason)
 
 		GlobalVariable.FlagFailed = 1
 	}
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

@@ -5,4 +5,17 @@
    <tag></tag>
    <comment></comment>
    <testCaseGuid>fc8fbcdf-1721-4bca-945d-78b3416cbea3</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>5e09a162-ca99-4ef0-a79f-8d5bf5a5f2ac</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'Tenant'</defaultValue>
+      <description></description>
+      <id>5e09a162-ca99-4ef0-a79f-8d5bf5a5f2ac</id>
+      <masked>false</masked>
+      <name>sheet</name>
+   </variable>
 </TestCaseEntity>

@@ -11,11 +11,24 @@
       <value></value>
       <variableId>84c8f0f2-06ce-4759-9fcb-bc43caf216ef</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>5d53aeba-9b01-4ad7-812a-7c2109ac897a</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'User Management/DataTestingUser'</defaultValue>
       <description></description>
       <id>84c8f0f2-06ce-4759-9fcb-bc43caf216ef</id>
       <masked>false</masked>
       <name>excelPathUser</name>
+   </variable>
+   <variable>
+      <defaultValue>'User'</defaultValue>
+      <description></description>
+      <id>5d53aeba-9b01-4ad7-812a-7c2109ac897a</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

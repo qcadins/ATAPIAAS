@@ -11,11 +11,24 @@
       <value></value>
       <variableId>d3ef3e7a-9771-421e-adb6-624cc097a21e</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>791cb694-6ed3-44d0-9d64-0fb638e976c8</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'Layanan Saya/DataTestingLayanan'</defaultValue>
       <description></description>
       <id>d3ef3e7a-9771-421e-adb6-624cc097a21e</id>
       <masked>false</masked>
       <name>ExcelPathLayananSaya</name>
+   </variable>
+   <variable>
+      <defaultValue>'LayananSaya'</defaultValue>
+      <description></description>
+      <id>791cb694-6ed3-44d0-9d64-0fb638e976c8</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

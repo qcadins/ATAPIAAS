@@ -21,6 +21,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>findTestData('Login/Login').getValue(5, 14)</initValue>
+      <name>continueTC</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>''</initValue>
       <name>DataFilePath</name>
    </GlobalVariableEntity>

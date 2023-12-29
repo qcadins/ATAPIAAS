@@ -254,8 +254,13 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
     }
 }
 
-//'panggil testcase untuk change password'
-//WebUI.callTestCase(findTestCase('Test Cases/Change Password/MAIN_ChangePassword'), [:], FailureHandling.STOP_ON_FAILURE)
+if (GlobalVariable.continueTC == 'Yes') {
+	'panggil testcase untuk change password'
+	WebUI.callTestCase(findTestCase('Test Cases/Change Password/MAIN_ChangePassword'), [:], FailureHandling.STOP_ON_FAILURE)
+}
+
+'panggil testcase untuk change password'
+WebUI.callTestCase(findTestCase('Test Cases/Change Password/MAIN_ChangePassword'), [:], FailureHandling.STOP_ON_FAILURE)
 
 def verifyDataEdit(Connection conn, String role) {
 	'ambil email dari testdata, disimpan ke string'

@@ -18,29 +18,31 @@ ArrayList resultDB = []
 ArrayList resultExcel = []
 
 'check if action new/edit/settings'
-if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
+if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('New')) {
 	
 	'ambil data role dari db'
 	String resultDB = CustomKeywords.'userManagement.RoleVerif.getNamaRole'(conndevUAT, 
-		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 20))
+		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Add RoleName')))
 	
 	'ambil data role dari excel'
-	String resultExcel = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 20)
+	String resultExcel = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Add RoleName'))
 	
 	'jika hasil db tidak sesuai excel'
 	if (resultDB != resultExcel) {
 		
+		GlobalVariable.FlagFailed = 1
+		
 		'tulis adanya error pada sistem web'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonStoreDB + ' New Role')
 	}
 	
-} else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
+} else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
 	
 	'ambil data role dan status dari DB'
 	resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleEdit'(conndevUAT, 
-		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 17))
+		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama Role')))
 	
 	'inisialisasi array dari Excel'
 	resultExcel = []
@@ -49,33 +51,41 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIg
 	for (int i = 0; i < resultDB.size ; i++){
 		
 		'ambil data dari excel'
-		resultExcel.add(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, (17+i)))
+		resultExcel.add(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, (rowExcel('$Nama Role')+i)))
 		
 		if (resultExcel[i] != resultDB[i]) {
 			
+			GlobalVariable.FlagFailed = 1
+			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 					GlobalVariable.FailedReasonStoreDB + ' Edit Role')
 		}
 	}
 	
-} else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Settings')) {
+} else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Settings')) {
 	
 	'ambil data result dari DB'
 	resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleMenu'(conndev, 
-		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 14), 
-			findTestData(ExcelPathRole).getValue(2, 11))
+		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Nama Role')), 
+			findTestData(ExcelPathRole).getValue(2, rowExcel('Username Login')))
 	
 	'ambil data menu role pada excel'
-	resultExcel = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 22).split(';', -1)
+	resultExcel = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$MenuChecked')).split(';', -1)
 	
 	'jika hasil kedua sumber tidak sesuai'
 	if (resultDB != resultExcel) {
 		
+		GlobalVariable.FlagFailed = 1
+		
 		'tulis adanya error pada sistem web'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				GlobalVariable.FailedReasonStoreDB + ' Setting akses Role')
 	}
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

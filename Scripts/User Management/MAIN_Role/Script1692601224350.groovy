@@ -23,7 +23,7 @@ int countColumnEdit = findTestData(ExcelPathRole).columnNumbers
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Role', ('SheetName') : 'Role',
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : sheet, ('SheetName') : sheet,
 	('Path') : ExcelPathRole], FailureHandling.STOP_ON_FAILURE)
 
 'klik pada menu'
@@ -44,13 +44,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	GlobalVariable.FlagFailed = 0
 		
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
+	if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
 		
 		break
-	} else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+	} else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
 		
 		'declare isMmandatory Complete'
-		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 5))
+		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Is Mandatory Complete')))
 		
 		'klik pada menu'
 		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/span_Menu'))
@@ -66,14 +66,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'check if action new/edit/settings'
-		if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')){
+		if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('New')){
 			
 			'klik pada tombol New'
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/a_New'))
 			
 			'input nama role baru yang akan ditambahkan'
 			WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_Add Role/input__roleName'),
-				findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 20))
+				findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Add RoleName')))
 			
 			'panggil fungsi cek konfirmasi dialog'
 			if(checkdialogConfirmation(isMandatoryComplete) == true) {
@@ -98,7 +98,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				
 				'input nama role baru yang akan ditambahkan'
 				WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_Add Role/input__roleName'),
-					findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 20))
+					findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Add RoleName')))
 			}
 
 			'klik pada tombol cari'
@@ -107,7 +107,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'verify nama role'
 			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-Role/label_Role')), findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 20), false, FailureHandling.CONTINUE_ON_FAILURE), ' Nama Role')
 			
-		} else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
+		} else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
 			
 			'panggil fungsi cari role'
 			searchRole()
@@ -120,11 +120,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'input nama role yang akan diubah'
 			WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_Edit Role/input__roleName'),
-				findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 17))
+				findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama Role')))
 			
 			'input status role yang akan diubah'
 			WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_Edit Role/input_status'),
-				findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 18))
+				findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Edit Status Role')))
 			
 			'enter pada status'
 			WebUI.sendKeys(findTestObject('Object Repository/User Management-Role/Page_Edit Role/input_status'),
@@ -139,11 +139,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'input nama role'
 			WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Role Name_roleName'),
-					findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 17))
+					findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama Role')))
 		
 			'input status role'
 			WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Status'),
-				findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 18))
+				findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Edit Status Role')))
 			
 			'enter pada status'
 			WebUI.sendKeys(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Status'),
@@ -155,7 +155,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'verify nama role'
 			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-Role/label_Role')), findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 17), false, FailureHandling.CONTINUE_ON_FAILURE), ' Nama Role')
 			
-		} else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Settings')) {
+		} else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Settings')) {
 			
 			'panggil fungsi cari role'
 			searchRole()
@@ -164,10 +164,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/setting_Rolebutton'))
 			
 			'fungsi uncheck service'
-			checkorUncheckservices(22)
+			checkorUncheckservices(rowExcel('$MenuChecked'))
 			
 			'fungsi untuk check services'
-			checkorUncheckservices(23)
+			checkorUncheckservices(rowExcel('$MenuUnchecked'))
 			
 			'klik pada button save services'
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Setting Menu/button_Save'))
@@ -185,7 +185,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					GlobalVariable.FlagFailed = 1
 					
 					'tulis adanya error pada sistem web'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
+					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusWarning, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 							GlobalVariable.FailedReasonUnknown)
 				}
@@ -194,7 +194,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				if (isMandatoryComplete == 0 && GlobalVariable.FlagFailed == 0) {
 					
 					'write to excel success'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Role', 0,
+					CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
 						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 					
 					'cek apakah perlu pengecekan ke db'
@@ -210,8 +210,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Setting Menu/button_OK'))
 					
 					'tulis adanya mandatory tidak lengkap'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-						GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 							GlobalVariable.FailedReasonMandatory)
 					
 					'cek apakah muncul error unknown setelah klik pada tombol ok'
@@ -221,16 +221,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						GlobalVariable.FlagFailed = 1
 						
 						'tulis adanya error pada sistem web'
-						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-							GlobalVariable.StatusWarning, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+							GlobalVariable.StatusWarning, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 								GlobalVariable.FailedReasonUnknown)
 					}
 				}
 				
 			} else {
+				GlobalVariable.FlagFailed = 1
+				
 				'tulis adanya error saat setting access menu role'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-					GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 						GlobalVariable.FailedReasonMenuRole)
 			}
 		}
@@ -242,11 +244,11 @@ WebUI.closeBrowser()
 def searchRole() {
 	'input nama role'
 	WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Role Name_roleName'),
-			findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 14))
+			findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Nama Role')))
 
 	'input status role'
 	WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Status'),
-		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 15))
+		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Status Role')))
 	
 	'enter pada status'
 	WebUI.sendKeys(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Status'),
@@ -296,10 +298,12 @@ def checkdialogConfirmation(int isMandatoryComplete) {
 	
 	if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_Next'), 
 		'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+	
+		GlobalVariable.FlagFailed = 1
 			
 		'tulis adanya mandatory tidak lengkap'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				GlobalVariable.FailedReasonMandatory)
 		
 		'klik pada tombol batal'
@@ -321,9 +325,11 @@ def checkdialogConfirmation(int isMandatoryComplete) {
 			'klik tombol OK'
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_OK'))
 		
+			GlobalVariable.FlagFailed = 1
+			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 					GlobalVariable.FailedReasonExisted)
 			
 			shouldcontinue = true
@@ -340,8 +346,8 @@ def checkdialogConfirmation(int isMandatoryComplete) {
 				GlobalVariable.FlagFailed = 1
 				
 				'tulis adanya error pada sistem web'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-					GlobalVariable.StatusWarning, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusWarning, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 						GlobalVariable.FailedReasonUnknown)
 			}
 			
@@ -349,7 +355,7 @@ def checkdialogConfirmation(int isMandatoryComplete) {
 			if (isMandatoryComplete == 0 && GlobalVariable.FlagFailed == 0) {
 				
 				'write to excel success'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Role', 0,
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
 					GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 				
 				'cek apakah perlu untuk cek ke DB'
@@ -385,8 +391,8 @@ def beforeEditVerif (Connection connUAT) {
 		if (roleDB[i] != roleUI[i]) {
 			
 			'Write To Excel gagal dan bermasalah saat verifikasi data'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) +
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 					';') + GlobalVariable.FailedReasonEditVerif)
 
 			GlobalVariable.FlagFailed = 1
@@ -398,11 +404,11 @@ def checkPaging(Connection connUAT) {
 	
 	'input nama role'
 	WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Role Name_roleName'), 
-			findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 14))
+			findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Nama Role')))
 
 	'input status role'
 	WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Status'),
-		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 15))
+		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Status Role')))
 	
 	'enter pada status'
 	WebUI.sendKeys(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Status'),
@@ -437,7 +443,7 @@ def checkPaging(Connection connUAT) {
 
 	'get data total dari tabel role'
 	int resultTotalData = CustomKeywords.'userManagement.RoleVerif.getRoleTotal'(connUAT, 
-		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 11))
+		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 	
 	'get text total data dari ui'
 	Total = WebUI.getText(findTestObject('Object Repository/User Management-Role/Page_List Roles/TotalData')).split(' ')
@@ -514,8 +520,8 @@ def checkVerifyPaging(Boolean isMatch) {
 	if (isMatch == false) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 				';') + GlobalVariable.FailedReasonPagingError)
 
 		GlobalVariable.FlagFailed = 1
@@ -527,9 +533,13 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Role', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-			(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+			(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 
 		GlobalVariable.FlagFailed = 1
 	}
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

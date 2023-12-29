@@ -11,11 +11,24 @@
       <value></value>
       <variableId>64eff6b3-d615-49fe-a660-ade9d908fd04</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>f904989e-c79f-4210-9f00-17c8dd38173e</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'Saldo/DataTestingSaldo'</defaultValue>
       <description></description>
       <id>64eff6b3-d615-49fe-a660-ade9d908fd04</id>
       <masked>false</masked>
       <name>ExcelPathSaldo</name>
+   </variable>
+   <variable>
+      <defaultValue>'Saldo'</defaultValue>
+      <description></description>
+      <id>f904989e-c79f-4210-9f00-17c8dd38173e</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

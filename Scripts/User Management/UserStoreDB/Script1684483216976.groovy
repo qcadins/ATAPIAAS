@@ -15,33 +15,35 @@ ArrayList resultDB = []
 ArrayList resultExcel = []
 
 'check if action new/edit'
-if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('New')) {
+if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('New')) {
 	
 	'isi array dari DB'
 	resultDB = CustomKeywords.'userManagement.UserVerif.getNewUserData'(conndev,
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 18),
-			findTestData(Path).getValue(GlobalVariable.NumOfColumn, 11))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email')),
+			findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 	
 	'cek data untuk tiap alamat di array'
 	for (int i = 0; i < resultDB.size ; i++) {
 		
 		'tambahkan data ke resultExcel'
-		resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (18+i)))
+		resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (rowExcel('$Email')+i)))
 		
 		if (resultExcel[i] != resultDB[i]) {
 			
+			GlobalVariable.FlagFailed = 1
+			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 					GlobalVariable.FailedReasonStoreDB + ' User baru')
 		}
 	}
 	
-} else if(findTestData(Path).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase('Edit')) {
+} else if(findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
 	
 	'ambil data role dari db'
 	resultDB = CustomKeywords.'userManagement.UserVerif.getEditUserData'(conndev, 
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 14))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Email')))
 		
 	'cek data untuk tiap alamat di array'
 	for (int i = 0; i < resultDB.size ; i++) {
@@ -49,20 +51,26 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 8).equalsIgnoreCase(
 		if (i == 0) {
 			
 			'tambahkan data ke array resultExcel'
-			resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, 14))
+			resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Email')))
 			
 		} else {
 			
 			'tambahkan data ke resultExcel'
-			resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (24+i)))
+			resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (rowExcel('Edit User')+i)))
 		}
 		
 		if (resultExcel[i] != resultDB[i]) {
 			
+			GlobalVariable.FlagFailed = 1
+			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('User', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 					GlobalVariable.FailedReasonStoreDB + ' Edit user')
 		}
 	}
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

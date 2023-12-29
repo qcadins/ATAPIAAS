@@ -33,17 +33,17 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	GlobalVariable.FlagFailed = 0
 		
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
+	if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
 		
 		break
 		
-	} else if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted') ||
-		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Warning')) {
+	} else if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted') ||
+		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Warning')) {
 		
 		if (flagLoginUsed == 0) {
 			
 			'panggil fungsi login'
-			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'TranxHist', ('SheetName') : 'RiwayatTransaksiAuto',
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'TranxHist', ('SheetName') : sheet,
 					('Path') : ExcelPathTranx], FailureHandling.STOP_ON_FAILURE)
 			
 			WebUI.delay(4)
@@ -104,22 +104,22 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'ambil role yang digunakan oleh user'
 		String RoleUser = CustomKeywords.'transactionHistory.TransactionVerif.getRoleofUser'(conndev,
-			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 9))
+			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 		
 		'cek apakah role adminclient/admineendigo/adminfinance'
 		if (RoleUser.equalsIgnoreCase('Admin Client')) {
 			
 			'input batas awal transaksi'
 			WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/input_startDate'),
-					findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 13))
+					findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Tanggal Transaksi awal')))
 			
 			'input batas akhir transaksi'
 			WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/input_endDate'),
-					findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 14))
+					findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Tanggal Transaksi awal')))
 			
 			'masukkan data ke filter status'
 			WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
-				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 16))
+				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('StatusSaldo')))
 			
 			'enter pada filter status'
 			WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
@@ -170,7 +170,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			String trxNum = WebUI.getText(modifytrxnumber)
 			
 			'cek apakah perlu upload bukti pembayaran'
-			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 20) == 'Yes') {
+			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Upload Pembayaran?')) == 'Yes') {
 				
 				'klik untuk bagian unggah pembayaran'
 				WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/view_UploadBukti'))
@@ -187,7 +187,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				
 				'klik unggah foto bukti pembayaran'
 				WebUI.uploadFile(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/uploadBukti_Browse'),
-					findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 21), FailureHandling.OPTIONAL)
+					findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('$Image')), FailureHandling.OPTIONAL)
 				
 				'klik batal'
 				WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/buttonBatal_upload'))
@@ -197,7 +197,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 
 				'klik unggah foto bukti pembayaran'
 				WebUI.uploadFile(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/uploadBukti_Browse'),
-					findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 21), FailureHandling.OPTIONAL)
+					findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('$Image')), FailureHandling.OPTIONAL)
 				
 				'klik simpan'
 				WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/buttonSimpan_upload'))
@@ -217,7 +217,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 						
 						'panggil fungsi storeDB'
 						WebUI.callTestCase(findTestCase('Test Cases/Transaction History/TransactionStoreDB'), [('Path') : ExcelPathTranx,
-							('TrxType') : 'Upload', ('TrxNum') : trxNum, ('Sheet') : 'RiwayatTransaksiAuto'],
+							('TrxType') : 'Upload', ('TrxNum') : trxNum, ('Sheet') : sheet],
 							 FailureHandling.CONTINUE_ON_FAILURE)
 					}
 					
@@ -226,8 +226,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					
 					'ambil error dan get text dari error tersebut'
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksiAuto', GlobalVariable.NumOfColumn,
-						GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) +
+					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 							';') + '<' +  WebUI.getText(findTestObject('Object Repository/TransactionHistory/ErrorTopRight')) + '>')
 					
 					'klik batal'
@@ -287,7 +287,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			String trxNum = WebUI.getText(modifytrxnumber)
 			
 			'cek apakah perlu approve pembayaran'
-			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 23) == 'Yes') {
+			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('ViewDetail?')) == 'Yes') {
 				
 				confRejectPayment('Approve', conndev, trxNum)
 			}
@@ -296,7 +296,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		'jika tidak ada error tulis sukses'
 		if(GlobalVariable.FlagFailed == 0 && isMandatoryComplete == 0) {
 			'write to excel success'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'RiwayatTransaksiAuto', 0,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0,
 				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 		}
 		
@@ -307,15 +307,15 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/span_Logout'))
 		
 		'cek apakah kolom selanjutnya kosong'
-		if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn+1, 9).length() != 0) {
+		if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn+1, rowExcel('Username Login')).length() != 0) {
 			
 			'input data email'
 			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn+1, 9))
+				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn+1, rowExcel('Username Login')))
 			
 			'input password'
 			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn+1, 10))
+				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn+1, rowExcel('Password Login')))
 			
 			'ceklis pada reCaptcha'
 			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
@@ -429,7 +429,7 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 				
 				'panggil fungsi storeDB'
 				WebUI.callTestCase(findTestCase('Test Cases/Transaction History/TransactionStoreDB'), [('Path') : ExcelPathTranx,
-					('TrxType') : choice, ('TrxNum') : trxNum, ('Sheet') : 'RiwayatTransaksiAuto'],
+					('TrxType') : choice, ('TrxNum') : trxNum, ('Sheet') : sheet],
 					 FailureHandling.CONTINUE_ON_FAILURE)
 			}
 		}
@@ -439,8 +439,8 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 		GlobalVariable.FlagFailed = 1
 		
 		'tulis adanya error saat melakukan approval'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksiAuto', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				'<' + WebUI.getText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/div_errorCatch')).toString()) + '>'
 	}
 }
@@ -463,15 +463,15 @@ def searchadminEendigoFinance() {
 	
 	'input batas awal transaksi'
 	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/input_startDate'),
-			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 13))
+			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Tanggal Transaksi awal')))
 	
 	'input batas akhir transaksi'
 	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/input_endDate'),
-			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 14))
+			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Tanggal Transaksi akhir')))
 	
 	'masukkan data ke filter status'
 	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
-		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 16))
+		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')))
 	
 	'enter pada filter status'
 	WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
@@ -479,7 +479,7 @@ def searchadminEendigoFinance() {
 	
 	'masukkan data ke filter tenant'
 	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
-		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 18))
+		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')))
 	
 	'enter pada filter tenant'
 	WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
@@ -530,15 +530,15 @@ def checkPaging(Connection conndev) {
 	
 	'input batas awal transaksi'
 	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/input_startDate'),
-			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 13))
+			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Tanggal Transaksi awal')))
 	
 	'input batas akhir transaksi'
 	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/input_endDate'),
-			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 14))
+			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Tanggal Transaksi akhir')))
 	
 	'input tipe isi ulang'
 	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTipeIsiUlang'),
-			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 15))
+			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Isi Ulang')))
 	
 	'enter pada tipe isi ulang'
 	WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTipeIsiUlang'),
@@ -546,7 +546,7 @@ def checkPaging(Connection conndev) {
 	
 	'input metode bayar'
 	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputMetodeBayar'),
-			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 17))
+			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Metode Pembayaran')))
 	
 	'enter pada metode bayar'
 	WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputMetodeBayar'),
@@ -554,7 +554,7 @@ def checkPaging(Connection conndev) {
 	
 	'input status pembayaran'
 	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
-			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 16))
+			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')))
 	
 	'enter pada status pembayaran'
 	WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
@@ -567,7 +567,7 @@ def checkPaging(Connection conndev) {
 	
 		'input tenant yang dituju'
 		WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
-			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 18))
+			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')))
 	
 		'enter pada tenant'
 		WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
@@ -584,8 +584,8 @@ def checkPaging(Connection conndev) {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksiAuto', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
 	
 	}
@@ -636,7 +636,7 @@ def checkPaging(Connection conndev) {
 	
 		'input tenant yang dituju'
 		WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
-			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 18))
+			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')))
 	
 		'enter pada tenant'
 		WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
@@ -653,8 +653,8 @@ def checkPaging(Connection conndev) {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksiAuto', GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
 	
 	}
@@ -672,7 +672,7 @@ def checkPaging(Connection conndev) {
 	
 	'ambil total data dari db'
 	int resultTotalData = CustomKeywords.'transactionHistory.TransactionVerif.getTotalTrx'(conndev,
-		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 
 //	'verify total data role'
 //	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
@@ -781,8 +781,8 @@ def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
 def checkVerifyPaging(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksiAuto', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 				';') + GlobalVariable.FailedReasonPagingError)
 
 		GlobalVariable.FlagFailed = 1
@@ -792,8 +792,8 @@ def checkVerifyPaging(Boolean isMatch) {
 def checkVerifyReset(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksiAuto', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 				';') + GlobalVariable.FailedReasonSetFailed)
 
 		GlobalVariable.FlagFailed = 1
@@ -803,8 +803,8 @@ def checkVerifyReset(Boolean isMatch) {
 def checkVerifyNotPresent(Boolean isPresent, String reason) {
 	if (isPresent == true) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksiAuto', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 				';') + GlobalVariable.FailedReasonRoleFeature + ' ' + reason)
 
 		GlobalVariable.FlagFailed = 1
@@ -814,8 +814,8 @@ def checkVerifyNotPresent(Boolean isPresent, String reason) {
 def checkVerifyPresent(Boolean isPresent, String reason) {
 	if (isPresent == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksiAuto', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 				';') + GlobalVariable.FailedReasonRoleFeature + ' Not showing ' + reason)
 
 		GlobalVariable.FlagFailed = 1
@@ -827,8 +827,8 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksiAuto', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 	}
 }
@@ -838,8 +838,12 @@ def checkVerifyNotEqualorMatch(Boolean isMatch, String reason) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksiAuto', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 	}
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

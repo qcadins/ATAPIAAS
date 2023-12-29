@@ -35,6 +35,12 @@
       <value></value>
       <variableId>6284bb70-5b02-45d5-a8d6-fb4dc24cf9eb</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>fa86196f-3347-425a-8653-ddf7b42872af</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'Top Up/DataTestingTopUp'</defaultValue>
       <description></description>
@@ -69,5 +75,12 @@
       <id>6284bb70-5b02-45d5-a8d6-fb4dc24cf9eb</id>
       <masked>false</masked>
       <name>ExcelPathCashNom</name>
+   </variable>
+   <variable>
+      <defaultValue>'Top Up'</defaultValue>
+      <description></description>
+      <id>fa86196f-3347-425a-8653-ddf7b42872af</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

@@ -37,13 +37,13 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	GlobalVariable.FlagFailed = 0
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
+	if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
 		
 		break
-	} else if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
+	} else if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
-		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 5))
+		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Is Mandatory Complete')))
 		
 		'klik pada tombol menu'
 		WebUI.click(findTestObject('Object Repository/Top Up/Page_Balance/spanMenu'))
@@ -91,7 +91,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'input data tipe saldo yang diinginkan'
 		WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputtipesaldo'), 
-			findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 9))
+			findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
 		
 		'enter pada ddl tipe saldo'
 		WebUI.sendKeys(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputtipesaldo'),
@@ -102,7 +102,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'input data metode pembayaran'
 		WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputMetodeBayar'),
-			findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 10))
+			findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('$Metode Pembayaran')))
 		
 		'enter pada ddl metode pembayaran'
 		WebUI.sendKeys(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputMetodeBayar'),
@@ -110,7 +110,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'input data bank'
 		WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputBank'),
-			findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 11))
+			findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('$Bank Destinasi')))
 		
 		'enter pada ddl bank'
 		WebUI.sendKeys(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputBank'),
@@ -133,8 +133,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			if (hasilNotif != 'Success') {
 								
 				'tulis error sesuai reason yang ditampilkan oleh error message'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
-					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 						'<' + hasilNotif + '>')
 				
 				WebUI.refresh()
@@ -144,7 +144,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		}
 		
 		'ambil nama ActiveSaldo dari DB'
-		ArrayList namaActiveSaldoDB = CustomKeywords.'topup.TopupVerif.getDDLSaldoactive'(conndevUAT, findTestData(ExcelPathTopUp).getValue(2, 19))
+		ArrayList namaActiveSaldoDB = CustomKeywords.'topup.TopupVerif.getDDLSaldoactive'(conndevUAT, findTestData(ExcelPathTopUp).getValue(2, rowExcel('Username Login')))
 		
 		'cek ddl activesaldo sesuai dengan DB'
 		checkDDL(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputJenisSaldo'), namaActiveSaldoDB, 'DDL Layanan')
@@ -153,15 +153,15 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/button_Cancel'))
 		
 		'cek apakah perlu tambah layanan'
-		if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 16) == 'Yes') {
+		if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('TambahLayanan?')) == 'Yes') {
 			
 			'ambil data services dari excel'
 			listServices = findTestData(ExcelPathTopUp).getValue(
-				GlobalVariable.NumOfColumn, 12).split(';', -1)
+				GlobalVariable.NumOfColumn, rowExcel('$SaldoYangDipilih')).split(';', -1)
 				
 			'ambil data jumlah isi ulang dari excel'
 			listJumlahisiUlang = findTestData(ExcelPathTopUp).getValue(
-				GlobalVariable.NumOfColumn, 13).split(';', -1)
+				GlobalVariable.NumOfColumn, rowExcel('$JumlahisiUlang(quantity)')).split(';', -1)
 				
 			for (int i = 0; i < listServices.size(); i++) {
 				
@@ -211,8 +211,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 						!= subtotalconvert) {
 						
 						'tulis penghitungan otomatis error'
-						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
-							GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) +
+						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+							GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 								';') + GlobalVariable.FailedReasonSubTotalCalc)
 				
 						GlobalVariable.FlagFailed = 1
@@ -224,8 +224,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				} else {
 					
 					'tulis penghitungan otomatis error'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
-						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) +
+					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 							';') + GlobalVariable.FailedReasonHargaSatuan)
 			
 					GlobalVariable.FlagFailed = 1
@@ -252,8 +252,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/tombolXservices'))
 					
 					'tulis error penambahan layanan'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
-						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) +
+					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 							';') + GlobalVariable.FailedReasonAddServices)
 			
 					GlobalVariable.FlagFailed = 1
@@ -280,15 +280,15 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		int ppnfromDB = Integer.parseInt(CustomKeywords.'topup.TopupVerif.getPPNvalue'(conndev))
 		
 		'pilihan untuk pakai kupon'
-		if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 17) == 'Yes') {
+		if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('TambahKupon?')) == 'Yes') {
 			
 			'ambil detail coupon dari DB'
 			ArrayList coupondetail = CustomKeywords.'topup.TopupVerif.getCouponDetail'(conndev,
-				findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 14))
+				findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Kode Kupon')))
 			
 			'input kode kupon'
 			WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/input_Kupon_kupon'),
-				findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 14))
+				findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Kode Kupon')))
 			
 			'klik pada apply'
 			WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/applyKupon'))
@@ -319,8 +319,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					GlobalVariable.FlagFailed = 1
 					
 					'tulis error karena minimum payment tidak terpenuhi'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
-						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 							GlobalVariable.FailedReasonMinimumPayment)
 					
 					WebUI.refresh()
@@ -330,8 +330,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			} else {
 				
 				'tulis error sesuai reason yang ditampilkan oleh error message'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
-					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 						'<' + WebUI.getText(findTestObject('Object Repository/Top Up/DiskonUI')) + '>')
 				
 				WebUI.refresh()
@@ -357,8 +357,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 			
 				'tulis error sesuai reason yang ditampilkan oleh error message'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
-					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 						'<' + WebUI.getText(findTestObject('Object Repository/Top Up/ErrorCatch')) + '>')
 				
 				WebUI.refresh()
@@ -378,8 +378,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				if (hasilNotif != 'Success') {
 									
 					'tulis error sesuai reason yang ditampilkan oleh error message'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
-						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 							'<' + hasilNotif + '>')
 					
 					WebUI.refresh()
@@ -451,7 +451,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (isMandatoryComplete == 0 && GlobalVariable.FlagFailed == 0) {
 			
 			'write to excel success'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'Top Up', 0,
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0,
 				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 		}
 	}
@@ -463,7 +463,7 @@ WebUI.closeBrowser()
 def firstcheckInputCancel() {
 	'input data tipe saldo yang diinginkan'
 	WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputtipesaldo'),
-		findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 9))
+		findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
 	
 	'enter pada ddl tipe saldo'
 	WebUI.sendKeys(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputtipesaldo'),
@@ -885,8 +885,12 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Top Up', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				GlobalVariable.FailedReasonVerifyEqualorMatch + ' ' + reason)
 	}
+}
+
+def rowExcel(String cellValue) {
+	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }
