@@ -7,30 +7,24 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.webui.driver.DriverFactory
 import internal.GlobalVariable as GlobalVariable
-import groovy.sql.Sql as Sql
-import org.openqa.selenium.By as By
 import org.openqa.selenium.JavascriptExecutor
-import org.openqa.selenium.WebElement
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.remote.DesiredCapabilities
-import com.kms.katalon.core.webui.driver.DriverFactory
 import org.openqa.selenium.WebDriver
 
 //inisialisasi webdriver
 WebDriver driver
 
-System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe")
+System.setProperty('webdriver.chrome.driver', 'Drivers/chromedriver.exe')
 
-def chromePrefs = [:] as HashMap<String, ArrayList>
+HashMap<String, ArrayList> chromePrefs = [:] as HashMap<String, ArrayList>
 
 chromePrefs.put('download.default_directory', System.getProperty('user.dir') + '\\Download')
 
 ChromeOptions options = new ChromeOptions()
 
-options.addExtensions(new File("Drivers/nocaptchaai_chrome_1.7.6.crx"))
-
-options.addExtensions(new File("Drivers/Smart_Wait.crx"))
+options.addExtensions(new File('Drivers/Smart_Wait.crx'))
 
 options.setExperimentalOption('prefs', chromePrefs)
 
@@ -52,23 +46,19 @@ WebUI.maximizeWindow()
 WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(8, 7))
 
 'login username google'
-WebUI.setText(findTestObject('OCR Testing/checkLog/input_username'), 
-	findTestData(ExcelPathLogin).getValue(8, 9))
+WebUI.setText(findTestObject('OCR Testing/checkLog/input_username'), findTestData(ExcelPathLogin).getValue(8, 9))
 
 'klik pada tombol next'
 WebUI.click(findTestObject('OCR Testing/checkLog/next_username'))
 
 'input password'
-WebUI.setText(findTestObject('OCR Testing/checkLog/input_pass'), 
-	findTestData(ExcelPathLogin).getValue(8, 10))
+WebUI.setText(findTestObject('OCR Testing/checkLog/input_pass'), findTestData(ExcelPathLogin).getValue(8, 10))
 
 'klik pada tombol next'
 WebUI.click(findTestObject('OCR Testing/checkLog/next_pass'))
 
 'jika muncul page penawaran google'
-if (WebUI.verifyElementPresent(findTestObject('OCR Testing/checkLog/span_NotNow'), GlobalVariable.Timeout,
-	FailureHandling.OPTIONAL)) {
-	
+if (WebUI.verifyElementPresent(findTestObject('OCR Testing/checkLog/span_NotNow'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 	'klik pada tombol tolak penawaran google'
 	WebUI.click(findTestObject('OCR Testing/checkLog/span_NotNow'))
 }

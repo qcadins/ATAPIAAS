@@ -12,19 +12,17 @@ import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
 public class CheckDocumentation {
-
 	int columnCount
 
 	@Keyword
 	def isFileDownloaded(String deleteFile) {
 		boolean isDownloaded = false
-		File dir = new File(System.getProperty('user.dir') + "\\Download")
+		File dir = new File(System.getProperty('user.dir') + '\\Download')
 		//Getting the list of all the files in the specific directory
 		File[] fList = dir.listFiles()
 		for (File f : fList) {
 			//checking the extension of the file with endsWith method.
 			if (f.exists()) {
-
 				if (deleteFile == 'Yes') {
 
 					f.delete();
@@ -40,14 +38,15 @@ public class CheckDocumentation {
 	getDocumentationAPIName(Connection conn) {
 		String data
 
-		ArrayList<String> listdata = []
+		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT api_name from ms_api")
-		ResultSetMetaData metadata  = resultSet.getMetaData()
+		ResultSet resultSet = stm.executeQuery('SELECT api_name from ms_api')
+		
+		ResultSetMetaData metadata  = resultSet.metaData
 
-		columnCount = metadata.getColumnCount()
+		columnCount = metadata.columnCount
 
 		while (resultSet.next()) {
 			for (int i = 1; i <= columnCount ; i++) {
@@ -62,12 +61,11 @@ public class CheckDocumentation {
 	@Keyword
 	getValueDDLDocumentationAPI() {
 
-		String ariachoice,ariaid
+		String ariachoice, ariaid
 
-		ariaid = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/'+
-				'Page_API Documentation/input'), 'aria-owns')
+		ariaid = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_API Documentation/input'), 'aria-owns')
 
-		ArrayList<String> hasilddl = []
+		ArrayList hasilddl = []
 
 		for (int i = 0; i <10; i++) {
 			ariachoice = ariaid + '-' + i

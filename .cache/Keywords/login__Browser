@@ -1,27 +1,14 @@
 {
-  "keywordFileContentHash": "B6C62BA3144CADEF72B342F61930BAC9",
+  "keywordFileContentHash": "E8FAFB8384BC746BF6BDD0D7218E788D",
   "keywordClasses": [
     {
-      "name": "otp.GetOTPfromDB",
+      "name": "login.Browser",
       "keywordMethods": [
         {
-          "name": "getOTPforRegister",
+          "name": "settingAndOpen",
           "parameters": [
             {
-              "name": "conn",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.sql.Connection",
-                "unresolvedClassName": "Connection",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            },
-            {
-              "name": "email",
+              "name": "Paths",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -32,12 +19,24 @@
                 "genericsTypes": [],
                 "errorOnParsing": false
               }
+            },
+            {
+              "name": "captchaRow",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "int",
+                "unresolvedClassName": "int",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": true,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

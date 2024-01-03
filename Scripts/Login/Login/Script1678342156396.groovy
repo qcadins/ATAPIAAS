@@ -17,43 +17,8 @@ import org.openqa.selenium.remote.DesiredCapabilities
 import com.kms.katalon.core.webui.driver.DriverFactory
 import org.openqa.selenium.WebDriver
 
-'untuk line 20-50 dibawah ini adalah setting untuk chromedrive dan extension Captcha Solver serta Katalon Smart Wait'
-WebDriver driver
-	
-System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe")
-
-def chromePrefs = [:] as HashMap<String, ArrayList>
-
-chromePrefs.put('download.default_directory', System.getProperty('user.dir') + '\\Download')
-
-ChromeOptions options = new ChromeOptions()
-
-'jika captcha perlu diaktifkan, maka extension akan ter-load secara otomatis'
-if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == 'Yes' ||
-	findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == '') {
-	
-	options.addExtensions(new File("Drivers/nocaptchaai_chrome_1.7.6.crx"))
-}
-
-options.addExtensions(new File("Drivers/Smart_Wait.crx"))
-
-options.setExperimentalOption('prefs', chromePrefs)
-
-DesiredCapabilities caps = new DesiredCapabilities()
-
-caps.setCapability(ChromeOptions.CAPABILITY, options)
-
-//RunConfiguration.setWebDriverPreferencesProperty('prefs', chromePrefs)
-
-driver = new ChromeDriver(caps)
-
-DriverFactory.changeWebDriver(driver)
-
-if (TC != 'Regist') {
-	
-	'aktifkan nocaptcha by link'
-	WebUI.navigateToUrl('https://config.noCaptchaai.com/?apikey=' + GlobalVariable.APIKEYCaptcha + '')
-}
+'panggil fungsi untuk open browser'
+def js = CustomKeywords.'login.Browser.settingAndOpen'(Path, rowExcel('CaptchaEnabled'))
 
 'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
 GlobalVariable.FlagFailed = 0
@@ -81,12 +46,21 @@ if ((findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEn
 	findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == '') && 
 	TC != 'Tenant' && TC != 'IsiSaldo' && TC != 'IsiSaldoAuto') {
 	
-	WebUI.waitForElementAttributeValue(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'aria-checked', 'true', 60, FailureHandling.OPTIONAL)
+	WebUI.delay(1)
+
+	String idObject = WebUI.getAttribute(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'id', FailureHandling.STOP_ON_FAILURE)
+	
+	modifyObjectCaptcha = WebUI.modifyObjectProperty(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'xpath', 'equals', 
+		'//*[@id="' + idObject + '"]/div/div[2]', true)
+	
+	WebUI.waitForElementAttributeValue(modifyObjectCaptcha, 'class', 'antigate_solver recaptcha solved', 60, FailureHandling.OPTIONAL)
+//	WebUI.waitForElementVisible(modifyObjectCaptcha, 60, FailureHandling.OPTIONAL)
+//	WebUI.waitForElementPresent(modifyObjectCaptcha, 60, FailureHandling.OPTIONAL)
 
 	WebUI.delay(1)
+//	
+//	WebUI.waitForElementAttributeValue(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'aria-checked', 'true', 60, FailureHandling.OPTIONAL)
 }
-
-def js = (JavascriptExecutor)driver
 
 if (TC == 'EditProf') {
 	

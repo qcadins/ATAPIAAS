@@ -6,19 +6,19 @@
    <elementGuidId>470e3279-8c0e-4e15-903f-ca5dfafd292a</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>XPATH</key>
+         <value>//*[@id=&quot;mat-tab-content-0-0&quot;]/div/form/div[8]/div/div[2]/ngx-recaptcha2/div/div</value>
+      </entry>
+      <entry>
          <key>CSS</key>
          <value>div.recaptcha-checkbox-border</value>
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>//*[@class = 'recaptcha-checkbox-border' and @ref_element = 'Object Repository/RegisterLogin/Page_Login - eendigo Platform/iframe_Recaptcha']</value>
-      </entry>
-      <entry>
-         <key>XPATH</key>
-         <value>//*[@id=&quot;recaptcha-anchor&quot;]</value>
+         <value>//*[@id=&quot;mat-tab-content-0-0&quot;]/div/form/div[8]/div/div[2]/ngx-recaptcha2/div/div</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -26,15 +26,15 @@
       <name>tag</name>
       <type>Main</type>
       <value>div</value>
-      <webElementGuid>d03c1f6b-670d-4d88-95fb-f00ea7b2e48f</webElementGuid>
+      <webElementGuid>41dc2a2f-91e6-4052-9d79-e88dc951622d</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
       <value>recaptcha-checkbox-border</value>
-      <webElementGuid>b27dd91c-6601-4b91-8f66-0ef33615d9b8</webElementGuid>
+      <webElementGuid>798630e5-9572-43c3-9023-ad3404494f36</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -42,23 +42,15 @@
       <name>role</name>
       <type>Main</type>
       <value>presentation</value>
-      <webElementGuid>11cfd264-40c5-4ed3-85ff-e82d27c5f12a</webElementGuid>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>xpath</name>
-      <type>Main</type>
-      <value>id(&quot;recaptcha-anchor&quot;)/div[@class=&quot;recaptcha-checkbox-border&quot;]</value>
-      <webElementGuid>37a2cfea-c125-4b4c-ae86-3fcf6950cb43</webElementGuid>
+      <webElementGuid>c9cbd266-d2e4-4bda-8ebc-1b4d14b6a98f</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>ref_element</name>
+      <name>xpath</name>
       <type>Main</type>
-      <value>Object Repository/RegisterLogin/Page_Login - eendigo Platform/iframe_Recaptcha</value>
-      <webElementGuid>6511cf04-24ee-419c-85b1-68a80581ca48</webElementGuid>
+      <value>//*[@id=&quot;mat-tab-content-0-0&quot;]/div/form/div[8]/div/div[2]/ngx-recaptcha2/div/div</value>
+      <webElementGuid>469eb711-7d8e-4720-931b-cef62db12280</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -66,7 +58,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//span[@id='recaptcha-anchor']/div</value>
-      <webElementGuid>a6bdfd17-827d-4eab-a611-b33304de8618</webElementGuid>
+      <webElementGuid>a05e868c-9aab-4c9f-bd7f-597dd0b4919f</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -74,6 +66,6 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//span/div</value>
-      <webElementGuid>7c86f65b-348d-40e2-aa24-7329dbb6fd25</webElementGuid>
+      <webElementGuid>643ea7dc-c7ec-42cc-b19f-aecfbc13d2b1</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

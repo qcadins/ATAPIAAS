@@ -1,7 +1,5 @@
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
-import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
 
@@ -19,7 +17,6 @@ ArrayList resultExcel = []
 
 'check if action new/edit/settings'
 if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('New')) {
-	
 	'ambil data role dari db'
 	String resultDB = CustomKeywords.'userManagement.RoleVerif.getNamaRole'(conndevUAT, 
 		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Add RoleName')))
@@ -37,21 +34,19 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('A
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonStoreDB + ' New Role')
 	}
-	
 } else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
 	
 	'ambil data role dan status dari DB'
-	resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleEdit'(conndevUAT, 
+	resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleEdit'(conndevUAT,
 		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama Role')))
 	
 	'inisialisasi array dari Excel'
 	resultExcel = []
 	
 	'cek data untuk tiap alamat di array'
-	for (int i = 0; i < resultDB.size ; i++){
-		
+	for (int i = 0; i < resultDB.size ; i++) {
 		'ambil data dari excel'
-		resultExcel.add(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, (rowExcel('$Nama Role')+i)))
+		resultExcel.add(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, (rowExcel('$Nama Role') + i )))
 		
 		if (resultExcel[i] != resultDB[i]) {
 			
@@ -64,11 +59,11 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('A
 		}
 	}
 	
-} else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Settings')) {
+} else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Settings')) {
 	
 	'ambil data result dari DB'
-	resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleMenu'(conndev, 
-		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Nama Role')), 
+	resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleMenu'(conndev,
+		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Nama Role')),
 			findTestData(ExcelPathRole).getValue(2, rowExcel('Username Login')))
 	
 	'ambil data menu role pada excel'
@@ -87,5 +82,5 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('A
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

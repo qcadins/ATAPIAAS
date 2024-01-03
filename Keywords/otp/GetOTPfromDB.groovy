@@ -7,23 +7,21 @@ import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
 public class GetOTPfromDB {
+	
+	int columnCount
 
 	//fungsi digunakan untuk mengambil kode otp secara realtime dengan parameter email
 	@Keyword
 	getOTPforRegister(Connection conn, String email) {
 		String data
 
-		int columnCount
-
-		ArrayList listdata = []
-
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT otp_code FROM tr_otp WHERE login_id = '"+ email +"'")
+		ResultSet resultSet = stm.executeQuery("SELECT otp_code FROM tr_otp WHERE login_id = '" + email + "'")
 
-		ResultSetMetaData metadata  = resultSet.getMetaData()
+		ResultSetMetaData metadata  = resultSet.metaData
 
-		columnCount = metadata.getColumnCount()
+		columnCount = metadata.columnCount
 
 		while (resultSet.next()) {
 			data = resultSet.getObject(1)

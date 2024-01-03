@@ -53,6 +53,12 @@
       <value></value>
       <variableId>117bf489-0115-46bc-a974-ef9065fb2c23</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>a581730b-1bff-4502-96e1-2e1a5b93ba6f</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'APIAAS/DataEditProfile'</defaultValue>
       <description></description>
@@ -108,5 +114,12 @@
       <id>117bf489-0115-46bc-a974-ef9065fb2c23</id>
       <masked>false</masked>
       <name>DisableCaptcha</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>a581730b-1bff-4502-96e1-2e1a5b93ba6f</id>
+      <masked>false</masked>
+      <name>Path</name>
    </variable>
 </TestCaseEntity>

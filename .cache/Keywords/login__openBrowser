@@ -1,0 +1,15 @@
+{
+  "keywordFileContentHash": "C97A267662C1ADB213C066868464F85F",
+  "keywordClasses": [
+    {
+      "name": "login.openBrowser",
+      "keywordMethods": [
+        {
+          "name": "getIDPaymentType",
+          "parameters": []
+        }
+      ]
+    }
+  ],
+  "javadocParsed": false
+}

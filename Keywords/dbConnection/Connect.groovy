@@ -9,13 +9,12 @@ import java.sql.Connection
 import java.sql.DriverManager
 
 public class Connect {
-
+	
 	String pathLogin = 'Data Files/Login/Login'
 
 	//fungsi digunakan untuk koneksi dengan database eendigo_prod_test_deploy_modify
 	@Keyword
 	def connectDBAPIAAS_esign() {
-
 		String servername = findTestData(pathLogin).getValue(1, 8)
 
 		String port = findTestData(pathLogin).getValue(2, 8)
@@ -36,7 +35,6 @@ public class Connect {
 	//fungsi digunakan untuk koneksi dengan database eendigo_prod_test_deploy_modify
 	@Keyword
 	def connectDBAPIAAS_public() {
-
 		String servername = findTestData(pathLogin).getValue(1, 8)
 
 		String port = findTestData(pathLogin).getValue(2, 8)
@@ -57,7 +55,6 @@ public class Connect {
 	//fungsi digunakan untuk koneksi dengan database adins apiaas uat tipe production
 	@Keyword
 	def connectDBAPIAAS_uatProduction() {
-
 		String servername = findTestData(pathLogin).getValue(1, 9)
 
 		String port = findTestData(pathLogin).getValue(2, 9)
@@ -78,7 +75,6 @@ public class Connect {
 	//fungsi digunakan untuk koneksi dengan database eendigo dev_uat
 	@Keyword
 	def connectDBAPIAAS_devUat() {
-
 		String servername = findTestData(pathLogin).getValue(1, 10)
 
 		String port = findTestData(pathLogin).getValue(2, 10)

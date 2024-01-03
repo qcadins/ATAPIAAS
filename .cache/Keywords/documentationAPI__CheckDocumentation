@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "DD780BA56CC8E7D9290D4955870274D2",
+  "keywordFileContentHash": "8CB1096200E8EEB5502E378B8E24537A",
   "keywordClasses": [
     {
       "name": "documentationAPI.CheckDocumentation",
@@ -20,8 +20,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getDocumentationAPIName",
@@ -39,16 +38,14 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getValueDDLDocumentationAPI",
-          "parameters": [],
-          "javadoc": ""
+          "parameters": []
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

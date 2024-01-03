@@ -2,9 +2,7 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import org.openqa.selenium.By as By
-import org.openqa.selenium.WebDriver as WebDriver
 import java.sql.Connection as Connection
-import java.sql.Driver as Driver
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
@@ -26,7 +24,7 @@ Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
 Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Layanan', ('SheetName') : sheet, ('Path') : ExcelPathLayananSaya], 
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Layanan', ('SheetName') : sheet, ('Path') : ExcelPathLayananSaya],
     FailureHandling.STOP_ON_FAILURE)
 
 'klik pada tombol profil di kanan atas'
@@ -58,11 +56,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
     } else if (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase(
         'Unexecuted')) {
         'angka untuk menghitung data mandatory yang tidak terpenuhi'
-        int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 
-                rowExcel('Mandatory Complete')))
+        int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Mandatory Complete')))
 
         'service name dari DB'
-        ArrayList<String> serviceNameDB = CustomKeywords.'layananSaya.VerifLayanan.getListServiceName'(conndevUAT, tenantcode)
+        ArrayList serviceNameDB = CustomKeywords.'layananSaya.VerifLayanan.getListServiceName'(conndevUAT, tenantcode)
 
         'service status dari DB'
         ArrayList<String> serviceStatusDB = CustomKeywords.'layananSaya.VerifLayanan.getListServiceStatus'(conndevUAT, tenantcode)
@@ -71,11 +68,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
         ArrayList<String> chargeTypeDB = CustomKeywords.'layananSaya.VerifLayanan.getListChargeType'(conndevUAT, tenantcode)
 
         'deklarasi array kosong untuk layanan saya'
-        ArrayList<String> serviceNameUI = []
-
-        ArrayList<String> serviceStatusUI = []
-
-        ArrayList<String> chargeTypeUI = []
+        ArrayList<String> serviceNameUI = [], serviceStatusUI = [], chargeTypeUI = []
 
         'ambil total data pada tabel'
         Total = WebUI.getText(findTestObject('Object Repository/LayananSaya/totalData')).split(' ')
@@ -84,34 +77,34 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
             for (int row = 0; row < serviceNameDB.size(); row++) {
                 if ((row / 10) == 1) {
                     'cek apakah button next enable atau disable'
-                    if (WebUI.verifyElementVisible(findTestObject('Object Repository/OCR Testing/Page_Balance/i_Catatan_datatable-icon-right'), 
+                    if (WebUI.verifyElementVisible(findTestObject('Object Repository/OCR Testing/Page_Balance/i_Catatan_datatable-icon-right'),
                         FailureHandling.OPTIONAL)) {
                         'klik button next page'
                         WebUI.click(findTestObject('Object Repository/OCR Testing/Page_Balance/i_Catatan_datatable-icon-right'))
                     }
-                    
+
                     'cek apakah muncul error unknown setelah refresh'
-                    if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), 
+                    if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
                         GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
                         GlobalVariable.FlagFailed = 1
 
                         'tulis adanya error pada sistem web'
-                        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
-                            GlobalVariable.StatusWarning, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, 
+                        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+                            GlobalVariable.StatusWarning, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn,
                                 rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonUnknown)
                     }
                 } else {
                     'ambil alamat trxnumber'
-                    def onepage = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-service > div > div > div > div:nth-child(3) > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
+                    def onepage = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-service > div > div > div > div:nth-child(3) > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
 
                     'banyaknya row table'
-                    int Index = onepage.size()
+                    int index = onepage.size()
 
                     'mulai perhitungan data service name'
-                    for (int i = 1; i <= Index; i++) {
+                    for (int i = 1; i <= index; i++) {
                         'ambil object dari ddl'
-                        def modifyServiceName = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 
-                            'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + 
+                        def modifyServiceName = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'),
+                            'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' +
                             i) + ']/datatable-body-row/div[2]/datatable-body-cell[1]/div/p', true)
 
                         'tambahkan nama service name UI ke array'
@@ -121,11 +114,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
                     }
                     
                     'mulai perhitungan data service status'
-                    for (int i = 1; i <= Index; i++) {
+                    for (int i = 1; i <= index; i++) {
 						
                         'ambil object dari ddl'
-                        def modifyServiceStatus = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 
-                            'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + 
+                        def modifyServiceStatus = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'),
+                            'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-service/div/div/div/div[3]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' +
                             i) + ']/datatable-body-row/div[2]/datatable-body-cell[2]/div/p', true)
 
                         'tambahkan nama service name UI ke array'
@@ -135,7 +128,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
                     }
                     
                     'mulai perhitungan data charge type'
-                    for (int i = 1; i <= Index; i++) {
+                    for (int i = 1; i <= index; i++) {
 						
                         'ambil object dari ddl'
                         def modifyChargeType = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'), 
@@ -155,8 +148,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
                 GlobalVariable.FlagFailed = 1
 
                 'Write to excel status failed and reason service tidak sesuai'
-                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-                    (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
+                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+                    (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
                     ';') + GlobalVariable.FailedReasonServiceNotMatch)
 				
             } else if (!(serviceStatusUI.containsAll(serviceStatusDB))) {
@@ -164,8 +157,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
                 GlobalVariable.FlagFailed = 1
 
                 'Write to excel status failed and reason status tidak sesuai'
-                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-                    (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
+                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+                    (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
                     ';') + GlobalVariable.FailedReasonStatusNotMatch)
 				
             } else if (!(chargeTypeUI.containsAll(chargeTypeDB))) {
@@ -173,8 +166,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
                 GlobalVariable.FlagFailed = 1
 
                 'Write to excel status failed and reason chargetype'
-                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-                    (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
+                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+                    (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
                     ';') + GlobalVariable.FailedReasonChargeTypeNotMatch)
             }
             
@@ -183,8 +176,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
                 GlobalVariable.FlagFailed = 1
 
                 'Write to excel status failed and reason chargetype'
-                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-                    (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
+                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+                    (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
                     ';') + GlobalVariable.FailedReasonMandatory)
             }
             
@@ -195,8 +188,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
             }
         } else {
             'Write to excel status failed karena table bermasalah'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
-                (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + 
+            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+                (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
                 GlobalVariable.FailedReasonTable)
         }
         
@@ -204,13 +197,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
         WebUI.refresh()
 
         'cek apakah muncul error unknown setelah refresh'
-        if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), GlobalVariable.Timeout, 
+        if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'), GlobalVariable.Timeout,
             FailureHandling.OPTIONAL) == false) {
             GlobalVariable.FlagFailed = 1
 
             'tulis adanya error pada sistem web'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning, 
-                (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + 
+            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning,
+                (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
                 GlobalVariable.FailedReasonUnknown)
         }
     }
@@ -220,5 +213,5 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 WebUI.closeBrowser()
 
 def rowExcel(String cellValue) {
-    return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+    CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

@@ -4,20 +4,19 @@ import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
+import java.util.Date
 
 'get current date'
-def currentDate = new Date().format('yyyy-MM-dd')
+Date currentDate = new Date().format('yyyy-MM-dd')
 
 Connection conn
 
-if(GlobalVariable.SettingEnvi == 'Production') {
+if (GlobalVariable.SettingEnvi == 'Production') {
 	'deklarasi koneksi ke Database eendigo_dev'
 	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
-	
-} else if(GlobalVariable.SettingEnvi == 'Trial') {
+} else if (GlobalVariable.SettingEnvi == 'Trial') {
 	'deklarasi koneksi ke Database eendigo_dev_uat'
 	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
-	
 }
 
 'get data balance mutation dari DB'
@@ -29,40 +28,40 @@ ArrayList arrayMatch = []
 'declare arrayindex'
 arrayindex = 0
 
-if (autoIsiSaldo == '') {	
+if (autoIsiSaldo == '') {
 	'verify tenant'
 	arrayMatch.add(WebUI.verifyMatch(
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')).toUpperCase(), 
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')).toUpperCase(),
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify vendor'
 	arrayMatch.add(WebUI.verifyMatch(
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Vendor')).toUpperCase(), 
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Vendor')).toUpperCase(),
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify tipe saldo'
 	arrayMatch.add(WebUI.verifyMatch(
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')).toUpperCase(), 
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')).toUpperCase(),
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify tambah saldo'
 	arrayMatch.add(WebUI.verifyMatch(
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tambah Saldo')).toUpperCase(), 
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tambah Saldo')).toUpperCase(),
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify Nomor tagihan'
 	arrayMatch.add(WebUI.verifyMatch(
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nomor tagihan')).toUpperCase(), 
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nomor tagihan')).toUpperCase(),
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify Catatan'
 	arrayMatch.add(WebUI.verifyMatch(
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Catatan')).toUpperCase(), 
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Catatan')).toUpperCase(),
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify tanggal pembelian'
 	arrayMatch.add(WebUI.verifyMatch(
-		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tanggal Pembelian (YYYY-MM-DD)')).toUpperCase(), 
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tanggal Pembelian (YYYY-MM-DD)')).toUpperCase(),
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 } else if (autoIsiSaldo == 'Yes') {
@@ -105,16 +104,15 @@ if (autoIsiSaldo == '') {
 
 'jika data db tidak sesuai dengan excel'
 if (arrayMatch.contains(false)) {
-	
 	GlobalVariable.FlagFailed = 1
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
-		GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';' + 
+	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';' +
 			GlobalVariable.FailedReasonStoreDB)
-	
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	
 }

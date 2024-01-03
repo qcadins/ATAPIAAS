@@ -33,7 +33,6 @@ int countColumnEdit = findTestData(ExcelPathAPIKey).columnNumbers, isLoggedin = 
 
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
-	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
 		
@@ -84,7 +83,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/buttonCopy'))
 				
 			'verifikasi copy berhasil'
-			CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, 
+			CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
 				findTestObject('Object Repository/API_KEY/Page_Api Key List/notif_CopySuccess'),
 					GlobalVariable.NumOfColumn, sheet)
 		}
@@ -93,14 +92,14 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Add API KEY?(Yes/No)')) == 'Yes') {
 			
 			'panggil fungsi Add API KEY'
-			WebUI.callTestCase(findTestCase('Test Cases/API Key/AddAPIKey'), 
+			WebUI.callTestCase(findTestCase('Test Cases/API Key/AddAPIKey'),
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
 			
 		} 
 		else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Edit API KEY?(Yes/No)')) == 'Yes') {
 			
 			'panggil fungsi Edit API Key'
-			WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'), 
+			WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'),
 				[('conn'): conndev], FailureHandling.CONTINUE_ON_FAILURE)
 		}
 
@@ -108,7 +107,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (GlobalVariable.FlagFailed == 0) {
 			
 			'tulis status sukses pada excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, 
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess, GlobalVariable.SuccessReason)
 		}
 	}
@@ -237,33 +236,33 @@ def checkpaging(Connection conn) {
 }
 
 'fungsi cek halaman'
-def checkVerifyFooter(){
+def checkVerifyFooter() {
 	
 	'fokus ke halaman yang sedang dipilih'
 	int pageCheck = Integer.parseInt(
 		WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Api Key List/PageFooter'), 'ng-reflect-page'))
 	
 	'halaman yang dipilih harus sama dengan yang di sistem'
-	if(GlobalVariable.PageNum == pageCheck){
+	if (GlobalVariable.PageNum == pageCheck) {
 		
 		GlobalVariable.PageNum -= 1
-		if(GlobalVariable.PageNum < 1){
+		if (GlobalVariable.PageNum < 1) {
 			
 			GlobalVariable.PageNum = 2
 		}
 	}
 	//tulis halaman error jika tidak sesuai
-	else{
+	else {
 		
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') 
+		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';')
 			+ GlobalVariable.FailedReasonPagingError)
 	}
 }
 
 def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
-	if(isMatch == false){
+	if (isMatch == false) {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
@@ -275,5 +274,6 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	
 }
