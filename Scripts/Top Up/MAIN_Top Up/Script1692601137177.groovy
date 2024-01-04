@@ -13,19 +13,19 @@ import org.openqa.selenium.Keys as Keys
 import org.openqa.selenium.By as By
 
 'mencari directory excel'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mencari directory excel lain'
-GlobalVariable.DataFilePath2 = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Simulasi/Simulasi Hitung Top Up Using Coupon.xlsx')
+GlobalVariable.DataFilePath2 = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Simulasi/Simulasi Hitung Top Up Using Coupon.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathTopUp).columnNumbers
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
+Connection conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_esign'()
 
 'deklarasi koneksi ke database eendigo_dev_uat'
-Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+Connection conndevUAT = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'TopUp', ('SheetName') : 'TopUp',
@@ -133,7 +133,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			if (hasilNotif != 'Success') {
 								
 				'tulis error sesuai reason yang ditampilkan oleh error message'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 						'<' + hasilNotif + '>')
 				
@@ -211,7 +211,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 						!= subtotalconvert) {
 						
 						'tulis penghitungan otomatis error'
-						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+						CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 							GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 								';') + GlobalVariable.FailedReasonSubTotalCalc)
 				
@@ -224,7 +224,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				} else {
 					
 					'tulis penghitungan otomatis error'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 							';') + GlobalVariable.FailedReasonHargaSatuan)
 			
@@ -252,7 +252,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/tombolXservices'))
 					
 					'tulis error penambahan layanan'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 							';') + GlobalVariable.FailedReasonAddServices)
 			
@@ -319,7 +319,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					GlobalVariable.FlagFailed = 1
 					
 					'tulis error karena minimum payment tidak terpenuhi'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 							GlobalVariable.FailedReasonMinimumPayment)
 					
@@ -330,7 +330,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			} else {
 				
 				'tulis error sesuai reason yang ditampilkan oleh error message'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 						'<' + WebUI.getText(findTestObject('Object Repository/Top Up/DiskonUI')) + '>')
 				
@@ -357,7 +357,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 			
 				'tulis error sesuai reason yang ditampilkan oleh error message'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 						'<' + WebUI.getText(findTestObject('Object Repository/Top Up/ErrorCatch')) + '>')
 				
@@ -378,7 +378,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				if (hasilNotif != 'Success') {
 									
 					'tulis error sesuai reason yang ditampilkan oleh error message'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 							'<' + hasilNotif + '>')
 					
@@ -451,7 +451,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (isMandatoryComplete == 0 && GlobalVariable.FlagFailed == 0) {
 			
 			'write to excel success'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0,
 				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 		}
 	}
@@ -563,48 +563,48 @@ def couponPercentage(ArrayList listServices, ArrayList tempDataPrice, ArrayList 
 	for (int i = 0; i < listServices.size(); i++) {
 		
 		'tulis layanan ke excel'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, i+1,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, i+1,
 			0, listServices[i])
 		
 		'tulis unit price ke excel'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, i+1,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, i+1,
 			1, tempDataPrice[i])
 		
 		'tulis qty ke excel'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, i+1,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, i+1,
 			2, listJumlahisiUlang[i])
 		
 		'tulis persentase diskon ke excel'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, i+1,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, i+1,
 			4, coupondetail[2])
 	}
 	
 	'buka excel untuk refresh testdata'
-	CustomKeywords.'customizeKeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
+	CustomKeywords.'customizekeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 	
 	'panggil fungsi pengecekan data'
 	statschecking(ppnfromDB, Integer.parseInt(diskonUI), SheetChoice)
 	
 	'panggil fungsi penghapusan data column service'
-	CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
+	CustomKeywords.'writetoexcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
 		1, 14, 0)
 	
 	'panggil fungsi penghapusan data column Price'
-	CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
+	CustomKeywords.'writetoexcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
 		1, 14, 1)
 	
 	'panggil fungsi penghapusan data column Jumlah'
-	CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
+	CustomKeywords.'writetoexcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
 		1, 14, 2)
 	
 	'panggil fungsi penghapusan data column Discount Percentage'
-	CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
+	CustomKeywords.'writetoexcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
 		1, 14, 4)
 	
 	WebUI.delay(GlobalVariable.Timeout)
 	
 	'buka excel untuk refresh testdata'
-	CustomKeywords.'customizeKeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
+	CustomKeywords.'customizekeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 }
 
 def couponNominal(ArrayList listServices, ArrayList tempDataPrice, ArrayList listJumlahisiUlang,
@@ -633,48 +633,48 @@ def couponNominal(ArrayList listServices, ArrayList tempDataPrice, ArrayList lis
 	for (int i = 0; i < listServices.size(); i++) {
 		
 		'tulis layanan ke excel'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, i+1,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, i+1,
 			0, listServices[i])
 		
 		'tulis unit price ke excel'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, i+1,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, i+1,
 			1, tempDataPrice[i])
 		
 		'tulis qty ke excel'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, i+1,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, i+1,
 			2, listJumlahisiUlang[i])
 	}
 	
 	'tulis total discount ke excel'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, 17,
+	CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath2, SheetChoice, 17,
 		1, diskonUI)
 	
 	'buka excel untuk refresh testdata'
-	CustomKeywords.'customizeKeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
+	CustomKeywords.'customizekeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 	
 	'panggil fungsi pengecekan data'
 	statschecking(ppnfromDB, Integer.parseInt(diskonUI), SheetChoice)
 	
 	'panggil fungsi penghapusan data column service'
-	CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
+	CustomKeywords.'writetoexcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
 		1, 14, 0)
 	
 	'panggil fungsi penghapusan data column Price'
-	CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
+	CustomKeywords.'writetoexcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
 		1, 14, 1)
 	
 	'panggil fungsi penghapusan data column Jumlah'
-	CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
+	CustomKeywords.'writetoexcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
 		1, 14, 2)
 	
 	'panggil fungsi penghapusan data column Discount Percentage'
-	CustomKeywords.'writeToExcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
+	CustomKeywords.'writetoexcel.WriteExcel.emptyCellRange'(GlobalVariable.DataFilePath2, SheetChoice,
 		17, 17, 1)
 	
 	WebUI.delay(GlobalVariable.Timeout)
 	
 	'buka excel untuk refresh testdata'
-	CustomKeywords.'customizeKeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
+	CustomKeywords.'customizekeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 
 }
 
@@ -885,12 +885,12 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				GlobalVariable.FailedReasonVerifyEqualorMatch + ' ' + reason)
 	}
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "8CB1096200E8EEB5502E378B8E24537A",
+  "keywordFileContentHash": "68684F733DBE913D2B1AC50CCBB53BB9",
   "keywordClasses": [
     {
-      "name": "documentationAPI.CheckDocumentation",
+      "name": "documentationapi.CheckDocumentation",
       "keywordMethods": [
         {
           "name": "isFileDownloaded",

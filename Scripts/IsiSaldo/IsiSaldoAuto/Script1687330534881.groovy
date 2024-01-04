@@ -17,16 +17,16 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 Connection conn
 
 if(GlobalVariable.SettingEnvi == 'Production') {
 	'deklarasi koneksi ke Database eendigo_dev'
-	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 } else if(GlobalVariable.SettingEnvi == 'Trial') {
 	'deklarasi koneksi ke Database eendigo_dev_uat'
-	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 }
 
 'panggil fungsi login'
@@ -40,7 +40,7 @@ int Saldobefore, Saldoafter, JumlahTopUp, TopupSaldoCorrectTenant = 1
 String noTrxfromUI, noTrxfromDB, noTrxOtherTenant
 
 'ambil kode tenant di DB'
-String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, rowExcel('UsernameLogin')).toUpperCase())
+String tenantcode = CustomKeywords.'ocrtesting.GetParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, rowExcel('UsernameLogin')).toUpperCase())
 
 'call setting balance type function'
 settingBalanceType()
@@ -113,7 +113,7 @@ if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Pa
     GlobalVariable.FlagFailed = 1
 
     'tulis kondisi gagal'
-    CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
+    CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
         (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonMandatory)
 
 } else {
@@ -131,7 +131,7 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta I
 //	GlobalVariable.FlagFailed = 1
 //	
 //	'tulis adanya error pada sistem web'
-//	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+//	CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 //		GlobalVariable.StatusWarning, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 //			GlobalVariable.FailedReasonUnknown)
 //}
@@ -397,7 +397,7 @@ def verifyTableContent(def connection, String tenant) {
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
+        CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
             (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch)
 
         GlobalVariable.FlagFailed = 1
@@ -424,5 +424,5 @@ def getTrxNumber() {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

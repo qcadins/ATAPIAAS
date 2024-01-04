@@ -18,7 +18,7 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Isi Saldo'
 int countColumnEdit = findTestData(ExcelPathSaldoAPI).columnNumbers, firstRun = 0
@@ -27,10 +27,10 @@ Connection conn
 
 if (GlobalVariable.SettingEnvi == 'Production') {
 	'deklarasi koneksi ke Database eendigo_dev'
-	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 } else if (GlobalVariable.SettingEnvi == 'Trial') {
 	'deklarasi koneksi ke Database eendigo_dev_uat'
-	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 }
 
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
@@ -79,7 +79,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		TopupSaldoCorrectTenant = 1
 		
 		'ambil kode tenant di DB'
-		String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
+		String tenantcode = CustomKeywords.'ocrtesting.GetParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
 		
 		WebUI.refresh()
 		
@@ -185,7 +185,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', 
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
 					findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';' +
 						GlobalVariable.FailedReasonMandatory)
@@ -213,7 +213,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusWarning, (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 					GlobalVariable.FailedReasonUnknown)
 		}
@@ -273,7 +273,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (Saldobefore + JumlahTopUp == Saldoafter && TopupSaldoCorrectTenant == 1) {
 			
 			'tulis status sukses pada excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'IsiSaldo', 0,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'IsiSaldo', 0,
 				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 					
 		}
@@ -281,7 +281,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';' +
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';' +
 			GlobalVariable.FailedReasonTopUpFailed)
 		}
 	}	
@@ -347,7 +347,7 @@ def navigatetoeendigoBeta() {
 		GlobalVariable.FlagFailed = 1
 		
 		'tulis adanya error pada sistem web'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusWarning, (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				GlobalVariable.FailedReasonUnknown)
 	}
@@ -511,7 +511,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 	if ((isMatch == false)) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo',
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo',
 			GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				GlobalVariable.FailedReasonVerifyEqualorMatch + ' ' + reason)
 
@@ -542,5 +542,5 @@ def getTrxNumber() {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

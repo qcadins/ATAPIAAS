@@ -60,7 +60,7 @@ WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Add Api Key/select
 if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Page_Add Api Key/button_Simpan'), 'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 	
 	'Write to excel status failed mandatory'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+	CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 	GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonMandatory)
 	
 	GlobalVariable.FlagFailed = 1
@@ -100,7 +100,7 @@ if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Pa
 			FailureHandling.OPTIONAL) == false) {
 		
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning,
 				(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonUnknown)
 		}
 		
@@ -115,7 +115,7 @@ if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Pa
 	} else {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + '<' + reason + '>')
 		
 		GlobalVariable.FlagFailed = 1
@@ -127,7 +127,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 	if ((isMatch == false)) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 			(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch + + '<' + reason + '>')
 
 		GlobalVariable.FlagFailed = 1
@@ -156,5 +156,5 @@ def searchAPIKEY() {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

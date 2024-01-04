@@ -1,4 +1,4 @@
-package userManagement
+package usermanagement
 
 import com.kms.katalon.core.annotation.Keyword
 import java.sql.Connection

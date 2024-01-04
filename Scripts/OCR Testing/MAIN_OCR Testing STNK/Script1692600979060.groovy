@@ -15,16 +15,16 @@ import org.openqa.selenium.By
 import org.openqa.selenium.Keys
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers()
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
-Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_uatProduction'()
+Connection connProd = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_uatProduction'()
 
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 10)
@@ -48,18 +48,18 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	} else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
 		'ambil kode tenant di DB'
-		String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn,
+		String tenantcode = CustomKeywords.'ocrtesting.GetParameterfromDB.getTenantCodefromDB'(conn,
 			findTestData(ExcelPathOCRTesting).getValue(2, 26))
 		
 		'ambil key trial yang aktif dari DB'
-		String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode, GlobalVariable.SettingEnvi)
+		String thekey = CustomKeywords.'ocrtesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode, GlobalVariable.SettingEnvi)
 		
 		'deklarasi id untuk harga pembayaran OCR'
-		int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(connProd,
+		int idPayment = CustomKeywords.'ocrtesting.GetParameterfromDB.getIDPaymentType'(connProd,
 			tenantcode, 'OCR STNK')
 		
 		'ambil jenis penagihan transaksi (by qty/price)'
-		String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(connProd,
+		String balanceChargeType = CustomKeywords.'ocrtesting.GetParameterfromDB.getPaymentType'(connProd,
 			tenantcode, idPayment)
 		
 		'deklarasi variable response'
@@ -131,7 +131,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (state_ocr == 'FAILED' && message_ocr == 'Insufficient balance') {
 			
 			'write to excel status failed dan reason'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			'<' + message_ocr + '>')
 			
@@ -162,7 +162,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		else if (state_ocr == 'SUCCESS' && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
 			
 			'write to excel status failed dan reason'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			GlobalVariable.FailedReasonKeyTenantBypass)
 						
@@ -172,7 +172,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		else if (message_ocr == 'STNK NOT FOUND' || message_ocr == 'Unexpected Error' || message_ocr == 'Invalid API key or tenant code') {
 			
 			'write to excel status failed dan reason'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			'<' + message_ocr + '>')
 			continue;
@@ -188,7 +188,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusWarning, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					GlobalVariable.FailedReasonUnknown)
 		}
@@ -211,10 +211,10 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (GlobalVariable.KondisiCekDB == 'Yes') {
 			
 			'simpan trx number terbaru dari DB'
-			String latestMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
+			String latestMutation = CustomKeywords.'ocrtesting.GetParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
 			
 			'simpan trx number terbaru milik tenant lain dari DB'
-			String latestOtherTenantMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(connProd, tenantcode)
+			String latestOtherTenantMutation = CustomKeywords.'ocrtesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(connProd, tenantcode)
 			
 			'jika data transaction number di web dan DB tidak sesuai'
 			if (latestMutation != noTrxAfter || latestMutation == latestOtherTenantMutation) {
@@ -225,7 +225,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		}
 		
 		'simpan harga OCR STNK ke dalam integer'
-		int serviceprice = CustomKeywords.'ocrTesting.GetParameterfromDB.getServicePricefromDB'(connProd, idPayment)
+		int serviceprice = CustomKeywords.'ocrtesting.GetParameterfromDB.getServicePricefromDB'(connProd, idPayment)
 		
 		'jika HIT API successful'
 		if (hitAPITrx == 1) {
@@ -273,7 +273,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			&& isSaldoBerkurang == 1 && hitAPITrx == 1) {
 			
 			'tulis status sukses pada excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR STNK',
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR STNK',
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 			GlobalVariable.SuccessReason)
 		
@@ -283,7 +283,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', 
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonTrxNotinDB)
 		}
@@ -292,7 +292,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', 
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonBalanceNotChange)
 		}
@@ -301,7 +301,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', 
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonSaldoBocor)
 		}
@@ -309,7 +309,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			GlobalVariable.FlagFailed = 1
 			'write to excel status failed dan reason'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			'<' + message_ocr + '>')
 		}
@@ -323,7 +323,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusWarning, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					GlobalVariable.FailedReasonUnknown)
 		}

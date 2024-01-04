@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "CB419C879D3259E0C94CACABE32F56A7",
+  "keywordFileContentHash": "1F1A43F1083589CDCBCA64024CFD5D0C",
   "keywordClasses": [
     {
-      "name": "userManagement.RoleVerif",
+      "name": "usermanagement.RoleVerif",
       "keywordMethods": [
         {
           "name": "getRoleTotal",

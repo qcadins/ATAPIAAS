@@ -12,16 +12,16 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Isi Saldo'
 int countColumnEdit = findTestData(ExcelPathLayananSaya).columnNumbers
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
-Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+Connection conndevUAT = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Layanan', ('SheetName') : sheet, ('Path') : ExcelPathLayananSaya],
@@ -43,7 +43,7 @@ if (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowE
 }
 
 'ambil kode tenant di DB'
-String tenantcode = CustomKeywords.'layananSaya.VerifLayanan.getTenantCodefromDB'(conn, findTestData(ExcelPathLayananSaya).getValue(
+String tenantcode = CustomKeywords.'layanansaya.VerifLayanan.getTenantCodefromDB'(conn, findTestData(ExcelPathLayananSaya).getValue(
         GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
 
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
@@ -59,13 +59,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
         int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Mandatory Complete')))
 
         'service name dari DB'
-        ArrayList serviceNameDB = CustomKeywords.'layananSaya.VerifLayanan.getListServiceName'(conndevUAT, tenantcode)
+        ArrayList serviceNameDB = CustomKeywords.'layanansaya.VerifLayanan.getListServiceName'(conndevUAT, tenantcode)
 
         'service status dari DB'
-        ArrayList<String> serviceStatusDB = CustomKeywords.'layananSaya.VerifLayanan.getListServiceStatus'(conndevUAT, tenantcode)
+        ArrayList<String> serviceStatusDB = CustomKeywords.'layanansaya.VerifLayanan.getListServiceStatus'(conndevUAT, tenantcode)
 
         'service charge type dari DB'
-        ArrayList<String> chargeTypeDB = CustomKeywords.'layananSaya.VerifLayanan.getListChargeType'(conndevUAT, tenantcode)
+        ArrayList<String> chargeTypeDB = CustomKeywords.'layanansaya.VerifLayanan.getListChargeType'(conndevUAT, tenantcode)
 
         'deklarasi array kosong untuk layanan saya'
         ArrayList<String> serviceNameUI = [], serviceStatusUI = [], chargeTypeUI = []
@@ -89,7 +89,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
                         GlobalVariable.FlagFailed = 1
 
                         'tulis adanya error pada sistem web'
-                        CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+                        CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
                             GlobalVariable.StatusWarning, (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn,
                                 rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonUnknown)
                     }
@@ -148,7 +148,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
                 GlobalVariable.FlagFailed = 1
 
                 'Write to excel status failed and reason service tidak sesuai'
-                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+                CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
                     (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
                     ';') + GlobalVariable.FailedReasonServiceNotMatch)
 				
@@ -157,7 +157,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
                 GlobalVariable.FlagFailed = 1
 
                 'Write to excel status failed and reason status tidak sesuai'
-                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+                CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
                     (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
                     ';') + GlobalVariable.FailedReasonStatusNotMatch)
 				
@@ -166,7 +166,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
                 GlobalVariable.FlagFailed = 1
 
                 'Write to excel status failed and reason chargetype'
-                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+                CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
                     (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
                     ';') + GlobalVariable.FailedReasonChargeTypeNotMatch)
             }
@@ -176,19 +176,19 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
                 GlobalVariable.FlagFailed = 1
 
                 'Write to excel status failed and reason chargetype'
-                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+                CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
                     (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
                     ';') + GlobalVariable.FailedReasonMandatory)
             }
             
             if ((isMandatoryComplete == 0) && (GlobalVariable.FlagFailed == 0)) {
                 'write to excel success'
-                CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0, GlobalVariable.NumOfColumn - 
+                CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0, GlobalVariable.NumOfColumn - 
                     1, GlobalVariable.StatusSuccess)
             }
         } else {
             'Write to excel status failed karena table bermasalah'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+            CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
                 (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
                 GlobalVariable.FailedReasonTable)
         }
@@ -202,7 +202,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
             GlobalVariable.FlagFailed = 1
 
             'tulis adanya error pada sistem web'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning,
+            CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusWarning,
                 (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
                 GlobalVariable.FailedReasonUnknown)
         }
@@ -213,5 +213,5 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 WebUI.closeBrowser()
 
 def rowExcel(String cellValue) {
-    CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+    CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

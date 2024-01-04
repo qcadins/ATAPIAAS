@@ -13,7 +13,7 @@ import internal.GlobalVariable
 import java.text.SimpleDateFormat
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/1. Login.xlsm')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/1. Login.xlsm')
 
 sheet = 'Link Base Url'
 
@@ -21,7 +21,7 @@ sheet = 'Link Base Url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, rowExcel('OCR Passport'))
 
 'mencari directory excel utama'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 sheet = 'OCR Passport'
 
@@ -29,7 +29,7 @@ sheet = 'OCR Passport'
 int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
-Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 
 String tanggal = todayDate()
 
@@ -45,11 +45,11 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	} else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
 		
 		'ambil kode tenant di DB'
-		String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn,
+		String tenantcode = CustomKeywords.'ocrtesting.GetParameterfromDB.getTenantCodefromDB'(conn,
 			findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('UsernameLogin')))
 		
 		'ambil key trial yang aktif dari DB'
-		String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode,  GlobalVariable.SettingEnvi)
+		String thekey = CustomKeywords.'ocrtesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode,  GlobalVariable.SettingEnvi)
 		
 		'deklarasi variable response'
 		ResponseObject response
@@ -91,13 +91,13 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		ocrdate = WS.getElementPropertyValue(response, 'ocr_date', FailureHandling.CONTINUE_ON_FAILURE)
 		
 		'write to excel response elapsed time'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Process Time') - 1, GlobalVariable.NumOfColumn -
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Process Time') - 1, GlobalVariable.NumOfColumn -
 			1, elapsedTime.toString())
 			
 		if (stateocr == null || stateocr == '') {
 			
 			'write to excel status failed dan reason'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 					'Terdapat unidentified "Nan", tidak bisa tulis respons ke excel')
 			
@@ -116,29 +116,29 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			responseBody = response.responseBodyContent
 			
 			'write to excel status'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
 				1, stateocr)
 			
 			'panggil keyword untuk proses beautify dari respon json yang didapat'
-			CustomKeywords.'parseJson.BeautifyJson.process'(responseBody, sheet, rowExcel('Respons') - 1,
+			CustomKeywords.'parsejson.BeautifyJson.process'(responseBody, sheet, rowExcel('Respons') - 1,
 				findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Scenario')))
 			
 			'pengecekan value expected dan respons dari OCR'
-			CustomKeywords.'ocrTesting.ResponseChecking.verifyValueDifference'(
+			CustomKeywords.'ocrtesting.ResponseChecking.verifyValueDifference'(
 				findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Expected Response')),
 					findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Respons')),
 						sheet, rowExcel('Difference Checking') - 1)
 			
 			if (stateocr.equalsIgnoreCase('Success') && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
 				'write to excel status failed dan reason'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				GlobalVariable.FailedReasonKeyTenantBypass)
 				
 			} else if (stateocr.equalsIgnoreCase('Failed')) {
 				GlobalVariable.FlagFailed = 1
 				'write to excel status failed dan reason'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				'<' + messageocr + '>')
 			}
@@ -162,7 +162,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			'jika expected response tidak sesuai response'
 			if (GlobalVariable.FlagFailed != 0) {
 				'write to excel status failed'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
 					1, GlobalVariable.StatusFailed)
 				
 			}
@@ -177,7 +177,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			}
 			
 			'Write To Excel GlobalVariable.StatusFailed and errormessage'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				stateocr, '<' + messageocr + '>')
 		}
 	}
@@ -186,7 +186,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 WebUI.closeBrowser()
 
 def rowExcel(String cellValue) {
-	CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }
 
 def todayDate() {

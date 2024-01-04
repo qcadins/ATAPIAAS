@@ -1,4 +1,4 @@
-package customizeKeyword
+package customizekeyword
 
 import java.text.SimpleDateFormat
 import com.kms.katalon.core.annotation.Keyword

@@ -1,4 +1,4 @@
-package ocrTesting
+package ocrtesting
 
 import com.kms.katalon.core.annotation.Keyword
 import java.sql.Connection

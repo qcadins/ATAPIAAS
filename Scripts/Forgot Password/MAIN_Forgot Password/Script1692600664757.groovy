@@ -12,13 +12,13 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.By
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet User'
 int countColumnEdit = findTestData(ExcelPathForgotPass).columnNumbers
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
+Connection conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_esign'()
 
 'buka chrome'
 WebUI.openBrowser('')
@@ -91,7 +91,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 				
 				'ambil error dan get text dari error tersebut'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 						';') + '<' + WebUI.getText(findTestObject('Object Repository/Forgot Password/Page_Reset Password/div_NotifPop')) + '>')
 				
@@ -111,7 +111,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			if (isMandatoryComplete != 0) {
 				
 				'tulis adanya error pada sistem web'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 						GlobalVariable.FailedReasonMandatory)
 			}
@@ -126,7 +126,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		int countResend = Integer.parseInt(findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Website')))
 		
 		'tambahkan reset code dari DB'
-		resetCodefromDB.add(CustomKeywords.'forgotPass.ForgotpassVerif.getResetCode'(conndev,
+		resetCodefromDB.add(CustomKeywords.'forgotpass.ForgotpassVerif.getResetCode'(conndev,
 			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login'))))
 		
 		'pengecekan untuk pakai code yang salah'
@@ -201,7 +201,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			FailureHandling.OPTIONAL) != 'Kata sandi Anda telah berhasil diganti') {
 			
 			'ambil error dan get text dari error tersebut'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 					';') + '<' + WebUI.getText(findTestObject('Object Repository/Forgot Password/Page_Reset Password/div_NotifPop')) + '>')
 			
@@ -241,17 +241,17 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			if (GlobalVariable.FlagFailed == 0 && isMandatoryComplete == 0) {
 				'write to excel success'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0,
 					GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 			} else {
 				'tulis adanya error pada sistem web'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 						GlobalVariable.FailedReasonMandatory)
 			}
 		} else {
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 					GlobalVariable.FailedReasonLoginIssue)
 		}
@@ -272,7 +272,7 @@ def verifConfirmation() {
 		GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		
 		'ambil error dan get text dari error tersebut'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 				';') + '<' + WebUI.getText(findTestObject('Object Repository/Forgot Password/Page_Reset Password/div_NotifPop')) + '>')
 		
@@ -308,7 +308,7 @@ def resendFunction(Connection conndev, int countResend, ArrayList resetCodefromD
 			WebUI.delay(5)
 			
 			'ambil kembali code dari DB'
-			resetCodefromDB.add(CustomKeywords.'forgotPass.ForgotpassVerif.getResetCode'(conndev,
+			resetCodefromDB.add(CustomKeywords.'forgotpass.ForgotpassVerif.getResetCode'(conndev,
 				findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login'))))
 			
 			'cek apakah resend gagal'
@@ -317,7 +317,7 @@ def resendFunction(Connection conndev, int countResend, ArrayList resetCodefromD
 				GlobalVariable.FlagFailed = 1
 				
 				'tulis adanya error pada resend'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 						GlobalVariable.FailedReasonOTP)
 			}
@@ -335,12 +335,12 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 	}
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "9882FB834FE94C123AD659AB106FDA67",
+  "keywordFileContentHash": "BC646E2E5A31E4E1DBFE220326BA502D",
   "keywordClasses": [
     {
-      "name": "userManagement.UserVerif",
+      "name": "usermanagement.UserVerif",
       "keywordMethods": [
         {
           "name": "getUserTotal",

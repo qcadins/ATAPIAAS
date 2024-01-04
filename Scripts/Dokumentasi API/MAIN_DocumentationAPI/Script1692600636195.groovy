@@ -11,7 +11,7 @@ import org.openqa.selenium.Keys as Keys
 import groovy.sql.Sql as Sql
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathAPIDocs).columnNumbers, isLoggedin = 0
@@ -82,7 +82,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		WebUI.delay(GlobalVariable.Timeout)
 		
 		'pengecekan file yang sudah didownload'
-		boolean isDownloaded = CustomKeywords.'documentationAPI.CheckDocumentation.isFileDownloaded'(
+		boolean isDownloaded = CustomKeywords.'documentationapi.CheckDocumentation.isFileDownloaded'(
 			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('Delete File ?(Yes/No)')))
 		
 		'jika file tidak terunduh, tulis gagal'
@@ -90,25 +90,25 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('ClearDDL ? (Yes/No)')) == 'No') {
 			
 			'tulis status sukses pada excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 					GlobalVariable.SuccessReason)
 		} else if (WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL) &&
 			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('ClearDDL ? (Yes/No)')) == 'Yes') {
 			
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 					GlobalVariable.FailedReasonDownloadProblem + ' Bypass')
 		} else if (isMandatoryComplete > 0) {
 			
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonMandatory)
 		} else {
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonDownloadProblem)
 		}
@@ -120,16 +120,16 @@ WebUI.closeBrowser()
 
 def VerifyDocumentListAPI(){
 	'deklarasi variabel untuk konek ke Database APIAAS'
-	def conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+	def conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 	
 	'kumpulan string yang menyimpan hasil data dari DB'
-	ArrayList hasildb = CustomKeywords.'documentationAPI.CheckDocumentation.getDocumentationAPIName'(conn)
+	ArrayList hasildb = CustomKeywords.'documentationapi.CheckDocumentation.getDocumentationAPIName'(conn)
 	
 	'klik pada panah turun ddl'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/span_panah_Pilih API'))
 	
 	'ambil text dari UI Web APIAAS'
-	ArrayList hasilweb = CustomKeywords.'documentationAPI.CheckDocumentation.getValueDDLDocumentationAPI'()
+	ArrayList hasilweb = CustomKeywords.'documentationapi.CheckDocumentation.getValueDDLDocumentationAPI'()
 	
 	'klik kembali panah turun ddl'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/span_panah_Pilih API'))
@@ -152,12 +152,12 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, 
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, 
 			GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 			(findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonDDL)
 	}
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

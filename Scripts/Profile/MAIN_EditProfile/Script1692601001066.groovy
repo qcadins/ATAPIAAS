@@ -18,13 +18,13 @@ import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathEditProfile).columnNumbers
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
-Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 
 'looping kolom dari testdata'
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; GlobalVariable.NumOfColumn++) {
@@ -67,7 +67,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
             GlobalVariable.FlagFailed = 1
 
             'tulis adanya error pada sistem web'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
+            CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
                 GlobalVariable.StatusWarning, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
                 ';') + GlobalVariable.FailedReasonUnknown)
         }
@@ -167,7 +167,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 							';') + 'Username Pojok Kanan Atas Tidak Sesuai Data Edit')
 		}
@@ -196,7 +196,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
                 GlobalVariable.FlagFailed = 1
 
                 'Write to excel status failed and reason topup failed'
-                CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
+                CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
                     GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 
                         rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonTrial)
             }
@@ -220,7 +220,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 //            GlobalVariable.FlagFailed = 1
 //
 //            'Write to excel status failed and reason topup failed'
-//            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
+//            CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
 //                GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 2) + 
 //                ';') + GlobalVariable.FailedReasonTenant)
 //        }
@@ -229,20 +229,20 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         if (isMandatoryComplete != 0) {
 			
             'Write To Excel GlobalVariable.StatusFailed and gagal karena reason status'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
+            CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
                 GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
                 ';') + GlobalVariable.FailedReasonMandatory)
 			
         } else if (GlobalVariable.FlagFailed == 0) {
 			
             'write to excel success'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn - 
+            CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn - 
                 1, GlobalVariable.StatusSuccess)
 			
         } else {
 			
             'Write To Excel GlobalVariable.StatusFailed and gagal karena reason status'
-            CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
+            CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
                 GlobalVariable.StatusWarning, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
                 ';') + GlobalVariable.StatusReasonSystem)
         }
@@ -282,14 +282,14 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 				';') + GlobalVariable.FailedReasonVerifyEqualorMatch + ' Data sebelum edit tidak sesuai')
 	}
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }
 
 def setTextEmptyValidation(TestObject object, String Testdata) {

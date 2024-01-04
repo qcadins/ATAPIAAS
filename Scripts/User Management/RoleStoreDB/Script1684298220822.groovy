@@ -4,10 +4,10 @@ import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
 
 'deklarasi koneksi ke Database eendigo_dev_uat'
-Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+Connection conndevUAT = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 
 'deklarasi koneksi ke DB eendigo_dev'
-Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
+Connection conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_esign'()
 
 'ambil data role dan status dari DB'
 ArrayList resultDB = []
@@ -18,7 +18,7 @@ ArrayList resultExcel = []
 'check if action new/edit/settings'
 if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('New')) {
 	'ambil data role dari db'
-	String resultDB = CustomKeywords.'userManagement.RoleVerif.getNamaRole'(conndevUAT, 
+	String resultDB = CustomKeywords.'usermanagement.RoleVerif.getNamaRole'(conndevUAT, 
 		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Add RoleName')))
 	
 	'ambil data role dari excel'
@@ -30,14 +30,14 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('A
 		GlobalVariable.FlagFailed = 1
 		
 		'tulis adanya error pada sistem web'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonStoreDB + ' New Role')
 	}
 } else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
 	
 	'ambil data role dan status dari DB'
-	resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleEdit'(conndevUAT,
+	resultDB = CustomKeywords.'usermanagement.RoleVerif.getRoleEdit'(conndevUAT,
 		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama Role')))
 	
 	'inisialisasi array dari Excel'
@@ -53,7 +53,7 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('A
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 					GlobalVariable.FailedReasonStoreDB + ' Edit Role')
 		}
@@ -62,7 +62,7 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('A
 } else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Settings')) {
 	
 	'ambil data result dari DB'
-	resultDB = CustomKeywords.'userManagement.RoleVerif.getRoleMenu'(conndev,
+	resultDB = CustomKeywords.'usermanagement.RoleVerif.getRoleMenu'(conndev,
 		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Nama Role')),
 			findTestData(ExcelPathRole).getValue(2, rowExcel('Username Login')))
 	
@@ -75,12 +75,12 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('A
 		GlobalVariable.FlagFailed = 1
 		
 		'tulis adanya error pada sistem web'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				GlobalVariable.FailedReasonStoreDB + ' Setting akses Role')
 	}
 }
 
 def rowExcel(String cellValue) {
-	CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

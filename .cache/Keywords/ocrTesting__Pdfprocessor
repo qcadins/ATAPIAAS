@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "73559EA56C4FCD56DE42293178965AB6",
+  "keywordFileContentHash": "BAC5A29AEB1A03A6F36745D26285FE3A",
   "keywordClasses": [
     {
-      "name": "ocrTesting.Pdfprocessor",
+      "name": "ocrtesting.Pdfprocessor",
       "keywordMethods": [
         {
           "name": "countPages",

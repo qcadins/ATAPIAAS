@@ -18,13 +18,13 @@ import org.openqa.selenium.WebElement
 import java.sql.Connection
 
 'siapkan koneksi ke db eendigo'
-Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
+Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_esign'()
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathRegisterLogin).columnNumbers
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; GlobalVariable.NumOfColumn++) {
 	
@@ -63,7 +63,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'cek apakah button register bisa di klik'
-		CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatusbtnClickable'(isMandatoryComplete, 
+		CustomKeywords.'writetoexcel.CheckSaveProcess.checkStatusbtnClickable'(isMandatoryComplete, 
 				findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Buat Akun Anda Sekarang'), GlobalVariable.NumOfColumn, 'Register')
 		
 		'pencet enter'
@@ -82,7 +82,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			iniotp.add(OTP)
 			
 			'cek apakah field untuk input otp muncul'
-			CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, 
+			CustomKeywords.'writetoexcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, 
 				findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), 
 					GlobalVariable.NumOfColumn, 'Register')
 			
@@ -114,7 +114,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							GlobalVariable.FlagFailed = 1
 							
 							'tulis gagal resend otp ke excel'
-							CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+							CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 								GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 									GlobalVariable.FailedReasonOTP)
 						}
@@ -136,7 +136,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), iniotp[i+1])
 						} else {
 							'verifikasi adanya alert otp'
-							CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
+							CustomKeywords.'writetoexcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
 							findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'),
 								GlobalVariable.NumOfColumn, 'Register')
 						}
@@ -148,7 +148,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				WebUI.delay(2)
 				
 				'verifikasi adanya sukses isi otp'
-				CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, 
+				CustomKeywords.'writetoexcel.CheckSaveProcess.checkStatus'(isMandatoryComplete, 
 					findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Verifikasi OTP Email berhasil'), 
 						GlobalVariable.NumOfColumn, 'Register')
 			} else {
@@ -177,7 +177,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 								GlobalVariable.FlagFailed = 1
 								
 								'tulis gagal resend otp ke excel'
-								CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+								CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 									GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 										GlobalVariable.FailedReasonOTP)
 							}	
@@ -193,7 +193,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					WebUI.delay(2)
 					
 					'verifikasi adanya alert otp'
-					CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
+					CustomKeywords.'writetoexcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
 					findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'),
 						GlobalVariable.NumOfColumn, 'Register')
 					
@@ -241,7 +241,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			verifyregistration(conn, findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email registrasi')))
 			
 			'tulis status sukses pada excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', 
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess, '')
 		}
 		WebUI.closeBrowser()
@@ -273,12 +273,12 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				GlobalVariable.FailedReasonStoreDB + ' ' + reason)
 	}
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

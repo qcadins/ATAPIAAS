@@ -9,10 +9,10 @@ Connection conn
 
 if (GlobalVariable.SettingEnvi == 'Production') {
 	'deklarasi koneksi ke Database eendigo_dev'
-	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 } else if (GlobalVariable.SettingEnvi == 'Trial') {
 	'deklarasi koneksi ke Database eendigo_dev_uat'
-	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 }
 
 'declare arraylist arraymatch'
@@ -144,11 +144,11 @@ if (arrayMatch.contains(false)) {
 	GlobalVariable.FlagFailed = 1
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+	CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 		';' + GlobalVariable.FailedReasonStoreDB)
 }
 
 def rowExcel(String cellValue) {
-	CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

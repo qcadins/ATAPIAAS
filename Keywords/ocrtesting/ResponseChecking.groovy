@@ -1,9 +1,9 @@
-package ocrTesting
+package ocrtesting
 
 import com.kms.katalon.core.annotation.Keyword
 import internal.GlobalVariable
 import groovy.json.JsonSlurper
-import writeToExcel.WriteExcel
+import writetoexcel.WriteExcel
 
 public class ResponseChecking {
 

@@ -13,19 +13,19 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.Keys as Keys
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 Connection conn
 
 if(GlobalVariable.SettingEnvi == 'Production') {
 	
 	'deklarasi koneksi ke Database eendigo_dev'
-	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 	
 } else if(GlobalVariable.SettingEnvi == 'Trial') {
 	
 	'deklarasi koneksi ke Database eendigo_dev_uat'
-	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 }
 
 'mendapat jumlah kolom dari sheet Tenant'
@@ -211,7 +211,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					'value', FailureHandling.CONTINUE_ON_FAILURE)
 
 				'write to excel api key'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 
 					sheet, rowExcel('API Key') - 1, GlobalVariable.NumOfColumn - 1, APIKEY)
 			}
 			
@@ -321,7 +321,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						GlobalVariable.FlagFailed = 1
 						
 						'tulis adanya error pada sistem web'
-						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+						CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 							GlobalVariable.StatusWarning, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 								GlobalVariable.FailedReasonUnknown)
 						
@@ -330,7 +330,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						checkAfterAddorEdit()
 						
 						'write to excel success'
-						CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
+						CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
 							GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 					}
 				} else {
@@ -338,7 +338,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					GlobalVariable.FlagFailed = 1
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 						';') + GlobalVariable.FailedReasonSubmitError)
 					
@@ -353,7 +353,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.FlagFailed = 1
 
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 					';') + GlobalVariable.FailedReasonMandatory)
 				
@@ -377,7 +377,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.FlagFailed = 1
 				
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 					';') + GlobalVariable.FailedReasonSearchFailed)
 				
@@ -411,7 +411,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					GlobalVariable.FlagFailed = 1
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 						';') + "Field Credit Scoring masih tercentang")
 					
@@ -423,7 +423,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.FlagFailed = 1
 				
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 					';') + GlobalVariable.FailedReasonSearchFailed)
 				
@@ -490,14 +490,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						GlobalVariable.FlagFailed = 1
 						
 						'tulis adanya error pada sistem web'
-						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+						CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 							GlobalVariable.StatusWarning, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 								GlobalVariable.FailedReasonUnknown)
 						
 					} else {
 						
 						'write to excel success'
-						CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
+						CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
 							GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 					}
 				}
@@ -510,7 +510,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.FlagFailed = 1
 
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 					';') + GlobalVariable.FailedReasonMandatory)
 				
@@ -556,7 +556,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					FailureHandling.CONTINUE_ON_FAILURE)
 
 				'write to excel api key'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 
 					sheet, rowExcel('API Key') - 1, GlobalVariable.NumOfColumn - 1, APIKEY)
 			}
 			
@@ -753,7 +753,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						GlobalVariable.FlagFailed = 1
 						
 						'tulis adanya error pada sistem web'
-						CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+						CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 							GlobalVariable.StatusWarning, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 								GlobalVariable.FailedReasonUnknown)
 						
@@ -762,7 +762,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						checkAfterAddorEdit()
 						
 						'write to excel success'
-						CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
+						CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
 							GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 					}
 					
@@ -771,7 +771,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					GlobalVariable.FlagFailed = 1
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 						';') + GlobalVariable.FailedReasonSubmitError)
 					
@@ -786,7 +786,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.FlagFailed = 1
 
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 					';') + GlobalVariable.FailedReasonMandatory)
 				
@@ -812,7 +812,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.FlagFailed = 1
 				
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 					';') + GlobalVariable.FailedReasonSearchFailed)
 				
@@ -871,7 +871,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					'berhasil')) {
 				
 					'write to excel success'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
 						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 					
 				} else {
@@ -879,7 +879,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					GlobalVariable.FlagFailed = 1
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 						';') + GlobalVariable.FailedReasonQuantityNotNull)
 					
@@ -893,7 +893,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					GlobalVariable.FlagFailed = 1
 					
 					'tulis adanya error pada sistem web'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusWarning, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 							GlobalVariable.FailedReasonUnknown)
 				}
@@ -906,7 +906,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				GlobalVariable.FlagFailed = 1
 				
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 					';') + GlobalVariable.FailedReasonMandatory)
 			
@@ -1027,7 +1027,7 @@ def checkPaging(Connection conn) {
 def checkVerifyPaging(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + 
 				';') + GlobalVariable.FailedReasonPagingError)
 
@@ -1057,7 +1057,7 @@ def checkActiveTenant(String tenantcode, Connection conn) {
 	if(!ActiveTenantfromUI.containsAll(ActiveTenantfromDB)){
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
 			GlobalVariable.StatusFailed,(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + 
 				';') + GlobalVariable.FailedReasonServiceNotMatch)
 
@@ -1098,7 +1098,7 @@ def checkSaldo() {
 		
 		println(arrayServices[i])
 		
-		int row = CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, arrayServices[i])
+		int row = CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, arrayServices[i])
 		
 		servicesNameActive.add(findTestData(ExcelPathTenant).getValue(2, row))
 	}
@@ -1132,7 +1132,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 	if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 			(findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 
 		GlobalVariable.FlagFailed = 1
@@ -1155,5 +1155,5 @@ def checkAfterAddorEdit() {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

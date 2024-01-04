@@ -1,6 +1,6 @@
-package parseJson
+package parsejson
 
-import writeToExcel.WriteExcel
+import writetoexcel.WriteExcel
 import com.kms.katalon.core.annotation.Keyword
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper

@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "701B074EBFA3953BAA8807F85AAEAB17",
+  "keywordFileContentHash": "A7E59E7D973057681BA77D9B6423446C",
   "keywordClasses": [
     {
-      "name": "forgotPass.ForgotpassVerif",
+      "name": "forgotpass.ForgotpassVerif",
       "keywordMethods": [
         {
           "name": "getResetCode",

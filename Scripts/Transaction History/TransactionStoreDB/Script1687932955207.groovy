@@ -6,30 +6,29 @@ import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
 
 'deklarasi koneksi ke DB eendigo_dev'
-Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
+Connection conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_esign'()
 
 'ambil data role dari db'
-String resultDB = CustomKeywords.'transactionHistory.TransactionVerif.getstatusafterConfirmOrReject'(
+String resultDB = CustomKeywords.'transactionhistory.TransactionVerif.getstatusafterConfirmOrReject'(
 	conndev, TrxNum)
 
 'deklarasi string result dari excel'
 String resultExcel
 
-'check if action new/edit'
-if (TrxType == 'Approve') {
-	
-	'ambil data role dari excel'
-	resultExcel = 'Pembayaran Berhasil'
-	
-} else if(TrxType == 'Reject') {
-	
-	'ambil data role dari excel'
-	resultExcel = 'Pembayaran Ditolak'
-
-} else if(TrxType == 'Upload') {
-	
-	'ambil data role dari excel'
-	resultExcel = 'Menunggu Verifikasi Pembayaran'
+'check transaction type and change the resultexcel'
+switch (TrxType) {
+	case 'Approve':
+		'ambil data role dari excel'
+		resultExcel = 'Pembayaran Berhasil'
+		break
+	case 'Reject':
+		'ambil data role dari excel'
+		resultExcel = 'Pembayaran Ditolak'
+		break
+	case 'Upload':
+		'ambil data role dari excel'
+		resultExcel = 'Menunggu Verifikasi Pembayaran'
+		break
 }
 
 checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB, resultExcel, false,
@@ -40,12 +39,12 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(Sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(Sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				GlobalVariable.FailedReasonStoreDB + ' ' + reason)
 	}
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, Sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, Sheet, cellValue)
 }

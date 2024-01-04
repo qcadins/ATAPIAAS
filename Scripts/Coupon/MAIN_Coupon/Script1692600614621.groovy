@@ -15,13 +15,13 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathCoupon).columnNumbers
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
+Connection conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_esign'()
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : sheet, ('SheetName') : sheet,
@@ -175,7 +175,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				GlobalVariable.FlagFailed = 1
 				
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 				';') + GlobalVariable.FailedReasonSearchFailed)
 				
@@ -212,7 +212,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				GlobalVariable.FlagFailed = 1
 			
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 				';') + GlobalVariable.FailedReasonSearchFailed)
 				
@@ -247,14 +247,14 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					GlobalVariable.FlagFailed = 1
 					
 					'tulis adanya error pada sistem web'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 							GlobalVariable.FailedReasonDetailNotMatch)
 					
 					break
 				} else {
 					'write to excel success'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status'),
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status'),
 						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 				}
 			}
@@ -316,7 +316,7 @@ def copylinkfunction() {
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis ada masalah pada button copy'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 			';') + GlobalVariable.FailedReasonButtonCopy)
 		}
@@ -480,7 +480,7 @@ def checkPaging(Connection conndev) {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
 	
@@ -555,7 +555,7 @@ def checkPaging(Connection conndev) {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
 	
@@ -673,7 +673,7 @@ def checkdialogConfirmation(isMandatoryComplete) {
 			if (GlobalVariable.FlagFailed == 0 && isMandatoryComplete == 0 && resultcheck == 'Success') {
 					
 				'write to excel success'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0,
 					GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 				
 				if (GlobalVariable.KondisiCekDB == 'Yes') {
@@ -687,7 +687,7 @@ def checkdialogConfirmation(isMandatoryComplete) {
 				GlobalVariable.FlagFailed = 1
 				
 				'tulis adanya error saat edit'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 						'<' + resultcheck  + '>')
 			}
@@ -696,7 +696,7 @@ def checkdialogConfirmation(isMandatoryComplete) {
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error saat edit'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 					GlobalVariable.FailedReasonSubmitError)
 		}	
@@ -706,7 +706,7 @@ def checkdialogConfirmation(isMandatoryComplete) {
 		GlobalVariable.FlagFailed = 1
 		
 		'tulis adanya mandatory tidak lengkap'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				GlobalVariable.FailedReasonMandatory)
 	}
@@ -715,7 +715,7 @@ def checkdialogConfirmation(isMandatoryComplete) {
 		GlobalVariable.FlagFailed = 1
 		
 		'tulis adanya error saat edit'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				GlobalVariable.FailedReasonPercentage)
 	}
@@ -766,7 +766,7 @@ def checkDBbeforeEdit(Connection conndev) {
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 					GlobalVariable.FailedReasonEditVerif)
 		}
@@ -810,7 +810,7 @@ def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
 def checkVerifyPaging(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 				';') + GlobalVariable.FailedReasonPagingError)
 
@@ -821,7 +821,7 @@ def checkVerifyPaging(Boolean isMatch) {
 def checkVerifyReset(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 				';') + GlobalVariable.FailedReasonSetFailed)
 
@@ -847,7 +847,7 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 		GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 		
@@ -873,12 +873,12 @@ def verifyAfterAddorEdit() {
 	'verify tipe kupon'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Coupon/label_TipeKupon')), findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TipeKupon')), false, FailureHandling.CONTINUE_ON_FAILURE), ' Tipe Kupon')
 	
-	parsedate = CustomKeywords.'customizeKeyword.ParseDate.parseDateFormat'(findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TanggalMulaiBerlaku')), 'yyyy-MM-dd', 'dd-MMM-yyyy').toUpperCase()
+	parsedate = CustomKeywords.'customizekeyword.ParseDate.parseDateFormat'(findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TanggalMulaiBerlaku')), 'yyyy-MM-dd', 'dd-MMM-yyyy').toUpperCase()
 		
 	'verify tanggal mulai berlaku'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Coupon/label_TanggalMulai')).toUpperCase(), parsedate, false, FailureHandling.CONTINUE_ON_FAILURE), ' Tanggal mulai berlaku')
 	
-	parsedate = CustomKeywords.'customizeKeyword.ParseDate.parseDateFormat'(findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TanggalTerakhirBerlaku')), 'yyyy-MM-dd', 'dd-MMM-yyyy').toUpperCase()
+	parsedate = CustomKeywords.'customizekeyword.ParseDate.parseDateFormat'(findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TanggalTerakhirBerlaku')), 'yyyy-MM-dd', 'dd-MMM-yyyy').toUpperCase()
 	
 	'verify tanggal terakhir berlaku'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Coupon/label_TanggalTerakhir')).toUpperCase(), parsedate, false, FailureHandling.CONTINUE_ON_FAILURE), ' Tanggal terakhir berlaku')
@@ -897,5 +897,5 @@ def verifyAfterAddorEdit() {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

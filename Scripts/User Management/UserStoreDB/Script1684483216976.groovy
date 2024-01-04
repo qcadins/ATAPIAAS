@@ -6,7 +6,7 @@ import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
 
 'deklarasi koneksi ke DB eendigo_dev'
-Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
+Connection conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_esign'()
 
 'ambil data role dari db'
 ArrayList resultDB = []
@@ -18,7 +18,7 @@ ArrayList resultExcel = []
 if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('New')) {
 	
 	'isi array dari DB'
-	resultDB = CustomKeywords.'userManagement.UserVerif.getNewUserData'(conndev,
+	resultDB = CustomKeywords.'usermanagement.UserVerif.getNewUserData'(conndev,
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email')),
 			findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 	
@@ -33,7 +33,7 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 					GlobalVariable.FailedReasonStoreDB + ' User baru')
 		}
@@ -42,7 +42,7 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).
 } else if(findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
 	
 	'ambil data role dari db'
-	resultDB = CustomKeywords.'userManagement.UserVerif.getEditUserData'(conndev, 
+	resultDB = CustomKeywords.'usermanagement.UserVerif.getEditUserData'(conndev, 
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Email')))
 		
 	'cek data untuk tiap alamat di array'
@@ -64,7 +64,7 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 					GlobalVariable.FailedReasonStoreDB + ' Edit user')
 		}
@@ -72,5 +72,5 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "FBDF87F18C2D34CDE4C05F7F2A4E748B",
+  "keywordFileContentHash": "A866AF38A242229332B6DD0019C663BD",
   "keywordClasses": [
     {
-      "name": "transactionHistory.TransactionVerif",
+      "name": "transactionhistory.TransactionVerif",
       "keywordMethods": [
         {
           "name": "getTotalTrx",

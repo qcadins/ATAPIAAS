@@ -23,10 +23,10 @@ import org.openqa.selenium.Keys as Keys
 //login sentani > regis user baru > logout -> login pakai user baru daftar ->
 //login gagal -> login pakai sentani -> aktifin user resend -> (query) -> logout -> login user baru -> login sukses
 'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
+Connection conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_esign'()
 
 'deklarasi koneksi ke database eendigo_dev_uat'
-Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+Connection conndevUAT = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 
 'click profile'
 WebUI.click(findTestObject('User Management-User/user_Profile'))
@@ -55,7 +55,7 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platf
 if (WebUI.verifyElementNotPresent(findTestObject('User Management-User/label_TextError'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 	
 	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+	CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 	GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') + 
 	'Berhasil Login dengan user yang belum aktivasi')
 	
@@ -129,11 +129,11 @@ if (WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgno
 	WebUI.click(findTestObject('User Management-User/button_Confirm'))
 	
 	'aktifkan user yang baru saja didaftarkan di db dev'
-	CustomKeywords.'userManagement.UserVerif.updateIsActiveUser'(conndev,
+	CustomKeywords.'usermanagement.UserVerif.updateIsActiveUser'(conndev,
 		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email')))
 
 	'aktifkan user yang baru saja didaftarkan di db dev_uat'
-	CustomKeywords.'userManagement.UserVerif.updateIsActiveUser'(conndevUAT,
+	CustomKeywords.'usermanagement.UserVerif.updateIsActiveUser'(conndevUAT,
 		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email')))
 	
 	'click profile'
@@ -164,7 +164,7 @@ if (WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgno
 	'Page_Balance/i_SEDARA MANYURA_ft-menu font-medium-3'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 		'gagal login dengan user yang baru terdaftar dan sudah aktivasi')
 
@@ -196,7 +196,7 @@ if (WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgno
 	
 } else {
 	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+	CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 	GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 	'gagal mengirimkan ulang email aktivasi')
 	
@@ -204,5 +204,5 @@ if (WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgno
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

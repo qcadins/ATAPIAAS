@@ -48,7 +48,7 @@ if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel(
 	GlobalVariable.FlagFailed = 1
 	
 	'tulis adanya error pada sistem web'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+	CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusWarning, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 			GlobalVariable.FailedReasonMandatory)
 } else {
@@ -101,7 +101,7 @@ if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel(
 		GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
 		
 		'tulis adanya error pada sistem web'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusWarning, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				GlobalVariable.FailedReasonUnknown)
 	}
@@ -109,7 +109,7 @@ if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel(
 	WebUI.delay(2)
 	
 	'periksa status edit dan tulis ke excel'
-	CustomKeywords.'writeToExcel.CheckSaveProcess.checkAlert'(GlobalVariable.NumOfColumn, sheet)
+	CustomKeywords.'writetoexcel.CheckSaveProcess.checkAlert'(GlobalVariable.NumOfColumn, sheet)
 	
 	'kondisi jika tidak ada tombol ok, tc masih bisa dilanjutkan'
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/button_OK_success'),
@@ -158,7 +158,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 	if ((isMatch == false)) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 			(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 
 		GlobalVariable.FlagFailed = 1
@@ -187,5 +187,5 @@ def searchAPIKEY(int row) {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

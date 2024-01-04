@@ -13,7 +13,7 @@ import org.openqa.selenium.Keys as Keys
 import org.openqa.selenium.By as By
 
 'mencari directory excel'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPath).getColumnNumbers()
@@ -22,17 +22,17 @@ Connection conn
 
 if(GlobalVariable.SettingEnvi == 'Production') {
 	'deklarasi koneksi ke Database eendigo_dev'
-	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 } else if(GlobalVariable.SettingEnvi == 'Trial') {
 	'deklarasi koneksi ke Database eendigo_dev_uat'
-	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 }
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
+Connection conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_esign'()
 
 'deklarasi koneksi ke database eendigo_dev_uat'
-Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+Connection conndevUAT = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'IsiSaldoAuto', ('SheetName') : sheet, ('Path') : ExcelPath],
@@ -158,7 +158,7 @@ if (WebUI.verifyElementPresent(findTestObject('Object Repository/Top Up/NotifCat
 		GlobalVariable.FlagFailed = 1
 						
 		'tulis error sesuai reason yang ditampilkan oleh error message'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				'<' + hasilNotif + '>')
 	}
@@ -237,7 +237,7 @@ if (findTestData(ExcelPath).getValue(2, 33) == 'Yes') {
 				!= subtotalconvert) {
 				
 				'tulis penghitungan otomatis error'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) +
 						';') + GlobalVariable.FailedReasonSubTotalCalc)
 		
@@ -247,7 +247,7 @@ if (findTestData(ExcelPath).getValue(2, 33) == 'Yes') {
 		else {
 			
 			'tulis penghitungan otomatis error'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) +
 					';') + GlobalVariable.FailedReasonHargaSatuan)
 	
@@ -272,7 +272,7 @@ if (findTestData(ExcelPath).getValue(2, 33) == 'Yes') {
 			WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/tombolXservices'))
 			
 			'tulis error penambahan layanan'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) +
 					';') + GlobalVariable.FailedReasonAddServices)
 	
@@ -316,7 +316,7 @@ if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Top Up/
 		GlobalVariable.FlagFailed = 1
 	
 		'tulis error sesuai reason yang ditampilkan oleh error message'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				'<' + WebUI.getText(findTestObject('Object Repository/Top Up/ErrorCatch'))  + '>')
 
@@ -336,7 +336,7 @@ if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Top Up/
 			GlobalVariable.FlagFailed = 1
 							
 			'tulis error sesuai reason yang ditampilkan oleh error message'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					'<' + hasilNotif + '>')
 		}
@@ -575,7 +575,7 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonVerifyEqualorMatch + ' ' + reason)
 	}

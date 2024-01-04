@@ -7,10 +7,10 @@ import internal.GlobalVariable as GlobalVariable
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'connect DB APIAAS'
-Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 
 'get colm excel'
 int countColmExcel = findTestData(excelPathAPIGetPaymentDetail).columnNumbers
@@ -46,7 +46,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColmExce
 					arrayIndex = 0
 					
 					'get payment detail from db'
-					result = CustomKeywords.'apiGetPaymentDetail.APIGetPaymentDetail.getPaymentDetailDB'(conn, findTestData(
+					result = CustomKeywords.'apigetpaymentdetail.APIGetPaymentDetail.getPaymentDetailDB'(conn, findTestData(
 							excelPathAPIGetPaymentDetail).getValue(GlobalVariable.NumOfColumn, rowExcel('bankCode')).replace('"', ''))
 		
 					'verify bank code'
@@ -64,12 +64,12 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColmExce
 				
 				if (arrayMatch.contains(false)) {
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(excelPathAPIGetPaymentDetail).getValue(GlobalVariable.NumOfColumn,
 							rowExcel('Reason Failed')) + ';') + GlobalVariable.FailedReasonStoreDB)
 				} else {
 		            'write to excel success'
-		            CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, 
+		            CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, 
 		                GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 				}
 			} else {
@@ -82,7 +82,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColmExce
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }
 
 def getErrorMessageAPI(def respon) {
@@ -90,7 +90,7 @@ def getErrorMessageAPI(def respon) {
 	message = WS.getElementPropertyValue(respon, 'ErrorMessages.Message', FailureHandling.OPTIONAL)
 
 	'Write To Excel GlobalVariable.StatusFailed and errormessage'
-	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
+	CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 		((findTestData(excelPathAPIGetPaymentDetail).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 		('<' + message)) + '>')
 

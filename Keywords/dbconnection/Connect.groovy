@@ -1,4 +1,4 @@
-package dbConnection
+package dbconnection
 
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 

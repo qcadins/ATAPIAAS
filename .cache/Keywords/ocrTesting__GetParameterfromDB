@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "52CA307C46EE82215813FA66C9FCC9C9",
+  "keywordFileContentHash": "5FAC3766DCFA4D1CBB32BEB80C3DFEF7",
   "keywordClasses": [
     {
-      "name": "ocrTesting.GetParameterfromDB",
+      "name": "ocrtesting.GetParameterfromDB",
       "keywordMethods": [
         {
           "name": "getIDPaymentType",

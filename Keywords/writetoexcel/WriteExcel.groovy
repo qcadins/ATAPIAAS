@@ -1,4 +1,4 @@
-package writeToExcel
+package writetoexcel
 
 import org.apache.poi.xssf.usermodel.XSSFRow
 import org.apache.poi.xssf.usermodel.XSSFSheet
@@ -10,13 +10,14 @@ import com.kms.katalon.core.annotation.Keyword
 import internal.GlobalVariable
 
 public class WriteExcel {
+	
 	/**
 	 * Write to Excel
 	 */
 	//fungsi digunakan untuk menulis data ke dalam excel dalam bentuk string
 	@Keyword
 	def writeToExcel(String filePath, String sheetName, int rowNo, int collNo, String cellValue) {
-		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
+		FileInputStream file = new FileInputStream(new File(filePath)) //initiate excel repository
 
 		XSSFWorkbook workbook = new XSSFWorkbook(file)
 		XSSFSheet sheet = workbook.getSheet(sheetName) //getSheet -> sheet num n (start from index 0)
@@ -70,29 +71,26 @@ public class WriteExcel {
 	//fungsi digunakan untuk menulis ke dalam excel dengan status dan alasan gagalnya case tersebut
 	// write to excel status and reason
 	@Keyword
-	writeToExcelStatusReason (String sheetname, int colm, String status, String reason){
-
-		(new writeToExcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
+	writeToExcelStatusReason(String sheetname, int colm, String status, String reason) {
+		(new writetoexcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 				0, colm - 1, status)
-		(new writeToExcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
+		(new writetoexcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 				1, colm - 1, reason)
 	}
-
 
 	//fungsi digunakan untuk menulis rumus ke dalam cell excel
 	@Keyword
 	void writeToExcelFormula(String filePath, String sheetName, int rowNo, int collNo, String cellValue) throws IOException {
-		FileInputStream file = new FileInputStream (new File(filePath))
+		FileInputStream file = new FileInputStream(new File(filePath))
 		XSSFWorkbook workbook = new XSSFWorkbook(file)
 		XSSFSheet sheet = workbook.getSheet(sheetName)
 
-		sheet.getRow(rowNo).createCell(collNo).setCellFormula(cellValue)
+		sheet.getRow(rowNo).createCell(collNo).cellFormula = cellValue
 
 		file.close()
 		FileOutputStream outFile = new FileOutputStream(new File(filePath))
 		workbook.write(outFile)
 		outFile.close()
-
 	}
 
 	//fungsi digunakan untuk mengambil directory dari file excel yang akan digunakan
@@ -117,7 +115,7 @@ public class WriteExcel {
 			if (currentRow != null) {
 				Cell cell = currentRow.getCell(column)
 				if (cell != null) {
-					cell.setCellValue('')
+					cell.cellValue = ''
 				}
 			}
 		}
@@ -134,28 +132,23 @@ public class WriteExcel {
 	public int getExcelRow(String filePath, String sheetName, String cellValue) {
 		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
 
-		XSSFWorkbook workbook = new XSSFWorkbook(file);
-		XSSFSheet sheet = workbook.getSheet(sheetName); //getSheet -> sheet num n (start from index 0)
-		XSSFRow row = null;
-		int row_num=-1;
-		for(int i=0; i <= sheet.getLastRowNum(); i++)
-		{
+		XSSFWorkbook workbook = new XSSFWorkbook(file)
+		XSSFSheet sheet = workbook.getSheet(sheetName) //getSheet -> sheet num n (start from index 0)
+		XSSFRow row = null
+		int rownum = -1
+		for (int i = 0; i <= sheet.lastRowNum; i++) {
 			row = sheet.getRow(i)
-			try{
-				if(row.getCell(0).getStringCellValue().equals(cellValue)){
-					row_num = i
+			try {
+				if (row.getCell(0).stringCellValue.equals(cellValue)) {
+					rownum = i
 					break
 				}
 			}
-			catch(Exception e){
+			catch (Exception e) {
 
 			}
-
 		}
-
-		return row_num+1
-
-
+		return rownum + 1
 	}
+	
 }
-

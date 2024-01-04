@@ -1,4 +1,4 @@
-package transactionHistory
+package transactionhistory
 
 import com.kms.katalon.core.annotation.Keyword
 import java.sql.Connection

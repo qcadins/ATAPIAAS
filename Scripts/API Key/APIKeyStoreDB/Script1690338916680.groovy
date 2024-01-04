@@ -7,7 +7,7 @@ import groovy.sql.Sql as Sql
 import java.sql.Connection
 
 'deklarasi variabel untuk konek ke Database APIAAS'
-Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 
 'deklarasi reason untuk failed'
 String reason
@@ -57,7 +57,7 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 		GlobalVariable.FailedReasonStoreDB + ' ' + reason)
 		
@@ -65,5 +65,5 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

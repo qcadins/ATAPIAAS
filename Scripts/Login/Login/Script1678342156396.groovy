@@ -91,7 +91,7 @@ if (TC == 'EditProf') {
 				GlobalVariable.FlagFailed = 1
 				
 				'tulis gagal membuka halaman kebijakan privasi'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 						'Gagal membuka halaman KEBIJAKAN PRIVASI')
 		}
@@ -110,7 +110,7 @@ if (TC == 'EditProf') {
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis gagal membuka halaman syarat dan ketentuan'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 					'Gagal membuka halaman SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO')
 		}
@@ -155,7 +155,7 @@ if (TC == 'EditProf') {
 			!= findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email registrasi'))) {
 	
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 			';') + GlobalVariable.FailedReasonEmailField)
 	}
@@ -368,7 +368,7 @@ if (TC == 'EditProf') {
 //		if (isSelected == 0) {
 //
 //			'tulis adanya error pada sistem web'
-//			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
+//			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
 //				GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 //					GlobalVariable.FailedReasonRoleLogin)
 //		}
@@ -395,7 +395,7 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Regist'
 		'cek apakah berhasil login'
 		if (WebUI.verifyElementPresent(findTestObject('RegisterLogin/Page_Login - eendigo Platform/textSmallError'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 			'write to excel reason failed error login'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					WebUI.getText(findTestObject('RegisterLogin/Page_Login - eendigo Platform/textSmallError')))
 			
@@ -408,7 +408,7 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Regist'
 		} else {
 			if (i == 10) {
 				'write to excel reason failed error login'
-				CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 						GlobalVariable.FailedReasonLoginIssue)
 				
@@ -433,11 +433,11 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
 //	GlobalVariable.FlagFailed = 1
 //	
 //	'tulis adanya error pada sistem web'
-//	CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
+//	CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
 //		GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 //			GlobalVariable.FailedReasonLoginIssue)
 //}
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, SheetName, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, SheetName, cellValue)
 }

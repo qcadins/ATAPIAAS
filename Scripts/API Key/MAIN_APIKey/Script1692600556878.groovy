@@ -16,17 +16,17 @@ import org.openqa.selenium.Keys as Keys
 Connection conn
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 if (GlobalVariable.SettingEnvi == 'Production') {
 	'deklarasi koneksi ke Database eendigo_dev'
-	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 } else if (GlobalVariable.SettingEnvi == 'Trial') {
 	'deklarasi koneksi ke Database eendigo_dev_uat'
-	conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 }
 
-conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathAPIKey).columnNumbers, isLoggedin = 0
@@ -83,7 +83,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/buttonCopy'))
 				
 			'verifikasi copy berhasil'
-			CustomKeywords.'writeToExcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
+			CustomKeywords.'writetoexcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
 				findTestObject('Object Repository/API_KEY/Page_Api Key List/notif_CopySuccess'),
 					GlobalVariable.NumOfColumn, sheet)
 		}
@@ -107,7 +107,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (GlobalVariable.FlagFailed == 0) {
 			
 			'tulis status sukses pada excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess, GlobalVariable.SuccessReason)
 		}
 	}
@@ -255,7 +255,7 @@ def checkVerifyFooter() {
 	else {
 		
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';')
 			+ GlobalVariable.FailedReasonPagingError)
 	}
@@ -266,7 +266,7 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 		GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 		
@@ -274,6 +274,6 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 }
 
 def rowExcel(String cellValue) {
-	CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 	
 }

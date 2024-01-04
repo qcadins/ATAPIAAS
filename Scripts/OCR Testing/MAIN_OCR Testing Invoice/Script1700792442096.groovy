@@ -17,26 +17,26 @@ import org.openqa.selenium.Keys
 import org.openqa.selenium.WebDriver
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers, firstRun
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
-Connection conn = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 
 Connection connProd
 
 if (GlobalVariable.SettingEnvi == 'Production') {
 	'deklarasi koneksi ke Database eendigo_dev'
-	connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_public'()
+	connProd = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 	
 	'get base url'
 	GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 16)
 	
 } else if (GlobalVariable.SettingEnvi == 'Trial') {
 	'deklarasi koneksi ke Database adins_apiaas_uat'
-	connProd = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+	connProd = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 	
 	'get base url'
 	GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 17)
@@ -68,17 +68,17 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.refresh()
 
 		'ambil kode tenant di DB'
-		String tenantcode = CustomKeywords.'ocrTesting.GetParameterfromDB.getTenantCodefromDB'(conn,
+		String tenantcode = CustomKeywords.'ocrtesting.GetParameterfromDB.getTenantCodefromDB'(conn,
 			findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 19))
 		
 		'ambil key trial yang aktif dari DB'
-		String thekey = CustomKeywords.'ocrTesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode,  GlobalVariable.SettingEnvi)
+		String thekey = CustomKeywords.'ocrtesting.GetParameterfromDB.getAPIKeyfromDB'(conn, tenantcode,  GlobalVariable.SettingEnvi)
 		
 		'deklarasi id untuk harga pembayaran OCR'
-		int idPayment = CustomKeywords.'ocrTesting.GetParameterfromDB.getIDPaymentType'(connProd, tenantcode, sheet)
+		int idPayment = CustomKeywords.'ocrtesting.GetParameterfromDB.getIDPaymentType'(connProd, tenantcode, sheet)
 		
 		'ambil jenis penagihan transaksi (by qty/price)'
-		String balanceChargeType = CustomKeywords.'ocrTesting.GetParameterfromDB.getPaymentType'(connProd,
+		String balanceChargeType = CustomKeywords.'ocrtesting.GetParameterfromDB.getPaymentType'(connProd,
 			tenantcode, idPayment)
 		
 		'deklarasi variable response'
@@ -144,18 +144,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		totalPages = WS.getElementPropertyValue(response, 'read.num_of_pages', FailureHandling.OPTIONAL)
 		
 		'write to excel response elapsed time'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Process Time') - 1, GlobalVariable.NumOfColumn -
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Process Time') - 1, GlobalVariable.NumOfColumn -
 			1, elapsedTime.toString())
 			
 		'ambil body dari hasil respons'
 		responseBody = response.getResponseBodyContent()
 		
 		'panggil keyword untuk proses beautify dari respon json yang didapat'
-		CustomKeywords.'parseJson.BeautifyJson.process'(responseBody, sheet, rowExcel('Respons') - 1,
+		CustomKeywords.'parsejson.BeautifyJson.process'(responseBody, sheet, rowExcel('Respons') - 1,
 			findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Scenario')))
 		
 //		'pengecekan value expected dan respons dari OCR'
-//		CustomKeywords.'ocrTesting.ResponseChecking.verifyValueDifference'(
+//		CustomKeywords.'ocrtesting.ResponseChecking.verifyValueDifference'(
 //			findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Expected Response')),
 //				findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Respons')),
 //					sheet, rowExcel('Difference Checking') - 1)
@@ -164,7 +164,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		if (stateocr == 'FAILED' && messageocr == 'Insufficient balance') {
 			
 			'write to excel status failed dan reason'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			 '<' + messageocr + '>')
 			
@@ -200,7 +200,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		else if (stateocr == 'SUCCESS' && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
 			
 			'write to excel status failed dan reason'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			GlobalVariable.FailedReasonKeyTenantBypass)
 				
@@ -210,7 +210,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == false) {
 			
 			'write to excel status failed dan reason'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			 '<' + messageocr + '>')
 			continue;
@@ -226,7 +226,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusWarning, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					GlobalVariable.FailedReasonUnknown)
 		}
@@ -249,10 +249,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		if (GlobalVariable.KondisiCekDB == 'Yes') {
 			
 			'simpan trx number terbaru dari DB'
-			String latestMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
+			String latestMutation = CustomKeywords.'ocrtesting.GetParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
 			
 			'simpan trx number terbaru milik tenant lain dari DB'
-			String latestOtherTenantMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(connProd, tenantcode)
+			String latestOtherTenantMutation = CustomKeywords.'ocrtesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(connProd, tenantcode)
 			
 			'jika data transaction number di web dan DB tidak sesuai'
 			if(latestMutation != noTrxafter || latestMutation == latestOtherTenantMutation){
@@ -263,7 +263,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		}
 		
 		'simpan harga OCR Invoice ke dalam integer'
-		int serviceprice = CustomKeywords.'ocrTesting.GetParameterfromDB.getServicePricefromDB'(connProd, idPayment)
+		int serviceprice = CustomKeywords.'ocrtesting.GetParameterfromDB.getServicePricefromDB'(connProd, idPayment)
 		
 		'jika HIT API successful'
 		if (hitAPITrx == 1) {
@@ -316,7 +316,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			&& isSaldoBerkurang == 1 && hitAPITrx == 1) {
 			
 			'tulis status sukses pada excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, 
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 					GlobalVariable.SuccessReason)
 		
@@ -326,7 +326,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, 
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonTrxNotinDB)
 		}
@@ -335,7 +335,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, 
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonBalanceNotChange)
 		}
@@ -344,7 +344,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, 
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, 
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					GlobalVariable.FailedReasonSaldoBocor)
 		}
@@ -352,7 +352,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			GlobalVariable.FlagFailed = 1
 			'write to excel status failed dan reason'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 			 '<' + messageocr + '>')
 		}
@@ -364,7 +364,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusWarning, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 					GlobalVariable.FailedReasonUnknown)
 		}
@@ -461,5 +461,5 @@ def filterSaldo() {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

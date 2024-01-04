@@ -1,4 +1,4 @@
-package documentationAPI
+package documentationapi
 
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 

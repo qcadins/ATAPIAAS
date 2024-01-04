@@ -13,16 +13,16 @@ import org.openqa.selenium.Keys as Keys
 import org.openqa.selenium.By as By
 
 'mencari directory excel\r\n'
-GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
+GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet User'
 int countColumnEdit = findTestData(ExcelPathTranx).columnNumbers, flagLoginUsed
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection conndev = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_esign'()
+Connection conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_esign'()
 
 'deklarasi koneksi ke database eendigo_dev_uat'
-Connection conndevUAT = CustomKeywords.'dbConnection.Connect.connectDBAPIAAS_devUat'()
+Connection conndevUAT = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	
@@ -78,7 +78,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		}
 		
 		'ambil nama TipeIsiUlang dari DB'
-		ArrayList namaTipeIsiUlangDB = CustomKeywords.'transactionHistory.TransactionVerif.getDDLTipeIsiUlang'(conndev)
+		ArrayList namaTipeIsiUlangDB = CustomKeywords.'transactionhistory.TransactionVerif.getDDLTipeIsiUlang'(conndev)
 	
 		'ambil nama Status dari DB'
 		ArrayList namaStatusExcel = []
@@ -91,7 +91,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		}
 		
 		'ambil nama metodeBayar dari DB'
-		ArrayList namametodeBayarDB = CustomKeywords.'transactionHistory.TransactionVerif.getDDLMetodeTrf'(conndev)
+		ArrayList namametodeBayarDB = CustomKeywords.'transactionhistory.TransactionVerif.getDDLMetodeTrf'(conndev)
 		
 		'panggil fungsi check ddl di DB dan UI'
 		checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTipeIsiUlang'), namaTipeIsiUlangDB, 'DDL Tipe isi Ulang')
@@ -103,7 +103,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputMetodeBayar'), namametodeBayarDB, 'DDL Metode bayar')
 		
 		'ambil role yang digunakan oleh user'
-		String RoleUser = CustomKeywords.'transactionHistory.TransactionVerif.getRoleofUser'(conndev,
+		String RoleUser = CustomKeywords.'transactionhistory.TransactionVerif.getRoleofUser'(conndev,
 			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 		
 		'cek apakah role adminclient/admineendigo/adminfinance'
@@ -226,7 +226,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					
 					'ambil error dan get text dari error tersebut'
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-					CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 							';') + '<' +  WebUI.getText(findTestObject('Object Repository/TransactionHistory/ErrorTopRight')) + '>')
 					
@@ -238,7 +238,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		else if (RoleUser.equalsIgnoreCase('Admin Finance Eendigo')) {
 			
 			'ambil nama Tenant dari DB'
-			ArrayList namaTenantDB = CustomKeywords.'transactionHistory.TransactionVerif.getTenantList'(conndev)
+			ArrayList namaTenantDB = CustomKeywords.'transactionhistory.TransactionVerif.getTenantList'(conndev)
 			
 			'panggil fungsi check ddl di DB dan UI'
 			checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'), namaTenantDB, 'DDL Tenant')
@@ -296,7 +296,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		'jika tidak ada error tulis sukses'
 		if(GlobalVariable.FlagFailed == 0 && isMandatoryComplete == 0) {
 			'write to excel success'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0,
 				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 		}
 		
@@ -346,7 +346,7 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 	}
 	
 	'ambil list service '
-	ArrayList serviceActive = CustomKeywords.'transactionHistory.TransactionVerif.getServiceCheck'(conndev, trxNum)
+	ArrayList serviceActive = CustomKeywords.'transactionhistory.TransactionVerif.getServiceCheck'(conndev, trxNum)
 	
 	'ambil harga dari service yang dituju'
 	ArrayList serviceSaldobefore = [], serviceSaldoafter = []
@@ -439,7 +439,7 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 		GlobalVariable.FlagFailed = 1
 		
 		'tulis adanya error saat melakukan approval'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				'<' + WebUI.getText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/div_errorCatch')).toString()) + '>'
 	}
@@ -584,7 +584,7 @@ def checkPaging(Connection conndev) {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
 	
@@ -653,7 +653,7 @@ def checkPaging(Connection conndev) {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
 	
@@ -671,7 +671,7 @@ def checkPaging(Connection conndev) {
 	Total = WebUI.getText(findTestObject('Object Repository/TransactionHistory/TotalData')).split(' ')
 	
 	'ambil total data dari db'
-	int resultTotalData = CustomKeywords.'transactionHistory.TransactionVerif.getTotalTrx'(conndev,
+	int resultTotalData = CustomKeywords.'transactionhistory.TransactionVerif.getTotalTrx'(conndev,
 		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 
 //	'verify total data role'
@@ -781,7 +781,7 @@ def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
 def checkVerifyPaging(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 				';') + GlobalVariable.FailedReasonPagingError)
 
@@ -792,7 +792,7 @@ def checkVerifyPaging(Boolean isMatch) {
 def checkVerifyReset(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 				';') + GlobalVariable.FailedReasonSetFailed)
 
@@ -803,7 +803,7 @@ def checkVerifyReset(Boolean isMatch) {
 def checkVerifyNotPresent(Boolean isPresent, String reason) {
 	if (isPresent == true) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 				';') + GlobalVariable.FailedReasonRoleFeature + ' ' + reason)
 
@@ -814,7 +814,7 @@ def checkVerifyNotPresent(Boolean isPresent, String reason) {
 def checkVerifyPresent(Boolean isPresent, String reason) {
 	if (isPresent == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 				';') + GlobalVariable.FailedReasonRoleFeature + ' Not showing ' + reason)
 
@@ -827,7 +827,7 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 	}
@@ -838,12 +838,12 @@ def checkVerifyNotEqualorMatch(Boolean isMatch, String reason) {
 		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 				GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
 	}
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writeToExcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

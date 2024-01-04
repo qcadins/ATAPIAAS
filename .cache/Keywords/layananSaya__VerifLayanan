@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "D32154CBC7CB5FAF759F0606B159BF66",
+  "keywordFileContentHash": "5775E38A0D3F6A6502DBB65FDFE351FB",
   "keywordClasses": [
     {
-      "name": "layananSaya.VerifLayanan",
+      "name": "layanansaya.VerifLayanan",
       "keywordMethods": [
         {
           "name": "getTenantCodefromDB",

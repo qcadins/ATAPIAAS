@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "679F3569132049395D037A7E8C7D8A70",
+  "keywordFileContentHash": "D7C65A991D32315EF2EBF233B76A98EA",
   "keywordClasses": [
     {
-      "name": "parseJson.BeautifyJson",
+      "name": "parsejson.BeautifyJson",
       "keywordMethods": [
         {
           "name": "process",
@@ -59,11 +59,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

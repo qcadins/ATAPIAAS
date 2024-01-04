@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "4A685FCCF5EEA1305CB1E645FCFE8D9A",
+  "keywordFileContentHash": "85437AE2AEF034B9EFC029C3F17DE3E1",
   "keywordClasses": [
     {
-      "name": "ocrTesting.ResponseChecking",
+      "name": "ocrtesting.ResponseChecking",
       "keywordMethods": [
         {
           "name": "verifyValueDifference",
@@ -59,11 +59,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

@@ -1,4 +1,4 @@
-package apiGetPaymentDetail
+package apigetpaymentdetail
 
 import java.sql.Connection
 import java.sql.ResultSet

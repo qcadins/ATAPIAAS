@@ -101,7 +101,7 @@ def checkProcedure(String bucketType) {
 	} else {
 		
 		'tulis kondisi gagal'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 			GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 				(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 'Log Not Found di bucket ' + bucketType)
 		
@@ -149,14 +149,14 @@ def verifyObjectPresent(String bucketType, String inc) {
 		'kalau result null'
 		if (!WebUI.getText(findTestObject('OCR Testing/checkLog/topResultFinal'), FailureHandling.OPTIONAL).contains(TimeOCR)) {
 			'tulis kondisi gagal'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 					(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 'Nama Log tidak sesuai pada folder halaman' + (inc) + ' di Bucket ' + bucketType)
 		}
 		
 	} else {
 		'tulis kondisi gagal'
-		CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'(sheet,
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 			GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 				(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 'Log Not Found di bucket ' + bucketType)
 	}
