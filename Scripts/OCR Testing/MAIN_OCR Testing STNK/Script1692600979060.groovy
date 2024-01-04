@@ -2,7 +2,6 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.testobject.ResponseObject
-import java.sql.Driver
 import java.sql.Connection
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase
@@ -14,7 +13,6 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable
 import org.openqa.selenium.By
 import org.openqa.selenium.Keys
-import org.openqa.selenium.WebDriver
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writeToExcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
@@ -47,7 +45,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).length() == 0) {
 		
 		break
-		
 	} else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 1).equalsIgnoreCase('Unexecuted')) {
 		
 		'ambil kode tenant di DB'
@@ -121,7 +118,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			('off_code'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 21),
 			('off_name'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 22),
 			('question'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 23),
-			('source'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 24)
+			('source'):findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 24),
 		]))
 					
 		'ambil message respon dari HIT tersebut'
@@ -214,7 +211,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (GlobalVariable.KondisiCekDB == 'Yes') {
 			
 			'simpan trx number terbaru dari DB'
-			String latestMutation= CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
+			String latestMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
 			
 			'simpan trx number terbaru milik tenant lain dari DB'
 			String latestOtherTenantMutation = CustomKeywords.'ocrTesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(connProd, tenantcode)
@@ -272,11 +269,11 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		}
 		
 		'jika tidak ada message error dan kondisi lain terpenuhi'
-		if (message_ocr == '' && state_ocr == 'SUCCESS' && isTrxIncreased == 1 
+		if (message_ocr == '' && state_ocr == 'SUCCESS' && isTrxIncreased == 1
 			&& isSaldoBerkurang == 1 && hitAPITrx == 1) {
 			
 			'tulis status sukses pada excel'
-			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR STNK', 
+			CustomKeywords.'writeToExcel.WriteExcel.writeToExcelStatusReason'('OCR STNK',
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 			GlobalVariable.SuccessReason)
 		
@@ -337,26 +334,26 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 WebUI.closeBrowser()
 
 'ambil saldo sesuai testing yang dilakukan'
-def getSaldoforTransaction(String NamaOCR) {
+def getSaldoforTransaction(String namaOCR) {
 	
 	'deklarasi jumlah saldo sekarang'
 	int saldoNow
 	
-	if(WebUI.verifyElementPresent(findTestObject('Object Repository/OCR Testing/TrxNumber'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {		
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/OCR Testing/TrxNumber'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		'cari element dengan nama saldo'
 		def elementNamaSaldo = DriverFactory.webDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
 		
 		'lakukan loop untuk cari nama saldo yang ditentukan'
-		for (int i=0; i<elementNamaSaldo.size(); i++) {
+		for (int i = 0; i < elementNamaSaldo.size(); i++) {
 			
 			'cari nama saldo yang sesuai di list saldo'
-			def modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i+1) +"]/div/div/div/div/div[1]/span", true)
+			def modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + (i+1) + ']/div/div/div/div/div[1]/span', true)
 	
 			'jika nama object sesuai dengan nama saldo'
-			if (WebUI.getText(modifyNamaSaldo) == NamaOCR) {
+			if (WebUI.getText(modifyNamaSaldo) == namaOCR) {
 					
 				'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
-				def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i+1) +"]/div/div/div/div/div[1]/h3", true)
+				def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + (i+1) + ']/div/div/div/div/div[1]/h3', true)
 				
 				'simpan jumlah saldo sekarang di variabel'
 				saldoNow = Integer.parseInt(WebUI.getText(modifySaldoDipilih).replace(',',''))
@@ -368,7 +365,7 @@ def getSaldoforTransaction(String NamaOCR) {
 		if (saldoNow == 0) {
 			
 			'simpan jumlah saldo sekarang di variabel'
-			saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988')).replace(',',''))
+			saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988')).replace(',', ''))
 		}
 	}
 	
@@ -389,7 +386,7 @@ def getTrxNumber() {
 		int lastIndex = variable.size()
 			
 		'modifikasi alamat object trxnumber'
-		def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[6]/div/p", true)
+		def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + (lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[6]/div/p', true)
 								
 		'simpan nomor transaction number ke string'
 		noTrx = WebUI.getText(modifytrxnumber)
