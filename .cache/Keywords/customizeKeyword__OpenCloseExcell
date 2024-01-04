@@ -1,14 +1,14 @@
 {
-  "keywordFileContentHash": "E8FAFB8384BC746BF6BDD0D7218E788D",
+  "keywordFileContentHash": "C1AE719D405EE88C8637445C0B2570F0",
   "keywordClasses": [
     {
-      "name": "login.Browser",
+      "name": "customizeKeyword.OpenCloseExcell",
       "keywordMethods": [
         {
-          "name": "settingAndOpen",
+          "name": "openCloseFileWithRefreshVal",
           "parameters": [
             {
-              "name": "Paths",
+              "name": "FilePath",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -16,19 +16,6 @@
                 "isArray": false,
                 "isGnericsPlaceHolder": false,
                 "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            },
-            {
-              "name": "captchaRow",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "int",
-                "unresolvedClassName": "int",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": true,
                 "genericsTypes": [],
                 "errorOnParsing": false
               }

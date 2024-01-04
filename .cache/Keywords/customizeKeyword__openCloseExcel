@@ -1,8 +1,8 @@
 {
-  "keywordFileContentHash": "89231A3901AAFEA44C4404D49059C954",
+  "keywordFileContentHash": "76D6FCDFFC4BBB37C3B08F039BABD582",
   "keywordClasses": [
     {
-      "name": "customizeKeyword.openCloseExcel",
+      "name": "customizeKeyword.OpenCloseExcel",
       "keywordMethods": [
         {
           "name": "openCloseFileWithRefreshVal",

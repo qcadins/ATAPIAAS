@@ -580,7 +580,7 @@ def couponPercentage(ArrayList listServices, ArrayList tempDataPrice, ArrayList 
 	}
 	
 	'buka excel untuk refresh testdata'
-	CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
+	CustomKeywords.'customizeKeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 	
 	'panggil fungsi pengecekan data'
 	statschecking(ppnfromDB, Integer.parseInt(diskonUI), SheetChoice)
@@ -604,7 +604,7 @@ def couponPercentage(ArrayList listServices, ArrayList tempDataPrice, ArrayList 
 	WebUI.delay(GlobalVariable.Timeout)
 	
 	'buka excel untuk refresh testdata'
-	CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
+	CustomKeywords.'customizeKeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 }
 
 def couponNominal(ArrayList listServices, ArrayList tempDataPrice, ArrayList listJumlahisiUlang,
@@ -650,7 +650,7 @@ def couponNominal(ArrayList listServices, ArrayList tempDataPrice, ArrayList lis
 		1, diskonUI)
 	
 	'buka excel untuk refresh testdata'
-	CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
+	CustomKeywords.'customizeKeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 	
 	'panggil fungsi pengecekan data'
 	statschecking(ppnfromDB, Integer.parseInt(diskonUI), SheetChoice)
@@ -674,7 +674,7 @@ def couponNominal(ArrayList listServices, ArrayList tempDataPrice, ArrayList lis
 	WebUI.delay(GlobalVariable.Timeout)
 	
 	'buka excel untuk refresh testdata'
-	CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
+	CustomKeywords.'customizeKeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
 
 }
 
