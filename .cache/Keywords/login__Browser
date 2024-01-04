@@ -1,11 +1,11 @@
 {
-  "keywordFileContentHash": "A5A9ED180991F2CA80FFE16199AC5189",
+  "keywordFileContentHash": "F4508B51A6E2807FD2274F7059E0464B",
   "keywordClasses": [
     {
       "name": "login.Browser",
       "keywordMethods": [
         {
-          "name": "settingAndOpen",
+          "name": "settingandOpen",
           "parameters": [
             {
               "name": "Paths",

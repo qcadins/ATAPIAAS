@@ -18,7 +18,7 @@ import com.kms.katalon.core.webui.driver.DriverFactory
 import org.openqa.selenium.WebDriver
 
 'panggil fungsi untuk open browser'
-def js = CustomKeywords.'login.Browser.settingAndOpen'(Path, rowExcel('CaptchaEnabled'))
+def js = CustomKeywords.'login.Browser.settingandOpen'(Path, rowExcel('CaptchaEnabled'))
 
 'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
 GlobalVariable.FlagFailed = 0
