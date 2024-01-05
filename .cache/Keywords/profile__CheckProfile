@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "7CB44C64426A7793FB7F75E52DD9BD22",
+  "keywordFileContentHash": "83E2573F2BDF9A1B747F4836390CF5CC",
   "keywordClasses": [
     {
       "name": "profile.CheckProfile",
@@ -22,19 +22,6 @@
             },
             {
               "name": "email",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.lang.String",
-                "unresolvedClassName": "String",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            },
-            {
-              "name": "role",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",

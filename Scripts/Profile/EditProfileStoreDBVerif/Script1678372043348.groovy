@@ -15,18 +15,37 @@ int arrayIndex = 0
 String email = findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login'))
 
 'kumpulan string yang menyimpan hasil data dari DB'
-ArrayList hasildb = CustomKeywords.'profile.CheckProfile.getProfilefromDB'(conn, email, role)
+ArrayList hasildb = CustomKeywords.'profile.CheckProfile.getProfilefromDB'(conn, email)
+
+'cek hasil db dan excel'
+checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
+	GlobalVariable.NumOfColumn, rowExcel('$Nama Depan')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Nama depan tidak sesuai')
+
+'cek hasil db dan excel'
+checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
+	GlobalVariable.NumOfColumn, rowExcel('$Last Name')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Nama belakang tidak sesuai')
+
+'cek hasil db dan excel'
+checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
+	GlobalVariable.NumOfColumn, rowExcel('Jenis Kelamin')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Jenis Kelamin tidak sesuai')
+
+'cek hasil db dan excel'
+checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
+	GlobalVariable.NumOfColumn, rowExcel('Nomor Telepon')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Nomor telepon tidak sesuai')
+
+'cek hasil db dan excel'
+checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
+	GlobalVariable.NumOfColumn, rowExcel('Jabatan')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Position tidak sesuai')
+
+'cek hasil db dan excel'
+checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
+	GlobalVariable.NumOfColumn, rowExcel('$Kode Negara')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Negara tidak sesuai')
 
 if (role == 'Admin Client') {
-		
 	'cek hasil db dan excel'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-		GlobalVariable.NumOfColumn, rowExcel('$Nama Depan')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Nama depan tidak sesuai')
+		GlobalVariable.NumOfColumn, rowExcel('Website')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Website tidak sesuai')
 	
-	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-		GlobalVariable.NumOfColumn, rowExcel('$Last Name')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Nama belakang tidak sesuai')
-
 	'cek hasil db dan excel'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
 		GlobalVariable.NumOfColumn, rowExcel('$Nama Tenant')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Nama tenant tidak sesuai')
@@ -37,53 +56,7 @@ if (role == 'Admin Client') {
 	
 	'cek hasil db dan excel'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-		GlobalVariable.NumOfColumn, rowExcel('Jenis Kelamin')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Jenis Kelamin tidak sesuai')
-	
-	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-		GlobalVariable.NumOfColumn, rowExcel('Website')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Website tidak sesuai')
-	
-	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-		GlobalVariable.NumOfColumn, rowExcel('Nomor Telepon')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Nomor telepon tidak sesuai')
-	
-	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-		GlobalVariable.NumOfColumn, rowExcel('Jabatan')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Position tidak sesuai')
-	
-	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-		GlobalVariable.NumOfColumn, rowExcel('$Kode Negara')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Negara tidak sesuai')
-	
-	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
 		GlobalVariable.NumOfColumn, rowExcel('No NPWP')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Nomor NPWP tidak sesuai')
-	
-} else {
-	
-	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-		GlobalVariable.NumOfColumn, rowExcel('$Nama Depan')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Nama depan tidak sesuai')
-	
-	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-		GlobalVariable.NumOfColumn, rowExcel('$Last Name')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Nama belakang tidak sesuai')
-	
-	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-		GlobalVariable.NumOfColumn, rowExcel('Jenis Kelamin')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Jenis Kelamin tidak sesuai')
-	
-	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-		GlobalVariable.NumOfColumn, rowExcel('Nomor Telepon')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Nomor telepon tidak sesuai')
-	
-	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-		GlobalVariable.NumOfColumn, rowExcel('Jabatan')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Position tidak sesuai')
-	
-	'cek hasil db dan excel'
-	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-		GlobalVariable.NumOfColumn, rowExcel('$Kode Negara')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Negara tidak sesuai')
 }
 
 def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
@@ -98,5 +71,5 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

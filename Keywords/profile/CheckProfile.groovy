@@ -22,7 +22,7 @@ public class CheckProfile {
 
 	//fungsi untuk mengambil data profile dari database
 	@Keyword
-	getProfilefromDB(Connection conn, String email, String role) {
+	getProfilefromDB(Connection conn, String email) {
 		String data
 
 		ArrayList listdata = []
@@ -31,12 +31,8 @@ public class CheckProfile {
 
 		ResultSet resultSet
 
-		if (role == 'Admin Client') {
-			resultSet = stm.executeQuery("SELECT amu.initial_name, amu.last_name, mt.tenant_name, mt.tenant_industry, aupd.gender, mt.tenant_website, amu.hashed_phone, aupd.position, mcc.country_name || ' ' || mcc.country_code, npwp_no from am_msuser amu join am_user_personal_data aupd on amu.id_ms_user = aupd.id_ms_user join ms_useroftenant mut on mut.id_ms_user = amu.id_ms_user join ms_tenant mt on mt.id_ms_tenant = mut.id_ms_tenant join ms_country_code mcc on mcc.id_country_code = amu.id_country_code WHERE amu.login_id = '" + email + "'")
-		} else {
-			resultSet = stm.executeQuery("SELECT amu.initial_name, amu.last_name, aupd.gender, amu.hashed_phone, aupd.position, mcc.country_name || ' ' || mcc.country_code from am_msuser amu join am_user_personal_data aupd on amu.id_ms_user = aupd.id_ms_user join ms_useroftenant mut on mut.id_ms_user = amu.id_ms_user join ms_tenant mt on mt.id_ms_tenant = mut.id_ms_tenant join ms_country_code mcc on mcc.id_country_code = amu.id_country_code WHERE amu.login_id = '" + email + "'")
-		}
-
+		resultSet = stm.executeQuery("SELECT amu.initial_name, amu.last_name, aupd.gender, amu.hashed_phone, aupd.position, mcc.country_name || ' ' || mcc.country_code, mt.tenant_website, mt.tenant_name, mt.tenant_industry, npwp_no from am_msuser amu join am_user_personal_data aupd on amu.id_ms_user = aupd.id_ms_user join ms_useroftenant mut on mut.id_ms_user = amu.id_ms_user join ms_tenant mt on mt.id_ms_tenant = mut.id_ms_tenant join ms_country_code mcc on mcc.id_country_code = amu.id_country_code WHERE amu.login_id = '" + email + "'")
+		
 		ResultSetMetaData metadata  = resultSet.getMetaData()
 
 		columnCount = metadata.getColumnCount()
