@@ -12,9 +12,9 @@ import org.openqa.selenium.WebDriver
 import com.kms.katalon.core.annotation.Keyword
 
 public class Browser {
-	
+
 	@Keyword
-	settingandOpen(String Paths, int captchaRow) {
+	settingandOpen(String paths, int captchaRow) {
 		WebDriver driver
 
 		System.setProperty('webdriver.chrome.driver', 'Drivers/chromedriver.exe')
@@ -26,8 +26,8 @@ public class Browser {
 		ChromeOptions options = new ChromeOptions()
 
 		'jika captcha perlu diaktifkan, maka extension akan ter-load secara otomatis'
-		if (findTestData(Paths).getValue(GlobalVariable.NumOfColumn, captchaRow) == 'Yes' ||
-		findTestData(Paths).getValue(GlobalVariable.NumOfColumn, captchaRow) == '') {
+		if (findTestData(paths).getValue(GlobalVariable.NumOfColumn, captchaRow) == 'Yes' ||
+		findTestData(paths).getValue(GlobalVariable.NumOfColumn, captchaRow) == '') {
 			//	options.addExtensions(new File("Drivers/nocaptchaai_chrome_1.7.6.crx"))
 			options.addExtensions(new File('Drivers/anticaptcha-plugin_v0.65.crx'))
 		}
@@ -48,4 +48,5 @@ public class Browser {
 
 		js
 	}
+	
 }

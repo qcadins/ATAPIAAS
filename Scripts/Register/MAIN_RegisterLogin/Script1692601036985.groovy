@@ -5,11 +5,10 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable
-
+import org.openqa.selenium.WebDriver
 import org.openqa.selenium.By
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.Keys
@@ -27,14 +26,11 @@ int countColumnEdit = findTestData(ExcelPathRegisterLogin).columnNumbers
 GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; GlobalVariable.NumOfColumn++) {
-	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
-	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
-		
+	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {	
 		break
 	} else if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
-		
-		String email, otpExcel, resendotp
+		String email, resendotp
 	
 		'simpan data email dari testdata'
 		email = findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email registrasi'))
@@ -54,11 +50,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			('Path') : ExcelPathRegisterLogin], FailureHandling.STOP_ON_FAILURE)
 		
 		if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Checklist Recaptcha')) == 'Yes' && isMandatoryComplete == 0) {
-				def driver = DriverFactory.getWebDriver()
-				def js = (JavascriptExecutor)driver
+				WebDriver driver = DriverFactory.webDriver
+				JavascriptExecutor js = (JavascriptExecutor)driver
 				
 				'bypass captcha langsung masuk verifikasi otp'
-				WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
+				WebElement buttonRegister = driver.findElement(By.cssSelector('#mat-tab-content-0-1 > div > form > button'))
 				js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister)
 		}
 		
@@ -94,7 +90,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				
 				if (resendotp == 'Yes') {
 					
-					for (int i=0; i < countresend; i++) {
+					for (int i = 0; i < countresend; i++) {
 						
 						'tunggu button resend otp'
 						WebUI.delay(116)
@@ -109,7 +105,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						'mengambil otp dari db, disimpan ke iniotp'
 						iniotp.add(OTP)
 						
-						if (!WebUI.verifyNotMatch(iniotp[i], iniotp[i+1], false, FailureHandling.CONTINUE_ON_FAILURE)) {
+						if (!WebUI.verifyNotMatch(iniotp[i], iniotp[i + 1], false, FailureHandling.CONTINUE_ON_FAILURE)) {
 							
 							GlobalVariable.FlagFailed = 1
 							
@@ -133,7 +129,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'))
 							
 							'input otp baru dari DB'
-							WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), iniotp[i+1])
+							WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), iniotp[i + 1])
 						} else {
 							'verifikasi adanya alert otp'
 							CustomKeywords.'writetoexcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
@@ -187,26 +183,25 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						}
 					}
 					
-					'klik pada button verifikasi otp'
-					WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Verifikasi'))
+				'klik pada button verifikasi otp'
+				WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Verifikasi'))
+				
+				WebUI.delay(2)
+				
+				'verifikasi adanya alert otp'
+				CustomKeywords.'writetoexcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
+				findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'),
+					GlobalVariable.NumOfColumn, 'Register')
+				
+				if (WebUI.verifyElementPresent(
+					findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) {
 					
-					WebUI.delay(2)
+					'klik ok pada verifikasi alert'
+					WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'))
 					
-					'verifikasi adanya alert otp'
-					CustomKeywords.'writetoexcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
-					findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'),
-						GlobalVariable.NumOfColumn, 'Register')
-					
-					if (WebUI.verifyElementPresent(
-						findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) {
-						
-						'klik ok pada verifikasi alert'
-						WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'))
-						
-						'klik tombol x pada verifikasi'
-						WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/span_'))
-						
-					} 
+					'klik tombol x pada verifikasi'
+					WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/span_'))
+				} 
 			}
 		}
 		
@@ -269,7 +264,7 @@ def verifyregistration(Connection conn, String email) {
 }
 
 def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
-	if(isMatch == false){
+	if (isMatch == false) {
 		
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
@@ -280,5 +275,5 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "F4508B51A6E2807FD2274F7059E0464B",
+  "keywordFileContentHash": "DEA96F956D5C480D17861FF615BE6F39",
   "keywordClasses": [
     {
       "name": "login.Browser",
@@ -8,7 +8,7 @@
           "name": "settingandOpen",
           "parameters": [
             {
-              "name": "Paths",
+              "name": "paths",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -33,11 +33,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

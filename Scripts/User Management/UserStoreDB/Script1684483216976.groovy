@@ -1,7 +1,5 @@
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
-import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
 
@@ -16,7 +14,6 @@ ArrayList resultExcel = []
 
 'check if action new/edit'
 if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('New')) {
-	
 	'isi array dari DB'
 	resultDB = CustomKeywords.'usermanagement.UserVerif.getNewUserData'(conndev,
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email')),
@@ -26,7 +23,7 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).
 	for (int i = 0; i < resultDB.size ; i++) {
 		
 		'tambahkan data ke resultExcel'
-		resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (rowExcel('$Email')+i)))
+		resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (rowExcel('$Email') + i)))
 		
 		if (resultExcel[i] != resultDB[i]) {
 			
@@ -38,8 +35,7 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).
 					GlobalVariable.FailedReasonStoreDB + ' User baru')
 		}
 	}
-	
-} else if(findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
+} else if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
 	
 	'ambil data role dari db'
 	resultDB = CustomKeywords.'usermanagement.UserVerif.getEditUserData'(conndev, 
@@ -56,7 +52,7 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).
 		} else {
 			
 			'tambahkan data ke resultExcel'
-			resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (rowExcel('Edit User')+i)))
+			resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (rowExcel('Edit User') + i)))
 		}
 		
 		if (resultExcel[i] != resultDB[i]) {
@@ -72,5 +68,5 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }
