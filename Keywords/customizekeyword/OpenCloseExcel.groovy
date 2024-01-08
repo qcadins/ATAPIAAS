@@ -8,8 +8,8 @@ import java.awt.Robot
 public class OpenCloseExcel {
 
 	@Keyword
-	def openCloseFileWithRefreshVal(String FilePath) {
-		File file = new File(FilePath)
+	def openCloseFileWithRefreshVal(String filePath) {
+		File file = new File(filePath)
 
 		//first check if Desktop is supported by Platform or not
 
@@ -35,4 +35,5 @@ public class OpenCloseExcel {
 		robot.delay(5000)
 		Runtime.runtime.exec('taskkill /IM EXCEL.EXE')
 	}
+	
 }

@@ -4,13 +4,11 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.testobject.ResponseObject
 
 import java.sql.Connection
-import java.sql.Driver
 
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.driver.DriverFactory
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import internal.GlobalVariable
 
@@ -38,10 +36,10 @@ int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
 Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 
 'deklarasi string hasil respons'
-String responseBody, message_ocr, state_ocr, error_ocr
+String responseBody, messageocr, stateocr, errorocr
 
 'pindah testcase sesuai jumlah di excel'
-for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++){
+for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
 		break
@@ -90,64 +88,63 @@ for(GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdi
 		]))
 			
 		'ambil message respon dari HIT tersebut'
-		message_ocr = WS.getElementPropertyValue(response, 'message')
+		messageocr = WS.getElementPropertyValue(response, 'message')
 		
 		'ambil status dari respon HIT tersebut'
-		state_ocr = WS.getElementPropertyValue(response, 'status')
+		stateocr = WS.getElementPropertyValue(response, 'status')
 		
 		'ambil verifStatus dari respon HIT'
-		error_ocr = WS.getElementPropertyValue(response, 'error')
+		errorocr = WS.getElementPropertyValue(response, 'error')
 		
 		'Jika status HIT API 200 OK'
 		if (WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) {
-			
 			'ambil body dari hasil respons'
-			responseBody = response.getResponseBodyContent()
+			responseBody = response.responseBodyContent
 			
 			'write to excel status'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
-				1, state_ocr)
+				1, stateocr)
 			
 			'write to excel message'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Reason failed') - 1, GlobalVariable.NumOfColumn -
-				1, message_ocr)
+				1, messageocr)
 			
 			'write to excel num of pages'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Error') - 1, GlobalVariable.NumOfColumn -
-				1, error_ocr)
+				1, errorocr)
 			
 			'panggil keyword untuk proses beautify dari respon json yang didapat'
 			CustomKeywords.'parsejson.BeautifyJson.process'(responseBody, sheet, rowExcel('Respons') - 1,
 				findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Scenario')))
 			
-			if (state_ocr.equalsIgnoreCase('Success') && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
+			if (stateocr.equalsIgnoreCase('Success') && useCorrectKey != 'Yes' && useCorrectTenant != 'Yes') {
+				GlobalVariable.FlagFailed = 1
+				
 				'write to excel status failed karena key dan tenant salah tapi HIT berhasil'
 				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
-				GlobalVariable.FailedReasonKeyTenantBypass)
-				
-			} else if (state_ocr.equalsIgnoreCase('Success')) {
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
+						GlobalVariable.FailedReasonKeyTenantBypass)
+			} else if (stateocr.equalsIgnoreCase('Success')) {
 				'tulis status sukses pada excel'
 				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 					GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
-						'<' + error_ocr + '>')
-		
+						'<' + errorocr + '>')
 			} else {
 				GlobalVariable.FlagFailed = 1
+				
 				'write to excel status failed dan reason'
 				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
-				'<' + message_ocr + '>')
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
+						'<' + messageocr + '>')
 			}
 		} else {
-
             'Write To Excel GlobalVariable.StatusFailed and errormessage'
             CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
-                GlobalVariable.StatusFailed, '<' + message_ocr + '>')
+                GlobalVariable.StatusFailed, '<' + messageocr + '>')
         }
 	}
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

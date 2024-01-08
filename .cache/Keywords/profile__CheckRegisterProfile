@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "3E6D14851EBF9617800419B53956C593",
+  "keywordFileContentHash": "D6F73CC4BE38EBABAC036259355936C5",
   "keywordClasses": [
     {
       "name": "profile.CheckRegisterProfile",
@@ -33,11 +33,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

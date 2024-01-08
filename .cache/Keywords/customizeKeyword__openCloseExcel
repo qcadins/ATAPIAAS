@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "5F9C89CF49919BE6097614EB3643735F",
+  "keywordFileContentHash": "D87248ED7FF8F596F6DB9549239B5DB9",
   "keywordClasses": [
     {
       "name": "customizekeyword.OpenCloseExcel",
@@ -8,7 +8,7 @@
           "name": "openCloseFileWithRefreshVal",
           "parameters": [
             {
-              "name": "FilePath",
+              "name": "filePath",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",
@@ -20,11 +20,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

@@ -10,7 +10,7 @@ import com.kms.katalon.core.annotation.Keyword
 import internal.GlobalVariable
 
 public class WriteExcel {
-	
+
 	/**
 	 * Write to Excel
 	 */
@@ -24,10 +24,10 @@ public class WriteExcel {
 
 		'Write data to excel'
 		//sheet.createRow(0) //for create clear row (if needed), start from index 0
-		sheet.getRow(rowNo).createCell(collNo).setCellValue(cellValue) //getrow = row, dimulai dari 0. create cell = coll, dimulai dari 0, setCellValue = write string to excel
+		sheet.getRow(rowNo).createCell(collNo).cellValue = cellValue //getrow = row, dimulai dari 0. create cell = coll, dimulai dari 0, setCellValue = write string to excel
 
 		file.close()
-		FileOutputStream outFile =new FileOutputStream(new File(filePath))
+		FileOutputStream outFile = new FileOutputStream(new File(filePath))
 		workbook.write(outFile)
 		outFile.close()
 	}
@@ -96,10 +96,10 @@ public class WriteExcel {
 	//fungsi digunakan untuk mengambil directory dari file excel yang akan digunakan
 	//keyword getExcelPath
 	@Keyword
-	getExcelPath(String Path) {
+	getExcelPath(String path) {
 		String userDir = System.getProperty('user.dir')
 
-		String filePath = userDir + Path
+		String filePath = userDir + path
 
 		filePath
 	}
@@ -129,7 +129,7 @@ public class WriteExcel {
 
 	//keyword getExcelRow
 	@Keyword
-	public int getExcelRow(String filePath, String sheetName, String cellValue) {
+	int getExcelRow(String filePath, String sheetName, String cellValue) {
 		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
 
 		XSSFWorkbook workbook = new XSSFWorkbook(file)
@@ -139,16 +139,15 @@ public class WriteExcel {
 		for (int i = 0; i <= sheet.lastRowNum; i++) {
 			row = sheet.getRow(i)
 			try {
-				if (row.getCell(0).stringCellValue.equals(cellValue)) {
+				if (row.getCell(0).stringCellValue == cellValue) {
 					rownum = i
 					break
 				}
 			}
-			catch (Exception e) {
-
+			catch (FileNotFoundException e) {
 			}
 		}
-		return rownum + 1
+		rownum + 1
 	}
-	
+
 }

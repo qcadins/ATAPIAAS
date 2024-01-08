@@ -38,8 +38,7 @@ checkVerifyEqualorMatch(WebUI.verifyMatch(resultDB[arrayIndex++], findTestData(P
 	GlobalVariable.NumOfColumn, rowExcel('$JumlahisiUlang(quantity)')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Jumlah isi ulang tidak sesuai')
 
 def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
-	if(isMatch == false){
-		
+	if (isMatch == false) {
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
@@ -49,5 +48,5 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

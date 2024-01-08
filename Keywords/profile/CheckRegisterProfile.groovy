@@ -7,8 +7,6 @@ import java.sql.Statement
 import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
-import internal.GlobalVariable
-
 public class CheckRegisterProfile {
 
 	@Keyword
@@ -22,9 +20,9 @@ public class CheckRegisterProfile {
 
 		ResultSet resultSet = stm.executeQuery("SELECT login_id, full_name FROM am_msuser WHERE login_id = '" + email + "'")
 
-		ResultSetMetaData metadata  = resultSet.getMetaData()
+		ResultSetMetaData metadata  = resultSet.metaData
 
-		columnCount = metadata.getColumnCount()
+		columnCount = metadata.columnCount
 
 		while (resultSet.next()) {
 			for (int i = 1; i <= columnCount ; i++) {
@@ -34,4 +32,5 @@ public class CheckRegisterProfile {
 		}
 		listdata
 	}
+	
 }
