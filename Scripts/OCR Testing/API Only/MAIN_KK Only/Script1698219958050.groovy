@@ -162,10 +162,10 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			'jika expected response tidak sesuai response'
 			if (GlobalVariable.FlagFailed != 0) {
-				'write to excel status failed'
-				CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn -
-					1, GlobalVariable.StatusFailed)
-				
+				'write to excel status failed dan reason'
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
+						'Expected tidak sesuai Response yang didapat')
 			}
 		} else {
 			'jika param message null'

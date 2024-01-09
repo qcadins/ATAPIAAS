@@ -4,11 +4,7 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import com.kms.katalon.core.webui.keyword.builtin.VerifyAlertNotPresentKeyword
-import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
-import org.openqa.selenium.Keys as Keys
-import org.openqa.selenium.JavascriptExecutor
 
 'lakukan check log bucket standard'
 checkProcedure('Standard')
@@ -41,7 +37,6 @@ WebUI.switchToWindowIndex(0)
 //WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(8, 7))
 
 def checkProcedure(String bucketType) {
-	
 	if (GlobalVariable.onlyFirstRun == 0) {
 		'input filter OCR'
 		WebUI.setText(findTestObject('OCR Testing/checkLog/inputSearchFilter'),
@@ -81,7 +76,6 @@ def checkProcedure(String bucketType) {
 		
 		'jika sudah coldline, maka tidak perlu input lagi'
 		if (bucketType == 'Coldline') {
-			
 			'ubah status bahwa first run sudah dilakukan'
 			GlobalVariable.onlyFirstRun = 1
 		}
@@ -126,12 +120,11 @@ def checkProcedure(String bucketType) {
 			
 			WebUI.delay(1)
 			
-			verifyObjectPresent(bucketType, 'Halaman ' + (i.toString()))
+			verifyObjectPresent(bucketType, 'Halaman ' + i)
 			
 			'klik tombol kembali'
 			WebUI.click(findTestObject('OCR Testing/checkLog/backButton'))
 		}
-		
 	} else {
 		for (i = 0 ; i < 2; i++) {
 			'input filter OCR'

@@ -396,7 +396,6 @@ def getSaldoforTransaction(String namaOCR) {
 
 'ambil no. transaksi pada tabel'
 def getTrxNumber() {
-	
 	String noTrx
 	
 	if(WebUI.verifyElementPresent(findTestObject('Object Repository/OCR Testing/TrxNumber'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
@@ -407,7 +406,7 @@ def getTrxNumber() {
 		int lastIndex = variable.size()
 			
 		'modifikasi alamat object trxnumber'
-		def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'),'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + (lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[6]/div/p', true)
+		def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + (lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[6]/div/p', true)
 								
 		'simpan nomor transaction number ke string'
 		noTrx = WebUI.getText(modifytrxnumber)
