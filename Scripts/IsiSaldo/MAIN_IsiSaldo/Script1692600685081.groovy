@@ -6,7 +6,6 @@ import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 
 import java.sql.Connection
-import java.sql.Driver
 import org.openqa.selenium.JavascriptExecutor as JavascriptExecutor
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
@@ -34,20 +33,17 @@ if (GlobalVariable.SettingEnvi == 'Production') {
 }
 
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
-	
-	'set penanda error menjadi 0'
-	GlobalVariable.FlagFailed = 0
-	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
-		
 		break
 	} else if (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
+		'set penanda error menjadi 0'
+		GlobalVariable.FlagFailed = 0
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Mandatory Complete')))
 		
-		int Saldobefore, Saldoafter, JumlahTopUp, TopupSaldoCorrectTenant
+		int saldobefore, saldoafter, jumlahTopUp, topupSaldoCorrectTenant
 		
 		String noTrxfromUI, noTrxfromDB, noTrxOtherTenant
 		
@@ -56,11 +52,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'IsiSaldo', ('SheetName') : 'IsiSaldo',
 				('Path') : ExcelPathSaldoAPI], FailureHandling.STOP_ON_FAILURE)
 			
-			'ambil index tab yang sedang dibuka di chrome'
-			int currentTab = WebUI.getWindowIndex()
-			
 			'ambil WebDriver untuk menjalankan js executor'
-			WebDriver driver = DriverFactory.getWebDriver()
+			WebDriver driver = DriverFactory.webDriver
 			
 			'siapkan js executor'
 			JavascriptExecutor js = ((driver) as JavascriptExecutor)
@@ -76,7 +69,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		}
 		
 		'flag apakah topup masuk ke tenant yang benar'
-		TopupSaldoCorrectTenant = 1
+		topupSaldoCorrectTenant = 1
 		
 		'ambil kode tenant di DB'
 		String tenantcode = CustomKeywords.'ocrtesting.GetParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
@@ -84,7 +77,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		WebUI.refresh()
 		
 		'ambil saldo sebelum isi ulang'
-		Saldobefore = getSaldoforTransaction(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
+		saldobefore = getSaldoforTransaction(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
 		
 		'ubah ke tab billing system'
 		WebUI.switchToWindowIndex(0)
@@ -219,7 +212,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		}
 		
 		'ambil jumlah saldo pada menu trial'
-		Saldoafter = getSaldoforTransaction(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
+		saldoafter = getSaldoforTransaction(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
 		
 		'filter saldo sesuai kebutuhan user'
 		filterSaldo()
@@ -254,32 +247,29 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			if (noTrxfromDB != noTrxfromUI || noTrxfromDB == noTrxOtherTenant) {
 				
 				'topup dianggap gagal'
-				TopupSaldoCorrectTenant = 0
+				topupSaldoCorrectTenant = 0
 			} else {
 				
 				'jika ada konten pada tabel yang tidak sesuai dengan DB'
 				if (verifyTableContent(conn, tenantcode) == 0) {
 					
 					'topup dianggap gagal'
-					TopupSaldoCorrectTenant = 0
+					topupSaldoCorrectTenant = 0
 				}
 			}
 		}
 		
 		'ambil jumlah topup yang diinput oleh user dari excel'
-		JumlahTopUp = Integer.parseInt(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tambah Saldo')))
+		jumlahTopUp = Integer.parseInt(findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tambah Saldo')))
 		
 		'saldo sekarang harus sama dengan saldo sebelumnya ditambah jumlah topup'
-		if (Saldobefore + JumlahTopUp == Saldoafter && TopupSaldoCorrectTenant == 1) {
-			
+		if (saldobefore + jumlahTopUp == saldoafter && topupSaldoCorrectTenant == 1) {
 			'tulis status sukses pada excel'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'IsiSaldo', 0,
 				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
-					
-		}
-		else {
-			
+		} else {
 			GlobalVariable.FlagFailed = 1
+			
 			'tulis kondisi gagal'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';' +
 			GlobalVariable.FailedReasonTopUpFailed)
@@ -358,28 +348,28 @@ def navigatetoeendigoBeta() {
 }
 
 'ambil saldo sesuai testing yang dilakukan'
-def getSaldoforTransaction(String NamaSaldo) {
+def getSaldoforTransaction(String namaSaldo) {
 	
 	'deklarasi jumlah saldo sekarang'
 	int saldoNow
 	
 	'cari element dengan nama saldo'
-	def elementNamaSaldo = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
+	def elementNamaSaldo = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
 	
 	'lakukan loop untuk cari nama saldo yang ditentukan'
-	for (int i=1; i<=elementNamaSaldo.size(); i++) {
+	for (int i = 1; i <= elementNamaSaldo.size(); i++) {
 		
 		'cari nama saldo yang sesuai di list saldo'
-		def modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/span", true)
+		def modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + (i) + ']/div/div/div/div/div[1]/span', true)
 
 		'jika nama object sesuai dengan nama saldo'
-		if (WebUI.getText(modifyNamaSaldo) == NamaSaldo) {
+		if (WebUI.getText(modifyNamaSaldo) == namaSaldo) {
 			
 			'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
-			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_45,649'), 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/h3", true)
+			def modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_45,649'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + (i) + ']/div/div/div/div/div[1]/h3', true)
 			
 			'simpan jumlah saldo sekarang di variabel'
-			 saldoNow = Integer.parseInt(WebUI.getText(modifySaldoDipilih).replace(',',''))
+			 saldoNow = Integer.parseInt(WebUI.getText(modifySaldoDipilih).replace(',', ''))
 			 
 			 break;
 		}
@@ -388,10 +378,10 @@ def getSaldoforTransaction(String NamaSaldo) {
 	if (saldoNow == 0) {
 		
 		'simpan jumlah saldo sekarang di variabel'
-		saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988')).replace(',',''))
+		saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988')).replace(',', ''))
 	}
 	'kembalikan nilai saldo sekarang'
-	return saldoNow
+	saldoNow
 }
 
 'fungsi untuk filter saldo berdasarkan input user'
@@ -418,9 +408,9 @@ def filterSaldo() {
 }
 
 'ambil no. transaksi pada tabel'
-def verifyTableContent(connection, String tenant) {
+def verifyTableContent(Connection conn, String tenant) {
 	'ambil alamat trxnumber'
-	def variable = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
+	def variable = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
 	
 	'banyaknya row table'
 	int lastIndex = variable.size()
@@ -435,40 +425,40 @@ def verifyTableContent(connection, String tenant) {
 	int flagError = 1
 	
 	'ambil data table dari db'
-	ArrayList result = CustomKeywords.'apikey.CheckSaldoAPI.getTrialTableContent'(connection, tenant)
+	ArrayList result = CustomKeywords.'apikey.CheckSaldoAPI.getTrialTableContent'(Conn, tenant)
 	
 	'modifikasi object tanggal transaksi'
-	def modifytglTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TglTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[1]/div/p", true)
+	def modifytglTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TglTrx'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + (lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[1]/div/p', true)
 		
 	'modifikasi object kantor'
-	def modifyKantor = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/KantorLocation'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[2]/div/p", true)
+	def modifyKantor = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/KantorLocation'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + (lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[2]/div/p', true)
 
 	'modifikasi object tipe transaksi'
-	def modifytipeTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TipeTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[3]/div/p", true)
+	def modifytipeTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TipeTrx'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + (lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[3]/div/p', true)
 
 	'modifikasi object sumber transaksi'
-	def modifysumberTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/sumberTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[4]/div/p", true)
+	def modifysumberTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/sumberTrx'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + (lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[4]/div/p', true)
 
 	'modifikasi object tenant transaksi'
-	def modifytenantTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TenantTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[5]/div/p", true)
+	def modifytenantTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TenantTrx'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + (lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[5]/div/p', true)
 
 	'modifikasi object trxnumber'
-	def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[6]/div/p", true)
+	def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + (lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[6]/div/p', true)
 		
 	'modifikasi object reference transaksi'
-	def modifyrefTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/refTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[7]/div/p", true)
+	def modifyrefTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/refTrx'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + (lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[7]/div/p', true)
 	
 	'modifikasi object quantity transaksi'
-	def modifyqtyTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/modifyobject'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[8]/div", true)
+	def modifyqtyTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/modifyobject'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + (lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[8]/div', true)
 
 	'modifikasi object hasil proses transaksi'
-	def modifyprocTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/procTrx'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[10]/div/p", true)
+	def modifyprocTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/procTrx'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + (lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[10]/div/p', true)
 
 	'modifikasi object hasil proses transaksi'
-	def modifycatatanTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/catatan'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[11]/div/p", true)
+	def modifycatatanTrx = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/catatan'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + (lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[11]/div/p', true)
 	
 	'verify tanggal transaksi ui = db'
-	checkVerifyEqualOrMatch(arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifytglTrx), result[arrayIndex++].replace('.0',''), false, FailureHandling.CONTINUE_ON_FAILURE)), 'Data Tanggal Transaksi')
+	checkVerifyEqualOrMatch(arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifytglTrx), result[arrayIndex++].replace('.0', ''), false, FailureHandling.CONTINUE_ON_FAILURE)), 'Data Tanggal Transaksi')
 	
 	'verify kantor ui = db'
 	checkVerifyEqualOrMatch(arrayMatch.add(WebUI.verifyMatch(WebUI.getText(modifyKantor), result[arrayIndex++], false, FailureHandling.CONTINUE_ON_FAILURE)), 'Data Kolom Kantor')
@@ -503,13 +493,12 @@ def verifyTableContent(connection, String tenant) {
 		'kembalikan flag error'
 		flagError = 0
 	}
-	return flagError
+	flagError
 }
 
 'fungsi untuk melakukan pengecekan '
 def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 	if ((isMatch == false)) {
-		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo',
 			GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
@@ -522,25 +511,25 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 'ambil no. transaksi pada tabel'
 def getTrxNumber() {
 	'ambil alamat trxnumber'
-	def variable = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
+	def variable = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
 	
 	'banyaknya row table'
 	int lastIndex = variable.size()
 		
-	String no_Trx = ''
+	String noTrx = ''
 	
 	'modifikasi alamat object trxnumber'
-	def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper["+ (lastIndex) +"]/datatable-body-row/div[2]/datatable-body-cell[6]/div/p", true)
+	def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + (lastIndex) + ']/datatable-body-row/div[2]/datatable-body-cell[6]/div/p', true)
 							
 	if(WebUI.verifyElementPresent(modifytrxnumber, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		'simpan nomor transaction number ke string'
-		no_Trx = WebUI.getText(modifytrxnumber)
+		noTrx = WebUI.getText(modifytrxnumber)
 	}
 	
 	'kembalikan nomor transaksi'
-	return no_Trx
+	noTrx
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

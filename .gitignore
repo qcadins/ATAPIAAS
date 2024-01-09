@@ -19,3 +19,8 @@ build
 /.settings/
 /.classpath
 .svn/
+/.settings/
+.project
+Reports/
+.cache/
+Excel/
