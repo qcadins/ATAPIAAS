@@ -6,16 +6,9 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
-import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
-import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import org.openqa.selenium.Keys as Keys
-import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
-import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
-import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
@@ -28,14 +21,10 @@ Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 
 'looping kolom dari testdata'
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; GlobalVariable.NumOfColumn++) {
-	
     'status kosong berhentikan testing, status selain unexecuted akan dilewat'
     if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
-		
         break
-		
     } else if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
-		
 		GlobalVariable.FlagFailed = 0
 		
         'memanggil fungsi untuk login'
@@ -43,7 +32,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
             FailureHandling.STOP_ON_FAILURE)
 		
 		if (GlobalVariable.FlagFailed == 1) {
-			
 			WebUI.closeBrowser()
 			
 			continue
@@ -79,12 +67,11 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 
         'panggil fungsi verifikasi jika checkdatabase = yes'
         if (GlobalVariable.KondisiCekDB == 'Yes') {
-			
-			'jika tenant masih kosong tidak perlu lakukan pengecekan ke DB'
-			if (WebUI.getText(findTestObject('Profile/Page_Edit Profile/input__tenantName')) != '')
-			
-            'verifikasi data yang ada di web dengan di database sebelum diEdit'
-			verifyDataEdit(conn, userRole)
+			'jika tenant tidak kosong lakukan pengecekan ke DB'
+			if (WebUI.getText(findTestObject('Profile/Page_Edit Profile/input__tenantName')) != '') {
+				'verifikasi data yang ada di web dengan di database sebelum diEdit'
+				verifyDataEdit(conn, userRole)
+			}
         }
 		
 		'input nama depan pengguna'
@@ -98,10 +85,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 
         'pilih jenis kelamin'
         if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Jenis Kelamin')) == 'M') {
-			
             WebUI.check(findTestObject('Object Repository/Profile/Page_Edit Profile/input__radioMale'))
         } else {
-			
             WebUI.check(findTestObject('Object Repository/Profile/Page_Edit Profile/input__radioFemale'))
         }
         
@@ -129,7 +114,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         
         'check if user role == admin client'
         if (userRole == 'Admin Client') {
-			
             'input data nama perusahaan'
 			setTextEmptyValidation(findTestObject('Profile/Page_Edit Profile/input__tenantName'), '$Nama Tenant')
 
@@ -143,7 +127,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			setTextEmptyValidation(findTestObject('Profile/Page_Edit Profile/input__NPWP'), 'No NPWP')
 
             if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('NPWP File Path')).length() > 0) {
-				
                 'upload file NPWP'
                 WebUI.uploadFile(findTestObject('Object Repository/Profile/Page_Edit Profile/button_UploadNPWP'), findTestData(
                         ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('NPWP File Path')), FailureHandling.CONTINUE_ON_FAILURE)
@@ -174,13 +157,11 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
         'panggil fungsi verifikasi jika checkdatabase = yes'
         if (GlobalVariable.KondisiCekDB == 'Yes') {
-			
             'verifikasi data yang ada di excel dengan di database sesudah diEdit'
             WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfileStoreDBVerif'), [('role') : userRole], FailureHandling.CONTINUE_ON_FAILURE)
         }
         
         if (userRole == 'Admin Client') {
-			
             'klik pada tombol garis tiga'
             WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/spanMenu'))
 
@@ -191,7 +172,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
             WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/label_TRIAL'))
 
             'verifikasi adanya saldo trial'
-            if (!(WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/' + 'Page_Balance/span_IDR'), GlobalVariable.Timeout, 
+            if (!(WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/span_IDR'), GlobalVariable.Timeout, 
                 FailureHandling.OPTIONAL))) {
                 GlobalVariable.FlagFailed = 1
 
@@ -227,20 +208,15 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         
         'kondisi jika tidak ada failed pada bagian lain testcase'
         if (isMandatoryComplete != 0) {
-			
             'Write To Excel GlobalVariable.StatusFailed and gagal karena reason status'
             CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
                 GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
                 ';') + GlobalVariable.FailedReasonMandatory)
-			
         } else if (GlobalVariable.FlagFailed == 0) {
-			
             'write to excel success'
             CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1, GlobalVariable.NumOfColumn - 
                 1, GlobalVariable.StatusSuccess)
-			
         } else {
-			
             'Write To Excel GlobalVariable.StatusFailed and gagal karena reason status'
             CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
                 GlobalVariable.StatusWarning, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
@@ -289,13 +265,13 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }
 
-def setTextEmptyValidation(TestObject object, String Testdata) {
+def setTextEmptyValidation(TestObject object, String testdata) {
 	
 	'jika testdata kosong'
-	if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel(Testdata)).equalsIgnoreCase('')) {
+	if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel(testdata)).equalsIgnoreCase('')) {
 		
 		'select all text di field tersebut'
 		WebUI.sendKeys(object, Keys.chord(Keys.CONTROL + 'a'))
@@ -308,6 +284,6 @@ def setTextEmptyValidation(TestObject object, String Testdata) {
 	} else {
 		
 		'input text sesuai testdata'
-		WebUI.setText(object, findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel(Testdata)))
+		WebUI.setText(object, findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel(testdata)))
 	}
 }

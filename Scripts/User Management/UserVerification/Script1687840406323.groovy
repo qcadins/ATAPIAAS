@@ -1,22 +1,12 @@
-import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
-import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
-
 import java.sql.Connection
-
-import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
-import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
-import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
 import com.kms.katalon.core.testobject.TestObject as TestObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
@@ -53,11 +43,10 @@ WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platf
 
 'check if reason failed tidak present'
 if (WebUI.verifyElementNotPresent(findTestObject('User Management-User/label_TextError'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-	
 	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 	CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-	GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') + 
-	'Berhasil Login dengan user yang belum aktivasi')
+		GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') + 
+			'Berhasil Login dengan user yang belum aktivasi')
 	
 	GlobalVariable.FlagFailed = 1
 }
@@ -88,7 +77,6 @@ WebUI.click(findTestObject('Object Repository/User Management-User/Page_Balance/
 
 'cek apakah tombol menu dalam jangkauan web'
 if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
-	
 	'klik pada tombol silang menu'
 	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
 }
@@ -124,7 +112,6 @@ WebUI.click(findTestObject('User Management-User/button_Confirm'))
 
 'check if success'
 if (WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgnoreCase('Success')) {
-	
 	'klik pada tombol ya Proses'
 	WebUI.click(findTestObject('User Management-User/button_Confirm'))
 	
@@ -162,11 +149,10 @@ if (WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgno
 	'check if berhasil login'
 	if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/User Management-Role/' +
 	'Page_Balance/i_SEDARA MANYURA_ft-menu font-medium-3'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
-		'gagal login dengan user yang baru terdaftar dan sudah aktivasi')
+			GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
+				'gagal login dengan user yang baru terdaftar dan sudah aktivasi')
 
 		GlobalVariable.FlagFailed = 1
 	}
@@ -193,16 +179,15 @@ if (WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgno
 	
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-	
 } else {
 	'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 	CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-	GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
-	'gagal mengirimkan ulang email aktivasi')
+		GlobalVariable.StatusFailed, (findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
+			'gagal mengirimkan ulang email aktivasi')
 	
 	GlobalVariable.FlagFailed = 1
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

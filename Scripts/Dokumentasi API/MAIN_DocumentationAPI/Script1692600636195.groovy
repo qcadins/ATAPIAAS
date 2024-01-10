@@ -8,7 +8,7 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
-import groovy.sql.Sql as Sql
+import java.sql.Connection
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
@@ -18,18 +18,14 @@ int countColumnEdit = findTestData(ExcelPathAPIDocs).columnNumbers, isLoggedin =
 
 'pindah testcase sesuai jumlah di excel'
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
-	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
-		
 		break
 	} else if (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
-		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('Mandatory Complete')))
 		
 		if (isLoggedin == 0) {
-			
 			'panggil fungsi login'
 			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'DocAPI', ('SheetName') : sheet,
 				('Path') : ExcelPathAPIDocs], FailureHandling.STOP_ON_FAILURE)
@@ -50,16 +46,14 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'cek apakah tombol menu dalam jangkauan web'
 		if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
-			
 			'klik pada tombol silang menu'
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
 		}
 		
 		'jika perlu, akan memanggil fungsi cek ddl dokumentasi'
 		if (GlobalVariable.KondisiCekDB == 'Yes') {
-			
 			'verifikasi data DDL yang ada di web dengan DB'
-			VerifyDocumentListAPI()
+			verifyDocumentListAPI()
 		}
 		
 		'input jenis dokumentasi yang akan didownload'
@@ -71,7 +65,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'cek apakah perlu kembalikan ddl ke default'
 		if (findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('ClearDDL ? (Yes/No)')) == 'Yes') {
-			
 			'klik pada tombol silang di ddl'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_API Documentation/CrossDDL'))
 		}
@@ -118,9 +111,9 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 'tutup browser'
 WebUI.closeBrowser()
 
-def VerifyDocumentListAPI(){
+def verifyDocumentListAPI() {
 	'deklarasi variabel untuk konek ke Database APIAAS'
-	def conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
+	Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 	
 	'kumpulan string yang menyimpan hasil data dari DB'
 	ArrayList hasildb = CustomKeywords.'documentationapi.CheckDocumentation.getDocumentationAPIName'(conn)
@@ -141,7 +134,6 @@ def VerifyDocumentListAPI(){
 	Collections.sort(hasildb)
 	
 	for (int j = 0; j < hasildb.size ; j++) {
-		
 		'verifikasi semua opsi pada web sesuai dengan database'
 		checkVerifyEqualorMatch(WebUI.verifyEqual(hasilweb[j], hasildb[j], FailureHandling.CONTINUE_ON_FAILURE))
 	}
@@ -149,7 +141,6 @@ def VerifyDocumentListAPI(){
 
 def checkVerifyEqualorMatch(Boolean isMatch) {
 	if (isMatch == false) {
-		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, 
@@ -159,5 +150,5 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

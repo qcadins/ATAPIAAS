@@ -6,16 +6,12 @@ import java.sql.Statement
 import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
-import groovy.sql.Sql as Sql
-
 public class TenantVerif {
-
 	int columnCount
 
 	//fungsi mengambil jumlah tenant
 	@Keyword
 	getTenantTotal(Connection conn) {
-
 		int data
 
 		Statement stm = conn.createStatement()
@@ -24,7 +20,7 @@ public class TenantVerif {
 
 		while (resultSet.next()) {
 
-			data = resultSet.getObject(1);
+			data = resultSet.getObject(1)
 		}
 		data
 	}
@@ -35,10 +31,10 @@ public class TenantVerif {
 		ArrayList listdata = []
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("select tenant_name, tenant_code, ref_number_label, api_key, email_reminder_dest from esign.ms_tenant where ref_number_label = '"+ refnum +"'")
-		ResultSetMetaData metadata = resultSet.getMetaData()
+		ResultSet resultSet = stm.executeQuery("select tenant_name, tenant_code, ref_number_label, api_key, email_reminder_dest from esign.ms_tenant where ref_number_label = '" + refnum + "'")
+		ResultSetMetaData metadata = resultSet.metaData
 
-		columnCount = metadata.getColumnCount()
+		columnCount = metadata.columnCount
 
 		while (resultSet.next()) {
 			for (int i = 1 ; i <= columnCount ; i++) {
@@ -55,10 +51,10 @@ public class TenantVerif {
 		ArrayList listdata = []
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT ms_lov.description, value FROM esign.ms_tenant CROSS JOIN LATERAL json_each_text(threshold_balance::json) AS threshold_type JOIN esign.ms_lov ON ms_lov.lov_group = 'BALANCE_TYPE' AND ms_lov.code = threshold_type.key WHERE tenant_code = '"+ tenantcode +"'")
-		ResultSetMetaData metadata = resultSet.getMetaData()
+		ResultSet resultSet = stm.executeQuery("SELECT ms_lov.description, value FROM esign.ms_tenant CROSS JOIN LATERAL json_each_text(threshold_balance::json) AS threshold_type JOIN esign.ms_lov ON ms_lov.lov_group = 'BALANCE_TYPE' AND ms_lov.code = threshold_type.key WHERE tenant_code = '" + tenantcode + "'")
+		ResultSetMetaData metadata = resultSet.metaData
 
-		columnCount = metadata.getColumnCount()
+		columnCount = metadata.columnCount
 
 		while (resultSet.next()) {
 			for (int i = 1 ; i <= columnCount ; i++) {
@@ -75,10 +71,10 @@ public class TenantVerif {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("select threshold_balance from esign.ms_tenant where tenant_name = '"+ tenantname +"'")
-		ResultSetMetaData metadata = resultSet.getMetaData()
+		ResultSet resultSet = stm.executeQuery("select threshold_balance from esign.ms_tenant where tenant_name = '" + tenantname + "'")
+		ResultSetMetaData metadata = resultSet.metaData
 
-		columnCount = metadata.getColumnCount()
+		columnCount = metadata.columnCount
 
 		while (resultSet.next()) {
 
@@ -94,11 +90,11 @@ public class TenantVerif {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("Select ml.id_lov FROM esign.ms_balancevendoroftenant mbt join esign.ms_tenant mt on mt.id_ms_tenant = mbt.id_ms_tenant Join esign.ms_lov ml on ml.id_lov = mbt.lov_balance_type Where mt.tenant_code = '"+ tenantcode +"' AND ml.code = '"+testedOCR+"'")
+		ResultSet resultSet = stm.executeQuery("Select ml.id_lov FROM esign.ms_balancevendoroftenant mbt join esign.ms_tenant mt on mt.id_ms_tenant = mbt.id_ms_tenant Join esign.ms_lov ml on ml.id_lov = mbt.lov_balance_type Where mt.tenant_code = '" + tenantcode + "' AND ml.code = '" + testedOCR + "'")
 
 		while (resultSet.next()) {
 
-			data = resultSet.getObject(1);
+			data = resultSet.getObject(1)
 		}
 
 		data
@@ -111,7 +107,7 @@ public class TenantVerif {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("Select description From esign.ms_lov ml join esign.ms_balancevendoroftenant mbt on ml.id_lov = mbt.lov_balance_charge_type Join esign.ms_tenant mt on mt.id_ms_tenant = mbt.id_ms_tenant Where ml.lov_group = 'BALANCE_CHARGE_TYPE' and mt.tenant_code = '"+ tenantcode +"' AND mbt.lov_balance_type = "+ idPayment +"")
+		ResultSet resultSet = stm.executeQuery("Select description From esign.ms_lov ml join esign.ms_balancevendoroftenant mbt on ml.id_lov = mbt.lov_balance_charge_type Join esign.ms_tenant mt on mt.id_ms_tenant = mbt.id_ms_tenant Where ml.lov_group = 'BALANCE_CHARGE_TYPE' and mt.tenant_code = '" + tenantcode + "' AND mbt.lov_balance_type = " + idPayment + "")
 
 		while (resultSet.next()) {
 			data = resultSet.getObject(1)
@@ -125,10 +121,10 @@ public class TenantVerif {
 		ArrayList listdata = []
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant JOIN esign.ms_vendor mv ON mv.id_ms_vendor = mbt.id_ms_vendor WHERE tenant_code = '"+ tenantcode +"' AND vendor_name = 'ADINS' AND description != 'IDR'")
-		ResultSetMetaData metadata = resultSet.getMetaData()
+		ResultSet resultSet = stm.executeQuery("SELECT ml.description FROM esign.ms_balancevendoroftenant mbt JOIN esign.ms_lov ml ON mbt.lov_balance_type = ml.id_lov JOIN esign.ms_tenant mt ON mbt.id_ms_tenant = mt.id_ms_tenant JOIN esign.ms_vendor mv ON mv.id_ms_vendor = mbt.id_ms_vendor WHERE tenant_code = '" + tenantcode + "' AND vendor_name = 'ADINS' AND description != 'IDR'")
+		ResultSetMetaData metadata = resultSet.metaData
 
-		columnCount = metadata.getColumnCount()
+		columnCount = metadata.columnCount
 
 		while (resultSet.next()) {
 			for (int i = 1 ; i <= columnCount ; i++) {
@@ -138,4 +134,5 @@ public class TenantVerif {
 		}
 		listdata
 	}
+	
 }

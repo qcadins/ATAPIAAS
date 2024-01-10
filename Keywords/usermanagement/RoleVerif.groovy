@@ -7,11 +7,12 @@ import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
 public class RoleVerif {
+	
 	int columnCount
 
 	//fungsi mengambil jumlah tenant
 	@Keyword
-	getRoleTotal (Connection conn, String email) {
+	getRoleTotal(Connection conn, String email) {
 		int data
 
 		Statement stm = conn.createStatement()
@@ -19,7 +20,6 @@ public class RoleVerif {
 		ResultSet resultSet = stm.executeQuery("SELECT count(amr.role_name) FROM am_msuser amu JOIN ms_useroftenant mot ON amu.id_ms_user = mot.id_ms_user LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mot.id_ms_tenant LEFT JOIN am_msrole amr ON amr.id_ms_tenant = mt.id_ms_tenant WHERE login_id = '" + email + "' AND role_name != 'AT-ROLEONE'")
 
 		while (resultSet.next()) {
-
 			data = resultSet.getObject(1)
 		}
 		data
@@ -27,7 +27,7 @@ public class RoleVerif {
 
 	//fungsi mengambil jumlah tenant
 	@Keyword
-	getNamaRole (Connection conn, String namarole) {
+	getNamaRole(Connection conn, String namarole) {
 
 		String data
 
@@ -43,7 +43,7 @@ public class RoleVerif {
 	}
 
 	@Keyword
-	getRoleEdit (Connection conn, String namarole) {
+	getRoleEdit(Connection conn, String namarole) {
 		String data
 		ArrayList listdata = []
 		Statement stm = conn.createStatement()
@@ -63,7 +63,7 @@ public class RoleVerif {
 	}
 
 	@Keyword
-	getRoleMenu (Connection conn, String roleName, String email) {
+	getRoleMenu(Connection conn, String roleName, String email) {
 		String data
 		ArrayList listdata = []
 		Statement stm = conn.createStatement()
@@ -83,7 +83,7 @@ public class RoleVerif {
 	}
 
 	@Keyword
-	getDataRolebeforeVerif (Connection conn, String roleName) {
+	getDataRolebeforeVerif(Connection conn, String roleName) {
 		String data
 		ArrayList listdata = []
 		Statement stm = conn.createStatement()
@@ -101,4 +101,5 @@ public class RoleVerif {
 		}
 		listdata
 	}
+	
 }

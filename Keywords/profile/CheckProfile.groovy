@@ -1,4 +1,4 @@
-package profile;
+package profile
 
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
@@ -32,10 +32,10 @@ public class CheckProfile {
 		ResultSet resultSet
 
 		resultSet = stm.executeQuery("SELECT amu.initial_name, amu.last_name, aupd.gender, amu.hashed_phone, aupd.position, mcc.country_name || ' ' || mcc.country_code, mt.tenant_website, mt.tenant_name, mt.tenant_industry, npwp_no from am_msuser amu join am_user_personal_data aupd on amu.id_ms_user = aupd.id_ms_user join ms_useroftenant mut on mut.id_ms_user = amu.id_ms_user join ms_tenant mt on mt.id_ms_tenant = mut.id_ms_tenant join ms_country_code mcc on mcc.id_country_code = amu.id_country_code WHERE amu.login_id = '" + email + "'")
-		
-		ResultSetMetaData metadata  = resultSet.getMetaData()
 
-		columnCount = metadata.getColumnCount()
+		ResultSetMetaData metadata  = resultSet.metaData
+
+		columnCount = metadata.columnCount
 
 		while (resultSet.next()) {
 			for (int i = 1; i <= columnCount ; i++) {
@@ -56,10 +56,10 @@ public class CheckProfile {
 		WebUI.click(findTestObject('Profile/Page_Edit Profile/framelogin'))
 
 		'fungsi select untuk yang mengarah ke element dropdown list negara'
-		select = new Select(DriverFactory.getWebDriver().findElement(By.xpath("//select[@id='countryCodes']")))
+		select = new Select(DriverFactory.webDriver.findElement(By.xpath("//select[@id='countryCodes']")))
 
 		'ambil text yang diselect oleh dropdown list tersebut'
-		optionLabel = select.getFirstSelectedOption().getText()
+		optionLabel = select.getFirstSelectedOption().text
 
 		'kumpulan string yang menyimpan hasil text dari User Interface APIAAS'
 		ArrayList hasilgetText = []
@@ -116,10 +116,9 @@ public class CheckProfile {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT tenant_name FROM am_msuser amu LEFT JOIN ms_useroftenant mto ON mto.id_ms_user = amu.id_ms_user LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mto.id_ms_tenant WHERE login_id = '"+ email +"'")
+		ResultSet resultSet = stm.executeQuery("SELECT tenant_name FROM am_msuser amu LEFT JOIN ms_useroftenant mto ON mto.id_ms_user = amu.id_ms_user LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mto.id_ms_tenant WHERE login_id = '" + email + "'")
 
 		while (resultSet.next()) {
-
 			data = resultSet.getObject(1)
 		}
 		data
@@ -131,12 +130,12 @@ public class CheckProfile {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT mr.role_name FROM am_msuser am JOIN am_memberofrole amr ON amr.id_ms_user = am.id_ms_user JOIN am_msrole mr ON mr.id_ms_role = amr.id_ms_role WHERE am.login_id = '"+ email +"'")
+		ResultSet resultSet = stm.executeQuery("SELECT mr.role_name FROM am_msuser am JOIN am_memberofrole amr ON amr.id_ms_user = am.id_ms_user JOIN am_msrole mr ON mr.id_ms_role = amr.id_ms_role WHERE am.login_id = '" + email + "'")
 
 		while (resultSet.next()) {
-
 			data = resultSet.getObject(1)
 		}
 		data
 	}
+	
 }

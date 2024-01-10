@@ -15,7 +15,7 @@ public class CheckSaveProcess {
 
 	//check status untuk write to excel success / failed + reason failed
 	@Keyword
-	checkStatus(int count, TestObject object, int colm, String sheetname){
+	checkStatus(int count, TestObject object, int colm, String sheetname) {
 		if (WebUI.verifyElementPresent(object, 3, FailureHandling.OPTIONAL)) {
 			if (count == 0) {
 				(new writetoexcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
@@ -28,7 +28,7 @@ public class CheckSaveProcess {
 				(new writetoexcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						1, colm - 1, GlobalVariable.StatusReasonSystem)
 			}
-		}else {
+		} else {
 			if (count == 0) {
 				GlobalVariable.FlagFailed = 1
 				(new writetoexcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
@@ -46,7 +46,6 @@ public class CheckSaveProcess {
 		}
 	}
 
-
 	//check alert pojok kanan atas jika failed akan write to excel failed + reason failed
 	@Keyword
 	checkAlert(int colm, String sheetname) {
@@ -54,16 +53,16 @@ public class CheckSaveProcess {
 			String erroralert = WebUI.getText(testerAlert, FailureHandling.OPTIONAL)
 			if (erroralert != null) {
 				if (!erroralert.contains("Success".toUpperCase())) {
-
-					String FailedAlertReason = 'Pengubahan API KEY gagal karena sudah aktif'
+					String failedAlertReason = 'Pengubahan API KEY gagal karena sudah aktif'
 					(new writetoexcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 							0, colm - 1, GlobalVariable.StatusFailed)
+					
 					(new writetoexcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
-							1, colm - 1, FailedAlertReason)
+							1, colm - 1, failedAlertReason)
+					
 					GlobalVariable.FlagFailed = 1
 				}
 			}
-
 		}
 	}
 
@@ -82,15 +81,14 @@ public class CheckSaveProcess {
 				(new writetoexcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						1, colm - 1, GlobalVariable.StatusReasonSystem)
 			}
-		}else {
-			if(count == 0) {
+		} else {
+			if (count == 0) {
 				GlobalVariable.FlagFailed = 1
 				(new writetoexcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						0, colm - 1, GlobalVariable.StatusFailed)
 				(new writetoexcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						1, colm - 1, GlobalVariable.FailedReasonSubmitError)
-			}
-			else {
+			} else {
 				GlobalVariable.FlagFailed = 1
 				(new writetoexcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 						0, colm - 1, GlobalVariable.StatusFailed)
