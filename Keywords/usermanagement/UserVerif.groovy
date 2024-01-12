@@ -7,7 +7,8 @@ import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
 public class UserVerif {
-	int columnCount
+	
+	int columnCount, updateVariable
 
 	//fungsi mengambil jumlah tenant
 	@Keyword
@@ -19,7 +20,7 @@ public class UserVerif {
 		ResultSet resultSet = stm.executeQuery("SELECT * FROM am_msuser WHERE usr_crt = '" + email + "'")
 
 		while (resultSet.next()) {
-			data = resultSet.getObject(1);
+			data = resultSet.getObject(1)
 		}
 		data
 	}
@@ -65,7 +66,7 @@ public class UserVerif {
 	updateIsActiveUser(Connection conn, String email) {
 		Statement stm = conn.createStatement()
 
-		int updateCount = stm.executeUpdate("UPDATE am_msuser SET is_active = '1', change_pwd_login = '0', is_verified = '1' WHERE login_id = '" + email + "';")
+		updateVariable = stm.executeUpdate("UPDATE am_msuser SET is_active = '1', change_pwd_login = '0', is_verified = '1' WHERE login_id = '" + email + "';")
 	}
 	@Keyword
 	getUserStatus(Connection conn, String email) {
@@ -80,4 +81,5 @@ public class UserVerif {
 		}
 		data
 	}
+	
 }

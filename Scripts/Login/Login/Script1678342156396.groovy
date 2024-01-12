@@ -1,41 +1,29 @@
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
-import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.webui.driver.DriverFactory
 import internal.GlobalVariable as GlobalVariable
-import groovy.sql.Sql as Sql
 import org.openqa.selenium.By as By
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.WebElement
-import org.openqa.selenium.chrome.ChromeDriver
-import org.openqa.selenium.chrome.ChromeOptions
-import org.openqa.selenium.remote.DesiredCapabilities
-import com.kms.katalon.core.webui.driver.DriverFactory
-import org.openqa.selenium.WebDriver
 
 'panggil fungsi untuk open browser'
-def js = CustomKeywords.'login.Browser.settingandOpen'(Path, rowExcel('CaptchaEnabled'))
+JavascriptExecutor js = CustomKeywords.'login.Browser.settingandOpen'(Path, rowExcel('CaptchaEnabled'))
 
 'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
 GlobalVariable.FlagFailed = 0
 
 if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
-	
 	'buka website APIAAS SIT, data diambil dari TestData Login'
 	WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 2))
 } else {
-	
 	if (GlobalVariable.SettingEnvi == 'Trial') {
-				
 		'buka website billing system Trial, untuk isi saldo'
 		WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 3))
-		
 	} else if (GlobalVariable.SettingEnvi == 'Production') {
-		
 		'buka website billing system Production, untuk isi saldo'
 		WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 4))
 	}
@@ -124,13 +112,13 @@ if (TC == 'EditProf') {
 	}
 	
 	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Checklist T&C?')) == 'Yes') {
-		WebElement linkTerm = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >"+
+		WebElement linkTerm = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >" +
 			" div:nth-child(6) > div > div > label > a:nth-child(1)"))
-		WebElement linkPrivacy = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >"+
+		WebElement linkPrivacy = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >" +
 			" div:nth-child(6) > div > div > label > a:nth-child(2)"))
 		
-		js.executeScript("arguments[0].remove()", linkTerm);
-		js.executeScript("arguments[0].remove()", linkPrivacy);
+		js.executeScript("arguments[0].remove()", linkTerm)
+		js.executeScript("arguments[0].remove()", linkPrivacy)
 		
 		'checklist T&C'
 		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/AcceptTnC'))
@@ -208,7 +196,7 @@ if (TC == 'EditProf') {
 	
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, Row+1))
+		findTestData(Path).getValue(GlobalVariable.NumOfColumn, Row + 1))
 	
 } else if (TC == 'IsiSaldo') {
 	
@@ -323,8 +311,8 @@ if (TC == 'EditProf') {
 	
 } else if (TC == 'TranxHist') {
 	
-	'deklarasi penghitungan role yang dipilih'
-	int isSelected = 0
+//	'deklarasi penghitungan role yang dipilih'
+//	int isSelected = 0
 	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
@@ -425,19 +413,6 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
 	}
 }
 
-
-//'cek apakah muncul error gagal login'
-//if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/ErrorMsg')
-//	,GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-//	
-//	GlobalVariable.FlagFailed = 1
-//	
-//	'tulis adanya error pada sistem web'
-//	CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(SheetName, GlobalVariable.NumOfColumn,
-//		GlobalVariable.StatusFailed, (findTestData(Path).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-//			GlobalVariable.FailedReasonLoginIssue)
-//}
-
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, SheetName, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, SheetName, cellValue)
 }

@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 import com.kms.katalon.core.annotation.Keyword
 
 public class ParseDate {
-	
+
 	@Keyword
 	parseDateFormat(String date, String format1, String format2) {
 		Locale locale = Locale.US
@@ -25,4 +25,5 @@ public class ParseDate {
 
 		sDate
 	}
+	
 }

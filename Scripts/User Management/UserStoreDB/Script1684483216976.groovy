@@ -1,5 +1,4 @@
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
-import com.kms.katalon.core.testdata.TestData as TestData
 import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
 
@@ -21,12 +20,10 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).
 	
 	'cek data untuk tiap alamat di array'
 	for (int i = 0; i < resultDB.size ; i++) {
-		
 		'tambahkan data ke resultExcel'
 		resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (rowExcel('$Email') + i)))
 		
 		if (resultExcel[i] != resultDB[i]) {
-			
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
@@ -36,27 +33,21 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).
 		}
 	}
 } else if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
-	
 	'ambil data role dari db'
 	resultDB = CustomKeywords.'usermanagement.UserVerif.getEditUserData'(conndev, 
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Email')))
 		
 	'cek data untuk tiap alamat di array'
 	for (int i = 0; i < resultDB.size ; i++) {
-	
 		if (i == 0) {
-			
 			'tambahkan data ke array resultExcel'
 			resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Email')))
-			
 		} else {
-			
 			'tambahkan data ke resultExcel'
 			resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (rowExcel('Edit User') + i)))
 		}
 		
 		if (resultExcel[i] != resultDB[i]) {
-			
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'

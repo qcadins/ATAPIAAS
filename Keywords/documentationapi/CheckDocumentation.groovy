@@ -12,6 +12,7 @@ import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
 public class CheckDocumentation {
+	
 	int columnCount
 
 	@Keyword
@@ -24,8 +25,7 @@ public class CheckDocumentation {
 			//checking the extension of the file with endsWith method.
 			if (f.exists()) {
 				if (deleteFile == 'Yes') {
-
-					f.delete();
+					f.delete()
 				}
 				isDownloaded = true
 			}
@@ -43,7 +43,7 @@ public class CheckDocumentation {
 		Statement stm = conn.createStatement()
 
 		ResultSet resultSet = stm.executeQuery('SELECT api_name from ms_api')
-		
+
 		ResultSetMetaData metadata  = resultSet.metaData
 
 		columnCount = metadata.columnCount
@@ -67,39 +67,43 @@ public class CheckDocumentation {
 
 		ArrayList hasilddl = []
 
-		for (int i = 0; i <10; i++) {
+		for (int i = 0; i < 10; i++) {
 			ariachoice = ariaid + '-' + i
-			if (ariachoice.contains('-0')) {
-				hasilddl.add('OCR BPKB')
-			}
-			else if (ariachoice.contains('-1')) {
-				hasilddl.add('OCR REK KORAN MANDIRI')
-			}
-			else if (ariachoice.contains('-2')) {
-				hasilddl.add('LIVENESS + FACECOMPARE')
-			}
-			else if (ariachoice.contains('-3')) {
-				hasilddl.add('OCR KK')
-			}
-			else if (ariachoice.contains('-4')) {
-				hasilddl.add('OCR REK KORAN BCA')
-			}
-			else if (ariachoice.contains('-5')) {
-				hasilddl.add('OCR STNK')
-			}
-			else if (ariachoice.contains('-6')) {
-				hasilddl.add('FACECOMPARE')
-			}
-			else if (ariachoice.contains('-7')) {
-				hasilddl.add('OCR KTP')
-			}
-			else if (ariachoice.contains('-8')) {
-				hasilddl.add('OCR NPWP')
-			}
-			else if (ariachoice.contains('-9')) {
-				hasilddl.add('LIVENESS')
+			
+			switch (true) {
+				case ariachoice.contains('-0'):
+					hasilddl.add('OCR BPKB')
+					break
+				case ariachoice.contains('-1'):
+					hasilddl.add('OCR REK KORAN MANDIRI')
+					break
+				case ariachoice.contains('-2'):
+					hasilddl.add('LIVENESS + FACECOMPARE')
+					break
+				case ariachoice.contains('-3'):
+					hasilddl.add('OCR KK')
+					break
+				case ariachoice.contains('-4'):
+					hasilddl.add('OCR REK KORAN BCA')
+					break
+				case ariachoice.contains('-5'):
+					hasilddl.add('OCR STNK')
+					break
+				case ariachoice.contains('-6'):
+					hasilddl.add('FACECOMPARE')
+					break
+				case ariachoice.contains('-7'):
+					hasilddl.add('OCR KTP')
+					break
+				case ariachoice.contains('-8'):
+					hasilddl.add('OCR NPWP')
+					break
+				case ariachoice.contains('-9'):
+					hasilddl.add('LIVENESS')
+					break
 			}
 		}
 		hasilddl
 	}
+	
 }

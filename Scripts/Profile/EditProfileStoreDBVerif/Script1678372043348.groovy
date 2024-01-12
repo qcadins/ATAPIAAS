@@ -1,6 +1,5 @@
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
@@ -60,8 +59,7 @@ if (role == 'Admin Client') {
 }
 
 def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
-	if(isMatch == false){
-		
+	if (isMatch == false) {
 		GlobalVariable.FlagFailed = 1
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,

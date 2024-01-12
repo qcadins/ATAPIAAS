@@ -1,6 +1,5 @@
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
@@ -21,7 +20,6 @@ ArrayList arrayMatch = []
 'check if action new/services'
 if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('New')
 	|| findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
-	
 	'get data balance mutation dari DB'
 	ArrayList result = CustomKeywords.'tenant.TenantVerif.getTenantStoreDB'(conn,
 		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('$LabelRefNumber')))
@@ -39,13 +37,11 @@ if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel(
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('New')) {
-		
 		'verify tenant code'
 		arrayMatch.add(WebUI.verifyMatch(
 			findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('$KodeTenant')).toUpperCase(),
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	} else {
-		
 		'skip'
 		arrayindex++
 	}
@@ -53,17 +49,17 @@ if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel(
 	'verify label ref number'
 	arrayMatch.add(WebUI.verifyMatch(
 		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('$LabelRefNumber')).toUpperCase(),
-		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+			(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify API Key'
 	arrayMatch.add(WebUI.verifyMatch(
 		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('API Key')).toUpperCase(),
-		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+			(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify Email reminder'
 	arrayMatch.add(WebUI.verifyMatch(
 		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Email')).toUpperCase().replace(';', ','),
-		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
+			(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'deklarasi array services'
 	List<String> arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Services')).split(';', -1)
@@ -76,11 +72,9 @@ if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel(
 	indexServices = 0
 	
 	for (indexExcel = 0 ; indexExcel < arrayServices.size(); indexExcel++) {
-		
-		String services = resultServices[indexServices++].toString()
+		String services = resultServices[indexServices++]
 		
 		if (services.equalsIgnoreCase(arrayServices[indexExcel])) {
-			
 			'verify services'
 			arrayMatch.add(WebUI.verifyMatch(services.toUpperCase(), arrayServices[indexExcel].toUpperCase(),
 					false, FailureHandling.CONTINUE_ON_FAILURE))
@@ -91,7 +85,6 @@ if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel(
 		}
 	}
 } else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Service')) {
-	
 	'get data balacne mutation dari DB'
 	String result = CustomKeywords.'tenant.TenantVerif.getTenantServices'(conn,
 		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('$NamaTenant'))).replace('{', '').replace('}', '').replace('"', '').replace(',', '')
@@ -106,15 +99,12 @@ if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel(
 	arrayMatch.add(resultarray.containsAll(arrayServices))
 	
 } else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('ChargeType')) {
-	
 	if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Balance ChargeType Check')) != '') {
-		
 		'get array Services dari excel'
 		arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Balance ChargeType Check')).split(';', -1)
 		
 		'looping untuk input services check'
 		for (index = 0; index < arrayServices.size(); index++) {
-			
 			'ambil id pembayaran untuk service pertama yang diubah'
 			int idpaymentType = CustomKeywords.'tenant.TenantVerif.getidpaymentType'(conn,
 				findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('$KodeTenant')), arrayServices[index])
@@ -125,12 +115,9 @@ if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel(
 			
 			'split result to array'
 			if (paymentType == 'Price') {
-				
 				'verify services'
 				arrayMatch.add(true)
-				
 			} else {
-				
 				'verify services'
 				arrayMatch.add(false)
 			}
@@ -140,7 +127,6 @@ if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel(
 
 'jika data db tidak sesuai dengan excel'
 if (arrayMatch.contains(false)) {
-	
 	GlobalVariable.FlagFailed = 1
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'

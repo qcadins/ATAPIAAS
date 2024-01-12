@@ -1,7 +1,5 @@
-import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
-import java.sql.Connection
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
@@ -14,8 +12,6 @@ import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.openqa.selenium.WebDriver
-import org.openqa.selenium.JavascriptExecutor
-import org.openqa.selenium.WebElement
 import com.kms.katalon.core.configuration.RunConfiguration
 
 'mencari directory excel\r\n'
@@ -37,7 +33,7 @@ DesiredCapabilities caps = new DesiredCapabilities()
 
 caps.setCapability(ChromeOptions.CAPABILITY, options)
 
-def chromePrefs = [:] as HashMap<String, ArrayList>
+HashMap<String, ArrayList> chromePrefs = [:] as HashMap<String, ArrayList>
 
 chromePrefs.put('download.default_directory', System.getProperty('user.dir') + '\\Download')
 
@@ -53,17 +49,13 @@ WebUI.navigateToUrl('https://config.nocaptchaai.com/?apikey=' + GlobalVariable.A
 'buka website APIAAS SIT, data diambil dari TestData Login'
 WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 2))
 
-for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
-	
-	'set penanda error menjadi 0'
-	GlobalVariable.FlagFailed = 0
-		
+for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {		
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
-		
 		break
-		
 	} else if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
+		'set penanda error menjadi 0'
+		GlobalVariable.FlagFailed = 0
 		
 		'lakukan proses login dengan password lama'
 		loginFunction(rowExcel('Password Login'))
@@ -75,7 +67,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		WebUI.click(findTestObject('Object Repository/Change Password/Page_Balance/changepass'))
 		
 		if (GlobalVariable.NumOfColumn == 2) {
-						
 			'klik pada bagian menu'
 			WebUI.click(findTestObject('Object Repository/Change Password/span_Menu'))
 			
@@ -128,7 +119,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			'cek muncul error atau tidak'
 			if (notifMsg != 'Kode Akses anda berhasil diganti.') {
-				
 				'tulis ada error '
 				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
@@ -151,14 +141,11 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			'login menggunakan password yang baru diubah'
 			if (loginFunction(rowExcel('$Password Baru')) == 0) {
-			
 				continue
 			}
 			
 			'cek apakah muncul error gagal login'
-			if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/ErrorMsg')
-				,GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-			
+			if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/ErrorMsg'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 				GlobalVariable.FlagFailed = 1
 			
 				'tulis adanya error pada sistem web'
@@ -168,15 +155,12 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			}
 			
 			'verifikasi berhasil login atau tidak'
-			if (WebUI.verifyElementPresent(findTestObject('Object Repository/Change Password/Page_Balance/dropdownMenu'),
-				GlobalVariable.Timeout) && GlobalVariable.FlagFailed == 0) {
-			
+			if (WebUI.verifyElementPresent(findTestObject('Object Repository/Change Password/Page_Balance/dropdownMenu'), GlobalVariable.Timeout) && GlobalVariable.FlagFailed == 0) {
 				'write to excel success'
 				CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
 					GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 			}
 		} else {
-			
 			'tulis ada error '
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
@@ -192,7 +176,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 WebUI.closeBrowser()
 
 def logoutFunction() {
-	
 	WebUI.delay(1)
 	
 	'klik pada tombol untuk span profile'
@@ -209,7 +192,6 @@ def logoutFunction() {
 }
 
 def loginFunction(int row) {
-	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
@@ -221,31 +203,26 @@ def loginFunction(int row) {
 	'tunggu tombol tidak di disable lagi'
 	if (WebUI.waitForElementNotHasAttribute(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'),
 		'disabled', 100, FailureHandling.OPTIONAL)) {
-	
 		'klik pada button login'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	}
 	
 	'jika ada pilihan role'
-	if (WebUI.verifyElementPresent(
-		findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'),
-			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		
 		'cari element dengan nama role'
-		def elementRole = DriverFactory.getWebDriver().findElements(By.cssSelector('body > ngb-modal-window > div > div > app-multi-role > div > div.row > div > table tr'))
+		def elementRole = DriverFactory.webDriver.findElements(By.cssSelector('body > ngb-modal-window > div > div > app-multi-role > div > div.row > div > table tr'))
 		
 		'lakukan loop untuk cari nama role yang ditentukan'
 		for (int i = 1; i <= elementRole.size() - 1; i++) {
-			
 			'cari nama role yag sesuai di opsi role'
-			def modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[1]", true)
+			def modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr[' + i + 1 + ']/td[1]', true)
 	
 			'jika nama object sesuai dengan nama role'
 			if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Pilih Role')).equalsIgnoreCase(
 				WebUI.getAttribute(modifyRole, 'value', FailureHandling.STOP_ON_FAILURE))) {
-				
 				'ubah alamat xpath ke role yang dipilih'
-				modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[2]/a", true)
+				modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr[' + i + 1 + ']/td[2]/a', true)
 			
 				'klik role yang dipilih'
 				WebUI.click(findTestObject('Object Repository/Change Password/modifyobject'))
@@ -258,7 +235,6 @@ def loginFunction(int row) {
 	'cek apakah muncul error gagal login'
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/ErrorMsg')
 		,GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-	
 		GlobalVariable.FlagFailed = 1
 	
 		'tulis adanya error pada sistem web'
@@ -281,5 +257,5 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }

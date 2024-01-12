@@ -12,6 +12,7 @@ import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
 public class CheckAPIKey {
+	
 	int columnCount
 
 	//fungsi untuk mengambil data APIKEY dari database
@@ -53,16 +54,14 @@ public class CheckAPIKey {
 		ArrayList hasilgetText = []
 
 		'mengambil text dari field nama api key'
-		hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/'+
+		hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/' +
 				'input__apiKeyName'), 'value'))
 
 		if (optionLabel.contains('-0')) {
-
 			'mengambil text dari field status api key'
 			hasilgetText.add('Active')
 		}
 		else {
-
 			'mengambil text dari field status api key'
 			hasilgetText.add('Inactive')
 		}
@@ -79,7 +78,7 @@ public class CheckAPIKey {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT api_key_name,(CASE WHEN mak.is_active = '1' THEN 'Active' WHEN mak.is_active = '0' THEN 'Inactive' END) AS is_active FROM ms_api_key mak LEFT JOIN ms_useroftenant mot ON mot.id_ms_tenant = mak.id_ms_tenant LEFT JOin am_msuser amu ON amu.id_ms_user = mot.id_ms_user WHERE api_key_name = '" + apiname + "' AND login_id = '"+email+"'")
+		ResultSet resultSet = stm.executeQuery("SELECT api_key_name,(CASE WHEN mak.is_active = '1' THEN 'Active' WHEN mak.is_active = '0' THEN 'Inactive' END) AS is_active FROM ms_api_key mak LEFT JOIN ms_useroftenant mot ON mot.id_ms_tenant = mak.id_ms_tenant LEFT JOin am_msuser amu ON amu.id_ms_user = mot.id_ms_user WHERE api_key_name = '" + apiname + "' AND login_id = '" + email + "'")
 		ResultSetMetaData metadata  = resultSet.metaData
 
 		columnCount = metadata.columnCount
@@ -93,7 +92,6 @@ public class CheckAPIKey {
 		listdata
 	}
 
-
 	//fungsi untuk mengambil jumlah data APIKEY dari database
 	@Keyword
 	getTotalAPIKeyfromDB(Connection conn, String email) {
@@ -104,8 +102,7 @@ public class CheckAPIKey {
 		ResultSet resultSet = stm.executeQuery("SELECT CONCAT(COUNT(api_key_name), ' total') FROM ms_api_key mak LEFT JOIN ms_useroftenant mot ON mot.id_ms_tenant = mak.id_ms_tenant LEFT JOIN am_msuser amu ON amu.id_ms_user = mot.id_ms_user WHERE amu.login_id = '" + email + "'")
 
 		while (resultSet.next()) {
-
-			data = resultSet.getObject(1);
+			data = resultSet.getObject(1)
 		}
 		data
 	}
@@ -132,4 +129,5 @@ public class CheckAPIKey {
 		}
 		listdata
 	}
+	
 }

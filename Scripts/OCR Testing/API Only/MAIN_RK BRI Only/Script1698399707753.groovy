@@ -4,9 +4,6 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.testobject.ResponseObject
 import java.sql.Connection
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase
-import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable
@@ -107,7 +104,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (!state.equalsIgnoreCase('key or tenant invalid') &&
 			((WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) ||
 				(WS.verifyResponseStatusCode(response, 500, FailureHandling.OPTIONAL) == true))) {
-			
 			'ambil waktu hit untuk sebagai acuan nama file log'
 			timeOcrhit = processHourOnly(ocrdate)
 			
@@ -137,7 +133,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			'jika perlu cek log dijalankan'
 			if (GlobalVariable.checkLog == 'Yes') {
-				
 				'jika browser belum pernah dibuka'
 				if (firstRun == 0) {
 					'panggil testcase open browser'
@@ -175,7 +170,7 @@ def rowExcel(String cellValue) {
 
 def todayDate() {
 	'ambil tanggal hari ini'
-	Date currentDate = new Date()
+	currentDate = new Date()
 	
 	'buat format menjadi yyyyMMDD'
 	SimpleDateFormat dateFormat = new SimpleDateFormat('yyyyMMdd', Locale.US)
@@ -184,16 +179,14 @@ def todayDate() {
 	String formattedDate = dateFormat.format(currentDate)
 	
 	'return hasil format tadi'
-	return formattedDate
+	formattedDate
 }
 
 def processHourOnly(String time) {
-	
 	parts = time.split('T')
 	String timePart = parts[1]
 	
-	String result = timePart.replaceAll('[:+]', '').replace('0700', '');
+	String result = timePart.replaceAll('[:+]', '').replace('0700', '')
 	
-	return result
-	
+	result
 }

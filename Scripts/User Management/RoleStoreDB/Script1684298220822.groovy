@@ -26,7 +26,6 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('A
 	
 	'jika hasil db tidak sesuai excel'
 	if (resultDB != resultExcel) {
-		
 		GlobalVariable.FlagFailed = 1
 		
 		'tulis adanya error pada sistem web'
@@ -34,8 +33,7 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('A
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonStoreDB + ' New Role')
 	}
-} else if(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
-	
+} else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
 	'ambil data role dan status dari DB'
 	resultDB = CustomKeywords.'usermanagement.RoleVerif.getRoleEdit'(conndevUAT,
 		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama Role')))
@@ -46,10 +44,9 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('A
 	'cek data untuk tiap alamat di array'
 	for (int i = 0; i < resultDB.size ; i++) {
 		'ambil data dari excel'
-		resultExcel.add(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, (rowExcel('$Nama Role') + i )))
+		resultExcel.add(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, (rowExcel('$Nama Role') + i)))
 		
 		if (resultExcel[i] != resultDB[i]) {
-			
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
@@ -58,9 +55,7 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('A
 					GlobalVariable.FailedReasonStoreDB + ' Edit Role')
 		}
 	}
-	
 } else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Settings')) {
-	
 	'ambil data result dari DB'
 	resultDB = CustomKeywords.'usermanagement.RoleVerif.getRoleMenu'(conndev,
 		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Nama Role')),
@@ -71,7 +66,6 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('A
 	
 	'jika hasil kedua sumber tidak sesuai'
 	if (resultDB != resultExcel) {
-		
 		GlobalVariable.FlagFailed = 1
 		
 		'tulis adanya error pada sistem web'

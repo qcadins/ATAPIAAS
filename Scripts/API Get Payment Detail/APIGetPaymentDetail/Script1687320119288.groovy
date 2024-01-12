@@ -29,7 +29,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColmExce
 			'get response data'
 			code = WS.getElementPropertyValue(respon, 'StatusCode', FailureHandling.OPTIONAL)
 			
-			if(code == '200') {
+			if (code == '200') {
 	            bankCode = WS.getElementPropertyValue(respon, 'KodeBank', FailureHandling.OPTIONAL)
 	
 	            bankName = WS.getElementPropertyValue(respon, 'NamaBank', FailureHandling.OPTIONAL)
@@ -42,7 +42,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColmExce
 				ArrayList<String> arrayMatch = []
 				
 				if (bankCode != '' && GlobalVariable.KondisiCekDB == 'Yes') {
-				
 					arrayIndex = 0
 					
 					'get payment detail from db'
@@ -82,7 +81,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColmExce
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }
 
 def getErrorMessageAPI(def respon) {

@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "99AF808C3250FBF71147CCC2F969766D",
+  "keywordFileContentHash": "E13AAE88F95A549B60D50E5F99CEC3DB",
   "keywordClasses": [
     {
       "name": "writetoexcel.WriteExcel",
@@ -73,7 +73,7 @@
               }
             }
           ],
-          "javadoc": "/**\r\n\t * Write to Excel\r\n\t */"
+          "javadoc": ""
         },
         {
           "name": "writeToExcelNumber",
@@ -205,8 +205,8 @@
               "name": "cellValue",
               "initialExpression": "",
               "type": {
-                "fullClassName": "java.lang.Double",
-                "unresolvedClassName": "Double",
+                "fullClassName": "java.math.BigDecimal",
+                "unresolvedClassName": "BigDecimal",
                 "isArray": false,
                 "isGnericsPlaceHolder": false,
                 "hasImmutableClassName": false,
@@ -358,77 +358,6 @@
                 "isArray": false,
                 "isGnericsPlaceHolder": false,
                 "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            }
-          ],
-          "javadoc": ""
-        },
-        {
-          "name": "emptyCellRange",
-          "parameters": [
-            {
-              "name": "filePath",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.lang.String",
-                "unresolvedClassName": "String",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            },
-            {
-              "name": "sheetName",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "java.lang.String",
-                "unresolvedClassName": "String",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": false,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            },
-            {
-              "name": "startRow",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "int",
-                "unresolvedClassName": "int",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": true,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            },
-            {
-              "name": "endRow",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "int",
-                "unresolvedClassName": "int",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": true,
-                "genericsTypes": [],
-                "errorOnParsing": false
-              }
-            },
-            {
-              "name": "column",
-              "initialExpression": "",
-              "type": {
-                "fullClassName": "int",
-                "unresolvedClassName": "int",
-                "isArray": false,
-                "isGnericsPlaceHolder": false,
-                "hasImmutableClassName": true,
                 "genericsTypes": [],
                 "errorOnParsing": false
               }

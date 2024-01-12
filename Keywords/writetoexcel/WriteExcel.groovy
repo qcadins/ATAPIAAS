@@ -1,74 +1,78 @@
 package writetoexcel
 
-import org.apache.poi.xssf.usermodel.XSSFRow
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
-import org.apache.poi.ss.usermodel.*
-
 import com.kms.katalon.core.annotation.Keyword
-
 import internal.GlobalVariable
+
+import org.apache.poi.xssf.usermodel.XSSFCell
+import org.apache.poi.xssf.usermodel.XSSFRow
 
 public class WriteExcel {
 
-	/**
-	 * Write to Excel
-	 */
-	//fungsi digunakan untuk menulis data ke dalam excel dalam bentuk string
+	FileInputStream file
+	XSSFWorkbook workbook
+	XSSFSheet sheet
+	XSSFRow row
+	XSSFCell cell
+
 	@Keyword
-	def writeToExcel(String filePath, String sheetName, int rowNo, int collNo, String cellValue) {
-		FileInputStream file = new FileInputStream(new File(filePath)) //initiate excel repository
+	writeToExcel(String filePath, String sheetName, int rowNo, int collNo, String cellValue) {
+		file = new FileInputStream(new File(filePath))
 
-		XSSFWorkbook workbook = new XSSFWorkbook(file)
-		XSSFSheet sheet = workbook.getSheet(sheetName) //getSheet -> sheet num n (start from index 0)
+		workbook = new XSSFWorkbook(file)
+		sheet = workbook.getSheet(sheetName)
 
-		'Write data to excel'
-		//sheet.createRow(0) //for create clear row (if needed), start from index 0
-		sheet.getRow(rowNo).createCell(collNo).cellValue = cellValue //getrow = row, dimulai dari 0. create cell = coll, dimulai dari 0, setCellValue = write string to excel
+		// Explicitly specify types for row and cell
+		row = sheet.getRow(rowNo) ?: sheet.createRow(rowNo)
+		cell = row.getCell(collNo) ?: row.createCell(collNo)
+
+		cell.cellValue = cellValue
+
+		file.close()
+		file.withCloseable {
+			workbook.write(new FileOutputStream(new File(filePath)))
+		}
+	}
+
+	@Keyword
+	writeToExcelNumber(String filePath, String sheetName, int rowNo, int collNo, Integer cellValue) {
+		file = new FileInputStream(new File(filePath))
+		workbook = new XSSFWorkbook(file)
+		sheet = workbook.getSheet(sheetName)
+
+		// Explicitly specify types for row and cell
+		row = sheet.getRow(rowNo) ?: sheet.createRow(rowNo)
+		cell = row.getCell(collNo) ?: row.createCell(collNo)
+
+		cell.cellValue = cellValue
 
 		file.close()
 		FileOutputStream outFile = new FileOutputStream(new File(filePath))
 		workbook.write(outFile)
+		outFile.flush()
 		outFile.close()
 	}
 
-	//fungsi digunakan untuk menulis ke dalam excel dengan tipe data angka
 	@Keyword
-	def writeToExcelNumber(String filePath, String sheetName, int rowNo, int collNo, Integer cellValue) {
-		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
+	writeToExcelDecimal(String filePath, String sheetName, int rowNo, int collNo, BigDecimal cellValue) {
+		file = new FileInputStream(new File(filePath)) //initiate excel repository
 
-		XSSFWorkbook workbook = new XSSFWorkbook(file)
-		XSSFSheet sheet = workbook.getSheet(sheetName) //getSheet -> sheet num n (start from index 0)
+		workbook = new XSSFWorkbook(file)
+		sheet = workbook.getSheet(sheetName)
 
-		'Write data to excel'
-		//sheet.createRow(0) //for create clear row (if needed), start from index 0
-		sheet.getRow(rowNo).createCell(collNo).setCellValue(cellValue) //getrow = row, dimulai dari 0. create cell = coll, dimulai dari 0, setCellValue = write string to excel
+		row = sheet.getRow(rowNo) ?: sheet.createRow(rowNo)
+		cell = row.getCell(collNo) ?: row.createCell(collNo)
+
+		cell.cellValue = cellValue
 
 		file.close()
 		FileOutputStream outFile = new FileOutputStream(new File(filePath))
 		workbook.write(outFile)
+		outFile.flush()
 		outFile.close()
 	}
 
-	//fungsi digunakan untuk menulis inputan decimal(float) ke excel
-	@Keyword
-	def writeToExcelDecimal(String filePath, String sheetName, int rowNo, int collNo, Double cellValue) {
-		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
-
-		XSSFWorkbook workbook = new XSSFWorkbook(file)
-		XSSFSheet sheet = workbook.getSheet(sheetName) //getSheet -> sheet num n (start from index 0)
-
-		'Write data to excel'
-		//sheet.createRow(0) //for create clear row (if needed), start from index 0
-		sheet.getRow(rowNo).createCell(collNo).setCellValue(cellValue) //getrow = row, dimulai dari 0. create cell = coll, dimulai dari 0, setCellValue = write string to excel
-
-		file.close()
-		FileOutputStream outFile = new FileOutputStream(new File(filePath))
-		workbook.write(outFile)
-		outFile.close()
-	}
-
-	//fungsi digunakan untuk menulis ke dalam excel dengan status dan alasan gagalnya case tersebut
 	// write to excel status and reason
 	@Keyword
 	writeToExcelStatusReason(String sheetname, int colm, String status, String reason) {
@@ -78,22 +82,24 @@ public class WriteExcel {
 				1, colm - 1, reason)
 	}
 
-	//fungsi digunakan untuk menulis rumus ke dalam cell excel
 	@Keyword
-	void writeToExcelFormula(String filePath, String sheetName, int rowNo, int collNo, String cellValue) throws IOException {
-		FileInputStream file = new FileInputStream(new File(filePath))
-		XSSFWorkbook workbook = new XSSFWorkbook(file)
-		XSSFSheet sheet = workbook.getSheet(sheetName)
+	writeToExcelFormula(String filePath, String sheetName, int rowNo, int collNo, String cellValue) throws IOException {
+		file = new FileInputStream(new File(filePath))
+		workbook = new XSSFWorkbook(file)
+		sheet = workbook.getSheet(sheetName)
 
-		sheet.getRow(rowNo).createCell(collNo).cellFormula = cellValue
+		row = sheet.getRow(rowNo) ?: sheet.createRow(rowNo)
+		cell = row.getCell(collNo) ?: row.createCell(collNo)
+
+		cell.cellValue = cellValue
 
 		file.close()
 		FileOutputStream outFile = new FileOutputStream(new File(filePath))
 		workbook.write(outFile)
+		outFile.flush()
 		outFile.close()
 	}
 
-	//fungsi digunakan untuk mengambil directory dari file excel yang akan digunakan
 	//keyword getExcelPath
 	@Keyword
 	getExcelPath(String path) {
@@ -104,50 +110,27 @@ public class WriteExcel {
 		filePath
 	}
 
-	@Keyword
-	void emptyCellRange(String filePath, String sheetName, int startRow, int endRow, int column) throws Exception {
-		FileInputStream fis = new FileInputStream(filePath)
-		XSSFWorkbook workbook = new XSSFWorkbook(fis)
-		Sheet sheet = workbook.getSheet(sheetName)
-
-		for (int row = startRow; row <= endRow; row++) {
-			Row currentRow = sheet.getRow(row)
-			if (currentRow != null) {
-				Cell cell = currentRow.getCell(column)
-				if (cell != null) {
-					cell.cellValue = ''
-				}
-			}
-		}
-
-		FileOutputStream fos = new FileOutputStream(filePath)
-		workbook.write(fos)
-		fos.close()
-		workbook.close()
-		fis.close()
-	}
-
 	//keyword getExcelRow
 	@Keyword
-	int getExcelRow(String filePath, String sheetName, String cellValue) {
-		FileInputStream file = new FileInputStream (new File(filePath)) //initiate excel repository
-
-		XSSFWorkbook workbook = new XSSFWorkbook(file)
-		XSSFSheet sheet = workbook.getSheet(sheetName) //getSheet -> sheet num n (start from index 0)
-		XSSFRow row = null
-		int rownum = -1
+	getExcelRow(String filePath, String sheetName, String cellValue) {
+		file = new FileInputStream(new File(filePath)) //initiate excel repository
+		workbook = new XSSFWorkbook(file)
+		sheet = workbook.getSheet(sheetName) //getSheet -> sheet num n (start from index 0)
+		row = null
+		int rowNum = -1
 		for (int i = 0; i <= sheet.lastRowNum; i++) {
 			row = sheet.getRow(i)
 			try {
-				if (row.getCell(0).stringCellValue == cellValue) {
-					rownum = i
+				if (row.getCell(0).stringCellValue.equalsIgnoreCase(cellValue)) {
+					rowNum = i
 					break
 				}
-			}
-			catch (FileNotFoundException e) {
+			} catch(Exception e) {
+				e.printStackTrace()
 			}
 		}
-		rownum + 1
+		file.close()
+		rowNum + 1
 	}
-
+	
 }

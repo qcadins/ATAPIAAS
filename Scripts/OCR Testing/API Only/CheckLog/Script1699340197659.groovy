@@ -1,8 +1,6 @@
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
@@ -89,11 +87,9 @@ def checkProcedure(String bucketType) {
 
 	'cek apakah log by date berhasil masuk'
 	if (WebUI.waitForElementClickable(findTestObject('OCR Testing/checkLog/topResult'), 5, FailureHandling.OPTIONAL)) {
-		
 		'klik pada objek paling atas'
 		WebUI.click(findTestObject('OCR Testing/checkLog/topResult'))
 	} else {
-		
 		'tulis kondisi gagal'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 			GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
@@ -103,7 +99,6 @@ def checkProcedure(String bucketType) {
 	}
 	
 	if (OCRType == 'BPKBExtractor' && bucketType == 'Coldline') {
-		
 		for (i = 2; i <= 3; i++) {
 			'input filter OCR'
 			WebUI.setText(findTestObject('OCR Testing/checkLog/inputSearchFilter'),
@@ -144,9 +139,8 @@ def verifyObjectPresent(String bucketType, String inc) {
 			'tulis kondisi gagal'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
-					(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 'Nama Log tidak sesuai pada folder halaman' + (inc) + ' di Bucket ' + bucketType)
+					(findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') + 'Nama Log tidak sesuai pada folder halaman' + inc + ' di Bucket ' + bucketType)
 		}
-		
 	} else {
 		'tulis kondisi gagal'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,

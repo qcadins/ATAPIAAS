@@ -1,7 +1,6 @@
 package login
 
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
-import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.webui.driver.DriverFactory
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.JavascriptExecutor

@@ -22,26 +22,20 @@ int countColumnEdit = findTestData(ExcelPathSaldo).columnNumbers, firstRun
 Connection conn
 
 if (GlobalVariable.SettingEnvi == 'Production') {
-	
 	'deklarasi koneksi ke Database eendigo_dev'
 	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
-	
 } else if (GlobalVariable.SettingEnvi == 'Trial') {
-	
 	'deklarasi koneksi ke Database eendigo_dev_uat'
 	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 }
 
-for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
-	
-	'set penanda error menjadi 0'
-	GlobalVariable.FlagFailed = 0
-		
+for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
-		
 		break
 	} else if (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
+		'set penanda error menjadi 0'
+		GlobalVariable.FlagFailed = 0
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Mandatory Complete')))
@@ -94,17 +88,14 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		ArrayList activeBalanceUI = [], arrayMatch = []
 		
 		'cari element dengan nama saldo'
-		def elementNamaSaldo = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout >'+
-			' div > div.main-panel > div > div.content-wrapper > app-balance-prod >'+
-			' div.row.match-height > div > lib-balance-summary > div > div'))
+		def elementNamaSaldo = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
 		
 		'lakukan loop untuk cari nama saldo yang ditentukan'
-		for (int i=1; i<=elementNamaSaldo.size(); i++){
+		for (int i = 1; i <= elementNamaSaldo.size(); i++) {
 			
 			'cari nama saldo yang sesuai di list saldo'
 			def modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'),
-				 'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/"+
-				 "lib-balance-summary/div/div["+ (i) +"]/div/div/div/div/div[1]/span", true)
+				 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + i + ']/div/div/div/div/div[1]/span', true)
 			
 			'tambahkan nama saldo ke array'
 			activeBalanceUI.add(WebUI.getText(modifyNamaSaldo))
@@ -179,9 +170,6 @@ WebUI.closeBrowser()
 'fungsi untuk filter saldo berdasarkan input user'
 def filterSaldo() {
 	
-	'driver chrome untuk pengalihan proses download'
-	WebDriver driver = DriverFactory.getWebDriver()
-	
 	'isi field input tipe saldo'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
 		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
@@ -204,7 +192,6 @@ def filterSaldo() {
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
 	}
-	
 	
 	'isi field input tipe saldo'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/inputtipesaldo'), 
@@ -275,57 +262,48 @@ def filterSaldo() {
 	WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Set Ulang'))
 	
 	'verify field tipe saldo ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
-		findTestObject('Object Repository/Saldo/Page_Balance/inputtipesaldo'),
-		'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/Page_Balance/inputtipesaldo'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE), '',
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field tipe transaksi ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
-		findTestObject('Object Repository/Saldo/Page_Balance/inputtipetransaksi'),
-		'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/Page_Balance/inputtipetransaksi'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE), '',
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field tanggal transaksi awal ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
-		findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Dari_transactionDateStart'),
-		'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Dari_transactionDateStart'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE), '',
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field pengguna ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
-		findTestObject('Object Repository/Saldo/Page_Balance/input_Pengguna_user'),
-		'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/Page_Balance/input_Pengguna_user'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE), '',
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field hasil proses ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
-		findTestObject('Object Repository/Saldo/Page_Balance/inputhasilproses'),
-		'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/Page_Balance/inputhasilproses'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE), '',
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field ref number ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
-		findTestObject('Object Repository/Saldo/Page_Balance/input_Ref Number_referenceNo'),
-		'value', FailureHandling.CONTINUE_ON_FAILURE),'',
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/Page_Balance/input_Ref Number_referenceNo'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE), '',
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field nama dokumen ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
-		findTestObject('Object Repository/Saldo/Page_Balance/input_Nama Dokumen_documentName'),
-		'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/Page_Balance/input_Nama Dokumen_documentName'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE), '',
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field tanggal transaksi akhir ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
-		findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Sampai_transactionDateEnd'),
-		'value', FailureHandling.CONTINUE_ON_FAILURE), '', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Sampai_transactionDateEnd'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE), '',
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'verify field kantor ter-reset'
-	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
-		findTestObject('Object Repository/Saldo/Page_Balance/inputkantor'),
-		'value', FailureHandling.CONTINUE_ON_FAILURE),'', 
+	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/Page_Balance/inputkantor'),
+		'value', FailureHandling.CONTINUE_ON_FAILURE), '',
 			false, FailureHandling.CONTINUE_ON_FAILURE))
 
 	'isi field input tipe saldo'
@@ -346,8 +324,7 @@ def filterSaldo() {
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/button_Cari'))
 	
 	'jika hasil pencarian tidak memberikan hasil'
-	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/Page_Balance/hasil search'), 
-		GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/Page_Balance/hasil search'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 	
 		GlobalVariable.FlagFailed = 1
 		
@@ -363,14 +340,7 @@ def filterSaldo() {
 	'user menentukan apakah file yang didownload langsung dihapus atau tidak lewat excel'
 	String flagDelete = findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Delete File ?(Yes/No)'))
 	
-	'mengambil alamat dari project katalon ini'
-	String userDir = System.getProperty('user.dir')
-	
-	'directory tempat file akan didownload'
-	String filePath = userDir + '\\Download'
-	
 	if (downloadFile == 'Yes') {
-		
 		'klik pada tombol unduh excel'
 		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Unduh Excel'))
 		
@@ -381,7 +351,6 @@ def filterSaldo() {
 		
 		'jika file tidak terdeteksi telah terdownload'
 		if (!WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL)) {
-			
 			GlobalVariable.FlagFailed = 1
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
@@ -427,18 +396,13 @@ def checkTableandPaging(Connection connection, String tenantcode, String tipeSal
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'cari button skip di footer'
-		def elementbuttonskip = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout >'+
-			' div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 >'+
-				' app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
+		def elementbuttonskip = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 > app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
 		
 		'ambil banyaknya laman footer'
 		int lastPage = elementbuttonskip.size()
 		
 		'ubah path object button next page'
-		def modifybuttonNextPage = WebUI.modifyObjectProperty(findTestObject('Object Repository/Saldo/'+
-			'Page_Balance/modifybuttonpage'),'xpath','equals', 
-			"/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/"+
-			"app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li["+ (lastPage-1) +"]", true)
+		def modifybuttonNextPage = WebUI.modifyObjectProperty(findTestObject('Object Repository/Saldo/Page_Balance/modifybuttonpage'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li[' + lastPage - 1 + ']', true)
 
 		'klik tombol next page'
 		WebUI.click(modifybuttonNextPage)
@@ -460,10 +424,7 @@ def checkTableandPaging(Connection connection, String tenantcode, String tipeSal
 		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/lastPage'))
 		
 		'ubah path object button laman terakhir'
-		def modifybuttonMaxPage = WebUI.modifyObjectProperty(findTestObject('Object Repository/Saldo/'+
-			'Page_Balance/modifybuttonpage'),'xpath','equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/"+
-			"app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/"+
-			"datatable-pager/ul/li["+ (lastPage-2) +"]", true)
+		def modifybuttonMaxPage = WebUI.modifyObjectProperty(findTestObject('Object Repository/Saldo/Page_Balance/modifybuttonpage'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li[' + lastPage - 2 + ']', true)
 		
 		'verify paging di page terakhir'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(modifybuttonMaxPage, 
@@ -518,7 +479,7 @@ def checkVerifyReset(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
-			GlobalVariable.StatusFailed,(findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
 				';') + GlobalVariable.FailedReasonSetFailed)
 
 		GlobalVariable.FlagFailed = 1
@@ -549,5 +510,5 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }
