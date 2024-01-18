@@ -125,12 +125,11 @@ public class WriteExcel {
 					rowNum = i
 					break
 				}
-			} catch(Exception e) {
+			} catch (IllegalArgumentException e) {
 				e.printStackTrace()
 			}
 		}
 		file.close()
 		rowNum + 1
 	}
-	
 }
