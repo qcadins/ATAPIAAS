@@ -361,7 +361,6 @@ def tableTrxNumber() {
 								
 		'simpan nomor transaction number ke string'
 		noTrx = WebUI.getText(modifytrxnumber)
-	
 	} else {
 		noTrx = ''
 	}

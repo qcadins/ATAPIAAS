@@ -126,10 +126,11 @@ public class WriteExcel {
 					break
 				}
 			} catch (IllegalArgumentException e) {
-				e.printStackTrace()
+				org.slf4j.LoggerFactory.getLogger(WriteExcel.class).error("An IllegalArgumentException occurred: {}", e.getMessage(), e)
 			}
 		}
 		file.close()
 		rowNum + 1
 	}
+	
 }

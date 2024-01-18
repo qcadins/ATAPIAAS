@@ -1,15 +1,10 @@
-import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import java.sql.Connection
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testobject.TestObject as TestObject
-import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
-import org.openqa.selenium.By
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
@@ -27,16 +22,13 @@ WebUI.openBrowser('')
 WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(1, 2))
 
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
-	
 	GlobalVariable.FlagFailed = 0
 	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
-		
 		break
 	} else if (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted') ||
 		findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Warning')) {
-		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Mandatory Complete')))
 		
@@ -76,7 +68,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			'cek apakah inputan nya masih ada'
 			checkVerifyEqualorMatch(WebUI.verifyMatch(
-				WebUI.getAttribute(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input__email'),'value', FailureHandling.OPTIONAL),
+				WebUI.getAttribute(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input__email'), 'value', FailureHandling.OPTIONAL),
 						findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')), false, FailureHandling.OPTIONAL),
 						'Field email tidak tersimpan setelah klik periksa lagi')
 			
@@ -104,12 +96,10 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				continue
 			}
 		} else {
-			
 			'klik pada tombol batal'
 			WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/button_Batal'))
 			
 			if (isMandatoryComplete != 0) {
-				
 				'tulis adanya error pada sistem web'
 				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
@@ -131,7 +121,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'pengecekan untuk pakai code yang salah'
 		if (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama Tenant')) == 'No') {
-			
 			'input reset code dari DB'
 			WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input_resetCode'),
 				resetCodefromDB[0])
@@ -139,12 +128,10 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			resendFunction(conndev, countResend, resetCodefromDB)
 			
 			'panggil fungsi konfirmasi verif'
-			if(verifConfirmation() == true) {
-				
+			if (verifConfirmation() == true) {
 				continue
 			}
 		} else {
-			
 			'input code yang salah dari DB'
 			WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input_resetCode'),
 				findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Industry')))
@@ -152,8 +139,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			resendFunction(conndev, countResend, resetCodefromDB)
 			
 			'panggil fungsi konfirmasi verif'
-			if(verifConfirmation() == true) {
-				
+			if (verifConfirmation() == true) {
 				continue
 			}
 		}
@@ -199,7 +185,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		'check apakah muncul error'
 		if (WebUI.getText(findTestObject('Object Repository/Forgot Password/Page_Reset Password/div_NotifPop'),
 			FailureHandling.OPTIONAL) != 'Kata sandi Anda telah berhasil diganti') {
-			
 			'ambil error dan get text dari error tersebut'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
@@ -213,7 +198,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			continue
 		} else {
-			
 			'klik pada tombol OK'
 			WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Reset Password/button_OK_notif'))
 		}
@@ -261,7 +245,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 WebUI.closeBrowser()
 
 def verifConfirmation() {
-	
 	boolean shouldContinue = false
 	
 	'klik pada button verifikasi'
@@ -270,7 +253,6 @@ def verifConfirmation() {
 	'check apakah muncul error'
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Forgot Password/Page_Reset Password/div_NotifPop'),
 		GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-		
 		'ambil error dan get text dari error tersebut'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
@@ -288,17 +270,15 @@ def verifConfirmation() {
 		shouldContinue = true
 	}
 	
-	return shouldContinue
+	shouldContinue
 }
 
 def resendFunction(Connection conndev, int countResend, ArrayList resetCodefromDB) {
-	
 	'cek apakah perlu resend reset code'
 	if (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Jenis Kelamin')) == 'Yes') {
 		
 		'ulangi sesuai flag dari excel'
 		for (int i = 1; i <= countResend; i++) {
-			
 			WebUI.delay(117)
 			
 			'klik pada resend code'
@@ -312,8 +292,7 @@ def resendFunction(Connection conndev, int countResend, ArrayList resetCodefromD
 				findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login'))))
 			
 			'cek apakah resend gagal'
-			if (resetCodefromDB[i-1] == resetCodefromDB[i]) {
-				
+			if (resetCodefromDB[i - 1] == resetCodefromDB[i]) {
 				GlobalVariable.FlagFailed = 1
 				
 				'tulis adanya error pada resend'
@@ -342,5 +321,5 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 }
 
 def rowExcel(String cellValue) {
-	return CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }
