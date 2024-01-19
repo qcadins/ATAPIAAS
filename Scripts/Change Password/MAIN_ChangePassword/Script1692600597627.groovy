@@ -1,9 +1,7 @@
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
@@ -107,7 +105,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		'pastikan tombol lanjut tidak disabled'
 		if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Change Password/Page_Change Password/button_Lanjut'),
 			'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-		
 			'klik pada tombol lanjut'
 			WebUI.click(findTestObject('Object Repository/Change Password/Page_Change Password/button_Lanjut'))
 			
@@ -211,12 +208,12 @@ def loginFunction(int row) {
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		
 		'cari element dengan nama role'
-		def elementRole = DriverFactory.webDriver.findElements(By.cssSelector('body > ngb-modal-window > div > div > app-multi-role > div > div.row > div > table tr'))
+		elementRole = DriverFactory.webDriver.findElements(By.cssSelector('body > ngb-modal-window > div > div > app-multi-role > div > div.row > div > table tr'))
 		
 		'lakukan loop untuk cari nama role yang ditentukan'
 		for (int i = 1; i <= elementRole.size() - 1; i++) {
 			'cari nama role yag sesuai di opsi role'
-			def modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr[' + i + 1 + ']/td[1]', true)
+			modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr[' + i + 1 + ']/td[1]', true)
 	
 			'jika nama object sesuai dengan nama role'
 			if (findTestData(ExcelPathChangePass).getValue(GlobalVariable.NumOfColumn, rowExcel('Pilih Role')).equalsIgnoreCase(
@@ -234,7 +231,7 @@ def loginFunction(int row) {
 	
 	'cek apakah muncul error gagal login'
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/ErrorMsg')
-		,GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		GlobalVariable.FlagFailed = 1
 	
 		'tulis adanya error pada sistem web'

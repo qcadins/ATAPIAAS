@@ -109,7 +109,7 @@ public class WriteExcel {
 
 		filePath
 	}
-	
+
 	@Keyword
 	emptyCellRange(String filePath, String sheetName, int startRow, int endRow, int column) throws Exception {
 		file = new FileInputStream(new File(filePath)) //initiate excel repository
@@ -120,7 +120,7 @@ public class WriteExcel {
 			if (currentRow != null) {
 				cell = currentRow.getCell(column)
 				if (cell != null) {
-					cell.setCellValue('')
+					cell.cellValue = ''
 				}
 			}
 		}
@@ -148,7 +148,7 @@ public class WriteExcel {
 					break
 				}
 			} catch (IllegalArgumentException e) {
-				org.slf4j.LoggerFactory.getLogger(WriteExcel.class).error("An IllegalArgumentException occurred: {}", e.getMessage(), e)
+				org.slf4j.LoggerFactory.getLogger(WriteExcel).error("An IllegalArgumentException occurred: {}", e.message, e)
 			}
 		}
 		file.close()

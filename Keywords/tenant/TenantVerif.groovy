@@ -7,6 +7,7 @@ import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
 public class TenantVerif {
+	
 	int columnCount
 
 	//fungsi mengambil jumlah tenant
@@ -19,7 +20,6 @@ public class TenantVerif {
 		ResultSet resultSet = stm.executeQuery("select count(*) from esign.ms_tenant")
 
 		while (resultSet.next()) {
-
 			data = resultSet.getObject(1)
 		}
 		data
@@ -77,7 +77,6 @@ public class TenantVerif {
 		columnCount = metadata.columnCount
 
 		while (resultSet.next()) {
-
 			data = resultSet.getObject(1)
 		}
 		data
@@ -93,7 +92,6 @@ public class TenantVerif {
 		ResultSet resultSet = stm.executeQuery("Select ml.id_lov FROM esign.ms_balancevendoroftenant mbt join esign.ms_tenant mt on mt.id_ms_tenant = mbt.id_ms_tenant Join esign.ms_lov ml on ml.id_lov = mbt.lov_balance_type Where mt.tenant_code = '" + tenantcode + "' AND ml.code = '" + testedOCR + "'")
 
 		while (resultSet.next()) {
-
 			data = resultSet.getObject(1)
 		}
 
@@ -134,5 +132,5 @@ public class TenantVerif {
 		}
 		listdata
 	}
-	
+
 }

@@ -7,7 +7,7 @@ import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
 public class UserVerif {
-	
+
 	int columnCount, updateVariable
 
 	//fungsi mengambil jumlah tenant
@@ -77,9 +77,9 @@ public class UserVerif {
 		ResultSet resultSet = stm.executeQuery("SELECT case when is_active = '0' THEN 'Tidak Aktif' WHEN is_active = '1' Then 'Aktif' WHEN is_active = '2' Then 'Belum verifikasi' END FROM am_msuser WHERE login_id = '" + email + "'")
 
 		while (resultSet.next()) {
-			data = resultSet.getObject(1);
+			data = resultSet.getObject(1)
 		}
 		data
 	}
-	
+
 }

@@ -7,7 +7,7 @@ import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
 public class RoleVerif {
-	
+
 	int columnCount
 
 	//fungsi mengambil jumlah tenant
@@ -28,7 +28,6 @@ public class RoleVerif {
 	//fungsi mengambil jumlah tenant
 	@Keyword
 	getNamaRole(Connection conn, String namarole) {
-
 		String data
 
 		Statement stm = conn.createStatement()
@@ -101,5 +100,5 @@ public class RoleVerif {
 		}
 		listdata
 	}
-	
+
 }
