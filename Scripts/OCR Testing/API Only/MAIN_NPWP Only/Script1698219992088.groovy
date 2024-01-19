@@ -4,9 +4,6 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.testobject.ResponseObject
 import java.sql.Connection
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase
-import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable
@@ -94,7 +91,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			1, elapsedTime.toString())
 			
 		if (stateocr == null || stateocr == '') {
-			
 			'write to excel status failed dan reason'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
@@ -190,7 +186,7 @@ def rowExcel(String cellValue) {
 
 def todayDate() {
 	'ambil tanggal hari ini'
-	Date currentDate = new Date()
+	currentDate = new Date()
 	
 	'buat format menjadi yyyyMMDD'
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.US)
@@ -203,11 +199,10 @@ def todayDate() {
 }
 
 def processHourOnly(String time) {
-	
 	parts = time.split('T')
 	String timePart = parts[1]
 	
-	String result = timePart.replaceAll('[:+]', '').replace('0700', '');
+	String result = timePart.replaceAll('[:+]', '').replace('0700', '')
 	
 	result
 }

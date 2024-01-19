@@ -4,9 +4,6 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.testobject.ResponseObject
 import java.sql.Connection
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase
-import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable
@@ -42,8 +39,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
 		break
-	} 
-	else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
+	} else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
 		'ambil kode tenant di DB'
 		String tenantcode = CustomKeywords.'ocrtesting.GetParameterfromDB.getTenantCodefromDB'(conn,
 			findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('UsernameLogin')))
@@ -96,7 +92,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			1, elapsedTime.toString())
 			
 		if (state == null || state == '') {
-			
 			'write to excel status failed dan reason'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
@@ -109,7 +104,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (!state.equalsIgnoreCase('key or tenant invalid') &&
 			((WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) ||
 				(WS.verifyResponseStatusCode(response, 500, FailureHandling.OPTIONAL) == true))) {
-			
 			'ambil waktu hit untuk sebagai acuan nama file log'
 			timeOcrhit = processHourOnly(ocrdate)
 			
@@ -140,7 +134,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			'jika perlu cek log dijalankan'
 			if (GlobalVariable.checkLog == 'Yes') {
-				
 				'jika browser belum pernah dibuka'
 				if (firstRun == 0) {
 					'panggil testcase open browser'
@@ -175,9 +168,10 @@ WebUI.closeBrowser()
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
 }
+
 def todayDate() {
 	'ambil tanggal hari ini'
-	Date currentDate = new Date()
+	currentDate = new Date()
 	
 	'buat format menjadi yyyyMMDD'
 	SimpleDateFormat dateFormat = new SimpleDateFormat('yyyyMMdd', Locale.US)
@@ -190,7 +184,6 @@ def todayDate() {
 }
 
 def processHourOnly(String time) {
-	
 	parts = time.split('T')
 	String timePart = parts[1]
 	

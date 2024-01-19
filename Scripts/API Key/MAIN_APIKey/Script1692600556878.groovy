@@ -5,15 +5,12 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import java.sql.Connection
 
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase as TestCase
-import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
 'deklarasi variable connection'
-Connection conn
+Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
@@ -21,9 +18,6 @@ GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPa
 if (GlobalVariable.SettingEnvi == 'Production') {
 	'deklarasi koneksi ke Database eendigo_dev'
 	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
-} else if (GlobalVariable.SettingEnvi == 'Trial') {
-	'deklarasi koneksi ke Database eendigo_dev_uat'
-	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 }
 
 conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
@@ -35,10 +29,8 @@ int countColumnEdit = findTestData(ExcelPathAPIKey).columnNumbers, isLoggedin = 
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
 	if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
-		
 		break
 	} else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
-		
 		'reset failed dari 0'
 		GlobalVariable.FlagFailed = 0
 		
@@ -46,7 +38,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Mandatory Complete')))
 		
 		if (isLoggedin == 0) {
-			
 			'panggil fungsi login'
 			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Key', ('SheetName') : sheet,
 				('Path') : ExcelPathAPIKey], FailureHandling.STOP_ON_FAILURE)
@@ -66,19 +57,16 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'cek apakah tombol menu dalam jangkauan web'
 		if (WebUI.verifyElementVisible(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'), FailureHandling.OPTIONAL)) {
-			
 			'klik pada tombol silang menu'
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
 		}
 		
 		if (GlobalVariable.NumOfColumn == 2) {
-			
 			checkpaging(conndev)
 		}
 		
 		'panggil fungsi copy link'
 		if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Copy API Link?(Yes/No)')) == 'Yes') {
-			
 			'klik tombol COPY LINK'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/buttonCopy'))
 				
@@ -90,14 +78,10 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'cek perlu nya pemanggilan fungsi add atau edit'
 		if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Add API KEY?(Yes/No)')) == 'Yes') {
-			
 			'panggil fungsi Add API KEY'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/AddAPIKey'),
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
-			
-		} 
-		else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Edit API KEY?(Yes/No)')) == 'Yes') {
-			
+		} else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Edit API KEY?(Yes/No)')) == 'Yes') {
 			'panggil fungsi Edit API Key'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'),
 				[('conn'): conndev], FailureHandling.CONTINUE_ON_FAILURE)
@@ -105,7 +89,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 
 		'kondisi jika tidak ada error'
 		if (GlobalVariable.FlagFailed == 0) {
-			
 			'tulis status sukses pada excel'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess, GlobalVariable.SuccessReason)
@@ -117,7 +100,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 WebUI.closeBrowser()
 
 def checkpaging(Connection conn) {
-	
 	String optiontipe, optionstatus
 	
 	int arrayIndex = 0
@@ -184,11 +166,14 @@ def checkpaging(Connection conn) {
 	
 	'jika semua pilihan ddl kembali ke "ALL"'
 	if (optiontipe.contains('-0') && optionstatus.contains('-0')) {
-		
 		'klik tombol cari'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
 	}
 	
+	checkPagingDetail(conn)
+}
+
+def checkPagingDetail(Connection conn) {
 	'kumpulan string dari DB'
 	String totaldataDB = CustomKeywords.'apikey.CheckAPIKey.getTotalAPIKeyfromDB'(conn,
 		findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
@@ -196,7 +181,6 @@ def checkpaging(Connection conn) {
 	checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Api Key List/PageFooter')), totaldataDB, false, FailureHandling.CONTINUE_ON_FAILURE), 'Total data tabel tidak sesuai DB')
 	
 	if (WebUI.verifyElementVisible(findTestObject('Object Repository/API_KEY/Page_Api Key List/isPagingEnabled'), FailureHandling.OPTIONAL)) {
-		
 		'klik panah ke kanan di footer'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/next_page'))
 		
@@ -237,23 +221,19 @@ def checkpaging(Connection conn) {
 
 'fungsi cek halaman'
 def checkVerifyFooter() {
-	
 	'fokus ke halaman yang sedang dipilih'
 	int pageCheck = Integer.parseInt(
 		WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_Api Key List/PageFooter'), 'ng-reflect-page'))
 	
 	'halaman yang dipilih harus sama dengan yang di sistem'
 	if (GlobalVariable.PageNum == pageCheck) {
-		
 		GlobalVariable.PageNum -= 1
 		if (GlobalVariable.PageNum < 1) {
-			
 			GlobalVariable.PageNum = 2
 		}
 	}
 	//tulis halaman error jika tidak sesuai
 	else {
-		
 		GlobalVariable.FlagFailed = 1
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';')
@@ -269,11 +249,9 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 		GlobalVariable.FailedReasonVerifyEqualorMatch + reason)
-		
 	}
 }
 
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
-	
 }

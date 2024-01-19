@@ -3,8 +3,6 @@ package profile
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.annotation.Keyword
-import com.kms.katalon.core.testdata.TestData
-import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import java.sql.Connection
 import java.sql.Statement
@@ -59,7 +57,7 @@ public class CheckProfile {
 		select = new Select(DriverFactory.webDriver.findElement(By.xpath("//select[@id='countryCodes']")))
 
 		'ambil text yang diselect oleh dropdown list tersebut'
-		optionLabel = select.getFirstSelectedOption().text
+		optionLabel = select.firstSelectedOption.text
 
 		'kumpulan string yang menyimpan hasil text dari User Interface APIAAS'
 		ArrayList hasilgetText = []
@@ -81,8 +79,7 @@ public class CheckProfile {
 		'mengambil value dari gender'
 		if (findTestData('APIAAS/DataEditProfile').getValue(GlobalVariable.NumOfColumn, 15) == 'M') {
 			hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/Profile/Page_Edit Profile/input__radioMale'), 'value'))
-		}
-		else {
+		} else {
 			hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/Profile/Page_Edit Profile/input__radioFemale'), 'value'))
 		}
 
@@ -137,5 +134,5 @@ public class CheckProfile {
 		}
 		data
 	}
-	
+
 }

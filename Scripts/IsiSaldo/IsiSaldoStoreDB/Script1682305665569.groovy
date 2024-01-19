@@ -1,10 +1,8 @@
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
-import java.util.Date
 
 'get current date'
 Date currentDate = new Date().format('yyyy-MM-dd')
@@ -63,7 +61,6 @@ if (autoIsiSaldo == '') {
 	arrayMatch.add(WebUI.verifyMatch(
 		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tanggal Pembelian (YYYY-MM-DD)')).toUpperCase(),
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
-	
 } else if (autoIsiSaldo == 'Yes') {
 	'verify tenant'
 	arrayMatch.add(WebUI.verifyMatch(
@@ -74,7 +71,6 @@ if (autoIsiSaldo == '') {
 		'verify vendor'
 		arrayMatch.add(WebUI.verifyMatch('ESIGN/ADINS',
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE))
-		
 	} else if (GlobalVariable.SettingEnvi == 'Trial') {
 		'verify vendor'
 		arrayMatch.add(WebUI.verifyMatch('ADINS',
@@ -114,5 +110,4 @@ if (arrayMatch.contains(false)) {
 
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
-	
 }

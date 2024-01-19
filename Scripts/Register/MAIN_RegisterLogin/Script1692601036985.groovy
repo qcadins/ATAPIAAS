@@ -2,9 +2,7 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable
@@ -69,7 +67,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.delay(5)
 		
 		if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-		
 			'mengambil otp dari db, disimpan ke iniotp'
 			ArrayList<String> iniotp = []
 	
@@ -84,14 +81,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'fungsi yang menyesuaikan keperluan ambil otp dari DB'
 			if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('AutofillOTP(Yes/No)')) == 'Yes') {
-				
 				'input otp dari DB'
 				WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), iniotp[0])
 				
 				if (resendotp == 'Yes') {
-					
 					for (int i = 0; i < countresend; i++) {
-						
 						'tunggu button resend otp'
 						WebUI.delay(116)
 						
@@ -106,7 +100,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						iniotp.add(OTP)
 						
 						if (!WebUI.verifyNotMatch(iniotp[i], iniotp[i + 1], false, FailureHandling.CONTINUE_ON_FAILURE)) {
-							
 							GlobalVariable.FlagFailed = 1
 							
 							'tulis gagal resend otp ke excel'
@@ -121,7 +114,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						'klik pada button verifikasi otp'
 						WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_Verifikasi'))
 						
-						if(WebUI.verifyElementPresent(
+						if (WebUI.verifyElementPresent(
 							findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'), 
 							GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) {
 							
@@ -153,8 +146,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('ManualOTP')))
 				
 				if (resendotp == 'Yes') {
-					
-						for (int i=0; i < countresend; i++) {
+						for (int i = 0; i < countresend; i++) {
 							'tunggu button resend otp'
 							WebUI.delay(116)
 							
@@ -168,8 +160,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							'mengambil otp dari db, disimpan ke iniotp'
 							iniotp.add(OTP)
 
-							if (!WebUI.verifyNotMatch(iniotp[i], iniotp[i+1], false, FailureHandling.CONTINUE_ON_FAILURE)) {
-							
+							if (!WebUI.verifyNotMatch(iniotp[i], iniotp[i + 1], false, FailureHandling.CONTINUE_ON_FAILURE)) {
 								GlobalVariable.FlagFailed = 1
 								
 								'tulis gagal resend otp ke excel'
@@ -179,7 +170,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							}	
 							
 							'input otp dari DB'
-							WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), iniotp[i+1])
+							WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input otp'), iniotp[i + 1])
 						}
 					}
 					
@@ -195,7 +186,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				
 				if (WebUI.verifyElementPresent(
 					findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'), GlobalVariable.Timeout, FailureHandling.CONTINUE_ON_FAILURE)) {
-					
 					'klik ok pada verifikasi alert'
 					WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/button_OK'))
 					
@@ -231,7 +221,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'jika berhasil login akan muncul object dibawah'
 		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/dropdownProfile'),
 			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-		
 			'jalankan verifikasi atas proses registrasi yang berhasil'
 			verifyregistration(conn, findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email registrasi')))
 			
@@ -249,7 +238,6 @@ if (GlobalVariable.continueTC == 'Yes') {
 }
 
 def verifyregistration(Connection conn, String email) {
-	
 	'deklarasi arrayindex untuk traversing array'
 	int arrayIndex = 0
 	
@@ -265,8 +253,8 @@ def verifyregistration(Connection conn, String email) {
 
 def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 	if (isMatch == false) {
-		
 		GlobalVariable.FlagFailed = 1
+		
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +

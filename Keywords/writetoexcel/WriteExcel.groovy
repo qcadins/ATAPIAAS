@@ -4,9 +4,9 @@ import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import com.kms.katalon.core.annotation.Keyword
 import internal.GlobalVariable
-
 import org.apache.poi.xssf.usermodel.XSSFCell
 import org.apache.poi.xssf.usermodel.XSSFRow
+import org.apache.poi.ss.usermodel.Row
 
 public class WriteExcel {
 
@@ -109,6 +109,28 @@ public class WriteExcel {
 
 		filePath
 	}
+	
+	@Keyword
+	emptyCellRange(String filePath, String sheetName, int startRow, int endRow, int column) throws Exception {
+		file = new FileInputStream(new File(filePath)) //initiate excel repository
+		workbook = new XSSFWorkbook(file)
+		sheet = workbook.getSheet(sheetName)
+		for (int row = startRow; row <= endRow; row++) {
+			Row currentRow = sheet.getRow(row)
+			if (currentRow != null) {
+				cell = currentRow.getCell(column)
+				if (cell != null) {
+					cell.setCellValue('')
+				}
+			}
+		}
+
+		FileOutputStream fos = new FileOutputStream(filePath)
+		workbook.write(fos)
+		fos.close()
+		workbook.close()
+		file.close()
+	}
 
 	//keyword getExcelRow
 	@Keyword
@@ -132,5 +154,5 @@ public class WriteExcel {
 		file.close()
 		rowNum + 1
 	}
-	
+
 }

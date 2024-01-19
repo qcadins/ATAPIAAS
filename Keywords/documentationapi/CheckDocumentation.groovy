@@ -3,7 +3,6 @@ package documentationapi
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 
 import com.kms.katalon.core.annotation.Keyword
-import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import java.sql.Connection
 import java.sql.Statement
@@ -12,7 +11,7 @@ import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
 public class CheckDocumentation {
-	
+
 	int columnCount
 
 	@Keyword
@@ -60,7 +59,6 @@ public class CheckDocumentation {
 	//fungsi digunakan untuk mengambil text dari dropdownlist documentation API
 	@Keyword
 	getValueDDLDocumentationAPI() {
-
 		String ariachoice, ariaid
 
 		ariaid = WebUI.getAttribute(findTestObject('Object Repository/API_KEY/Page_API Documentation/input'), 'aria-owns')
@@ -69,7 +67,7 @@ public class CheckDocumentation {
 
 		for (int i = 0; i < 10; i++) {
 			ariachoice = ariaid + '-' + i
-			
+
 			switch (true) {
 				case ariachoice.contains('-0'):
 					hasilddl.add('OCR BPKB')
@@ -105,5 +103,5 @@ public class CheckDocumentation {
 		}
 		hasilddl
 	}
-	
+
 }

@@ -3,13 +3,12 @@ package dbconnection
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 
 import com.kms.katalon.core.annotation.Keyword
-import com.kms.katalon.core.testdata.TestData
 
 import java.sql.Connection
 import java.sql.DriverManager
 
 public class Connect {
-	
+
 	String pathLogin = 'Data Files/Login/Login'
 
 	//fungsi digunakan untuk koneksi dengan database eendigo_prod_test_deploy_modify
@@ -91,4 +90,5 @@ public class Connect {
 
 		conn
 	}
+	
 }

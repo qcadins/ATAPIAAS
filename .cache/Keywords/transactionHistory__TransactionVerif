@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "A866AF38A242229332B6DD0019C663BD",
+  "keywordFileContentHash": "DE311525701E3364A21CF013ED31C82D",
   "keywordClasses": [
     {
       "name": "transactionhistory.TransactionVerif",
@@ -33,8 +33,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getTenantList",
@@ -52,8 +51,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getDDLTipeIsiUlang",
@@ -71,8 +69,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getDDLMetodeTrf",
@@ -90,8 +87,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getRoleofUser",
@@ -122,8 +118,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getRiwayatDetail",
@@ -154,8 +149,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getNPWPnumUser",
@@ -186,8 +180,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getServiceCheck",
@@ -218,8 +211,7 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         },
         {
           "name": "getstatusafterConfirmOrReject",
@@ -250,11 +242,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

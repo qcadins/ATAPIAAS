@@ -3,14 +3,11 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import java.sql.Connection
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase as TestCase
-import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
-import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 
 'mencari directory excel\r\n'
@@ -88,13 +85,12 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		ArrayList activeBalanceUI = [], arrayMatch = []
 		
 		'cari element dengan nama saldo'
-		def elementNamaSaldo = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
+		elementNamaSaldo = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
 		
 		'lakukan loop untuk cari nama saldo yang ditentukan'
 		for (int i = 1; i <= elementNamaSaldo.size(); i++) {
-			
 			'cari nama saldo yang sesuai di list saldo'
-			def modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'),
+			modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'),
 				 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + i + ']/div/div/div/div/div[1]/span', true)
 			
 			'tambahkan nama saldo ke array'
@@ -123,13 +119,10 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'check if mandatory complete dan button simpan clickable'
 		if ((isMandatoryComplete == 0) && GlobalVariable.FlagFailed == 0) {
-			
 			'write to excel success'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0,
 				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
-			
 		} else if (isMandatoryComplete > 0) {
-			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
@@ -140,8 +133,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'cek apakah muncul error unknown setelah refresh'
 		if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
-			GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
-			
+				GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
@@ -169,7 +161,6 @@ WebUI.closeBrowser()
 
 'fungsi untuk filter saldo berdasarkan input user'
 def filterSaldo() {
-	
 	'isi field input tipe saldo'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
 		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
@@ -184,7 +175,6 @@ def filterSaldo() {
 	'jika hasil pencarian tidak memberikan hasil'
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/Page_Balance/hasil search'), 
 		GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-	
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
@@ -248,8 +238,7 @@ def filterSaldo() {
 	
 	'jika hasil pencarian tidak memberikan hasil'
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/Page_Balance/hasil search'), 
-		GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-	
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
@@ -261,6 +250,14 @@ def filterSaldo() {
 	'klik pada tombol set ulang'
 	WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Set Ulang'))
 	
+	'panggil fungsi verifikasi input ter-reset ulang'
+	verifyReset()
+	
+	'panggil fungsi filter saldo detail'
+	filterSaldoDetail()
+}
+
+def verifyReset() {
 	'verify field tipe saldo ter-reset'
 	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/Page_Balance/inputtipesaldo'),
 		'value', FailureHandling.CONTINUE_ON_FAILURE), '',
@@ -305,16 +302,18 @@ def filterSaldo() {
 	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/Saldo/Page_Balance/inputkantor'),
 		'value', FailureHandling.CONTINUE_ON_FAILURE), '',
 			false, FailureHandling.CONTINUE_ON_FAILURE))
+}
 
+def filterSaldoDetail() {
 	'isi field input tipe saldo'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'),
 		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
 	
 	'isi field tipe transaksi'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), 
+	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'),
 		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Transaksi')))
 	
 	'pencet enter'
@@ -363,7 +362,6 @@ def filterSaldo() {
 
 'fungsi langsung ke laman akhir'
 def checkTableandPaging(Connection connection, String tenantcode, String tipeSaldo) {
-	
 	'ambil total data yang dicari dari DB'
 	int resultTotalData = CustomKeywords.'saldo.VerifSaldo.getCountTotalData'(connection, tenantcode, tipeSaldo)
 	
@@ -376,7 +374,6 @@ def checkTableandPaging(Connection connection, String tenantcode, String tipeSal
 	'cek apakah button enable atau disable'
 	if (WebUI.verifyElementVisible(findTestObject('Object Repository/Saldo/Page_Balance/lastPage'), 
 		FailureHandling.OPTIONAL)) {
-		
 		'klik button page 2'
 		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/page2'))
 		
@@ -396,13 +393,13 @@ def checkTableandPaging(Connection connection, String tenantcode, String tipeSal
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'cari button skip di footer'
-		def elementbuttonskip = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 > app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
+		elementbuttonskip = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 > app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
 		
 		'ambil banyaknya laman footer'
 		int lastPage = elementbuttonskip.size()
 		
 		'ubah path object button next page'
-		def modifybuttonNextPage = WebUI.modifyObjectProperty(findTestObject('Object Repository/Saldo/Page_Balance/modifybuttonpage'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li[' + lastPage - 1 + ']', true)
+		modifybuttonNextPage = WebUI.modifyObjectProperty(findTestObject('Object Repository/Saldo/Page_Balance/modifybuttonpage'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li[' + lastPage - 1 + ']', true)
 
 		'klik tombol next page'
 		WebUI.click(modifybuttonNextPage)
@@ -424,7 +421,7 @@ def checkTableandPaging(Connection connection, String tenantcode, String tipeSal
 		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/lastPage'))
 		
 		'ubah path object button laman terakhir'
-		def modifybuttonMaxPage = WebUI.modifyObjectProperty(findTestObject('Object Repository/Saldo/Page_Balance/modifybuttonpage'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li[' + lastPage - 2 + ']', true)
+		modifybuttonMaxPage = WebUI.modifyObjectProperty(findTestObject('Object Repository/Saldo/Page_Balance/modifybuttonpage'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li[' + lastPage - 2 + ']', true)
 		
 		'verify paging di page terakhir'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(modifybuttonMaxPage, 
@@ -490,7 +487,7 @@ def checkVerifyPaging(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
-			GlobalVariable.StatusFailed,(findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + 
 				';') + GlobalVariable.FailedReasonPagingError)
 
 		GlobalVariable.FlagFailed = 1
@@ -499,7 +496,6 @@ def checkVerifyPaging(Boolean isMatch) {
 
 def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 	if (isMatch == false) {
-		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 			GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +

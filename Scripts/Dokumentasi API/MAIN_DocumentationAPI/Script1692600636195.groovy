@@ -2,9 +2,6 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testcase.TestCase as TestCase
-import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
@@ -79,22 +76,17 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('Delete File ?(Yes/No)')))
 		
 		'jika file tidak terunduh, tulis gagal'
-		if (WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL) && isMandatoryComplete == 0 &&
-			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('ClearDDL ? (Yes/No)')) == 'No') {
-			
+		if (WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL) && isMandatoryComplete == 0 && findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('ClearDDL ? (Yes/No)')) == 'No') {
 			'tulis status sukses pada excel'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 					GlobalVariable.SuccessReason)
-		} else if (WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL) &&
-			findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('ClearDDL ? (Yes/No)')) == 'Yes') {
-			
+		} else if (WebUI.verifyEqual(isDownloaded, true, FailureHandling.OPTIONAL) && findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('ClearDDL ? (Yes/No)')) == 'Yes') {
 			'tulis kondisi gagal'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusSuccess,
 					GlobalVariable.FailedReasonDownloadProblem + ' Bypass')
 		} else if (isMandatoryComplete > 0) {
-			
 			'tulis kondisi gagal'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
@@ -143,6 +135,7 @@ def checkVerifyEqualorMatch(Boolean isMatch) {
 	if (isMatch == false) {
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		GlobalVariable.FlagFailed = 1
+		
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, 
 			GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 			(findTestData(ExcelPathAPIDocs).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonDDL)
