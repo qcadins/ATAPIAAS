@@ -257,8 +257,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			WebUI.getAttribute(findTestObject('Object Repository/Top Up/Page_Topup Balance/totalprice'),
 				'value', FailureHandling.OPTIONAL).replace('.', '')), 'Total tidak sesuai')
 		
-		'ambil ppn dari DB'
-		int ppnfromDB = Integer.parseInt(CustomKeywords.'topup.TopupVerif.getPPNvalue'(conndev))
+//		'ambil ppn dari DB'
+//		int ppnfromDB = Integer.parseInt(CustomKeywords.'topup.TopupVerif.getPPNvalue'(conndev))
 		
 		'pilihan untuk pakai kupon'
 		if (findTestData(ExcelPathTopUp).getValue(GlobalVariable.NumOfColumn, rowExcel('TambahKupon?')) == 'Yes') {
@@ -284,10 +284,10 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					'lihat jenis nilai kupon'
 					if (coupondetail[1] == 'Percentage') {
 						'panggil fungsi kupon percentage'
-						couponPercentage(listServices, tempDataPrice, listJumlahisiUlang, coupondetail, ppnfromDB)
+						couponPercentage(listServices, tempDataPrice, listJumlahisiUlang, coupondetail)
 					} else if (coupondetail[1] == 'Nominal') {
 						'panggil fungsi kupon nominal'
-						couponNominal(listServices, tempDataPrice, listJumlahisiUlang, coupondetail, ppnfromDB)
+						couponNominal(listServices, tempDataPrice, listJumlahisiUlang, coupondetail)
 					}
 				} else {
 					GlobalVariable.FlagFailed = 1
@@ -500,7 +500,7 @@ def firstcheckInputCancel() {
 	WebUI.refresh()
 }
 
-def couponPercentage(ArrayList listServices, ArrayList tempDataPrice, ArrayList listJumlahisiUlang, ArrayList coupondetail, int ppnfromDB) {
+def couponPercentage(ArrayList listServices, ArrayList tempDataPrice, ArrayList listJumlahisiUlang, ArrayList coupondetail) {
 	'deklarasi string untuk sheet'
 	String sheetChoice
 	
@@ -565,7 +565,7 @@ def couponPercentage(ArrayList listServices, ArrayList tempDataPrice, ArrayList 
 }
 
 def couponNominal(ArrayList listServices, ArrayList tempDataPrice, ArrayList listJumlahisiUlang,
-	ArrayList coupondetail, int ppnfromDB) {
+	ArrayList coupondetail) {
 	
 	'deklarasi string untuk sheet'
 	String sheetChoice
@@ -779,16 +779,16 @@ def getLastTrx(String noTrxKatalon, Connection conndev) {
 	'lakukan loop untuk ambil data detail'
 	for (int i = 1; i <= variabledetail.size(); i++) {
 		'modifikasi object layanan transaksi'
-		def modifylayanandetail = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/Page_List Transaction History/layananDetail'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-transaction-history-detail/div/div[2]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + i + ']/datatable-body-row/div[2]/datatable-body-cell[1]/div/p', true)
+		modifylayanandetail = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/Page_List Transaction History/layananDetail'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-transaction-history-detail/div/div[2]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + i + ']/datatable-body-row/div[2]/datatable-body-cell[1]/div/p', true)
 	
 		'modifikasi object unit price transaksi'
-		def modifyunitpricedetail = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/Page_List Transaction History/unitpriceDetail'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-transaction-history-detail/div/div[2]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + i + ']/datatable-body-row/div[2]/datatable-body-cell[2]/div', true)
+		modifyunitpricedetail = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/Page_List Transaction History/unitpriceDetail'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-transaction-history-detail/div/div[2]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + i + ']/datatable-body-row/div[2]/datatable-body-cell[2]/div', true)
 
 		'modifikasi object jumlah transaksi'
-		def modifyjumlahdetail = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/Page_List Transaction History/jumlahDetail'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-transaction-history-detail/div/div[2]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + i + ']/datatable-body-row/div[2]/datatable-body-cell[3]/div', true)
+		modifyjumlahdetail = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/Page_List Transaction History/jumlahDetail'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-transaction-history-detail/div/div[2]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + i + ']/datatable-body-row/div[2]/datatable-body-cell[3]/div', true)
 
 		'modifikasi object subtotal transaksi'
-		def modifysubtotaldetail = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/Page_List Transaction History/subtotalDetail'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-transaction-history-detail/div/div[2]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + i + ']/datatable-body-row/div[2]/datatable-body-cell[4]/div', true)
+		modifysubtotaldetail = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/Page_List Transaction History/subtotalDetail'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-transaction-history-detail/div/div[2]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + i + ']/datatable-body-row/div[2]/datatable-body-cell[4]/div', true)
 		
 		'tambah hasil get text layanan ke array'
 		detail.add(WebUI.getText(modifylayanandetail))

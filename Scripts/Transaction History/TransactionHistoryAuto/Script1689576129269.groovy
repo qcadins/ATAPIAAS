@@ -3,8 +3,6 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import java.sql.Connection
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase as TestCase
-import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
@@ -27,9 +25,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		break
 	} else if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted') ||
 		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Warning')) {
-		'deklarasi variable integer'
-		int arrayIndex = 0
-		
 		'set penanda error menjadi 0'
 		GlobalVariable.FlagFailed = 0
 		
@@ -160,7 +155,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			'cek apakah perlu upload bukti pembayaran'
 			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Upload Pembayaran?')) == 'Yes') {
-				
 				'klik untuk bagian unggah pembayaran'
 				WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/view_UploadBukti'))
 				
@@ -207,7 +201,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 							('TrxType') : 'Upload', ('TrxNum') : trxNum, ('Sheet') : sheet],
 							 FailureHandling.CONTINUE_ON_FAILURE)
 					}
-					
 				} else if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/ErrorTopRight'),
 					GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 					'ambil error dan get text dari error tersebut'
@@ -220,8 +213,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/buttonBatal_upload'))
 				}
 			}
-		}
-		else if (roleUser.equalsIgnoreCase('Admin Finance Eendigo')) {
+		} else if (roleUser.equalsIgnoreCase('Admin Finance Eendigo')) {
 			'ambil nama Tenant dari DB'
 			ArrayList namaTenantDB = CustomKeywords.'transactionhistory.TransactionVerif.getTenantList'(conndev)
 			
@@ -347,13 +339,13 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 	searchadminEendigoFinance()
 	
 	'klik pada tombol approve/reject pembayaran'
-	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/'+ string2 +''))
+	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/' + string2 + ''))
 	
 	'klik pada tombol batal'
 	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/button_Tidak, batalkan'))
 	
 	'klik pada tombol approve/reject pembayaran'
-	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/'+ string2 +''))
+	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/' + string2 + ''))
 	
 	'klik pada tombol ya'
 	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/button_YaKonfirmReject'))
@@ -563,6 +555,47 @@ def checkPaging(Connection conndev) {
 	'klik pada button set ulang'
 	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/button_Set Ulang'))
 	
+	verifyReset()
+	
+	'cek apakah dropdown tenant muncul'
+	if (WebUI.verifyElementPresent(
+		findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		'verify field ke reset'
+		checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
+			findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
+				'value', FailureHandling.CONTINUE_ON_FAILURE), '', false, FailureHandling.CONTINUE_ON_FAILURE))
+	}
+	
+	'cek apakah dropdown tenant muncul'
+	if (WebUI.verifyElementPresent(
+		findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		'input tenant yang dituju'
+		WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
+			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')))
+	
+		'enter pada tenant'
+		WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
+			Keys.chord(Keys.ENTER))
+	}
+	
+	'klik pada tombol cari'
+	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/button_Cari'))
+	
+	'cek apakah hasil search gagal'
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_List Coupon/searchResult')
+		, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		GlobalVariable.FlagFailed = 1
+		
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+		GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
+		';') + GlobalVariable.FailedReasonSearchFailed)
+	}
+	
+	checkPagingDetail(conndev)
+}
+
+def verifyReset() {
 	'verify field ke reset'
 	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
 		findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/input_startDate'),
@@ -587,45 +620,12 @@ def checkPaging(Connection conndev) {
 	checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
 		findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
 			'value', FailureHandling.CONTINUE_ON_FAILURE), '', false, FailureHandling.CONTINUE_ON_FAILURE))
-	
-	'cek apakah dropdown tenant muncul'
-	if (WebUI.verifyElementPresent(
-		findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-		'verify field ke reset'
-		checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
-			findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
-				'value', FailureHandling.CONTINUE_ON_FAILURE),'', false, FailureHandling.CONTINUE_ON_FAILURE))
-	}
-	
-	'cek apakah dropdown tenant muncul'
-	if (WebUI.verifyElementPresent(
-		findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-		'input tenant yang dituju'
-		WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
-			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')))
-	
-		'enter pada tenant'
-		WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
-			Keys.chord(Keys.ENTER))
-	}
-	
-	'klik pada tombol cari'
-	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/button_Cari'))
-	
-	'cek apakah hasil search gagal'
-	if(WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_List Coupon/searchResult')
-		, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-		GlobalVariable.FlagFailed = 1
-		
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
-		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
-		';') + GlobalVariable.FailedReasonSearchFailed)
-	}
-	
+}
+
+def checkPagingDetail(Connection conndev) {
 	'cari button skip di footer'
-	elementbutton = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout >'+
-		' div > div.main-panel > div > div.content-wrapper > app-list-transaction-history > app-msx-paging >'+
+	elementbutton = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout >' +
+		' div > div.main-panel > div > div.content-wrapper > app-list-transaction-history > app-msx-paging >' +
 		' app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
 	
 	'ambil banyaknya laman footer'
@@ -634,12 +634,12 @@ def checkPaging(Connection conndev) {
 	'get text total data dari ui'
 	Total = WebUI.getText(findTestObject('Object Repository/TransactionHistory/TotalData')).split(' ')
 	
-//	'ambil total data dari db'
-//	int resultTotalData = CustomKeywords.'transactionhistory.TransactionVerif.getTotalTrx'(conndev,
-//		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
+	'ambil total data dari db'
+	int resultTotalData = CustomKeywords.'transactionhistory.TransactionVerif.getTotalTrx'(conndev,
+		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 
-//	'verify total data role'
-//	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
+	'verify total data role'
+	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'cek apakah hlm  tersedia'
 	if (WebUI.verifyElementVisible(
@@ -688,9 +688,9 @@ def checkPaging(Connection conndev) {
 		'modify object laman terakhir'
 		modifyObjectmaxPage = WebUI.modifyObjectProperty(
 			findTestObject('Object Repository/TransactionHistory/modifyObject'),
-			'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-transaction-history/"+
-				"app-msx-paging/app-msx-datatable/section/ngx-datatable/div/"+
-					"datatable-footer/div/datatable-pager/ul/li[" + (lastPage - 2) + "]", true)
+			'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-transaction-history/" +
+				"app-msx-paging/app-msx-datatable/section/ngx-datatable/div/" +
+					"datatable-footer/div/datatable-pager/ul/li[" + lastPage - 2 + "]", true)
 		
 		'verify paging di page terakhir'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(modifyObjectmaxPage,

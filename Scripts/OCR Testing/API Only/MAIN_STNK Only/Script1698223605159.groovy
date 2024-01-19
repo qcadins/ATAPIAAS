@@ -7,7 +7,8 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable
-import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+import java.time.LocalDate
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/1. Login.xlsm')
@@ -106,7 +107,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (!stateocr.equalsIgnoreCase('key or tenant invalid') &&
 			((WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) ||
 				(WS.verifyResponseStatusCode(response, 500, FailureHandling.OPTIONAL) == true))) {
-			
 			'ambil waktu hit untuk sebagai acuan nama file log'
 			timeOcrhit = processHourOnly(ocrdate)
 			
@@ -188,13 +188,13 @@ def rowExcel(String cellValue) {
 
 def todayDate() {
 	'ambil tanggal hari ini'
-	currentDate = new Date()
+	LocalDate currentDate = LocalDate.now()
 	
 	'buat format menjadi yyyyMMDD'
-	SimpleDateFormat dateFormat = new SimpleDateFormat('yyyyMMdd', Locale.US)
-	
-	'ambil hasil format tadi menjadi string'
-	String formattedDate = dateFormat.format(currentDate)
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+
+	'Format the LocalDate'
+	String formattedDate = currentDate.format(formatter)
 	
 	'return hasil format tadi'
 	formattedDate
