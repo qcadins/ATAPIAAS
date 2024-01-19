@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "4D6774263258D2B1F97D4E11A17C70B0",
+  "keywordFileContentHash": "83F66A884A9949A760BA2DBFB927B1EF",
   "keywordClasses": [
     {
       "name": "forgotpass.ForgotpassVerif",
@@ -33,11 +33,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

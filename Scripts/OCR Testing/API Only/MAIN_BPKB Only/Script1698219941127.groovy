@@ -31,10 +31,6 @@ int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
 
 String tanggal = todayDate()
 
-println tanggal
-
-return
-
 String responseBody, messageocr, stateocr, ocrdate, timeOcrhit
 
 int firstRun = 0
