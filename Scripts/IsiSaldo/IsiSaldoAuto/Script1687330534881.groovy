@@ -4,8 +4,6 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import org.openqa.selenium.By as By
 import java.sql.Connection as Connection
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase as TestCase
-import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
@@ -28,9 +26,6 @@ if (GlobalVariable.SettingEnvi == 'Production') {
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'IsiSaldoAuto', ('SheetName') : sheet, ('Path') : ExcelPath],
     FailureHandling.STOP_ON_FAILURE)
-
-'delcare variable string'
-String noTrxfromDB, noTrxOtherTenant
 
 'ambil kode tenant di DB'
 String tenantcode = CustomKeywords.'ocrtesting.GetParameterfromDB.getTenantCodefromDB'(conn, findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, rowExcel('UsernameLogin')).toUpperCase())
@@ -353,13 +348,13 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
 
 def getTrxNumber() {
     'ambil alamat trxnumber'
-    variable = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
+    variable = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.ng-star-inserted > app-msx-paging-v2 > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
 
     'banyaknya row table'
     int lastIndex = variable.size()
 
     'modifikasi alamat object trxnumber'
-    def modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'), 'xpath', 
+    modifytrxnumber = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/TrxNumber'), 'xpath', 
         'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' +
         lastIndex + ']/datatable-body-row/div[2]/datatable-body-cell[6]/div/p', true)
 

@@ -189,7 +189,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			'check after edit'
 			verifyAfterAddorEdit()
 		} else if (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Detail')) {
-			
 			'panggil fungsi search'
 			searchfunction()
 			
@@ -461,7 +460,6 @@ def checkPaging(Connection conndev) {
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
-	
 	}
 	
 	'klik pada button set ulang'
@@ -535,14 +533,13 @@ def checkPaging(Connection conndev) {
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
-	
 	}
 	checkPagingDetail(conndev)
 }
 
 def checkPagingDetail(Connection conndev) {
 	'cari button skip di footer'
-	elementbutton = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-coupon > app-msx-paging > app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
+	elementbutton = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-coupon > app-msx-paging > app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
 	
 	'ambil banyaknya laman footer'
 	int lastPage = elementbutton.size()
@@ -607,7 +604,7 @@ def checkPagingDetail(Connection conndev) {
 			findTestObject('Object Repository/User Management-Role/modifyObject'),
 			'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-coupon/app-msx-paging/" +
 				"app-msx-datatable/section/ngx-datatable/div/datatable-footer/" +
-					"div/datatable-pager/ul/li["+ lastPage - 2 +"]", true)
+					"div/datatable-pager/ul/li[" + lastPage - 2 + "]", true)
 		
 		'verify paging di page terakhir'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(modifyObjectmaxPage,
@@ -625,7 +622,7 @@ def checkPagingDetail(Connection conndev) {
 	}
 }
 
-def checkdialogConfirmation(isMandatoryComplete) {
+def checkdialogConfirmation(int isMandatoryComplete) {
 	'cek apakah button simpan dinonaktifkan'
 	if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Coupon/Page_Add Coupon/button_Simpan'),
 			'disabled' , GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {

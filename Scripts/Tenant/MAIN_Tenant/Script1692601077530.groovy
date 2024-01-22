@@ -47,7 +47,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 		'check if action new/services/edit/balancechargetype'
 			if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('New')) {
-						
 			GlobalVariable.FlagFailed = 0
 			
 			'click menu tenant'
@@ -61,7 +60,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'cek untuk field awalan sebelum loop'
 			if (GlobalVariable.NumOfColumn == 2) {
-				
 				'input nama tenant'
 				WebUI.setText(findTestObject('Tenant/TenantBaru/input_NamaTenant'),
 					'TenantTest')
@@ -79,7 +77,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				
 				'looping untuk input batas saldo'
 				for (index = 5; index < variable.size(); index++) {
-					
 					'modify object button services'
 					modifyObjectButtonServices = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
 						'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/' +
@@ -204,7 +201,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			for (index = 5; index < variable.size(); index++) {
 				'modify object button services'
 				modifyObjectButtonServices = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
-					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/'+
+					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/' +
 						'div/div/div/form/div[' + index) + ']/button', true)
 				
 				'looping untuk array service excel'
@@ -566,7 +563,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							'modify object input services'
 							modifyObjectInputServices = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
 								'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/' +
-									'div/form/div[' +index + ']/div/input', true)
+									'div/form/div[' + index + ']/div/input', true)
 
 							'input batas saldo'
 							WebUI.setText(modifyObjectInputServices, arrayServicesBatasSaldo[indexExcel])
@@ -791,7 +788,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						GlobalVariable.StatusWarning, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 							GlobalVariable.FailedReasonUnknown)
 				}
-				
 			} else if (isMandatoryComplete > 0) {
 				'click button Batal'
 				WebUI.click(findTestObject('Tenant/ChargeType/button_Batal'))
@@ -897,7 +893,7 @@ def checkPaging(Connection conn) {
 	
 	'modify object last Page'
 	modifyObjectmaxPage = WebUI.modifyObjectProperty(findTestObject('Tenant/button_MaxPage'), 
-		'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-tenant/app-msx-paging/"+
+		'xpath', 'equals', "/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-tenant/app-msx-paging/" +
 		"app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li[" + (lastPage - 2) + "]", true)
 
 	'verify paging di page terakhir'
@@ -936,7 +932,7 @@ def checkActiveTenant(String tenantcode, Connection conn) {
 		'modify object checkbox'
 		modifyObjectNamaTenant = WebUI.modifyObjectProperty(findTestObject('Tenant/ChargeType/namaTenant'), 'xpath',
 			'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-charge/div[2]/' +
-				'div/div/div/div/table/tr[' + (i+2) + ']/th[1]'), true)
+				'div/div/div/div/table/tr[' + (i + 2) + ']/th[1]'), true)
 		
 		'tambahkan nama tenant ke array'
 		activeTenantfromUI.add(WebUI.getText(modifyObjectNamaTenant))

@@ -210,7 +210,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					}
 			
 					'check if button contain service name'
-					if (WebUI.verifyElementNotPresent(modifyObjectButtonServices, GlobalVariable.Timeout, FailureHandling.OPTIONAL)){
+					if (WebUI.verifyElementNotPresent(modifyObjectButtonServices, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 						continue
 					} else if (!(WebUI.getText(modifyObjectButtonServices).contains(arrayServices[indexExcel]))) {
 						continue
@@ -236,7 +236,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 
 			'looping untuk input email reminder'
 			for (index = 1; index <= arrayEmailReminder.size(); index++) {
-				
 				'modify object input email'
 				modifyObjectInputEmail = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'), 'xpath',
 					'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/' +
@@ -277,8 +276,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 							GlobalVariable.StatusWarning, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 								GlobalVariable.FailedReasonUnknown)
-					}
-					else {
+					} else {
 						'call function checkAfterAddorEdit'
 						checkAfterAddorEdit()
 						
@@ -286,8 +284,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
 							GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 					}
-				}
-				else {
+				} else {
 					GlobalVariable.FlagFailed = 1
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
@@ -297,7 +294,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					
 					continue
 				}
-				
 			} else if (isMandatoryComplete > 0) {
 				'click button Batal'
 				WebUI.click(findTestObject('Tenant/TenantBaru/button_Batal'))
@@ -318,7 +314,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			if (WebUI.verifyElementPresent(findTestObject('Tenant/button_ServiceBalance'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 				'click button services balance'
 				WebUI.click(findTestObject('Tenant/button_ServiceBalance'))
-				
 			} else {
 				GlobalVariable.FlagFailed = 1
 				
@@ -446,7 +441,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			}
 			
 			'get total form'
-			variable = DriverFactory.getWebDriver().findElements(By.cssSelector('body > app-root > app-full-layout > div > ' +
+			variable = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > ' +
 				' div.main-panel > div > div.content-wrapper > app-add-tenant > div.row.match-height > div > div >' +
 				' div > div > form div'))
 			
@@ -502,7 +497,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 								break
 							}
 						}
-						
 					} else if (WebUI.verifyElementPresent(modifyObjectButtonServices, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 						if (WebUI.getText(modifyObjectButtonServices).contains(arrayServices[indexExcel])) {
 							'click button add service'
@@ -510,8 +504,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 
 							'modify object input services'
 							modifyObjectInputServices = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
-								'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/'+
-									'div/form/div[' +index) + ']/div/input', true)
+								'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/' +
+									'div/form/div[' + index) + ']/div/input', true)
 
 							'input batas saldo'
 							WebUI.setText(modifyObjectInputServices, arrayServicesBatasSaldo[indexExcel])
@@ -527,7 +521,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 
 			'looping untuk hapus email reminder yang tidak ada di excel'
 			for (index = 25; index <= variable.size(); index++) {
-				
 				'modify object input email'
 				modifyObjectInputEmail = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'), 'xpath',
 					'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
@@ -546,7 +539,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							arrayEmailReminder[(indexexcel - 1)])) {
 						
 							break
-							
 						} else {
 							if (indexexcel == arrayEmailReminder.size()) {
 								'click tambah email'
@@ -666,7 +658,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 
 			'looping untuk input services check'
 			for (index = 0; index < arrayServices.size(); index++) {
-				
 				'modify object checkbox'
 				modifyObjectCheckbox = WebUI.modifyObjectProperty(findTestObject('Tenant/Services/modifyObject'), 'xpath',
 					'equals', ('//*[@id="' + arrayServices[index] + '"]'), true)
@@ -698,7 +689,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'check if mandatory complete dan button simpan clickable'
 			if ((isMandatoryComplete == 0) && !(WebUI.verifyElementHasAttribute(findTestObject('Tenant/ChargeType/button_Simpan'),
 				'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL))) {
-			
 				'click button simpan'
 				WebUI.click(findTestObject('Tenant/ChargeType/button_Simpan'))
 
