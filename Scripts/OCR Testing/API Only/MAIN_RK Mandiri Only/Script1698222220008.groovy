@@ -173,13 +173,13 @@ def rowExcel(String cellValue) {
 
 def todayDate() {
 	'ambil tanggal hari ini'
-	currentDate = new Date()
+	LocalDate currentDate = LocalDate.now()
 	
 	'buat format menjadi yyyyMMDD'
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.US)
-	
-	'ambil hasil format tadi menjadi string'
-	String formattedDate = dateFormat.format(currentDate)
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+
+	'Format the LocalDate'
+	String formattedDate = currentDate.format(formatter)
 	
 	'return hasil format tadi'
 	formattedDate
