@@ -67,6 +67,9 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			tenantcode = findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Wrong TenantCode'))
 		}
 		
+		println thekey
+		println tenantcode
+		
 		'lakukan proses HIT api dengan parameter image, key, dan juga tenant'
 		response = WS.sendRequest(findTestObject('Object Repository/OCR Testing/New API/KTP', 
 		[
@@ -101,7 +104,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		}
 		
 		'Jika status HIT API 200 atau 500 dan tidak menggunakan key atau tenant invalid'
-		if (!stateocr.equalsIgnoreCase('key or tenant invalid') &&
+		if ((!stateocr.equalsIgnoreCase('key or tenant invalid') && !messageocr.equalsIgnoreCase('Invalid API key or tenant code')) &&
 			((WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) ||
 				(WS.verifyResponseStatusCode(response, 500, FailureHandling.OPTIONAL) == true))) {
 			'ambil waktu hit untuk sebagai acuan nama file log'

@@ -2,11 +2,11 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.testobject.ResponseObject
+import java.sql.Connection
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable
-import java.sql.Connection
 import java.time.format.DateTimeFormatter
 import java.time.LocalDate
 
@@ -101,7 +101,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		}
 		
 		'Jika status HIT API 200 atau 500 dan tidak menggunakan key atau tenant invalid'
-		if (!stateocr.equalsIgnoreCase('key or tenant invalid') &&
+		if ((!stateocr.equalsIgnoreCase('key or tenant invalid') && !messageocr.equalsIgnoreCase('Invalid API key or tenant code')) &&
 			((WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) ||
 				(WS.verifyResponseStatusCode(response, 500, FailureHandling.OPTIONAL) == true))) {
 			'ambil body dari hasil respons'

@@ -102,8 +102,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			continue
 		}
 		
-		'Jika status HIT API 200 atau 500 dan tidak menggunakan key atau tenant invalid'
-		if (!stateocr.equalsIgnoreCase('key or tenant invalid') &&
+				'Jika status HIT API 200 atau 500 dan tidak menggunakan key atau tenant invalid'
+		if ((!stateocr.equalsIgnoreCase('key or tenant invalid') && !messageocr.equalsIgnoreCase('Invalid API key or tenant code')) &&
 			((WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) ||
 				(WS.verifyResponseStatusCode(response, 500, FailureHandling.OPTIONAL) == true))) {
 			'ambil body dari hasil respons'
