@@ -25,9 +25,9 @@ sheet = 'OCR BPKB'
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
-//
-//'deklarasi variabel untuk konek ke Database eendigo_dev'
-//Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
+
+'deklarasi variabel untuk konek ke Database eendigo_dev'
+Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 
 String tanggal = todayDate()
 
