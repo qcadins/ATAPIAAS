@@ -3,8 +3,6 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import java.sql.Connection as Connection
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase as TestCase
-import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
@@ -102,12 +100,9 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 
         'pilih tipe akun'
         if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Akun')) == 'Perusahaan') {
-			
             'check radio button perusahaan'
             WebUI.check(findTestObject('Object Repository/Profile/Page_Edit Profile/radio_Perusahaan'))
-			
         } else if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Akun')) == 'Personal') {
-			
             'check radio button personal'
             WebUI.check(findTestObject('Object Repository/Profile/Page_Edit Profile/radio_Personal'))
         }
@@ -269,10 +264,8 @@ def rowExcel(String cellValue) {
 }
 
 def setTextEmptyValidation(TestObject object, String testdata) {
-	
 	'jika testdata kosong'
 	if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel(testdata)).equalsIgnoreCase('')) {
-		
 		'select all text di field tersebut'
 		WebUI.sendKeys(object, Keys.chord(Keys.CONTROL + 'a'))
 		
@@ -282,7 +275,6 @@ def setTextEmptyValidation(TestObject object, String testdata) {
 		'input text kosong'
 		WebUI.setText(object, '')
 	} else {
-		
 		'input text sesuai testdata'
 		WebUI.setText(object, findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel(testdata)))
 	}

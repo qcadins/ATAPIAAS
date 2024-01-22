@@ -119,7 +119,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 					GlobalVariable.FlagFailed = 1
 				}
-				
 			} else {
 				'klik pada ddl'
 				WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/inputstatusUser'))
@@ -275,12 +274,11 @@ def checkdialogConfirmation(int isMandatoryComplete) {
 				if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('New')) {
 					'input email'
 					WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/input_Email_email'),
-							findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email')))
-					
+						findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email')))
 				} else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
 					'input email'
 					WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/input_Email_email'),
-							findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Email')))
+						findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Email')))
 				}
 				
 				'klik pada tombol cari'
@@ -485,9 +483,9 @@ def checkPaging(Connection conndev) {
 	'ambil banyaknya laman footer'
 	int lastPage = elementbutton.size()
 
-//	'get data total dari tabel user'
-//	int resultTotalData = CustomKeywords.'usermanagement.RoleVerif.getRoleTotal'(conndev,
-//		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
+	'get data total dari tabel user'
+	int resultTotalData = CustomKeywords.'usermanagement.RoleVerif.getRoleTotal'(conndev,
+		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 	
 	'get text total data dari ui'
 	Total = WebUI.getText(findTestObject('Object Repository/User Management-User/TotalData')).split(' ')
@@ -525,7 +523,7 @@ def checkPaging(Connection conndev) {
 		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/prev_page'))
 		
 		'verify paging di page 1'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/Page_List User/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/Page_List User/Page1'), 'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik pada tombol skip'
@@ -546,7 +544,7 @@ def checkPaging(Connection conndev) {
 		WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/gotoFirst_page'))
 		
 		'verify paging di page 1'
-		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/Page_List User/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('Object Repository/User Management-User/Page_List User/Page1'), 'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 	}
 }

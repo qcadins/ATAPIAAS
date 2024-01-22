@@ -135,7 +135,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					FailureHandling.CONTINUE_ON_FAILURE)
 			}
 			else if (GlobalVariable.SettingTopup == 'SelfTopUp') {
-				
 				'call isi saldo secara mandiri di Admin Client'
 				WebUI.callTestCase(findTestCase('Top Up/TopUpAuto'), [('ExcelPathOCR') : ExcelPathOCRTesting, ('ExcelPath') : 'Login/Login', ('tipeSaldo') : 'OCR Rek. Koran BCA', ('sheet') : 'OCR RK BCA', ('idOCR') : 'OCR_REKKORAN_BCA'],
 					FailureHandling.CONTINUE_ON_FAILURE)
@@ -188,7 +187,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		filterSaldo()
 		
 		'cek apakah button skip enable atau disable'
-		if(WebUI.verifyElementVisible(
+		if (WebUI.verifyElementVisible(
 			findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'), FailureHandling.OPTIONAL)) {
 			'klik button skip to last page'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/skiptoLast_page'))
@@ -258,6 +257,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		//kondisi jika transaksi berhasil tapi tidak tercatat/tersimpan di DB
 		else if (stateocr == 'SUCCESS' && isTrxIncreased == 0 && isSaldoBerkurang == 1) {
 			GlobalVariable.FlagFailed = 1
+			
 			'tulis kondisi gagal'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR RK BCA', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 			GlobalVariable.FailedReasonTrxNotinDB)
@@ -265,6 +265,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		//kondisi jika transaksi berhasil tapi saldo tidak berkurang
 		else if (stateocr == 'SUCCESS' && isTrxIncreased == 1 && isSaldoBerkurang == 0) {
 			GlobalVariable.FlagFailed = 1
+			
 			'tulis kondisi gagal'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR RK BCA', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 			GlobalVariable.FailedReasonBalanceNotChange)
@@ -272,11 +273,13 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		//kondisi transaksi tidak tampil dan tidak tersimpan di DB
 		else if (hitAPITrx == 0 && stateocr == 'FAILED' && isTrxIncreased == 0 && isSaldoBerkurang == 1) {
 			GlobalVariable.FlagFailed = 1
+			
 			'tulis kondisi gagal'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR RK BCA', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
 			GlobalVariable.FailedReasonSaldoBocor)
 		} else {
 			GlobalVariable.FlagFailed = 1
+			
 			'write to excel status failed dan reason'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR RK BCA', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
@@ -352,7 +355,6 @@ def tableTrxNumber() {
 								
 		'simpan nomor transaction number ke string'
 		noTrx = WebUI.getText(modifytrxnumber)
-	
 	} else {
 		noTrx = ''
 	}

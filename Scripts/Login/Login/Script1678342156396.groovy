@@ -2,7 +2,6 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.webui.driver.DriverFactory
 import internal.GlobalVariable as GlobalVariable
@@ -33,7 +32,6 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
 if ((findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == 'Yes' ||
 	findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == '') && 
 	TC != 'Tenant' && TC != 'IsiSaldo' && TC != 'IsiSaldoAuto') {
-	
 	WebUI.delay(1)
 
 	String idObject = WebUI.getAttribute(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'id', FailureHandling.STOP_ON_FAILURE)
@@ -42,8 +40,6 @@ if ((findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEn
 		'//*[@id="' + idObject + '"]/div/div[2]', true)
 	
 	WebUI.waitForElementAttributeValue(modifyObjectCaptcha, 'class', 'antigate_solver recaptcha solved', 60, FailureHandling.OPTIONAL)
-//	WebUI.waitForElementVisible(modifyObjectCaptcha, 60, FailureHandling.OPTIONAL)
-//	WebUI.waitForElementPresent(modifyObjectCaptcha, 60, FailureHandling.OPTIONAL)
 
 	WebUI.delay(1)
 //	
@@ -179,7 +175,6 @@ if (TC == 'EditProf') {
 		findTestData('API_KEY/DataAPIKEY').getValue(GlobalVariable.NumOfColumn, rowExcel('$Password Login')))
 	
 } else if (TC == 'DocAPI') {
-	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Username')))
@@ -187,9 +182,7 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Password')))
-	
 } else if (TC == 'OCR') {
-	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, Row))
@@ -197,9 +190,7 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, Row + 1))
-	
 } else if (TC == 'IsiSaldo') {
-	
 	'input data username'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
 		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Billing')))
@@ -210,9 +201,7 @@ if (TC == 'EditProf') {
 	
 	'klik tombol masuk'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
-	
 } else if (TC == 'Tenant') {
-	
 	WebUI.maximizeWindow()
 	
 	'input data username'
@@ -225,9 +214,7 @@ if (TC == 'EditProf') {
 		
 	'klik tombol masuk'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
-	
 } else if (TC == 'Saldo') {
-	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Username')))
@@ -235,9 +222,7 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Password')))
-	
 } else if (TC == 'Layanan') {
-	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(ExcelPathLayanan).getValue(2, rowExcel('$Username Login')))
@@ -245,9 +230,7 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(ExcelPathLayanan).getValue(2, rowExcel('$Password Login')))
-	
 } else if (TC == 'Role') {
-	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(ExcelPathRole).getValue(2, rowExcel('Username Login')))
@@ -255,9 +238,7 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(ExcelPathRole).getValue(2, rowExcel('Password Login')))
-	
 } else if (TC == 'User') {
-	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(2, rowExcel('Username Login')))
@@ -265,9 +246,7 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(2, rowExcel('Password Login')))
-	
 } else if (TC == 'Coupon') {
-	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(2, rowExcel('Username Login')))
@@ -275,9 +254,7 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(2, rowExcel('Password Login')))
-	
 } else if (TC == 'TopUp') {
-	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(2, rowExcel('Username Login')))
@@ -285,9 +262,7 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(2, rowExcel('Password Login')))
-	
 } else if (TC == 'ChangePass') {
-	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
@@ -295,9 +270,7 @@ if (TC == 'EditProf') {
 	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Password Login')))
-	
 } else if (TC == 'IsiSaldoAuto') {
-	
 	'input data username'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
 		findTestData(ExcelPathLogin).getValue(2, 18))
@@ -308,9 +281,7 @@ if (TC == 'EditProf') {
 	
 	'klik tombol masuk'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
-	
 } else if (TC == 'TranxHist') {
-	
 //	'deklarasi penghitungan role yang dipilih'
 //	int isSelected = 0
 	
@@ -361,9 +332,7 @@ if (TC == 'EditProf') {
 //					GlobalVariable.FailedReasonRoleLogin)
 //		}
 //	}
-	
 } else if (TC == 'TenantCekServices') {
-	
 	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, 34))
@@ -374,7 +343,6 @@ if (TC == 'EditProf') {
 }
 
 if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Regist') {
-
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
@@ -388,10 +356,9 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Regist'
 					WebUI.getText(findTestObject('RegisterLogin/Page_Login - eendigo Platform/textSmallError')))
 			
 			GlobalVariable.FlagFailed = 1
+			
 			break
-			
 		} else if (WebUI.verifyElementPresent(findTestObject('Profile/Page_Balance/dropdownProfile'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-			
 			break
 		} else {
 			if (i == 10) {

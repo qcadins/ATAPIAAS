@@ -140,7 +140,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'verify nama role'
 			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-Role/label_Role')), findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 17), false, FailureHandling.CONTINUE_ON_FAILURE), ' Nama Role')
-			
 		} else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Settings')) {
 			'panggil fungsi cari role'
 			searchRole()
@@ -195,7 +194,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					
 					'cek apakah muncul error unknown setelah klik pada tombol ok'
 					if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
-						GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
+							GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
 						GlobalVariable.FlagFailed = 1
 						
 						'tulis adanya error pada sistem web'
@@ -204,7 +203,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 								GlobalVariable.FailedReasonUnknown)
 					}
 				}
-				
 			} else {
 				GlobalVariable.FlagFailed = 1
 				
@@ -288,7 +286,6 @@ def checkdialogConfirmation(int isMandatoryComplete) {
 		
 		'jika error muncul'
 		if (WebUI.getText(findTestObject('Object Repository/User Management-Role/Page_Add Role/KonfirmasiAdd')).contains('Sudah Ada')) {
-		
 			'klik tombol OK'
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Add Role/button_OK'))
 		
@@ -412,7 +409,7 @@ def checkPaging(Connection connUAT) {
 		
 		'verify paging di page 2'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
-			findTestObject('Object Repository/User Management-Role/Page_List Roles/Page2'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+			findTestObject('Object Repository/User Management-Role/Page_List Roles/Page2'), 'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik halaman 1'
@@ -420,7 +417,7 @@ def checkPaging(Connection connUAT) {
 		
 		'verify paging di page 1'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
-			findTestObject('Object Repository/User Management-Role/Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+			findTestObject('Object Repository/User Management-Role/Page_List Roles/Page1'), 'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik button next page'
@@ -428,7 +425,7 @@ def checkPaging(Connection connUAT) {
 		
 		'verify paging di page 2'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
-			findTestObject('Object Repository/User Management-Role/Page_List Roles/Page2'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+			findTestObject('Object Repository/User Management-Role/Page_List Roles/Page2'), 'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'klik prev page'
@@ -436,7 +433,7 @@ def checkPaging(Connection connUAT) {
 		
 		'verify paging di page 1'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
-			findTestObject('Object Repository/User Management-Role/Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+			findTestObject('Object Repository/User Management-Role/Page_List Roles/Page1'), 'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 		
 		'cek apakah button skip disabled atau enabled'
@@ -459,7 +456,7 @@ def checkPaging(Connection connUAT) {
 		
 		'verify paging di page 1'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(
-			findTestObject('Object Repository/User Management-Role/Page_List Roles/Page1'),'class', FailureHandling.CONTINUE_ON_FAILURE),
+			findTestObject('Object Repository/User Management-Role/Page_List Roles/Page1'), 'class', FailureHandling.CONTINUE_ON_FAILURE),
 				'pages active ng-star-inserted', false, FailureHandling.CONTINUE_ON_FAILURE))
 	}
 }
