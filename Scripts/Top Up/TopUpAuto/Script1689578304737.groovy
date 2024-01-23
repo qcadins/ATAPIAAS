@@ -485,7 +485,6 @@ def getLastTrx(String noTrxKatalon, Connection conn) {
 	
 	'lakukan loop untuk ambil data detail'
 	for (int i = 1; i <= variabledetail.size(); i++) {
-		
 		'modifikasi object layanan transaksi'
 		modifylayanandetail = WebUI.modifyObjectProperty(findTestObject('Object Repository/Top Up/Page_List Transaction History/layananDetail'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-transaction-history-detail/div/div[2]/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + i + ']/datatable-body-row/div[2]/datatable-body-cell[1]/div/p', true)
 	

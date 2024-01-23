@@ -206,7 +206,6 @@ def loginFunction(int row) {
 	
 	'jika ada pilihan role'
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-		
 		'cari element dengan nama role'
 		elementRole = DriverFactory.webDriver.findElements(By.cssSelector('body > ngb-modal-window > div > div > app-multi-role > div > div.row > div > table tr'))
 		

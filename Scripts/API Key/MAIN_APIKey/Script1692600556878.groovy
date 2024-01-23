@@ -9,16 +9,8 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-'deklarasi variable connection'
-Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
-
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
-
-if (GlobalVariable.SettingEnvi == 'Production') {
-	'deklarasi koneksi ke Database eendigo_dev'
-	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
-}
 
 conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 

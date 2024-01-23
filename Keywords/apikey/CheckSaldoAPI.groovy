@@ -105,7 +105,7 @@ public class CheckSaldoAPI {
 		ResultSet resultSet = stm.executeQuery("select trx_no from esign.tr_balance_mutation bm JOIN esign.ms_tenant mt ON mt.id_ms_tenant = bm.id_ms_tenant WHERE tenant_code != '" + tenant + "' ORDER BY id_balance_mutation DESC limit 1;")
 
 		while (resultSet.next()) {
-			data = resultSet.getObject(1);
+			data = resultSet.getObject(1)
 		}
 
 		data
@@ -153,5 +153,4 @@ public class CheckSaldoAPI {
 		}
 		listdata
 	}
-	
 }

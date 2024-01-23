@@ -126,8 +126,8 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		if (stateocr == 'FAILED' && messageocr == 'Insufficient balance') {
 			'write to excel status failed dan reason'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('OCR RK BCA', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-			 '<' + messageocr + '>')
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+					'<' + messageocr + '>')
 			
 			if (GlobalVariable.SettingTopup == 'IsiSaldo') {
 				'call auto isi saldo'
@@ -307,7 +307,6 @@ WebUI.closeBrowser()
 
 'ambil saldo sesuai testing yang dilakukan'
 def getSaldoforTransaction(String namaOCR) {
-	
 	'deklarasi jumlah saldo sekarang'
 	int saldoNow
 	

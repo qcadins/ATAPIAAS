@@ -489,6 +489,9 @@ def checkPaging(Connection conndev) {
 	
 	'get text total data dari ui'
 	Total = WebUI.getText(findTestObject('Object Repository/User Management-User/TotalData')).split(' ')
+	
+	'cek apakah total di db dan Ui sesuai'
+	checkVerifyEqualOrMatch(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.STOP_ON_FAILURE), "")
 
 	'cek apakah hlm  tersedia'
 	if (WebUI.verifyElementVisible(

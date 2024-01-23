@@ -97,7 +97,6 @@ if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel(
 	
 	'verify services'
 	arrayMatch.add(resultarray.containsAll(arrayServices))
-	
 } else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('ChargeType')) {
 	if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Balance ChargeType Check')) != '') {
 		'get array Services dari excel'

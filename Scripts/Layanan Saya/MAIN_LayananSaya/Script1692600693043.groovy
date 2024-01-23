@@ -146,7 +146,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
                 CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed,
                     (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
                     ';') + GlobalVariable.FailedReasonServiceNotMatch)
-				
             } else if (!(serviceStatusUI.containsAll(serviceStatusDB))) {
                 'jika service status yang tampil UI tidak sesuai dengan DB'
                 GlobalVariable.FlagFailed = 1

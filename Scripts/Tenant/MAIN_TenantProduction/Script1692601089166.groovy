@@ -536,8 +536,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					for (indexexcel = 1; indexexcel <= arrayEmailReminder.size(); indexexcel++) {
 						'check if email ui = excel'
 						if (WebUI.getAttribute(modifyObjectInputEmail, 'value', FailureHandling.OPTIONAL).equalsIgnoreCase(
-							arrayEmailReminder[(indexexcel - 1)])) {
-						
+								arrayEmailReminder[(indexexcel - 1)])) {
 							break
 						} else {
 							if (indexexcel == arrayEmailReminder.size()) {
@@ -548,7 +547,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							}
 						}
 					}
-					
 				} else {
 					break
 				}
@@ -580,7 +578,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'check if mandatory complete dan button simpan clickable'
 			if ((isMandatoryComplete == 0) && !(WebUI.verifyElementHasAttribute(findTestObject('Tenant/Edit/button_Simpan'),
-				'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL))) {
+					'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL))) {
 				'click button simpan'
 				WebUI.click(findTestObject('Tenant/Edit/button_Simpan'))
 

@@ -174,7 +174,7 @@ def filterSaldo() {
 	
 	'jika hasil pencarian tidak memberikan hasil'
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/Page_Balance/hasil search'), 
-		GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
@@ -324,7 +324,6 @@ def filterSaldoDetail() {
 	
 	'jika hasil pencarian tidak memberikan hasil'
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/Page_Balance/hasil search'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-	
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'

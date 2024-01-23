@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "D7C65A991D32315EF2EBF233B76A98EA",
+  "keywordFileContentHash": "457B316157BAD2B37753FED7B9B76E06",
   "keywordClasses": [
     {
       "name": "parsejson.BeautifyJson",
@@ -59,11 +59,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

@@ -122,11 +122,9 @@ if (TC == 'Regist') {
 	WebUI.delay(1)
 	
 	'ambil teks dari field input email'
-	if (WebUI.getAttribute(
-		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemailRegister'), 'value', FailureHandling.OPTIONAL)
+	if (WebUI.getAttribute(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemailRegister'), 'value', FailureHandling.OPTIONAL)
 			!= findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email registrasi'))) {
-	
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
+		'write excel reason email tidak hilang'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
 			';') + GlobalVariable.FailedReasonEmailField)
@@ -152,105 +150,116 @@ if (TC == 'Regist') {
 //		WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
 //		js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister);
 //	}
-} else if (TC == 'OCR') {
-	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, Row))
-	
-	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, Row + 1))
-} else if (TC == 'Tenant') {
-	WebUI.maximizeWindow()
-	
-	'input data username'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
-		findTestData(ExcelPathLogin).getValue(2, 3))
-	
-	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputpassword'),
-		findTestData(ExcelPathLogin).getValue(3, 3))
+}
+
+switch (TC) {
+	case 'OCR':
+		'input data email'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
+			findTestData(Path).getValue(GlobalVariable.NumOfColumn, Row))
 		
-	'klik tombol masuk'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
-} else if (TC == 'ChangePass') {
-	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
-	
-	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Password Login')))
-} else if (TC == 'IsiSaldoAuto') {
-	'input data username'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
-		findTestData(ExcelPathLogin).getValue(2, 18))
-	
-	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputpassword'),
-		findTestData(ExcelPathLogin).getValue(2, 19))
-	
-	'klik tombol masuk'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
-} else if (TC == 'TranxHist') {
-//	'deklarasi penghitungan role yang dipilih'
-//	int isSelected = 0
-	
-	'input data email'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
-	
-	'input password'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Password Login')))
-	
-//	'jika ada pilihan role'
-//	if (WebUI.verifyElementPresent(
-//		findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'),
-//			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-//
-//		'cari element dengan nama role'
-//		def elementRole = DriverFactory.getWebDriver().findElements(By.cssSelector('body > ngb-modal-window > div > div > app-multi-role > div > div.row > div > table tr'))
-//
-//		'lakukan loop untuk cari nama role yang ditentukan'
-//		for (int i = 1; i <= elementRole.size() - 1; i++) {
-//
-//			'cari nama role yag sesuai di opsi role'
-//			def modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[1]", true)
-//
-//			'jika nama object sesuai dengan nama role'
-//			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 11).equalsIgnoreCase(
-//				WebUI.getAttribute(modifyRole, 'value', FailureHandling.STOP_ON_FAILURE))) {
-//
-//				'ubah alamat xpath ke role yang dipilih'
-//				modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[2]/a", true)
-//
-//				'klik role yang dipilih'
-//				WebUI.click(findTestObject('Object Repository/Change Password/modifyobject'))
-//
-//				'penanda adanya role yang dipilih'
-//				isSelected = 1
-//
-//				break;
-//			}
-//		}
-//		'tulis error dan lanjut testcase berikutnya'
-//		if (isSelected == 0) {
-//
-//			'tulis adanya error pada sistem web'
-//			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
-//				GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
-//					GlobalVariable.FailedReasonRoleLogin)
-//		}
-//	}
-} else {
-	'input email'
-	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemail'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel(Username)))
-	
-	'input password'
-	WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputpassword'),
-		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel(Password)))
+		'input password'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
+			findTestData(Path).getValue(GlobalVariable.NumOfColumn, Row + 1))
+		break
+
+	case 'Tenant':
+		WebUI.maximizeWindow()
+		
+		'input data username'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
+			findTestData(ExcelPathLogin).getValue(2, 3))
+		
+		'input password'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputpassword'),
+			findTestData(ExcelPathLogin).getValue(3, 3))
+			
+		'klik tombol masuk'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
+		break
+
+	case 'ChangePass':
+		'input data email'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
+			findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
+		
+		'input password'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
+			findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Password Login')))
+		break
+
+	case 'IsiSaldoAuto':
+		'input data username'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
+			findTestData(ExcelPathLogin).getValue(2, 18))
+		
+		'input password'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputpassword'),
+			findTestData(ExcelPathLogin).getValue(2, 19))
+		
+		'klik tombol masuk'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
+		break
+
+	case 'TranxHist':
+		//	'deklarasi penghitungan role yang dipilih'
+	//	int isSelected = 0
+		
+		'input data email'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
+			findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
+		
+		'input password'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
+			findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Password Login')))
+		
+	//	'jika ada pilihan role'
+	//	if (WebUI.verifyElementPresent(
+	//		findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'),
+	//			GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+	//
+	//		'cari element dengan nama role'
+	//		def elementRole = DriverFactory.getWebDriver().findElements(By.cssSelector('body > ngb-modal-window > div > div > app-multi-role > div > div.row > div > table tr'))
+	//
+	//		'lakukan loop untuk cari nama role yang ditentukan'
+	//		for (int i = 1; i <= elementRole.size() - 1; i++) {
+	//
+	//			'cari nama role yag sesuai di opsi role'
+	//			def modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[1]", true)
+	//
+	//			'jika nama object sesuai dengan nama role'
+	//			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 11).equalsIgnoreCase(
+	//				WebUI.getAttribute(modifyRole, 'value', FailureHandling.STOP_ON_FAILURE))) {
+	//
+	//				'ubah alamat xpath ke role yang dipilih'
+	//				modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', "/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr["+ (i+1) +"]/td[2]/a", true)
+	//
+	//				'klik role yang dipilih'
+	//				WebUI.click(findTestObject('Object Repository/Change Password/modifyobject'))
+	//
+	//				'penanda adanya role yang dipilih'
+	//				isSelected = 1
+	//
+	//				break;
+	//			}
+	//		}
+	//		'tulis error dan lanjut testcase berikutnya'
+	//		if (isSelected == 0) {
+	//
+	//			'tulis adanya error pada sistem web'
+	//			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('RiwayatTransaksi', GlobalVariable.NumOfColumn,
+	//				GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
+	//					GlobalVariable.FailedReasonRoleLogin)
+	//		}
+	//	}
+	default:
+		'input email'
+		WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemail'),
+			findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel(Username)))
+		
+		'input password'
+		WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputpassword'),
+			findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel(Password)))
 }
 
 if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Regist') {

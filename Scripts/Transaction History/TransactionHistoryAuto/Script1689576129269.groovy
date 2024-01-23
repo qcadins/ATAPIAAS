@@ -309,12 +309,9 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 	
 	'deklarasi string yang perlu diubah'
 	if (choice == 'Approve') {
-		
 		string1 = 'Accept Pembayaran'
 		string2 = 'konfirmasiBayarbutton'
-	}
-	else {
-		
+	} else {	
 		string1 = 'Reject pembayaran'
 		string2 = 'rejectBayarButton'
 	}
@@ -353,7 +350,6 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 	'cek apakah tombol ok muncul'
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/button_OK_upload'),
 		GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-	
 		'ambil text notif'
 		String notifText = WebUI.getText(
 			findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/div_Success_upload'))
@@ -411,8 +407,7 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 
 def searchadminEendigoFinance() {
 	'klik pada menu'
-	WebUI.click(
-		findTestObject('Object Repository/TransactionHistory/Page_Balance/span_Menu'))
+	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/span_Menu'))
 	
 	'pilih submenu riwayat transaksi'
 	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/RiwayatTrxMenu'))
@@ -453,7 +448,6 @@ def searchadminEendigoFinance() {
 
 'ambil saldo sesuai testing yang dilakukan'
 def getSaldoforTransaction(String namaOCR) {
-	
 	'deklarasi jumlah saldo sekarang'
 	int saldoNow
 	
@@ -463,13 +457,11 @@ def getSaldoforTransaction(String namaOCR) {
 		
 		'lakukan loop untuk cari nama saldo yang ditentukan'
 		for (int i = 1; i <= elementNamaSaldo.size(); i++) {
-			
 			'cari nama saldo yang sesuai di list saldo'
 			modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + (i) + ']/div/div/div/div/div[1]/span', true)
 	
 			'jika nama object sesuai dengan nama saldo'
 			if (WebUI.getText(modifyNamaSaldo) == namaOCR) {
-				
 				'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
 				modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/kotakSaldo'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + (i) + ']/div/div/div/div/div[1]/h3', true)
 				
@@ -479,7 +471,6 @@ def getSaldoforTransaction(String namaOCR) {
 		}
 		'pakai saldo IDR jika lainnya tidak ada'
 		if (saldoNow == 0) {
-			
 			'simpan jumlah saldo sekarang di variabel'
 			saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/kotakSaldo')).replace(',', ''))
 		}
@@ -489,7 +480,6 @@ def getSaldoforTransaction(String namaOCR) {
 }
 
 def checkPaging(Connection conndev) {
-	
 	'input batas awal transaksi'
 	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/input_startDate'),
 			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Tanggal Transaksi awal')))
@@ -523,10 +513,8 @@ def checkPaging(Connection conndev) {
 		Keys.chord(Keys.ENTER))
 	
 	'cek apakah dropdown tenant muncul'
-	if (WebUI.verifyElementPresent(
-		findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
 		GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-	
 		'input tenant yang dituju'
 		WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
 			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')))
@@ -542,14 +530,12 @@ def checkPaging(Connection conndev) {
 	'cek apakah hasil search gagal'
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_List Coupon/searchResult')
 		, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-		
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 		GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 		';') + GlobalVariable.FailedReasonSearchFailed)
-	
 	}
 	
 	'klik pada button set ulang'
@@ -558,8 +544,7 @@ def checkPaging(Connection conndev) {
 	verifyReset()
 	
 	'cek apakah dropdown tenant muncul'
-	if (WebUI.verifyElementPresent(
-		findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		'verify field ke reset'
 		checkVerifyReset(WebUI.verifyMatch(WebUI.getAttribute(
 			findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
@@ -583,13 +568,13 @@ def checkPaging(Connection conndev) {
 	
 	'cek apakah hasil search gagal'
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Coupon/Page_List Coupon/searchResult')
-		, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+			, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		GlobalVariable.FlagFailed = 1
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonsearchFailed'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-		GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
-		';') + GlobalVariable.FailedReasonSearchFailed)
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
+				';') + GlobalVariable.FailedReasonSearchFailed)
 	}
 	
 	checkPagingDetail(conndev)
@@ -642,10 +627,8 @@ def checkPagingDetail(Connection conndev) {
 	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'cek apakah hlm  tersedia'
-	if (WebUI.verifyElementVisible(
-		findTestObject('Object Repository/TransactionHistory/skiptoLast_page'),
-		FailureHandling.OPTIONAL) == true) {
-	
+	if (WebUI.verifyElementVisible(findTestObject('Object Repository/TransactionHistory/skiptoLast_page'),
+			FailureHandling.OPTIONAL) == true) {
 		'klik halaman 2'
 		WebUI.click(findTestObject('Object Repository/TransactionHistory/Page2'))
 		

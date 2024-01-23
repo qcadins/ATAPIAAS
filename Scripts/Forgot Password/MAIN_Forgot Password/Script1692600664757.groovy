@@ -56,10 +56,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
 		
 		'cek apakah tombol lanjut tidak di disable'
-		if (WebUI.verifyElementNotHasAttribute(
-			findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/button_Lanjut'), 'disabled',
+		if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/button_Lanjut'), 'disabled',
 				GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-			
 			'klik pada tombol lanjut'
 			WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/button_Lanjut'))
 			
@@ -81,7 +79,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			'check apakah muncul error'
 			if (WebUI.verifyElementPresent(findTestObject('Object Repository/Forgot Password/Page_Reset Password/div_NotifPop'),
 				GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
-				
 				'ambil error dan get text dari error tersebut'
 				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 					GlobalVariable.StatusFailed, (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
@@ -276,7 +273,6 @@ def verifConfirmation() {
 def resendFunction(Connection conndev, int countResend, ArrayList resetCodefromDB) {
 	'cek apakah perlu resend reset code'
 	if (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Jenis Kelamin')) == 'Yes') {
-		
 		'ulangi sesuai flag dari excel'
 		for (int i = 1; i <= countResend; i++) {
 			WebUI.delay(117)

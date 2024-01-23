@@ -106,7 +106,6 @@ public class TopupVerif {
 
 	@Keyword
 	getPPNvalue(Connection conn) {
-
 		String data
 
 		Statement stm = conn.createStatement()
@@ -235,5 +234,4 @@ public class TopupVerif {
 		}
 		listdata
 	}
-	
 }

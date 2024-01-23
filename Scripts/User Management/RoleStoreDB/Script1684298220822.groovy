@@ -1,5 +1,4 @@
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
-import com.kms.katalon.core.testdata.TestData as TestData
 import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
 

@@ -35,7 +35,6 @@ public class RoleVerif {
 		ResultSet resultSet = stm.executeQuery("SELECT role_name FROM am_msrole WHERE role_name = '" + namarole + "' LIMIT 1;")
 
 		while (resultSet.next()) {
-
 			data = resultSet.getObject(1)
 		}
 		data
@@ -100,5 +99,4 @@ public class RoleVerif {
 		}
 		listdata
 	}
-
 }
