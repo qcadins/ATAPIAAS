@@ -12,7 +12,7 @@ import java.sql.ResultSet
 import java.sql.ResultSetMetaData
 
 public class CheckAPIKey {
-	
+
 	int columnCount
 
 	//fungsi untuk mengambil data APIKEY dari database
@@ -129,5 +129,5 @@ public class CheckAPIKey {
 		}
 		listdata
 	}
-	
+
 }

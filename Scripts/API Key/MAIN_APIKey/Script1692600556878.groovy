@@ -40,7 +40,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (isLoggedin == 0) {
 			'panggil fungsi login'
 			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Key', ('SheetName') : sheet,
-				('Path') : ExcelPathAPIKey], FailureHandling.STOP_ON_FAILURE)
+				('Path') : ExcelPathAPIKey, ('Username') : '$Username Login', ('Password') : '$Password Login',], FailureHandling.STOP_ON_FAILURE)
 			
 			isLoggedin = 1
 		}

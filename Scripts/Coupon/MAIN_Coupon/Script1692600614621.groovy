@@ -23,7 +23,7 @@ Connection conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_esign'
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : sheet, ('SheetName') : sheet,
-	('Path') : ExcelPathCoupon], FailureHandling.STOP_ON_FAILURE)
+	('Path') : ExcelPathCoupon, ('Username') : 'Username Login', ('Password') : 'Password Login',], FailureHandling.STOP_ON_FAILURE)
 
 'klik pada tombol untuk span menu'
 WebUI.click(findTestObject('Object Repository/Coupon/Page_Balance/Spanmenu'))

@@ -970,7 +970,7 @@ def searchTenant() {
 def checkSaldo() {
 	'call test case login admin esign'
 	WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'TenantCekServices', ('SheetName') : sheet,
-		('Path') : ExcelPathTenant] , FailureHandling.STOP_ON_FAILURE)
+		('Path') : ExcelPathTenant, ('Username') : 'Username Check Services', ('Password') : 'Pass Check Services',], FailureHandling.STOP_ON_FAILURE)
 	
 	'get array service dari excel yang terceklist'
 	ArrayList<String> arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('ServicesCheck')).split(';', -1)

@@ -47,7 +47,10 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (firstRun == 0) {
 			'panggil fungsi login'
 			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'IsiSaldo', ('SheetName') : 'IsiSaldo',
-				('Path') : ExcelPathSaldoAPI], FailureHandling.STOP_ON_FAILURE)
+				('Path') : ExcelPathSaldoAPI, ('Username') : '$Username Login', ('Password') : '$Password Login',], FailureHandling.STOP_ON_FAILURE)
+			
+			'klik tombol masuk'
+			WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
 			
 			'ambil WebDriver untuk menjalankan js executor'
 			WebDriver driver = DriverFactory.webDriver

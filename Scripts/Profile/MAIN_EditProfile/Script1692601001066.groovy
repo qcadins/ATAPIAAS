@@ -26,8 +26,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		GlobalVariable.FlagFailed = 0
 		
         'memanggil fungsi untuk login'
-        WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf', ('SheetName') : sheet, ('Path') : ExcelPathEditProfile], 
-            FailureHandling.STOP_ON_FAILURE)
+        WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'EditProf', ('SheetName') : sheet, ('Path') : ExcelPathEditProfile,
+			('Username') : '$Username Login', ('Password') : '$Password Login',], FailureHandling.STOP_ON_FAILURE)
 		
 		if (GlobalVariable.FlagFailed == 1) {
 			WebUI.closeBrowser()

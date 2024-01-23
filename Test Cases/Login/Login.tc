@@ -59,6 +59,18 @@
       <value></value>
       <variableId>a581730b-1bff-4502-96e1-2e1a5b93ba6f</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>c2039267-a687-448a-9030-2c4c940850d1</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>83b6e3b2-4c22-4136-8ebd-c152cf6e3779</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'APIAAS/DataEditProfile'</defaultValue>
       <description></description>
@@ -121,5 +133,19 @@
       <id>a581730b-1bff-4502-96e1-2e1a5b93ba6f</id>
       <masked>false</masked>
       <name>Path</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>c2039267-a687-448a-9030-2c4c940850d1</id>
+      <masked>false</masked>
+      <name>Username</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>83b6e3b2-4c22-4136-8ebd-c152cf6e3779</id>
+      <masked>false</masked>
+      <name>Password</name>
    </variable>
 </TestCaseEntity>

@@ -21,8 +21,8 @@ Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 Connection conndevUAT = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Layanan', ('SheetName') : sheet, ('Path') : ExcelPathLayananSaya],
-    FailureHandling.STOP_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Layanan', ('SheetName') : sheet, ('Path') : ExcelPathLayananSaya,
+	('Username') : '$Username Login', ('Password') : '$Password Login',], FailureHandling.STOP_ON_FAILURE)
 
 'klik pada tombol profil di kanan atas'
 WebUI.click(findTestObject('Object Repository/LayananSaya/Page_Balance/span_CHECK FINANCE'))

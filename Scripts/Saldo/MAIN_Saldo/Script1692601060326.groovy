@@ -40,7 +40,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		if (firstRun == 0) {
 			'panggil fungsi login'
 			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : sheet, ('SheetName') : sheet,
-				('Path') : ExcelPathSaldo], FailureHandling.STOP_ON_FAILURE)
+				('Path') : ExcelPathSaldo, ('Username') : 'Username', ('Password') : 'Password',], FailureHandling.STOP_ON_FAILURE)
 			
 			firstRun = 1
 		}

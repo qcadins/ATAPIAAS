@@ -24,7 +24,7 @@ if (GlobalVariable.SettingEnvi == 'Production') {
 }
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'IsiSaldoAuto', ('SheetName') : sheet, ('Path') : ExcelPath],
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'IsiSaldoAuto', ('SheetName') : sheet, ('Path') : ExcelPath,],
     FailureHandling.STOP_ON_FAILURE)
 
 'ambil kode tenant di DB'

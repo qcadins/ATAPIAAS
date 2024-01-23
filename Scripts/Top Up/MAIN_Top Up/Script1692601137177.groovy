@@ -27,7 +27,7 @@ Connection conndevUAT = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_dev
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'TopUp', ('SheetName') : 'TopUp',
-	('Path') : ExcelPathTopUp], FailureHandling.STOP_ON_FAILURE)
+	('Path') : ExcelPathTopUp, ('Username') : 'Username Login', ('Password') : 'Password Login',], FailureHandling.STOP_ON_FAILURE)
 
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'

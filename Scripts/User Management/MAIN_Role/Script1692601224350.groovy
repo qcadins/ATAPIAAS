@@ -20,7 +20,7 @@ Connection conndevUAT = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_pub
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : sheet, ('SheetName') : sheet,
-	('Path') : ExcelPathRole], FailureHandling.STOP_ON_FAILURE)
+	('Path') : ExcelPathRole, ('Username') : 'Username Login', ('Password') : 'Password Login',], FailureHandling.STOP_ON_FAILURE)
 
 'klik pada menu'
 WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/span_Menu'))
