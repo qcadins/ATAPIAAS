@@ -120,7 +120,6 @@ public class TopupVerif {
 
 	@Keyword
 	getCouponDetail(Connection conn, String kodekupon) {
-
 		String data
 		ArrayList listdata = []
 		Statement stm = conn.createStatement()

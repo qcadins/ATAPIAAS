@@ -664,7 +664,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				if (WebUI.verifyElementNotChecked(modifyObjectCheckbox, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 					'click checkbox'
 					WebUI.click(modifyObjectCheckbox)
-					
 				}
 			}
 			
