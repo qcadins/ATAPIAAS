@@ -11,11 +11,24 @@
       <value></value>
       <variableId>f36501a8-f021-4705-ab14-7ad993654bd9</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>8516ba95-8d9f-495f-8c0a-4420bd414b34</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'OCR Testing/DataOCRTestingBPKB'</defaultValue>
       <description></description>
       <id>f36501a8-f021-4705-ab14-7ad993654bd9</id>
       <masked>false</masked>
       <name>ExcelPathOCRTesting</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR BPKB'</defaultValue>
+      <description></description>
+      <id>8516ba95-8d9f-495f-8c0a-4420bd414b34</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

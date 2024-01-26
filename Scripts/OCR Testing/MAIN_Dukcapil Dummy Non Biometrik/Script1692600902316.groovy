@@ -28,7 +28,7 @@ GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, rowExcel('du
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : sheet,
-	('Path') : ExcelPathOCRTesting, ('Row') : rowExcel('UsernameLogin')], FailureHandling.STOP_ON_FAILURE)
+	('Path') : ExcelPathOCRTesting, ('Username') : 'UsernameLogin', ('Password') : 'PasswordLogin',], FailureHandling.STOP_ON_FAILURE)
 
 if (GlobalVariable.SettingEnvi == 'Production') {
 	'click pada production'

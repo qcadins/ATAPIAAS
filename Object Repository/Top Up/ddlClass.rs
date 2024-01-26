@@ -7,17 +7,17 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@class = 'ng-dropdown-panel ng-star-inserted ng-select-bottom']</value>
+         <value>//*[contains(@class, 'ng-dropdown-panel ng-star-inserted ng-select-')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
+      <matchCondition>contains</matchCondition>
       <name>class</name>
       <type>Main</type>
-      <value>ng-dropdown-panel ng-star-inserted ng-select-bottom</value>
-      <webElementGuid>1d681ddc-c295-4143-ad24-5fba76eb9afc</webElementGuid>
+      <value>ng-dropdown-panel ng-star-inserted ng-select-</value>
+      <webElementGuid>e13770e8-655b-463e-813c-74752ccadefa</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

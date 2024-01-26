@@ -3,9 +3,17 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import java.sql.Connection
+import java.time.format.DateTimeFormatter
+import java.time.LocalDate
 
 'get current date'
-Date currentDate = new Date().format('yyyy-MM-dd')
+LocalDate todate = LocalDate.now()
+
+'buat format menjadi yyyyMMDD'
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
+'Format the LocalDate'
+String currentDate = todate.format(formatter)
 
 Connection conn
 

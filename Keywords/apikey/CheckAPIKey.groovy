@@ -16,14 +16,14 @@ public class CheckAPIKey {
 
 	//fungsi untuk mengambil data APIKEY dari database
 	@Keyword
-	getAPINamefromDB(Connection conn, String apiname) {
+	getAPINamefromDB(Connection conn, String apiname, String email) {
 		String data
 
 		ArrayList listdata = []
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("select mk.api_key_name, mlo.description from ms_lov mlo JOIN ms_api_key mk on mlo.id_lov = mk.lov_api_key_type where mk.api_key_name = '" + apiname + "'")
+		ResultSet resultSet = stm.executeQuery("select mak.api_key_name, mlo.description from ms_lov mlo JOIN ms_api_key mak on mlo.id_lov = mak.lov_api_key_type LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mak.id_ms_tenant LEFT JOIN ms_useroftenant mot ON mot.id_ms_tenant = mak.id_ms_tenant LEFT JOIN am_msuser amu ON amu.id_ms_user = mot.id_ms_user where mak.api_key_name = '" + apiname + "' AND login_id = '" + email + "'")
 
 		ResultSetMetaData metadata  = resultSet.metaData
 

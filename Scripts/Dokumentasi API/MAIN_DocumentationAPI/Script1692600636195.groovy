@@ -25,7 +25,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		if (isLoggedin == 0) {
 			'panggil fungsi login'
 			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'DocAPI', ('SheetName') : sheet,
-				('Path') : ExcelPathAPIDocs, ('Username') : '$Username Billing', ('Password') : '$Password Billing',], FailureHandling.STOP_ON_FAILURE)
+				('Path') : ExcelPathAPIDocs, ('Username') : 'Username', ('Password') : 'Password',], FailureHandling.STOP_ON_FAILURE)
 						
 			isLoggedin = 1
 		}
@@ -125,7 +125,7 @@ def verifyDocumentListAPI() {
 	'sortir data pada hasil db'
 	Collections.sort(hasildb)
 	
-	for (int j = 0; j < hasildb.size ; j++) {
+	for (int j = 0; j < hasildb.size() ; j++) {
 		'verifikasi semua opsi pada web sesuai dengan database'
 		checkVerifyEqualorMatch(WebUI.verifyEqual(hasilweb[j], hasildb[j], FailureHandling.CONTINUE_ON_FAILURE))
 	}

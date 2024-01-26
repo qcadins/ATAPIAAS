@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "3EE96C76940435A94553C6653887C566",
+  "keywordFileContentHash": "03EBAFFC66C938E747D80EA8E65D5A8C",
   "keywordClasses": [
     {
       "name": "login.Browser",
@@ -33,11 +33,10 @@
                 "errorOnParsing": false
               }
             }
-          ],
-          "javadoc": ""
+          ]
         }
       ]
     }
   ],
-  "javadocParsed": true
+  "javadocParsed": false
 }

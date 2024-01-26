@@ -11,11 +11,24 @@
       <value></value>
       <variableId>5b179a6b-a837-4146-adaa-3716489075b9</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>56fc2206-b0a9-40fe-bb91-69066caba805</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'OCR Testing/DataOCRTestingLiveness'</defaultValue>
       <description></description>
       <id>5b179a6b-a837-4146-adaa-3716489075b9</id>
       <masked>false</masked>
       <name>ExcelPathOCRTesting</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR Liveness'</defaultValue>
+      <description></description>
+      <id>56fc2206-b0a9-40fe-bb91-69066caba805</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

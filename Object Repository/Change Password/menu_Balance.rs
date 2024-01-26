@@ -7,17 +7,25 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@ng-reflect-parent = 'Balance']</value>
+         <value>//*[@href = '/balance']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>ng-reflect-parent</name>
       <type>Main</type>
       <value>Balance</value>
-      <webElementGuid>46a10a28-ec38-4bc4-a9a8-18bf5ace0f02</webElementGuid>
+      <webElementGuid>214c3c9e-4036-4070-b19a-f62531569cda</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>href</name>
+      <type>Main</type>
+      <value>/balance</value>
+      <webElementGuid>55a7b277-fa4b-4d49-b11b-94193a0e455d</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

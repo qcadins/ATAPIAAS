@@ -56,10 +56,10 @@ public class CheckSaveProcess {
 					String failedAlertReason = 'Pengubahan API KEY gagal karena sudah aktif'
 					(new writetoexcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 							0, colm - 1, GlobalVariable.StatusFailed)
-					
+
 					(new writetoexcel.WriteExcel()).writeToExcel(GlobalVariable.DataFilePath, sheetname,
 							1, colm - 1, failedAlertReason)
-					
+
 					GlobalVariable.FlagFailed = 1
 				}
 			}
@@ -97,5 +97,4 @@ public class CheckSaveProcess {
 			}
 		}
 	}
-
 }

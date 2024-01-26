@@ -21,7 +21,8 @@ if (Case == 'Add') {
 	reason = 'Add API KEY'
 	
 	'ambil data dari DB sesudah tambah API baru'
-	hasilDB = CustomKeywords.'apikey.CheckAPIKey.getAPINamefromDB'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama API KEY')))
+	hasilDB = CustomKeywords.'apikey.CheckAPIKey.getAPINamefromDB'(conn, findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama API KEY')),
+		findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
 	
 	'cek hasil db dan excel'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama API KEY')),

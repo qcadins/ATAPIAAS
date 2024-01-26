@@ -26,7 +26,7 @@ public class Browser {
 
 		'jika captcha perlu diaktifkan, maka extension akan ter-load secara otomatis'
 		if (findTestData(paths).getValue(GlobalVariable.NumOfColumn, captchaRow) == 'Yes' ||
-		findTestData(paths).getValue(GlobalVariable.NumOfColumn, captchaRow) == '') {
+				findTestData(paths).getValue(GlobalVariable.NumOfColumn, captchaRow) == '') {
 			//	options.addExtensions(new File("Drivers/nocaptchaai_chrome_1.7.6.crx"))
 			options.addExtensions(new File('Drivers/anticaptcha-plugin_v0.65.crx'))
 		}
@@ -47,5 +47,4 @@ public class Browser {
 
 		js
 	}
-	
 }

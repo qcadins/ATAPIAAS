@@ -46,8 +46,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		if (firstRun == 0) {
 			'panggil fungsi login'
-			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'IsiSaldo', ('SheetName') : 'IsiSaldo',
-				('Path') : ExcelPathSaldoAPI, ('Username') : '$Username Login', ('Password') : '$Password Login',], FailureHandling.STOP_ON_FAILURE)
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'IsiSaldo', ('SheetName') : sheet,
+				('Path') : ExcelPathSaldoAPI, ('Username') : '$Username ', ('Password') : '$Password Login',], FailureHandling.STOP_ON_FAILURE)
 			
 			'klik tombol masuk'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
@@ -176,7 +176,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					'disabled', GlobalVariable.Timeout, FailureHandling.OPTIONAL) && isMandatoryComplete != 0) {
 			GlobalVariable.FlagFailed = 1
 			'tulis kondisi gagal'
-			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo',
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 				GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, 
 					findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';' +
 						GlobalVariable.FailedReasonMandatory)
@@ -202,7 +202,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis adanya error pada sistem web'
-			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusWarning, (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 					GlobalVariable.FailedReasonUnknown)
 		}
@@ -234,7 +234,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			noTrxOtherTenant = CustomKeywords.'apikey.CheckSaldoAPI.getLatestMutationOtherTenant'(conn, tenantcode)
 			
 			'call test case store db'
-			 WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoStoreDB'), [('ExcelPathSaldoAPI') : 'APIAAS/DataSaldoAPIKEY', ('tenant') : tenantcode, ('autoIsiSaldo') : '', ('tipeSaldo') : '', ('sheet') : 'IsiSaldo'],
+			 WebUI.callTestCase(findTestCase('IsiSaldo/IsiSaldoStoreDB'), [('ExcelPathSaldoAPI') : 'APIAAS/DataSaldoAPIKEY', ('tenant') : tenantcode, ('autoIsiSaldo') : '', ('tipeSaldo') : '', ('sheet') : sheet],
 				 FailureHandling.CONTINUE_ON_FAILURE)
 			
 			'cek apakah transaksi tercatat, memastikan tenant lain tidak memiliki transaksi yang sama'
@@ -259,13 +259,13 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		'saldo sekarang harus sama dengan saldo sebelumnya ditambah jumlah topup'
 		if (saldobefore + jumlahTopUp == saldoafter && topupSaldoCorrectTenant == 1) {
 			'tulis status sukses pada excel'
-			CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, 'IsiSaldo', 0,
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, 0,
 				GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 		} else {
 			GlobalVariable.FlagFailed = 1
 			
 			'tulis kondisi gagal'
-			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';' +
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';' +
 			GlobalVariable.FailedReasonTopUpFailed)
 		}
 	}	
@@ -310,29 +310,68 @@ def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
 def navigatetoeendigoBeta() {
 	'buka website APIAAS SIT, data diambil dari TestData Login'
 	WebUI.navigateToUrl(findTestData('Login/Login').getValue(1, 2))
-	
-	WebUI.waitForElementAttributeValue(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'aria-checked', 'true', 60, FailureHandling.OPTIONAL)
-	
-	'isi username dengan email yang terdaftar'
+
+	'input data email'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
 		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
 	
-	'isi password yang sesuai'
+	'input password'
 	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Password Login')))
+	
+	'cek perlukah tunggu agar recaptcha selesai solving'
+	if ((findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == 'Yes' ||
+		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == '')) {
+		WebUI.delay(1)
+	
+		String idObject = WebUI.getAttribute(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'id', FailureHandling.STOP_ON_FAILURE)
+		
+		modifyObjectCaptcha = WebUI.modifyObjectProperty(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'xpath', 'equals',
+			'//*[@id="' + idObject + '"]/div/div[2]', true)
+		
+		WebUI.waitForElementAttributeValue(modifyObjectCaptcha, 'class', 'antigate_solver recaptcha solved', 120, FailureHandling.OPTIONAL)
+	
+		WebUI.delay(1)
+	//
+	//	WebUI.waitForElementAttributeValue(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'aria-checked', 'true', 60, FailureHandling.OPTIONAL)
+	}
 	
 	'klik pada button login'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
 	
-	'cek apakah muncul error unknown setelah login'
-	if (WebUI.verifyElementNotPresent(findTestObject('Object Repository/Profile/Page_Balance/div_Unknown Error'),
-		GlobalVariable.Timeout, FailureHandling.OPTIONAL) == false) {
-		GlobalVariable.FlagFailed = 1
+	'jika ada pilihan role'
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		'cari element dengan nama role'
+		elementRole = DriverFactory.webDriver.findElements(By.cssSelector('body > ngb-modal-window > div > div > app-multi-role > div > div.row > div > table tr'))
 		
+		'lakukan loop untuk cari nama role yang ditentukan'
+		for (int i = 1; i <= elementRole.size() - 1; i++) {
+			'cari nama role yag sesuai di opsi role'
+			modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr[' + i + 1 + ']/td[1]', true)
+	
+			'jika nama object sesuai dengan nama role'
+			if (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Pilih Role')).equalsIgnoreCase(
+				WebUI.getAttribute(modifyRole, 'value', FailureHandling.STOP_ON_FAILURE))) {
+				'ubah alamat xpath ke role yang dipilih'
+				modifyRole = WebUI.modifyObjectProperty(findTestObject('Object Repository/Change Password/modifyobject'), 'xpath', 'equals', '/html/body/ngb-modal-window/div/div/app-multi-role/div/div[2]/div/table/tr[' + i + 1 + ']/td[2]/a', true)
+			
+				'klik role yang dipilih'
+				WebUI.click(findTestObject('Object Repository/Change Password/modifyobject'))
+				
+				break
+			}
+		}
+	}
+	
+	'cek apakah muncul error gagal login'
+	if (WebUI.verifyElementPresent(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/ErrorMsg')
+		, GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
+		GlobalVariable.FlagFailed = 1
+	
 		'tulis adanya error pada sistem web'
-		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusWarning, (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
-				GlobalVariable.FailedReasonUnknown)
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+			GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
+				GlobalVariable.FailedReasonLoginIssue)
 	}
 	
 	if (GlobalVariable.SettingEnvi == 'Production' && WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
@@ -352,12 +391,12 @@ def getSaldoforTransaction(String namaSaldo) {
 	'lakukan loop untuk cari nama saldo yang ditentukan'
 	for (int i = 1; i <= elementNamaSaldo.size(); i++) {
 		'cari nama saldo yang sesuai di list saldo'
-		modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + (i) + ']/div/div/div/div/div[1]/span', true)
+		modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + i + ']/div/div/div/div/div[1]/span', true)
 
 		'jika nama object sesuai dengan nama saldo'
 		if (WebUI.getText(modifyNamaSaldo) == namaSaldo) {
 			'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
-			modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_45,649'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + (i) + ']/div/div/div/div/div[1]/h3', true)
+			modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_45,649'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + i + ']/div/div/div/div/div[1]/h3', true)
 			
 			'simpan jumlah saldo sekarang di variabel'
 			 saldoNow = Integer.parseInt(WebUI.getText(modifySaldoDipilih).replace(',', ''))
@@ -367,8 +406,10 @@ def getSaldoforTransaction(String namaSaldo) {
 	}
 	'pakai saldo IDR jika lainnya tidak ada'
 	if (saldoNow == 0) {
+		modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_45,649'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + elementNamaSaldo.size() + ']/div/div/div/div/div[1]/h3', true)
+		
 		'simpan jumlah saldo sekarang di variabel'
-		saldoNow = Integer.parseInt(WebUI.getText(findTestObject('Object Repository/API_KEY/Page_Balance/h3_4,988')).replace(',', ''))
+		 saldoNow = Integer.parseInt(WebUI.getText(modifySaldoDipilih).replace(',', ''))
 	}
 	'kembalikan nilai saldo sekarang'
 	saldoNow
@@ -490,7 +531,7 @@ def verifyTableContent(Connection conn, String tenant) {
 def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 	if ((isMatch == false)) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('IsiSaldo',
+		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet,
 			GlobalVariable.NumOfColumn, GlobalVariable.StatusFailed, (findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
 				GlobalVariable.FailedReasonVerifyEqualorMatch + ' ' + reason)
 

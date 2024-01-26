@@ -200,6 +200,17 @@ switch (TC) {
 		'klik tombol masuk'
 		WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/button_Masuk'))
 		break
+		
+	case 'IsiSaldo':
+		'input data username'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputUsername'),
+			findTestData(ExcelPathLogin).getValue(2, 3))
+		
+		'input password'
+		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/inputpassword'),
+			findTestData(ExcelPathLogin).getValue(3, 3))
+		
+		break
 
 	case 'TranxHist':
 		//	'deklarasi penghitungan role yang dipilih'

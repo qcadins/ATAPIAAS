@@ -11,11 +11,24 @@
       <value></value>
       <variableId>15c129ae-8264-4657-bd68-6e6ac86f7934</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>feb50e2c-4eba-4eef-abe1-20b720a6ea6b</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'OCR Testing/DataOCRTestingFaceComp'</defaultValue>
       <description></description>
       <id>15c129ae-8264-4657-bd68-6e6ac86f7934</id>
       <masked>false</masked>
       <name>ExcelPathOCRTesting</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR Face Compare'</defaultValue>
+      <description></description>
+      <id>feb50e2c-4eba-4eef-abe1-20b720a6ea6b</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

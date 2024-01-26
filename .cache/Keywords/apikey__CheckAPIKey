@@ -1,5 +1,5 @@
 {
-  "keywordFileContentHash": "125623C3FA946DC4960EAF3E7B2F09B2",
+  "keywordFileContentHash": "EAD610C33ED7B0D29DA4E6343157DE08",
   "keywordClasses": [
     {
       "name": "apikey.CheckAPIKey",
@@ -22,6 +22,19 @@
             },
             {
               "name": "apiname",
+              "initialExpression": "",
+              "type": {
+                "fullClassName": "java.lang.String",
+                "unresolvedClassName": "String",
+                "isArray": false,
+                "isGnericsPlaceHolder": false,
+                "hasImmutableClassName": false,
+                "genericsTypes": [],
+                "errorOnParsing": false
+              }
+            },
+            {
+              "name": "email",
               "initialExpression": "",
               "type": {
                 "fullClassName": "java.lang.String",

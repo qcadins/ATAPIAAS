@@ -11,11 +11,24 @@
       <value></value>
       <variableId>7519ef77-d3eb-4649-a5a2-36def9531d74</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>5c9e0d6d-d54c-4589-862c-7a4862535dc9</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'APIAAS/DataSaldoAPIKEY'</defaultValue>
       <description></description>
       <id>7519ef77-d3eb-4649-a5a2-36def9531d74</id>
       <masked>false</masked>
       <name>ExcelPathSaldoAPI</name>
+   </variable>
+   <variable>
+      <defaultValue>'IsiSaldo'</defaultValue>
+      <description></description>
+      <id>5c9e0d6d-d54c-4589-862c-7a4862535dc9</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

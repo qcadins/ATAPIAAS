@@ -33,7 +33,7 @@ if (GlobalVariable.KondisiCekDB == 'Yes') {
 	ArrayList hasilweb = CustomKeywords.'apikey.CheckAPIKey.getAttributeValueAPI'()
 
 	'verifikasi data pada WEB dan DB sama'
-	for (int j = 0; j < hasildb.size; j++) {
+	for (int j = 0; j < hasildb.size(); j++) {
 	    checkVerifyEqualOrMatch(WebUI.verifyMatch(hasilweb[j], hasildb[j], false, FailureHandling.CONTINUE_ON_FAILURE), 'Data sebelum Edit tidak sesuai DB')
 	}
 }
@@ -62,12 +62,10 @@ if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel(
 	'jika status yang diingkan adalah aktif/inaktif'
 	if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Edit Status API')) == 'Active') {
 		'modify object DDL'
-		modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'),
-			'xpath', 'equals', '//*[@id="' + (id) + '-0"]', true)
+		modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), 'xpath', 'equals', '//*[@id="' + id + '-0"]', true)
 	} else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Edit Status API')) == 'Inactive') {
 		'modify object DDL'
-		modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'),
-			'xpath', 'equals', '//*[@id="' + id + '-1"]', true)
+		modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Edit Api Key/input'), 'xpath', 'equals', '//*[@id="' + id + '-1"]', true)
 	}
 	
 	'klik status yang dipilih'
@@ -117,7 +115,7 @@ if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel(
 		}
 		
 		'search api key yang sudah di edit'
-		searchAPIKEY(14)
+		searchAPIKEY(rowExcel('$Edit Status API'))
 		
 		'verify nama api key'
 		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_NamaAPIKey')),
