@@ -37,7 +37,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'input email yang akan dilakukan reset pass'
 		WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input__email'),
-			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
+			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$EmailForPassChange')))
 		
 		'klik pada tombol batal'
 		WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/button_Batal'))
@@ -53,7 +53,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'input email yang akan dilakukan reset pass'
 		WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input__email'),
-			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
+			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$EmailForPassChange')))
 		
 		'cek apakah tombol lanjut tidak di disable'
 		if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/button_Lanjut'), 'disabled',
@@ -67,7 +67,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			'cek apakah inputan nya masih ada'
 			checkVerifyEqualorMatch(WebUI.verifyMatch(
 				WebUI.getAttribute(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input__email'), 'value', FailureHandling.OPTIONAL),
-						findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')), false, FailureHandling.OPTIONAL),
+						findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$EmailForPassChange')), false, FailureHandling.OPTIONAL),
 						'Field email tidak tersimpan setelah klik periksa lagi')
 			
 			'klik pada tombol lanjut'
@@ -110,14 +110,14 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		ArrayList resetCodefromDB = []
 		
 		'hitung jumlah resend yang diperlukan'
-		int countResend = Integer.parseInt(findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Website')))
+		int countResend = Integer.parseInt(findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Count Resend')))
 		
 		'tambahkan reset code dari DB'
 		resetCodefromDB.add(CustomKeywords.'forgotpass.ForgotpassVerif.getResetCode'(conndev,
-			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login'))))
+			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$EmailForPassChange'))))
 		
 		'pengecekan untuk pakai code yang salah'
-		if (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama Tenant')) == 'No') {
+		if (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('WrongResetCode?')) == 'No') {
 			'input reset code dari DB'
 			WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input_resetCode'),
 				resetCodefromDB[0])
@@ -131,7 +131,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		} else {
 			'input code yang salah dari DB'
 			WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input_resetCode'),
-				findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Industry')))
+				findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('FalseCode')))
 			
 			resendFunction(conndev, countResend, resetCodefromDB)
 			
@@ -143,11 +143,11 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'input password baru'
 		WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Reset Password/input_newPassword'),
-			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Password Login')))
+			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Password Baru')))
 		
 		'input password confirm'
 		WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Reset Password/input_confirmNewPassword'),
-			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama Depan')))
+			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$PasswordBaruConfirm')))
 		
 		'klik button lanjut'
 		WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Reset Password/button_Simpan'))
@@ -165,12 +165,12 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				
 		'cek apakah inputan nya masih ada'
 		checkVerifyEqualorMatch(WebUI.verifyMatch(newPass,
-			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Password Login')),
+			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Password Baru')),
 				false, FailureHandling.OPTIONAL), 'Field new Password tidak tersimpan setelah klik periksa lagi')
 			
 		'cek apakah inputan nya masih ada'
 		checkVerifyEqualorMatch(WebUI.verifyMatch(newPassConfirm,
-			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama Depan')),
+			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$PasswordBaruConfirm')),
 				false, FailureHandling.OPTIONAL), 'Field new Password Confirm tidak tersimpan setelah klik periksa lagi')
 		
 		'klik button lanjut'
@@ -201,11 +201,11 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		
 		'input email untuk login'
 		WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Login - eendigo Platform/input_usernameLogin'),
-			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
+			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$EmailForPassChange')))
 		
 		'input password baru yang direset'
 		WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Login - eendigo Platform/input_passLogin'),
-			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Password Login')))
+			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Password Baru')))
 		
 		'klik pada button login'
 		WebUI.click(
@@ -272,7 +272,7 @@ def verifConfirmation() {
 
 def resendFunction(Connection conndev, int countResend, ArrayList resetCodefromDB) {
 	'cek apakah perlu resend reset code'
-	if (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Jenis Kelamin')) == 'Yes') {
+	if (findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('Resend Reset Code?')) == 'Yes') {
 		'ulangi sesuai flag dari excel'
 		for (int i = 1; i <= countResend; i++) {
 			WebUI.delay(117)
@@ -285,7 +285,7 @@ def resendFunction(Connection conndev, int countResend, ArrayList resetCodefromD
 			
 			'ambil kembali code dari DB'
 			resetCodefromDB.add(CustomKeywords.'forgotpass.ForgotpassVerif.getResetCode'(conndev,
-				findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login'))))
+				findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$EmailForPassChange'))))
 			
 			'cek apakah resend gagal'
 			if (resetCodefromDB[i - 1] == resetCodefromDB[i]) {

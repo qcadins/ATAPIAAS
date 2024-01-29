@@ -30,7 +30,7 @@ public class CouponVerif {
 		ArrayList<String> listdata = []
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT mt.tenant_name, FLOOR(minimum_payment), redemption_limit FROM tr_coupon tc LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = tc.id_ms_tenant WHERE coupon_code = '" + kodekupon + "'")
+		ResultSet resultSet = stm.executeQuery("SELECT CASE WHEN mt.tenant_name is null then 'All' ELSE mt.tenant_name END as tenant, FLOOR(minimum_payment), redemption_limit FROM tr_coupon tc LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = tc.id_ms_tenant WHERE coupon_code = '" + kodekupon + "'")
 		ResultSetMetaData metadata = resultSet.metaData
 
 		columnCount = metadata.columnCount
@@ -123,5 +123,4 @@ public class CouponVerif {
 		}
 		listdata
 	}
-	
 }

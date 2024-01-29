@@ -6,12 +6,12 @@
    <elementGuidId>7fa2ce8f-ef3b-4aed-b970-cd2e259e733a</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@class = 'mat-tab-body-content ng-tns-c241-2 ng-trigger ng-trigger-translateTab']/form/div[6]/div/div/label</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>//section[@id='login']/div/div[2]/div/mat-tab-group/div/mat-tab-body[2]/div/form/div[6]/div/div/label</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;mat-tab-content-0-1&quot;]/div/form/div[6]/div/div/label</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -21,8 +21,8 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@class = 'mat-tab-body-content ng-tns-c241-2 ng-trigger ng-trigger-translateTab']/form/div[6]/div/div/label</value>
-      <webElementGuid>e4cf42a7-b1a2-4622-ac96-ef7d699b9c6c</webElementGuid>
+      <value>//*[@id=&quot;mat-tab-content-0-1&quot;]/div/form/div[6]/div/div/label</value>
+      <webElementGuid>247188c5-95fb-43d9-9b51-eedd229ff2a2</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -30,14 +30,22 @@
       <name>formcontrolname</name>
       <type>Main</type>
       <value>acceptTerms</value>
-      <webElementGuid>bed3b9aa-8a51-4edd-968b-83e97a3b28b4</webElementGuid>
+      <webElementGuid>e00323e8-61d7-41c8-aef3-bbd2dc80c38e</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
-      <value>mat-tab-body-content ng-tns-c241-2 ng-trigger ng-trigger-translateTab</value>
-      <webElementGuid>bc8702c0-fb90-49a2-968e-705df7adf4ef</webElementGuid>
+      <value>form-control ng-untouched ng-pristine ng-invalid</value>
+      <webElementGuid>4ecf720a-4d19-478d-9b0d-6e26fd389186</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>checkbox</value>
+      <webElementGuid>daa6f213-39b6-4d06-ba22-2dd3f65bc5a2</webElementGuid>
    </webElementProperties>
 </WebElementEntity>

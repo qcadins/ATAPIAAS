@@ -22,7 +22,7 @@ int countColumnEdit = findTestData(ExcelPathCoupon).columnNumbers
 Connection conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_esign'()
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : sheet, ('SheetName') : sheet,
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Coupon', ('SheetName') : sheet,
 	('Path') : ExcelPathCoupon, ('Username') : 'Username Login', ('Password') : 'Password Login',], FailureHandling.STOP_ON_FAILURE)
 
 'klik pada tombol untuk span menu'
@@ -119,13 +119,13 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				'verifikasi field kosong'
 				checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
 					findTestObject('Object Repository/Coupon/Page_Add Coupon/input__jmlkupon'),
-					'value', FailureHandling.CONTINUE_ON_FAILURE), '',
+					'value', FailureHandling.CONTINUE_ON_FAILURE), '1',
 						false, FailureHandling.CONTINUE_ON_FAILURE), 'Field jumlah kupon tidak kosong')
 				
 				'verifikasi field kosong'
 				checkVerifyEqualorMatch(WebUI.verifyMatch(WebUI.getAttribute(
 					findTestObject('Object Repository/Coupon/Page_Add Coupon/input__maxredeem'),
-					'value', FailureHandling.CONTINUE_ON_FAILURE), '',
+					'value', FailureHandling.CONTINUE_ON_FAILURE), '1',
 						false, FailureHandling.CONTINUE_ON_FAILURE), 'Field max redeem tidak kosong')
 				
 				'verifikasi field kosong'
@@ -171,6 +171,9 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				continue
 			}
 			
+			'cek apa perlu lakukan copy link'
+			copylinkfunction()
+			
 			'klik tombol edit'
 			WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/editButton'))
 			
@@ -182,9 +185,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			'panggil fungsi menjalankan konfirmasi dialog'
 			checkdialogConfirmation(isMandatoryComplete)
-			
-			'cek apa perlu lakukan copy link'
-			copylinkfunction()
 			
 			'check after edit'
 			verifyAfterAddorEdit()
@@ -225,7 +225,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			detailresultWeb.add(WebUI.getText(findTestObject('Object Repository/Coupon/Page_List Coupon/makspenebusan')))
 			
 			'cek apakah ada data yang tidak sesuai'
-			for (int i = 0 ; i < detailresultDB.size; i++) {
+			for (int i = 0 ; i < detailresultDB.size(); i++) {
 				'jika ada data yang tidak sesuai'
 				if (detailresultWeb[i] != detailresultDB[i]) {
 					GlobalVariable.FlagFailed = 1
@@ -238,7 +238,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					break
 				} else {
 					'write to excel success'
-					CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status'),
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
 						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
 				}
 			}
@@ -708,7 +708,7 @@ def checkDBbeforeEdit(Connection conndev) {
 	editUI.add(WebUI.getText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/CheckTipeNilaiKupon')))
 	
 	'tambahkan data ke array editUI'
-	editUI.add(WebUI.getAttribute(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__nilaikupon'), 'value'))
+	editUI.add(WebUI.getAttribute(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__nilaikupon'), 'value').replace('.', ''))
 
 	'tambahkan data ke array editUI'
 	editUI.add(WebUI.getAttribute(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__jmlkupon'), 'value'))
@@ -746,22 +746,28 @@ def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
 	'get row'
 	variable = DriverFactory.webDriver.findElements(By.cssSelector(('#' + id) + '> div > div:nth-child(2) div'))
 	
-	'looping untuk get ddl kedalam array'
-	for (i = 1; i < variable.size(); i++) {
-		'modify object DDL'
-		modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/Coupon/modifyObject'), 'xpath', 'equals', ((('//*[@id=\'' +
-			id) + '-') + i) + '\']', true)
-
-		'add ddl ke array'
-		list.add(WebUI.getText(modifyObjectDDL))
+	'cek apakah variable size dibawah 30 akan di cek secara menyeluruh'
+	if (variable.size() < 30) {
+		'looping untuk get ddl kedalam array'
+		for (i = 1; i < variable.size(); i++) {
+			'modify object DDL'
+			modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/Coupon/modifyObject'), 'xpath', 'equals', ((('//*[@id=\'' +
+				id) + '-') + i) + '\']', true)
+	
+			'add ddl ke array'
+			list.add(WebUI.getText(modifyObjectDDL))
+		}
+		
+		'verify ddl ui = db'
+		checkVerifyEqualorMatch(listDB.containsAll(list), reason)
+	
+		'verify jumlah ddl ui = db'
+		checkVerifyEqualorMatch(WebUI.verifyEqual(list.size(), listDB.size(), FailureHandling.CONTINUE_ON_FAILURE), ' Jumlah ' + reason)
+	} else {
+		'verify jumlah ddl ui = db'
+		checkVerifyEqualorMatch(WebUI.verifyEqual(variable.size() - 1, listDB.size(), FailureHandling.CONTINUE_ON_FAILURE), ' Jumlah ' + reason)
 	}
-	
-	'verify ddl ui = db'
-	checkVerifyEqualorMatch(listDB.containsAll(list), reason)
-
-	'verify jumlah ddl ui = db'
-	checkVerifyEqualorMatch(WebUI.verifyEqual(list.size(), listDB.size(), FailureHandling.CONTINUE_ON_FAILURE), ' Jumlah ' + reason)
-	
+		
 	'Input enter untuk tutup ddl'
 	WebUI.sendKeys(objectDDL, Keys.chord(Keys.ENTER))
 }

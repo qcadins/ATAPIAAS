@@ -17,6 +17,12 @@
       <value></value>
       <variableId>c024d416-316e-46fe-a183-15d8f2b34683</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>45b48acf-d3ab-4e16-8e7c-1d77b631ce47</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'APIAAS/DataRegistLogin'</defaultValue>
       <description></description>
@@ -30,5 +36,12 @@
       <id>c024d416-316e-46fe-a183-15d8f2b34683</id>
       <masked>false</masked>
       <name>ExcelPathLogin</name>
+   </variable>
+   <variable>
+      <defaultValue>'Register'</defaultValue>
+      <description></description>
+      <id>45b48acf-d3ab-4e16-8e7c-1d77b631ce47</id>
+      <masked>false</masked>
+      <name>sheet</name>
    </variable>
 </TestCaseEntity>

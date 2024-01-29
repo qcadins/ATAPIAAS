@@ -7,6 +7,8 @@ import internal.GlobalVariable
 import org.apache.poi.xssf.usermodel.XSSFCell
 import org.apache.poi.xssf.usermodel.XSSFRow
 import org.apache.poi.ss.usermodel.Row
+import org.apache.poi.ss.usermodel.CellType
+import org.apache.poi.ss.usermodel.Cell
 
 public class WriteExcel {
 
@@ -143,7 +145,7 @@ public class WriteExcel {
 		for (int i = 0; i <= sheet.lastRowNum; i++) {
 			row = sheet.getRow(i)
 			try {
-				if (row.getCell(0).stringCellValue.equalsIgnoreCase(cellValue)) {
+				if (row != null && row.getCell(0) != null && row.getCell(0).getStringCellValue().equalsIgnoreCase(cellValue)) {
 					rowNum = i
 					break
 				}

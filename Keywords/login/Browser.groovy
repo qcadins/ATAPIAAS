@@ -3,7 +3,6 @@ package login
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import com.kms.katalon.core.webui.driver.DriverFactory
 import internal.GlobalVariable as GlobalVariable
-import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.remote.DesiredCapabilities
@@ -42,9 +41,7 @@ public class Browser {
 		driver = new ChromeDriver(caps)
 
 		DriverFactory.changeWebDriver(driver)
-
-		JavascriptExecutor js = (JavascriptExecutor)driver
-
-		js
+		
+		driver
 	}
 }

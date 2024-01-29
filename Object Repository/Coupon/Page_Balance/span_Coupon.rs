@@ -6,15 +6,15 @@
    <elementGuidId>06fc4c9c-8727-428f-a908-ae45aef320bf</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@ng-reflect-parent = 'Coupon']</value>
-      </entry>
-      <entry>
          <key>CSS</key>
       </entry>
       <entry>
          <key>XPATH</key>
          <value>/html/body/app-root/app-full-layout/div/div[1]/app-sidebar/div[2]/div[1]/ul/li[23]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@href = '/coupon']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -25,7 +25,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>span</value>
-      <webElementGuid>41b03130-9eb6-44a7-b25c-ea0605137a53</webElementGuid>
+      <webElementGuid>aec46a59-bbaf-4d07-b83e-8584114bad37</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -33,7 +33,7 @@
       <name>class</name>
       <type>Main</type>
       <value>ng-tns-c133-4 icon-wallet</value>
-      <webElementGuid>602880af-47da-46d8-8989-573de161fcdb</webElementGuid>
+      <webElementGuid>86a885cf-3cc2-4036-9bc6-289b13794d23</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -41,7 +41,7 @@
       <name>text</name>
       <type>Main</type>
       <value>Coupon</value>
-      <webElementGuid>8e405406-181e-4740-bd23-254db470ac03</webElementGuid>
+      <webElementGuid>0bf194d6-c41d-49c7-9869-b93e6dc1d685</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -49,15 +49,15 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-expanded vertical-menu menu-open&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;app-sidebar main-menu menu-fixed menu-native-scroll expanded ng-star-inserted&quot;]/app-sidebar[@class=&quot;ng-tns-c133-4&quot;]/div[@class=&quot;sidebar-content main-menu-content ng-tns-c133-4 ps&quot;]/div[@class=&quot;nav-container ng-tns-c133-4&quot;]/ul[@class=&quot;navigation ng-tns-c133-4&quot;]/li[@class=&quot;ng-tns-c133-4 ng-star-inserted&quot;]/a[@class=&quot;ng-tns-c133-4 ng-star-inserted&quot;]/span[@class=&quot;menu-title ng-tns-c133-4&quot;]</value>
-      <webElementGuid>82e6b6c4-3279-464c-8144-8aacce96026e</webElementGuid>
+      <webElementGuid>f31b1e35-bab4-4c2d-b87f-ba0214217cb5</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>ng-reflect-parent</name>
       <type>Main</type>
       <value>Coupon</value>
-      <webElementGuid>16c1a814-e057-4354-a236-0b43d23beeb1</webElementGuid>
+      <webElementGuid>df485580-7a74-43ff-92b9-894db5774969</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -65,7 +65,15 @@
       <name>ng-reflect-router-link</name>
       <type>Main</type>
       <value>/coupon</value>
-      <webElementGuid>e632f0b7-2b81-43f9-aad4-867bbb064ed4</webElementGuid>
+      <webElementGuid>a49abe7d-68ad-49ea-9b37-e2c42149606a</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>href</name>
+      <type>Main</type>
+      <value>/coupon</value>
+      <webElementGuid>797e909a-22de-464c-80c2-f05094e382ad</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -73,7 +81,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Pengguna'])[1]/following::span[1]</value>
-      <webElementGuid>b317d995-74a4-48fe-b2a0-e8251d016d8c</webElementGuid>
+      <webElementGuid>c58eeb72-9a85-4866-b6dd-17fbc2f45b40</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -81,7 +89,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Peran'])[1]/following::span[2]</value>
-      <webElementGuid>ee0d9847-26b2-416b-b7c9-285712ca4012</webElementGuid>
+      <webElementGuid>7c498340-3cab-4c69-af6b-e9e4ed1e7931</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -89,7 +97,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='PRODUCTION'])[1]/preceding::span[1]</value>
-      <webElementGuid>4464602e-87e9-45b0-9ffe-319bfc4829e1</webElementGuid>
+      <webElementGuid>f75fa54f-85b4-48d6-b036-1a80bf9b04fd</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -97,7 +105,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='TRIAL'])[1]/preceding::span[1]</value>
-      <webElementGuid>df9ba473-4177-45f1-9766-8cb93cdf1265</webElementGuid>
+      <webElementGuid>65f9d31f-92fc-490c-be2f-2aa6015c4e62</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -105,7 +113,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='Coupon']/parent::*</value>
-      <webElementGuid>03f14d27-f3b1-4684-b91f-99fa9ab4f1d6</webElementGuid>
+      <webElementGuid>2547e273-05f2-486c-90bc-98144b5daf82</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -113,7 +121,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//li[7]/a/span</value>
-      <webElementGuid>b421c8ab-9f90-476f-9460-fd0853878fbd</webElementGuid>
+      <webElementGuid>0e2caeea-7fd1-4b34-bcb1-40ac27041fc2</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -121,6 +129,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//span[(text() = 'Coupon' or . = 'Coupon')]</value>
-      <webElementGuid>4118e5b7-b0e1-4867-a7f5-0def8947f0e9</webElementGuid>
+      <webElementGuid>67d0820f-47b8-4892-8e96-4d8a045657eb</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

@@ -43,6 +43,9 @@ if (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowE
 String tenantcode = CustomKeywords.'layanansaya.VerifLayanan.getTenantCodefromDB'(conn, findTestData(ExcelPathLayananSaya).getValue(
         GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
 
+'deklarasi variabel connect'
+Connection connect
+
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
     'set penanda error menjadi 0'
     GlobalVariable.FlagFailed = 0
@@ -55,14 +58,29 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
         'angka untuk menghitung data mandatory yang tidak terpenuhi'
         int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Mandatory Complete')))
 
+		'user memilih perlu cek layanan production atau trial'
+		if (findTestData(ExcelPathLayananSaya).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe API KEY')) == 'PRODUCTION') {
+			'klik pada api key production'
+			WebUI.click(findTestObject('Object Repository/LayananSaya/Page_List Service/label_PRODUCTION'))
+			
+			'deklarasikan koneksi untuk memakai production db'
+			connect = conn
+		} else {
+			'klik pada api key trial'
+			WebUI.click(findTestObject('Object Repository/LayananSaya/Page_List Service/label_TRIAL'))
+			
+			'deklarasikan koneksi untuk memakai production db'
+			connect = conndevUAT
+		}
+		
         'service name dari DB'
-        ArrayList serviceNameDB = CustomKeywords.'layanansaya.VerifLayanan.getListServiceName'(conndevUAT, tenantcode)
+        ArrayList serviceNameDB = CustomKeywords.'layanansaya.VerifLayanan.getListServiceName'(connect, tenantcode)
 
         'service status dari DB'
-        ArrayList<String> serviceStatusDB = CustomKeywords.'layanansaya.VerifLayanan.getListServiceStatus'(conndevUAT, tenantcode)
+        ArrayList<String> serviceStatusDB = CustomKeywords.'layanansaya.VerifLayanan.getListServiceStatus'(connect, tenantcode)
 
         'service charge type dari DB'
-        ArrayList<String> chargeTypeDB = CustomKeywords.'layanansaya.VerifLayanan.getListChargeType'(conndevUAT, tenantcode)
+        ArrayList<String> chargeTypeDB = CustomKeywords.'layanansaya.VerifLayanan.getListChargeType'(connect, tenantcode)
 
         'deklarasi array kosong untuk layanan saya'
         ArrayList<String> serviceNameUI = [], serviceStatusUI = [], chargeTypeUI = []

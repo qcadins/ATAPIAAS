@@ -8,9 +8,12 @@ import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.By as By
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.WebElement
+import org.openqa.selenium.WebDriver
 
-'panggil fungsi untuk open browser'
-JavascriptExecutor js = CustomKeywords.'login.Browser.settingandOpen'(Path, rowExcel('CaptchaEnabled'))
+'deklarasi untuk buka browser dan ambil driver nya'
+WebDriver driver = CustomKeywords.'login.Browser.settingandOpen'(Path, rowExcel('CaptchaEnabled'))
+
+JavascriptExecutor js = (JavascriptExecutor)driver
 
 'buat flag failed menjadi 0 agar tidak menimpa status failed pada excel'
 GlobalVariable.FlagFailed = 0
@@ -31,7 +34,7 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {
 'cek perlukah tunggu agar recaptcha selesai solving'
 if ((findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == 'Yes' ||
 	findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEnabled')) == '') && 
-	TC != 'Tenant' && TC != 'IsiSaldo' && TC != 'IsiSaldoAuto') {
+	TC != 'Tenant' && TC != 'IsiSaldo' && TC != 'IsiSaldoAuto' && TC != 'Regist') {
 	WebUI.delay(1)
 
 	String idObject = WebUI.getAttribute(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'id', FailureHandling.STOP_ON_FAILURE)
@@ -44,115 +47,115 @@ if ((findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEn
 	WebUI.delay(1)
 //	
 //	WebUI.waitForElementAttributeValue(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'aria-checked', 'true', 60, FailureHandling.OPTIONAL)
-}	
-	
-if (TC == 'Regist') {
-	WebUI.maximizeWindow()
-	
-	WebUI.delay(GlobalVariable.Timeout)
-	
-	'klik pada tombol buat akun'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
-	
-	'check apakah mau buka hyperlink atau tidak'
-	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Open Hyperlink?')) == 'Yes') {
-		'click label syarat dan ketentuan'
-		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_KebijakanPrivasi'))
-		
-		'verify judul halaman == KEBIJAKAN PRIVASI'
-		if (!WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_KebijakanorSyarat'), FailureHandling.OPTIONAL), 'KEBIJAKAN PRIVASI', false, FailureHandling.CONTINUE_ON_FAILURE)) {
-				GlobalVariable.FlagFailed = 1
-				
-				'tulis gagal membuka halaman kebijakan privasi'
-				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
-					GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
-						'Gagal membuka halaman KEBIJAKAN PRIVASI')
-		}
-		
-		'kembali ke halaman login'
-		WebUI.back()
-		
-		'klik pada tombol buat akun'
-		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
-		
-		'click label syarat dan ketentuan'
-		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_SyaratdanKetentuan'))
-		
-		'verify judul halaman == SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO'
-		if (!WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_KebijakanorSyarat'), FailureHandling.OPTIONAL), 'SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO', false, FailureHandling.CONTINUE_ON_FAILURE)) {
-			GlobalVariable.FlagFailed = 1
-			
-			'tulis gagal membuka halaman syarat dan ketentuan'
-			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
-				GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
-					'Gagal membuka halaman SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO')
-		}
-		
-		'kembali ke halaman login'
-		WebUI.back()
-		
-		'klik pada tombol buat akun'
-		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
-	}
-	
-	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Checklist T&C?')) == 'Yes') {
-		WebElement linkTerm = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >" +
-			" div:nth-child(6) > div > div > label > a:nth-child(1)"))
-		WebElement linkPrivacy = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >" +
-			" div:nth-child(6) > div > div > label > a:nth-child(2)"))
-		
-		js.executeScript("arguments[0].remove()", linkTerm)
-		js.executeScript("arguments[0].remove()", linkPrivacy)
-		
-		'checklist T&C'
-		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/AcceptTnC'))
-	}
-	
-	'input pada field email'
-	WebUI.setText(
-		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemailRegister'),
-			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email registrasi')))
-	
-	'ubah ke laman login'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Masuk'))
-	
-	'klik pada tombol buat akun'
-	WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
-	
-	WebUI.delay(1)
-	
-	'ambil teks dari field input email'
-	if (WebUI.getAttribute(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemailRegister'), 'value', FailureHandling.OPTIONAL)
-			!= findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email registrasi'))) {
-		'write excel reason email tidak hilang'
-		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
-			GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
-			';') + GlobalVariable.FailedReasonEmailField)
-	}
-	
-	'input pada field nama pengguna'
-	WebUI.setText(
-		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputNamaRegister'),
-			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username registrasi')))
-	
-	'input pada field kata sandi'
-	WebUI.setText(
-		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_passRegister'),
-			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Pass registrasi')))
-	
-	'input pada field ketik ulang kata sandi'
-	WebUI.setText(
-		findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_confirmPassRegist'),
-			findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$KetikUlang Pass')))
-	
-//	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 21) == 'Yes') {
-//		'bypass captcha langsung masuk verifikasi otp'
-//		WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
-//		js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister);
-//	}
 }
 
 switch (TC) {
+	case 'Regist':
+		WebUI.maximizeWindow()
+		
+		WebUI.delay(GlobalVariable.Timeout)
+		
+		'klik pada tombol buat akun'
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
+		
+		'check apakah mau buka hyperlink atau tidak'
+		if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Open Hyperlink?')) == 'Yes') {
+			'click label syarat dan ketentuan'
+			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_KebijakanPrivasi'))
+			
+			'verify judul halaman == KEBIJAKAN PRIVASI'
+			if (!WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_KebijakanorSyarat'), FailureHandling.OPTIONAL), 'KEBIJAKAN PRIVASI', false, FailureHandling.CONTINUE_ON_FAILURE)) {
+					GlobalVariable.FlagFailed = 1
+					
+					'tulis gagal membuka halaman kebijakan privasi'
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
+							'Gagal membuka halaman KEBIJAKAN PRIVASI')
+			}
+			
+			'kembali ke halaman login'
+			WebUI.back()
+			
+			'klik pada tombol buat akun'
+			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
+			
+			'click label syarat dan ketentuan'
+			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_SyaratdanKetentuan'))
+			
+			'verify judul halaman == SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO'
+			if (!WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/label_KebijakanorSyarat'), FailureHandling.OPTIONAL), 'SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO', false, FailureHandling.CONTINUE_ON_FAILURE)) {
+				GlobalVariable.FlagFailed = 1
+				
+				'tulis gagal membuka halaman syarat dan ketentuan'
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+					GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
+						'Gagal membuka halaman SYARAT DAN KETENTUAN PENGGUNAAN PRODUK SOLUSI EENDIGO')
+			}
+			
+			'kembali ke halaman login'
+			WebUI.back()
+			
+			'klik pada tombol buat akun'
+			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
+		}
+		
+		if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Checklist T&C?')) == 'Yes') {
+			WebElement linkTerm = js.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >" +
+				" div:nth-child(6) > div > div > label > a:nth-child(1)"))
+			WebElement linkPrivacy = driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form >" +
+				" div:nth-child(6) > div > div > label > a:nth-child(2)"))
+			
+			js.executeScript("arguments[0].remove()", linkTerm)
+			js.executeScript("arguments[0].remove()", linkPrivacy)
+			
+			'checklist T&C'
+			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/AcceptTnC'))
+		}
+		
+		'input pada field email'
+		WebUI.setText(
+			findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemailRegister'),
+				findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email registrasi')))
+		
+		'ubah ke laman login'
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Masuk'))
+		
+		'klik pada tombol buat akun'
+		WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/div_Buat Akun'))
+		
+		WebUI.delay(1)
+		
+		'ambil teks dari field input email'
+		if (WebUI.getAttribute(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemailRegister'), 'value', FailureHandling.OPTIONAL)
+				!= findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email registrasi'))) {
+			'write excel reason email tidak hilang'
+			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'('Register', GlobalVariable.NumOfColumn,
+				GlobalVariable.StatusFailed, (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
+				';') + GlobalVariable.FailedReasonEmailField)
+		}
+		
+		'input pada field nama pengguna'
+		WebUI.setText(
+			findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputNamaRegister'),
+				findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username registrasi')))
+		
+		'input pada field kata sandi'
+		WebUI.setText(
+			findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_passRegister'),
+				findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$Pass registrasi')))
+		
+		'input pada field ketik ulang kata sandi'
+		WebUI.setText(
+			findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/input_confirmPassRegist'),
+				findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, rowExcel('$KetikUlang Pass')))
+		
+	//	if (findTestData(ExcelPathRegisterLogin).getValue(GlobalVariable.NumOfColumn, 21) == 'Yes') {
+	//		'bypass captcha langsung masuk verifikasi otp'
+	//		WebElement buttonRegister= driver.findElement(By.cssSelector("#mat-tab-content-0-1 > div > form > button"))
+	//		js.executeScript("arguments[0].removeAttribute('disabled')", buttonRegister);
+	//	}
+	
+		break
 	case 'OCR':
 		'input data email'
 		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
