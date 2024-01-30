@@ -1,5 +1,6 @@
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import java.sql.Connection
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testdata.TestData as TestData
@@ -129,7 +130,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				continue
 			}
 		} else {
-			'input code yang salah dari DB'
+			'input code yang salah dari excel'
 			WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Forgot Password Page/input_resetCode'),
 				findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('FalseCode')))
 			
@@ -199,17 +200,19 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			WebUI.click(findTestObject('Object Repository/Forgot Password/Page_Reset Password/button_OK_notif'))
 		}
 		
-		'input email untuk login'
-		WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Login - eendigo Platform/input_usernameLogin'),
-			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$EmailForPassChange')))
-		
-		'input password baru yang direset'
-		WebUI.setText(findTestObject('Object Repository/Forgot Password/Page_Login - eendigo Platform/input_passLogin'),
-			findTestData(ExcelPathForgotPass).getValue(GlobalVariable.NumOfColumn, rowExcel('$Password Baru')))
+		'panggil fungsi login'
+		WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'ForgotPass', ('SheetName') : sheet,
+			('Path') : ExcelPathForgotPass, ('Username') : '$EmailForPassChange', ('Password') : '$Password Baru',], FailureHandling.STOP_ON_FAILURE)
 		
 		'klik pada button login'
-		WebUI.click(
-			findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+		
+		'cek apakah pilih role muncul'
+		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'),
+				4, FailureHandling.OPTIONAL)) {
+			'klik pada tombol role tersebut'
+			WebUI.click(findTestObject('Object Repository/Change Password/Page_Login - eendigo Platform/Admin Client_3'))
+		}
 		
 		'cek apakah berhasil login'
 		if (WebUI.verifyElementPresent(findTestObject('Object Repository/Forgot Password/span_profile'),

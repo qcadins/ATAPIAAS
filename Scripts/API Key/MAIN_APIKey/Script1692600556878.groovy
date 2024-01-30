@@ -57,26 +57,21 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			checkpaging(conndev)
 		}
 		
-		'panggil fungsi copy link'
-		if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Copy API Link?(Yes/No)')) == 'Yes') {
-			'klik tombol COPY LINK'
-			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/buttonCopy'))
-				
-			'verifikasi copy berhasil'
-			CustomKeywords.'writetoexcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
-				findTestObject('Object Repository/API_KEY/Page_Api Key List/notif_CopySuccess'),
-					GlobalVariable.NumOfColumn, sheet)
-		}
-		
 		'cek perlu nya pemanggilan fungsi add atau edit'
-		if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Add API KEY?(Yes/No)')) == 'Yes') {
+		if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')) == 'Add') {
 			'panggil fungsi Add API KEY'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/AddAPIKey'),
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
-		} else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Edit API KEY?(Yes/No)')) == 'Yes') {
+			
+			'cek apakah perlu copy api key yang baru ditambah atau diedit'
+			checkCopyLink(isMandatoryComplete)
+		} else if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')) == 'Edit') {
 			'panggil fungsi Edit API Key'
 			WebUI.callTestCase(findTestCase('Test Cases/API Key/EditAPIKey'),
 				[('conn'): conndev], FailureHandling.CONTINUE_ON_FAILURE)
+			
+			'cek apakah perlu copy api key yang baru ditambah atau diedit'
+			checkCopyLink(isMandatoryComplete)
 		}
 
 		'kondisi jika tidak ada error'
@@ -246,4 +241,17 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+}
+
+def checkCopyLink(int isMandatoryComplete) {
+	'panggil fungsi copy link'
+	if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Copy API Link?(Yes/No)')) == 'Yes') {
+		'klik tombol COPY LINK'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/buttonCopy'))
+			
+		'verifikasi copy berhasil'
+		CustomKeywords.'writetoexcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
+			findTestObject('Object Repository/API_KEY/Page_Api Key List/notif_CopySuccess'),
+				GlobalVariable.NumOfColumn, sheet)
+	}
 }

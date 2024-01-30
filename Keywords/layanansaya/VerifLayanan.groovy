@@ -58,7 +58,7 @@ public class VerifLayanan {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT CASE WHEN mbt.is_active = '1' THEN 'Active' ELSE 'Inactive' END AS status FROM ms_balancevendoroftenant mbt LEFT JOIN ms_lov mlo ON mlo.id_lov = mbt.lov_balance_type LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mbt.id_ms_tenant WHERE tenant_code = '" + tenantcode + "'")
+		ResultSet resultSet = stm.executeQuery("SELECT CASE WHEN mbt.is_active = '1' THEN 'Active' ELSE 'Inactive' END AS status FROM ms_balancevendoroftenant mbt LEFT JOIN ms_lov mlo ON mlo.id_lov = mbt.lov_balance_type LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mbt.id_ms_tenant WHERE tenant_code = '" + tenantcode + "' AND mlo.code != 'IDR'")
 
 		ResultSetMetaData metadata  = resultSet.metaData
 
@@ -81,7 +81,7 @@ public class VerifLayanan {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT description FROM ms_balancevendoroftenant mbt LEFT JOIN ms_lov mlo ON mlo.id_lov = mbt.lov_balance_charge_type LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mbt.id_ms_tenant WHERE tenant_code = '" + tenantcode + "'")
+		ResultSet resultSet = stm.executeQuery("SELECT mlo.description FROM ms_balancevendoroftenant mbt LEFT JOIN ms_lov mlo ON mlo.id_lov = mbt.lov_balance_charge_type LEFT JOIN ms_tenant mt ON mt.id_ms_tenant = mbt.id_ms_tenant LEFT JOIN ms_lov ml ON ml.id_lov = mbt.lov_balance_type WHERE tenant_code = '" + tenantcode + "' AND ml.code != 'IDR'")
 		ResultSetMetaData metadata  = resultSet.metaData
 
 		columnCount = metadata.columnCount

@@ -42,7 +42,7 @@ if ((findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('CaptchaEn
 	modifyObjectCaptcha = WebUI.modifyObjectProperty(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'xpath', 'equals', 
 		'//*[@id="' + idObject + '"]/div/div[2]', true)
 	
-	WebUI.waitForElementAttributeValue(modifyObjectCaptcha, 'class', 'antigate_solver recaptcha solved', 60, FailureHandling.OPTIONAL)
+	WebUI.waitForElementAttributeValue(modifyObjectCaptcha, 'class', 'antigate_solver recaptcha solved', 90, FailureHandling.OPTIONAL)
 
 	WebUI.delay(1)
 //	
@@ -276,12 +276,12 @@ switch (TC) {
 			findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel(Password)))
 }
 
-if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Regist') {
-	'klik pada button login'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
-	
+if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Regist' && TC != 'ForgotPass') {
 	'cek apakah berhasil login'
 	for (int i = 1; i <= 10; i++) {
+		'klik pada button login'
+		WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
+		
 		'cek apakah berhasil login'
 		if (WebUI.verifyElementPresent(findTestObject('RegisterLogin/Page_Login - eendigo Platform/textSmallError'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 			'write to excel reason failed error login'
@@ -307,7 +307,7 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'Regist'
 	}
 }
 
-if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto') {	
+if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'ForgotPass') {	
 	if (GlobalVariable.SettingEnvi == 'Production' && WebUI.verifyElementPresent(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		'click pada production'
 		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/button_Production'))

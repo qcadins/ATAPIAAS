@@ -9,6 +9,8 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 import org.openqa.selenium.By as By
+import java.time.format.DateTimeFormatter
+import java.time.LocalDate
 
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
@@ -25,6 +27,8 @@ if (GlobalVariable.SettingEnvi == 'Production') {
 	'deklarasi koneksi ke Database eendigo_dev_uat'
 	conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 }
+
+String tanggal = firstDateofMonth()
 
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {	
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
@@ -58,7 +62,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		WebUI.scrollToElement(findTestObject('API_KEY/Page_Api Key List/skiptoLast_page'), GlobalVariable.Timeout)
 		
 		'panggil fungsi cek table dan paging'
-		checkTableandPaging(conn, tenantcode, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
+		checkTableandPaging(conn, tenantcode, findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')), tanggal)
 		
 		'ambil nama balance dari DB'
 		ArrayList namatipesaldoDB = CustomKeywords.'saldo.VerifSaldo.getListTipeSaldo'(conn, tenantcode)
@@ -100,11 +104,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		'lakukan sort ascending pada kedua array'
 		activeBalanceUI.sort()
 		activeBalanceDB.sort()
-	
+
 		'loop dan verifikasi datanya satu per satu'
 		for (int i = 0; i <= activeBalanceDB.size(); i++) {
 			'verify livenessFacecompareServicesStatus'
-			arrayMatch.add(WebUI.verifyMatch(activeBalanceUI[i], activeBalanceDB[i], FailureHandling.CONTINUE_ON_FAILURE))
+			arrayMatch.add(WebUI.verifyMatch(activeBalanceUI[i].toString(), activeBalanceDB[i].toString(), false, FailureHandling.CONTINUE_ON_FAILURE))
 		}
 		
 		'jika hasil UI dan DB tidak sama'
@@ -360,9 +364,9 @@ def filterSaldoDetail() {
 }
 
 'fungsi langsung ke laman akhir'
-def checkTableandPaging(Connection connection, String tenantcode, String tipeSaldo) {
+def checkTableandPaging(Connection connection, String tenantcode, String tipeSaldo, String tanggal) {
 	'ambil total data yang dicari dari DB'
-	int resultTotalData = CustomKeywords.'saldo.VerifSaldo.getCountTotalData'(connection, tenantcode, tipeSaldo)
+	int resultTotalData = CustomKeywords.'saldo.VerifSaldo.getCountTotalData'(connection, tenantcode, tipeSaldo, tanggal)
 	
 	'cek apakah total data di table dan db equal'
 	Total = WebUI.getText(findTestObject('Object Repository/Saldo/Page_Balance/totalDataTable')).split(' ')
@@ -420,7 +424,7 @@ def checkTableandPaging(Connection connection, String tenantcode, String tipeSal
 		WebUI.click(findTestObject('Object Repository/Saldo/Page_Balance/lastPage'))
 		
 		'ubah path object button laman terakhir'
-		modifybuttonMaxPage = WebUI.modifyObjectProperty(findTestObject('Object Repository/Saldo/Page_Balance/modifybuttonpage'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li[' + lastPage - 2 + ']', true)
+		modifybuttonMaxPage = WebUI.modifyObjectProperty(findTestObject('Object Repository/Saldo/Page_Balance/modifybuttonpage'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[3]/app-msx-paging-v2/app-msx-datatable/section/ngx-datatable/div/datatable-footer/div/datatable-pager/ul/li[' + (lastPage - 2) + ']', true)
 		
 		'verify paging di page terakhir'
 		checkVerifyPaging(WebUI.verifyMatch(WebUI.getAttribute(modifybuttonMaxPage, 
@@ -506,4 +510,20 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+}
+
+def firstDateofMonth() {
+	'ambil tanggal hari ini'
+	LocalDate currentDate = LocalDate.now()
+	
+	'ambil tanggal pertama bulan ini'
+	LocalDate firstDateOfMonth = currentDate.withDayOfMonth(1)
+	
+	'buat format menjadi yyyyMMDD'
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+	
+    String formattedDate = firstDateOfMonth.format(formatter)
+	
+	'return hasil format tadi'
+	formattedDate
 }

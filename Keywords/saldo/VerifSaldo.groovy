@@ -74,7 +74,7 @@ public class VerifSaldo {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT description FROM ms_lov WHERE description LIKE '%Use " + tipeSaldo + "%' OR description LIKE '%Topup " + tipeSaldo + "%' OR description LIKE '%Top Up " + tipeSaldo + "' AND is_active = '1'")
+		ResultSet resultSet = stm.executeQuery("SELECT description FROM ms_lov WHERE description ILIKE '%Use " + tipeSaldo + "%' OR description ILIKE '%Topup " + tipeSaldo + "%' OR description ILIKE '%Top Up " + tipeSaldo + "' AND is_active = '1'")
 		ResultSetMetaData metadata  = resultSet.metaData
 
 		columnCount = metadata.columnCount
@@ -134,17 +134,16 @@ public class VerifSaldo {
 
 	//fungsi untuk mengambil tenant code dari database
 	@Keyword
-	getCountTotalData(Connection conn, String tenantcode, String tipeSaldo) {
+	getCountTotalData(Connection conn, String tenantcode, String tipeSaldo, String tanggal) {
 		int data
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT COUNT(*) FROM esign.tr_balance_mutation bm JOIN esign.ms_lov ml ON ml.id_lov = bm.lov_balance_type JOIN esign.ms_tenant mt ON mt.id_ms_tenant = bm.id_ms_tenant WHERE tenant_code = '" + tenantcode + "' AND description = '" + tipeSaldo + "' AND trx_date >= '2023-05-01 00:00:00.0'")
+		ResultSet resultSet = stm.executeQuery("SELECT COUNT(*) FROM esign.tr_balance_mutation bm JOIN esign.ms_lov ml ON ml.id_lov = bm.lov_balance_type JOIN esign.ms_tenant mt ON mt.id_ms_tenant = bm.id_ms_tenant WHERE tenant_code = '" + tenantcode + "' AND description = '" + tipeSaldo + "' AND trx_date >= '" + tanggal + " 00:00:00.0'")
 
 		while (resultSet.next()) {
 			data = resultSet.getObject(1)
 		}
 		data
 	}
-	
 }
