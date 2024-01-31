@@ -4,6 +4,8 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
+import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
+import org.openqa.selenium.By as By
 import org.openqa.selenium.Keys as Keys
 
 'klik pada tombol garis tiga'
@@ -92,13 +94,13 @@ if (WebUI.verifyElementHasAttribute(findTestObject('Object Repository/API_KEY/Pa
 				(findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonUnknown)
 		}
 		
-		searchAPIKEY()
+		checkVerifyEqualOrMatch(searchAPIKEY(isMandatory), " Search after Add")
 		
-		'verify nama api key'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_NamaAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama API KEY')), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama api key')
-	
-		'verify nama tipe api key'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_TipeAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe API KEY')), false, FailureHandling.CONTINUE_ON_FAILURE), ' tipe api key')
+//		'verify nama api key'
+//		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_NamaAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama API KEY')), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama api key')
+//	
+//		'verify nama tipe api key'
+//		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/API_KEY/label_TipeAPIKey')), findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe API KEY')), false, FailureHandling.CONTINUE_ON_FAILURE), ' tipe api key')
 	} else {
 		'Write to excel status failed and ReasonFailedVerifyEqualorMatch'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
@@ -119,25 +121,81 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 	}
 }
 
-def searchAPIKEY() {
-	'input tipe API'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
-			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe API KEY')))
+def searchAPIKEY(int isMandatoryComplete) {
+//	'input tipe API'
+//	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
+//			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe API KEY')))
+//	
+//	'select tipe API'
+//	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(
+//			Keys.ENTER))
+//	
+//	'input status API'
+//	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
+//			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('SearchStatusAPI')))
+//	
+//	'select status API'
+//	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(
+//			Keys.ENTER))
+//	
+//	'klik pada button cari'
+//	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
 	
-	'select tipe API'
-	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(
-			Keys.ENTER))
+	boolean isFound = false
 	
-	'input status API'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
-			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('SearchStatusAPI')))
-	
-	'select status API'
-	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(
-			Keys.ENTER))
-	
-	'klik pada button cari'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
+	'cari size dari page yang ada'
+	elementbuttonskip = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-api-key > app-msx-paging > app-msx-datatable > section > ngx-datatable > div > datatable-footer > div > datatable-pager > ul li'))
+
+	for (int row = 0; row < elementbuttonskip.size() - 4; row++) {
+		'ambil alamat trxnumber'
+		onepage = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-list-api-key > app-msx-paging > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
+
+		'banyaknya row table'
+		int index = onepage.size()
+		
+		'mulai perhitungan data service name'
+		for (int i = 1; i <= index; i++) {
+			'ambil object dari ddl'
+			modifyAPIName = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'),
+				'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-api-key/app-msx-paging/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' +
+				i + ']/datatable-body-row/div[2]/datatable-body-cell[1]/div/p', true)
+
+			'jika nama object sesuai dengan nama saldo'
+			if (WebUI.getText(modifyAPIName) == findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama API KEY'))) {
+				isFound = true
+				
+				'panggil fungsi copy link'
+				if (findTestData(ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('Copy API Link?(Yes/No)')) == 'Yes') {
+					'ambil object dari ddl'
+					modifyCopyLink = WebUI.modifyObjectProperty(findTestObject('Object Repository/LayananSaya/modifytablecontent'),
+						'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-list-api-key/app-msx-paging/app-msx-datatable/section/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' +
+						i + ']/datatable-body-row/div[2]/datatable-body-cell[3]/div/a/em', true)
+					
+					'klik tombol COPY LINK'
+					WebUI.click(modifyCopyLink)
+						
+					'verifikasi copy berhasil'
+					CustomKeywords.'writetoexcel.CheckSaveProcess.checkStatus'(isMandatoryComplete,
+						findTestObject('Object Repository/API_KEY/Page_Api Key List/notif_CopySuccess'),
+							GlobalVariable.NumOfColumn, sheet)
+				}
+				break
+			}
+		}
+		
+		'cek apakah button next enable atau disable'
+		if (WebUI.verifyElementVisible(findTestObject('Object Repository/OCR Testing/Page_Balance/i_Catatan_datatable-icon-right'),
+			FailureHandling.OPTIONAL) && isFound == 0) {
+			'klik button next page'
+			WebUI.click(findTestObject('Object Repository/OCR Testing/Page_Balance/i_Catatan_datatable-icon-right'))
+		}
+		
+		'cek jika sudah ketemu, hentikan seluruh loop'
+		if (isFound == 1) {
+			break
+		}
+	}
+	isFound
 }
 
 def rowExcel(String cellValue) {

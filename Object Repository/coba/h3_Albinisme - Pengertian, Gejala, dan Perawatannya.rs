@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>h3_Albinisme - Pengertian, Gejala, dan Perawatannya</name>
+   <tag></tag>
+   <elementGuidId>c5576a0c-3b0d-4bc5-9b7e-a91dafe254d5</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>h3.LC20lb.MBeuO.DKV0Md</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='rso']/div/div/div/div/div/div/div/span/a/h3</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>h3</value>
+      <webElementGuid>8214808f-660f-4ef3-ab2c-f76b904adcf9</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>LC20lb MBeuO DKV0Md</value>
+      <webElementGuid>4dfc1ca9-1380-4194-be34-a4504da85e35</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Albinisme - Pengertian, Gejala, dan Perawatannya</value>
+      <webElementGuid>e5be96ce-e7bf-49af-9db2-4533f434234d</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;rso&quot;)/div[@class=&quot;hlcw0c&quot;]/div[@class=&quot;MjjYud&quot;]/div[@class=&quot;g Ww4FFb vt6azd tF2Cxc asEBEc&quot;]/div[@class=&quot;srKDX cvP2Ce&quot;]/div[@class=&quot;kb0PBd cvP2Ce jGGQ5e ieodic ToJJHb&quot;]/div[@class=&quot;yuRUbf&quot;]/div[1]/span[1]/a[1]/h3[@class=&quot;LC20lb MBeuO DKV0Md&quot;]</value>
+      <webElementGuid>e0642997-f37f-4e25-a692-7d4ec6259cb2</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='rso']/div/div/div/div/div/div/div/span/a/h3</value>
+      <webElementGuid>e372d03a-911c-47bf-97cb-ea3a50fade09</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//h3</value>
+      <webElementGuid>a6217226-aed3-411e-a2b2-e617674c971e</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//h3[(text() = 'Albinisme - Pengertian, Gejala, dan Perawatannya' or . = 'Albinisme - Pengertian, Gejala, dan Perawatannya')]</value>
+      <webElementGuid>0cc333d8-932f-4908-b5ab-0f00321d52b0</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

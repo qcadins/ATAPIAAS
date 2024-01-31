@@ -38,7 +38,7 @@ checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(Ex
 
 'cek hasil db dan excel'
 checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-	GlobalVariable.NumOfColumn, rowExcel('$Kode Negara')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Negara tidak sesuai')
+	GlobalVariable.NumOfColumn, rowExcel('Kode Negara')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Negara tidak sesuai')
 
 if (role == 'Admin Client') {
 	'cek hasil db dan excel'
@@ -51,7 +51,7 @@ if (role == 'Admin Client') {
 	
 	'cek hasil db dan excel'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-		GlobalVariable.NumOfColumn, rowExcel('$Industry')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Industry tidak sesuai')
+		GlobalVariable.NumOfColumn, rowExcel('Industry')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Industry tidak sesuai')
 	
 	'cek hasil db dan excel'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(

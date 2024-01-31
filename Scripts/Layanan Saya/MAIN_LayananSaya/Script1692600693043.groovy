@@ -148,15 +148,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				}
             }
 			
-			println serviceNameUI
-			println serviceNameDB
-			
-			println serviceStatusUI
-			println serviceStatusDB
-			
-			println chargeTypeUI
-			println chargeTypeDB
-            
             'jika service name yang tampil UI tidak sesuai dengan DB'
             if (!(serviceNameUI.containsAll(serviceNameDB))) {
                 GlobalVariable.FlagFailed = 1

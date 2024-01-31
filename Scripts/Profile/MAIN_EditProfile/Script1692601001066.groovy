@@ -96,7 +96,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 
         'pilih dari dropdownlist +62 Indonesia'
         WebUI.selectOptionByLabel(findTestObject('Object Repository/Profile/Page_Edit Profile/select__country'), findTestData(
-                ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('$Kode Negara')), false)
+                ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Kode Negara')), false)
 
         'pilih tipe akun'
         if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Akun')) == 'Perusahaan') {
@@ -113,7 +113,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			setTextEmptyValidation(findTestObject('Profile/Page_Edit Profile/input__tenantName'), '$Nama Tenant')
 
             'input data industri'
-			setTextEmptyValidation(findTestObject('Profile/Page_Edit Profile/input__industry'), '$Industry')
+			setTextEmptyValidation(findTestObject('Profile/Page_Edit Profile/input__industry'), 'Industry')
 
             'input field website'
 			setTextEmptyValidation(findTestObject('Profile/Page_Edit Profile/input__website'), 'Website')

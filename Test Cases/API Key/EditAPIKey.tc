@@ -17,6 +17,12 @@
       <value></value>
       <variableId>26c96815-ad4f-46e7-8c9a-b125154b9ec0</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>76a42f6d-649e-430e-b804-44f4fec01230</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'API_KEY/DataAPIKEY'</defaultValue>
       <description></description>
@@ -30,5 +36,12 @@
       <id>26c96815-ad4f-46e7-8c9a-b125154b9ec0</id>
       <masked>false</masked>
       <name>sheet</name>
+   </variable>
+   <variable>
+      <defaultValue>0</defaultValue>
+      <description></description>
+      <id>76a42f6d-649e-430e-b804-44f4fec01230</id>
+      <masked>false</masked>
+      <name>isMandatory</name>
    </variable>
 </TestCaseEntity>
