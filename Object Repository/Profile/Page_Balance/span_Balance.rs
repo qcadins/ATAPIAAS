@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>//*[@ng-reflect-path = '/balance']</value>
+         <value>//*[@href = '/balance']</value>
       </entry>
       <entry>
          <key>CSS</key>
@@ -26,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>span</value>
-      <webElementGuid>7517b0ce-9888-466b-8148-22cffe24df27</webElementGuid>
+      <webElementGuid>4a41ac26-e4ea-46df-8025-a51e8152c9d9</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -34,7 +34,7 @@
       <name>class</name>
       <type>Main</type>
       <value>ng-tns-c133-4 icon-wallet</value>
-      <webElementGuid>901f25fc-4edd-4703-8288-49112fc8bb09</webElementGuid>
+      <webElementGuid>5c084eeb-a249-452c-890c-40586224b890</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -42,7 +42,7 @@
       <name>text</name>
       <type>Main</type>
       <value>Balance</value>
-      <webElementGuid>df777629-a743-40da-adda-0b780a745968</webElementGuid>
+      <webElementGuid>9f483286-8948-4b57-bdbc-ea1209e562d8</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -50,15 +50,23 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-expanded vertical-menu menu-open&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;app-sidebar main-menu menu-fixed menu-native-scroll expanded ng-star-inserted&quot;]/app-sidebar[@class=&quot;ng-tns-c133-5&quot;]/div[@class=&quot;sidebar-content main-menu-content ng-tns-c133-5 ps&quot;]/div[@class=&quot;nav-container ng-tns-c133-5&quot;]/ul[@class=&quot;navigation ng-tns-c133-5&quot;]/li[@class=&quot;ng-tns-c133-5 ng-star-inserted active&quot;]/a[@class=&quot;ng-tns-c133-5 ng-star-inserted&quot;]/span[@class=&quot;menu-title ng-tns-c133-5&quot;]</value>
-      <webElementGuid>74b7d920-5f82-4034-a764-53fad8339564</webElementGuid>
+      <webElementGuid>989bd71b-600a-4623-9793-f0ed53a15af7</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>ng-reflect-path</name>
       <type>Main</type>
       <value>/balance</value>
-      <webElementGuid>f1e60b03-f348-4c51-9365-22ab6dd74a6e</webElementGuid>
+      <webElementGuid>c5a30edf-92f8-4c26-959b-aaa0fc85aa04</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>href</name>
+      <type>Main</type>
+      <value>/balance</value>
+      <webElementGuid>afed33fd-5793-4bc6-8242-140a71d23157</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -66,7 +74,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Logout'])[1]/following::span[1]</value>
-      <webElementGuid>f668a445-0ba2-44b7-b3a6-76c53e9f4279</webElementGuid>
+      <webElementGuid>7ee01522-5b0b-422c-91dd-ac1b742ebbd3</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -74,7 +82,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='List Service'])[1]/following::span[2]</value>
-      <webElementGuid>7213939b-5fea-413d-8387-9667b2058bc9</webElementGuid>
+      <webElementGuid>90166023-d768-4717-a9b0-9e4579f7aed7</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -82,7 +90,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='API Key'])[1]/preceding::span[1]</value>
-      <webElementGuid>eac3a0cf-3a7f-4f22-be05-03099b6e73d5</webElementGuid>
+      <webElementGuid>6e89f8ed-ee72-44ba-9aa1-4a743acd3e66</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -90,7 +98,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='API Documentation'])[1]/preceding::span[2]</value>
-      <webElementGuid>6d8d759c-1d54-41df-95cd-1f09ab27f31b</webElementGuid>
+      <webElementGuid>e322e86e-edb9-47a2-a9a9-1c326655fbff</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -98,7 +106,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//a/span</value>
-      <webElementGuid>53d8c283-768d-42fc-a693-19abec4e146a</webElementGuid>
+      <webElementGuid>08420c07-5080-4f5e-a5bf-3454af976a44</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -106,6 +114,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//span[(text() = 'Balance' or . = 'Balance')]</value>
-      <webElementGuid>35994f58-f977-416c-b14a-b48e63638795</webElementGuid>
+      <webElementGuid>afafbbcd-d034-4abc-9bcd-e2edc279967b</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

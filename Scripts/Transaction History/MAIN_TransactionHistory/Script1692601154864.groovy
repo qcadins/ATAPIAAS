@@ -162,7 +162,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				functionviewverifNPWP(conndev)
 			}
 			'cek apakah perlu upload bukti pembayaran'
-			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Upload Pembayaran?')) == 'Yes') {
+			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')) == 'Upload Bukti Bayar') {
 				'klik untuk bagian unggah pembayaran'
 				WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/view_UploadBukti'))
 				
@@ -273,7 +273,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			String trxNum = WebUI.getText(modifytrxnumber)
 			
 			'cek apakah perlu reject pembayaran'
-			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('RejectPembayaran')) == 'Yes') {
+			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')) == 'Reject') {
 				confRejectPayment('Reject', conndev, trxNum)
 				
 				searchadminEendigoFinance()
@@ -301,7 +301,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/viewbukti_X'))
 			}
 			'cek apakah perlu approve pembayaran'
-			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('ApprovePembayaran?')) == 'Yes') {
+			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Action?')) == 'Approve') {
 				confRejectPayment('Approve', conndev, trxNum)
 			}
 		} else if (roleUser.equalsIgnoreCase('Admin Eendigo')) {

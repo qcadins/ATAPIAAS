@@ -1,4 +1,5 @@
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
+import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
@@ -36,9 +37,15 @@ checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(Ex
 checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
 	GlobalVariable.NumOfColumn, rowExcel('Jabatan')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Position tidak sesuai')
 
-'cek hasil db dan excel'
-checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
-	GlobalVariable.NumOfColumn, rowExcel('Kode Negara')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Negara tidak sesuai')
+if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Kode Negara')) != '') {
+	'cek hasil db dan ui'
+	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++],
+		WebUI.getText(findTestObject('Profile/Page_My Profile/textNegara')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Negara tidak sesuai')
+} else {
+	'cek hasil db dan excel'
+	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
+		GlobalVariable.NumOfColumn, rowExcel('Kode Negara')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Negara tidak sesuai')
+}
 
 if (role == 'ADMIN CLIENT') {
 	'cek hasil db dan excel'

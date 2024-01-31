@@ -94,10 +94,13 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         'input data field position'
 		setTextEmptyValidation(findTestObject('Profile/Page_Edit Profile/input__position'), 'Jabatan')
 
-        'pilih dari dropdownlist +62 Indonesia'
-        WebUI.selectOptionByLabel(findTestObject('Object Repository/Profile/Page_Edit Profile/select__country'), findTestData(
-                ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Kode Negara')), false)
-
+		'cek jika tidak ada inputan, select ddl akan dilewat'
+		if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Kode Negara')) != '') {
+			'pilih dari dropdownlist +62 Indonesia'
+			WebUI.selectOptionByLabel(findTestObject('Object Repository/Profile/Page_Edit Profile/select__country'), findTestData(
+				ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Kode Negara')), false, FailureHandling.OPTIONAL)
+		}
+		
         'pilih tipe akun'
         if (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Akun')) == 'Perusahaan') {
             'check radio button perusahaan'

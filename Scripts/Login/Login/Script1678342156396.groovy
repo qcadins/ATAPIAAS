@@ -156,16 +156,6 @@ switch (TC) {
 	//	}
 	
 		break
-	case 'OCR':
-		'input data email'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_username'),
-			findTestData(Path).getValue(GlobalVariable.NumOfColumn, Row))
-		
-		'input password'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
-			findTestData(Path).getValue(GlobalVariable.NumOfColumn, Row + 1))
-		break
-
 	case 'Tenant':
 		WebUI.maximizeWindow()
 		

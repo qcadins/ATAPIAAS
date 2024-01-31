@@ -6,15 +6,18 @@
    <elementGuidId>0cc617ef-2de4-4b35-a6ad-33364b96d058</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
-         <value></value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>(.//*[normalize-space(text()) and normalize-space(.)='Verifikasi Identitas Dukcapil'])[1]/following::span[1]</value>
       </entry>
+      <entry>
+         <key>CSS</key>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[(text() = 'IDR' or . = 'IDR')]</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>true</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -22,7 +25,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>span</value>
-      <webElementGuid>5c9f7b93-185f-44af-8bea-e674f7cc47dc</webElementGuid>
+      <webElementGuid>c69f958d-83c5-4d6d-ad96-4046f36bda87</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +33,7 @@
       <name>text</name>
       <type>Main</type>
       <value>IDR</value>
-      <webElementGuid>39a13ba5-ee4c-447f-807d-7ba67ebeeaa1</webElementGuid>
+      <webElementGuid>22bbc276-90bf-42da-b4fb-b4ee52341ed4</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +41,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout menu-hide navbar-static pace-done pace-done&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[@class=&quot;content-wrapper&quot;]/app-balance-prod[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;row match-height&quot;]/div[@class=&quot;col-12&quot;]/lib-balance-summary[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-xl-3 col-lg-6 col-12 ng-star-inserted&quot;]/div[@class=&quot;card&quot;]/div[@class=&quot;card-content&quot;]/div[@class=&quot;card-body&quot;]/div[@class=&quot;media&quot;]/div[@class=&quot;media-body text-left&quot;]/span[1]</value>
-      <webElementGuid>849b314d-0023-4548-9347-2f4a05798f1d</webElementGuid>
+      <webElementGuid>5b13e46f-a1e3-4297-822b-54306ba06d49</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -46,7 +49,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Verifikasi Identitas Dukcapil'])[1]/following::span[1]</value>
-      <webElementGuid>9e519403-801f-49f1-8ce3-cff2b884c645</webElementGuid>
+      <webElementGuid>2811cf61-1ab3-45e1-b0cf-1c779d547f97</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -54,7 +57,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='TRIAL'])[1]/following::span[2]</value>
-      <webElementGuid>d3fd043a-4693-433c-92e6-634ee2d9693a</webElementGuid>
+      <webElementGuid>f6ddc216-d457-432e-98ff-079a4a4c28da</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -62,7 +65,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='OCR BPKB'])[1]/preceding::span[1]</value>
-      <webElementGuid>10aad7a2-766a-42c0-896a-6294a0eed3e9</webElementGuid>
+      <webElementGuid>6d581412-1635-4cd5-bdc1-c04ac8104e38</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +73,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='OCR NPWP'])[1]/preceding::span[2]</value>
-      <webElementGuid>7347a71d-cae9-4863-9fc9-905a2fefc234</webElementGuid>
+      <webElementGuid>20675e33-4e4a-4ebb-aecd-da3cddac0b31</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,7 +81,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='IDR']/parent::*</value>
-      <webElementGuid>866ae310-2b57-49c1-96f2-818c9fd6ba9b</webElementGuid>
+      <webElementGuid>57e2203a-5fc7-4a8f-83a1-b66133719439</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -86,7 +89,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//div[2]/div/div/div/div/div/span</value>
-      <webElementGuid>44f4abb7-e6dd-4cca-8ff3-78ffb9da23f1</webElementGuid>
+      <webElementGuid>be53a461-4b12-42fb-82c1-833b15a29428</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -94,6 +97,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//span[(text() = 'IDR' or . = 'IDR')]</value>
-      <webElementGuid>43ec66a4-0fd4-425a-8807-cfec57a1f7b5</webElementGuid>
+      <webElementGuid>c650d172-78ed-4a67-885d-8165a7a7370c</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>
