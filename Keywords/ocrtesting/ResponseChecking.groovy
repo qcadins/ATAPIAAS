@@ -23,7 +23,7 @@ public class ResponseChecking {
 
 		read1.each { key, value1 ->
 			if (read2.containsKey(key)) {
-				String value2 = read2[key]
+				Object value2 = read2[key]
 
 				if (value1 != value2) {
 					reason.add("Terdapat perbedaan di parameter $key: $value1 != $value2")

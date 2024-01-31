@@ -11,31 +11,8 @@ import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.openqa.selenium.WebDriver
 
-//inisialisasi webdriver
-WebDriver driver
-
-System.setProperty('webdriver.chrome.driver', 'Drivers/chromedriver.exe')
-
-HashMap<String, ArrayList> chromePrefs = [:] as HashMap<String, ArrayList>
-
-chromePrefs.put('download.default_directory', System.getProperty('user.dir') + '\\Download')
-
-ChromeOptions options = new ChromeOptions()
-
-options.addExtensions(new File('Drivers/Smart_Wait.crx'))
-
-options.setExperimentalOption('prefs', chromePrefs)
-
-DesiredCapabilities caps = new DesiredCapabilities()
-
-caps.setCapability(ChromeOptions.CAPABILITY, options)
-
-//RunConfiguration.setWebDriverPreferencesProperty('prefs', chromePrefs)
-
-driver = new ChromeDriver(caps)
-
-DriverFactory.changeWebDriver(driver)
-//end of initialization webdriver
+'deklarasi untuk buka browser dan ambil driver nya'
+WebDriver driver = CustomKeywords.'login.Browser.settingandOpen'(Path, rowExcel('CaptchaEnabled'))
 
 'maximize window browser'
 WebUI.maximizeWindow()
@@ -62,7 +39,7 @@ if (WebUI.verifyElementPresent(findTestObject('OCR Testing/checkLog/span_NotNow'
 }
 
 'siapkan js executor'
-JavascriptExecutor js = ((driver) as JavascriptExecutor)
+JavascriptExecutor js = (JavascriptExecutor)driver
 
 'buka tab baru'
 js.executeScript('window.open();')
@@ -75,3 +52,7 @@ WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(8, 8))
 
 'ganti fokus robot ke tab baru'
 WebUI.switchToWindowIndex(0)
+
+def rowExcel(String cellValue) {
+	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+}

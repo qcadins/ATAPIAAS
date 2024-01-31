@@ -41,7 +41,7 @@ public class Browser {
 		driver = new ChromeDriver(caps)
 
 		DriverFactory.changeWebDriver(driver)
-		
+
 		driver
 	}
 }

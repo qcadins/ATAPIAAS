@@ -40,7 +40,7 @@ checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(Ex
 checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
 	GlobalVariable.NumOfColumn, rowExcel('Kode Negara')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Negara tidak sesuai')
 
-if (role == 'Admin Client') {
+if (role == 'ADMIN CLIENT') {
 	'cek hasil db dan excel'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(hasildb[arrayIndex++], findTestData(ExcelPathEditProfile).getValue(
 		GlobalVariable.NumOfColumn, rowExcel('Website')), false, FailureHandling.CONTINUE_ON_FAILURE), 'Website tidak sesuai')

@@ -68,7 +68,7 @@ public class CheckProfile {
 		'megambil text dari field nama belakang'
 		hasilgetText.add(WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__lastName'), 'value'))
 
-		if (role == 'Admin Client') {
+		if (role == 'ADMIN CLIENT') {
 			'mengambil text dari field nama perusahaan'
 			hasilgetText.add(WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__tenantName'), 'value'))
 
@@ -83,7 +83,7 @@ public class CheckProfile {
 			hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/Profile/Page_Edit Profile/input__radioFemale'), 'value'))
 		}
 
-		if (role == 'Admin Client') {
+		if (role == 'ADMIN CLIENT') {
 			'mengambil value dari field website'
 			hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/Profile/Page_Edit Profile/input__website'), 'value'))
 		}
@@ -97,7 +97,7 @@ public class CheckProfile {
 		'mengambil text dari field negara'
 		hasilgetText.add(optionLabel)
 
-		if (role == 'Admin Client') {
+		if (role == 'ADMIN CLIENT') {
 			'mengambil value dari field website'
 			hasilgetText.add(WebUI.getAttribute(findTestObject('Object Repository/Profile/Page_Edit Profile/input__NPWP'), 'value'))
 		}
@@ -134,5 +134,4 @@ public class CheckProfile {
 		}
 		data
 	}
-
 }

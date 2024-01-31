@@ -142,11 +142,12 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				'jika browser belum pernah dibuka'
 				if (firstRun == 0) {
 					'panggil testcase open browser'
-					WebUI.callTestCase(findTestCase('OCR Testing/API Only/OpenBrowserMultiTab'), [:])
+					WebUI.callTestCase(findTestCase('OCR Testing/API Only/OpenBrowserMultiTab'), [('Path') : ExcelPathOCRTesting,
+						('sheet') : sheet,])
 					
 					firstRun = 1
 				}
-				'panggil testcase open browser'
+				'panggil testcase check log'
 				WebUI.callTestCase(findTestCase('OCR Testing/API Only/CheckLog'), [('OCRType') : 'KKExtractor',
 					('Tanggal') : tanggal, ('TenantCode') : tenantcode, ('TimeOCR') : timeOcrhit, ('sheet') : sheet,
 					('ExcelPathOCRTesting') : ExcelPathOCRTesting,])

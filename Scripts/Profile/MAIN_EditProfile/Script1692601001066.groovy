@@ -38,8 +38,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         'angka untuk menghitung data mandatory yang tidak terpenuhi'
         int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Mandatory Complete')))
 
-        userRole = CustomKeywords.'profile.CheckProfile.getUserRole'(conn,
-			findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login')))
+        String userRole = CustomKeywords.'profile.CheckProfile.getUserRole'(conn,
+			findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('$Username Login'))).toString().toUpperCase()
 
         'klik garis tiga di kanan atas web'
         WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/dropdownProfile'))
@@ -108,7 +108,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
         }
         
         'check if user role == admin client'
-        if (userRole == 'Admin Client') {
+        if (userRole == 'ADMIN CLIENT') {
             'input data nama perusahaan'
 			setTextEmptyValidation(findTestObject('Profile/Page_Edit Profile/input__tenantName'), '$Nama Tenant')
 
@@ -138,44 +138,44 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
             FailureHandling.OPTIONAL)) {
             'klik pada tombol ok jika muncul'
             WebUI.click(findTestObject('Object Repository/Profile/Page_Edit Profile/button_OK'))
-        }
-        
-		'check if username pada pojok kanan atas tidak match dengan data yang baru di edit'
-		if (!WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Profile/Page_Edit Profile/label_UserName')), findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama Depan')) + ' ' + findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('$Last Name')), false, FailureHandling.CONTINUE_ON_FAILURE)) {
-			GlobalVariable.FlagFailed = 1
 			
-			'tulis adanya error pada sistem web'
-			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-					GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
-							';') + 'Username Pojok Kanan Atas Tidak Sesuai Data Edit')
-		}
-		
-        'panggil fungsi verifikasi jika checkdatabase = yes'
-        if (GlobalVariable.KondisiCekDB == 'Yes') {
-            'verifikasi data yang ada di excel dengan di database sesudah diEdit'
-            WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfileStoreDBVerif'), [('role') : userRole], FailureHandling.CONTINUE_ON_FAILURE)
-        }
-        
-        if (userRole == 'Admin Client') {
-            'klik pada tombol garis tiga'
-            WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/spanMenu'))
-
-            'klik pada tombol balance'
-            WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/span_Balance'))
-
-            'klik pada saldo trial'
-            WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/label_TRIAL'))
-
-            'verifikasi adanya saldo trial'
-            if (!(WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/span_IDR'), GlobalVariable.Timeout, 
-                FailureHandling.OPTIONAL))) {
-                GlobalVariable.FlagFailed = 1
-
-                'Write to excel status failed and reason topup failed'
-                CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn, 
-                    GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, 
-                        rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonTrial)
-            }
+			'check if username pada pojok kanan atas tidak match dengan data yang baru di edit'
+			if (!WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/Profile/Page_Edit Profile/label_UserName')), findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama Depan')) + ' ' + findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('$Last Name')), false, FailureHandling.CONTINUE_ON_FAILURE)) {
+				GlobalVariable.FlagFailed = 1
+				
+				'tulis adanya error pada sistem web'
+				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) +
+								';') + 'Username Pojok Kanan Atas Tidak Sesuai Data Edit')
+			}
+			
+			'panggil fungsi verifikasi jika checkdatabase = yes'
+			if (GlobalVariable.KondisiCekDB == 'Yes') {
+				'verifikasi data yang ada di excel dengan di database sesudah diEdit'
+				WebUI.callTestCase(findTestCase('Test Cases/Profile/EditProfileStoreDBVerif'), [('role') : userRole], FailureHandling.CONTINUE_ON_FAILURE)
+			}
+			
+			if (userRole == 'ADMIN CLIENT') {
+				'klik pada tombol garis tiga'
+				WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/spanMenu'))
+	
+				'klik pada tombol balance'
+				WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/span_Balance'))
+	
+				'klik pada saldo trial'
+				WebUI.click(findTestObject('Object Repository/Profile/Page_Balance/label_TRIAL'))
+	
+				'verifikasi adanya saldo trial'
+				if (!(WebUI.verifyElementPresent(findTestObject('Object Repository/Profile/Page_Balance/span_IDR'), GlobalVariable.Timeout,
+					FailureHandling.OPTIONAL))) {
+					GlobalVariable.FlagFailed = 1
+	
+					'Write to excel status failed and reason topup failed'
+					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
+						GlobalVariable.StatusFailed, (findTestData(ExcelPathEditProfile).getValue(GlobalVariable.NumOfColumn,
+							rowExcel('Reason failed')) + ';') + GlobalVariable.FailedReasonTrial)
+				}
+			}
         }
         
 //        'klik pada tombol garis tiga'
@@ -230,15 +230,12 @@ if (GlobalVariable.continueTC == 'Yes') {
 	WebUI.callTestCase(findTestCase('Test Cases/Change Password/MAIN_ChangePassword'), [:], FailureHandling.STOP_ON_FAILURE)
 }
 
-'panggil testcase untuk change password'
-WebUI.callTestCase(findTestCase('Test Cases/Change Password/MAIN_ChangePassword'), [:], FailureHandling.STOP_ON_FAILURE)
-
 def verifyDataEdit(Connection conn, String role) {
 	'ambil email dari testdata, disimpan ke string'
 	String email = WebUI.getAttribute(findTestObject('Profile/Page_Edit Profile/input__email'), 'value')
 	
 	'kumpulan string dari data yang diambil langsung dari database'
-	ArrayList hasildb = CustomKeywords.'profile.CheckProfile.getProfilefromDB'(conn, email, role)
+	ArrayList hasildb = CustomKeywords.'profile.CheckProfile.getProfilefromDB'(conn, email)
 	
 	'ambil text dari UI Web APIAAS'
 	ArrayList hasilweb = CustomKeywords.'profile.CheckProfile.getAttributeValueProfile'(role)
