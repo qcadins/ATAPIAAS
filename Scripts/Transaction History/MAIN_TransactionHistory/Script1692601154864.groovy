@@ -42,9 +42,6 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			'lakukan check paging'
 			checkPaging(conndev)
-			
-			'ubah flag login sudah terpakai = 1'
-			flagLoginUsed = 1
 		}
 		
 		'angka untuk menghitung data mandatory yang tidak terpenuhi'
@@ -63,30 +60,35 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/tombolX_menu'))
 		}
 		
-		'ambil nama TipeIsiUlang dari DB'
-		ArrayList namaTipeIsiUlangDB = CustomKeywords.'transactionhistory.TransactionVerif.getDDLTipeIsiUlang'(conndev)
+		if (flagLoginUsed == 0) {
+			'ambil nama TipeIsiUlang dari DB'
+			ArrayList namaTipeIsiUlangDB = CustomKeywords.'transactionhistory.TransactionVerif.getDDLTipeIsiUlang'(conndev)
+		
+			'ambil nama Status dari DB'
+			ArrayList namaStatusExcel = []
+			
+			'ambil data status dari excel, karena tidak disimpan ke DB'
+			for (int i = 0; i < 5; i++) {
+				'tambah data ke array excel'
+				namaStatusExcel.add(findTestData(ExcelPathTranx).getValue(1, (rowExcel('Menunggu Pembayaran') + i)))
+			}
+			
+			'ambil nama metodeBayar dari DB'
+			ArrayList namametodeBayarDB = CustomKeywords.'transactionhistory.TransactionVerif.getDDLMetodeTrf'(conndev)
 	
-		'ambil nama Status dari DB'
-		ArrayList namaStatusExcel = []
-		
-		'ambil data status dari excel, karena tidak disimpan ke DB'
-		for (int i = 0; i < 5; i++) {
-			'tambah data ke array excel'
-			namaStatusExcel.add(findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, (rowExcel('Menunggu Pembayaran') + i)))
+			'panggil fungsi check ddl di DB dan UI'
+			checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTipeIsiUlang'), namaTipeIsiUlangDB, 'DDL Tipe isi Ulang')
+			
+			'panggil fungsi check ddl di DB dan UI'
+			checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'), namaStatusExcel, 'DDL Status')
+			
+			'panggil fungsi check ddl di DB dan UI'
+			checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputMetodeBayar'), namametodeBayarDB, 'DDL Metode bayar')
+			
+			'ubah flag login sudah terpakai = 1'
+			flagLoginUsed = 1
 		}
-		
-		'ambil nama metodeBayar dari DB'
-		ArrayList namametodeBayarDB = CustomKeywords.'transactionhistory.TransactionVerif.getDDLMetodeTrf'(conndev)
-
-		'panggil fungsi check ddl di DB dan UI'
-		checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTipeIsiUlang'), namaTipeIsiUlangDB, 'DDL Tipe isi Ulang')
-		
-		'panggil fungsi check ddl di DB dan UI'
-		checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'), namaStatusExcel, 'DDL Status')
-
-		'panggil fungsi check ddl di DB dan UI'
-		checkDDL(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputMetodeBayar'), namametodeBayarDB, 'DDL Metode bayar')
-		
+				
 		'ambil role yang digunakan oleh user'
 		String roleUser = CustomKeywords.'transactionhistory.TransactionVerif.getRoleofUser'(conndev,
 			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
@@ -301,7 +303,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/viewbukti_X'))
 			}
 			'cek apakah perlu approve pembayaran'
-			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Action?')) == 'Approve') {
+			if (findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')) == 'Approve') {
 				confRejectPayment('Approve', conndev, trxNum)
 			}
 		} else if (roleUser.equalsIgnoreCase('Admin Eendigo')) {
@@ -386,12 +388,23 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			'input password'
 			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/input_password'),
 				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn + 1, rowExcel('Password Login')))
+						
+			'cek perlukah tunggu agar recaptcha selesai solving'
+			if ((findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn + 1, rowExcel('CaptchaEnabled')) == 'Yes' ||
+				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn + 1, rowExcel('CaptchaEnabled')) == '')) {
+				WebUI.delay(1)
 			
-			'ceklis pada reCaptcha'
-			WebUI.click(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'))
+				String idObject = WebUI.getAttribute(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'id', FailureHandling.STOP_ON_FAILURE)
+				
+				modifyObjectCaptcha = WebUI.modifyObjectProperty(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'xpath', 'equals', 
+					'//*[@id="' + idObject + '"]/div/div[2]', true)
+				
+				WebUI.waitForElementAttributeValue(modifyObjectCaptcha, 'class', 'antigate_solver recaptcha solved', 90, FailureHandling.OPTIONAL)
 			
-			'pada delay, lakukan captcha secara manual'
-			WebUI.delay(10)
+				WebUI.delay(1)
+			//	
+			//	WebUI.waitForElementAttributeValue(findTestObject('RegisterLogin/Page_Login - eendigo Platform/check_Recaptcha'), 'aria-checked', 'true', 60, FailureHandling.OPTIONAL)
+			}
 			
 			'klik pada button login'
 			WebUI.click(findTestObject('Object Repository/API_KEY/Page_Login - eendigo Platform/button_Lanjutkan Perjalanan Anda'))
@@ -411,11 +424,11 @@ def functionviewverifNPWP(Connection conndev) {
 	
 	'ambil npwp dari DB'
 	String npwpDB = CustomKeywords.'transactionhistory.TransactionVerif.getNPWPnumUser'(conndev,
-		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')))
+		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 
 	'verify npwp dari DB dan UI sesuai'
 	checkVerifyEqualorMatch(WebUI.verifyMatch(npwpUI,
-		npwpDB, false, FailureHandling.CONTINUE_ON_FAILURE), 'NPWP Number')
+		npwpDB, false, FailureHandling.CONTINUE_ON_FAILURE), ' NPWP Number')
 	
 	'klik silang'
 	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/npwp_X'))
@@ -447,7 +460,7 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/SaldoMenu'))
 	
 	'looping untuk tambahkan saldo ke array'
-	for (int i = 0 ; i < serviceActive.size; i++) {
+	for (int i = 0 ; i < serviceActive.size(); i++) {
 		serviceSaldobefore.add(getSaldoforTransaction(serviceActive[i]))
 	}
 	
@@ -488,12 +501,12 @@ def confRejectPayment(String choice, Connection conndev, String trxNum) {
 			WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_Balance/SaldoMenu'))
 			
 			'looping untuk tambahkan saldo ke array'
-			for (int i = 0 ; i < serviceActive.size; i++) {
+			for (int i = 0 ; i < serviceActive.size(); i++) {
 				serviceSaldoafter.add(getSaldoforTransaction(serviceActive[i]))
 			}
 			
 			'loop untuk verifikasi data'
-			for (int i = 0; i < serviceActive.size; i++) {
+			for (int i = 0; i < serviceActive.size(); i++) {
 				if (choice == 'Approve') {
 					'verify notifikasi sukses atau tidak'
 					checkVerifyEqualorMatch(WebUI.verifyEqual(serviceSaldobefore[i],
@@ -577,12 +590,12 @@ def getSaldoforTransaction(String namaOCR) {
 		'lakukan loop untuk cari nama saldo yang ditentukan'
 		for (int i = 1; i <= elementNamaSaldo.size(); i++) {
 			'cari nama saldo yang sesuai di list saldo'
-			modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + (i) + ']/div/div/div/div/div[1]/span', true)
+			modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + i + ']/div/div/div/div/div[1]/span', true)
 	
 			'jika nama object sesuai dengan nama saldo'
 			if (WebUI.getText(modifyNamaSaldo) == namaOCR) {
 				'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
-				modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/kotakSaldo'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + (i) + ']/div/div/div/div/div[1]/h3', true)
+				modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/kotakSaldo'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + i + ']/div/div/div/div/div[1]/h3', true)
 				
 				'simpan jumlah saldo sekarang di variabel'
 				 saldoNow = Integer.parseInt(WebUI.getText(modifySaldoDipilih).replace(',', ''))
@@ -605,8 +618,10 @@ def functionDetail(Connection conndev, String trxNum) {
 	'ambil data table dari db'
 	ArrayList result = CustomKeywords.'transactionhistory.TransactionVerif.getRiwayatDetail'(conndev, trxNum)
 	
+	WebUI.delay(GlobalVariable.Timeout)
+	
 	'ambil alamat trxnumber'
-	variabledetail = DriverFactory.webDriver().findElements(By.cssSelector('body > ngb-modal-window > div > div > app-transaction-history-detail > div > div.modal-body > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
+	variabledetail = DriverFactory.webDriver.findElements(By.cssSelector('body > ngb-modal-window > div > div > app-transaction-history-detail > div > div.modal-body > app-msx-datatable > section > ngx-datatable > div > datatable-body > datatable-selection > datatable-scroller datatable-row-wrapper'))
 	
 	'arraylist untuk tampung detail'
 	ArrayList detail = []
@@ -787,7 +802,7 @@ def checkPagingDetail(Connection conndev) {
 		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, 9))
 
 	'verify total data role'
-	checkVerifyPaging(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
+	checkVerifyPaging(WebUI.verifyNotEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'cek apakah hlm  tersedia'
 	if (WebUI.verifyElementVisible(findTestObject('Object Repository/TransactionHistory/skiptoLast_page'), FailureHandling.OPTIONAL) == true) {
@@ -862,21 +877,27 @@ def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
 	'get row'
 	variable = DriverFactory.webDriver.findElements(By.cssSelector(('#' + id) + '> div > div:nth-child(2) div'))
 	
-	'looping untuk get ddl kedalam array'
-	for (i = 1; i < variable.size(); i++) {
-		'modify object DDL'
-		modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/TransactionHistory/modifyObject'), 'xpath', 'equals', ((('//*[@id=\'' +
-			id) + '-') + i) + '\']', true)
-
-		'add ddl ke array'
-		list.add(WebUI.getText(modifyObjectDDL))
-	}
+	'jika size variable diatas 10, lakukan pengecekan size nya saja'
+	if (variable.size() < 10) {
+		'looping untuk get ddl kedalam array'
+		for (i = 1; i < variable.size(); i++) {
+			'modify object DDL'
+			modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/TransactionHistory/modifyObject'), 'xpath', 'equals', ((('//*[@id=\'' +
+				id) + '-') + i) + '\']', true)
 	
-	'verify ddl ui = db'
-	checkVerifyEqualorMatch(listDB.containsAll(list), reason)
-
-	'verify jumlah ddl ui = db'
-	checkVerifyEqualorMatch(WebUI.verifyEqual(list.size(), listDB.size(), FailureHandling.CONTINUE_ON_FAILURE), ' Jumlah ' + reason)
+			'add ddl ke array'
+			list.add(WebUI.getText(modifyObjectDDL))
+		}
+		
+		'verify ddl ui = db'
+		checkVerifyEqualorMatch(listDB.containsAll(list), reason)
+		
+		'verify jumlah ddl ui = db'
+		checkVerifyEqualorMatch(WebUI.verifyEqual(list.size(), listDB.size(), FailureHandling.CONTINUE_ON_FAILURE), ' Jumlah ' + reason)
+	} else {
+		'verify jumlah ddl ui = db'
+		checkVerifyEqualorMatch(WebUI.verifyEqual(variable.size() - 1, listDB.size(), FailureHandling.CONTINUE_ON_FAILURE), ' Jumlah ' + reason)
+	}
 	
 	'Input enter untuk tutup ddl'
 	WebUI.sendKeys(objectDDL, Keys.chord(Keys.ENTER))

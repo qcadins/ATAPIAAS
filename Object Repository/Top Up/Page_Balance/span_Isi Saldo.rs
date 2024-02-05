@@ -11,11 +11,10 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>//*[@ng-reflect-parent = 'Topup Balance']</value>
+         <value>//*[@href = '/topup']</value>
       </entry>
       <entry>
          <key>CSS</key>
-         <value></value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -26,7 +25,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>span</value>
-      <webElementGuid>35a2e282-13b1-41b4-bdc3-ab87563d7bff</webElementGuid>
+      <webElementGuid>bbcd533a-aa85-4007-8181-d00caf29c66d</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -34,7 +33,7 @@
       <name>class</name>
       <type>Main</type>
       <value>menu-title ng-tns-c133-4</value>
-      <webElementGuid>1c846aca-5a28-4301-99a0-d5c338bb8c9c</webElementGuid>
+      <webElementGuid>3d0cb5e6-1315-460c-81a4-8959f5c5fabc</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -42,7 +41,7 @@
       <name>text</name>
       <type>Main</type>
       <value>Isi Saldo</value>
-      <webElementGuid>2128dd40-9ba5-4379-aa59-d6ed557df6ba</webElementGuid>
+      <webElementGuid>311f4e16-18de-4e3f-ab15-2de85f7b8f31</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -50,15 +49,23 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout navbar-static pace-done menu-expanded vertical-menu menu-open&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;app-sidebar main-menu menu-fixed menu-native-scroll expanded ng-star-inserted&quot;]/app-sidebar[@class=&quot;ng-tns-c133-4&quot;]/div[@class=&quot;sidebar-content main-menu-content ng-tns-c133-4 ps&quot;]/div[@class=&quot;nav-container ng-tns-c133-4&quot;]/ul[@class=&quot;navigation ng-tns-c133-4&quot;]/li[@class=&quot;ng-tns-c133-4 ng-star-inserted&quot;]/a[@class=&quot;ng-tns-c133-4 ng-star-inserted&quot;]/span[@class=&quot;menu-title ng-tns-c133-4&quot;]</value>
-      <webElementGuid>50d0b5fc-2a5b-4acf-ae9b-54d23946f732</webElementGuid>
+      <webElementGuid>275df6c8-c632-47a1-ad92-5e14f1a4e7b0</webElementGuid>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>ng-reflect-parent</name>
       <type>Main</type>
       <value>Topup Balance</value>
-      <webElementGuid>4879ac2a-e03e-464f-b7fd-0922f1d77862</webElementGuid>
+      <webElementGuid>179a1f1b-725c-4f10-936e-133ca810d675</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>href</name>
+      <type>Main</type>
+      <value>/topup</value>
+      <webElementGuid>53660109-bb7f-49c6-b2b6-b961fd3d41bb</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -66,7 +73,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Saldo'])[1]/following::span[1]</value>
-      <webElementGuid>93b9bf39-bd14-4a49-a5c0-93ca5f31c875</webElementGuid>
+      <webElementGuid>073882db-5398-4157-9918-287e95145e40</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -74,7 +81,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Keluar'])[1]/following::span[2]</value>
-      <webElementGuid>d8d857ca-25b7-451c-9aff-2f2c3b1fcea9</webElementGuid>
+      <webElementGuid>bf9e7b34-6419-45b0-9397-452832e3559c</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -82,7 +89,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='API Key'])[1]/preceding::span[1]</value>
-      <webElementGuid>9e34a531-e5c8-485e-9de3-aea414ff3822</webElementGuid>
+      <webElementGuid>45fb9105-5cc6-41a6-aa25-b13dd6d53c0e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -90,7 +97,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Harga Layanan'])[1]/preceding::span[2]</value>
-      <webElementGuid>80a78965-6c1d-4f35-8a99-f4f01cf6990a</webElementGuid>
+      <webElementGuid>01de0c4d-7c72-47ba-a661-41a567919c0f</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -98,7 +105,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>//*/text()[normalize-space(.)='Isi Saldo']/parent::*</value>
-      <webElementGuid>f8503969-57f3-4621-8041-3115498ed38f</webElementGuid>
+      <webElementGuid>1add4111-37d8-496a-a55e-2e920f25ffe0</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -106,7 +113,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//li[2]/a/span</value>
-      <webElementGuid>b622730b-8985-4e16-bf84-2bd6f52470b3</webElementGuid>
+      <webElementGuid>65bd85d1-e4be-4ded-a7f3-0261faf21931</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -114,6 +121,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//span[(text() = 'Isi Saldo' or . = 'Isi Saldo')]</value>
-      <webElementGuid>aab14d96-307a-4b5e-b97d-a21170aa5bfb</webElementGuid>
+      <webElementGuid>5961ec93-111e-4093-b276-ec52566c2d57</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

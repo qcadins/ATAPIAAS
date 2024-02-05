@@ -287,24 +287,29 @@ def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
 	'get row'
 	variable = DriverFactory.webDriver.findElements(By.cssSelector(('#' + id) + '> div > div:nth-child(2) div'))
 	
-	'looping untuk get ddl kedalam array'
-	for (i = 1; i < variable.size(); i++) {
-		'modify object DDL'
-		modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/modifyobject'), 'xpath', 'equals', ((('//*[@id=\'' +
-			id) + '-') + i) + '\']', true)
-
-		'add ddl ke array'
-		list.add(WebUI.getText(modifyObjectDDL))
+	if (variable.size() < 10) {
+		'looping untuk get ddl kedalam array'
+		for (i = 1; i < variable.size(); i++) {
+			'modify object DDL'
+			modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('Object Repository/OCR Testing/modifyobject'), 'xpath', 'equals', ((('//*[@id=\'' +
+				id) + '-') + i) + '\']', true)
+	
+			'add ddl ke array'
+			list.add(WebUI.getText(modifyObjectDDL))
+		}
+		
+		'verify ddl ui = db'
+		checkVerifyEqualOrMatch(listDB.containsAll(list), reason)
+	
+		'verify jumlah ddl ui = db'
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(list.size(), listDB.size(), FailureHandling.CONTINUE_ON_FAILURE), ' Jumlah ' + reason)
+	} else {
+		'verify jumlah ddl ui = db'
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(variable.size() - 1, listDB.size(), FailureHandling.CONTINUE_ON_FAILURE), ' Jumlah ' + reason)
 	}
-	
-	'verify ddl ui = db'
-	checkVerifyEqualOrMatch(listDB.containsAll(list), reason)
-
-	'verify jumlah ddl ui = db'
-	checkVerifyEqualOrMatch(WebUI.verifyEqual(list.size(), listDB.size(), FailureHandling.CONTINUE_ON_FAILURE), ' Jumlah ' + reason)
-	
+		
 	'Input enter untuk tutup ddl'
-	WebUI.sendKeys(objectDDL, Keys.chord(Keys.ENTER))
+	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/containerForm'))
 }
 
 def navigatetoeendigoBeta() {

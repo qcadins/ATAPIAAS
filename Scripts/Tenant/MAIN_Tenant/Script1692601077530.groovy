@@ -195,18 +195,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Services')).split(';', -1)
 			
 			'get array batas saldo dari excel'
-			arrayServicesBatasSaldo = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Batas Saldo')).split(';', -1)
+			arrayServicesBatasSaldo = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Nominal')).split(';', -1)
 			
 			'looping untuk input batas saldo'
 			for (index = 5; index < variable.size(); index++) {
 				'modify object button services'
 				modifyObjectButtonServices = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
-					'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/' +
-						'div/div/div/form/div[' + index) + ']/button', true)
+					'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/' +
+						'div/div/div/form/div[' + index + ']/button', true)
 				
 				'looping untuk array service excel'
 				for (indexExcel = 0; indexExcel < arrayServices.size(); indexExcel++) {
-					if (index > 34) {
+					if (index > 38) {
 						break
 					}
 			
@@ -241,19 +241,19 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'ubah lokasi xpath dari button simpan'
 			modifyobjectbuttonSimpan = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/button_Simpan'), 'xpath',
 					'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/' +
-						'form/div[' + (36 + emailReminderTotal) + ']/div/button[2]', true)
+						'form/div[' + (40 + emailReminderTotal) + ']/div/button[2]', true)
 			
 			'ubah lokasi xpath dari button simpan'
 			modifyobjectbuttonBatal = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/button_Batal'), 'xpath',
 					'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/' +
-						'form/div[' + (36 + emailReminderTotal) + ']/div/button[1]', true)
+						'form/div[' + (40 + emailReminderTotal) + ']/div/button[1]', true)
 
 			'looping untuk input email reminder'
 			for (index = 1; index <= emailReminderTotal; index++) {
 				'modify object input email'
 				modifyObjectInputEmail = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'), 'xpath',
 					'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/' +
-						'form/div[' + (34 + index) + ']/div/input', true)
+						'form/div[' + (38 + index) + ']/div/input', true)
 
 				'click tambah email'
 				WebUI.click(findTestObject('Tenant/TenantBaru/button_TambahEmail'))
@@ -506,7 +506,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			arrayServices = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Services')).split(';', -1)
 
 			'get array batas saldo dari excel'
-			arrayServicesBatasSaldo = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Batas Saldo')).split(';', -1)
+			arrayServicesBatasSaldo = findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Nominal')).split(';', -1)
 
 			'looping untuk input bata saldo'
 			for (index = 5; index < variable.size(); index++) {
@@ -526,7 +526,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						'div/form/div[' + index + ']/button', true)
 				
 				'break if index udah lebih dari 34 HARDCODE karena tidak bisa di track objectnya'
-				if (index > 37) {
+				if (index > 38) {
 					break
 				}
 				
@@ -582,15 +582,15 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'ubah lokasi xpath dari button simpan'
 			modifyobjectbuttonSimpan = WebUI.modifyObjectProperty(findTestObject('Tenant/Edit/button_Simpan'), 'xpath',
 					'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					(37 + emailReminderTotal) + ']/div/button[2]', true)
+					(38 + emailReminderTotal) + ']/div/button[2]', true)
 			
 			'ubah lokasi xpath dari button simpan'
 			modifyobjectbuttonBatal = WebUI.modifyObjectProperty(findTestObject('Tenant/Edit/button_Batal'), 'xpath',
 					'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
-					(37 + emailReminderTotal) + ']/div/button[1]', true)
+					(38 + emailReminderTotal) + ']/div/button[1]', true)
 
 			'looping untuk hapus email reminder yang tidak ada di excel'
-			for (index = 38; index <= variable.size(); index++) {
+			for (index = 39; index <= variable.size(); index++) {
 				'modify object input email'
 				modifyObjectInputEmail = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'), 'xpath',
 					'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/div/form/div[' +
@@ -625,7 +625,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'looping untuk input email reminder yang tidak ada di ui'
 			for (indexexcel = 1; indexexcel <= arrayEmailReminder.size(); indexexcel++) {
 				'looping untuk input email reminder'
-				for (index = 38; index <= variable.size(); index++) {
+				for (index = 39; index <= variable.size(); index++) {
 					'modify object input email'
 					modifyObjectInputEmail = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
 						'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-add-tenant/div[2]/div/div/div/' +
@@ -952,7 +952,7 @@ def searchTenant() {
 	
 	'input nama tenant'
 	WebUI.setText(findTestObject('Tenant/input_NamaTenant'), 
-		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('$NamaTenant')))
+		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')))
 
 	'input status'
 	WebUI.setText(findTestObject('Tenant/input_Status'), 
@@ -975,7 +975,7 @@ def checkSaldo() {
 	
 	ArrayList<String> servicesNameActive = [], servicesNameUISaldo = []
 	
-	for (int i = 0 ; i < arrayServices.size ; i++) {
+	for (int i = 0 ; i < arrayServices.size() ; i++) {
 		println(arrayServices[i])
 		
 		int row = CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, arrayServices[i])
@@ -988,9 +988,7 @@ def checkSaldo() {
 	'get total tipe saldo'
 	variable = DriverFactory.webDriver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div.content-wrapper > app-balance-prod > div.row.match-height > div > lib-balance-summary > div > div'))
 	
-	println(variable.size)
-	
-	for (i = 1 ; i <= variable.size ; i++) {
+	for (i = 1 ; i <= variable.size() ; i++) {
 		'modify object button services'
 		modifyObjectTipeSaldo = WebUI.modifyObjectProperty(findTestObject('Tenant/TenantBaru/modifyObject'),
 			'xpath', 'equals', ('/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' 

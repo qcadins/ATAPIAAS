@@ -35,5 +35,4 @@ public class OpenCloseExcel {
 		robot.delay(5000)
 		Runtime.runtime.exec('taskkill /IM EXCEL.EXE')
 	}
-
 }

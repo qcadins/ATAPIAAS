@@ -256,6 +256,8 @@ switch (TC) {
 	//					GlobalVariable.FailedReasonRoleLogin)
 	//		}
 	//	}
+		
+		break
 	default:
 		'input email'
 		WebUI.setText(findTestObject('Object Repository/RegisterLogin/Page_Login - eendigo Platform/inputemail'),

@@ -87,7 +87,7 @@ if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel(
 } else if (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Service')) {
 	'get data balacne mutation dari DB'
 	String result = CustomKeywords.'tenant.TenantVerif.getTenantServices'(conn,
-		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('$NamaTenant'))).replace('{', '').replace('}', '').replace('"', '').replace(',', '')
+		findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant'))).replace('{', '').replace('}', '').replace('"', '').replace(',', '')
 	
 	'split result to array'
 	ArrayList resultarray = result.split(':0')

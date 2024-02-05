@@ -26,7 +26,7 @@ Connection conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_esign'
 Connection conndevUAT = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 
 'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'TopUp', ('SheetName') : 'TopUp',
+WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'TopUp', ('SheetName') : 'Top Up',
 	('Path') : ExcelPathTopUp, ('Username') : 'Username Login', ('Password') : 'Password Login',], FailureHandling.STOP_ON_FAILURE)
 
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
@@ -562,6 +562,8 @@ def couponPercentage(ArrayList listServices, ArrayList tempDataPrice, ArrayList 
 	
 	'buka excel untuk refresh testdata'
 	CustomKeywords.'customizekeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
+	
+	WebUI.delay(5)
 }
 
 def couponNominal(ArrayList listServices, ArrayList tempDataPrice, ArrayList listJumlahisiUlang,
@@ -628,6 +630,8 @@ def couponNominal(ArrayList listServices, ArrayList tempDataPrice, ArrayList lis
 	
 	'buka excel untuk refresh testdata'
 	CustomKeywords.'customizekeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
+	
+	WebUI.delay(5)
 }
 
 def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
