@@ -294,14 +294,23 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						'call function checkAfterAddorEdit'
 						checkAfterAddorEdit()
 						
-						'write to excel success'
-						CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
-							GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+						'check if store db'
+						if (GlobalVariable.KondisiCekDB == 'Yes') {
+							'call test case tenant store db'
+							WebUI.callTestCase(findTestCase('Tenant/TenantStoreDB'), [('ExcelPathTenant') : 'Tenant/DataTestingTenant'],
+								FailureHandling.STOP_ON_FAILURE)
+						}
+					
+						if (GlobalVariable.FlagFailed == 0) {
+							'write to excel success'
+							CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
+								GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+						}
 					}
 				} else {
 					GlobalVariable.FlagFailed = 1
 					
-					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReasonMandatory'
+					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.FailedReason submit error'
 					CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 						GlobalVariable.StatusFailed, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) +
 						';') + GlobalVariable.FailedReasonSubmitError)
@@ -441,9 +450,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 							GlobalVariable.StatusWarning, (findTestData(ExcelPathTenant).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason Failed')) + ';') +
 								GlobalVariable.FailedReasonUnknown)
 					} else {
-						'write to excel success'
-						CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
-							GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+						'check if store db'
+						if (GlobalVariable.KondisiCekDB == 'Yes') {
+							'call test case tenant store db'
+							WebUI.callTestCase(findTestCase('Tenant/TenantStoreDB'), [('ExcelPathTenant') : 'Tenant/DataTestingTenant'],
+								FailureHandling.STOP_ON_FAILURE)
+						}
+					
+						if (GlobalVariable.FlagFailed == 0) {
+							'write to excel success'
+							CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
+								GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+						}
 					}
 				}
 			} else if (isMandatoryComplete > 0) {
@@ -670,9 +688,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 						'call function check afteraddoredit'
 						checkAfterAddorEdit()
 						
-						'write to excel success'
-						CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
-							GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+						'check if store db'
+						if (GlobalVariable.KondisiCekDB == 'Yes') {
+							'call test case tenant store db'
+							WebUI.callTestCase(findTestCase('Tenant/TenantStoreDB'), [('ExcelPathTenant') : 'Tenant/DataTestingTenant'],
+								FailureHandling.STOP_ON_FAILURE)
+						}
+					
+						if (GlobalVariable.FlagFailed == 0) {
+							'write to excel success'
+							CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
+								GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+						}
 					}
 				} else {
 					GlobalVariable.FlagFailed = 1
@@ -684,7 +711,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					
 					continue
 				}
-			} else if (isMandatoryComplete > 0) {
+			} else {
 				'click button Batal'
 				WebUI.click(findTestObject('Tenant/Edit/button_Batal'))
 				
@@ -762,9 +789,18 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 				'check if alert berhasil muncul'
 				if (WebUI.getAttribute(findTestObject('Tenant/errorLog'), 'aria-label', FailureHandling.OPTIONAL).contains(
 					'berhasil')) {
-					'write to excel success'
-					CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
-						GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+					'check if store db'
+					if (GlobalVariable.KondisiCekDB == 'Yes') {
+						'call test case tenant store db'
+						WebUI.callTestCase(findTestCase('Tenant/TenantStoreDB'), [('ExcelPathTenant') : 'Tenant/DataTestingTenant'],
+							FailureHandling.STOP_ON_FAILURE)
+					}
+				
+					if (GlobalVariable.FlagFailed == 0) {
+						'write to excel success'
+						CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Status') - 1,
+							GlobalVariable.NumOfColumn - 1, GlobalVariable.StatusSuccess)
+					}
 				} else {
 					GlobalVariable.FlagFailed = 1
 					
@@ -799,13 +835,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 				continue
 			}
-		}
-		
-		'check if store db'
-		if (GlobalVariable.KondisiCekDB == 'Yes' && isMandatoryComplete == 0) {
-			'call test case tenant store db'
-			WebUI.callTestCase(findTestCase('Tenant/TenantStoreDB'), [('ExcelPathTenant') : 'Tenant/DataTestingTenant'], 
-				FailureHandling.STOP_ON_FAILURE)
 		}
 	}
 }

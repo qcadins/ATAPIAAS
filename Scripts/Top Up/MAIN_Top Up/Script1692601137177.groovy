@@ -562,8 +562,6 @@ def couponPercentage(ArrayList listServices, ArrayList tempDataPrice, ArrayList 
 	
 	'buka excel untuk refresh testdata'
 	CustomKeywords.'customizekeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
-	
-	WebUI.delay(5)
 }
 
 def couponNominal(ArrayList listServices, ArrayList tempDataPrice, ArrayList listJumlahisiUlang,
@@ -630,8 +628,6 @@ def couponNominal(ArrayList listServices, ArrayList tempDataPrice, ArrayList lis
 	
 	'buka excel untuk refresh testdata'
 	CustomKeywords.'customizekeyword.OpenCloseExcel.openCloseFileWithRefreshVal'(GlobalVariable.DataFilePath2)
-	
-	WebUI.delay(5)
 }
 
 def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {

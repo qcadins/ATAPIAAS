@@ -6,12 +6,12 @@
    <elementGuidId>b1ac43d1-ecb9-4bc8-994f-292c25e76291</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>(.//*[normalize-space(text()) and normalize-space(.)='Isi Saldo'])[2]/following::div[2]</value>
-      </entry>
-      <entry>
          <key>CSS</key>
          <value>div.row.match-height > div.col-6</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>/html/body/app-root/app-full-layout/div</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +22,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>div</value>
-      <webElementGuid>98a05809-3d63-488b-bc56-8a03c341dff7</webElementGuid>
+      <webElementGuid>9ca5c8ac-72c3-4010-8224-118130d4a8c5</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -30,7 +30,7 @@
       <name>class</name>
       <type>Main</type>
       <value>col-6</value>
-      <webElementGuid>edf547e4-5bc7-4ca2-a069-7bc64ddad7b6</webElementGuid>
+      <webElementGuid>91475020-1112-4ca3-91d7-f2c459cc182b</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -38,7 +38,7 @@
       <name>text</name>
       <type>Main</type>
       <value>TenantPilih tenant×Pilih Tenant×VendorPilih vendor×Pilih Vendor×Tipe SaldoPilih Tipe Saldo×Pilih Tipe Saldo×Tambah SaldoNomor TagihanCatatanTanggal PembelianBatalLanjut</value>
-      <webElementGuid>abcaa729-fd6a-4069-a067-93788f8cf4ef</webElementGuid>
+      <webElementGuid>17c6ce82-b196-453c-bb89-cd45adb4204f</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +46,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>/html[1]/body[@class=&quot;vertical-layout menu-hide navbar-static pace-done&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[@class=&quot;content-wrapper&quot;]/app-topup-balance[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;row match-height&quot;]/div[@class=&quot;col-6&quot;]</value>
-      <webElementGuid>685608d8-2ee9-43d4-8eb6-47d87ea978e9</webElementGuid>
+      <webElementGuid>af56bd7a-da37-4880-90c8-6ee8fd7710cb</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -54,7 +54,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Isi Saldo'])[2]/following::div[2]</value>
-      <webElementGuid>0df52d1d-ea5e-4e15-a7bf-2b7cf95a7f32</webElementGuid>
+      <webElementGuid>940680ec-38a8-4bc5-a23b-903613ca293d</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -62,7 +62,7 @@
       <name>xpath:neighbor</name>
       <type>Main</type>
       <value>(.//*[normalize-space(text()) and normalize-space(.)='Tenant'])[1]/following::div[13]</value>
-      <webElementGuid>97215e7b-0cfc-4886-86a1-ef8fa8debad3</webElementGuid>
+      <webElementGuid>35ddcac2-f8a2-40ea-8561-d1aa8a27d0be</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -70,7 +70,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//app-topup-balance/div[2]/div</value>
-      <webElementGuid>7178c2d6-982e-4e8a-8655-fd0bbcdb7aea</webElementGuid>
+      <webElementGuid>e2b9f1f8-6c88-4482-bca6-3c8eef5f4d7d</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -78,6 +78,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//div[(text() = 'TenantPilih tenant×Pilih Tenant×VendorPilih vendor×Pilih Vendor×Tipe SaldoPilih Tipe Saldo×Pilih Tipe Saldo×Tambah SaldoNomor TagihanCatatanTanggal PembelianBatalLanjut' or . = 'TenantPilih tenant×Pilih Tenant×VendorPilih vendor×Pilih Vendor×Tipe SaldoPilih Tipe Saldo×Pilih Tipe Saldo×Tambah SaldoNomor TagihanCatatanTanggal PembelianBatalLanjut')]</value>
-      <webElementGuid>e7d0a866-b1d3-46e1-91dc-40867c8976a4</webElementGuid>
+      <webElementGuid>e697a2c5-92e7-4986-bf92-c845dc035942</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

@@ -32,7 +32,7 @@ public class OpenCloseExcel {
 		robot.keyPress(KeyEvent.VK_S)
 		robot.keyRelease(KeyEvent.VK_S)
 		robot.keyRelease(KeyEvent.VK_CONTROL)
-		robot.delay(5000)
+		robot.delay(20000)
 		Runtime.runtime.exec('taskkill /IM EXCEL.EXE')
 	}
 }

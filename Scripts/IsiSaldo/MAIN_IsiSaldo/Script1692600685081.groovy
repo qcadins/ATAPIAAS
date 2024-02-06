@@ -68,6 +68,9 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			navigatetoeendigoBeta()
 		}
 		
+		'ganti fokus robot ke tab baru'
+		WebUI.switchToWindowIndex(1)
+		
 		'flag apakah topup masuk ke tenant yang benar'
 		topupSaldoCorrectTenant = 1
 		
@@ -96,8 +99,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			checkDDL(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'), namatenantDB, 'DDL Tenant')
 			
 			'input nama tenant yang akan digunakan'
-			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'),
-				findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')))
+			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'), 'PT REAL ESTATE')
 			
 			'pencet enter pada textbox'
 			WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'),
@@ -108,7 +110,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			'input nama vendor yang akan digunakan'
 			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'),
-				findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Vendor')))
+				'ADINS')
 			
 			'pencet enter pada textbox'
 			WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'),
@@ -119,11 +121,13 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 	
 			'input nama saldo yang akan diisi ulang'
 			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'),
-				findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
+				'IDR')
 			
 			'pencet enter pada textbox'
 			WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'),
 				Keys.chord(Keys.ENTER))
+			
+			WebUI.refresh()
 			
 			firstRun = 1
 		}
@@ -309,7 +313,7 @@ def checkDDL(TestObject objectDDL, ArrayList<String> listDB, String reason) {
 	}
 		
 	'Input enter untuk tutup ddl'
-	WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/containerForm'))
+	WebUI.sendKeys(objectDDL, Keys.chord(Keys.ENTER))
 }
 
 def navigatetoeendigoBeta() {
@@ -399,7 +403,7 @@ def getSaldoforTransaction(String namaSaldo) {
 		modifyNamaSaldo = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/span_OCR KK'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + i + ']/div/div/div/div/div[1]/span', true)
 
 		'jika nama object sesuai dengan nama saldo'
-		if (WebUI.getText(modifyNamaSaldo) == namaSaldo) {
+		if (WebUI.getText(modifyNamaSaldo).toUpperCase() == namaSaldo.toUpperCase()) {
 			'ubah alamat jumlah saldo ke kotak saldo yang dipilih'
 			modifySaldoDipilih = WebUI.modifyObjectProperty(findTestObject('Object Repository/API_KEY/Page_Balance/h3_45,649'), 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div[2]/app-balance-prod/div[1]/div/lib-balance-summary/div/div[' + i + ']/div/div/div/div/div[1]/h3', true)
 			

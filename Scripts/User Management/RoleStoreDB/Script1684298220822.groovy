@@ -17,14 +17,14 @@ ArrayList resultExcel = []
 'check if action new/edit/settings'
 if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('New')) {
 	'ambil data role dari db'
-	String resultDB = CustomKeywords.'usermanagement.RoleVerif.getNamaRole'(conndevUAT, 
+	String resDB = CustomKeywords.'usermanagement.RoleVerif.getNamaRole'(conndevUAT, 
 		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Add RoleName')))
 	
 	'ambil data role dari excel'
-	String resultExcel = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Add RoleName'))
+	String resExcel = findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Add RoleName'))
 	
 	'jika hasil db tidak sesuai excel'
-	if (resultDB != resultExcel) {
+	if (resDB != resExcel) {
 		GlobalVariable.FlagFailed = 1
 		
 		'tulis adanya error pada sistem web'
@@ -41,7 +41,7 @@ if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('A
 	resultExcel = []
 	
 	'cek data untuk tiap alamat di array'
-	for (int i = 0; i < resultDB.size ; i++) {
+	for (int i = 0; i < resultDB.size() ; i++) {
 		'ambil data dari excel'
 		resultExcel.add(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, (rowExcel('$Nama Role') + i)))
 		
