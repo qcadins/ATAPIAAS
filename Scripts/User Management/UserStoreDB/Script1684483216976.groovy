@@ -19,7 +19,7 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).
 			findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 	
 	'cek data untuk tiap alamat di array'
-	for (int i = 0; i < resultDB.size ; i++) {
+	for (int i = 0; i < resultDB.size() ; i++) {
 		'tambahkan data ke resultExcel'
 		resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, (rowExcel('$Email') + i)))
 		
@@ -38,7 +38,7 @@ if (findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).
 		findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Email')))
 		
 	'cek data untuk tiap alamat di array'
-	for (int i = 0; i < resultDB.size ; i++) {
+	for (int i = 0; i < resultDB.size() ; i++) {
 		if (i == 0) {
 			'tambahkan data ke array resultExcel'
 			resultExcel.add(findTestData(Path).getValue(GlobalVariable.NumOfColumn, rowExcel('Email')))

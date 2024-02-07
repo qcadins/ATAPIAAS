@@ -6,22 +6,17 @@
    <defaultProfile>true</defaultProfile>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>findTestData('Login/Login').getValue(6, 2)</initValue>
-      <name>APIKEYCaptcha</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
       <initValue>''</initValue>
       <name>BaseUrl</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>findTestData('Login/Login').getValue(4, 14)</initValue>
+      <initValue>findTestData('Login/Login OCR').getValue(2, 2)</initValue>
       <name>checkLog</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>findTestData('Login/Login').getValue(5, 14)</initValue>
+      <initValue>findTestData('Login/Login').getValue(3, 14)</initValue>
       <name>continueTC</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
@@ -251,7 +246,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>findTestData('Login/Login').getValue(1, 14)</initValue>
+      <initValue>findTestData('Login/Login').getValue(2, 14)</initValue>
       <name>KondisiCekDB</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
@@ -271,12 +266,12 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>findTestData('Login/Login').getValue(5, 2)</initValue>
+      <initValue>findTestData('Login/Login').getValue(1, 14)</initValue>
       <name>SettingEnvi</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>findTestData('Login/Login').getValue(5, 4)</initValue>
+      <initValue>findTestData('Login/Login').getValue(2, 16)</initValue>
       <name>SettingTopup</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>

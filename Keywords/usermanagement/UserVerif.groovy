@@ -17,7 +17,7 @@ public class UserVerif {
 
 		Statement stm = conn.createStatement()
 
-		ResultSet resultSet = stm.executeQuery("SELECT * FROM am_msuser WHERE usr_crt = '" + email + "'")
+		ResultSet resultSet = stm.executeQuery("SELECT count(*) FROm am_msuser amu LEFT JOIN ms_useroftenant mot ON mot.id_ms_user = amu.id_ms_user LEFT JOIN ms_tenant mt oN mt.id_ms_tenant = mot.id_ms_tenant WHERE tenant_code = (SELECT tenant_code FROM ms_tenant mt LEFT JOIN ms_useroftenant mot ON mot.id_ms_tenant = mt.id_ms_tenant LEFT JOIN am_msuser amu ON amu.id_ms_user = mot.id_ms_user WHERE login_id = '" + email + "') AND login_id != '" + email + "'")
 
 		while (resultSet.next()) {
 			data = resultSet.getObject(1)
@@ -81,5 +81,4 @@ public class UserVerif {
 		}
 		data
 	}
-
 }

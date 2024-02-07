@@ -18,16 +18,16 @@ WebDriver driver = CustomKeywords.'login.Browser.settingandOpen'(Path, rowExcel(
 WebUI.maximizeWindow()
 
 'navigasi ke url bucket standard'
-WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(8, 7))
+WebUI.navigateToUrl(findTestData(ExcelPathLoginOCR).getValue(2, 3))
 
 'login username google'
-WebUI.setText(findTestObject('OCR Testing/checkLog/input_username'), findTestData(ExcelPathLogin).getValue(8, 9))
+WebUI.setText(findTestObject('OCR Testing/checkLog/input_username'), findTestData(ExcelPathLoginOCR).getValue(2, 5))
 
 'klik pada tombol next'
 WebUI.click(findTestObject('OCR Testing/checkLog/next_username'))
 
 'input password'
-WebUI.setText(findTestObject('OCR Testing/checkLog/input_pass'), findTestData(ExcelPathLogin).getValue(8, 10))
+WebUI.setText(findTestObject('OCR Testing/checkLog/input_pass'), findTestData(ExcelPathLoginOCR).getValue(2, 6))
 
 'klik pada tombol next'
 WebUI.click(findTestObject('OCR Testing/checkLog/next_pass'))
@@ -48,7 +48,7 @@ js.executeScript('window.open();')
 WebUI.switchToWindowIndex(1)
 
 'navigasi ke url bucket coldline'
-WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(8, 8))
+WebUI.navigateToUrl(findTestData(ExcelPathLoginOCR).getValue(2, 4))
 
 'ganti fokus robot ke tab baru'
 WebUI.switchToWindowIndex(0)

@@ -13,26 +13,10 @@ import org.openqa.selenium.By as By
 GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet Edit Profile'
-int countColumnEdit = findTestData(ExcelPathRole).columnNumbers
+int countColumnEdit = findTestData(ExcelPathRole).columnNumbers, firstRun = 0
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndevUAT = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
-
-'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Role', ('SheetName') : sheet,
-	('Path') : ExcelPathRole, ('Username') : 'Username Login', ('Password') : 'Password Login',], FailureHandling.STOP_ON_FAILURE)
-
-'klik pada menu'
-WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/span_Menu'))
-
-'pilih submenu manage user'
-WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/a_Manage User'))
-
-'klik pada roles'
-WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/span_Roles'))
-
-'panggil fungsi check paging'
-checkPaging(conndevUAT)
 
 for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	'status kosong berhentikan testing, status selain unexecuted akan dilewat'
@@ -44,6 +28,26 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 		
 		'declare isMmandatory Complete'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Is Mandatory Complete')))
+		
+		if (firstRun == 0) {
+			'panggil fungsi login'
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'Role', ('SheetName') : sheet,
+				('Path') : ExcelPathRole, ('Username') : 'Username Login', ('Password') : 'Password Login',], FailureHandling.STOP_ON_FAILURE)
+			
+			'klik pada menu'
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/span_Menu'))
+			
+			'pilih submenu manage user'
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/a_Manage User'))
+			
+			'klik pada roles'
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/span_Roles'))
+			
+			'panggil fungsi check paging'
+			checkPaging(conndevUAT)
+			
+			firstRun = 1
+		}
 		
 		'klik pada menu'
 		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/span_Menu'))
@@ -98,7 +102,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/button_Search'))	
 			
 			'verify nama role'
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-Role/label_Role')), findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 20), false, FailureHandling.CONTINUE_ON_FAILURE), ' Nama Role')
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-Role/label_Role')), findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Add RoleName')), false, FailureHandling.CONTINUE_ON_FAILURE), ' Nama Role')
 		} else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
 			'panggil fungsi cari role'
 			searchRole()
@@ -161,7 +165,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/button_Search'))
 			
 			'verify nama role'
-			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-Role/label_Role')), findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, 17), false, FailureHandling.CONTINUE_ON_FAILURE), ' Nama Role')
+			checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-Role/label_Role')), findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama Role')), false, FailureHandling.CONTINUE_ON_FAILURE), ' Nama Role')
 		} else if (findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Settings')) {
 			'panggil fungsi cari role'
 			searchRole()

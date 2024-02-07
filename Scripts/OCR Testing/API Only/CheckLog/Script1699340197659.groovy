@@ -25,20 +25,14 @@ WebUI.click(findTestObject('OCR Testing/checkLog/button_ListCustomer'))
 'refresh laman web'
 WebUI.refresh()
 
-//'navigasi ke url bucket coldline'
-//WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(8, 8))
-
 'ganti fokus robot ke tab standard'
 WebUI.switchToWindowIndex(0)
-
-//'navigasi ke url bucket standard'
-//WebUI.navigateToUrl(findTestData(ExcelPathLogin).getValue(8, 7))
 
 def checkProcedure(String bucketType) {
 	if (GlobalVariable.onlyFirstRun == 0) {
 		'input filter OCR'
 		WebUI.setText(findTestObject('OCR Testing/checkLog/inputSearchFilter'),
-			findTestData(ExcelPathLogin).getValue(8, 11))
+			findTestData(ExcelPathLoginOCR).getValue(2, 7))
 		
 		WebUI.delay(1)
 		

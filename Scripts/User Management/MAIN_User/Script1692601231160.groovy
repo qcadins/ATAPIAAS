@@ -13,29 +13,13 @@ import org.openqa.selenium.By as By
 GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
 'mendapat jumlah kolom dari sheet User'
-int countColumnEdit = findTestData(ExcelPathUser).columnNumbers
+int countColumnEdit = findTestData(ExcelPathUser).columnNumbers, firstRun = 0
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
 Connection conndev = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_esign'()
 
 //'deklarasi koneksi ke database eendigo_dev_uat'
 //Connection conndevUAT = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
-
-'panggil fungsi login'
-WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : sheet, ('SheetName') : sheet, 
-	('Path') : ExcelPathUser, ('Username') : 'Username Login', ('Password') : 'Password Login',], FailureHandling.STOP_ON_FAILURE)
-
-'klik pada menu'
-WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/span_Menu'))
-
-'pilih submenu manage user'
-WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/a_Manage User'))
-
-'klik pada user'
-WebUI.click(findTestObject('Object Repository/User Management-User/Page_Balance/span_User'))
-
-'panggil fungsi check paging'
-checkPaging(conndev)
 
 for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEdit; (GlobalVariable.NumOfColumn)++) {
 	'set penanda error menjadi 0'
@@ -48,6 +32,26 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Warning')) {
 		'declare isMmandatory Complete'
 		int isMandatoryComplete = Integer.parseInt(findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Is Mandatory Complete')))
+		
+		if (firstRun == 0) {
+			'panggil fungsi login'
+			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'User', ('SheetName') : sheet,
+				('Path') : ExcelPathUser, ('Username') : 'Username Login', ('Password') : 'Password Login',], FailureHandling.STOP_ON_FAILURE)
+			
+			'klik pada menu'
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/span_Menu'))
+			
+			'pilih submenu manage user'
+			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/a_Manage User'))
+			
+			'klik pada user'
+			WebUI.click(findTestObject('Object Repository/User Management-User/Page_Balance/span_User'))
+			
+			'panggil fungsi check paging'
+			checkPaging(conndev)
+			
+			firstRun = 1
+		}
 		
 		'klik pada menu'
 		WebUI.click(findTestObject('Object Repository/User Management-Role/Page_Balance/span_Menu'))
@@ -94,15 +98,15 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			'input nama depan yang akan diubah'
 			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Edit User/input__firstName'),
-				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Firstname')))
+				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Firstname(Edit)')))
 			
 			'input nama belakang user yang akan diubah'
 			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Edit User/input__lastName'),
-				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$LastName')))
+				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$LastName(Edit)')))
 			
 			'input peran user yang akan diubah'
 			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Edit User/inputuseredit'),
-				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Role')))
+				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Role(Edit)')))
 			
 			'enter pada peran user'
 			WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_Edit User/inputuseredit'),
@@ -123,14 +127,29 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				'klik pada ddl'
 				WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/inputstatusUser'))
 				
-				'cek kondisi status input pada database'
+				'get id ddl'
+				id = WebUI.getAttribute(findTestObject('Object Repository/Top Up/ddlClass'), 'id', FailureHandling.CONTINUE_ON_FAILURE)
+				
+				'jika status yang diingkan adalah aktif/inaktif'
 				if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Status Aktivasi')) == 'Aktif') {
-					'pilih status active'
-					WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/Statusactive'))
-				} else {
-					'pilih status inactive'
-					WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/Statusinactive'))
+					'modify object DDL'
+					modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('User Management-Role/modifyObject'), 'xpath', 'equals', '//*[@id="' + id + '-0"]', true)
+				} else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Status Aktivasi')) == 'Tidak aktif') {
+					'modify object DDL'
+					modifyObjectDDL = WebUI.modifyObjectProperty(findTestObject('User Management-Role/modifyObject'), 'xpath', 'equals', '//*[@id="' + id + '-1"]', true)
 				}
+				
+				'klik status yang dipilih'
+				WebUI.click(modifyObjectDDL)
+				
+//				'cek kondisi status input pada database'
+//				if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Status Aktivasi')) == 'Aktif') {
+//					'pilih status active'
+//					WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/Statusactive'))
+//				} else {
+//					'pilih status inactive'
+//					WebUI.click(findTestObject('Object Repository/User Management-User/Page_Edit User/Statusinactive'))
+//				}
 			}
 			
 			'panggil fungsi lengkapi konfirmasi dialog'
@@ -292,16 +311,16 @@ def checkdialogConfirmation(int isMandatoryComplete) {
 					checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Email')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email')), false, FailureHandling.CONTINUE_ON_FAILURE), ' Email')
 					
 					'verify peran'
-					checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Peran')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Role')), false, FailureHandling.CONTINUE_ON_FAILURE), ' peran')
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Peran')).toUpperCase(), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Role')).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE), ' peran')
 				} else if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('Edit')) {
 					'verify nama depan'
-					checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_NamaDepan')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Firstname')), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama depan')
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_NamaDepan')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Firstname(Edit)')), false, FailureHandling.CONTINUE_ON_FAILURE), ' nama depan')
 					
 					'verify email'
 					checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Email')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Email')), false, FailureHandling.CONTINUE_ON_FAILURE), ' Email')
 					
 					'verify peran'
-					checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Peran')), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Role')), false, FailureHandling.CONTINUE_ON_FAILURE), ' peran')
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/User Management-User/label_Peran')).toUpperCase(), findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Role(Edit)')).toUpperCase(), false, FailureHandling.CONTINUE_ON_FAILURE), ' peran')
 				}
 				
 				if (findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Action')).equalsIgnoreCase('New')) {
@@ -484,14 +503,14 @@ def checkPaging(Connection conndev) {
 	int lastPage = elementbutton.size()
 
 	'get data total dari tabel user'
-	int resultTotalData = CustomKeywords.'usermanagement.RoleVerif.getRoleTotal'(conndev,
+	int resultTotalData = CustomKeywords.'usermanagement.UserVerif.getUserTotal'(conndev,
 		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Username Login')))
 	
 	'get text total data dari ui'
 	Total = WebUI.getText(findTestObject('Object Repository/User Management-User/TotalData')).split(' ')
 	
 	'cek apakah total di db dan Ui sesuai'
-	checkVerifyEqualOrMatch(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.STOP_ON_FAILURE), "")
+	checkVerifyEqualOrMatch(WebUI.verifyEqual(resultTotalData, Integer.parseInt(Total[0]), FailureHandling.CONTINUE_ON_FAILURE), "")
 
 	'cek apakah hlm  tersedia'
 	if (WebUI.verifyElementVisible(

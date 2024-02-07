@@ -24,11 +24,11 @@
       <variableId>914c6227-88a0-4755-9bb3-888ad5d97b31</variableId>
    </variableLinks>
    <variable>
-      <defaultValue>'Login/Login'</defaultValue>
+      <defaultValue>'Login/Login OCR'</defaultValue>
       <description></description>
       <id>084a28c4-2f46-4c60-a9d6-a155cb315633</id>
       <masked>false</masked>
-      <name>ExcelPathLogin</name>
+      <name>ExcelPathLoginOCR</name>
    </variable>
    <variable>
       <defaultValue>''</defaultValue>
