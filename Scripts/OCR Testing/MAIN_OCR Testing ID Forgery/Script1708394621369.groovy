@@ -371,7 +371,10 @@ def filterSaldo() {
 	
 	'pencet enter'
 	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), Keys.chord(Keys.ENTER))
-		
+	
+	'focus kepada button cari'
+	WebUI.focus(findTestObject('Object Repository/API_KEY/Page_Balance/button_Cari'))
+	
 	'klik pada button cari'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/button_Cari'))
 }

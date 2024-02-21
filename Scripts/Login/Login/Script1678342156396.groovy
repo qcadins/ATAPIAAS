@@ -306,6 +306,7 @@ if (TC != 'IsiSaldo' && TC != 'Tenant' && TC != 'IsiSaldoAuto' && TC != 'ForgotP
 	}
 }
 
+WebUI.maximizeWindow()
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, SheetName, cellValue)
 }
