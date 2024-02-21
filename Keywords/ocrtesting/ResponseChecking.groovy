@@ -4,7 +4,6 @@ import com.kms.katalon.core.annotation.Keyword
 import internal.GlobalVariable
 import groovy.json.JsonSlurper
 import writetoexcel.WriteExcel
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 public class ResponseChecking {
 

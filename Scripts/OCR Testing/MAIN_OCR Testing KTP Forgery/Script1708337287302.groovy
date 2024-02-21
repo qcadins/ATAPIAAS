@@ -28,7 +28,7 @@ GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 18)
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : sheet,
-	('Path') : ExcelPathOCRTesting, ('Row') : 26,('Username') : 'UsernameLogin', ('Password') : 'PasswordLogin'], FailureHandling.STOP_ON_FAILURE)
+	('Path') : ExcelPathOCRTesting, ('Row') : 26, ('Username') : 'UsernameLogin', ('Password') : 'PasswordLogin'], FailureHandling.STOP_ON_FAILURE)
 
 if (GlobalVariable.SettingEnvi == 'Production') {
 	'click pada production'
@@ -41,7 +41,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 	if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).length() == 0) {
 		break
 	} else if (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Status')).equalsIgnoreCase('Unexecuted')) {
-
 		'ambil kode tenant di DB'
 		String tenantcode = CustomKeywords.'ocrtesting.GetParameterfromDB.getTenantCodefromDB'(conn,
 			findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('UsernameLogin')))
@@ -195,7 +194,6 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'simpan trx number terbaru milik tenant lain dari DB'
 			String latestOtherTenantMutation = CustomKeywords.'ocrtesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(connProd, tenantcode)
 
-			
 			'jika data transaction number di web dan DB tidak sesuai'
 			if (noTrxbefore == latestMutation || noTrxafter == latestOtherTenantMutation) {
 				'anggap HIT Api gagal'
