@@ -51,7 +51,7 @@ public class Connect {
 		conn
 	}
 
-	//fungsi digunakan untuk koneksi dengan database adins apiaas uat tipe production
+	//fungsi digunakan untuk koneksi dengan database adins apiaas uat tipe production (gk ada)
 	@Keyword
 	def connectDBAPIAAS_uatProduction() {
 		String servername = findTestData(pathLogin).getValue(1, 9)

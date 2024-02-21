@@ -16,12 +16,12 @@ GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPa
 sheet = 'Link Base Url'
 
 'get base url'
-GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, rowExcel('OCR KTP'))
+GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, rowExcel('OCR KTP Forgery'))
 
 'mencari directory excel utama'
 GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
-sheet = 'OCR KTP'
+sheet = 'OCR KTP Forgery'
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers

@@ -11,11 +11,50 @@
       <value></value>
       <variableId>06dd5406-121e-41fa-b27e-293c71077e86</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>4d6a6a09-b705-44dd-8e10-6f8b93e24d23</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>8687eb41-7eff-40ba-bae4-28f781ac8689</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>7f87ff05-98e6-43ef-af29-430a2acfcb4a</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'OCR Testing/DataOCRTestingSTNK'</defaultValue>
       <description></description>
       <id>06dd5406-121e-41fa-b27e-293c71077e86</id>
       <masked>false</masked>
       <name>ExcelPathOCRTesting</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR STNK'</defaultValue>
+      <description></description>
+      <id>4d6a6a09-b705-44dd-8e10-6f8b93e24d23</id>
+      <masked>false</masked>
+      <name>sheet</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR STNK'</defaultValue>
+      <description>Description pada ms_lov</description>
+      <id>8687eb41-7eff-40ba-bae4-28f781ac8689</id>
+      <masked>false</masked>
+      <name>lovBalanceType</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR_STNK'</defaultValue>
+      <description>code pada ms_lov</description>
+      <id>7f87ff05-98e6-43ef-af29-430a2acfcb4a</id>
+      <masked>false</masked>
+      <name>idOCR</name>
    </variable>
 </TestCaseEntity>

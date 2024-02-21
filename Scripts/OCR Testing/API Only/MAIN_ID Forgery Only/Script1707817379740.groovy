@@ -16,12 +16,12 @@ GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPa
 sheet = 'Link Base Url'
 
 'get base url'
-GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, rowExcel('OCR KTP'))
+GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, rowExcel('OCR ID Forgery'))
 
 'mencari directory excel utama'
 GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
-sheet = 'OCR KTP'
+sheet = 'OCR ID Forgery'
 
 'mendapat jumlah kolom dari sheet Edit Profile'
 int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
@@ -31,7 +31,7 @@ Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 
 String tanggal = todayDate()
 
-String responseBody, messageocr, stateocr, ocrdate, timeOcrhit
+String responseBody, errorocr, stateocr, ocrdate, timeOcrhit
 
 int firstRun = 0
 
@@ -79,16 +79,15 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		]))
 		
 		'ambil lama waktu yang diperlukan hingga request menerima balikan'
-		String elapsedTime = (response.elapsedTime) / 1000 + ' second'
-		
-		'ambil message respon dari HIT tersebut'
-		messageocr = WS.getElementPropertyValue(response, 'message', FailureHandling.CONTINUE_ON_FAILURE)
-					
+		String elapsedTime = (response.elapsedTime) / 1000 + ' second'		
 		'ambil status dari respon HIT tersebut'
 		stateocr = WS.getElementPropertyValue(response, 'status', FailureHandling.CONTINUE_ON_FAILURE)
 		
 		'ambil status dari respon HIT tersebut'
-		ocrdate = WS.getElementPropertyValue(response, 'ocr_date', FailureHandling.CONTINUE_ON_FAILURE)
+		errorocr = WS.getElementPropertyValue(response, 'error', FailureHandling.CONTINUE_ON_FAILURE)
+		
+		'ambil status dari respon HIT tersebut'
+		ocrdate = WS.getElementPropertyValue(response, 'dtm_crt', FailureHandling.CONTINUE_ON_FAILURE)
 		
 		'write to excel response elapsed time'
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcel'(GlobalVariable.DataFilePath, sheet, rowExcel('Process Time') - 1, GlobalVariable.NumOfColumn -
@@ -102,10 +101,10 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			continue
 		}
-		
+
 		'Jika status HIT API 200 atau 500 dan tidak menggunakan key atau tenant invalid'
-		if ((!stateocr.equalsIgnoreCase('key or tenant invalid') && !messageocr.equalsIgnoreCase('Invalid API key or tenant code')) &&
-			((WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) ||
+		if ((!stateocr.equalsIgnoreCase('key or tenant invalid') &&
+			(WS.verifyResponseStatusCode(response, 200, FailureHandling.OPTIONAL) == true) ||
 				(WS.verifyResponseStatusCode(response, 500, FailureHandling.OPTIONAL) == true))) {
 			'ambil waktu hit untuk sebagai acuan nama file log'
 			timeOcrhit = processHourOnly(ocrdate)
@@ -138,7 +137,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				'write to excel status failed dan reason'
 				CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 				GlobalVariable.StatusFailed, (findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('Reason failed')) + ';') +
-				'<' + messageocr + '>')
+				'<' + errorocr + '>')
 			}
 			
 			'jika perlu cek log dijalankan'
@@ -166,16 +165,16 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			}
 		} else {
 			'jika param message null'
-			if (messageocr == null) {
+			if (errorocr == null) {
 				'pindahkan value di status ke message'
-				messageocr = stateocr
+				errorocr = stateocr
 				
 				'hardcode status yang kosong'
 				stateocr = 'FAILED'
 			}
 			'Write To Excel GlobalVariable.StatusFailed and errormessage'
 			CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
-				stateocr, '<' + messageocr + '>')
+				stateocr, '<' + errorocr + '>')
 		}
 	}
 }

@@ -17,6 +17,18 @@
       <value></value>
       <variableId>a5cc340b-304e-456f-82d6-92dd6f18f482</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>8a25bd4c-a19a-4742-83a2-cabe042f6119</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>f0ebb457-952b-4166-b7ab-ce91052a3b26</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'OCR Testing/Invoice'</defaultValue>
       <description></description>
@@ -30,5 +42,19 @@
       <id>a5cc340b-304e-456f-82d6-92dd6f18f482</id>
       <masked>false</masked>
       <name>sheet</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR Invoice'</defaultValue>
+      <description>Description pada ms_lov</description>
+      <id>8a25bd4c-a19a-4742-83a2-cabe042f6119</id>
+      <masked>false</masked>
+      <name>lovBalanceType</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR_INVOICE'</defaultValue>
+      <description>code pada ms_lov</description>
+      <id>f0ebb457-952b-4166-b7ab-ce91052a3b26</id>
+      <masked>false</masked>
+      <name>idOCR</name>
    </variable>
 </TestCaseEntity>

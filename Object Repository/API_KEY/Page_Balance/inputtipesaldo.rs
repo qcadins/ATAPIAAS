@@ -6,12 +6,12 @@
    <elementGuidId>f7a9759c-8568-41da-9e35-f5185d66bb2e</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
-         <value>input[type=&quot;text&quot;]</value>
+         <key>XPATH</key>
+         <value>//input[@type='text']</value>
       </entry>
       <entry>
-         <key>XPATH</key>
-         <value>//*[@id=&quot;balanceType&quot;]/div/div/div[3]/input</value>
+         <key>CSS</key>
+         <value>input[type=&quot;text&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

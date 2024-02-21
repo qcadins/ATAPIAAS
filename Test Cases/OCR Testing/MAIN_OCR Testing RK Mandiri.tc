@@ -11,11 +11,50 @@
       <value></value>
       <variableId>35c601af-efe2-4e24-8447-5a6dacb19966</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>561427fc-0b46-4891-b131-ac9cfbb5386f</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>3c56d627-20e5-4d77-8b99-d84e985a5e9f</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>f2f2b72d-c986-4be2-8719-ad5adce94cbc</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'OCR Testing/DataOCRTestingRKMandiri'</defaultValue>
       <description></description>
       <id>35c601af-efe2-4e24-8447-5a6dacb19966</id>
       <masked>false</masked>
       <name>ExcelPathOCRTesting</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR RK Mandiri'</defaultValue>
+      <description></description>
+      <id>561427fc-0b46-4891-b131-ac9cfbb5386f</id>
+      <masked>false</masked>
+      <name>sheet</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR Rek. Koran Mandiri'</defaultValue>
+      <description>Description pada ms_lov</description>
+      <id>3c56d627-20e5-4d77-8b99-d84e985a5e9f</id>
+      <masked>false</masked>
+      <name>lovBalanceType</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR_REKKORAN_MANDIRI'</defaultValue>
+      <description>code pada ms_lov</description>
+      <id>f2f2b72d-c986-4be2-8719-ad5adce94cbc</id>
+      <masked>false</masked>
+      <name>idOCR</name>
    </variable>
 </TestCaseEntity>

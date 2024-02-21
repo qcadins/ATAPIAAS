@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>MAIN_OCR Testing NPWP</name>
+   <name>MAIN_OCR Testing KTP Forgery</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>f2091142-757b-43d2-a8ec-43ac19b87bc4</testCaseGuid>
+   <testCaseGuid>86d71e4d-d592-4df9-9d0e-19c92565ecc1</testCaseGuid>
    <variableLinks>
       <testDataLinkId></testDataLinkId>
       <type>DEFAULT</type>
       <value></value>
-      <variableId>75eee568-5944-4bed-af7b-ca0eac72e54d</variableId>
+      <variableId>8c28f9a1-679b-4dab-8aae-0fd174eb3c0c</variableId>
    </variableLinks>
    <variableLinks>
       <testDataLinkId></testDataLinkId>
       <type>DEFAULT</type>
       <value></value>
-      <variableId>c80c1cd1-829d-47bf-b590-13eda59e3299</variableId>
+      <variableId>ba1fb2c5-28fe-40d3-a508-e10e6c4d4879</variableId>
    </variableLinks>
    <variableLinks>
       <testDataLinkId></testDataLinkId>
       <type>DEFAULT</type>
       <value></value>
-      <variableId>3a617b1e-77d4-4048-82c6-92df35af7f82</variableId>
+      <variableId>9ae80b7b-c519-494e-949b-6464111ad852</variableId>
    </variableLinks>
    <variableLinks>
       <testDataLinkId></testDataLinkId>
       <type>DEFAULT</type>
       <value></value>
-      <variableId>51c774d7-7951-46cc-b25f-d4b9f8331dcf</variableId>
+      <variableId>92b6297f-ebb4-45d5-a6df-a1739120f43a</variableId>
    </variableLinks>
    <variable>
-      <defaultValue>'OCR Testing/DataOCRTestingNPWP'</defaultValue>
+      <defaultValue>'OCR Testing/KTP Forgery'</defaultValue>
       <description></description>
-      <id>75eee568-5944-4bed-af7b-ca0eac72e54d</id>
+      <id>8c28f9a1-679b-4dab-8aae-0fd174eb3c0c</id>
       <masked>false</masked>
       <name>ExcelPathOCRTesting</name>
    </variable>
    <variable>
-      <defaultValue>'OCR NPWP'</defaultValue>
+      <defaultValue>'OCR KTP Forgery'</defaultValue>
       <description></description>
-      <id>c80c1cd1-829d-47bf-b590-13eda59e3299</id>
+      <id>ba1fb2c5-28fe-40d3-a508-e10e6c4d4879</id>
       <masked>false</masked>
       <name>sheet</name>
    </variable>
    <variable>
-      <defaultValue>'OCR NPWP'</defaultValue>
+      <defaultValue>'ID Forgery + OCR KTP'</defaultValue>
       <description>Description pada ms_lov</description>
-      <id>3a617b1e-77d4-4048-82c6-92df35af7f82</id>
+      <id>9ae80b7b-c519-494e-949b-6464111ad852</id>
       <masked>false</masked>
       <name>lovBalanceType</name>
    </variable>
    <variable>
-      <defaultValue>'OCR_NPWP'</defaultValue>
+      <defaultValue>'IDFORGERY_OCRKTP'</defaultValue>
       <description>code pada ms_lov</description>
-      <id>51c774d7-7951-46cc-b25f-d4b9f8331dcf</id>
+      <id>92b6297f-ebb4-45d5-a6df-a1739120f43a</id>
       <masked>false</masked>
       <name>idOCR</name>
    </variable>

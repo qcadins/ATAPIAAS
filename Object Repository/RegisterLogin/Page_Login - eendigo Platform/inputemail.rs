@@ -6,12 +6,16 @@
    <elementGuidId>5ccdc179-b3c4-4768-80c3-e2c29c7c1991</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
-         <value>input.form-control.ng-untouched.ng-pristine.ng-invalid</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>//input[@type='text']</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@type = 'text' and @placeholder = 'Email']</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>input.form-control.ng-untouched.ng-pristine.ng-invalid</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -22,7 +26,7 @@
       <name>tag</name>
       <type>Main</type>
       <value>input</value>
-      <webElementGuid>5dfa5f1e-5cf2-49bc-846a-a4c1ba507996</webElementGuid>
+      <webElementGuid>a93a1462-2293-4584-a7f0-fc118a6d3e87</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -30,7 +34,7 @@
       <name>type</name>
       <type>Main</type>
       <value>text</value>
-      <webElementGuid>e3aeed5c-c67b-4e56-a38a-d04a790de915</webElementGuid>
+      <webElementGuid>98738bde-5d8a-4459-9924-07543877bbce</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +42,7 @@
       <name>formcontrolname</name>
       <type>Main</type>
       <value>email</value>
-      <webElementGuid>45a4be15-4b1a-43f4-af6e-781a20f25ced</webElementGuid>
+      <webElementGuid>81fc1ff9-95c6-4856-9255-7c2dfad37936</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -46,7 +50,7 @@
       <name>size</name>
       <type>Main</type>
       <value>36</value>
-      <webElementGuid>d2126ec8-4cb1-48b7-8e18-4e5978767813</webElementGuid>
+      <webElementGuid>d8f3bb29-951b-43d1-859f-4d1cc28ef533</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -54,7 +58,7 @@
       <name>class</name>
       <type>Main</type>
       <value>form-control ng-untouched ng-pristine ng-invalid</value>
-      <webElementGuid>a8e9d6d4-3ef7-4911-affb-5ac41e41e754</webElementGuid>
+      <webElementGuid>bf402b4a-fa67-4eff-9472-0b294307850f</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -62,7 +66,7 @@
       <name>ng-reflect-name</name>
       <type>Main</type>
       <value>email</value>
-      <webElementGuid>607bb9aa-e8f0-4c6f-82bb-292bcad48c80</webElementGuid>
+      <webElementGuid>e17e4a48-4c75-40fa-84d1-72091d575476</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -70,7 +74,7 @@
       <name>placeholder</name>
       <type>Main</type>
       <value>Email</value>
-      <webElementGuid>f1eade66-28c1-452b-a1c1-120dce45043e</webElementGuid>
+      <webElementGuid>318d5d15-7a86-43d8-be2f-d1af24ab928a</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -78,7 +82,7 @@
       <name>ng-reflect-is-disabled</name>
       <type>Main</type>
       <value>false</value>
-      <webElementGuid>cab7869c-feb3-4ab4-a7bd-61155c5159bd</webElementGuid>
+      <webElementGuid>1c507ae0-8a6e-4238-bf74-e70f573f2435</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -86,7 +90,7 @@
       <name>ng-reflect-ng-class</name>
       <type>Main</type>
       <value>[object Object]</value>
-      <webElementGuid>edcb20e7-a3e4-4103-bdad-fa9fd05d3d0e</webElementGuid>
+      <webElementGuid>0bab9e84-5f89-462e-aa78-456987179287</webElementGuid>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -94,7 +98,7 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;mat-tab-content-0-0&quot;)/div[@class=&quot;mat-tab-body-content ng-tns-c240-1 ng-trigger ng-trigger-translateTab&quot;]/form[@class=&quot;ng-untouched ng-pristine ng-invalid ng-star-inserted&quot;]/div[@class=&quot;form-group&quot;]/div[@class=&quot;input&quot;]/input[@class=&quot;form-control ng-untouched ng-pristine ng-invalid&quot;]</value>
-      <webElementGuid>535f0b38-2521-499a-8953-3f63f87e8997</webElementGuid>
+      <webElementGuid>f736c665-d3ac-468c-9d42-9b2e080805d1</webElementGuid>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
@@ -102,7 +106,7 @@
       <name>xpath:attributes</name>
       <type>Main</type>
       <value>//input[@type='text']</value>
-      <webElementGuid>8b5db53a-77e8-4173-adb0-06bdb33f7313</webElementGuid>
+      <webElementGuid>9f1417fb-7a62-42d0-95e1-f990939b5ba3</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -110,7 +114,7 @@
       <name>xpath:idRelative</name>
       <type>Main</type>
       <value>//mat-tab-body[@id='mat-tab-content-0-0']/div/form/div/div/input</value>
-      <webElementGuid>eafc6550-d034-49af-bd36-00ec3433e0e6</webElementGuid>
+      <webElementGuid>cacc06ed-2778-4d71-950e-963f9a613d7c</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -118,7 +122,7 @@
       <name>xpath:position</name>
       <type>Main</type>
       <value>//input</value>
-      <webElementGuid>1194c629-9b41-4181-8b72-b18f7402d2a8</webElementGuid>
+      <webElementGuid>eab47a96-f011-4d15-b825-b63da19b740e</webElementGuid>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
@@ -126,6 +130,6 @@
       <name>xpath:customAttributes</name>
       <type>Main</type>
       <value>//input[@type = 'text' and @placeholder = 'Email']</value>
-      <webElementGuid>3b4a2fb0-0b4f-444b-a8b0-e33a549b2f85</webElementGuid>
+      <webElementGuid>f60888a0-aef4-4b37-89fd-7f7c2af9e4f7</webElementGuid>
    </webElementXpaths>
 </WebElementEntity>

@@ -11,11 +11,50 @@
       <value></value>
       <variableId>a348b07f-5b6f-4ab6-bfa4-f83f53984018</variableId>
    </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>67b628a6-1c11-47e4-855d-7e1f5860ba12</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>63b1dd13-8f34-4fd6-bf2d-8ab972ed183b</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>1672cfb9-3372-465a-98ff-c022d9d76ad8</variableId>
+   </variableLinks>
    <variable>
       <defaultValue>'OCR Testing/DataOCRTestingRKBCA'</defaultValue>
       <description></description>
       <id>a348b07f-5b6f-4ab6-bfa4-f83f53984018</id>
       <masked>false</masked>
       <name>ExcelPathOCRTesting</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR RK BCA'</defaultValue>
+      <description></description>
+      <id>67b628a6-1c11-47e4-855d-7e1f5860ba12</id>
+      <masked>false</masked>
+      <name>sheet</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR Rek. Koran BCA'</defaultValue>
+      <description>Description pada ms_lov</description>
+      <id>63b1dd13-8f34-4fd6-bf2d-8ab972ed183b</id>
+      <masked>false</masked>
+      <name>lovBalanceType</name>
+   </variable>
+   <variable>
+      <defaultValue>'OCR_REKKORAN_BCA'</defaultValue>
+      <description>code pada ms_lov</description>
+      <id>1672cfb9-3372-465a-98ff-c022d9d76ad8</id>
+      <masked>false</masked>
+      <name>idOCR</name>
    </variable>
 </TestCaseEntity>
