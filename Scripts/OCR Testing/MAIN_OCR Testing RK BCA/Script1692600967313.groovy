@@ -201,8 +201,11 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			'simpan trx number terbaru dari DB'
 			String latestMutation = CustomKeywords.'ocrtesting.GetParameterfromDB.getLatestMutationfromDB'(connProd, tenantcode)
 			
+			'simpan trx number terbaru milik tenant lain dari DB'
+			String latestOtherTenantMutation = CustomKeywords.'ocrtesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(connProd, tenantcode)
+			
 			'jika data transaction number di web dan DB tidak sesuai'
-			if (!WebUI.verifyMatch(latestMutation, noTrxafter, false, FailureHandling.CONTINUE_ON_FAILURE)) {
+			if (noTrxbefore == latestMutation || noTrxafter == latestOtherTenantMutation) {
 				'anggap HIT Api gagal'
 				hitAPITrx = 0
 			}

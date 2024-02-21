@@ -24,7 +24,7 @@ Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 Connection connProd = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_uatProduction'()
 
 'get base url'
-GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 18)
+GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 19)
 
 'panggil fungsi login'
 WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : sheet,
@@ -137,7 +137,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'panggil fungsi login'
 			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : sheet,
-				('Path') : ExcelPathOCRTesting, ('Row') : 26], FailureHandling.STOP_ON_FAILURE)
+				('Path') : ExcelPathOCRTesting, ('Row') : 26, ('Username') : 'UsernameLogin', ('Password') : 'PasswordLogin'], FailureHandling.STOP_ON_FAILURE)
 						
 			continue
 		}
@@ -195,7 +195,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			String latestOtherTenantMutation = CustomKeywords.'ocrtesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(connProd, tenantcode)
 			
 			'jika data transaction number di web dan DB tidak sesuai'
-			if (latestMutation != noTrxafter || latestMutation == latestOtherTenantMutation) {
+			if (noTrxbefore == latestMutation || noTrxafter == latestOtherTenantMutation) {
 				'anggap HIT Api gagal'
 				hitAPITrx = 0
 			}

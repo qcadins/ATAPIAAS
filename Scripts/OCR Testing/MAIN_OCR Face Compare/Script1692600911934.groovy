@@ -202,7 +202,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			String latestOtherTenantMutation = CustomKeywords.'ocrtesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(conndevUAT, tenantcode)
 			
 			'jika data transaction number di web dan DB tidak sesuai'
-			if (latestMutation != noTrxafter || latestMutation == latestOtherTenantMutation) {
+			if (noTrxbefore == latestMutation || noTrxafter == latestOtherTenantMutation) {
 				'anggap HIT Api gagal'
 				hitAPITrx = 0
 			}

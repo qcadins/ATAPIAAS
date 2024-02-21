@@ -137,7 +137,7 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			
 			'panggil fungsi login'
 			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : sheet,
-				('Path') : ExcelPathOCRTesting, ('Row') : 26], FailureHandling.STOP_ON_FAILURE)
+				('Path') : ExcelPathOCRTesting, ('Row') : 26, ('Username') : 'UsernameLogin', ('Password') : 'PasswordLogin'], FailureHandling.STOP_ON_FAILURE)
 						
 			continue
 		}

@@ -7,11 +7,6 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.By
-import org.openqa.selenium.chrome.ChromeDriver
-import org.openqa.selenium.chrome.ChromeOptions
-import org.openqa.selenium.remote.DesiredCapabilities
-import org.openqa.selenium.WebDriver
-import com.kms.katalon.core.configuration.RunConfiguration
 import org.openqa.selenium.Keys as Keys
 
 'mencari directory excel\r\n'

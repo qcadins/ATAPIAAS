@@ -12,22 +12,34 @@
    <rerunImmediately>true</rerunImmediately>
    <testSuiteGuid>db0b9314-466f-4e9f-86da-5374851c98ad</testSuiteGuid>
    <testCaseLink>
-      <guid>15def471-7f55-495e-b908-6a6aa07a15c0</guid>
+      <guid>35e13ba0-83cd-4a63-b746-44508ac9ea28</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/OCR Testing/API Only/MAIN_KTP Forgery Only</testCaseId>
+      <testCaseId>Test Cases/OCR Testing/MAIN_OCR Testing ID Forgery</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
       <variableLink>
          <testDataLinkId></testDataLinkId>
          <type>DEFAULT</type>
          <value></value>
-         <variableId>ccebd77c-bc5d-4c29-ba4e-f62be365fdca</variableId>
+         <variableId>3c56a411-1f5d-4a42-bead-798f28e80dbc</variableId>
       </variableLink>
       <variableLink>
          <testDataLinkId></testDataLinkId>
          <type>DEFAULT</type>
          <value></value>
-         <variableId>3d3c17b2-a8e2-4c3f-b949-703f7f396d77</variableId>
+         <variableId>2b160e5a-b4e2-4f73-bfb4-4e5cfe05d506</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>ecf61fd9-fa23-4056-a931-7924960790bd</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId></testDataLinkId>
+         <type>DEFAULT</type>
+         <value></value>
+         <variableId>5fb4099e-1c74-433b-a365-620c3723081d</variableId>
       </variableLink>
    </testCaseLink>
 </TestSuiteEntity>

@@ -144,7 +144,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			
 			'panggil fungsi login'
 			WebUI.callTestCase(findTestCase('Test Cases/Login/Login'), [('TC') : 'OCR', ('SheetName') : sheet,
-				('Path') : ExcelPathOCRTesting,('Username') : 'UsernameLogin', ('Password') : 'PasswordLogin',], FailureHandling.STOP_ON_FAILURE)
+				('Path') : ExcelPathOCRTesting, ('Username') : 'UsernameLogin', ('Password') : 'PasswordLogin'], FailureHandling.STOP_ON_FAILURE)
 			
 			continue
 		}
@@ -195,7 +195,7 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			String latestOtherTenantMutation = CustomKeywords.'ocrtesting.GetParameterfromDB.getNotMyLatestMutationfromDB'(conndevUAT, tenantcode)
 			
 			'jika data transaction number di web dan DB tidak sesuai'
-			if (latestMutation != noTrxafter || latestMutation == latestOtherTenantMutation) {
+			if (noTrxbefore == latestMutation || noTrxafter == latestOtherTenantMutation) {
 				'anggap HIT Api gagal'
 				hitAPITrx = 0
 			}
