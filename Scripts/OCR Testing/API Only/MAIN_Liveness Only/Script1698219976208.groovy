@@ -20,7 +20,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPa
 
 sheet = 'OCR Liveness'
 
-'mendapat jumlah kolom dari sheet Edit Profile'
+'mendapat jumlah kolom'
 int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'

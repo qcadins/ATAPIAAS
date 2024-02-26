@@ -14,7 +14,7 @@ import java.sql.Connection as Connection
 'mencari directory excel\r\n'
 GlobalVariable.DataFilePath = CustomKeywords.'writetoexcel.WriteExcel.getExcelPath'('/Excel/2. APIAAS.xlsx')
 
-'mendapat jumlah kolom dari sheet Edit Profile'
+'mendapat jumlah kolom'
 int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
 
 'deklarasi variabel untuk konek ke Database eendigo_dev'
