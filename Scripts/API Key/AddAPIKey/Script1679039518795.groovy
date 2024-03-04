@@ -11,6 +11,7 @@ import org.openqa.selenium.Keys as Keys
 'klik pada tombol garis tiga'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/spanMenu'))
 
+'delay'
 WebUI.delay(1)
 
 'klik pada API KEY'
