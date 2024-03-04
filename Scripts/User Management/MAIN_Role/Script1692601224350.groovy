@@ -136,13 +136,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 			WebUI.click(modifyObjectDDL)
 			
 			'input status role yang akan diubah'
-			WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_Edit Role/input_status'),
+			inputDDLExact('Object Repository/User Management-Role/Page_Edit Role/input_status',
 				findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Edit Status Role')))
-			
-			'enter pada status'
-			WebUI.sendKeys(findTestObject('Object Repository/User Management-Role/Page_Edit Role/input_status'),
-				Keys.chord(Keys.ENTER))
-			
+
 			'panggil fungsi cek konfirmasi dialog'
 			if (checkdialogConfirmation(isMandatoryComplete) == true) {
 				'jika failed mandatory continue testcase'
@@ -154,13 +150,9 @@ for (GlobalVariable.NumOfColumn; GlobalVariable.NumOfColumn <= countColumnEdit; 
 					findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Nama Role')))
 		
 			'input status role'
-			WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Status'),
+			inputDDLExact('Object Repository/User Management-Role/Page_List Roles/input_Status',
 				findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('$Edit Status Role')))
-			
-			'enter pada status'
-			WebUI.sendKeys(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Status'),
-				 Keys.chord(Keys.ENTER))
-			
+
 			'klik pada tombol cari'
 			WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/button_Search'))
 			
@@ -251,12 +243,8 @@ def searchRole() {
 			findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Nama Role')))
 
 	'input status role'
-	WebUI.setText(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Status'),
+	inputDDLExact('Object Repository/User Management-Role/Page_List Roles/input_Status',
 		findTestData(ExcelPathRole).getValue(GlobalVariable.NumOfColumn, rowExcel('Status Role')))
-	
-	'enter pada status'
-	WebUI.sendKeys(findTestObject('Object Repository/User Management-Role/Page_List Roles/input_Status'),
-		 Keys.chord(Keys.ENTER))
 	
 	'klik pada tombol cari'
 	WebUI.click(findTestObject('Object Repository/User Management-Role/Page_List Roles/button_Search'))
@@ -514,4 +502,37 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+}
+
+def inputDDLExact(String locationObject, String input) {
+	'Input value status'
+	WebUI.setText(findTestObject(locationObject), input)
+
+	if (input != '') {
+		WebUI.click(findTestObject(locationObject))
+
+		'get token unik'
+		tokenUnique = WebUI.getAttribute(findTestObject(locationObject), 'aria-owns')
+
+		'modify object label Value'
+		modifyObjectGetDDLFromToken = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+			'equals', ('//*[@id="' + tokenUnique) + '"]/div/div[2]', true)
+
+		DDLFromToken = WebUI.getText(modifyObjectGetDDLFromToken)
+
+		for (i = 0; i < DDLFromToken.split('\n', -1).size(); i++) {
+			if ((DDLFromToken.split('\n', -1)[i]).toString().toLowerCase() == input.toString().toLowerCase()) {
+				modifyObjectClicked = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+					'equals', ((('//*[@id="' + tokenUnique) + '"]/div/div[2]/div[') + (i + 1)) + ']', true)
+
+				WebUI.click(modifyObjectClicked)
+
+				break
+			}
+		}
+	} else {
+		WebUI.click(findTestObject(locationObject))
+
+		WebUI.sendKeys(findTestObject(locationObject), Keys.chord(Keys.ENTER))
+	}
 }

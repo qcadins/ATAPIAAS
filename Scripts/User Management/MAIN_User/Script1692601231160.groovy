@@ -105,13 +105,9 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$LastName(Edit)')))
 			
 			'input peran user yang akan diubah'
-			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Edit User/inputuseredit'),
+			inputDDLExact('Object Repository/User Management-User/Page_Edit User/inputuseredit',
 				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Role(Edit)')))
-			
-			'enter pada peran user'
-			WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_Edit User/inputuseredit'),
-				Keys.chord(Keys.ENTER))
-	
+
 			'jika status dari user masih unverified, belum bisa ubah status aktivasi'
 			if (statususer == 'Belum verifikasi') {
 				if (WebUI.verifyElementNotHasAttribute(findTestObject('Object Repository/User Management-User/Page_Edit User/inputstatusUser'), 'readonly',
@@ -162,12 +158,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Email')))
 			
 			'input status user'
-			WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/inputstatus'),
+			inputDDLExact('Object Repository/User Management-User/Page_List User/inputstatus',
 				findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Status')))
-			
-			'enter pada status'
-			WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_List User/inputstatus'),
-				 Keys.chord(Keys.ENTER))
 			
 			'klik tombol cari'
 			WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/button_Search'))
@@ -205,21 +197,13 @@ def searchUser() {
 			findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Email')))
 	
 	'input status user'
-	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/inputstatus'),
+	inputDDLExact('Object Repository/User Management-User/Page_List User/inputstatus',
 		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Status')))
 	
-	'enter pada status'
-	WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_List User/inputstatus'),
-		 Keys.chord(Keys.ENTER))
-	
 	'input peran user'
-	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/inputrole'),
+	inputDDLExact('Object Repository/User Management-User/Page_List User/inputrole',
 		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Role')))
-	
-	'enter pada peran user'
-	WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_List User/inputrole'),
-		 Keys.chord(Keys.ENTER))
-	
+
 	'klik pada tombol cari'
 	WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/button_Search'))
 }
@@ -399,12 +383,8 @@ def inputNewUser() {
 	WebUI.click(findTestObject('Object Repository/User Management-User/Page_Add User/eyeicon_1'))
 	
 	'input peran'
-	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
+	inputDDLExact('Object Repository/User Management-User/Page_Add User/inputadduser',
 		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Role')))
-	
-	'klik enter pada peran'
-	WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_Add User/inputadduser'),
-		Keys.chord(Keys.ENTER))
 }
 
 def inputCancelCheck() {
@@ -460,17 +440,9 @@ def checkPaging(Connection conndev) {
 	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/inputstatus'),
 		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Status')))
 	
-	'enter pada status'
-	WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_List User/inputstatus'),
-		Keys.chord(Keys.ENTER))
-	
 	'input peran dari user'
-	WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/inputrole'),
+	inputDDLExact('Object Repository/User Management-User/Page_List User/inputrole',
 		findTestData(ExcelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('Role')))
-	
-	'klik enter pada peran'
-	WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_List User/inputrole'),
-		Keys.chord(Keys.ENTER))
 	
 	'klik pada tombol cari'
 	WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/button_Search'))
@@ -632,4 +604,37 @@ def checkVerifyEqualOrMatch(Boolean isMatch, String reason) {
 
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+}
+
+def inputDDLExact(String locationObject, String input) {
+	'Input value status'
+	WebUI.setText(findTestObject(locationObject), input)
+
+	if (input != '') {
+		WebUI.click(findTestObject(locationObject))
+
+		'get token unik'
+		tokenUnique = WebUI.getAttribute(findTestObject(locationObject), 'aria-owns')
+
+		'modify object label Value'
+		modifyObjectGetDDLFromToken = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+			'equals', ('//*[@id="' + tokenUnique) + '"]/div/div[2]', true)
+
+		DDLFromToken = WebUI.getText(modifyObjectGetDDLFromToken)
+
+		for (i = 0; i < DDLFromToken.split('\n', -1).size(); i++) {
+			if ((DDLFromToken.split('\n', -1)[i]).toString().toLowerCase() == input.toString().toLowerCase()) {
+				modifyObjectClicked = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+					'equals', ((('//*[@id="' + tokenUnique) + '"]/div/div[2]/div[') + (i + 1)) + ']', true)
+
+				WebUI.click(modifyObjectClicked)
+
+				break
+			}
+		}
+	} else {
+		WebUI.click(findTestObject(locationObject))
+
+		WebUI.sendKeys(findTestObject(locationObject), Keys.chord(Keys.ENTER))
+	}
 }

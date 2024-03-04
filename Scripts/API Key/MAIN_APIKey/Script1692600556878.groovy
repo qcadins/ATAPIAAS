@@ -99,20 +99,12 @@ def checkpaging(Connection conn) {
 			'value', FailureHandling.OPTIONAL), false, FailureHandling.CONTINUE_ON_FAILURE), ' tenant name')
 	
 	'input tipe API'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), findTestData(
+	inputDDLExact('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list', findTestData(
 			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('SearchTipeAPI')))
-	
-	'select tipe API'
-	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_tipeapi_list'), Keys.chord(
-			Keys.ENTER))
-	
+
 	'input status API'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), findTestData(
-			ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('SearchStatusAPI')))
-	
-	'select status API'
-	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list'), Keys.chord(
-			Keys.ENTER))
+	inputDDLExact('Object Repository/API_KEY/Page_Api Key List/input_statusapi_list', findTestData(
+		ExcelPathAPIKey).getValue(GlobalVariable.NumOfColumn, rowExcel('SearchStatusAPI')))
 	
 	'klik pada button cari'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Api Key List/button_Cari'))
@@ -233,4 +225,37 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+}
+
+def inputDDLExact(String locationObject, String input) {
+	'Input value status'
+	WebUI.setText(findTestObject(locationObject), input)
+
+	if (input != '') {
+		WebUI.click(findTestObject(locationObject))
+
+		'get token unik'
+		tokenUnique = WebUI.getAttribute(findTestObject(locationObject), 'aria-owns')
+
+		'modify object label Value'
+		modifyObjectGetDDLFromToken = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+			'equals', ('//*[@id="' + tokenUnique) + '"]/div/div[2]', true)
+
+		DDLFromToken = WebUI.getText(modifyObjectGetDDLFromToken)
+
+		for (i = 0; i < DDLFromToken.split('\n', -1).size(); i++) {
+			if ((DDLFromToken.split('\n', -1)[i]).toString().toLowerCase() == input.toString().toLowerCase()) {
+				modifyObjectClicked = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+					'equals', ((('//*[@id="' + tokenUnique) + '"]/div/div[2]/div[') + (i + 1)) + ']', true)
+
+				WebUI.click(modifyObjectClicked)
+
+				break
+			}
+		}
+	} else {
+		WebUI.click(findTestObject(locationObject))
+
+		WebUI.sendKeys(findTestObject(locationObject), Keys.chord(Keys.ENTER))
+	}
 }

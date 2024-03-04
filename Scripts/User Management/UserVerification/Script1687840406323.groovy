@@ -82,20 +82,12 @@ WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List U
 		findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Email')))
 
 'input status user'
-WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/inputstatus'),
+inputDDLExact('Object Repository/User Management-User/Page_List User/inputstatus',
 	'Belum Verifikasi')
 
-'enter pada status'
-WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_List User/inputstatus'),
-	 Keys.chord(Keys.ENTER))
-
 'input peran user'
-WebUI.setText(findTestObject('Object Repository/User Management-User/Page_List User/inputrole'),
+inputDDLExact('Object Repository/User Management-User/Page_List User/inputrole',
 	findTestData(excelPathUser).getValue(GlobalVariable.NumOfColumn, rowExcel('$Role')))
-
-'enter pada peran user'
-WebUI.sendKeys(findTestObject('Object Repository/User Management-User/Page_List User/inputrole'),
-	 Keys.chord(Keys.ENTER))
 
 'klik pada tombol cari'
 WebUI.click(findTestObject('Object Repository/User Management-User/Page_List User/button_Search'))
@@ -186,4 +178,37 @@ if (WebUI.getText(findTestObject('User Management-User/label_PopUp')).equalsIgno
 
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+}
+
+def inputDDLExact(String locationObject, String input) {
+	'Input value status'
+	WebUI.setText(findTestObject(locationObject), input)
+
+	if (input != '') {
+		WebUI.click(findTestObject(locationObject))
+
+		'get token unik'
+		tokenUnique = WebUI.getAttribute(findTestObject(locationObject), 'aria-owns')
+
+		'modify object label Value'
+		modifyObjectGetDDLFromToken = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+			'equals', ('//*[@id="' + tokenUnique) + '"]/div/div[2]', true)
+
+		DDLFromToken = WebUI.getText(modifyObjectGetDDLFromToken)
+
+		for (i = 0; i < DDLFromToken.split('\n', -1).size(); i++) {
+			if ((DDLFromToken.split('\n', -1)[i]).toString().toLowerCase() == input.toString().toLowerCase()) {
+				modifyObjectClicked = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+					'equals', ((('//*[@id="' + tokenUnique) + '"]/div/div[2]/div[') + (i + 1)) + ']', true)
+
+				WebUI.click(modifyObjectClicked)
+
+				break
+			}
+		}
+	} else {
+		WebUI.click(findTestObject(locationObject))
+
+		WebUI.sendKeys(findTestObject(locationObject), Keys.chord(Keys.ENTER))
+	}
 }

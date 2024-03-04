@@ -40,12 +40,8 @@ WebUI.click(findTestObject('Tenant/menu_Burger'))
 WebUI.click(findTestObject('Tenant/menu_isiSaldo'))
 
 'input nama tenant yang akan digunakan'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'), findTestData(
+inputDDLExact('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant', findTestData(
         ExcelPath).getValue(2, 20))
-
-'pencet enter pada textbox'
-WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'), Keys.chord(
-        Keys.ENTER))
 
 'klik pada input vendor'
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'))
@@ -66,11 +62,7 @@ WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipt
 WebUI.click(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'))
 
 'input nama saldo yang akan diisi ulang'
-WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'), tipeSaldo)
-
-'pencet enter pada textbox'
-WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'),
-    Keys.chord(Keys.ENTER))
+inputDDLExact('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'), tipeSaldo)
 
 'input jumlah saldo yang akan ditambahkan'
 WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Tambah Saldo_qty'),
@@ -202,18 +194,12 @@ def filterSaldo() {
     WebUI.delay(4)
 
     'isi field input tipe saldo'
-    WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), findTestData(ExcelPathOCR).getValue(
+    inputDDLExact('Object Repository/API_KEY/Page_Balance/inputtipesaldo', findTestData(ExcelPathOCR).getValue(
             GlobalVariable.NumOfColumn, 21))
 
-    'pencet enter'
-    WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
-
     'isi field tipe transaksi'
-    WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), findTestData(ExcelPath).getValue(
+    inputDDLExact('Object Repository/API_KEY/Page_Balance/inputtipetranc'), findTestData(ExcelPath).getValue(
             GlobalVariable.NumOfColumn, 22))
-
-    'pencet enter'
-    WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), Keys.chord(Keys.ENTER))
 
     'klik pada button cari'
     WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/button_Cari'))
@@ -367,4 +353,37 @@ def getTrxNumber() {
 
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+}
+
+def inputDDLExact(String locationObject, String input) {
+	'Input value status'
+	WebUI.setText(findTestObject(locationObject), input)
+
+	if (input != '') {
+		WebUI.click(findTestObject(locationObject))
+
+		'get token unik'
+		tokenUnique = WebUI.getAttribute(findTestObject(locationObject), 'aria-owns')
+
+		'modify object label Value'
+		modifyObjectGetDDLFromToken = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+			'equals', ('//*[@id="' + tokenUnique) + '"]/div/div[2]', true)
+
+		DDLFromToken = WebUI.getText(modifyObjectGetDDLFromToken)
+
+		for (i = 0; i < DDLFromToken.split('\n', -1).size(); i++) {
+			if ((DDLFromToken.split('\n', -1)[i]).toString().toLowerCase() == input.toString().toLowerCase()) {
+				modifyObjectClicked = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+					'equals', ((('//*[@id="' + tokenUnique) + '"]/div/div[2]/div[') + (i + 1)) + ']', true)
+
+				WebUI.click(modifyObjectClicked)
+
+				break
+			}
+		}
+	} else {
+		WebUI.click(findTestObject(locationObject))
+
+		WebUI.sendKeys(findTestObject(locationObject), Keys.chord(Keys.ENTER))
+	}
 }

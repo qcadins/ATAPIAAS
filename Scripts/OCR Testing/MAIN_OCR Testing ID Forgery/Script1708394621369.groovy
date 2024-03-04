@@ -21,7 +21,7 @@ int countColumnEdit = findTestData(ExcelPathOCRTesting).columnNumbers
 Connection conn = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_public'()
 
 'deklarasi koneksi ke Database adins_apiaas_uat'
-Connection connProd = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_uatProduction'()
+Connection connProd = CustomKeywords.'dbconnection.Connect.connectDBAPIAAS_devUat'()
 
 'get base url'
 GlobalVariable.BaseUrl =  findTestData('Login/BaseUrl').getValue(2, 19)
@@ -359,19 +359,13 @@ def filterSaldo() {
 	WebUI.delay(4)
 	
 	'isi field input tipe saldo'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
+	inputDDLExact('Object Repository/API_KEY/Page_Balance/inputtipesaldo', 
 		findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('$SearchTipeSaldo')))
-	
-	'pencet enter'
-	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
-	
+
 	'isi field tipe transaksi'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), 
+	inputDDLExact('Object Repository/API_KEY/Page_Balance/inputtipetranc', 
 		findTestData(ExcelPathOCRTesting).getValue(GlobalVariable.NumOfColumn, rowExcel('$SearchTipeTransaksi')))
-	
-	'pencet enter'
-	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), Keys.chord(Keys.ENTER))
-	
+
 	'focus kepada button cari'
 	WebUI.focus(findTestObject('Object Repository/API_KEY/Page_Balance/button_Cari'))
 	
@@ -381,4 +375,37 @@ def filterSaldo() {
 
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+}
+
+def inputDDLExact(String locationObject, String input) {
+	'Input value status'
+	WebUI.setText(findTestObject(locationObject), input)
+
+	if (input != '') {
+		WebUI.click(findTestObject(locationObject))
+
+		'get token unik'
+		tokenUnique = WebUI.getAttribute(findTestObject(locationObject), 'aria-owns')
+
+		'modify object label Value'
+		modifyObjectGetDDLFromToken = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+			'equals', ('//*[@id="' + tokenUnique) + '"]/div/div[2]', true)
+
+		DDLFromToken = WebUI.getText(modifyObjectGetDDLFromToken)
+
+		for (i = 0; i < DDLFromToken.split('\n', -1).size(); i++) {
+			if ((DDLFromToken.split('\n', -1)[i]).toString().toLowerCase() == input.toString().toLowerCase()) {
+				modifyObjectClicked = WebUI.modifyObjectProperty(findTestObject('DocumentMonitoring/lbl_Value'), 'xpath',
+					'equals', ((('//*[@id="' + tokenUnique) + '"]/div/div[2]/div[') + (i + 1)) + ']', true)
+
+				WebUI.click(modifyObjectClicked)
+
+				break
+			}
+		}
+	} else {
+		WebUI.click(findTestObject(locationObject))
+
+		WebUI.sendKeys(findTestObject(locationObject), Keys.chord(Keys.ENTER))
+	}
 }

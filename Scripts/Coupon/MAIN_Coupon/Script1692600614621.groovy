@@ -308,13 +308,9 @@ def inputparameter(String action) {
 		inputNew()
 	} else {
 		'input tipe kupon'
-		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipekupon'),
-				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TipeKupon')))
-		
-		'enter pada tipe kupon'
-		WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipekupon'),
-			Keys.chord(Keys.ENTER))
-		
+		inputDDLExact('Object Repository/Coupon/Page_Edit Coupon/inputtipekupon', 
+			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TipeKupon')))
+
 		'input kode kupon'
 		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputkodekupon'),
 				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$KodeKupon')))
@@ -328,12 +324,8 @@ def inputparameter(String action) {
 				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TanggalTerakhirBerlaku')))
 		
 		'input tipe nilai kupon'
-		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipenilaikupon'),
-				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TipeNilaiKupon')))
-		
-		'enter pada tipe nilai kupon'
-		WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/inputtipenilaikupon'),
-			Keys.chord(Keys.ENTER))
+		inputDDLExact('Object Repository/Coupon/Page_Edit Coupon/inputtipenilaikupon', 
+			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TipeNilaiKupon')))
 		
 		'input tipe nilai kupon'
 		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/input__nilaikupon'),
@@ -352,23 +344,15 @@ def inputparameter(String action) {
 				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$MinimalPembayaran')))
 		
 		'input tenant'
-		WebUI.setText(findTestObject('Object Repository/Coupon/Page_Edit Coupon/tenantinput'),
-				findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$NamaTenant')))
-		
-		'enter pada tenant'
-		WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Edit Coupon/tenantinput'),
-			Keys.chord(Keys.ENTER))
+		inputDDLExact('Object Repository/Coupon/Page_Edit Coupon/tenantinput', 
+			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$NamaTenant')))
 	}
 }
 
 def inputNew() {
 	'input tipe kupon'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/inputtipekupon'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TipeKupon')))
-	
-	'enter pada tipe kupon'
-	WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Add Coupon/inputtipekupon'),
-		Keys.chord(Keys.ENTER))
+	inputDDLExact('Object Repository/Coupon/Page_Add Coupon/inputtipekupon',
+		findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TipeKupon')))
 	
 	'input kode kupon'
 	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/input__couponCode'),
@@ -383,12 +367,8 @@ def inputNew() {
 			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TanggalTerakhirBerlaku')))
 	
 	'input tipe nilai kupon'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/inputtipenilaikupon'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TipeNilaiKupon')))
-	
-	'enter pada tipe nilai kupon'
-	WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Add Coupon/inputtipenilaikupon'),
-		Keys.chord(Keys.ENTER))
+	inputDDLExact('Coupon/Page_Add Coupon/inputtipenilaikupon', 
+		findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$TipeNilaiKupon')))
 	
 	'input tipe nilai kupon'
 	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/input__nilaikupon'),
@@ -407,31 +387,19 @@ def inputNew() {
 			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$MinimalPembayaran')))
 	
 	'input tenant'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_Add Coupon/tenantinput'),
-			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$NamaTenant')))
-	
-	'enter pada tenant'
-	WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_Add Coupon/tenantinput'),
-		Keys.chord(Keys.ENTER))
+	inputDDLExact('Object Repository/Coupon/Page_Add Coupon/tenantinput', 
+		findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('$NamaTenant')))
 }
 
 def checkPaging(Connection conndev) {
 	'input tipe kupon'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_List Coupon/inputtipekupon'),
+	inputDDLExact('Object Repository/Coupon/Page_List Coupon/inputtipekupon',
 			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Kupon')))
 	
-	'enter pada tipe kupon'
-	WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_List Coupon/inputtipekupon'),
-		Keys.chord(Keys.ENTER))
-	
 	'input tipe nilai kupon'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_List Coupon/inputtipenilaikupon'),
+	inputDDLExact('Object Repository/Coupon/Page_List Coupon/inputtipenilaikupon',
 			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Nilai Kupon')))
-	
-	'enter pada tipe nilai kupon'
-	WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_List Coupon/inputtipenilaikupon'),
-		Keys.chord(Keys.ENTER))
-	
+
 	'input tanggal mulai berlaku akhir'
 	WebUI.setText(findTestObject('Object Repository/Coupon/Page_List Coupon/Tanggal Mulai Berlaku Awal'),
 			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Tanggal Mulai berlaku awal')))
@@ -506,21 +474,13 @@ def checkPaging(Connection conndev) {
 			'value', FailureHandling.CONTINUE_ON_FAILURE), '', false, FailureHandling.CONTINUE_ON_FAILURE))
 	
 	'input tipe kupon'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_List Coupon/inputtipekupon'),
+	inputDDLExact('Object Repository/Coupon/Page_List Coupon/inputtipekupon',
 			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Kupon')))
-	
-	'enter pada tipe kupon'
-	WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_List Coupon/inputtipekupon'),
-		Keys.chord(Keys.ENTER))
-	
+
 	'input tipe nilai kupon'
-	WebUI.setText(findTestObject('Object Repository/Coupon/Page_List Coupon/inputtipenilaikupon'),
+	inputDDLExact('Object Repository/Coupon/Page_List Coupon/inputtipenilaikupon',
 			findTestData(ExcelPathCoupon).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Nilai Kupon')))
-	
-	'enter pada tipe nilai kupon'
-	WebUI.sendKeys(findTestObject('Object Repository/Coupon/Page_List Coupon/inputtipenilaikupon'),
-		Keys.chord(Keys.ENTER))
-	
+
 	'klik pada tombol cari'
 	WebUI.click(findTestObject('Object Repository/Coupon/Page_List Coupon/button_Cari'))
 	
@@ -861,4 +821,37 @@ def verifyAfterAddorEdit() {
 
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+}
+
+def inputDDLExact(String locationObject, String input) {
+	'Input value status'
+	WebUI.setText(findTestObject(locationObject), input)
+
+	if (input != '') {
+		WebUI.click(findTestObject(locationObject))
+
+		'get token unik'
+		tokenUnique = WebUI.getAttribute(findTestObject(locationObject), 'aria-owns')
+
+		'modify object label Value'
+		modifyObjectGetDDLFromToken = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+			'equals', ('//*[@id="' + tokenUnique) + '"]/div/div[2]', true)
+
+		DDLFromToken = WebUI.getText(modifyObjectGetDDLFromToken)
+
+		for (i = 0; i < DDLFromToken.split('\n', -1).size(); i++) {
+			if ((DDLFromToken.split('\n', -1)[i]).toString().toLowerCase() == input.toString().toLowerCase()) {
+				modifyObjectClicked = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+					'equals', ((('//*[@id="' + tokenUnique) + '"]/div/div[2]/div[') + (i + 1)) + ']', true)
+
+				WebUI.click(modifyObjectClicked)
+
+				break
+			}
+		}
+	} else {
+		WebUI.click(findTestObject(locationObject))
+
+		WebUI.sendKeys(findTestObject(locationObject), Keys.chord(Keys.ENTER))
+	}
 }

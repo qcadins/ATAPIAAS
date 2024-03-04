@@ -166,13 +166,9 @@ WebUI.closeBrowser()
 'fungsi untuk filter saldo berdasarkan input user'
 def filterSaldo() {
 	'isi field input tipe saldo'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
+	inputDDLExact('Object Repository/API_KEY/Page_Balance/inputtipesaldo', 
 		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
-	
-	'pencet enter'
-	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
-		Keys.chord(Keys.ENTER))
-	
+
 	'klik pada button cari'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/button_Cari'))
 	
@@ -188,19 +184,13 @@ def filterSaldo() {
 	}
 	
 	'isi field input tipe saldo'
-	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/inputtipesaldo'), 
+	inputDDLExact('Object Repository/Saldo/Page_Balance/inputtipesaldo', 
 		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
-	
-	'pencet enter'
-	WebUI.sendKeys(findTestObject('Object Repository/Saldo/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
-	
+
 	'isi field tipe transaksi'
-	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/inputtipetransaksi'), 
+	inputDDLExact('Object Repository/Saldo/Page_Balance/inputtipetransaksi', 
 		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Transaksi')))
-	
-	'pencet enter'
-	WebUI.sendKeys(findTestObject('Object Repository/Saldo/Page_Balance/inputtipetransaksi'), Keys.chord(Keys.ENTER))
-	
+
 	'isi tanggal transaksi awal'
 	WebUI.setText(
 		findTestObject('Object Repository/Saldo/Page_Balance/input_Tanggal Transaksi Dari_transactionDateStart'),
@@ -211,12 +201,9 @@ def filterSaldo() {
 		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Pengguna')))
 	
 	'input hasil proses berdasarkan ddl di excel'
-	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/inputhasilproses'), 
+	inputDDLExact('Object Repository/Saldo/Page_Balance/inputhasilproses', 
 		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Hasil Proses')))
-	
-	'pencet enter'
-	WebUI.sendKeys(findTestObject('Object Repository/Saldo/Page_Balance/inputhasilproses'), Keys.chord(Keys.ENTER))
-	
+
 	'input reference number transaksi'
 	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/input_Ref Number_referenceNo'), 
 		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Ref Number')))
@@ -231,12 +218,9 @@ def filterSaldo() {
 			findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Tanggal Transaksi hingga')))
 	
 	'input kantor'
-	WebUI.setText(findTestObject('Object Repository/Saldo/Page_Balance/inputkantor'), 
+	inputDDLExact('Object Repository/Saldo/Page_Balance/inputkantor', 
 		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Kantor')))
-	
-	'pencet enter'
-	WebUI.sendKeys(findTestObject('Object Repository/Saldo/Page_Balance/inputkantor'), Keys.chord(Keys.ENTER))
-	
+
 	'klik pada button cari'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/button_Cari'))
 	
@@ -310,19 +294,13 @@ def verifyReset() {
 
 def filterSaldoDetail() {
 	'isi field input tipe saldo'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'),
+	inputDDLExact('Object Repository/API_KEY/Page_Balance/inputtipesaldo',
 		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
-	
-	'pencet enter'
-	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
-	
+
 	'isi field tipe transaksi'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'),
+	inputDDLExact('Object Repository/API_KEY/Page_Balance/inputtipetranc',
 		findTestData(ExcelPathSaldo).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Transaksi')))
-	
-	'pencet enter'
-	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), Keys.chord(Keys.ENTER))
-	
+
 	'klik pada button cari'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/button_Cari'))
 	
@@ -526,4 +504,37 @@ def firstDateofMonth() {
 	
 	'return hasil format tadi'
 	formattedDate
+}
+
+def inputDDLExact(String locationObject, String input) {
+	'Input value status'
+	WebUI.setText(findTestObject(locationObject), input)
+
+	if (input != '') {
+		WebUI.click(findTestObject(locationObject))
+
+		'get token unik'
+		tokenUnique = WebUI.getAttribute(findTestObject(locationObject), 'aria-owns')
+
+		'modify object label Value'
+		modifyObjectGetDDLFromToken = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+			'equals', ('//*[@id="' + tokenUnique) + '"]/div/div[2]', true)
+
+		DDLFromToken = WebUI.getText(modifyObjectGetDDLFromToken)
+
+		for (i = 0; i < DDLFromToken.split('\n', -1).size(); i++) {
+			if ((DDLFromToken.split('\n', -1)[i]).toString().toLowerCase() == input.toString().toLowerCase()) {
+				modifyObjectClicked = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+					'equals', ((('//*[@id="' + tokenUnique) + '"]/div/div[2]/div[') + (i + 1)) + ']', true)
+
+				WebUI.click(modifyObjectClicked)
+
+				break
+			}
+		}
+	} else {
+		WebUI.click(findTestObject(locationObject))
+
+		WebUI.sendKeys(findTestObject(locationObject), Keys.chord(Keys.ENTER))
+	}
 }

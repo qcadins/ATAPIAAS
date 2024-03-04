@@ -104,12 +104,8 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 					findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Tanggal Transaksi akhir')))
 			
 			'masukkan data ke filter status'
-			WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
+			inputDDLExact('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus',
 				findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('StatusSaldo')))
-			
-			'enter pada filter status'
-			WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
-				Keys.chord(Keys.ENTER))
 			
 			'klik pada tombol cari'
 			WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/button_Cari'))
@@ -559,20 +555,12 @@ def searchadminEendigoFinance() {
 			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Tanggal Transaksi akhir')))
 	
 	'masukkan data ke filter status'
-	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
+	inputDDLExact('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus',
 		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('StatusSaldo')))
 	
-	'enter pada filter status'
-	WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
-		Keys.chord(Keys.ENTER))
-	
 	'masukkan data ke filter tenant'
-	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
+	inputDDLExact('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant',
 		findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')))
-	
-	'enter pada filter tenant'
-	WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
-		Keys.chord(Keys.ENTER))
 	
 	'klik pada tombol cari'
 	WebUI.click(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/button_Cari'))
@@ -673,38 +661,22 @@ def checkPaging(Connection conndev) {
 			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Tanggal Transaksi akhir')))
 	
 	'input tipe isi ulang'
-	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTipeIsiUlang'),
+	inputDDLExact('Object Repository/TransactionHistory/Page_List Transaction History/inputTipeIsiUlang',
 			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Tipe Isi Ulang')))
-	
-	'enter pada tipe isi ulang'
-	WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTipeIsiUlang'),
-		Keys.chord(Keys.ENTER))
-	
+
 	'input metode bayar'
-	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputMetodeBayar'),
+	inputDDLExact('Object Repository/TransactionHistory/Page_List Transaction History/inputMetodeBayar',
 			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('Metode Pembayaran')))
 	
-	'enter pada metode bayar'
-	WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputMetodeBayar'),
-		Keys.chord(Keys.ENTER))
-	
 	'input status pembayaran'
-	WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
+	inputDDLExact('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus',
 			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('StatusSaldo')))
-	
-	'enter pada status pembayaran'
-	WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputStatus'),
-		Keys.chord(Keys.ENTER))
 	
 	'cek apakah dropdown tenant muncul'
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		'input tenant yang dituju'
-		WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
+		inputDDLExact('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant',
 			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')))
-	
-		'enter pada tenant'
-		WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
-			Keys.chord(Keys.ENTER))
 	}
 	
 	'klik pada tombol cari'
@@ -736,12 +708,8 @@ def checkPaging(Connection conndev) {
 	'cek apakah dropdown tenant muncul'
 	if (WebUI.verifyElementPresent(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'), GlobalVariable.Timeout, FailureHandling.OPTIONAL)) {
 		'input tenant yang dituju'
-		WebUI.setText(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
+		inputDDLExact('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant',
 			findTestData(ExcelPathTranx).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')))
-	
-		'enter pada tenant'
-		WebUI.sendKeys(findTestObject('Object Repository/TransactionHistory/Page_List Transaction History/inputTenant'),
-			Keys.chord(Keys.ENTER))
 	}
 	
 	'klik pada tombol cari'
@@ -969,4 +937,37 @@ def checkVerifyNotEqualorMatch(Boolean isMatch, String reason) {
 
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+}
+
+def inputDDLExact(String locationObject, String input) {
+	'Input value status'
+	WebUI.setText(findTestObject(locationObject), input)
+
+	if (input != '') {
+		WebUI.click(findTestObject(locationObject))
+
+		'get token unik'
+		tokenUnique = WebUI.getAttribute(findTestObject(locationObject), 'aria-owns')
+
+		'modify object label Value'
+		modifyObjectGetDDLFromToken = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+			'equals', ('//*[@id="' + tokenUnique) + '"]/div/div[2]', true)
+
+		DDLFromToken = WebUI.getText(modifyObjectGetDDLFromToken)
+
+		for (i = 0; i < DDLFromToken.split('\n', -1).size(); i++) {
+			if ((DDLFromToken.split('\n', -1)[i]).toString().toLowerCase() == input.toString().toLowerCase()) {
+				modifyObjectClicked = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+					'equals', ((('//*[@id="' + tokenUnique) + '"]/div/div[2]/div[') + (i + 1)) + ']', true)
+
+				WebUI.click(modifyObjectClicked)
+
+				break
+			}
+		}
+	} else {
+		WebUI.click(findTestObject(locationObject))
+
+		WebUI.sendKeys(findTestObject(locationObject), Keys.chord(Keys.ENTER))
+	}
 }

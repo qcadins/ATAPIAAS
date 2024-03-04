@@ -99,33 +99,21 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 			checkDDL(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'), namatenantDB, 'DDL Tenant')
 			
 			'input nama tenant yang akan digunakan'
-			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'), 'PT REAL ESTATE')
-			
-			'pencet enter pada textbox'
-			WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'),
-				Keys.chord(Keys.ENTER))
+			inputDDLExact('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant', 'PT REAL ESTATE')
 			
 			'check jumlah vendor di DB dan UI'
 			checkDDL(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'), namaVendorDB, 'DDL Vendor')
 			
 			'input nama vendor yang akan digunakan'
-			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'),
+			inputDDLExact('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor',
 				'ADINS')
-			
-			'pencet enter pada textbox'
-			WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'),
-				Keys.chord(Keys.ENTER))
-			
+
 			'panggil fungsi cek banyak tipe saldo yang bisa diisi ulang'
 			checkDDL(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'), namaTipefromDB, 'DDL Tipe saldo')
 	
 			'input nama saldo yang akan diisi ulang'
-			WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'),
+			inputDDLExact('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo',
 				'IDR')
-			
-			'pencet enter pada textbox'
-			WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'),
-				Keys.chord(Keys.ENTER))
 			
 			WebUI.refresh()
 			
@@ -133,29 +121,17 @@ for (GlobalVariable.NumOfColumn = 2; GlobalVariable.NumOfColumn <= countColumnEd
 		}
 				
 		'input nama tenant yang akan digunakan'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'),
+		inputDDLExact('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant',
 			findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tenant')))
-		
-		'pencet enter pada textbox'
-		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tenant'),
-			Keys.chord(Keys.ENTER))
-		
+
 		'input nama vendor yang akan digunakan'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'),
+		inputDDLExact('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor',
 			findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Vendor')))
-		
-		'pencet enter pada textbox'
-		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input vendor'),
-			Keys.chord(Keys.ENTER))
-		
+
 		'input nama saldo yang akan diisi ulang'
-		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'), 
+		inputDDLExact('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo', 
 			findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tipe Saldo')))
-		
-		'pencet enter pada textbox'
-		WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input tipe saldo'), 
-			Keys.chord(Keys.ENTER))
-		
+
 		'input jumlah saldo yang akan ditambahkan'
 		WebUI.setText(findTestObject('Object Repository/API_KEY/Page_eSignHub - Adicipta Inovasi Teknologi/input_Tambah Saldo_qty'),
 			findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$Tambah Saldo')))
@@ -430,19 +406,13 @@ def filterSaldo() {
 	WebUI.delay(4)
 	
 	'isi field input tipe saldo'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), 
+	inputDDLExact('Object Repository/API_KEY/Page_Balance/inputtipesaldo', 
 		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$SearchTipeSaldo')))
-	
-	'pencet enter'
-	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipesaldo'), Keys.chord(Keys.ENTER))
-	
+
 	'isi field tipe transaksi'
-	WebUI.setText(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), 
+	inputDDLExact('Object Repository/API_KEY/Page_Balance/inputtipetranc', 
 		findTestData(ExcelPathSaldoAPI).getValue(GlobalVariable.NumOfColumn, rowExcel('$SearchTipeTransaksi')))
 	
-	'pencet enter'
-	WebUI.sendKeys(findTestObject('Object Repository/API_KEY/Page_Balance/inputtipetranc'), Keys.chord(Keys.ENTER))
-		
 	'klik pada button cari'
 	WebUI.click(findTestObject('Object Repository/API_KEY/Page_Balance/button_Cari'))
 }
@@ -572,4 +542,37 @@ def tableTrxNumber() {
 
 def rowExcel(String cellValue) {
 	CustomKeywords.'writetoexcel.WriteExcel.getExcelRow'(GlobalVariable.DataFilePath, sheet, cellValue)
+}
+
+def inputDDLExact(String locationObject, String input) {
+	'Input value status'
+	WebUI.setText(findTestObject(locationObject), input)
+
+	if (input != '') {
+		WebUI.click(findTestObject(locationObject))
+
+		'get token unik'
+		tokenUnique = WebUI.getAttribute(findTestObject(locationObject), 'aria-owns')
+
+		'modify object label Value'
+		modifyObjectGetDDLFromToken = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+			'equals', ('//*[@id="' + tokenUnique) + '"]/div/div[2]', true)
+
+		DDLFromToken = WebUI.getText(modifyObjectGetDDLFromToken)
+
+		for (i = 0; i < DDLFromToken.split('\n', -1).size(); i++) {
+			if ((DDLFromToken.split('\n', -1)[i]).toString().toLowerCase() == input.toString().toLowerCase()) {
+				modifyObjectClicked = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+					'equals', ((('//*[@id="' + tokenUnique) + '"]/div/div[2]/div[') + (i + 1)) + ']', true)
+
+				WebUI.click(modifyObjectClicked)
+
+				break
+			}
+		}
+	} else {
+		WebUI.click(findTestObject(locationObject))
+
+		WebUI.sendKeys(findTestObject(locationObject), Keys.chord(Keys.ENTER))
+	}
 }

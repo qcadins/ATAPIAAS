@@ -89,31 +89,19 @@ checkDDL(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputMetode
 checkDDL(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputBank'), namaBankDestDB, 'DDL Bank Destination')
 
 'input data tipe saldo yang diinginkan'
-WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputtipesaldo'),
+inputDDLExact('Object Repository/Top Up/Page_Topup Balance/inputtipesaldo',
 	findTestData(ExcelPath).getValue(2, 29))
-
-'enter pada ddl tipe saldo'
-WebUI.sendKeys(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputtipesaldo'),
-	 Keys.chord(Keys.ENTER))
 
 'klik pada luaran form'
 WebUI.click(findTestObject('Object Repository/Top Up/ClickForm'))
 
 'input data metode pembayaran'
-WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputMetodeBayar'),
+inputDDLExact('Object Repository/Top Up/Page_Topup Balance/inputMetodeBayar',
 	findTestData(ExcelPath).getValue(2, 30))
 
-'enter pada ddl metode pembayaran'
-WebUI.sendKeys(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputMetodeBayar'),
-	 Keys.chord(Keys.ENTER))
-
 'input data bank'
-WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputBank'),
+inputDDLExact('Object Repository/Top Up/Page_Topup Balance/inputBank',
 	findTestData(ExcelPath).getValue(2, 31))
-
-'enter pada ddl bank'
-WebUI.sendKeys(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputBank'),
-	 Keys.chord(Keys.ENTER))
 
 'klik pada tambah layanan'
 WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/a_Tambah'))
@@ -173,12 +161,8 @@ if (findTestData(ExcelPath).getValue(2, 33) == 'Yes') {
 		WebUI.click(findTestObject('Object Repository/Top Up/Page_Topup Balance/a_Tambah'))
 		
 		'input data saldo yang dipilih'
-		WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputJenisSaldo'),
+		inputDDLExact('Object Repository/Top Up/Page_Topup Balance/inputJenisSaldo',
 			listServices[i])
-		
-		'enter pada ddl saldo yang dipilih'
-		WebUI.sendKeys(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputJenisSaldo'),
-			 Keys.chord(Keys.ENTER))
 		
 		'input data jumlah isi ulang yang dipilih'
 		WebUI.setText(findTestObject('Object Repository/Top Up/Page_Topup Balance/inputamount'),
@@ -527,5 +511,38 @@ def checkVerifyEqualorMatch(Boolean isMatch, String reason) {
 		CustomKeywords.'writetoexcel.WriteExcel.writeToExcelStatusReason'(sheet, GlobalVariable.NumOfColumn,
 			GlobalVariable.StatusFailed, (findTestData(ExcelPathOCR).getValue(GlobalVariable.NumOfColumn, 2) + ';') +
 				GlobalVariable.FailedReasonVerifyEqualorMatch + ' ' + reason)
+	}
+}
+
+def inputDDLExact(String locationObject, String input) {
+	'Input value status'
+	WebUI.setText(findTestObject(locationObject), input)
+
+	if (input != '') {
+		WebUI.click(findTestObject(locationObject))
+
+		'get token unik'
+		tokenUnique = WebUI.getAttribute(findTestObject(locationObject), 'aria-owns')
+
+		'modify object label Value'
+		modifyObjectGetDDLFromToken = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+			'equals', ('//*[@id="' + tokenUnique) + '"]/div/div[2]', true)
+
+		DDLFromToken = WebUI.getText(modifyObjectGetDDLFromToken)
+
+		for (i = 0; i < DDLFromToken.split('\n', -1).size(); i++) {
+			if ((DDLFromToken.split('\n', -1)[i]).toString().toLowerCase() == input.toString().toLowerCase()) {
+				modifyObjectClicked = WebUI.modifyObjectProperty(findTestObject('Saldo/Page_Balance/modifybuttonpage'), 'xpath',
+					'equals', ((('//*[@id="' + tokenUnique) + '"]/div/div[2]/div[') + (i + 1)) + ']', true)
+
+				WebUI.click(modifyObjectClicked)
+
+				break
+			}
+		}
+	} else {
+		WebUI.click(findTestObject(locationObject))
+
+		WebUI.sendKeys(findTestObject(locationObject), Keys.chord(Keys.ENTER))
 	}
 }
